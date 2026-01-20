@@ -235,30 +235,27 @@ Demonstrate that you can revise strategically. You will not execute revisions; y
 -   Demonstrates mature judgment about improving inference and communication
 :::
 
----
+------------------------------------------------------------------------
 
 ## Grading
 
 ::::: columns
-
 ::: {.column width="70%"}
 Numerical grades are downright loathsome. For all assignments, I use the Traffic Signal Grading Scale:
 
-| Grade | Simple meaning | Scientific judgement |
-|---|---|---|
-| Green | Good to Proceed | Scientifically coherent for this milestone |
-| Yellow | Exercise Caution | Viable, but revision is required |
-| Red | Stop and Rework | Not yet ready for scientific judgment |
+| Grade  | Simple meaning   | Scientific judgement                       |
+|--------|------------------|--------------------------------------------|
+| Green  | Good to Proceed  | Scientifically coherent for this milestone |
+| Yellow | Exercise Caution | Viable, but revision is required           |
+| Red    | Stop and Rework  | Not yet ready for scientific judgment      |
 
-Yellow is **not** bad. It just means there are certain elements that you should tighten up before moving on. 
-
+Yellow is **not** bad. It just means there are certain elements that you should tighten up before moving on.
+Red is also **not** bad. It just means there are *more* elements that you should tighten up before moving on.
+Hmm...see a pattern here? Maybe top-tier science is built upon iterative improvements?
 :::
-
 
 ::: {.column width="30%"}
 ![](../graphics/other_stylized_graphics/traffic_grades.png)
-
-
 :::
 :::::
 
@@ -266,8 +263,8 @@ Yellow is **not** bad. It just means there are certain elements that you should 
 
 *The Traffic Signal Grading Scale applies to all Milestone Assignments. Grading reflects scientific readiness relative to the purpose of the milestone.*
 
-| Dimension | 🟢 GREEN: Good to Proceed  | 🟡 YELLOW: Exercise Caution | 🔴 RED: Stop and Rework |
-|---|---|---|---|
+| Dimension | 🟢 GREEN: Good to Proceed | 🟡 YELLOW: Exercise Caution | 🔴 RED: Stop and Rework |
+|------------------|------------------|------------------|------------------|
 | **Purpose & intent** | Clearly meets the core intent of the milestone | Partially meets intent; key elements need revision | Does not meet the core intent of the milestone |
 | **Question or objective** | Clear, focused, and appropriate for this stage | Present but vague, drifting, or overly broad | Unclear, unfocused, or missing |
 | **Alignment (question–data–methods)** | Question, data, and approach are coherently aligned | Partial alignment; gaps or weak links remain | Fundamental mismatch between components |
@@ -276,16 +273,10 @@ Yellow is **not** bad. It just means there are certain elements that you should 
 | **Course GPT self-check** | Used appropriately; issues addressed or justified | Used, but issues only partially addressed | Little or no meaningful evidence of self-checking |
 | **Scientific readiness** | Work is ready to move to the next stage | Viable but requires targeted revision | Not yet in a usable scientific state |
 
+This universal grading scale is meant to help you quickly understand where your work stands, not to highlight small mistakes. My goal here is to make expectations clear, keep grading transparent, and help you focus on doing solid, defensible science --all without unnecessary stress over points or formatting (which we will let GenAI work on for you). The scale's primary benefits include:
 
-This universal grading scale is meant to help you quickly understand where your work stands, not to highlight small mistakes. My goal here is to make expectations clear, keep grading transparent, and help you focus on doing solid, defensible science --all without unnecessary stress over points or formatting (which we will let GenAI work on for you).
-The scale's primary benefits include:
-
-- **It is easy to read.** The traffic light color scheme (green, yellow, and red) tell you right away whether your work is ready to move forward, needs some fixing, or needs a rethink.
-- **It is the same for every assignment.** I use this scale for all milestone assignments. Therefore, it is predictable for every assignment.
-- **It centers on scientific readiness, not scientific perfection** (which, technically, does not exist). You are not being graded on having the “right” answer. What matters most to me is whether your question, data, and reasoning co-exist coherently together.
-- **It matches how real science works.** Research almost never gets it right on the first try; drafts, checks, and revisions are normal.
-- **It allows for rapid feedback.** GenAI will do some of the busy work associated with troubleshooting coding issues or improving clarity, which will give me more time to gauge the scientific readiness of your work.
-
-
-
-
+-   **It is easy to read.** The traffic light color scheme (green, yellow, and red) tell you right away whether your work is ready to move forward, needs some fixing, or needs a more substantial rethink (the majority of good scientists' ideas)
+-   **It is the same for every assignment.** I use this scale for all milestone assignments. Therefore, the standards are predictable for every assignment.
+-   **It centers on scientific readiness, not scientific perfection** (which, technically, does not exist). You are not being graded on having the “right” answer. What matters most to me is whether your question, data, and reasoning co-exist coherently together.
+-   **It matches how real science works.** Research almost never gets it right on the first try; drafts, checks, and revisions are normal.
+-   **It allows for rapid feedback.** GenAI will do some of the busy work associated with troubleshooting coding issues or improving clarity, which will give me more time to gauge the scientific readiness of your work. A win-win for us all!

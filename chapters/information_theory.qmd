@@ -1,0 +1,88 @@
+---
+title: "Information Theory and Multi-Model Inference"
+format: html
+---
+
+# Overview and Learning Goals
+
+-   \[Explain why model selection is unavoidable in complex systems\]
+-   \[Position information theory as an alternative to null-hypothesis testing\]
+
+# Philosophical Foundations
+
+## Multiple Working Hypotheses
+
+-   \[Describe Chamberlin’s framework\]
+-   \[Explain relevance to ecology\]
+-   \[Connect to strong inference\]
+
+## Model Parsimony
+
+-   \[Explain parsimony conceptually\]
+-   \[Describe trade-offs between realism and simplicity\]
+
+# Bias–Variance Tradeoff
+
+-   \[Explain bias and variance intuitively\]
+-   \[Relate tradeoff to prediction error\]
+-   \[Explain why “best fit” is not the goal\]
+
+# Information Criteria
+
+## Akaike Information Criterion (AIC)
+
+-   \[Define AIC mathematically\]
+-   \[Explain likelihood and penalty terms\]
+
+## AICc and QAIC
+
+-   \[Explain small-sample correction\]
+-   \[Describe overdispersion and QAIC\]
+
+## AIC vs. BIC
+
+-   \[Explain philosophical differences\]
+-   \[Clarify when each might be preferred\]
+
+# Candidate Model Sets
+
+-   \[Describe biologically motivated model construction\]
+-   \[Explain dangers of post hoc model fishing\]
+
+# Comparing Models
+
+## ΔAIC
+
+-   \[Define and interpret ΔAIC\]
+
+## Akaike Weights
+
+-   \[Explain probabilistic interpretation\]
+-   \[Describe evidence ratios\]
+
+## Confidence Sets
+
+-   \[Explain cutoff rules and alternatives\]
+
+# Model Averaging
+
+-   \[Explain rationale for model averaging\]
+-   \[Describe full vs. reduced averaging\]
+-   \[Explain how uncertainty propagates\]
+
+# Stepwise Selection (Cautionary Section)
+
+-   \[Describe backward and forward stepwise procedures\]
+-   \[Explain why stepwise is discouraged\]
+-   \[Clarify limited cases where it might be defensible\]
+
+# Strengths and Limitations of AIC
+
+-   \[Explain objectivity advantages\]
+-   \[Clarify what AIC does *not* validate\]
+-   \[Emphasize need for model checking\]
+
+# Take-Home Messages
+
+-   \[Summarize information-theoretic inference\]
+-   \[Reinforce interpretation over decision rules\]

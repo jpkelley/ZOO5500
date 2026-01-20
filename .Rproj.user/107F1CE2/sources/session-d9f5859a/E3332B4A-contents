@@ -1,0 +1,88 @@
+.course-info thead tr {
+  background-color: #e6f2ff;
+}
+
+p { margin: 0.4em 0; }
+
+table {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+  font-size: 0.9em;
+}
+
+
+th, td {
+  padding: 0.35em 0.5em;   /* default ~0.75em */
+  line-height: 1.1;
+}
+
+
+body {
+  font-size: 0.8rem;
+  line-height: 1.2;
+}
+
+html { font-size: 90%; }
+
+h1 { font-size: 1.4rem; }
+h2 { font-size: 1rem; }
+h3 { font-size: 0.95rem; }
+
+/* Course calendar table styling */
+.calendar-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.95rem;
+}
+
+/* Header row */
+.calendar-table thead th {
+  background-color: #cfe8f6;  /* slightly darker light blue */
+  color: #000000;
+  text-align: left;
+  padding: 8px;
+  border-bottom: 2px solid #9ccbe6;
+}
+
+/* Body cells */
+.calendar-table tbody td {
+  padding: 8px;
+  vertical-align: top;
+}
+
+/* Alternating row colors */
+.calendar-table tbody tr:nth-child(odd) {
+  background-color: #f4fbff;  /* very light blue */
+}
+
+.calendar-table tbody tr:nth-child(even) {
+  background-color: #ffffff;
+}
+
+/* Optional: subtle hover for readability */
+.calendar-table tbody tr:hover {
+  background-color: #e9f4fb;
+}
+
+.callout,
+.callout p,
+.callout li,
+.callout div {
+  font-size: 0.8rem !important;
+  line-height: 1.2 !important;
+  font-weight: 400 !important;
+}
+
+
+/* Save as styles.css and include in your Quarto project */
+.red-box {
+  border-left: 4px solid #e74c3c;
+  background-color: #fceaea;
+  padding: 1em;
+}
+
+.green-box {
+  border-left: 4px solid #27ae60;
+  background-color: #eafaf1;
+  padding: 1em;
+}

@@ -1,0 +1,55 @@
+---
+title: ""
+format: html
+---
+
+## Setting up your R Studio project
+
+Note that this is a very basic way of creating a set of project folders. You will see boxes with R code. Feel free to copy and run these.
+
+Steps:
+
+-   Navigate to your folder (in this case, your student folder).
+-   In “Files” window, click “More/Set as Working Directory”.
+-   Create a New R Project in your student folder: “File/New Project/Existing Directory”
+-   Create your File structure: Refer to this RStudio tutorial Links to an external site.. In this class, we will modify this set of directories to make things a bit easier and more transparent for you. Feel free to implement other folder structures as well, but consider keeping this structure as simple as possible to help other users understand what you have done.
+-   Place your dataset in your “data/raw_data” folder (after you create it below). Navigate to this folder on your computer and drag-and-drop or copy-paste your data file(s) into this folder.
+
+## Create three folders (one suggested framework):
+
+-   data (for raw, processed, clean datasets)
+-   R (for R scripts, each containing a set of related functions)
+-   output (for models, graphs, tables)
+
+We can do this by staying in our directory (within RStudio) and then using the `dir.create` function.
+
+```{r, warning=FALSE}
+dir.create("data")
+```
+
+You can see your new folder (“data”) appear in the Files in the lower right window within RStudio. Now let’s create the other two folders.
+
+```{r, warning=FALSE}
+dir.create("r_scripts")
+dir.create("output")
+```
+
+To help with data processing (i.e. cleaning and organization)–something that we will discuss in coming days within the context of your analytical workflow–, we will create some subfolders within your newly created “data” folder. Let’s do this now. Note how you create a folder within the “data” folder by specifying the path:
+
+```{r, warning=FALSE}
+dir.create("data/raw_data")
+dir.create("data/processed_data")
+dir.create("data/metadata")
+```
+
+Feel free to create other subfolders now.
+
+And that is how you create a basic R Project in RStudio! What you have done is create a set of folders and subfolders that have names that can be easily understood by other users.
+
+There is an added benefit to creating an R Project in this way. What you have done is create a minimally reproducible data structure. First method: A collaborator (or instructor or classmate) can simply navigate to your subfolder, set that as their working directory from within RStudio, and then open the .RProj file. Alternatively, you can create zip your root folder (the one labelled as your name, in this case) and then share your entire analysis, etc. All the recipient would need to do is unzip the folder, open the .Rproj file, and then “Set as Working Directory.” Place your data in your “data/raw_data” subfolder.
+
+After copying and pasting your data file into this subfolder, confirm that your files is there by using the `list.files` function.
+
+```{r, warning=FALSE}
+list.files("data/raw_data")
+```

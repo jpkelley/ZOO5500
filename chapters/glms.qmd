@@ -1,0 +1,419 @@
+---
+title: "glms"
+format: html
+---
+
+
+
+# Chapter Overview
+
+\[Briefly describe how this chapter moves from data hygiene and naming conventions, through exploratory data analysis, to formal statistical modeling with GLMs. Emphasize workflow and scientific reasoning.\]
+
+<details>
+
+<summary>Test dropdown</summary>
+
+This is a test
+
+</details>
+
+## Learning Objectives
+
+-   \[Describe what students should be able to do after completing this chapter, spanning data management, exploration, and modeling\]
+-   \[Connect coding practices to reproducibility and statistical inference\]
+
+# Introduction to Generalized Linear Models (GLMs)
+
+\[Based primarily on the GLM Introduction lecture :contentReference[oaicite:2]{index="2"}\]
+
+## Why We Need GLMs
+
+-   \[Explain limitations of classical linear models for non-normal data\]
+-   \[Position GLMs as a unifying statistical framework\]
+
+## What Are Generalized Linear Models?
+
+-   \[Describe the three core components: random component, systematic component, link function\]
+-   \[Explain how GLMs subsume t-tests and ANOVA\]
+
+## Advantages of GLMs in Ecological and Field Data
+
+-   \[Discuss unbalanced data, natural boundaries, and autocorrelation\]
+-   \[Introduce extensions (GLMMs, GAMs, GAMMs)\]
+
+## GLMs vs. Traditional Tests
+
+-   \[Conceptually compare t-tests, ANOVA, and GLMs\]
+-   \[Emphasize equivalence under Gaussian assumptions\]
+
+## Model Assumptions Revisited
+
+-   \[Clarify assumptions about residuals rather than raw data\]
+-   \[Discuss independence, linearity, and variance structure\]
+
+## Choosing the Right Distribution
+
+-   \[Outline how response type (count, binary, proportion, continuous) drives distribution choice\]
+-   \[Introduce overdispersion and zero inflation\]
+
+## Link Functions and Interpretation
+
+-   \[Explain the role of link functions in connecting predictors to the mean response\]
+-   \[Describe common links (log, logit, etc.) and when they are used\]
+
+## Building a GLM: Initial Workflow
+
+-   \[Describe steps from distribution choice to model specification\]
+-   \[Emphasize exploratory analysis as a prerequisite\]
+
+## Assessing Normality and Model Fit
+
+-   \[Explain visual diagnostics (histograms, Q-Q plots)\]
+-   \[Introduce simulation-based diagnostics using DHARMa\]
+
+## Take-Home Messages for GLMs
+
+-   \[Reinforce the idea that good models start with good questions\]
+-   \[Encourage model-based thinking over test-based thinking\]
+
+## Case Study: The Puffer Jackalope
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source(r_scripts/load_packages.r)
+```
+
+
+## Introduction
+![](graphics/jackalope_graphics/puffer_pelican.png)
+
+In this tutorial, we introduce Generalized Linear Models (GLMs), starting with how to construct a Poisson GLM. This example purposefully starts with a simple--and inaccurate-- model to illustrate the process of building a better, more explanatory model. This should highlight the idea discussed in the video that identifying an optimal model structure often solves many of the issues with model assumptions.
+
+For this first example, we will use a dataset (real but changed for this example) collected on *Lepusantilocapra pufferi* (puffer jackalope), starting in the mid-1970s. The data include the following variables:
+
+-   site: where the individuals were sampled
+-   abund: number of individuals detected at each location
+-   dens: density of individuals at each sampling location
+-   mean_depth: mean depth, in meters of the sampling location
+-   year: year of the study
+-   period: 1=before and 2= after introduction of *Pelicanus pufferivorus* (puffer-jackalope pelican)
+-   x_km: longitude (decimal degrees) of sampling location
+-   y_km: latitude (decimal degrees) of sampling location
+-   swept_area: size in square meters of the sampling location (effort)
+
+You are tasked with examining/testing the relationship between total *Lepusantilocapra pufferi* abundance and mean depth for each time period (before/after introduction of puffer-jackalope pelican).
+
+
+## Generalized Linear Model (Gaussian error distribution)
+
+Read in the *Lepusantilocapra pufferi* dataset and examine its structure.
+
+```{r}
+pufferi <- read.csv("data/lepusantilocapra_pufferi_abundance.csv")
+str(pufferi) # examine data structure
+```
+
+Note: Though the `readr::read_csv` function is commonly used, the initial warning messages upon import may throw off users who are unfamiliar with what it is doing. The function does provide a lot more flexibility in defining column types, but we do not need it for this. So, here, we are using the base R function `read.csv`.
+
+Let's explore the data a bit to see what we're up again. Obviously, data exploration would requires quite a bit more detailed examination, but this should serve us well right now.
+
+```{r}
+p <- ggplot2::ggplot(pufferi, aes(x = mean_depth, y = abund)) +
+  geom_point(color = "black", size = 3) +
+  facet_wrap(~ period, ncol = 1, nrow = 2) +
+  labs(x = "Mean depth (km)", y = "Number of L. pufferi") +
+  theme_bw()
+```
+
+We observe (but haven't found statistical support for) a general decline in *L. pufferi* abundance with mean depth. So, let's make our first attempt at a GLM. There are a variety of packages and functions for GLMs and their extensions. In this course, we will try to use the packages/functions that (1) have similar model syntax (even though used in Bayesian approaches), and (2) are used in 95% of published work.
+
+Let's run a model without considering the distribution of our response variable. We use the `mass::glm` function, a versatile model function for non-clustered data (i.e. data that has no hierarchical structure like multiple samples collected for each individual, or multiple students from multiple schools from multiple school districts).
+
+```{r}
+base_model <- glm(abund ~ mean_depth, data = pufferi)
+```
+
+This model structure will be common to all of the modeling functions we discuss in the course. This simply means tht abundance is modeled as a function of mean_depth. That is, response variable is on the left side of the tilde (\~) and the predictors/factors/variables are on the right side of the tilde.
+
+Let's view the summary output of this model in two ways: First, use the `summary` function to review the summary of the model object you just created (`base_model`).
+
+```{r}
+summary(base_model) 
+```
+
+These results can sometimes be a bit overwhelming. Try the `broom` package to make the model output a lot more readable. This also saves you --to some extent-- from learning how to extract specific output components from model objects from different packages. And the `broom` functions will certainly save you a huge amount of time outputting model results, residuals, and predicted values.
+
+First, just examine the effect sizes.
+
+```{r}
+# Tidy model coefficients
+tidy_glm <- tidy(base_model, conf.int = TRUE)
+print(tidy_glm)
+```
+
+Then, you can check out the model fit. This is just for your information; we will do this in depth when we discuss how to report your results. But it's good to build some habits now! And I also want to give you some tools, so you can start adding them into an optimal data workflow!
+
+```{r}
+# Glance at model-level statistics
+glance_glm <- glance(base_model)
+print(glance_glm)
+```
+
+Next, we can calculate model residuals and then add these values to (i.e. "augment") our original dataset.
+
+```{r}
+# Augment the original data with predictions and residuals
+augment_glm <- augment(base_model)
+print(augment_glm)
+```
+
+The results (from `summary()` or one of the `broom` functions) show a significant effect of mean_death. As an aside, it might not be the best to use the term "effect," as this implies a causal structure. But it is common usage, so we'll stick to it. Just be cautious of using wording that does not match with your hypotheses and predictions.
+
+# Checking residuals for heteroscedaticity and violations to normality.
+
+For every final model, we need to check the structure of the residuals. In the past, this was a relatively tiresome task, which involved (priarily) visual inspection) of Pearson residuals. With the advent of the DHARMa package, this becomes much easier. A vignette for this package is exceptional and can be found [here] (<https://cran.r-project.org/web/packages/DHARMa/vignettes/DHARMa.html#calculating-scaled-residuals>).
+
+The package does not use Pearson residuals and instead generates simulated (standardized) residuals ,making it more suitable for diagnosing generalized linear models (GLMs), mixed models, and other complex models. This simulation-based approach makes this step insensitive to sample size and allows you to more easily detect overdispersion, heteroscedasticity, and model misspecification.
+
+The most general function is for the simulation of residuals, `simulateResiduals()`, which is run on the fitted model.
+
+```{r}
+sim_res <- simulateResiduals(base_model)
+```
+
+We can then plot this simulation:
+
+```{r}
+plot(sim_res)
+```
+
+You can immediately see lots of red text, indicating that there are some series issues. These issues might be due to variance issues, non-normality, or, most likely, model misspecification. The left plot indicates issues with normality and outllier. The right plot is very informative as well; it converts the residuals into percentiles (y-axis), and then tests the 25%, 50%, and 75% percentiles of the model's residuals against those expected percentiles. Ideally, the three lines would follow the horizontal lines drawn at 0.25, 0.50, and 0.75. They do not.
+
+There are other built-in functions as well, including the following (these descriptions are taken directly from the [DHARMa package vignette] (<https://cran.r-project.org/web/packages/DHARMa/vignettes/DHARMa.html#calculating-scaled-residuals>):
+
+-   testUniformity() - tests if the overall distribution conforms to expectations
+-   testOutliers() - tests if there are more simulation outliers than expected
+-   testDispersion() - tests if the simulated dispersion is equal to the observed dispersion
+-   testQuantiles() - fits a quantile regression or residuals against a predictor (default predicted value), and tests of this conforms to the expected quantile
+-   testCategorical(simulationOutput, catPred = testData\$group) tests residuals against a categorical predictor
+-   testZeroinflation() - tests if there are more zeros in the data than expected from the simulations
+-   testGeneric() - test if a generic summary statistics (user-defined) deviates from model expectations
+-   testTemporalAutocorrelation() - tests for temporal autocorrelation in the residuals
+-   testSpatialAutocorrelation() - tests for spatial autocorrelation in the residuals. Can also be used with a generic distance function, for example to test for phylogenetic signal in the residuals
+
+Back to our model. We know something is going wrong. But what exactly? We can plot the simulated residuals against predictors in our model, using the `plotResiduals` function. This is a specialized DHARMa function.
+
+Plot against mean_depth.
+
+```{r}
+plotResiduals(sim_res, pufferi$mean_depth)
+```
+
+And then plot against period.
+
+```{r}
+plotResiduals(sim_res, pufferi$period)
+```
+
+...and against year.
+
+```{r}
+plotResiduals(sim_res, pufferi$year)
+```
+
+And then, just for kicks, against our measure of sampling effort (swept_area).
+
+```{r}
+plotResiduals(sim_res, pufferi$swept_area)
+```
+
+For each of these, you see statistical evidence that something is wrong with your model.
+
+## Generalized Linear Model (Poisson error distribution)
+
+Looking more closely at the data, we realize that our variable for abundance is simple count data (integer). Make a histogram:
+
+```{r}
+hist(pufferi$abund, breaks=100)
+```
+
+The distribution also ranges from zero to infinity (right-skewed). So, let's try a Poisson error distribution with the default link function; this is often a good first guess for count data.
+
+```{r}
+base_model_pois <- glm(abund ~ mean_depth, 
+  data = pufferi, 
+  family = poisson(link = "log"))
+```
+
+Here we are using the log link function, the preferred one for the Poisson distribution. Now, check your model residuals:
+
+```{r}
+sim_res <- simulateResiduals(base_model_pois)
+```
+
+We can then plot this simulation:
+
+```{r}
+plot(sim_res)
+```
+
+Uh, oh. You know that you've correctly identified a distribution that fits your data boundaries. But, clearly, there are still patterns in these residuals and they shouldn't show this. So there are other issues going on as well. Perhaps the issues are related to model misspecification. Believe it or not, despite the horrific-looking simulated residuals, you are now one step closer to building a successful GLM.
+
+# Overdispersion: a common issue with Poisson GLMs
+
+Given that our Poisson GLM has issues, maybe Poisson wasn't the absolute best model. The negative binomial distribution still satisifies our data boundaries, but that distribution has one more parameter that allows for variance to be greater than the mean (unlike the Poisson distribution, where mean = variance). Let's first check for overdispersion using the `testDispersion()` function in DHARMa.
+
+```{r}
+testDispersion(sim_res)
+```
+
+This is a wickedly easy way to test for overdispersion. If the result is significantly greater than 1 (here, it is 161.36 with p\<0.0001), there is overdispersion. Let's try the negative binomial distribution.
+
+```{r}
+mod_nb <- glm.nb(abund ~ mean_depth, data = pufferi)
+summary(mod_nb)
+```
+
+Let's test for overdispersion to see is switching from Poisson to negative binomial was a good and logical move:
+
+```{r}
+testDispersion(mod_nb)
+```
+
+This looks good. Once again, check residual structure.
+
+```{r}
+sim_res <- simulateResiduals(mod_nb)
+plot(sim_res)
+```
+
+Whoa! That looks great great! The overall model residuals show no deviations from normality, and there's no overdispersion or detectable outliers. But, remember, these are overall residuals. We had other variables of interest in our dataset, including one variable related to sampling effort. So, it is important to check our simulated residuals against those as well.
+
+Plot against mean_depth.
+
+```{r}
+plotResiduals(sim_res, pufferi$mean_depth)
+```
+
+This looks good. There's no residual structure. Plot against period:
+
+```{r}
+plotResiduals(sim_res, pufferi$period)
+```
+
+There's a problem here. There is a clear sign that the GLM assumption of homogeneity of variance has been violated.
+
+Now, plot residuals against year.
+
+```{r}
+plotResiduals(sim_res, pufferi$year)
+```
+
+There is another issue here. And then, just for kicks, against our measure of sampling effort (swept_area).
+
+```{r}
+plotResiduals(sim_res, pufferi$swept_area)
+```
+
+There is a bit of structure here. So, this suggests that we may not have included in our model some important covariates like period, year, or swept_area. We will do that in the next step.
+
+First, let's deal with the sampling effort variable (swept_area), as it makes sense to include this in every model.For any case in which you have sampling effort (for any of the models discussed in this course), you need to include an offset. This is a better solution that dividing the response variable by the sampling effort prior to analysis, as this can alter the repsonse variable's distribution to something unrecognizable. Here, we are controlling for differences in size of the sampling area. This means that we are adjusting abund so that it becomes the total number of *L. pufferi* per site (or per size of site). Remember we are using the log-link function; this means we need to directly log-transform the swept_area variable before putting it in an `offset()` function. This tells the model function to recognize that term as a correction for the response variable.
+
+```{r}
+pufferi$log_sa <- log(pufferi$swept_area)
+mod_nb_offset <- glm.nb(abund ~ mean_depth + offset(log_sa), 
+  data = pufferi)
+```
+
+Again, let's simulate the residuals and plot against mean_depth, period, and year.
+
+```{r}
+sim_res <- simulateResiduals(mod_nb_offset)
+plotResiduals(sim_res, pufferi$mean_depth)
+plotResiduals(sim_res, pufferi$period)
+plotResiduals(sim_res, pufferi$year)
+```
+
+The problems with residuals remain. This means that this really is a case of model misspecification, so let's think about what other factors we should include. Note that the model names could possibly be improved. As you review the models, think critically about each one means. In all models, we include the offset variable.
+
+```{r}
+mod_nb_offset_01 <- glm.nb(abund ~ offset(log_sa), 
+  data = pufferi)
+mod_nb_offset_02 <- glm.nb(abund ~ mean_depth + offset(log_sa), 
+  data = pufferi)
+mod_nb_offset_03 <- glm.nb(abund ~ period + offset(log_sa), 
+  data = pufferi)
+mod_nb_offset_04 <- glm.nb(abund ~ year + offset(log_sa), 
+  data = pufferi)
+mod_nb_offset_05 <- glm.nb(abund ~
+  mean_depth + period + offset(log_sa), 
+  data = pufferi)
+mod_nb_offset_06 <- glm.nb(abund ~
+  mean_depth + year + offset(log_sa), 
+  data = pufferi)
+mod_nb_offset_07 <- glm.nb(abund ~
+  period + year + offset(log_sa), 
+  data = pufferi)
+mod_nb_offset_08 <- glm.nb(abund ~
+  mean_depth * period + year + offset(log_sa), 
+  data = pufferi)
+mod_nb_offset_09 <- glm.nb(abund ~
+  mean_depth * year + period + offset(log_sa), 
+  data = pufferi)
+mod_nb_offset_10 <- glm.nb(abund ~
+  mean_depth + year * period + offset(log_sa), 
+  data = pufferi)
+```
+
+Note that these models test all two-way combinations (including interactions). A sort of null hypothesis ---although some would disagree philosophically-- is the first model (mod_nb_offset_01), as it contains only the offset variable. Let's calculate AIC and then sort the output in ascending order of AIC (where lowest AIC is the best-supported model).
+
+```{r}
+aic_df <- AIC(
+  mod_nb_offset_01,
+  mod_nb_offset_02,
+  mod_nb_offset_03,
+  mod_nb_offset_04,
+  mod_nb_offset_05,
+  mod_nb_offset_06,
+  mod_nb_offset_07,
+  mod_nb_offset_08,
+  mod_nb_offset_09,
+  mod_nb_offset_10
+  )
+aic_df <- aic_df |>
+  arrange(AIC)
+```
+
+Let's check those residuals of the top model. There are better ways of doing this, but let's be simple for now.
+
+```{r}
+sim_res <- simulateResiduals(mod_nb_offset_10)
+plot(sim_res)
+```
+
+These look great so far, but let's check the residuals against the predictors in the model.
+
+```{r}
+plotResiduals(sim_res, pufferi$mean_depth)
+```
+
+This looks great!
+
+```{r}
+plotResiduals(sim_res, pufferi$period)
+```
+
+OK, we're starting to get the picture here that we've done something up.
+
+```{r}
+plotResiduals(sim_res, pufferi$year)
+```
+
+This was the final check. We've specified the model correctly, and we've confirmed that there's no residual structure.
+
+We have successfully formulated a Generalized Linear Model!
+
+sac \<- testSpatialAutocorrelation(sim_res, x=pufferi$x_km, y=pufferi$y_km)
+
+END
+

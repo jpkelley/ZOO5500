@@ -1,0 +1,41 @@
+---
+title: "Effective Sample Size in Model Selection"
+format: html
+---
+
+# Why Sample Size Matters
+
+-   \[Explain why AIC is often described as sample-size agnostic\]
+-   \[Introduce why AICc changes this\]
+
+# What Is “n” in AICc?
+
+-   \[Define sample size in likelihood-based inference\]
+-   \[Distinguish observations from independent information\]
+
+# Pseudoreplication and Inflated n
+
+-   \[Explain how dependence inflates apparent sample size\]
+-   \[Describe consequences for model selection penalties\]
+
+# Effective Sample Size
+
+-   \[Define effective sample size conceptually\]
+-   \[Relate to clustering, repeated measures, and random effects\]
+
+# Software Pitfalls
+
+-   \[Explain MuMIn::dredge behavior\]
+-   \[Discuss risks of automated workflows\]
+-   \[Reinforce need for statistical judgment\]
+
+# Practical Guidance
+
+-   \[Describe strategies to estimate effective n\]
+-   \[Explain when AICc comparisons become unreliable\]
+-   \[Discuss implications for ecological inference\]
+
+# Take-Home Messages
+
+-   \[Emphasize that n is about information, not rows\]
+-   \[Reinforce caution with model selection in complex designs\]

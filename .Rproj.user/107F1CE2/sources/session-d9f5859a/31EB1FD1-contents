@@ -1,0 +1,55 @@
+---
+title: "tutorial_[glms_part01]"
+author: "Patrick Kelley"
+date:
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## Introduction
+
+In this brief tutorial, we provide some simulation code that will (hopefully) convince you that GLMs are pretty much the same kinds of models that you were exposed to in your introductory statistics courses back in the day. As you'll quickly see, however, GLMs are highly flexible and will allow you to extract the maximum amount of signal from your noisy data.
+
+## Set up workspace
+source("class_r_scripts/load_packages.r")
+
+## A brief comparison of t-test, ANOVA, and GLM
+
+We will simulate a fake dataset that has two groups (1 and 2). The values for each group follow normal distributions with a standard deviation of 1. The groups differ in their mean values, however, by one unit.
+
+```{r}
+set.seed(100) # this is a random seed that ensures example reproducibility
+nval <- 50 # Generate some fake data
+group1 <- rnorm(nval, mean=5, sd=1)
+group2 <- rnorm(nval, mean=6, sd=1)
+d <- data.frame(id=rep(c("group1", "group2"), each=nval), 
+  y=c(group1, group2))
+```
+Or, if you're really fancy, you can do the same thing in tidy R.
+```{r}
+d2 <- tibble::tibble(
+  id = rep(c("group1", "group2"), each = nval),
+  y = c(group1, group2)
+  )
+```
+Now, using three test types, let's test the hypothesis that the two groups differ. Note that we need to convert the ANOVA's F-stat to a t-statistic below. The last four lines below simply extraxt the t-statistic from each test.
+
+```{r}
+ttest.mod <- t.test(y ~ id, data=d) # t-test
+anova.mod <- aov(y ~ id, data=d) # ANOVA
+glm.mod <- glm(y ~ id, data=d) # GLM
+
+ttest.t <- abs(as.numeric(ttest.mod$statistic))
+anova.f <- summary(anova.mod)[[1]]$F[1]
+anova.t <- sqrt(anova.f) # t-stat = sqrt(F-stat)
+glm.t <- coefficients(summary(glm.mod))[2, 3]
+```
+Then, we compare all the test statistics.
+```{r}
+c(ttest.t, anova.t, glm.t) # thus, p-values and inference are the same
+```
+They're the same! Fantastic! Now you can sit back and silently vow never to use a t-test or ANOVA again. Take a moment and do that now. Seriously, take a moment (and write to your college stats instructor).

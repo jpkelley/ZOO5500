@@ -1,0 +1,276 @@
+---
+title: "nature_of_data"
+format: html
+toc: true
+number-sections: false
+---
+
+## Welcome!
+
+You were asked to come into this course with data. Most of you did.
+
+Some of you arrived with carefully curated spreadsheets. Others showed up with folders full of raw sensor outputs, GIS layers, audio files, camera-trap images, or field notes that only you can currently interpret. All of that counts. But before we do anything quantitative, we need to pause and ask a deceptively simple question:
+
+**What are data, really?**
+
+Throughout this lesson, you’ll see figure callouts like *Figure 1* or *Figure 2*. These are placeholders where you can insert images, screenshots, diagrams, or small examples. If you don’t have the figures ready yet, keep the callouts—they still guide the reading flow.
+
+::: {.callout-tip title="Where you’ll add figures"}
+As you build this page, insert figures where you see the *Figure callout* blocks. A simple workflow is: add a screenshot or diagram → give it a caption → keep the surrounding paragraph short so the figure does the heavy lifting.
+:::
+
+---
+
+## What Do We Mean by “Data”?
+
+### Formal and historical definitions
+
+Two definitions—separated by nearly 200 years—are a useful place to start.
+
+::: callout-note
+**Modern definition (2016):**  
+“Facts or information used usually to calculate, analyze, or plan something.”
+
+**Older definition (1828):**  
+“Quantities, principles, or facts given or admitted, by which to find things or results unknown.”
+:::
+
+I strongly prefer the older definition.
+
+The modern definition quietly collapses a distinction that matters enormously for science. It treats *data* and *information* as if they are interchangeable. They are not.
+
+**Data are facts we have observed.**  
+**Information is what we extract from those facts through modeling.**
+
+We do not collect information.  
+We collect data, and then—carefully, explicitly, and sometimes painfully—we *create* information.
+
+::: {.callout-note title="Figure callout (Figure 1)"}
+**Figure 1 (insert):** A simple schematic showing **Observed data → Modeling → Information**.  
+(Think: raw observations on the left, model in the middle, inference/estimates on the right.)
+:::
+
+---
+
+### Data as collections, not facts
+
+Early in scientific training, it is very easy to treat a single measurement as a “fact” about the world.
+
+> “The wing length of this bird is 72 mm.”  
+> “This plant produced 14 fruits.”  
+> “This animal moved 1.3 km today.”
+
+Each of those statements sounds definitive. Each is also misleading if taken on its own.
+
+What we actually have are **measurements**, not truths—and measurements only become meaningful when viewed as **collections**. The scientific object of interest is almost never the individual value. It is the *distribution* around that value.
+
+That distribution contains:
+
+- variation among individuals  
+- variation through time  
+- variation across space  
+- variation introduced by the measurement process itself  
+
+This variability is not noise that needs to be eliminated. It is often the phenomenon you are trying to understand.
+
+A trait is not a number.  
+A behavior is not a point.  
+An ecological process is not a single curve on a plot.
+
+They are **structured collections of observations**, embedded in context.
+
+::: {.callout-note title="Figure callout (Figure 2)"}
+**Figure 2 (insert):** A cartoon example of “single value vs distribution.”  
+For example: 10 individual trait measurements as dots, with a mean/median shown, plus a short note: *the distribution is the object of study*.
+:::
+
+---
+
+### Raw data as a data lake
+
+Most ecological datasets do not begin life as tidy tables. They begin life as something closer to a **data lake**.
+
+Imagine a historical field notebook page from Alexander Skutch working in Panama in the 1950s. On a single page you might find sketches, weather notes, time stamps, behavioral observations, and narrative natural history context. Nothing is standardized. Nothing is labeled for later analysis. Yet the scientific value is enormous.
+
+Modern data collection often looks more digital, but the structure is similar:
+
+- raw sensor outputs  
+- field notes  
+- metadata scattered across files  
+- repeated measurements  
+- missing values  
+- partial failures  
+
+Raw data are frequently unstructured or semi-structured. They are often messy, redundant, incomplete, and internally inconsistent.
+
+This is not a failure of the researcher. It is what real ecological data look like.
+
+**Raw data are almost never analysis-ready.**  
+They must be filtered, curated, transformed, and contextualized before modeling can begin.
+
+A key quantitative skill is not just *cleaning* data, but understanding what information is lost—and what assumptions are introduced—at every step of that process.
+
+::: {.callout-note title="Figure callout (Figure 3)"}
+**Figure 3 (insert):** Photo or screenshot montage of “raw data lake” artifacts.  
+Examples: a field notebook page, a messy spreadsheet, a sensor log snippet, and a metadata file—all side by side.
+:::
+
+---
+
+## Types of Data You Already Work With
+
+By the time you reach graduate school, you are already working with more data types than you may realize.
+
+### Field and lab data
+
+Many of you work with observational or experimental data collected under imperfect conditions. These datasets often carry hidden structure:
+
+- observer bias  
+- detection limits  
+- non-random sampling  
+- missingness tied to ecological processes  
+
+Ignoring those issues does not make them disappear. It simply pushes them downstream into your models, where they resurface as confusing results or violated assumptions.
+
+::: {.callout-note title="Figure callout (Figure 4)"}
+**Figure 4 (insert):** A simple “sampling pipeline” diagram showing where bias enters.  
+Example: *true state → observation process → recorded data* (with bias/detection noted at the observation step).
+:::
+
+---
+
+### Processed and derived data
+
+At some point, raw measurements become summaries: means, rates, indices, or features. This step is unavoidable, and often useful.
+
+But it always involves a tradeoff.
+
+You lose some information about individual observations. In return, you gain interpretability and tractability. Problems arise when we forget that the derived quantity is no longer the original phenomenon—it is a *representation* of it.
+
+::: {.callout-note title="Figure callout (Figure 5)"}
+**Figure 5 (insert):** Raw-to-derived example.  
+For example: raw minute-by-minute accelerometer data → a daily activity index.  
+Label: *loss of detail; gain of interpretability.*
+:::
+
+---
+
+### Multivariate and high-dimensional data
+
+Many of you work with data that are explicitly multivariate: movement paths, accelerometer time series, behavioral states, or trait matrices.
+
+These data are defined by correlation and dependence. Treating each column as independent is one of the fastest ways to produce results that look precise but are scientifically meaningless.
+
+::: {.callout-note title="Figure callout (Figure 6)"}
+**Figure 6 (insert):** A correlation heatmap or a conceptual diagram of dependence.  
+Even a small matrix graphic works: *features are not independent.*
+:::
+
+---
+
+### Spatial, social, and interaction data
+
+Others work with spatial point patterns, interaction matrices, social networks, or food webs. These data violate assumptions of independence by construction.
+
+They require models that explicitly acknowledge structure, not methods borrowed uncritically from simpler systems.
+
+::: {.callout-warning}
+Scale mismatches—spatial, temporal, or organizational—are among the most common and damaging sources of analytical error in ecology.
+:::
+
+::: {.callout-note title="Figure callout (Figure 7)"}
+**Figure 7 (insert):** Example of scale mismatch.  
+For example: animal GPS points at 1-second resolution overlaid on habitat data at 30 m pixels and monthly summaries.
+:::
+
+---
+
+## From Data to Knowledge
+
+### The conventional scientific workflow
+
+Most of us were taught a clean sequence:
+
+> question → hypothesis → test → inference
+
+This framework is pedagogically useful, but it is not how science usually unfolds.
+
+In practice, questions evolve as you learn what the data can and cannot support. Hypotheses are refined. Models change as constraints become apparent.
+
+Pretending otherwise produces fragile analyses that collapse when confronted with real complexity.
+
+::: {.callout-note title="Figure callout (Figure 8)"}
+**Figure 8 (insert):** “Textbook workflow vs real workflow.”  
+Left: linear pipeline. Right: iterative loop with feedback arrows (exploration, revision, re-modeling).
+:::
+
+---
+
+### Alternative, data-first workflows
+
+In many ecological projects, structure is discovered rather than assumed. Questions emerge from exploratory analysis. Modeling becomes iterative rather than terminal.
+
+Exploration is not a failure of rigor. It is a legitimate phase of scientific reasoning—as long as it is clearly separated from inference.
+
+::: {.callout-note title="Figure callout (Figure 9)"}
+**Figure 9 (insert):** A two-lane diagram: *Exploration* (left lane) feeding into *Inference* (right lane), with a “handoff” point.
+:::
+
+---
+
+### Data reuse and synthesis
+
+Data do not stop being data once a paper is published. They are reused in meta-analyses, comparative studies, and re-analyses with new methods.
+
+This is why reproducibility matters—not as a bureaucratic requirement, but as scientific hygiene. A model that cannot be reconstructed cannot be trusted.
+
+::: {.callout-note title="Figure callout (Figure 10)"}
+**Figure 10 (insert):** “Data lifecycle” schematic.  
+Collection → cleaning → modeling → publication → reuse → synthesis → new questions.
+:::
+
+---
+
+## A Critical Warning About Visualization
+
+Raw data visualization is **not inference**.
+
+Plots are powerful tools for exploration, sanity checking, and communication. They are not explanations.
+
+I am deeply skeptical of much of the data visualization used in popular media because it often shows raw data only, includes no explicit model, and then implies causation or mechanism.
+
+As scientists, we would never get away with that.
+
+**Inference comes from models.**  
+Plots support inference; they do not replace it.
+
+::: {.callout-note title="Figure callout (Figure 11)"}
+**Figure 11 (insert):** Side-by-side example:  
+Left: raw scatterplot with implied story. Right: model-based estimate with uncertainty (confidence/credible intervals).
+:::
+
+---
+
+## A Short Reflection Exercise
+
+::: {.callout-note collapse="true" title="Pause and reflect (3 minutes)"}
+Think about your dataset and answer these questions for yourself:
+
+1. **Where did the data come from?**
+   - Your own observations?
+   - A public database?
+   - Remote sensing products?
+
+2. **What are the data types?**
+   - Numeric, categorical, character?
+   - Images, audio, spatial data?
+
+3. **What are the major challenges?**
+   - Sample size limitations
+   - Spatial or temporal non-independence
+   - Biases introduced during collection or processing
+:::
+
+If you can answer these questions clearly, the rest of this course will make much more sense. If you cannot, that is not a failure—it is a signal that you are exactly where you should be.
+
+Understanding the *nature of your data* is the first real step toward defensible ecological inference.

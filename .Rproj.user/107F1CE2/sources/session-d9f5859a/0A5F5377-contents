@@ -1,0 +1,378 @@
+---
+title: "Course calendar"
+numbered: true
+number-sections: true
+toc: true
+toc-depth: 1
+---
+
+## Calendar overview
+
+Use the calendar table below to see what’s coming each week; simply click a week (first column link) to jump to full details, and then expand sections to see what to do before, during, and after class. This calendar may change slightly as we progress through the term. You will receive immediate notification of any and all changes.
+
+::: {.course-info tbl-colwidths="[14, 32, 18, 18, 10, 8]"}
+| **Week** | **Topics** | **In-class exercise** | **Milestone assignment** | **Stress level** | **Grade weight (%)** |
+|-----------:|------------|------------|------------|------------|------------|
+| [**Week 1**<br>19-Jan-2026](#week-1) | Course intro; RStudio setup; AI guardrails | Project scoping discussion | — | Very low | 5 |
+| [**Week 2**<br>26-Jan-2026](#week-2) | File structure; reproducible workflows; AI logs | File audit walkthrough | Analysis Concept Note | Low | 5 |
+| [**Week 3**<br>02-Feb-2026](#week-3) | Data exploration; measurement & uncertainty | Exploratory data analysis walkthrough | — | Very low | 0 |
+| [**Week 4**<br>09-Feb-2026](#week-4) | GLMs (theory + practice) | GLM exercise | Data Readiness Note | Low | 10 |
+| [**Week 5**<br>16-Feb-2026](#week-5) | GLMs; AIC & information theory | Model comparison exercise | — | Low | 5 |
+| [**Week 6**<br>23-Feb-2026](#week-6) | GLMMs; effective sample size | GLMM exercise | — | Moderate | 15 |
+| [**Week 7**<br>02-Mar-2026](#week-7) | GAMs | GAM exercise | Working Model (draft) | Moderate | 0 |
+| [**Week 8**<br>09-Mar-2026](#week-8) | GAMMs; spatial & temporal heterogeneity | Model refinement exercise | Working Model (final lock) | Moderate | 15 |
+| [**Week 9**<br>16-Mar-2026](#week-9) | Student Spring Break | — | — | None | 0 |
+| [**Week 10**<br>23-Mar-2026](#week-10) | Structural Causal Modeling (SCM) | Causal diagram critique | — | Low | 10 |
+| [**Week 11**<br>30-Mar-2026](#week-11) | Instructor Spring Break | — | — | None | 0 |
+| [**Week 12**<br>06-Apr-2026](#week-12) | Prediction & uncertainty | Prediction checks | Interpretation Memo | Low | 10 |
+| [**Week 13**<br>13-Apr-2026](#week-13) | Synthesis & justification | Peer + AI review | — | Moderate | 0 |
+| [**Week 14**<br>20-Apr-2026](#week-14) | Tables, figures, reporting standards | Table/figure workshop | Results Section | Low | 10 |
+| [**Week 15**<br>27-Apr-2026](#week-15) | Writing Results sections | Draft clinic | Full Draft | Moderate | 15 |
+| [**Week 16**<br>04-May-2026](#week-16) | Reflection & closure | Course wrap-up | Revision Plan (not executed) | None | 5 |
+:::
+
+## Weekly Information
+
+Click to expand sections below to see expectations before, during, and after class.
+
+::: {#week-1 .callout-tip .unnumbered icon="false" collapse="true"}
+### **Week 1 (19-Jan-2026)**
+
+**Topics:** Course introduction; RStudio setup; AI guardrails\
+**Stress level:** Very low\
+**Grade weight:** 0%
+
+### Before class {.unnumbered}
+
+-   Absolutely nothing.
+
+### In class {.unnumbered}
+
+-   Course overview and expectations
+-   Review syllabus
+-   Read AI policy and documentation expectations
+-   Project scoping discussion
+
+### After class {.unnumbered}
+
+-   No submission due
+-   Install R and RStudio
+-   Read AI use and documentation expectations
+-   Begin gathering your dataset files
+:::
+
+::: {#week-2 .callout-tip .unnumbered icon="false" collapse="true"}
+### **Week 2 (26-Jan-2026)**
+
+**Topics:** File structure; reproducible workflows; AI logs\
+**Stress level:** Low\
+**Grade weight:** 5%
+
+### Before class {.unnumbered}
+
+-   Review example project directory structures
+-   Read guidance on reproducible workflows
+
+### In class {.unnumbered}
+
+-   File audit walkthrough
+-   Discussion of AI interaction logging
+
+### After class {.unnumbered}
+
+-   **Submit:** Analysis Concept Note
+:::
+
+::: {#week-3 .callout-tip .unnumbered icon="false" collapse="true"}
+### **Week 3 (02-Feb-2026)**
+
+**Topics:** Data exploration; measurement & uncertainty\
+**Stress level:** Very low\
+**Grade weight:** 5%
+
+### Before class {.unnumbered}
+
+-   Skim examples of exploratory data analysis (EDA)
+-   Review notes on uncertainty and measurement error
+
+### In class {.unnumbered}
+
+-   Exploratory data analysis walkthrough
+-   Discussion of data limitations and noise
+
+### After class {.unnumbered}
+
+-   No submission due
+-   Begin informal exploration of your own data
+:::
+
+::: {#week-4 .callout-tip .unnumbered icon="false" collapse="true"}
+### **Week 4 (09-Feb-2026)**
+
+**Topics:** GLMs (theory + practice)\
+**Stress level:** Low\
+**Grade weight:** 10%
+
+### Before class {.unnumbered}
+
+-   Read GLM conceptual overview
+-   Review examples of common link functions
+
+### In class {.unnumbered}
+
+-   GLM exercise
+-   Translating scientific questions into model form
+
+### After class {.unnumbered}
+
+-   **Submit:** Data Readiness Note
+:::
+
+::: {#week-5 .callout-tip .unnumbered icon="false" collapse="true"}
+### **Week 5 (16-Feb-2026)**
+
+**Topics:** GLMs; AIC & information theory\
+**Stress level:** Low\
+**Grade weight:** 5%
+
+### Before class {.unnumbered}
+
+-   Review information-theoretic model comparison
+-   Read example AIC workflows
+
+### In class {.unnumbered}
+
+-   Model comparison exercise
+-   Interpreting relative support
+
+### After class {.unnumbered}
+
+-   No submission due
+-   Refine candidate model sets
+:::
+
+::: {#week-6 .callout-tip .unnumbered icon="false" collapse="true"}
+### **Week 6 (23-Feb-2026)**
+
+**Topics:** GLMMs; effective sample size\
+**Stress level:** Moderate\
+**Grade weight:** 15%
+
+### Before class {.unnumbered}
+
+-   Read GLMM overview
+-   Review motivation for random effects
+
+### In class {.unnumbered}
+
+-   GLMM exercise
+-   Discussion of pseudoreplication and effective sample size
+
+### After class {.unnumbered}
+
+-   No submission due
+-   Begin transitioning models to mixed frameworks where appropriate
+:::
+
+::: {#week-7 .callout-tip .unnumbered icon="false" collapse="true"}
+### **Week 7 (02-Mar-2026)**
+
+**Topics:** GAMs\
+**Stress level:** Moderate\
+**Grade weight:** 0%
+
+### Before class {.unnumbered}
+
+-   Review motivation for smooth terms
+-   Read conceptual introduction to GAMs
+
+### In class {.unnumbered}
+
+-   GAM exercise
+-   Interpreting smooths vs parametric effects
+
+### After class {.unnumbered}
+
+-   **Submit:** Working Model (draft)
+:::
+
+::: {#week-8 .callout-tip .unnumbered icon="false" collapse="true"}
+### **Week 8 (09-Mar-2026)**
+
+**Topics:** GAMMs; spatial & temporal heterogeneity\
+**Stress level:** Moderate\
+**Grade weight:** 15%
+
+### Before class {.unnumbered}
+
+-   Review examples of spatial and temporal structure
+-   Read GAMM case studies
+
+### In class {.unnumbered}
+
+-   Model refinement exercise
+-   Diagnosing remaining structure in residuals
+
+### After class {.unnumbered}
+
+-   **Submit:** Working Model (final lock)
+:::
+
+::: {#week-9 .callout-tip .unnumbered icon="false" collapse="true"}
+### **Week 9 (16-Mar-2026)**
+
+**Topics:** Student Spring Break\
+**Stress level:** None\
+**Grade weight:** 0%
+
+### Notes {.unnumbered}
+
+-   No class
+-   No assignments due
+-   Recommended: rest, catch up, or light review if needed
+:::
+
+::: {#week-10 .callout-tip .unnumbered icon="false" collapse="true"}
+### **Week 10 (23-Mar-2026)**
+
+**Topics:** Structural Causal Modeling (SCM)\
+**Stress level:** Low\
+**Grade weight:** 10%
+
+### Before class {.unnumbered}
+
+-   Read SCM overview and motivation
+-   Review example causal diagrams
+
+### In class {.unnumbered}
+
+-   Causal diagram critique
+-   Discussion of assumptions and identification
+
+### After class {.unnumbered}
+
+-   No submission due
+-   Consider how SCM reframes your modeling decisions
+:::
+
+::: {#week-11 .callout-tip .unnumbered icon="false" collapse="true"}
+### **Week 11 (30-Mar-2026)**
+
+**Topics:** Instructor Spring Break\
+**Stress level:** None\
+**Grade weight:** 0%
+
+### Notes {.unnumbered}
+
+-   No class
+-   No assignments due
+:::
+
+::: {#week-12 .callout-tip .unnumbered icon="false" collapse="true"}
+### **Week 12 (06-Apr-2026)**
+
+**Topics:** Prediction & uncertainty\
+**Stress level:** Low\
+**Grade weight:** 10%
+
+### Before class {.unnumbered}
+
+-   Review prediction vs inference distinctions
+-   Read examples of uncertainty communication
+
+### In class {.unnumbered}
+
+-   Prediction checks
+-   Evaluating extrapolation risk
+
+### After class {.unnumbered}
+
+-   **Submit:** Interpretation Memo
+:::
+
+::: {#week-13 .callout-tip .unnumbered icon="false" collapse="true"}
+### **Week 13 (13-Apr-2026)**
+
+**Topics:** Synthesis & justification\
+**Stress level:** Moderate\
+**Grade weight:** 0%
+
+### Before class {.unnumbered}
+
+-   Review synthesis examples from prior studies
+
+### In class {.unnumbered}
+
+-   Peer + AI review
+-   Justifying analytical decisions
+
+### After class {.unnumbered}
+
+-   No submission due
+-   Prepare figures and tables for results
+:::
+
+::: {#week-14 .callout-tip .unnumbered icon="false" collapse="true"}
+### **Week 14 (20-Apr-2026)**
+
+**Topics:** Tables, figures, reporting standards\
+**Stress level:** Low\
+**Grade weight:** 10%
+
+### Before class {.unnumbered}
+
+-   Review reporting guidelines
+-   Examine good and bad figure examples
+
+### In class {.unnumbered}
+
+-   Table/figure workshop
+-   Emphasis on clarity and restraint
+
+### After class {.unnumbered}
+
+-   **Submit:** Results Section
+:::
+
+::: {#week-15 .callout-tip .unnumbered icon="false" collapse="true"}
+### **Week 15 (27-Apr-2026)**
+
+**Topics:** Writing Results sections\
+**Stress level:** Moderate\
+**Grade weight:** 15%
+
+### Before class {.unnumbered}
+
+-   Review example Results sections
+-   Reflect on narrative flow
+
+### In class {.unnumbered}
+
+-   Draft clinic
+-   Focused feedback on structure and interpretation
+
+### After class {.unnumbered}
+
+-   **Submit:** Full Draft
+:::
+
+::: {#week-16 .callout-tip .unnumbered icon="false" collapse="true"}
+### **Week 16 (04-May-2026)**
+
+**Topics:** Reflection & closure\
+**Stress level:** None\
+**Grade weight:** 5%
+
+### Before class {.unnumbered}
+
+-   Review feedback on full draft
+
+### In class {.unnumbered}
+
+-   Course wrap-up
+-   Reflection on analytical growth
+
+### After class {.unnumbered}
+
+-   **Submit:** Revision Plan (not executed)
+:::

@@ -1,0 +1,162 @@
+---
+title: "Analysis Concept Note"
+author: "[Enter your name here]"
+date: "Week 2: Analysis Concept Note"
+numbered: false
+toc: false
+---
+
+## Project overview {.unnumbered}
+
+### Working title {.unnumbered}
+*(This can change later)*
+
+> _Insert a concise, descriptive working title._
+
+---
+
+### Research question {.unnumbered}
+
+> _State your primary question in 1–3 sentences, in plain language._  
+> _Avoid methods or results language here._
+
+---
+
+### Study system and units of analysis {.unnumbered}
+
+- **Study system / context:**  
+  _Brief description of the biological, ecological, or applied system._
+
+- **Unit of analysis:**  
+  _What does a single row represent conceptually? (e.g., individual, site-day, plot-year, detection event, etc.)_
+
+---
+
+## Data description {.unnumbered}
+
+### Data source {.unnumbered}
+
+- Where do the data come from?  
+- Are they observational, experimental, or simulated?  
+- Are you the original data collector?
+
+---
+
+### Response variable(s) {.unnumbered}
+
+List your primary response variable(s):
+
+- Variable name (as it appears in the data):  
+- What it represents conceptually:  
+- Measurement scale / type (count, binary, continuous, proportion, etc.):  
+- Units (if applicable):
+
+---
+
+### Predictor variable(s) {.unnumbered}
+
+List your main predictors (draft list is fine):
+
+- Predictor name:  
+- Conceptual meaning:  
+- Expected direction of effect (if any):  
+- Why it matters for your question:
+
+---
+
+## Hypotheses and expectations {.unnumbered}
+
+> _Briefly describe the relationships you expect to see._  
+> _Bullets are fine. Directional expectations are helpful but not required._
+
+---
+
+## Planned analytical approach (tentative) {.unnumbered}
+
+### Candidate model family {.unnumbered}
+
+> _What type of model do you currently think is appropriate, and why?_  
+> _(GLM, GLMM, GAM, GAMM, etc. — this is a hypothesis, not a commitment.)_
+
+---
+
+### Data structure considerations {.unnumbered}
+
+Note anything you already suspect may matter:
+
+- Non-independence (grouping, repeated measures, hierarchy)
+- Temporal structure
+- Spatial structure
+- Zero inflation, truncation, bounds
+- Unequal sampling effort
+
+---
+
+## Workflow and reproducibility plan {.unnumbered}
+
+### File organization {.unnumbered}
+
+> _Briefly describe how you plan to organize your project files._
+
+- Project root name:
+- Data folder(s):
+- Script folder(s):
+- Output / figures folder(s):
+
+---
+
+### AI use (planned) {.unnumbered}
+
+> _If you anticipate using AI tools, describe how (e.g., troubleshooting, clarification, workflow advice, link to AI Interaction Log)._  
+> _Do not include prompts or outputs here._
+
+---
+
+## Anticipated challenges {.unnumbered}
+
+> _What do you already think might be difficult or limiting?_  
+> _Examples: missing data, unclear metadata, low sample size, confounding, measurement error._
+
+---
+
+## What success looks like at this stage {.unnumbered}
+
+> _In 2–4 sentences, describe what you would consider a successful outcome for this project by the end of the semester._
+
+---
+
+## Notes for the instructor (optional) {.unnumbered}
+
+> _Anything you want feedback on specifically? Scope, feasibility, model choice, data limitations, etc._
+
+---
+
+## Self-check rubric (complete before submitting) {.unnumbered}
+
+Before submitting, read each item and confirm that your Concept Note meets the standard.
+
+### Clarity and scope
+- ☐ My research question is understandable to a classmate outside my subfield  
+- ☐ The scope is appropriate for one semester (not overly ambitious)  
+- ☐ I can clearly describe what one observation (row) represents  
+
+### Data readiness (conceptual)
+- ☐ I know where the data come from and what they represent  
+- ☐ I can name my response variable(s) and explain what they measure  
+- ☐ I can explain why each main predictor is included  
+
+### Analytical thinking
+- ☐ My tentative model choice is motivated by the data structure, not habit  
+- ☐ I have considered non-independence, temporal, or spatial structure where relevant  
+- ☐ I have identified at least one plausible complication or limitation  
+
+### Workflow and reproducibility
+- ☐ I have a clear plan for organizing files and scripts  
+- ☐ Someone else could understand my project structure from my description  
+- ☐ My planned AI use aligns with course expectations  
+
+### Overall check
+- ☐ This document reflects *my current thinking*, not a polished final plan  
+- ☐ Uncertainty and open questions are stated honestly  
+- ☐ I am ready to receive feedback and revise my approach  
+

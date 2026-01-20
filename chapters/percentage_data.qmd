@@ -1,0 +1,70 @@
+---
+title: "Modeling Proportion and Percentage Data"
+format: html
+---
+
+# Overview
+
+-   \[Explain why proportion data are common in ecology\]
+-   \[Describe why they require special treatment\]
+
+# Why Gaussian Models Fail
+
+-   \[Explain bounded nature of proportion data\]
+-   \[Describe impossible predictions (\<0, \>1)\]
+
+# Binary Data (0/1 Outcomes)
+
+## Binomial GLMs
+
+-   \[Describe binomial likelihood\]
+-   \[Explain relationship to logistic regression\]
+
+## Link Functions
+
+-   \[Describe logit, probit, cloglog, and others\]
+-   \[Explain when to use each\]
+-   \[Discuss imbalance in 0s and 1s\]
+
+## Interpretation and Back-Transformation
+
+-   \[Explain link vs. response scale\]
+-   \[Describe how to compute probabilities\]
+
+# Model Validation for Binary Data
+
+-   \[Explain why residuals are tricky\]
+-   \[Introduce DHARMa as preferred approach\]
+
+# Continuous Proportion Data (0–1)
+
+-   \[Distinguish counts from decimal proportions\]
+-   \[Explain why beta distribution is appropriate\]
+
+# Modeling Strategies
+
+## Quasibinomial with Offsets
+
+-   \[Explain multiplication and offsets\]
+-   \[Discuss preservation of precision\]
+
+## Beta GLMs and GAMs
+
+-   \[Describe assumptions and advantages\]
+-   \[Discuss handling of 0s and 1s\]
+
+# Scaling, Precision, and Inference
+
+-   \[Explain why results should be invariant to numerator/denominator\]
+-   \[Discuss impact on standard errors\]
+-   \[Explain Type I error inflation\]
+
+# Model Comparison
+
+-   \[Describe testing distributions and link functions with AIC\]
+-   \[Emphasize robustness checks\]
+
+# Take-Home Messages
+
+-   \[Summarize best practices\]
+-   \[Reinforce focus on proportions, not raw counts\]

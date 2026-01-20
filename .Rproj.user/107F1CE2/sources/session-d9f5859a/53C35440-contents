@@ -1,0 +1,239 @@
+---
+title: "tutorial_[glmms_part01]"
+author: "Patrick Kelley"
+date:
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE)
+```
+
+# Introduction
+In this tutorial, we will build a Generalized Linear Mixed Model (GLMM) using the ```glmmTMB``` package. We will demonstrate how GLMMs can improve GLMs by first building a GLM (as if you were a naive researcher); this is obviously not the approach that a seasoned analyst would take.
+
+## Workspace set-up
+
+```{r}
+source("class_r_scripts/load_packages.r")
+
+```
+
+## Load the data
+Lorax seem to be everywhere. Recently, during a survey of 31 forested study plots (1 square kilometer each) here in Wyoming, scientists discovered a cryptic species of Lorax. Because it is endemic to Wyoming, they named it the Wyoming Lorax (*Lorax wyomingensis*). The researchers quantified their abundance (counts per survey and multiple surveys per plot), community diversity (all *Lorax* species in the plots), and also measured several habitat features, including percentage ground vegetation, percentage herb layer, and percent leaf litter. Anyway, these scientists thought the scientific community would not believe their discovery, so they gave the dataset to us. Let's read in these data and save it to an object called "wyoming" and then look at the structure of the data::
+
+```{r}
+wyoming <- import("class_data/lorax_wyomingensis_dataset.csv")
+str(wyoming)
+```
+You see several variables and plot information:
+
+* ```plot_id```: values 1-31 for each unique plot
+* ```forest_age```: categorical variable describing the age, in years, of each plot
+* ```tree_species```: species of dominant tree in each survey
+* ```x``` and ```y```: spatial coordinates in UTM (specific projection not important) of each measured survey
+* ```abundance```: of *Lorax wyomingensis* in each survey
+* ```shannon_hlog10```: Shannon diversity index of the *Lorax* community in each survey
+* ```ground_veg```: Proportion of each survey area covered in ground vegetation
+* ```herb_layer```: Proportion of each survey area covered in herbs
+* ```leaf_litter```: Proportion of each survey area covered in leaf litter only (no vegetation)
+* ```rain_in```: round total precipitation (in inches...because that's what their inexpensive rain gauge collected)
+
+For the sake of brevity, let's assume that these data have already been cleaned and inspected for multicollinearity and outliers. That is, we will not eliminate any data at this point. Remember also that we will do some additional model validation tests (to check on the influence of outliers, etc.) after out initial analysis.
+
+# How to formulate a Generalized Linear Model (GLM)
+
+## Describing the model structure (impact of predictors on number of parasites)
+We have several hypotheses to test. These hypotheses can easily be verbalized in a way that reflects how we might test them with Generalized Linear Models, which we have already seen before. That is, we think about a few of the variables and hypothesize that number of Lorax is impacted by:
+
+* ground_veg, herb_layer, leaf_litter
+* ground_veg, herb_layer
+* ground_veg, leaf_litter
+* herb_layer, leaf_litter
+* ground_veg
+* herb_layer
+* leaf_litter
+* (none of these variable...this is our null hypothesis)
+
+This serves as a reminder of how we write these GLMs. You should be become familiar with this general form of the models, where "~" (a tilde) can be verbalized as "...is a function of...". The main predictors are then put after this tilde. Then, we need to specify the dataset that the function should read from. OK, let's get a few models:
+
+```{r}
+mod_01 <- glm(abundance ~ ground_veg + herb_layer + leaf_litter, data=wyoming)
+mod_02 <- glm(abundance ~ ground_veg + herb_layer, data=wyoming)
+mod_03 <- glm(abundance ~ ground_veg + leaf_litter, data=wyoming)
+mod_04 <- glm(abundance ~ herb_layer + leaf_litter, data=wyoming)
+mod_05 <- glm(abundance ~ ground_veg, data=wyoming)
+mod_06 <- glm(abundance ~ herb_layer, data=wyoming)
+mod_07 <- glm(abundance ~ leaf_litter, data=wyoming)
+mod_08 <- glm(abundance ~ 1, data=wyoming)
+```
+
+You have used GLMs to test eight competing (i.e. multiple working) hypotheses. Let's look at the the first model you ran.
+
+```{r}
+summary(mod_01)
+```
+
+Remember that When you run the summary() function on a model object, you will see output that will be fairly consistent across GLMs, GLMMs, GAMs, GAMMs, and many other model types. As a reminder, the main part of the model output is the coefficients table; this tells you the results of your model. Expect to see scientific notation (e.g. 5.655e-2 = 0.05655). The way to read this is like an equation for a line (since this is a linear model):
+
+abundance = 78.046 + ground_veg * 68.559 + herb_layer * 8.163 + leaf_litter * -47.168,
+
+where you put the relevant values of ground_veg, herb_layer, and leaf_litter into the equation. So, as a reminder, this output is telling you that ground_veg has a significant (p = 6.18e-05) positive impact (68.559; this is the slope value of the line) on abundance. No other factor shows a significant effect. But, as you will see, this was but a single hypothesis (ground_veg, herb_layer, and leaf_litter) that we tested. We need to know if it is better supported by the data than other hypotheses. For this, we use information criterion (AIC) as a measure of explanatory power. AIC is an information statistic; therefore, higher values of AIC indicate more uncertainty (and less information); the absolute value of AIC does not matter. So, for this exercise, we are looking for the model with the lowest AIC value. Let's calculate AIC values for each model that we created.
+
+```{r}
+AIC(mod_01, mod_02, mod_03, mod_04, mod_05, mod_06, mod_07, mod_08)
+```
+
+The third model (mod_03) is the model with the lowest AIC value and therefore our best-supported model. We will discuss conventional approached to AIC-based model selection later.
+
+## Conclusion
+We have now successfully created a GLM for this dataset. But, as you know, we still have some checks to do... 
+
+# Checking your model residuals
+You now know why the structure of your model residuals (normality and homogeneity) is important. Let's check our best-supported model (mod_03) to see what's going on with those residuals. Again, call on the DHARMa package's functionality.
+
+```{r}
+simresid <- simulateResiduals(fittedModel = mod_03)
+
+plot(simresid)
+
+```
+Focus on the left plot (the QQ Plot of residuals)? The "KS test" (Kolmogorov-Smirnov test) is a test of normality of residuals. Here, it says the residuals deviate significantly from a normal distribution. This will be something to fix. It also tests for outliers in the data (at the bottom). The results here suggests that there are no statistical outliers. From the plot at right, we see that the median quantile of the data also shows residual structure.
+
+So, we now need to try to fix this non-normality of residuals. Sometimes, this is a difficult prospect. Let's think critically about what we did. We have abundance of *L. wyomingensis*, a metric that should follow a Poisson distribution (positive skew, and >0). But we didn't specify anything about that in our GLM. What we did was run a set of GLMs that assumed that abundance followed a normal (or Gaussian) distribution. What were we thinking?!? Regardless of what the model residuals show, we need to get our data boundaries correct. So, let's try a Poisson distribution. We do this by specifying an argument in the glm() function for family. Unfortunately, because of our oversight, we need to refit all of our original models (and immediately forgot that our best model was mod_07, as that might change). Let's do this:
+
+```{r}
+mod_01 <- glm(abundance ~ ground_veg + herb_layer + leaf_litter, family=poisson, data=wyoming)
+mod_02 <- glm(abundance ~ ground_veg + herb_layer, family=poisson, data=wyoming)
+mod_03 <- glm(abundance ~ ground_veg + leaf_litter, family=poisson, data=wyoming)
+mod_04 <- glm(abundance ~ herb_layer + leaf_litter, family=poisson, data=wyoming)
+mod_05 <- glm(abundance ~ ground_veg, family=poisson, data=wyoming)
+mod_06 <- glm(abundance ~ herb_layer, family=poisson, data=wyoming)
+mod_07 <- glm(abundance ~ leaf_litter, family=poisson, data=wyoming)
+mod_08 <- glm(abundance ~ 1, family=poisson, data=wyoming)
+
+```
+
+OK, we are now comfortable that we got our data boundaries correct. Let's compare models using AIC:
+
+```{r}
+AIC(mod_01, mod_02, mod_03, mod_04, mod_05, mod_06, mod_07, mod_08)
+```
+Whoa. This was a big change. Now, mod_01 (our most complex model) is the best-supported model, as it has the lowest AIC value. Let's look at this model:
+
+```{r}
+summary(mod_01)
+```
+
+And check its residuals...
+```{r}
+simresid <- simulateResiduals(fittedModel = mod_01)
+plot(simresid)
+```
+
+Uh, oh. Everything about the model seems to be poorly fit. Ouch. The DHARMa package continues to detect non-normal residuals, and it has now detected other problems (e.g.outliers based on our imposed distribution). I chose this example to demonstrate how even the best model in a set of models might not be a good model. There may be other factors we failed to account for that are throwing the model into disarray. We may need to adjust our chosen distribution for our response variable. Or maybe there's some non-independence that is fundamental to our data structure that we need to account for. 
+
+## Stop and Think.
+You may have noticed from looking at the original dataset that we excluded some predictors. Think about a few potentially important data components that we should have included in our model-building and hypothesis testing in the above GLMs. Let's then remedy these omissions while we also attempt to solve our issues of non-independence.
+
+# How to formulate a Generalized Linear Mixed Model (GLMM)
+
+Let's always assume that our data have some pseudoreplication (non-independence) and act accordingly. And let's specify our predictors properly (and not cherry-pick what we think to be important variables).
+
+## Rethinking the structure of our model
+
+We have thought critically about our response variable (abundance) and have specified a Poisson distribution. This seemed to mess up the model residuals, but we know we have the data boundaries (>0) correct. Therefore, another component of the model must be mis-specified.  So, let's think about how we collected our data. Our first thought is to figure out how much we sampled at each plot.
+
+```{r}
+wyoming |> 
+  count(plot_id)
+```
+
+There is variation in the number of times we surveyed each plot. This violates the assumption of non-independence, so we need to do something about it. Let's include "plot" as a random effect (a clustering variable). First, we convert it from a character string to a factor, so that the function we'll use will recognize it. 
+
+```{r}
+wyoming$plot_id <- as.factor(wyoming$plot_id) # convert "plot" to factor
+
+# Or, in tidy R:
+wyoming <- wyoming |>
+  mutate(plot_id = as.factor(plot_id))
+```
+We then refit our GLM as a Generalized Linear Mixed Model (GLMM) using the glmmTMB package with the following specification. Note the form of the random effect (in parentheses). Note also that we have added the one predictor in our dataset that we omitted in the GLMs (```rain_in```). And we have now included models that include two-way interactions of all term combinations. Note that, for simplicity, we have omitted models with two and three two-way interactions. But these could easily be included.
+
+```{r}
+mod_01 <- glmmTMB(abundance ~ ground_veg + herb_layer + leaf_litter + rain_in + (1 | plot_id), family=poisson, data=wyoming)
+mod_02 <- glmmTMB(abundance ~ ground_veg*leaf_litter + herb_layer + rain_in + (1 | plot_id), family=poisson, data=wyoming)
+mod_03 <- glmmTMB(abundance ~ ground_veg*herb_layer + leaf_litter + rain_in + (1 | plot_id), family=poisson, data=wyoming)
+mod_04 <- glmmTMB(abundance ~ ground_veg*rain_in + leaf_litter + herb_layer + (1 | plot_id), family=poisson, data=wyoming)
+mod_05 <- glmmTMB(abundance ~ ground_veg + herb_layer*leaf_litter + rain_in + (1 | plot_id), family=poisson, data=wyoming)
+mod_06 <- glmmTMB(abundance ~ ground_veg + herb_layer*rain_in + leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
+mod_07 <- glmmTMB(abundance ~ ground_veg + herb_layer + leaf_litter*rain_in + (1 | plot_id), family=poisson, data=wyoming)
+mod_08 <- glmmTMB(abundance ~ ground_veg + herb_layer + leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
+mod_09 <- glmmTMB(abundance ~ ground_veg*herb_layer + leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
+mod_10 <- glmmTMB(abundance ~ ground_veg + herb_layer*leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
+mod_11 <- glmmTMB(abundance ~ ground_veg*leaf_litter + herb_layer + (1 | plot_id), family=poisson, data=wyoming)
+mod_12 <- glmmTMB(abundance ~ ground_veg + herb_layer + rain_in + (1 | plot_id), family=poisson, data=wyoming)
+mod_13 <- glmmTMB(abundance ~ ground_veg*herb_layer + rain_in + (1 | plot_id), family=poisson, data=wyoming)
+mod_14 <- glmmTMB(abundance ~ ground_veg + herb_layer*rain_in + (1 | plot_id), family=poisson, data=wyoming)
+mod_15 <- glmmTMB(abundance ~ ground_veg*rain_in + herb_layer + (1 | plot_id), family=poisson, data=wyoming)
+mod_16 <- glmmTMB(abundance ~ ground_veg + rain_in + leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
+mod_17 <- glmmTMB(abundance ~ ground_veg*rain_in + leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
+mod_18 <- glmmTMB(abundance ~ ground_veg + rain_in*leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
+mod_19 <- glmmTMB(abundance ~ ground_veg*leaf_litter + rain_in + (1 | plot_id), family=poisson, data=wyoming)
+mod_20 <- glmmTMB(abundance ~ rain_in + rain_in + leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
+mod_21 <- glmmTMB(abundance ~ rain_in*rain_in + leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
+mod_22 <- glmmTMB(abundance ~ rain_in + rain_in*leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
+mod_23 <- glmmTMB(abundance ~ rain_in*leaf_litter + rain_in + (1 | plot_id), family=poisson, data=wyoming)
+mod_24 <- glmmTMB(abundance ~ ground_veg + herb_layer + (1 | plot_id), family=poisson, data=wyoming)
+mod_25 <- glmmTMB(abundance ~ ground_veg + leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
+mod_26 <- glmmTMB(abundance ~ herb_layer + leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
+mod_27 <- glmmTMB(abundance ~ herb_layer + rain_in + (1 | plot_id), family=poisson, data=wyoming)
+mod_28 <- glmmTMB(abundance ~ leaf_litter + rain_in + (1 | plot_id), family=poisson, data=wyoming)
+mod_29 <- glmmTMB(abundance ~ ground_veg + rain_in + (1 | plot_id), family=poisson, data=wyoming)
+mod_30 <- glmmTMB(abundance ~ ground_veg*herb_layer + (1 | plot_id), family=poisson, data=wyoming)
+mod_31 <- glmmTMB(abundance ~ ground_veg*leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
+mod_32 <- glmmTMB(abundance ~ herb_layer*leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
+mod_33 <- glmmTMB(abundance ~ herb_layer*rain_in + (1 | plot_id), family=poisson, data=wyoming)
+mod_34 <- glmmTMB(abundance ~ leaf_litter*rain_in + (1 | plot_id), family=poisson, data=wyoming)
+mod_35 <- glmmTMB(abundance ~ ground_veg*rain_in + (1 | plot_id), family=poisson, data=wyoming)
+mod_36 <- glmmTMB(abundance ~ ground_veg + (1 | plot_id), family=poisson, data=wyoming)
+mod_37 <- glmmTMB(abundance ~ herb_layer + (1 | plot_id), family=poisson, data=wyoming)
+mod_38 <- glmmTMB(abundance ~ leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
+mod_39 <- glmmTMB(abundance ~ rain_in + (1 | plot_id), family=poisson, data=wyoming)
+mod_40 <- glmmTMB(abundance ~ 1 + (1 | plot_id), family=poisson, data=wyoming)
+```
+These were fit with Maximum Likelihood. 
+
+```{r}
+mod_a <- glmmTMB(abundance ~ 1 + (1 | plot_id), family=poisson, data=wyoming)
+mod_b <- glmmTMB(abundance ~ 1 + (x | plot_id), family=poisson, data=wyoming)
+```
+
+
+
+```{r}
+aic.df <- AIC(mod_01, mod_02, mod_03, mod_04, mod_05, mod_06, mod_07,
+  mod_08, mod_09, mod_10, mod_11, mod_12, mod_13, mod_14, mod_15,
+  mod_16, mod_17, mod_18, mod_19, mod_20, mod_21, mod_22, mod_23,
+  mod_24, mod_25, mod_26, mod_27, mod_28, mod_29, mod_30, mod_31,
+  mod_32,mod_33, mod_34, mod_35, mod_36,
+  mod_37, mod_38, mod_39, mod_40
+)
+aic.df <- aic.df |>
+  arrange(AIC)
+aic.df
+```
+Let's then examine the top model; remember, we are not yet using any formal AIC-based model selection and averaging methods. ```mod_02``` seems to have the best fit, based on AIC values.
+
+```{r}
+simresid <- simulateResiduals(fittedModel = mod_02)
+plot(simresid)
+```
+
+Indeed, most residual structure looks improved, and we can begin to make inference and predict from your model. The main results (and final model) show that the best-supported hypothesis is one where *L. wyomingensis* abundance is impacted by all through vegetation variables. Ground vegetation and herb layer percentage impact abundance positively, whereas the precentage of lead litter has a negative impact of abundance.
+
+Congratulations, you've now run a Generalized Linear Mixed Model! You're now ready to publish your first scientific article on Lorax.
+
+The End...for now.

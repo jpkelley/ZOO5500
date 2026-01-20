@@ -1,0 +1,22 @@
+---
+title: "Information"
+numbered: true
+---
+
+## Essential Course Information {.unnumbered}
+
+::: course-info
+| Instructor | Patrick Kelley |
+|---------------------|---------------------------------------------------|
+| **Email** | jkelle24\@uwyo.edu |
+| **Schedule** | Tu / Th, 11:00–12:15 MT |
+| **Dates** | 20-Jan-2026 to 08-May-2026 |
+| **Meeting Type** | synchronous remote |
+| **Location** | [Join via Zoom](https://uwyo.zoom.us/j/99162811558?pwd=bqQfpeVAW4Gwrs6qF40zlyKJYq1GCM.1){target="_blank"} |
+| **Communication** | Slack (private link sent to your email) |
+:::
+
+## Quicklinks {.unnumbered}
+
+[Collaborative Statistics References](https://docs.google.com/document/d/1abc9-8_gHdmGDlnbElgdKHY7udbbKJ33KH7Cckb9Vyg/edit?usp=sharing)
+

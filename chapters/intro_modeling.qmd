@@ -1,0 +1,59 @@
+---
+title: "modeling"
+format: html
+---
+
+## Statistical Philosophy and Practice
+
+### A culture of the imperfect
+
+-   \[Introduce aphorisms about imperfection and pragmatism\]
+-   \[Discuss why waiting for the “perfect” analysis is often counterproductive\]
+
+### Avoiding statistical traps
+
+-   \[Describe common analytical pitfalls\]
+-   \[Emphasize critical reading of others’ analyses\]
+
+### Multiple valid paths
+
+-   \[Introduce the idea that many analytical approaches can be defensible\]
+-   \[Connect to collaboration and intellectual humility\]
+
+------------------------------------------------------------------------
+
+## Patterns, Models, and Inference
+
+### Detecting patterns
+
+-   \[Describe visualization and exploratory analysis as pattern discovery\]
+-   \[Emphasize skepticism and iteration\]
+
+### Models as tools, not truths
+
+-   \[Explain what models are (and are not)\]
+-   \[Discuss assumptions, simplifications, and abstraction\]
+
+### Inference and uncertainty
+
+-   \[Describe uncertainty, variability, and confidence\]
+-   \[Distinguish statistical significance from scientific importance\]
+
+------------------------------------------------------------------------
+
+## Limits of Conventional Modeling
+
+### Standard models you already know
+
+-   \[Briefly list GLMs, GAMs, GLMMs, etc.\]
+-   \[Acknowledge their usefulness\]
+
+### Why these models are often insufficient
+
+-   \[Discuss complexity, nonlinearity, dependence, and scale\]
+-   \[Explain mismatch between data-generating processes and model assumptions\]
+
+### What the “ideal” might look like
+
+-   \[Pose the question of ideal inference without answering it fully\]
+-   \[Frame this as a motivating tension for the course\]

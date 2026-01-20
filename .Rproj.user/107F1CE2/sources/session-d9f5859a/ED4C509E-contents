@@ -1,0 +1,105 @@
+---
+title: ""
+author: "Patrick Kelley"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    number-depth: 2
+---
+
+# Syllabus
+
+## Why this course?
+
+The benefit of this course is to not only teach you about statistics (and some statistical traps), but to have you working with your peers as you delve into the issues that inevitably arise with your own data analysis. Learning how to navigate data analysis issues is a skill that is critical for developing researchers. Please try to make this class as useful as possible for you and include most or all of the analyses that you expect will go into one of your dissertation chapters. You can just include one analysis if that is all that you need or you can include 4-5 analyses if that is what you need to answer your question(s). This is an opportunity for you to get more help with data analysis, so take advantage.
+
+## Course Objectives
+
+By the end of the course you should:
+
+-   Feel comfortable using the statistics (and the statistical modeling) taught in course and know how to approach analyzing your own data
+-   Feel comfortable writing methods and results section in a manuscript
+-   Make significant progress with some element of your own analysis, with the recognition that some people’s analyses are more or less simple than others’.
+
+## Office hours
+
+Due to the nature of the course, I will not have specific office hours for the course. I have extended class times (after our weekly meetings) to allow more time to ask questions and for one-on-one work. These are optional and may be canceled in some weeks depending on your interest in meeting.
+
+## Location and meeting times
+
+Physical Sciences Bldg 231 Monday and Wednesday 11:15 AM until 12:50 PM.
+
+## Prerequisites
+
+● You are required to have a dataset to be analyzed prior to the start of the semester. This is very important. This class will only cover data reformatting; we will not cover data processing (except as necessary in specific cases). ● You must be at least in your second year of graduate school. ● You must have some exposure to using the Program R (tidyverse preferred, but base R is nice too)\
+● You must have taken a statistics course in the last three years. Assessment and Grading Standards This course is graded as Pass or Fail. To pass the course you need to do the following: ● Participate at least 80% of the class meetings. Simply inform me of your absences (for health reasons, field research, etc.), and then do what you can to catch up with the work. ● Turn in all assignments on their due dates (see Course Outline below). This is critical to your success and the flow of the course.
+
+## Attendance/Participation Policy:
+
+This is a graduate level course, and you are here for your own benefit. That being said, I expect you to come to class, stay engaged with the material, and not only learn how to do your own analysis but understand other types of data and analyses by working with your group members. If you do this, you should have analyzed your own data by the end of the semester and have part of a manuscript completed. Please email me ahead of time when you will be unable to attend class for a valid reason.
+
+## How to succeed in the course (beyond your wildest and funniest dreams)
+
+Graduate school can be considerably challenging, as everyone is attempting to juggle research, teaching, classes, health, and family, all while coping with unexpected stressors. Course information is flying at you from every direction; there are many specific terms and concepts that you need to learn and operationalize. So, here are some reminders for you (even though I know you don't need these):
+
+-   **Ask questions!** Even though there are no exams, take copious notes and work collaboratively to build course notes.
+
+-   **Don't be afraid to redirect the flow of the course.** I am here for you. I want to give you time to think about and discuss the material. This is supposed to be fun (while simultaneously transforming you into analytical gurus)! So, just talk to me about how I can help!
+
+-   **Read all the material in this Course Guidebook.** Many online courses require much more reading; this one does not.
+
+-   **Show up to as many of the synchronous (Zoom) discussions as you can.** When we meet together online, our goal will be to solidify everyone's understanding of different concepts and how they are linked. These concepts will be useful as you navigate your own analysis project.
+
+## Expectations
+
+As your instructor, you should expect me to:
+
+-   Try my very hardest to make the course go smoothly (the reason you now have this nice new online course guide); but please be prepared for the inevitable hiccups.
+-   Respond to questions within 24 hours during the work week. However, I likely will not respond during the weekend (unless there is an urgent matter).
+-   Respect you not only as a learner but as a colleague.
+-   Understand that these are strange and sometimes unforgiving times. We all have varying levels of tolerance and resistance to stress. If you are having a hard time for whatever reason, please communicate with me. I not good at judging, but I can do a hell of a job listening and working with you to solve a problem.
+
+As a student, you are expected to:
+
+-   Be respectful of everyone in the class, including me.
+-   Ask for help if needed.
+-   Treat your presence in the classroom and your enrollment in this course as you would a job; Act professionally, arrive on time, pay attention, complete your work in a timely and professional manner, and treat your learning seriously.
+-   Understand that everyone is going through different things (family events, etc.), and be understanding of each other.
+-   Be engaged in the course.
+-   Be engaged within your assigned groups and help each other learn. Teaching another group member something you know solidifies your own knowledge and also sets you up to be a great future colleague.
+
+::: {.callout-note collapse="true" title="A note on knowledge-sharing"}
+Our classroom is a shared intellectual space. Questions, mistakes, and partial understanding are part of learning. Please remember that supporting one another’s intellectual growth matters more than performative corrections or demonstrations of expertise.
+:::
+
+## R Code, readings, and discussion sections:
+
+All R code for the course is available within this Course Guidebook. Unlike past versions of this course, the present iteration no longer has traditional lectures. That said, I may respond to your questions by creating a presentation for you. I will share such material immediately.
+
+## Further details on assignments (Milestones):
+
+Details about the final deliverable: The paper should be single-spaced (or no more than 1.15 line spacing), Times New Roman 11 point font (or similar), and one-inch margins. Lengths can be much less depending upon your questions. I just want to make sure you make this as concise as possible. If you had significant issues during the term with some component of your analysis (and you’ve communicated these with me), your final deliverable should focus on documenting your statistical issues and how you approached them. The following sections should be included (adhering to the specified length restrictions):
+
+-   One paragraph introduction (max. ¼ page): includes why subject is important and question(s) and predictions
+-   Methods section (max. 2 pages): complete methods section, including statistics section
+-   Results section (max. 2 pages): detail of the results of all analyses described in the Methods section
+-   One paragraph discussion (max. ¼ page): conclusions/summary of your results and what they mean
+-   Appendix/Supplemental Information (as long as you want): detailed statistics section and other details not included in the main methods. Most published articles do not want a long statistics section in the main manuscript. This will go into the Appendix. I want to see all of the details of your analysis in the Appendix, so that I can determine whether it makes sense.
+
+## Classroom Climate and Conduct:
+
+## Classroom Behavior Policy:
+
+## Classroom Statement on Diversity:
+
+## Duty to Report:
+
+## Disability Statement:
+
+If you have a physical, learning, sensory or psychological disability and require accommodations, please let me know as soon as possible. You will need to register with, and provide documentation of your disability to University Disability Support Services (UDSS) in SEO, room 330 Knight Hall.
+
+## Academic Honesty:
+
+The University of Wyoming is built upon a strong foundation of integrity, respect and trust. All members of the university community have a responsibility to be honest and the right to expect honesty from others. Any form of academic dishonesty is unacceptable to our community and will not be tolerated \[from the University Catalog\]. Teachers and students should report suspected violations of standards of academic honesty to the instructor, department head, or dean. Other University regulations can be found [here](http://www.uwyo.edu/generalcounsel/new-regulatory-structure/index.html)

@@ -1,0 +1,146 @@
+{
+  "index.qmd": {
+    "index.html": "c1a690c0"
+  },
+  "course_sections/intro/01_welcome.qmd": {
+    "01_welcome.html": "34a6c9a2"
+  },
+  "course_sections/intro/course_roadmap.qmd": {
+    "course_roadmap.html": "983ab24d"
+  },
+  "course_sections/intro/statistical_aphorisms.qmd": {
+    "statistical_aphorisms.html": "f358bc34"
+  },
+  "course_sections/coding/naming_conventions.qmd": {
+    "naming_conventions.html": "3d416ebb"
+  },
+  "course_sections/data/data_exploration.qmd": {
+    "data_exploration.html": "da9a94e9"
+  },
+  "course_sections/modeling/modeling.qmd": {
+    "modeling.html": "a7a5f60c"
+  },
+  "course_sections/glms/glms.qmd": {
+    "glms.html": "ca8e1540"
+  },
+  "course_sections/intro/syllabus.qmd": {
+    "syllabus.html": "125a6627"
+  },
+  "course_sections/glms/glm_poisson.qmd": {
+    "glm_poisson.html": "99d12284"
+  },
+  "course_sections/data/preprocessing.qmd": {
+    "preprocessing.html": "6278c5c1"
+  },
+  "draft_sections/syllabus.qmd": {
+    "syllabus.html": "af630e07"
+  },
+  "draft_sections/01_welcome.qmd": {
+    "01_welcome.html": "7c2392e7"
+  },
+  "draft_sections/course_roadmap.qmd": {
+    "course_roadmap.html": "2621988d"
+  },
+  "draft_sections/statistical_aphorisms.qmd": {
+    "statistical_aphorisms.html": "d771ff83"
+  },
+  "draft_sections/naming_conventions.qmd": {
+    "naming_conventions.html": "32d1344b"
+  },
+  "draft_sections/data_exploration.qmd": {
+    "data_exploration.html": "88aa5178"
+  },
+  "draft_sections/preprocessing.qmd": {
+    "preprocessing.html": "1ebeaed0"
+  },
+  "draft_sections/intro_modeling.qmd": {
+    "intro_modeling.html": "095f1b47"
+  },
+  "draft_sections/glms.qmd": {
+    "glms.html": "a93cc1db"
+  },
+  "draft_sections/glm_poisson.qmd": {
+    "glm_poisson.html": "444f87f9"
+  },
+  "draft_sections/02_course_roadmap.qmd": {
+    "02_course_roadmap.html": "3ce33f37"
+  },
+  "draft_sections/03_syllabus.qmd": {
+    "03_syllabus.html": "4d073c7d"
+  },
+  "draft_sections/housekeeping.qmd": {
+    "housekeeping.html": "2d3808f4"
+  },
+  "draft_sections/01_course_intro.qmd": {
+    "01_course_intro.html": "bcc66357"
+  },
+  "draft_sections/04_calendar.qmd": {
+    "04_calendar.html": "8a87244a"
+  },
+  "draft_sections/ai_analytica.qmd": {
+    "ai_analytica.html": "f13d4709"
+  },
+  "draft_sections/02_course_intro.qmd": {
+    "02_course_intro.html": "8fad0d58"
+  },
+  "draft_sections/03_course_roadmap.qmd": {
+    "03_course_roadmap.html": "632be521"
+  },
+  "draft_sections/04_syllabus.qmd": {
+    "04_syllabus.html": "3cd1ab44"
+  },
+  "draft_sections/05_ai.qmd": {
+    "05_ai.html": "c99be476"
+  },
+  "draft_sections/06_preparing_yourself.qmd": {
+    "06_preparing_yourself.html": "467cee44"
+  },
+  "chapters/02_course_intro.qmd": {
+    "02_course_intro.html": "19743777"
+  },
+  "chapters/03_course_roadmap.qmd": {
+    "03_course_roadmap.html": "32dfaed7"
+  },
+  "chapters/04_syllabus.qmd": {
+    "04_syllabus.html": "360c2eeb"
+  },
+  "chapters/05_ai.qmd": {
+    "05_ai.html": "9172816e"
+  },
+  "chapters/06_preparing_yourself.qmd": {
+    "06_preparing_yourself.html": "8afd69ab"
+  },
+  "chapters/glms.qmd": {
+    "glms.html": "06516422"
+  },
+  "chapters/statistical_aphorisms.qmd": {
+    "statistical_aphorisms.html": "16e394de"
+  },
+  "chapters/naming_conventions.qmd": {
+    "naming_conventions.html": "98e45bdb"
+  },
+  "chapters/data_exploration.qmd": {
+    "data_exploration.html": "5f1ccd34"
+  },
+  "chapters/preprocessing.qmd": {
+    "preprocessing.html": "7966013d"
+  },
+  "chapters/intro_modeling.qmd": {
+    "intro_modeling.html": "05d4c673"
+  },
+  "chapters/glm_poisson.qmd": {
+    "glm_poisson.html": "d2e60db8"
+  },
+  "chapters/resources.qmd": {
+    "resources.html": "f1167d68"
+  },
+  "chapters/calendar_sp26.qmd": {
+    "calendar_sp26.html": "1783188c"
+  },
+  "chapters/assignment_descriptions.qmd": {
+    "assignment_descriptions.html": "9b312ac2"
+  },
+  "chapters/assignment_grades.qmd": {
+    "assignment_grades.html": "a9fbd480"
+  }
+}

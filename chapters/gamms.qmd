@@ -1,0 +1,133 @@
+---
+title: "Generalized Additive Models (GAMs and GAMMs)"
+format: html
+---
+
+# Overview and Learning Goals
+- [Describe why GAMs are useful for modeling nonlinear ecological relationships]
+- [Position GAMs relative to GLMs, GLMMs, and polynomial regression]
+- [Clarify when GAMs improve inference versus when they add unnecessary complexity]
+
+# What Is a Generalized Additive Model?
+- [Define GAMs as weighted sums of smooth functions]
+- [Explain the meaning of “additive” and “generalized”]
+- [Contrast GAMs with piecewise and polynomial regression]
+
+# Nonlinearity in Ecological Data
+- [Describe common sources of nonlinear relationships (thresholds, saturation, limits)]
+- [Explain why forcing linearity can bias inference]
+- [Discuss advantages of letting data determine shape]
+
+# Knots, Smoothers, and Model Complexity
+## Knots
+- [Describe what knots represent conceptually]
+- [Explain equal vs. unequal knot spacing]
+- [Explain relationship between knots and data segmentation]
+
+## Effective Degrees of Freedom (e.d.f.)
+- [Define e.d.f. and how it relates to curve complexity]
+- [Explain interpretation of e.d.f. = 1 vs. large e.d.f.]
+- [Relate e.d.f. to number of estimated parameters]
+
+# Why GAMs Are Powerful — and Dangerous
+## Advantages
+- [Describe flexibility for nonlinear patterns]
+- [Explain ability to handle non-normal data, autocorrelation, and random effects]
+- [Describe GAMs as hypothesis-testing tools for nonlinearity]
+
+## Challenges
+- [Explain interpretation difficulties]
+- [Discuss computational cost and instability]
+- [Explain risks of overfitting and poor extrapolation]
+
+# When Should You Use a GAM?
+- [Describe residual-based diagnostics from GLM(M)s]
+- [Explain exploratory visualization as a trigger for GAMs]
+- [Discuss a priori biological expectations of nonlinearity]
+- [List other issues that can masquerade as nonlinearity]
+
+# GAMs vs. GAMMs
+- [Explain difference between GAMs and GAMMs]
+- [Describe when random effects or autocorrelation are required]
+- [Explain why GAMMs are often preferred as global models]
+
+# Implementing GAMs in R
+## Core Packages
+- [Describe mgcv as the primary framework]
+- [Briefly contrast gamm4 and gamlss]
+- [Discuss trade-offs among packages]
+
+## Model Structure
+- [Describe how smooth terms are specified]
+- [Explain how parametric and smooth terms coexist]
+- [Explain how offsets and distributions are incorporated]
+
+# Choosing the Amount of Smoothing
+## Specifying k (Maximum Knots)
+- [Explain what k controls and what it does not]
+- [Describe rules of thumb for choosing k]
+- [Discuss relationship between sample size and k]
+
+## Automatic Smoothing (GCV)
+- [Explain generalized cross-validation conceptually]
+- [Describe when automatic smoothing works well]
+- [Explain why small datasets are especially vulnerable to overfitting]
+
+# Model Validation for GAMs
+- [Describe residual diagnostics]
+- [Explain use of gam.check()]
+- [Discuss detecting missing covariates and structure]
+
+## Influential Observations
+- [Explain why Cook’s distance is non-trivial for GAMs]
+- [Describe leave-one-out influence diagnostics]
+
+# GAMs with Multiple Covariates
+- [Describe combining smooth and parametric predictors]
+- [Explain how categorical variables are handled]
+- [Discuss interpretation of additive effects]
+
+# Interactions in GAMs
+## Continuous × Categorical Interactions
+- [Describe use of by= in smoothers]
+- [Explain how main effects must be specified]
+
+## Continuous × Continuous Interactions
+- [Introduce tensor-product smoothers]
+- [Explain te() vs. ti() and when to use each]
+- [Discuss interpretation challenges]
+
+# Choosing Smoother Types
+- [Describe common smoother bases (tp, cr, cs, cc, sos)]
+- [Explain when cyclic smoothers are required]
+- [Discuss shrinkage smoothers for model selection]
+
+# Cyclic Patterns and Periodic Data
+- [Explain why time-of-year data are special]
+- [Describe cyclic cubic regression splines]
+- [Explain consequences of ignoring cyclic structure]
+
+# Data Sparseness and GAM Failure Modes
+- [Explain why sparse regions cause unreliable surfaces]
+- [Describe warning signs in model output]
+- [Discuss strategies to simplify models]
+
+# GAMs for Count Data
+- [Describe Poisson GAMs with offsets]
+- [Explain diagnosing and correcting overdispersion]
+- [Describe use of quasipoisson and negative binomial GAMs]
+
+# Model Comparison with GAMs
+- [Explain why likelihood ratio tests often fail]
+- [Describe use of AIC for non-nested GAMs]
+- [Discuss interpreting small AIC differences]
+
+# Scaling to Large Datasets
+- [Introduce BAMs (big additive models)]
+- [Explain when BAMs are necessary]
+- [Describe limitations and trade-offs]
+
+# Take-Home Messages
+- [Summarize best practices for GAM use]
+- [Reinforce biological interpretability over curve-fitting]
+- [Emphasize restraint with interactions and complexity]

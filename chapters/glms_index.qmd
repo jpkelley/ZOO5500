@@ -1,0 +1,42 @@
+---
+title: "SECTION TITLE"
+format: html
+---
+
+## Overview
+- [Briefly describe what this section is about and why it matters]
+- [State the core statistical problem this section addresses]
+
+## Learning Goals
+After completing this section, students should be able to:
+- [Describe or explain X]
+- [Choose appropriate models for Y]
+- [Diagnose common problems related to Z]
+- [Interpret model output in an ecological context]
+
+## Prerequisites
+Before starting this section, students should be comfortable with:
+- [Concept or method A]
+- [Concept or method B]
+- [Relevant assumptions or diagnostics]
+
+## Conceptual Scope
+This section focuses on:
+- [What *is* covered]
+- [What *is not* covered]
+- [Boundary between this section and adjacent topics]
+
+## How This Section Fits in the Course
+- [Explain where this section sits in the modeling workflow]
+- [Connect to previous sections]
+- [Preview how ideas here are used later]
+
+## Section Contents
+- [Brief one-line description of each file in this folder]
+
+## Common Pitfalls to Watch For
+- [List typical student mistakes or misconceptions]
+- [Flag conceptual traps or overgeneralizations]
+
+## Take-Home Message
+- [One or two high-level ideas students should retain long-term]

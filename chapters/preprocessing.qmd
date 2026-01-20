@@ -1,0 +1,309 @@
+---
+title: "Data Exploration I: Outliers and Extra Zeros"
+subtitle: "Day 3 — Video 3"
+author: "Patrick Kelley"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+editor: visual
+---
+
+## Overview
+
+Welcome back. This marks the beginning of the **data exploration phase** of the course. In this video, we focus on **basic exploratory steps** that should always be done *before* formal modeling.
+
+The goal here is not to perform inference, but to identify potential problems early—before they complicate or derail the analysis phase. In the next video, we will move on to coping with **heterogeneity in the data**, particularly through variance structures.
+
+---
+
+## The Data Exploration Toolkit
+
+Across this section of the course, we will work through five core data exploration steps:
+
+1. Identifying outliers (univariate and multivariate)  
+2. Identifying extra zeros in the data  
+3. Assessing multicollinearity  
+4. Thinking carefully about interactions  
+5. Deciding whether to standardize covariates  
+
+These steps are meant to give you a **practical toolkit** for diagnosing issues early. Skipping them often leads to paralysis during the modeling phase. Many of these are mistakes I have made myself over the years—and learned from the hard way.
+
+In this video, we focus on **Steps 1 and 2: outliers and extra zeros**.
+
+---
+
+## Types of Outliers
+
+Outliers arise for many reasons, and not all outliers are errors. It is useful to think about different types:
+
+### Univariate Outliers
+
+These occur in **one dimension only**—a single variable. For example, a body size measurement that is larger than expected relative to the rest of the population.
+
+These values may be:
+- Slightly larger or smaller than expected
+- Rare but biologically plausible
+- Statistically extreme, depending on assumptions
+
+---
+
+### Multivariate Outliers
+
+Multivariate outliers occur when a data point is unusual **in combination across variables**, even if it is not extreme in any single variable.
+
+These are extremely common in real datasets and often more important than univariate outliers.
+
+---
+
+### Influential Observations
+
+These are data points that exert **disproportionate influence** on a regression model. They are typically identified *after* modeling (e.g., via Cook’s distance).
+
+This approach is common, but it is not blind to inference and can introduce bias if used carelessly. Decisions about data inclusion should not be driven by p-values.
+
+---
+
+### Measurement and Processing Errors
+
+Outliers may arise from:
+
+- Data entry errors
+- Spreadsheet mistakes
+- Miscommunication during field measurements
+- Instrument or observer error
+
+This is why rigorous data quality control is essential.
+
+---
+
+### Natural Oddities (“Black Swans”)
+
+Some outliers are **real and biologically meaningful**. Rare events—such as extreme climatic years or unusual individuals—may have disproportionate ecological importance.
+
+Automatically removing such observations risks losing genuine scientific insight.
+
+---
+
+## Identifying Univariate Outliers
+
+A classic definition (Moore & McCabe):
+
+> *An outlier is an observation that lies outside the overall pattern of a distribution.*
+
+This definition is inherently univariate. There are two broad approaches to identifying outliers:
+
+### Statistical Identification
+
+This depends on:
+- Sample size
+- Assumptions about the underlying distribution
+
+With small sample sizes, this approach can be fragile and misleading.
+
+---
+
+### Expert Judgment
+
+This relies on domain knowledge, but must be applied cautiously. Appeals to authority are not substitutes for statistical reasoning, though in some cases expert knowledge is indispensable.
+
+---
+
+## Graphical Approaches to Univariate Outliers
+
+Before modeling, graphical inspection provides a useful first approximation.
+
+### Cleveland Plots (Dot Charts)
+
+Cleveland plots rank observations and display them visually. They make **no distributional assumptions** and are purely exploratory.
+
+They are subjective, but effective for spotting values that warrant further attention.
+
+---
+
+### Tukey Box Plots
+
+Tukey-style box plots are widely used and based on **quantiles**, not normality.
+
+Key components:
+
+- The box spans the interquartile range (IQR):
+  
+  $$
+  \text{IQR} = Q_3 - Q_1
+  $$
+
+- Whiskers extend to $1.5 \times \text{IQR}$
+- Points beyond this threshold are flagged as outliers
+- Points beyond $3 \times \text{IQR}$ may be flagged as *extreme* outliers
+
+These thresholds are **arbitrary** but conventional. They provide a consistent rule of thumb rather than a strict statistical test.
+
+---
+
+### Conditional Box Plots
+
+Conditional box plots split the data by a grouping factor (e.g., month, treatment, site).
+
+Advantages:
+- Can scale box width by sample size
+- Highlight where outliers originate
+- Useful for diagnosing heterogeneity across groups
+
+---
+
+## Caveats with Univariate Outliers
+
+Be especially cautious with **small sample sizes**.
+
+For example, data drawn from a Gamma distribution (bounded at zero, right-skewed) may produce values flagged as outliers by Tukey’s rule—even when they are perfectly consistent with the true distribution.
+
+Outliers identified by a rule are not necessarily statistical anomalies.
+
+---
+
+## Multivariate Outliers
+
+Most datasets are multivariate. A data point may appear normal in each variable individually, yet be extreme in multivariate space.
+
+This is where univariate methods fail.
+
+---
+
+## Mahalanobis Distance
+
+A powerful method for identifying multivariate outliers is **Mahalanobis distance**, which accounts for covariance among variables.
+
+Conceptually, it measures how far a point is from the multivariate centroid:
+
+$$
+D^2 = (x - \mu)^T \Sigma^{-1} (x - \mu)
+$$
+
+In practice, this can be implemented using existing R packages (e.g., `psych`) and works well for moderate-dimensional datasets.
+
+---
+
+### Extensions: Minimum Covariance Determinant (MCD)
+
+A newer variant uses a subset (e.g., 75%) of the data to estimate covariance robustly, then flags points outside that structure.
+
+Advantages:
+- Improves model convergence
+- Produces stable coefficient estimates
+
+Disadvantages:
+- Can be overly aggressive in flagging outliers
+- Requires careful justification
+
+This approach is promising but still evolving.
+
+---
+
+## What to Do If You Identify an Outlier
+
+There is no single correct response. Options include:
+
+### 1. Remove the Outlier (With Justification)
+
+Removal must be justified using **multiple lines of evidence**, such as:
+- Field notes
+- Known anomalies (e.g., storms, injuries)
+- Instrument failure
+
+---
+
+### 2. Conduct Concurrent Analyses
+
+Run models:
+- With the outlier included
+- With the outlier removed
+
+Report both results transparently. If conclusions are unchanged, the outlier has little influence.
+
+---
+
+### 3. Do Nothing (Often the Best Choice)
+
+With adequate sample size, individual outliers rarely matter. If one point drastically changes results, the real issue is often insufficient data.
+
+---
+
+### 4. Do *Not* Transform the Data
+
+Data transformation is largely obsolete in modern statistical practice. It is unnecessary for most models and can actively distort inference.
+
+Transformations often fail to achieve their stated goals and introduce new problems.
+
+---
+
+## Ethical and Biological Considerations
+
+Do **not** remove outliers that are biologically meaningful:
+
+- Extreme climate years
+- Rare but dominant individuals
+- Unusual but real ecological events
+
+These often generate the most interesting hypotheses.
+
+---
+
+## Extra Zeros in the Data
+
+The second focus of this video is identifying **excess zeros**, which can cause serious modeling issues.
+
+We are *not* trying to force data into normality. Instead, we want to understand whether the data reasonably approximate a distribution we intend to model.
+
+---
+
+## Why Extra Zeros Matter
+
+Excess zeros can:
+
+1. Prevent model convergence
+2. Produce unstable or misleading coefficient estimates
+
+If the likelihood surface is poorly defined, the estimation algorithm may fail or settle on spurious solutions.
+
+---
+
+## Visual Inspection for Zero Inflation
+
+A practical approach:
+
+- Plot a histogram
+- Increase the number of bins
+- Zoom into the lower range (e.g., 0–10)
+
+If the frequency at zero is much higher than expected under a Poisson or Gamma distribution, zero inflation may be present.
+
+---
+
+## Quantifying Zero Inflation
+
+A simple diagnostic:
+
+- Calculate the proportion of zeros
+- If more than ~50% of observations are zero, standard GLMs may struggle
+
+Importantly, **zeros are not bad data**. They often represent real biological states (e.g., non-breeders, absence).
+
+They simply require the **appropriate model**, which we will cover later.
+
+---
+
+## Wrap-Up
+
+In this video, we covered:
+
+- Types of outliers
+- Graphical and statistical tools for identifying them
+- Ethical considerations for handling outliers
+- Identification of excess zeros and why they matter
+
+These steps should be completed **before** formal modeling. They prevent bias, reduce frustration, and lead to more defensible inference.
+
+In the next section, we will move on to **heterogeneity and variance structures**.
+
+---

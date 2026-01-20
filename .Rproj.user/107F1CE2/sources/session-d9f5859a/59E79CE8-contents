@@ -1,0 +1,40 @@
+---
+title: "Course Roadmap"
+format: html
+---
+
+## Course Roadmap
+
+The course progresses as follows:
+
+-   Metrology
+-   Data exploration, outliers, visual inspection
+-   Data heterogeneity
+-   Generalized Linear Models (GLMs)
+-   General principles of model validation
+-   Generalized Linear Mixed Models (GLMMs)
+-   Information Theory of Model Selection
+-   Generalized Additive (Mixed) Models (GAMMs)
+-   Spatial and Temporal autocorrelation
+-   Structural Causal Models (but still not Bayesian)
+
+Given the scope of the entire course, we may only scratch the surface of some topics. Even our cursory treatment will convince you why these subjects matter for scientists who have messy data.
+
+## How This Course Is Structured
+
+We will meet twice weekly via Zoom. work in **small groups**, and you will also work extensively with **your own data**. By early October (around October 4), your dataset should be in *working order*—not just technically usable, but conceptually ready to explain to others.
+
+::: callout-note
+**Working order does not mean “a single spreadsheet.”**\
+A dataset is only complete if it includes **metadata**. Metadata describe: - what the variables are\
+- how the data were collected\
+- under what conditions\
+- with what assumptions and limitations
+
+If you have questions about metadata, I have a dedicated lecture on metadata structures, and I strongly encourage you to reach out.
+:::
+
+### What to expect next
+
+-   \[Describe what will happen in the remainder of the first class\]
+-   \[Outline upcoming assignments or activities\]

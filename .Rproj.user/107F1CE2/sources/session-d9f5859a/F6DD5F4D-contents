@@ -1,0 +1,87 @@
+---
+title: "Syllabus"
+numbered: true
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    number-depth: 2
+---
+
+## Location and meeting times
+Tuesday/Thursday on Zoom; 11:00AM - 12:15PM (Mountain Time) Spring term 2026
+
+## Office hours
+Due to the nature of the course, I will not have specific office hours for the course. I have extended class times (after our weekly meetings) to allow more time to ask questions and for one-on-one work. These are optional and may be canceled in some weeks depending on your interest in meeting.
+
+## Prerequisites
+To ensure your success in this course, the following are required: - You must have a dataset to be analyzed this semester. This is very important. This class will only cover data reformatting; we will not cover data processing (except as necessary in specific cases). - Your data analysis must not be used in another (past or present). - You must be at least in your second year of graduate school. - You must have some exposure to using the Program R (tidyverse preferred, but base R is nice too). - You must have taken a statistics course in the last five years.
+
+## Assessment and Grading Standards
+This course is graded as Pass or Fail (technically "Satisfactory" or "Unsatisfactory"). To pass the course you need to do the following
+
+-   Participate at least 80% of the class meetings. Simply inform me of your absences (for health reasons, field research, etc.), and then do what you can to catch up with the work.
+-   Turn in all assignments on their due dates (see Course Outline below). This is especially critical until Spring Break, after which there will be more flexibility in your schedule.
+
+## Attendance/Participation Policy
+This is a graduate level course, and you are here for your own benefit. That being said, I expect you to come to class, stay engaged with the material, and not only learn how to do your own analysis but understand other types of data and analyses by working with your group members. If you do this, you should have analyzed your own data by the end of the semester and have part of a manuscript completed. Please email me ahead of time when you will be unable to attend class for a valid reason.
+
+## How to succeed in the course (beyond your wildest and funniest dreams)
+Graduate school can be considerably challenging, as everyone is attempting to juggle research, teaching, classes, health, and family, all while coping with unexpected stressors. Course information is flying at you from every direction; there are many specific terms and concepts that you need to learn and operationalize. So, here are some reminders for you (even though I know you don't need these):
+
+-   **Ask questions!** Even though there are no exams, take copious notes and work collaboratively to build course notes.
+
+-   **Don't be afraid to redirect the flow of the course.** 5000-level courses should be flexible and fun. I want to give you time to think about and discuss the material. I'm willing to alter the pace of the course, change the order of topics, or devise new exercises for you. This is intended to be fun (while simultaneously transforming you into analytical gurus)! So, just talk to me about how I can help!
+
+-   **Read all the material in this course guidebook.** Many online courses require much more reading; this one does not.
+
+-   **Show up to as many of the synchronous (Zoom) discussions as you can.** When we meet together online, our goal will be to solidify everyone's understanding of different concepts and how they are linked. These concepts will be useful as you navigate your own analysis project.
+
+## Expectations
+As your instructor, you should expect me to:
+
+-   Try my very hardest to make the course go smoothly (the reason you now have this nice new online course guide); but please be prepared for the inevitable hiccups. No matter how hard we all try, there always seem to be a few obstacles (like internet going down for a couple of hours when we're on Zoom).
+-   Respond to questions within 24 hours during the work week. However, I likely will not respond during the weekend (unless there is an urgent matter).
+-   Respect you not only as a learner but as a colleague.
+-   Understand that these are strange and sometimes unforgiving times. We all have varying levels of tolerance and resistance to stress. If you are having a hard time for whatever reason, please communicate with me. I suck at judging, but I can do a hell of a job listening and working with you to solve a problem.
+
+As a student, you are expected to:
+
+-   Be respectful of everyone in the class, including me.
+-   Ask for help if needed.
+-   Treat your presence in the classroom and your enrollment in this course as you would a job; Act professionally, arrive on time, pay attention, complete your work in a timely and professional manner, and treat your learning seriously.
+-   Understand that everyone is going through different things (family events, etc.), and be understanding of each other.
+-   Be engaged in the course.
+-   Be engaged within your assigned groups and help each other learn. Teaching another group member something you know solidifies your own knowledge and also sets you up to be a great future colleague.
+
+## R Code, readings, and discussion sections
+All R code required for both instruction and hands-on exercises is available within this course book. Unlike past versions of this course, the present iteration no longer has traditional lectures. That said, I may respond to your questions by creating mini-presentations for you. I will share such material immediately after our discussions.
+
+## Classroom Climate and Conduct
+Again, you will be respectful towards your classmates and your instructors. Spirited debate and disagreement are to be expected in any classroom, and all perspectives will be heard, but we will behave civilly and with respect towards one another. Personal attacks, offensive language, name-calling, and dismissive gestures (eye-rolling, saying “whatever”, etc.) are not warranted in a learning atmosphere. Plus, in my opinion, such behavior shows an ability to problem-solve, which is counter to the mission of any university. As your instructor, I have the right to dismiss you from the classroom if you engage in disrespectful or disruptive behavior. Lastly, for the privacy of your fellow students, please do not record the lectures (unless with permission of the instructor).
+
+::: {.callout-note collapse="true" title="A note on knowledge-sharing"}
+Our classroom is a shared intellectual space. Questions, mistakes, and partial understanding are part of learning. Please remember that supporting one another’s intellectual growth matters more than performative corrections or demonstrations of expertise.
+:::
+
+## Classroom Statement on Diversity
+The University of Wyoming values an educational environment that is diverse, equitable, and inclusive. The diversity that students and faculty bring to class, including age, country of origin, culture, disability, economic class, ethnicity, gender identity, immigration status, linguistic, political affiliation, race, religion, sexual orientation, veteran status, worldview, and other social and cultural diversity is valued, respected, and considered a resource for learning. we understand that our UW community members represent a rich variety of backgrounds and perspectives. We are committed to providing an atmosphere for learning that respects diversity of all types. While working together to build this community, we ask all members--from students to staff to faculty--to:
+
+-   Be transparent about pre-existing biases and beliefs.
+-   Do not hesitate to share their unique experiences and perspectives.
+-   Be open to the views of others.
+-   Honor the uniqueness of their colleagues.
+-   Appreciate the opportunity that we have to learn from each other in this community.
+-   Value each other’s opinions and communicate in a respectful manner.
+-   Keep confidential any discussions of a personal (or professional) nature.
+-   Use this opportunity together to discuss ways in which we can create an inclusive environment in this course and across the University community.
+
+## Duty to Report
+UW faculty are committed to supporting students and upholding the University’s non-discrimination policy. Under Title IX, discrimination based upon sex and gender is prohibited. If you experience an incident of sex- or gender-based discrimination, we encourage you to report it. While you may talk to a faculty member, understand that as a “Responsible Employee” of the University, the faculty member is required to report information you share about the incident to the University’s Title IX Coordinator (you may choose whether you or anyone involved is identified by name). If you would like to speak with someone who may be able to afford you privacy or confidentiality, there are people who can meet with you. Faculty can help direct you or you may find info about UW policy and resources at http://www.uwyo.edu/reportit. While we want you to feel comfortable coming to us with issues you may be struggling with or concerns you may be having, please be aware that we have some reporting requirements that are part of our job requirements at UW. You do not have to go through the experience alone. For example, if you inform us of an issue of sexual harassment, sexual assault, or discrimination we will keep the information as private as we can, but we am required to bring it to the attention of the institution’s Title IX Coordinator. If you would like to talk to those offices directly, you can contact Equal Opportunity Report and Response (Bureau of Mines Room 319, 766-5200, report-it\@uwyo.edu, www.uwyo.edu/reportit). Additionally, you can also report incidents or complaints to the UW Police Department. You can also get support at the STOP Violence program (stopviolence\@uwyo.edu, www.uwyo.edu/stop, 766-3296) (or SAFE Project (www.safeproject.org, campus\@safeproject.org, 766-3434, 24-Hour hotline: 745-3556). Assistance and resources are available, and you are not required to make a formal complaint or participate in an investigation to access them. Another common example is if you are struggling with an issue that may be traumatic, or under unusual stress. We will likely inform the Dean of Students Office or Counseling Center. If you would like to reach out directly to them for assistance, you can contact them by going to www.uwyo.edu/dos/uwyocares.
+
+## Disability Statement
+If you have a physical, learning, sensory or psychological disability and require accommodations, please let me know as soon as possible. You will need to register with, and provide documentation of your disability to University Disability Support Services (UDSS) in SEO, room 330 Knight Hall.
+
+## Academic Honesty
+The University of Wyoming is built upon a strong foundation of integrity, respect and trust. All members of the university community have a responsibility to be honest and the right to expect honesty from others. Any form of academic dishonesty is unacceptable to our community and will not be tolerated \[from the University Catalog\]. Teachers and students should report suspected violations of standards of academic honesty to the instructor, department head, or dean. Other University regulations can be found [here](http://www.uwyo.edu/generalcounsel/new-regulatory-structure/index.html)

@@ -1,0 +1,2169 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrreprt}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{5}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
+
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
+\@ifpackageloaded{fontawesome5}{}{\usepackage{fontawesome5}}
+\definecolor{quarto-callout-color}{HTML}{909090}
+\definecolor{quarto-callout-note-color}{HTML}{0758E5}
+\definecolor{quarto-callout-important-color}{HTML}{CC1914}
+\definecolor{quarto-callout-warning-color}{HTML}{EB9113}
+\definecolor{quarto-callout-tip-color}{HTML}{00A047}
+\definecolor{quarto-callout-caution-color}{HTML}{FC5300}
+\definecolor{quarto-callout-color-frame}{HTML}{acacac}
+\definecolor{quarto-callout-note-color-frame}{HTML}{4582ec}
+\definecolor{quarto-callout-important-color-frame}{HTML}{d9534f}
+\definecolor{quarto-callout-warning-color-frame}{HTML}{f0ad4e}
+\definecolor{quarto-callout-tip-color-frame}{HTML}{02b875}
+\definecolor{quarto-callout-caution-color-frame}{HTML}{fd7e14}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Quantitative Analysis of (Messy) Field Data},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{Quantitative Analysis of (Messy) Field Data}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{University of Wyoming -- ZOO-5500 (CRN 13415) \textbar{}
+ECOL-5500 (CRN 13417)}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+
+\renewcommand*\contentsname{Table of contents}
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+
+\chapter{Course Overview}\label{course-overview}
+
+\chapter{Course Overview}\label{course-overview-1}
+
+\section{Essential Course
+Information}\label{essential-course-information}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Instructor & Patrick Kelley \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Email} & jkelle24@uwyo.edu \\
+\textbf{Schedule} & Tu / Th, 11:00--12:15 MT \\
+\textbf{Dates} & 20-Jan-2026 to 08-May-2026 \\
+\textbf{Location} & Zoom (Remote) \\
+\textbf{Communication} &
+\href{https://quantanalysis-fal4752.slack.com}{Slack} \\
+\end{longtable}
+
+\part{Part I: Foundations}
+
+\chapter{Syllabus}\label{syllabus}
+
+\section{Why this course?}\label{why-this-course}
+
+The benefit of this course is to not only teach you about statistics
+(and some statistical traps), but to have you working with your peers as
+you delve into the issues that inevitably arise with your own data
+analysis. Learning how to navigate data analysis issues is a skill that
+is critical for developing researchers. Please try to make this class as
+useful as possible for you and include most or all of the analyses that
+you expect will go into one of your dissertation chapters. You can just
+include one analysis if that is all that you need or you can include 4-5
+analyses if that is what you need to answer your question(s). This is an
+opportunity for you to get more help with data analysis, so take
+advantage.
+
+\section{Course Objectives}\label{course-objectives}
+
+By the end of the course you should:
+
+\begin{itemize}
+\tightlist
+\item
+  Feel comfortable using the statistics modeling approaches taught in
+  course and know how to approach analyzing your own data
+\item
+  Feel comfortable writing methods and results section in a manuscript
+\item
+  Make significant progress with some element of your own analysis, with
+  the recognition that some people's analyses are more or less simple
+  than others'.
+\end{itemize}
+
+\section{Office hours}\label{office-hours}
+
+Due to the nature of the course, I will not have specific office hours
+for the course. I have extended class times (after our weekly meetings)
+to allow more time to ask questions and for one-on-one work. These are
+optional and may be canceled in some weeks depending on your interest in
+meeting.
+
+\section{Location and meeting times}\label{location-and-meeting-times}
+
+Tuesday/Thursday on Zoom; 11:00AM - 12:15PM (Mountain Time) Spring term
+2026
+
+\section{Prerequisites}\label{prerequisites}
+
+To ensure your success in this course, the following are required: - You
+must have a dataset to be analyzed this semester. This is very
+important. This class will only cover data reformatting; we will not
+cover data processing (except as necessary in specific cases). - Your
+data analysis must not be used in another (past or present). - You must
+be at least in your second year of graduate school. - You must have some
+exposure to using the Program R (tidyverse preferred, but base R is nice
+too). - You must have taken a statistics course in the last five years.
+
+Assessment and Grading Standards This course is graded as Pass or Fail.
+To pass the course you need to do the following: ● Participate at least
+80\% of the class meetings. Simply inform me of your absences (for
+health reasons, field research, etc.), and then do what you can to catch
+up with the work. ● Turn in all assignments on their due dates (see
+Course Outline below). This is critical to your success and the flow of
+the course.
+
+\section{Attendance/Participation
+Policy:}\label{attendanceparticipation-policy}
+
+This is a graduate level course, and you are here for your own benefit.
+That being said, I expect you to come to class, stay engaged with the
+material, and not only learn how to do your own analysis but understand
+other types of data and analyses by working with your group members. If
+you do this, you should have analyzed your own data by the end of the
+semester and have part of a manuscript completed. Please email me ahead
+of time when you will be unable to attend class for a valid reason.
+
+\section{How to succeed in the course (beyond your wildest and funniest
+dreams)}\label{how-to-succeed-in-the-course-beyond-your-wildest-and-funniest-dreams}
+
+Graduate school can be considerably challenging, as everyone is
+attempting to juggle research, teaching, classes, health, and family,
+all while coping with unexpected stressors. Course information is flying
+at you from every direction; there are many specific terms and concepts
+that you need to learn and operationalize. So, here are some reminders
+for you (even though I know you don't need these):
+
+\begin{itemize}
+\item
+  \textbf{Ask questions!} Even though there are no exams, take copious
+  notes and work collaboratively to build course notes.
+\item
+  \textbf{Don't be afraid to redirect the flow of the course.} I am here
+  for you. I want to give you time to think about and discuss the
+  material. This is supposed to be fun (while simultaneously
+  transforming you into analytical gurus)! So, just talk to me about how
+  I can help!
+\item
+  \textbf{Read all the material in this Course Guidebook.} Many online
+  courses require much more reading; this one does not.
+\item
+  \textbf{Show up to as many of the synchronous (Zoom) discussions as
+  you can.} When we meet together online, our goal will be to solidify
+  everyone's understanding of different concepts and how they are
+  linked. These concepts will be useful as you navigate your own
+  analysis project.
+\end{itemize}
+
+\section{Expectations}\label{expectations}
+
+As your instructor, you should expect me to:
+
+\begin{itemize}
+\tightlist
+\item
+  Try my very hardest to make the course go smoothly (the reason you now
+  have this nice new online course guide); but please be prepared for
+  the inevitable hiccups.
+\item
+  Respond to questions within 24 hours during the work week. However, I
+  likely will not respond during the weekend (unless there is an urgent
+  matter).
+\item
+  Respect you not only as a learner but as a colleague.
+\item
+  Understand that these are strange and sometimes unforgiving times. We
+  all have varying levels of tolerance and resistance to stress. If you
+  are having a hard time for whatever reason, please communicate with
+  me. I not good at judging, but I can do a hell of a job listening and
+  working with you to solve a problem.
+\end{itemize}
+
+As a student, you are expected to:
+
+\begin{itemize}
+\tightlist
+\item
+  Be respectful of everyone in the class, including me.
+\item
+  Ask for help if needed.
+\item
+  Treat your presence in the classroom and your enrollment in this
+  course as you would a job; Act professionally, arrive on time, pay
+  attention, complete your work in a timely and professional manner, and
+  treat your learning seriously.
+\item
+  Understand that everyone is going through different things (family
+  events, etc.), and be understanding of each other.
+\item
+  Be engaged in the course.
+\item
+  Be engaged within your assigned groups and help each other learn.
+  Teaching another group member something you know solidifies your own
+  knowledge and also sets you up to be a great future colleague.
+\end{itemize}
+
+\begin{tcolorbox}[enhanced jigsaw, breakable, colframe=quarto-callout-note-color-frame, colbacktitle=quarto-callout-note-color!10!white, toptitle=1mm, coltitle=black, leftrule=.75mm, opacitybacktitle=0.6, colback=white, rightrule=.15mm, left=2mm, opacityback=0, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{A note on knowledge-sharing}, arc=.35mm, titlerule=0mm, toprule=.15mm, bottomtitle=1mm]
+
+Our classroom is a shared intellectual space. Questions, mistakes, and
+partial understanding are part of learning. Please remember that
+supporting one another's intellectual growth matters more than
+performative corrections or demonstrations of expertise.
+
+\end{tcolorbox}
+
+\section{R Code, readings, and discussion
+sections:}\label{r-code-readings-and-discussion-sections}
+
+All R code for the course is available within this Course Guidebook.
+Unlike past versions of this course, the present iteration no longer has
+traditional lectures. That said, I may respond to your questions by
+creating a presentation for you. I will share such material immediately.
+
+\section{Further details on assignments
+(Milestones):}\label{further-details-on-assignments-milestones}
+
+Details about the final deliverable: The paper should be single-spaced
+(or no more than 1.15 line spacing), Times New Roman 11 point font (or
+similar), and one-inch margins. Lengths can be much less depending upon
+your questions. I just want to make sure you make this as concise as
+possible. If you had significant issues during the term with some
+component of your analysis (and you've communicated these with me), your
+final deliverable should focus on documenting your statistical issues
+and how you approached them. The following sections should be included
+(adhering to the specified length restrictions):
+
+\begin{itemize}
+\tightlist
+\item
+  One paragraph introduction (max. ¼ page): includes why subject is
+  important and question(s) and predictions
+\item
+  Methods section (max. 2 pages): complete methods section, including
+  statistics section
+\item
+  Results section (max. 2 pages): detail of the results of all analyses
+  described in the Methods section
+\item
+  One paragraph discussion (max. ¼ page): conclusions/summary of your
+  results and what they mean
+\item
+  Appendix/Supplemental Information (as long as you want): detailed
+  statistics section and other details not included in the main methods.
+  Most published articles do not want a long statistics section in the
+  main manuscript. This will go into the Appendix. I want to see all of
+  the details of your analysis in the Appendix, so that I can determine
+  whether it makes sense.
+\end{itemize}
+
+\section{Classroom Climate and
+Conduct:}\label{classroom-climate-and-conduct}
+
+\section{Classroom Behavior Policy:}\label{classroom-behavior-policy}
+
+\section{Classroom Statement on
+Diversity:}\label{classroom-statement-on-diversity}
+
+\section{Duty to Report:}\label{duty-to-report}
+
+\section{Disability Statement:}\label{disability-statement}
+
+If you have a physical, learning, sensory or psychological disability
+and require accommodations, please let me know as soon as possible. You
+will need to register with, and provide documentation of your disability
+to University Disability Support Services (UDSS) in SEO, room 330 Knight
+Hall.
+
+\section{Academic Honesty:}\label{academic-honesty}
+
+The University of Wyoming is built upon a strong foundation of
+integrity, respect and trust. All members of the university community
+have a responsibility to be honest and the right to expect honesty from
+others. Any form of academic dishonesty is unacceptable to our community
+and will not be tolerated {[}from the University Catalog{]}. Teachers
+and students should report suspected violations of standards of academic
+honesty to the instructor, department head, or dean. Other University
+regulations can be found
+\href{http://www.uwyo.edu/generalcounsel/new-regulatory-structure/index.html}{here}
+
+\chapter{Course Introduction}\label{course-introduction}
+
+Quantitative Analysis of Field Data
+
+\hfill\break
+
+\section{The Core Goal of the Course}\label{the-core-goal-of-the-course}
+
+The central goal of this course is to guide you through the transition:
+
+\begin{quote}
+\textbf{Messy field or lab data → processed data → models → inference}
+\end{quote}
+
+You have already collected data. Now we focus on: - understanding what
+those data actually are\\
+- identifying patterns\\
+- building appropriate models\\
+- validating and selecting those models\\
+- making inference and generating new hypotheses
+
+We will take a \textbf{frequentist approach} in this course. We will
+\emph{not} cover Bayesian modeling in detail, though many
+ideas---especially model structure and philosophy---transfer directly.
+
+\begin{tcolorbox}[enhanced jigsaw, breakable, colframe=quarto-callout-note-color-frame, colbacktitle=quarto-callout-note-color!10!white, toptitle=1mm, coltitle=black, leftrule=.75mm, opacitybacktitle=0.6, colback=white, rightrule=.15mm, left=2mm, opacityback=0, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{A note on Bayesian methods}, arc=.35mm, titlerule=0mm, toprule=.15mm, bottomtitle=1mm]
+
+Bayesian approaches are increasingly common and powerful, and this may
+change over the next 5--10 years. However, the foundational ideas about
+data structure, scale, and modeling assumptions are shared across
+frameworks.
+
+\end{tcolorbox}
+
+\section{Meetings and Expectations}\label{meetings-and-expectations}
+
+On our first in-person meeting, we will: - do brief class
+introductions\\
+- discuss statistical philosophy\\
+- go through example problems\\
+- talk about common analytical pitfalls to avoid
+
+This assumes you have \textbf{watched or skimmed} the asynchronous
+videos beforehand.
+
+This course is designed to be cumulative and interactive---preparation
+matters.
+
+\chapter{course\_roadmap}\label{course_roadmap}
+
+\section{Course Roadmap}\label{course-roadmap}
+
+\subsection{General course outline}\label{general-course-outline}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}List major themes or modules to be covered{]}
+\item
+  {[}Indicate how topics build on one another{]}
+\end{itemize}
+
+\section{Course Roadmap}\label{course-roadmap-1}
+
+The course progresses as follows:
+
+General course outline - Metrology - Data exploration, outliers, visual
+inspection - Data heterogeneity (what to do with messy data) -
+Generalized Linear Models (GLMs) - General principles of model
+validation - Generalized Linear Mixed Models (GLMMs) - Information
+Theory of Model Selection - Generalized Additive (Mixed) Models (GAMMs)
+- Spatial and Temporal autocorrelation - Structural Causal Models (but
+still not Bayesian)
+
+Given the scope of the entire course, we may only scratch the surface of
+some topics. Even our cursory treatment will convince you why these
+subjects matter for scientists who have messy data.
+
+\section{How This Course Is
+Structured}\label{how-this-course-is-structured}
+
+We will meet twice weekly via Zoom. work in \textbf{small groups}, and
+you will also work extensively with \textbf{your own data}. By early
+October (around October 4), your dataset should be in \emph{working
+order}---not just technically usable, but conceptually ready to explain
+to others.
+
+\begin{tcolorbox}[enhanced jigsaw, breakable, colframe=quarto-callout-note-color-frame, colbacktitle=quarto-callout-note-color!10!white, toptitle=1mm, coltitle=black, leftrule=.75mm, opacitybacktitle=0.6, colback=white, rightrule=.15mm, left=2mm, opacityback=0, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, arc=.35mm, titlerule=0mm, toprule=.15mm, bottomtitle=1mm]
+
+\textbf{Working order does not mean ``a single spreadsheet.''}\\
+A dataset is only complete if it includes \textbf{metadata}. Metadata
+describe: - what the variables are\\
+- how the data were collected\\
+- under what conditions\\
+- with what assumptions and limitations
+
+If you have questions about metadata, I have a dedicated lecture on
+metadata structures, and I strongly encourage you to reach out.
+
+\end{tcolorbox}
+
+\subsection{What to expect next}\label{what-to-expect-next}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Describe what will happen in the remainder of the first class{]}
+\item
+  {[}Outline upcoming assignments or activities{]}
+\end{itemize}
+
+\section{Getting Started}\label{getting-started}
+
+\subsection{Who are you?}\label{who-are-you}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Prompt students to introduce themselves{]}
+\item
+  {[}Encourage sharing of disciplinary background{]}
+\end{itemize}
+
+\subsection{Your data}\label{your-data}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Ask students to describe the data they work with or hope to work
+  with{]}
+\item
+  {[}Surface common challenges and anxieties{]}
+\end{itemize}
+
+\subsection{Your concerns and
+expectations}\label{your-concerns-and-expectations}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Invite discussion of fears, gaps, or uncertainties{]}
+\end{itemize}
+
+\chapter{Statistical Aphorisms}\label{statistical-aphorisms}
+
+\section{Three Statistical Aphorisms (to guide
+you)}\label{three-statistical-aphorisms-to-guide-you}
+
+\begin{tcolorbox}[enhanced jigsaw, breakable, colframe=quarto-callout-note-color-frame, colbacktitle=quarto-callout-note-color!10!white, toptitle=1mm, coltitle=black, leftrule=.75mm, opacitybacktitle=0.6, colback=white, rightrule=.15mm, left=2mm, opacityback=0, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Aphorism 1: For progress, embrace imperfection}, arc=.35mm, titlerule=0mm, toprule=.15mm, bottomtitle=1mm]
+
+Beware perfection. In data analysis, one can be paralyzed by ``perfect''
+solutions. After all, perfection is a moving target. What does
+``perfection'' really mean in practice? Does it mean that an analysis
+looks complex enough to impress your colleagues or instructors, even if
+it's not appropriate for your questions? Is it an analysis that works
+flawlessly the first time, right out of the box? Or is it one that is
+quickly built and deployed but that also may hide critical assumptions
+or produce error-filled predictions? Or perhaps one that a senior
+colleague or advisor has deemed ``the correct'' approach (without
+justification)?
+
+The danger lies in waiting for an ideal solution that may never arrive,
+or may arrive too late. In doing so, your and your collaborators'
+progress stalls, opportunities are missed, and, perhaps most
+importantly, learning is sorely delayed. This idea is captured
+poetically in the words of Robert Watson-Watt, the inventor of radar:
+
+\begin{quote}
+\textbf{\emph{Give them the third best to go on with; the second best
+comes too late, the best never comes.}}
+\end{quote}
+
+Watson-Watt's advice should remind us that, in dynamic and complex
+fields such as radar development or our own messy statistical modeling,
+timely action often outweighs our vision of perfection. A solution that
+is simply good enough today allows you to:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Learn through deployment:} Practical application often reveals
+  insights that you cannot anticipate.
+\item
+  \textbf{Iterate and improve:} Real-world feedback reveals issues far
+  faster than endless refinement in isolation!
+\item
+  \textbf{Transparently communicate analytical limitations:}
+  Collaborators and stakeholders can better understand assumptions,
+  uncertainties, and the scope of your work.
+\end{itemize}
+
+In short (as as you know), perfection is often the enemy of good
+progress. By consciously and purposefully adopting a culture of
+imperfection, you will be able to better learn, iterate, and produce
+work that is timely, practical, and ultimately more impactful.
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, breakable, colframe=quarto-callout-note-color-frame, colbacktitle=quarto-callout-note-color!10!white, toptitle=1mm, coltitle=black, leftrule=.75mm, opacitybacktitle=0.6, colback=white, rightrule=.15mm, left=2mm, opacityback=0, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Aphorism \#2: Beware of Armadillo Burrows.}, arc=.35mm, titlerule=0mm, toprule=.15mm, bottomtitle=1mm]
+
+Don't fall into someone else's statistical trap!
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, breakable, colframe=quarto-callout-note-color-frame, colbacktitle=quarto-callout-note-color!10!white, toptitle=1mm, coltitle=black, leftrule=.75mm, opacitybacktitle=0.6, colback=white, rightrule=.15mm, left=2mm, opacityback=0, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Aphorism \#3: Beware paralysis of analysis.}, arc=.35mm, titlerule=0mm, toprule=.15mm, bottomtitle=1mm]
+
+Camponotus leonardi infected by a ``zombie fungus'' (genus
+Ophiocordyceps)
+
+\end{tcolorbox}
+
+\section{Analytical Workflow}\label{analytical-workflow}
+
+\section{Defining ``analytical
+workflow''}\label{defining-analytical-workflow}
+
+What do we mean by analytical workflow? First, it is the data
+infrastructure that supports efficient analysis. It turns raw data into
+action.
+
+There should also be analysis of the workflow itself. Is it efficient in
+terms of computational load or time? Does it allow for reproducibility?
+
+\section{Two thoughts as you develop your analytical
+workflow}\label{two-thoughts-as-you-develop-your-analytical-workflow}
+
+\begin{itemize}
+\tightlist
+\item
+  There are a huge \textgreater{}
+\end{itemize}
+
+\textbf{\emph{Here's my wisdom for your use, as I learned it when the
+moose And the reindeer roamed where Paris roars to-night: ``There are
+nine and sixty ways of constructing tribal lays,
+And---every---single---one---of---them---is---right!}} --From In the
+Neolithic Age (Rudyard Kipling)
+
+a core tenet of collaborative, creative, and productive data science Let
+me that for you How many of you have experience with prompt engineering?
+Your goals as a scientist\ldots{} Use this course to develop your own
+philosophical workflow (that reduces bias) Stick to this philosophy
+until you learn something new and improved
+
+\section{Statistical Philosophy}\label{statistical-philosophy}
+
+More than anything else, I want you to use this course to develop a
+\textbf{personal statistical philosophy}.
+
+A good philosophy: - reduces bias\\
+- prevents analytical wandering\\
+- promotes clarity and efficiency\\
+- evolves as you learn more
+
+I will present a set of guiding principles and aphorisms early in the
+course. You should modify them, reject them, or replace them---but you
+should have \emph{something} guiding your decisions.
+
+This is how you become consistent, thoughtful, and credible as a
+scientist.
+
+\chapter{Naming conventions}\label{naming-conventions}
+
+\section{Part I: Naming Conventions and Data
+Organization}\label{part-i-naming-conventions-and-data-organization}
+
+{[}Based primarily on the Naming Conventions lecture
+:contentReference{oaicite:0}{]}
+
+\section{Why Naming Conventions
+Matter}\label{why-naming-conventions-matter}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Explain why variable names, file names, and coding style influence
+  collaboration, reproducibility, and long-term scalability{]}
+\item
+  {[}Discuss how unconventional naming can cause downstream problems in
+  analysis{]}
+\end{itemize}
+
+\section{Common Naming Conventions}\label{common-naming-conventions}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Describe camelCase, PascalCase, and snake\_case{]}
+\item
+  {[}Explain why snake\_case is typically preferred in R and data
+  science{]}
+\end{itemize}
+
+\section{General Rules for Naming Data
+Objects}\label{general-rules-for-naming-data-objects}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Outline rules about avoiding spaces, special characters, leading
+  numbers, and inconsistent capitalization{]}
+\item
+  {[}Describe best practices for handling dates, missing values, and
+  metadata{]}
+\end{itemize}
+
+\section{Naming Variables vs.~Naming
+Functions}\label{naming-variables-vs.-naming-functions}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Explain the noun/verb distinction for objects and functions{]}
+\item
+  {[}Provide guidance on clarity versus brevity{]}
+\end{itemize}
+
+\section{Coding Style and the
+Tidyverse}\label{coding-style-and-the-tidyverse}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Introduce the tidyverse style guide and its role in
+  standardization{]}
+\item
+  {[}Describe tools such as \texttt{lintr} and \texttt{styler} and what
+  problems they solve{]}
+\end{itemize}
+
+\section{Data File Formats and Dataset
+Management}\label{data-file-formats-and-dataset-management}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Compare acceptable formats for small datasets (CSV, TSV){]}
+\item
+  {[}Introduce efficient formats for larger datasets (e.g., parquet) and
+  why they matter{]}
+\end{itemize}
+
+\section{Becoming a Better Statistical
+Programmer}\label{becoming-a-better-statistical-programmer}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Encourage iterative improvement of existing projects{]}
+\item
+  {[}Discuss professional responsibility in collaborative data
+  management{]}
+\end{itemize}
+
+\part{Part II: Chaos to Columns}
+
+\chapter{Data exploration}\label{data-exploration}
+
+\section{Data Exploration}\label{data-exploration-1}
+
+\section{Distinguishing measurand, observed data, and estimated
+value}\label{distinguishing-measurand-observed-data-and-estimated-value}
+
+\begin{tcolorbox}[enhanced jigsaw, breakable, colframe=quarto-callout-tip-color-frame, colbacktitle=quarto-callout-tip-color!10!white, toptitle=1mm, coltitle=black, leftrule=.75mm, opacitybacktitle=0.6, colback=white, rightrule=.15mm, left=2mm, opacityback=0, bottomrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Population abundance is changing over time}, arc=.35mm, titlerule=0mm, toprule=.15mm, bottomtitle=1mm]
+
+\textbf{Prompt:} {[}What is the measurand? What are the observed data?
+What does the model return?{]}
+
+Reveal
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Measurand:} True population abundance within a defined
+  area/time window\\
+\item
+  \textbf{Observed:} Counts/detections/encounters\\
+\item
+  \textbf{Estimated:} Abundance available for detection during sampling,
+  conditional on closure/availability\\
+\end{itemize}
+
+\end{tcolorbox}
+
+\section{Why Data Exploration Comes
+First}\label{why-data-exploration-comes-first}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Explain the risks of skipping exploratory steps{]}
+\item
+  {[}Frame exploration as hypothesis protection, not data dredging{]}
+\end{itemize}
+
+\section{Step 1: Identifying
+Outliers}\label{step-1-identifying-outliers}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Define univariate vs.~multivariate outliers{]}
+\item
+  {[}Discuss different sources of outliers: error, biology, rare
+  events{]}
+\end{itemize}
+
+\subsection{Graphical Identification of Univariate
+Outliers}\label{graphical-identification-of-univariate-outliers}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Describe Cleveland plots, Tukey boxplots, and conditional
+  boxplots{]}
+\item
+  {[}Explain strengths and weaknesses of each{]}
+\end{itemize}
+
+\subsection{Statistical vs.~Expert
+Judgment}\label{statistical-vs.-expert-judgment}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Contrast formal statistical rules with biological or domain
+  expertise{]}
+\item
+  {[}Discuss risks of authority-based decisions{]}
+\end{itemize}
+
+\subsection{Multivariate Outliers}\label{multivariate-outliers}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Introduce Mahalanobis distance and robust alternatives{]}
+\item
+  {[}Explain why univariate methods can fail{]}
+\end{itemize}
+
+\subsection{What to Do When You Find
+Outliers}\label{what-to-do-when-you-find-outliers}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Outline options: removal, parallel analyses, transformation, or no
+  action{]}
+\item
+  {[}Emphasize transparency and justification{]}
+\end{itemize}
+
+\section{Step 2: Examining Zeroes in the
+Data}\label{step-2-examining-zeroes-in-the-data}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Explain zero inflation and why it matters{]}
+\item
+  {[}Describe when excess zeroes signal a modeling problem versus a
+  biological pattern{]}
+\end{itemize}
+
+\section{Step 3: Collinearity Among
+Predictors}\label{step-3-collinearity-among-predictors}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Define collinearity and why it destabilizes models{]}
+\item
+  {[}Contrast implications for frequentist vs.~Bayesian models{]}
+\end{itemize}
+
+\subsection{Detecting Collinearity}\label{detecting-collinearity}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Describe scatterplots, correlation coefficients, and VIFs/GVIFs{]}
+\item
+  {[}Explain interpretation thresholds (e.g., VIF \textless{} 3){]}
+\end{itemize}
+
+\subsection{Dealing with Collinearity}\label{dealing-with-collinearity}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Describe selective variable removal{]}
+\item
+  {[}Introduce PCA as a dimensionality-reduction approach{]}
+\item
+  {[}Discuss biological reasoning in deciding what to retain{]}
+\end{itemize}
+
+\section{Step 4: Considering Interaction
+Terms}\label{step-4-considering-interaction-terms}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Explain what interaction terms represent biologically{]}
+\item
+  {[}Discuss sample size constraints and interpretability{]}
+\end{itemize}
+
+\section{Step 5: Standardizing, Scaling, or Leaving Covariates
+Alone}\label{step-5-standardizing-scaling-or-leaving-covariates-alone}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Define standardization and centering{]}
+\item
+  {[}Explain how these choices affect interpretation of coefficients and
+  intercepts{]}
+\item
+  {[}Provide guidance on when each approach is appropriate{]}
+\end{itemize}
+
+\section{Step 6: Violations of
+Homogeneity}\label{step-6-violations-of-homogeneity}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Introduce homoscedasticity and heteroscedasticity{]}
+\item
+  {[}Explain why residuals---not raw data---are the focus{]}
+\end{itemize}
+
+\chapter{Data Exploration I: Outliers and Extra
+Zeros}\label{data-exploration-i-outliers-and-extra-zeros}
+
+Day 3 --- Video 3
+
+\hfill\break
+
+\section{Overview}\label{overview}
+
+Welcome back. This marks the beginning of the \textbf{data exploration
+phase} of the course. In this video, we focus on \textbf{basic
+exploratory steps} that should always be done \emph{before} formal
+modeling.
+
+The goal here is not to perform inference, but to identify potential
+problems early---before they complicate or derail the analysis phase. In
+the next video, we will move on to coping with \textbf{heterogeneity in
+the data}, particularly through variance structures.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{The Data Exploration
+Toolkit}\label{the-data-exploration-toolkit}
+
+Across this section of the course, we will work through five core data
+exploration steps:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Identifying outliers (univariate and multivariate)\\
+\item
+  Identifying extra zeros in the data\\
+\item
+  Assessing multicollinearity\\
+\item
+  Thinking carefully about interactions\\
+\item
+  Deciding whether to standardize covariates
+\end{enumerate}
+
+These steps are meant to give you a \textbf{practical toolkit} for
+diagnosing issues early. Skipping them often leads to paralysis during
+the modeling phase. Many of these are mistakes I have made myself over
+the years---and learned from the hard way.
+
+In this video, we focus on \textbf{Steps 1 and 2: outliers and extra
+zeros}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Types of Outliers}\label{types-of-outliers}
+
+Outliers arise for many reasons, and not all outliers are errors. It is
+useful to think about different types:
+
+\subsection{Univariate Outliers}\label{univariate-outliers}
+
+These occur in \textbf{one dimension only}---a single variable. For
+example, a body size measurement that is larger than expected relative
+to the rest of the population.
+
+These values may be: - Slightly larger or smaller than expected - Rare
+but biologically plausible - Statistically extreme, depending on
+assumptions
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Multivariate Outliers}\label{multivariate-outliers-1}
+
+Multivariate outliers occur when a data point is unusual \textbf{in
+combination across variables}, even if it is not extreme in any single
+variable.
+
+These are extremely common in real datasets and often more important
+than univariate outliers.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Influential Observations}\label{influential-observations}
+
+These are data points that exert \textbf{disproportionate influence} on
+a regression model. They are typically identified \emph{after} modeling
+(e.g., via Cook's distance).
+
+This approach is common, but it is not blind to inference and can
+introduce bias if used carelessly. Decisions about data inclusion should
+not be driven by p-values.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Measurement and Processing
+Errors}\label{measurement-and-processing-errors}
+
+Outliers may arise from:
+
+\begin{itemize}
+\tightlist
+\item
+  Data entry errors
+\item
+  Spreadsheet mistakes
+\item
+  Miscommunication during field measurements
+\item
+  Instrument or observer error
+\end{itemize}
+
+This is why rigorous data quality control is essential.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Natural Oddities (``Black
+Swans'')}\label{natural-oddities-black-swans}
+
+Some outliers are \textbf{real and biologically meaningful}. Rare
+events---such as extreme climatic years or unusual individuals---may
+have disproportionate ecological importance.
+
+Automatically removing such observations risks losing genuine scientific
+insight.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Identifying Univariate
+Outliers}\label{identifying-univariate-outliers}
+
+A classic definition (Moore \& McCabe):
+
+\begin{quote}
+\emph{An outlier is an observation that lies outside the overall pattern
+of a distribution.}
+\end{quote}
+
+This definition is inherently univariate. There are two broad approaches
+to identifying outliers:
+
+\subsection{Statistical
+Identification}\label{statistical-identification}
+
+This depends on: - Sample size - Assumptions about the underlying
+distribution
+
+With small sample sizes, this approach can be fragile and misleading.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Expert Judgment}\label{expert-judgment}
+
+This relies on domain knowledge, but must be applied cautiously. Appeals
+to authority are not substitutes for statistical reasoning, though in
+some cases expert knowledge is indispensable.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Graphical Approaches to Univariate
+Outliers}\label{graphical-approaches-to-univariate-outliers}
+
+Before modeling, graphical inspection provides a useful first
+approximation.
+
+\subsection{Cleveland Plots (Dot
+Charts)}\label{cleveland-plots-dot-charts}
+
+Cleveland plots rank observations and display them visually. They make
+\textbf{no distributional assumptions} and are purely exploratory.
+
+They are subjective, but effective for spotting values that warrant
+further attention.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Tukey Box Plots}\label{tukey-box-plots}
+
+Tukey-style box plots are widely used and based on \textbf{quantiles},
+not normality.
+
+Key components:
+
+\begin{itemize}
+\item
+  The box spans the interquartile range (IQR):
+
+  \[
+  \text{IQR} = Q_3 - Q_1
+  \]
+\item
+  Whiskers extend to \(1.5 \times \text{IQR}\)
+\item
+  Points beyond this threshold are flagged as outliers
+\item
+  Points beyond \(3 \times \text{IQR}\) may be flagged as \emph{extreme}
+  outliers
+\end{itemize}
+
+These thresholds are \textbf{arbitrary} but conventional. They provide a
+consistent rule of thumb rather than a strict statistical test.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Conditional Box Plots}\label{conditional-box-plots}
+
+Conditional box plots split the data by a grouping factor (e.g., month,
+treatment, site).
+
+Advantages: - Can scale box width by sample size - Highlight where
+outliers originate - Useful for diagnosing heterogeneity across groups
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Caveats with Univariate
+Outliers}\label{caveats-with-univariate-outliers}
+
+Be especially cautious with \textbf{small sample sizes}.
+
+For example, data drawn from a Gamma distribution (bounded at zero,
+right-skewed) may produce values flagged as outliers by Tukey's
+rule---even when they are perfectly consistent with the true
+distribution.
+
+Outliers identified by a rule are not necessarily statistical anomalies.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Multivariate Outliers}\label{multivariate-outliers-2}
+
+Most datasets are multivariate. A data point may appear normal in each
+variable individually, yet be extreme in multivariate space.
+
+This is where univariate methods fail.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Mahalanobis Distance}\label{mahalanobis-distance}
+
+A powerful method for identifying multivariate outliers is
+\textbf{Mahalanobis distance}, which accounts for covariance among
+variables.
+
+Conceptually, it measures how far a point is from the multivariate
+centroid:
+
+\[
+D^2 = (x - \mu)^T \Sigma^{-1} (x - \mu)
+\]
+
+In practice, this can be implemented using existing R packages (e.g.,
+\texttt{psych}) and works well for moderate-dimensional datasets.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Extensions: Minimum Covariance Determinant
+(MCD)}\label{extensions-minimum-covariance-determinant-mcd}
+
+A newer variant uses a subset (e.g., 75\%) of the data to estimate
+covariance robustly, then flags points outside that structure.
+
+Advantages: - Improves model convergence - Produces stable coefficient
+estimates
+
+Disadvantages: - Can be overly aggressive in flagging outliers -
+Requires careful justification
+
+This approach is promising but still evolving.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{What to Do If You Identify an
+Outlier}\label{what-to-do-if-you-identify-an-outlier}
+
+There is no single correct response. Options include:
+
+\subsection{1. Remove the Outlier (With
+Justification)}\label{remove-the-outlier-with-justification}
+
+Removal must be justified using \textbf{multiple lines of evidence},
+such as: - Field notes - Known anomalies (e.g., storms, injuries) -
+Instrument failure
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{2. Conduct Concurrent
+Analyses}\label{conduct-concurrent-analyses}
+
+Run models: - With the outlier included - With the outlier removed
+
+Report both results transparently. If conclusions are unchanged, the
+outlier has little influence.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{3. Do Nothing (Often the Best
+Choice)}\label{do-nothing-often-the-best-choice}
+
+With adequate sample size, individual outliers rarely matter. If one
+point drastically changes results, the real issue is often insufficient
+data.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{\texorpdfstring{4. Do \emph{Not} Transform the
+Data}{4. Do Not Transform the Data}}\label{do-not-transform-the-data}
+
+Data transformation is largely obsolete in modern statistical practice.
+It is unnecessary for most models and can actively distort inference.
+
+Transformations often fail to achieve their stated goals and introduce
+new problems.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Ethical and Biological
+Considerations}\label{ethical-and-biological-considerations}
+
+Do \textbf{not} remove outliers that are biologically meaningful:
+
+\begin{itemize}
+\tightlist
+\item
+  Extreme climate years
+\item
+  Rare but dominant individuals
+\item
+  Unusual but real ecological events
+\end{itemize}
+
+These often generate the most interesting hypotheses.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Extra Zeros in the Data}\label{extra-zeros-in-the-data}
+
+The second focus of this video is identifying \textbf{excess zeros},
+which can cause serious modeling issues.
+
+We are \emph{not} trying to force data into normality. Instead, we want
+to understand whether the data reasonably approximate a distribution we
+intend to model.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Why Extra Zeros Matter}\label{why-extra-zeros-matter}
+
+Excess zeros can:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Prevent model convergence
+\item
+  Produce unstable or misleading coefficient estimates
+\end{enumerate}
+
+If the likelihood surface is poorly defined, the estimation algorithm
+may fail or settle on spurious solutions.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Visual Inspection for Zero
+Inflation}\label{visual-inspection-for-zero-inflation}
+
+A practical approach:
+
+\begin{itemize}
+\tightlist
+\item
+  Plot a histogram
+\item
+  Increase the number of bins
+\item
+  Zoom into the lower range (e.g., 0--10)
+\end{itemize}
+
+If the frequency at zero is much higher than expected under a Poisson or
+Gamma distribution, zero inflation may be present.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Quantifying Zero Inflation}\label{quantifying-zero-inflation}
+
+A simple diagnostic:
+
+\begin{itemize}
+\tightlist
+\item
+  Calculate the proportion of zeros
+\item
+  If more than \textasciitilde50\% of observations are zero, standard
+  GLMs may struggle
+\end{itemize}
+
+Importantly, \textbf{zeros are not bad data}. They often represent real
+biological states (e.g., non-breeders, absence).
+
+They simply require the \textbf{appropriate model}, which we will cover
+later.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Wrap-Up}\label{wrap-up}
+
+In this video, we covered:
+
+\begin{itemize}
+\tightlist
+\item
+  Types of outliers
+\item
+  Graphical and statistical tools for identifying them
+\item
+  Ethical considerations for handling outliers
+\item
+  Identification of excess zeros and why they matter
+\end{itemize}
+
+These steps should be completed \textbf{before} formal modeling. They
+prevent bias, reduce frustration, and lead to more defensible inference.
+
+In the next section, we will move on to \textbf{heterogeneity and
+variance structures}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\part{Part III: Columns to Curves}
+
+\chapter{modeling}\label{modeling}
+
+\section{Statistical Philosophy and
+Practice}\label{statistical-philosophy-and-practice}
+
+\subsection{A culture of the
+imperfect}\label{a-culture-of-the-imperfect}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Introduce aphorisms about imperfection and pragmatism{]}
+\item
+  {[}Discuss why waiting for the ``perfect'' analysis is often
+  counterproductive{]}
+\end{itemize}
+
+\subsection{Avoiding statistical
+traps}\label{avoiding-statistical-traps}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Describe common analytical pitfalls{]}
+\item
+  {[}Emphasize critical reading of others' analyses{]}
+\end{itemize}
+
+\subsection{Multiple valid paths}\label{multiple-valid-paths}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Introduce the idea that many analytical approaches can be
+  defensible{]}
+\item
+  {[}Connect to collaboration and intellectual humility{]}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Patterns, Models, and
+Inference}\label{patterns-models-and-inference}
+
+\subsection{Detecting patterns}\label{detecting-patterns}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Describe visualization and exploratory analysis as pattern
+  discovery{]}
+\item
+  {[}Emphasize skepticism and iteration{]}
+\end{itemize}
+
+\subsection{Models as tools, not
+truths}\label{models-as-tools-not-truths}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Explain what models are (and are not){]}
+\item
+  {[}Discuss assumptions, simplifications, and abstraction{]}
+\end{itemize}
+
+\subsection{Inference and uncertainty}\label{inference-and-uncertainty}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Describe uncertainty, variability, and confidence{]}
+\item
+  {[}Distinguish statistical significance from scientific importance{]}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Limits of Conventional
+Modeling}\label{limits-of-conventional-modeling}
+
+\subsection{Standard models you already
+know}\label{standard-models-you-already-know}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Briefly list GLMs, GAMs, GLMMs, etc.{]}
+\item
+  {[}Acknowledge their usefulness{]}
+\end{itemize}
+
+\subsection{Why these models are often
+insufficient}\label{why-these-models-are-often-insufficient}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Discuss complexity, nonlinearity, dependence, and scale{]}
+\item
+  {[}Explain mismatch between data-generating processes and model
+  assumptions{]}
+\end{itemize}
+
+\subsection{What the ``ideal'' might look
+like}\label{what-the-ideal-might-look-like}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Pose the question of ideal inference without answering it fully{]}
+\item
+  {[}Frame this as a motivating tension for the course{]}
+\end{itemize}
+
+\chapter{glms}\label{glms}
+
+\chapter{Chapter Overview}\label{chapter-overview}
+
+{[}Briefly describe how this chapter moves from data hygiene and naming
+conventions, through exploratory data analysis, to formal statistical
+modeling with GLMs. Emphasize workflow and scientific reasoning.{]}
+
+Test dropdown
+
+This is a test
+
+\section{Learning Objectives}\label{learning-objectives}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Describe what students should be able to do after completing this
+  chapter, spanning data management, exploration, and modeling{]}
+\item
+  {[}Connect coding practices to reproducibility and statistical
+  inference{]}
+\end{itemize}
+
+\chapter{Introduction to Generalized Linear Models
+(GLMs)}\label{introduction-to-generalized-linear-models-glms}
+
+{[}Based primarily on the GLM Introduction lecture
+:contentReference{oaicite:2}{]}
+
+\section{Why We Need GLMs}\label{why-we-need-glms}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Explain limitations of classical linear models for non-normal
+  data{]}
+\item
+  {[}Position GLMs as a unifying statistical framework{]}
+\end{itemize}
+
+\section{What Are Generalized Linear
+Models?}\label{what-are-generalized-linear-models}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Describe the three core components: random component, systematic
+  component, link function{]}
+\item
+  {[}Explain how GLMs subsume t-tests and ANOVA{]}
+\end{itemize}
+
+\section{Advantages of GLMs in Ecological and Field
+Data}\label{advantages-of-glms-in-ecological-and-field-data}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Discuss unbalanced data, natural boundaries, and autocorrelation{]}
+\item
+  {[}Introduce extensions (GLMMs, GAMs, GAMMs){]}
+\end{itemize}
+
+\section{GLMs vs.~Traditional Tests}\label{glms-vs.-traditional-tests}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Conceptually compare t-tests, ANOVA, and GLMs{]}
+\item
+  {[}Emphasize equivalence under Gaussian assumptions{]}
+\end{itemize}
+
+\section{Model Assumptions Revisited}\label{model-assumptions-revisited}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Clarify assumptions about residuals rather than raw data{]}
+\item
+  {[}Discuss independence, linearity, and variance structure{]}
+\end{itemize}
+
+\section{Choosing the Right
+Distribution}\label{choosing-the-right-distribution}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Outline how response type (count, binary, proportion, continuous)
+  drives distribution choice{]}
+\item
+  {[}Introduce overdispersion and zero inflation{]}
+\end{itemize}
+
+\section{Link Functions and
+Interpretation}\label{link-functions-and-interpretation}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Explain the role of link functions in connecting predictors to the
+  mean response{]}
+\item
+  {[}Describe common links (log, logit, etc.) and when they are used{]}
+\end{itemize}
+
+\section{Building a GLM: Initial
+Workflow}\label{building-a-glm-initial-workflow}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Describe steps from distribution choice to model specification{]}
+\item
+  {[}Emphasize exploratory analysis as a prerequisite{]}
+\end{itemize}
+
+\section{Assessing Normality and Model
+Fit}\label{assessing-normality-and-model-fit}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Explain visual diagnostics (histograms, Q-Q plots){]}
+\item
+  {[}Introduce simulation-based diagnostics using DHARMa{]}
+\end{itemize}
+
+\section{Take-Home Messages for GLMs}\label{take-home-messages-for-glms}
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Reinforce the idea that good models start with good questions{]}
+\item
+  {[}Encourage model-based thinking over test-based thinking{]}
+\end{itemize}
+
+\chapter{Generalized Linear Models for Count
+Data}\label{generalized-linear-models-for-count-data}
+
+Day 3 --- Video 2
+
+\hfill\break
+
+\section{Overview}\label{overview-1}
+
+Welcome back to Day 3. This is the second video on generalized linear
+models (GLMs), focusing specifically on \textbf{models for non-normal
+data}. In this lecture, we work through \textbf{count data} as a
+concrete case study to build intuition about model choice, diagnostics,
+prediction, and interpretation.
+
+These ideas will be reinforced through hands-on practice in class.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Poisson GLMs for Count Data}\label{poisson-glms-for-count-data}
+
+Count data are extremely common in ecological surveys and field studies.
+Whenever your response variable is a count (e.g., number of individuals,
+detections, or events), the \textbf{Poisson distribution} is often the
+natural starting point.
+
+A defining property of the Poisson distribution is:
+
+\begin{quote}
+\textbf{The mean equals the variance.}
+\end{quote}
+
+Formally,
+
+\[
+\mathbb{E}(Y) = \mathrm{Var}(Y)
+\]
+
+This means the distribution is fully specified by a single parameter
+(the mean). Other distributions often require additional parameters to
+describe dispersion.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Link Functions for the Poisson
+Distribution}\label{link-functions-for-the-poisson-distribution}
+
+Several link functions are available for Poisson GLMs:
+
+\begin{itemize}
+\tightlist
+\item
+  Identity\\
+\item
+  Square root\\
+\item
+  \textbf{Log (default and most commonly used)}
+\end{itemize}
+
+The \textbf{log link} is generally preferred because it ensures that
+fitted values are \textbf{strictly positive}, which is required for
+count data.
+
+With a log link:
+
+\begin{itemize}
+\tightlist
+\item
+  The linear predictor is on the log scale
+\item
+  The inverse link is the exponential function
+\item
+  Coefficients are interpreted multiplicatively after
+  back-transformation
+\end{itemize}
+
+If \(\eta\) is the linear predictor, then the mean response is:
+
+\[
+\mu = \exp(\eta)
+\]
+
+Back-transforming model output is critical for interpretation and
+prediction.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Assumptions of the Poisson
+GLM}\label{assumptions-of-the-poisson-glm}
+
+For a Poisson GLM to be appropriate, the response must satisfy:
+
+\[
+\mathrm{Var}(Y) \approx \mathbb{E}(Y)
+\]
+
+To evaluate this assumption, we calculate an \textbf{overdispersion
+parameter}. Ideally, this value should be close to \textbf{1}.
+
+\begin{itemize}
+\tightlist
+\item
+  Dispersion \(> 1\): \textbf{Overdispersion}
+\item
+  Dispersion \(< 1\): \textbf{Underdispersion}
+\end{itemize}
+
+In practice, overdispersion is far more common than underdispersion.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Calculating the Dispersion
+Statistic}\label{calculating-the-dispersion-statistic}
+
+If dispersion is not reported automatically, it can be calculated as:
+
+\[
+\hat{c} = \frac{\sum r_i^2}{n - p}
+\]
+
+where:
+
+\begin{itemize}
+\tightlist
+\item
+  \(r_i\) are Pearson residuals\\
+\item
+  \(n\) is the number of observations\\
+\item
+  \(p\) is the number of estimated parameters (including the intercept)
+\end{itemize}
+
+For mixed models, defining \(p\) becomes more complicated because the
+effective sample size lies between the number of observations and the
+number of random-effect levels.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{When Overdispersion Is a
+Symptom}\label{when-overdispersion-is-a-symptom}
+
+Before assuming overdispersion is the primary issue, consider other
+common causes:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Model misspecification (missing predictors)
+\item
+  Influential observations or outliers
+\item
+  Missing interaction terms
+\item
+  Predictors on inappropriate scales
+\item
+  Unmodeled nonlinear relationships
+\item
+  Zero inflation
+\item
+  Unaccounted dependency structure
+\end{enumerate}
+
+A standard GLM assumes \textbf{independent observations} with no
+spatial, temporal, or hierarchical structure.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Strategies for Handling
+Overdispersion}\label{strategies-for-handling-overdispersion}
+
+\subsection{Quasi-Poisson Models}\label{quasi-poisson-models}
+
+Quasi-Poisson models adjust standard errors to account for
+overdispersion while leaving the mean structure unchanged. This is a
+technical fix and can work in some cases, but it is not always ideal.
+
+\subsection{Negative Binomial Models
+(Preferred)}\label{negative-binomial-models-preferred}
+
+The negative binomial distribution includes two parameters:
+
+\begin{itemize}
+\tightlist
+\item
+  Mean
+\item
+  Dispersion parameter
+\end{itemize}
+
+This allows the variance to exceed the mean:
+
+\[
+\mathrm{Var}(Y) = \mu + \alpha \mu^2
+\]
+
+where \(\alpha\) controls overdispersion. This makes negative binomial
+GLMs a robust choice for overdispersed count data.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Why Distribution Choice
+Matters}\label{why-distribution-choice-matters}
+
+At large mean values, a Poisson distribution can visually resemble a
+normal distribution. However, the underlying assumptions remain
+different.
+
+If variance is mischaracterized:
+
+\begin{itemize}
+\tightlist
+\item
+  Standard errors will be incorrect
+\item
+  Confidence intervals will be misleading
+\item
+  p-values may be invalid
+\end{itemize}
+
+A good decision workflow is:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Is the response discrete or continuous?
+\item
+  What are the bounds of the data?
+\item
+  Does variance increase with the mean?
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Example Dataset: Fish Abundance and Water
+Depth}\label{example-dataset-fish-abundance-and-water-depth}
+
+We now consider a dataset designed to address the question:
+
+\begin{quote}
+Has the relationship between water depth and total fish abundance
+changed over time?
+\end{quote}
+
+Before modeling, we:
+
+\begin{itemize}
+\tightlist
+\item
+  Inspect variable structure
+\item
+  Remove a spatial outlier (for teaching purposes)
+\item
+  Rescale depth for interpretability
+\end{itemize}
+
+Always examine your data first, but avoid making inferential claims from
+exploratory plots alone.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Ordinary Least Squares as a
+Baseline}\label{ordinary-least-squares-as-a-baseline}
+
+We begin with a Gaussian linear model:
+
+\[
+\text{Total abundance} \sim \text{Mean depth}
+\]
+
+The model reports a strong effect of depth. However, residual
+diagnostics reveal major violations:
+
+\begin{itemize}
+\tightlist
+\item
+  Heteroskedasticity
+\item
+  Skewed residuals
+\item
+  Non-normality
+\item
+  Influential observations
+\end{itemize}
+
+Q--Q plots confirm these violations. This model is not appropriate for
+count data.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Residuals in GLMs}\label{residuals-in-glms}
+
+In GLMs, raw residuals (observed minus fitted) are not useful. Instead,
+use:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Pearson residuals}
+\item
+  \textbf{Deviance residuals}
+\end{itemize}
+
+These should be plotted against:
+
+\begin{itemize}
+\tightlist
+\item
+  Fitted values
+\item
+  Each predictor
+\item
+  Time
+\item
+  Space
+\end{itemize}
+
+Residuals should show no systematic structure across any variable.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Fitting a Poisson GLM}\label{fitting-a-poisson-glm}
+
+We refit the model using a Poisson GLM with a log link:
+
+\[
+\log(\mu_i) = \beta_0 + \beta_1 \text{Depth}_i
+\]
+
+The model explains approximately 43\% of the deviance:
+
+\[
+R^2_{\text{pseudo}} = \frac{D_\text{null} - D_\text{residual}}{D_\text{null}}
+\]
+
+However, diagnostics reveal extreme overdispersion.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Explicit Overdispersion
+Diagnosis}\label{explicit-overdispersion-diagnosis}
+
+Using Pearson residuals, we compute:
+
+\[
+\hat{c} \approx 115
+\]
+
+This indicates severe overdispersion and confirms that the Poisson model
+is mis-specified.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Model Refinement Attempts}\label{model-refinement-attempts}
+
+We explore several refinements:
+
+\begin{itemize}
+\tightlist
+\item
+  Cook's distance reveals many influential points
+\item
+  Adding sampling period as a covariate improves fit marginally
+\item
+  Adding an offset for sampling effort worsens dispersion
+\end{itemize}
+
+Each step provides diagnostic information but does not resolve the
+issue.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Negative Binomial GLM}\label{negative-binomial-glm}
+
+We refit the same model using a \textbf{negative binomial GLM}:
+
+\[
+\log(\mu_i) = \beta_0 + \beta_1 \text{Depth}_i + \beta_2 \text{Period}_i
+\]
+
+This dramatically improves the model:
+
+\begin{itemize}
+\tightlist
+\item
+  Dispersion \(\approx 1\)
+\item
+  Residuals stabilize
+\item
+  Cook's distance values drop
+\item
+  AIC strongly favors the negative binomial model
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Interpreting the Final
+Model}\label{interpreting-the-final-model}
+
+The depth--abundance relationship is similar across periods. However,
+claims about similarity require explicit comparison between:
+
+\begin{itemize}
+\tightlist
+\item
+  Additive models
+\item
+  Interaction models
+\end{itemize}
+
+Only after comparing these models can we infer whether relationships
+truly differ.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Prediction and
+Back-Transformation}\label{prediction-and-back-transformation}
+
+When predicting from GLMs:
+
+\begin{itemize}
+\tightlist
+\item
+  Always use \texttt{type\ =\ "link"}
+\item
+  Request standard errors
+\item
+  Compute confidence intervals on the link scale
+\item
+  Back-transform using the inverse link
+\end{itemize}
+
+For a log link, predictions are back-transformed as:
+
+\[
+\hat{\mu} = \exp(\hat{\eta})
+\]
+
+Confidence intervals are:
+
+\[
+\exp(\hat{\eta} \pm 1.96 \cdot \text{SE})
+\]
+
+This produces asymmetric intervals appropriate for count data.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{A Cautionary Example}\label{a-cautionary-example}
+
+In a published study of reproductive success, predictions were plotted
+on the \textbf{link scale}, leading to biologically impossible negative
+values. The model itself was correct---the error occurred during
+prediction and visualization.
+
+This mistake is common and avoidable.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Key Take-Home Messages}\label{key-take-home-messages}
+
+\begin{itemize}
+\tightlist
+\item
+  Use Poisson GLMs for count data whenever appropriate
+\item
+  Always check for zero inflation and overdispersion
+\item
+  Prefer negative binomial models when overdispersion is present
+\item
+  Never extrapolate beyond observed data ranges
+\item
+  Default to \texttt{type\ =\ "link"} when predicting
+\item
+  Always back-transform predictions and confidence intervals
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Wrap-Up}\label{wrap-up-1}
+
+This concludes Day 3. In Day 4, we will continue building on these ideas
+and extend them to more complex modeling frameworks.
+
+\part{Part IV: Curves to Meaning}
+
+
+
+
+\end{document}

@@ -11,11 +11,11 @@ book:
     - part: "Course Overview"
       chapters:   
         - index.qmd
-        - chapters/02_course_intro.qmd
-        - chapters/04_syllabus.qmd
+        - chapters/course_intro.qmd
+        - chapters/syllabus.qmd
         - chapters/calendar_sp26.qmd
-        - chapters/05_ai.qmd  
-        - chapters/06_preparing_yourself.qmd
+        - chapters/ai_policy.qmd  
+        - chapters/preparing_yourself.qmd
         - chapters/assignment_grades.qmd
     # --- MAIN BODY ---
     - part: "Part I: Chaos to Columns"

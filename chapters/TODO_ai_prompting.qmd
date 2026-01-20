@@ -1,4 +1,0 @@
----
-title: "Prompting with Generative Transformers"
-format: html
----

@@ -142,5 +142,17 @@
   },
   "chapters/assignment_grades.qmd": {
     "assignment_grades.html": "a9fbd480"
+  },
+  "chapters/course_intro.qmd": {
+    "course_intro.html": "29dd2d03"
+  },
+  "chapters/syllabus.qmd": {
+    "syllabus.html": "17e1171b"
+  },
+  "chapters/ai_policy.qmd": {
+    "ai_policy.html": "281c3429"
+  },
+  "chapters/preparing_yourself.qmd": {
+    "preparing_yourself.html": "5a45734e"
   }
 }

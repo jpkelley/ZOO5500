@@ -1,6 +1,6 @@
 project:
   type: book
-  output-dir: _book
+  output-dir: docs
 
 book:
   title: "Quantitative Analysis of (Messy) Field Data"
@@ -41,7 +41,4 @@ format:
     number-depth: 3
     css: styles.css
 
-  pdf:
-    documentclass: scrreprt
-
-editor: visual
+editor: source

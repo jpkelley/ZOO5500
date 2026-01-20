@@ -1,0 +1,387 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Quantitative Analysis of (Messy) Field Data",
+    "section": "",
+    "text": "Essential Course Information",
+    "crumbs": [
+      "Course Overview",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Information</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#essential-course-information",
+    "href": "index.html#essential-course-information",
+    "title": "Quantitative Analysis of (Messy) Field Data",
+    "section": "",
+    "text": "Instructor\nPatrick Kelley\n\n\n\n\nEmail\njkelle24@uwyo.edu\n\n\nSchedule\nTu / Th, 11:00–12:15 MT\n\n\nDates\n20-Jan-2026 to 08-May-2026\n\n\nMeeting Type\nsynchronous remote\n\n\nLocation\nJoin via Zoom\n\n\nCommunication\nSlack (private link sent to your email)",
+    "crumbs": [
+      "Course Overview",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Information</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#quicklinks",
+    "href": "index.html#quicklinks",
+    "title": "Quantitative Analysis of (Messy) Field Data",
+    "section": "Quicklinks",
+    "text": "Quicklinks\nCollaborative Statistics References",
+    "crumbs": [
+      "Course Overview",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Information</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/02_course_intro.html",
+    "href": "chapters/02_course_intro.html",
+    "title": "2  Introduction",
+    "section": "",
+    "text": "2.1 Welcome to Quantitative Analysis of (Messy) Field Data!\nThanks for joining us this term! I couldn’t be more pleased at the large size of the class this term! This means that there are more perspectives to help guide us through the following phases of data analysis:\nThe complexity of the project, difficulty of field conditions, or an impending deadline can make the jumps from data collection to inference horribly daunting to young and old researchers alike. Our joint goal in this course is to become more comfortable with each of these steps, so that we not only work more efficiently but we also know a bit more about how to sense of our complex world. It is my sincerest hope that this course will not only teach you some about statistics (and some statistical traps) but that it will also give you a unique opportunity to work with your peers as you delve into the myriad issues that inevitably arise in data analysis. Working together means that we must first acknowledge that each one of us assimilates new material and produces syntheses in varied ways. All I ask is that each of you",
+    "crumbs": [
+      "Course Overview",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/02_course_intro.html#welcome-to-quantitative-analysis-of-messy-field-data",
+    "href": "chapters/02_course_intro.html#welcome-to-quantitative-analysis-of-messy-field-data",
+    "title": "2  Introduction",
+    "section": "",
+    "text": "Messy field or lab data → processed data → models → inference",
+    "crumbs": [
+      "Course Overview",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/02_course_intro.html#course-objectives",
+    "href": "chapters/02_course_intro.html#course-objectives",
+    "title": "2  Introduction",
+    "section": "2.2 Course Objectives",
+    "text": "2.2 Course Objectives\nBy the end of this course, you should be able to:\n\nThink quantitatively about messy ecological data. You should be on your way to developing a habit of translating real-world ecological questions into quantitative frameworks, while explicitly acknowledging uncertainty and bias in estimation and measurement.\nDistinguish between questions/hypotheses, data, and inferences. You should be able to (1) clearly separate ecological hypotheses, the data actually collected, and the quantities being estimated, and (2) understand why these distinctions matter for interpretation and decision-making.\nUnderstand the processes that generate data. You should be able to recognize how different study designs, variation in detection, observer effects, instrument error, and data processing shape and constrain the structure of ecological datasets.\nSelect, build, and critique statistical models as scientific tools. You should be comfortable choosing and using statistical models not as black boxes, but as explicit representations of assumptions about ecological processes, variation, and causal structure. You should never blindly choose a statistical model again!\nInterpret results in ecological —not just statistical— terms. You should be able to conceptually move beyond p-values and coefficients to clearly articulate what your results mean biologically, mechanistically, and practically.\nBe comfortable applying causal –and not just correlational– reasoning. You should be able to use causal thinking (conceptual models and directed acyclic graphs) to evaluate what can —and ehat cannot— be inferred from observational and experimental data.\nCommunicate quantitative results clearly, transparently, and honestl.y Present analyses, figures, and conclusions in ways that are transparent, reproducible, and appropriate for scientific audiences.\nDevelop durable, reproducible analytical workflows. You should be increasingly comfortable with good data-science practices that support clarity, versioning (even though we will not delve into GitHub this term), and reusability of analyses.\nDevelop new confidence working with unfamiliar, complex, imperfect datasets. You should leave this course better prepared to engage with real ecological data —without expecting it to be clean, complete, or simple.",
+    "crumbs": [
+      "Course Overview",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/02_course_intro.html#topics-covered",
+    "href": "chapters/02_course_intro.html#topics-covered",
+    "title": "2  Introduction",
+    "section": "Topics covered",
+    "text": "Topics covered\nThe course covers the following topics, roughly in the following order:\n\nMetrology: measurands, measurement error, uncertainty, and data quality\n\nExploratory data analysis of messy data\n\nGeneralized Linear Models (GLMs): theory and implementation\n\nModel comparison using AIC and information-theoretic approaches\n\nGeneralized Linear Mixed Models (GLMMs) and effective sample size\n\nGeneralized Additive Models (GAMs)\n\nGeneralized Additive Mixed Models (GAMMs)\n\nModeling spatial and temporal heterogeneity\n\nStructural Causal Modeling (SCM) and causal diagrams\n\nPrediction, uncertainty propagation, and model validation\n\nSynthesis of analytical results and justification of inference\n\nTables, figures, and reporting standards for quantitative results\n\nWriting defensible and interpretable Results sections\n\nGiven this ambitious scope, we may only scratch the surface of some topics. Even our cursory treatment is aimed at convincing you why these subjects matter for scientists who have messy data.",
+    "crumbs": [
+      "Course Overview",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/02_course_intro.html#what-is-new-this-term-spring-2026",
+    "href": "chapters/02_course_intro.html#what-is-new-this-term-spring-2026",
+    "title": "2  Introduction",
+    "section": "2.3 What is new this term (Spring 2026)?",
+    "text": "2.3 What is new this term (Spring 2026)?\nFor Spring 2026, I have added attention to new topics that improve both efficiency of analysis workflows and our ability to understand causality at a deeper level. Specifically, I have chosen to add course components on:\n\nUsing large-language models (LLMs) –via ChatGPT– to improve analytical workflows. This term, I have integrated ChatGPT into the course as a way to support the process of analysis rather than to automate the analysis itself. Many of the hardest parts of quantitative work happen outside of writing code: figuring out why R code isn’t behaving as expected, checking whether an interpretation actually follows from a model, troubleshooting an obscure error message, or getting feedback on how tp clearly document a decision. Used carefully, ChatGPT can act like a sounding board for troubleshooting, sanity-checking, and refining explanations without taking over your critical thinking. Throughout the course, I have deliberately constrained ChatGPT’s role and scope and have tailored its guardrails to match the course progression. In other words, ChatGPT is used to help improve analytical workflow and decision-making, not to generate results or write code on a student’s behalf. We will work together to assess the utility of this tool as the term advances.\n\n\n\n\nUsing large-language models (LLMs) to improve teaching at scale. What does this mean? In past terms, between 10-15 students have been enrolled in this course. This term, I have allowed 26 students to enroll. Without a Teaching Assistant, this spawns a significant issue of scale. This is solvable if we use AI as a helpful tool. So, after spending some time as an LLM-consultant and tester, I decided to explicitly integrate chatGPT’s LLMs into my teaching/grading workflow. This means that students will use a custom GPT that I created specifically for ZOO/ECOL-5500 called JackalopeGPT (using ChatGPT) to run checks on their work prior to submission; this will solve some of the “tuning” issues (with codes, grammar, clarity, etc.) that I have seen in student submissions in previous years.\n\n\n\n\n\n\nStructural Causal Models (SCMs) I added Structural Causal Models (SCMs) at the end of the course to give us a way to think more clearly about complex systems where multiple variables influence each other at the same time. In the first part of the course, students will see the limits of fitting separate models (e.g. GLMs, GLMMs, GAMMs) for singular response variables; those models can work individually, but they often miss shared drivers, indirect effects, or how pieces of the complex system of exogenous and endogenous factors fit together. SCMs give us a way to lay out those relationships explicitly and analyze them as a connected structure (as is present in natural systems) rather than as a collection of isolated models. The goal isn’t to replace the modeling approaches we’ve already used but to improve inference by making our assumptions about the system clear and coherent.\nJackalopes! This course corrects a long-standing perspective that (1) jackalopes had deer-like antlers (Fig. 1), and (2) there was only a single species of jackalopes (Fig. 2). We will use the newly discovered cryptid ecosystem for course exercises and examples.\n\n\n\n\nFigure 1. Illustrations of the correct and incorrect ornament morphology of jackalopes.",
+    "crumbs": [
+      "Course Overview",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04_syllabus.html",
+    "href": "chapters/04_syllabus.html",
+    "title": "3  Syllabus",
+    "section": "",
+    "text": "3.1 Location and meeting times\nTuesday/Thursday on Zoom; 11:00AM - 12:15PM (Mountain Time) Spring term 2026",
+    "crumbs": [
+      "Course Overview",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Syllabus</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04_syllabus.html#office-hours",
+    "href": "chapters/04_syllabus.html#office-hours",
+    "title": "3  Syllabus",
+    "section": "3.2 Office hours",
+    "text": "3.2 Office hours\nDue to the nature of the course, I will not have specific office hours for the course. I have extended class times (after our weekly meetings) to allow more time to ask questions and for one-on-one work. These are optional and may be canceled in some weeks depending on your interest in meeting.",
+    "crumbs": [
+      "Course Overview",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Syllabus</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04_syllabus.html#prerequisites",
+    "href": "chapters/04_syllabus.html#prerequisites",
+    "title": "3  Syllabus",
+    "section": "3.3 Prerequisites",
+    "text": "3.3 Prerequisites\nTo ensure your success in this course, the following are required: - You must have a dataset to be analyzed this semester. This is very important. This class will only cover data reformatting; we will not cover data processing (except as necessary in specific cases). - Your data analysis must not be used in another (past or present). - You must be at least in your second year of graduate school. - You must have some exposure to using the Program R (tidyverse preferred, but base R is nice too). - You must have taken a statistics course in the last five years.",
+    "crumbs": [
+      "Course Overview",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Syllabus</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04_syllabus.html#assessment-and-grading-standards",
+    "href": "chapters/04_syllabus.html#assessment-and-grading-standards",
+    "title": "3  Syllabus",
+    "section": "3.4 Assessment and Grading Standards",
+    "text": "3.4 Assessment and Grading Standards\nThis course is graded as Pass or Fail (technically “Satisfactory” or “Unsatisfactory”). To pass the course you need to do the following:\n\nParticipate at least 80% of the class meetings. Simply inform me of your absences (for health reasons, field research, etc.), and then do what you can to catch up with the work.\nTurn in all assignments on their due dates (see Course Calendar) and receive a Green Light on all assignment submissions by the end of term (see Assignments & Grading). This is especially critical until Spring Break, after which there will be more flexibility in your schedule.",
+    "crumbs": [
+      "Course Overview",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Syllabus</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04_syllabus.html#attendanceparticipation-policy",
+    "href": "chapters/04_syllabus.html#attendanceparticipation-policy",
+    "title": "3  Syllabus",
+    "section": "3.5 Attendance/Participation Policy",
+    "text": "3.5 Attendance/Participation Policy\nThis is a graduate level course, and you are here for your own benefit. That being said, I expect you to come to class, stay engaged with the material, and not only learn how to do your own analysis but understand other types of data and analyses by working with your group members. If you do this, you should have analyzed your own data by the end of the semester and have part of a manuscript completed. Please email me ahead of time when you will be unable to attend class for a valid reason.",
+    "crumbs": [
+      "Course Overview",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Syllabus</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04_syllabus.html#how-to-succeed-in-the-course-beyond-your-wildest-and-funniest-dreams",
+    "href": "chapters/04_syllabus.html#how-to-succeed-in-the-course-beyond-your-wildest-and-funniest-dreams",
+    "title": "3  Syllabus",
+    "section": "3.6 How to succeed in the course (beyond your wildest and funniest dreams)",
+    "text": "3.6 How to succeed in the course (beyond your wildest and funniest dreams)\nGraduate school can be considerably challenging, as everyone is attempting to juggle research, teaching, classes, health, and family, all while coping with unexpected stressors. Course information is flying at you from every direction; there are many specific terms and concepts that you need to learn and operationalize. So, here are some reminders for you (even though I know you don’t need these):\n\nAsk questions! Even though there are no exams, take copious notes and work collaboratively to build course notes.\nDon’t be afraid to redirect the flow of the course. 5000-level courses should be flexible and fun. I want to give you time to think about and discuss the material. I’m willing to alter the pace of the course, change the order of topics, or devise new exercises for you. This is intended to be fun (while simultaneously transforming you into analytical gurus)! So, just talk to me about how I can help!\nRead all the material in this course guidebook. Many online courses require much more reading; this one does not.\nShow up to as many of the synchronous (Zoom) discussions as you can. When we meet together online, our goal will be to solidify everyone’s understanding of different concepts and how they are linked. These concepts will be useful as you navigate your own analysis project.",
+    "crumbs": [
+      "Course Overview",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Syllabus</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04_syllabus.html#expectations",
+    "href": "chapters/04_syllabus.html#expectations",
+    "title": "3  Syllabus",
+    "section": "3.7 Expectations",
+    "text": "3.7 Expectations\nAs your instructor, you should expect me to:\n\nTry my very hardest to make the course go smoothly (the reason you now have this nice new online course guide); but please be prepared for the inevitable hiccups. No matter how hard we all try, there always seem to be a few obstacles (like internet going down for a couple of hours when we’re on Zoom).\nRespond to questions within 24 hours during the work week. However, I likely will not respond during the weekend (unless there is an urgent matter).\nRespect you not only as a learner but as a colleague.\nUnderstand that these are strange and sometimes unforgiving times. We all have varying levels of tolerance and resistance to stress. If you are having a hard time for whatever reason, please communicate with me. I suck at judging, but I can do a hell of a job listening and working with you to solve a problem.\n\nAs a student, you are expected to:\n\nBe respectful of everyone in the class, including me.\nAsk for help if needed.\nTreat your presence in the classroom and your enrollment in this course as you would a job; Act professionally, arrive on time, pay attention, complete your work in a timely and professional manner, and treat your learning seriously.\nUnderstand that everyone is going through different things (family events, etc.), and be understanding of each other.\nBe engaged in the course.\nBe engaged within your assigned groups and help each other learn. Teaching another group member something you know solidifies your own knowledge and also sets you up to be a great future colleague.",
+    "crumbs": [
+      "Course Overview",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Syllabus</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04_syllabus.html#r-code-readings-and-discussion-sections",
+    "href": "chapters/04_syllabus.html#r-code-readings-and-discussion-sections",
+    "title": "3  Syllabus",
+    "section": "3.8 R Code, readings, and discussion sections",
+    "text": "3.8 R Code, readings, and discussion sections\nAll R code required for both instruction and hands-on exercises is available within this course book. Unlike past versions of this course, the present iteration no longer has traditional lectures. That said, I may respond to your questions by creating mini-presentations for you. I will share such material immediately after our discussions.",
+    "crumbs": [
+      "Course Overview",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Syllabus</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04_syllabus.html#classroom-climate-and-conduct",
+    "href": "chapters/04_syllabus.html#classroom-climate-and-conduct",
+    "title": "3  Syllabus",
+    "section": "3.9 Classroom Climate and Conduct",
+    "text": "3.9 Classroom Climate and Conduct\nAgain, you will be respectful towards your classmates and your instructors. Spirited debate and disagreement are to be expected in any classroom, and all perspectives will be heard, but we will behave civilly and with respect towards one another. Personal attacks, offensive language, name-calling, and dismissive gestures (eye-rolling, saying “whatever”, etc.) are not warranted in a learning atmosphere. Plus, in my opinion, such behavior shows an ability to problem-solve, which is counter to the mission of any university. As your instructor, I have the right to dismiss you from the classroom if you engage in disrespectful or disruptive behavior. Lastly, for the privacy of your fellow students, please do not record the lectures (unless with permission of the instructor).\n\n\n\n\n\n\nNoteA note on knowledge-sharing\n\n\n\n\n\nOur classroom is a shared intellectual space. Questions, mistakes, and partial understanding are part of learning. Please remember that supporting one another’s intellectual growth matters more than performative corrections or demonstrations of expertise.",
+    "crumbs": [
+      "Course Overview",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Syllabus</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04_syllabus.html#classroom-statement-on-diversity",
+    "href": "chapters/04_syllabus.html#classroom-statement-on-diversity",
+    "title": "3  Syllabus",
+    "section": "3.10 Classroom Statement on Diversity",
+    "text": "3.10 Classroom Statement on Diversity\nThe University of Wyoming values an educational environment that is diverse, equitable, and inclusive. The diversity that students and faculty bring to class, including age, country of origin, culture, disability, economic class, ethnicity, gender identity, immigration status, linguistic, political affiliation, race, religion, sexual orientation, veteran status, worldview, and other social and cultural diversity is valued, respected, and considered a resource for learning. we understand that our UW community members represent a rich variety of backgrounds and perspectives. We are committed to providing an atmosphere for learning that respects diversity of all types. While working together to build this community, we ask all members–from students to staff to faculty–to:\n\nBe transparent about pre-existing biases and beliefs.\nDo not hesitate to share their unique experiences and perspectives.\nBe open to the views of others.\nHonor the uniqueness of their colleagues.\nAppreciate the opportunity that we have to learn from each other in this community.\nValue each other’s opinions and communicate in a respectful manner.\nKeep confidential any discussions of a personal (or professional) nature.\nUse this opportunity together to discuss ways in which we can create an inclusive environment in this course and across the University community.",
+    "crumbs": [
+      "Course Overview",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Syllabus</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04_syllabus.html#duty-to-report",
+    "href": "chapters/04_syllabus.html#duty-to-report",
+    "title": "3  Syllabus",
+    "section": "3.11 Duty to Report",
+    "text": "3.11 Duty to Report\nUW faculty are committed to supporting students and upholding the University’s non-discrimination policy. Under Title IX, discrimination based upon sex and gender is prohibited. If you experience an incident of sex- or gender-based discrimination, we encourage you to report it. While you may talk to a faculty member, understand that as a “Responsible Employee” of the University, the faculty member is required to report information you share about the incident to the University’s Title IX Coordinator (you may choose whether you or anyone involved is identified by name). If you would like to speak with someone who may be able to afford you privacy or confidentiality, there are people who can meet with you. Faculty can help direct you or you may find info about UW policy and resources at http://www.uwyo.edu/reportit. While we want you to feel comfortable coming to us with issues you may be struggling with or concerns you may be having, please be aware that we have some reporting requirements that are part of our job requirements at UW. You do not have to go through the experience alone. For example, if you inform us of an issue of sexual harassment, sexual assault, or discrimination we will keep the information as private as we can, but we am required to bring it to the attention of the institution’s Title IX Coordinator. If you would like to talk to those offices directly, you can contact Equal Opportunity Report and Response (Bureau of Mines Room 319, 766-5200, report-it@uwyo.edu, www.uwyo.edu/reportit). Additionally, you can also report incidents or complaints to the UW Police Department. You can also get support at the STOP Violence program (stopviolence@uwyo.edu, www.uwyo.edu/stop, 766-3296) (or SAFE Project (www.safeproject.org, campus@safeproject.org, 766-3434, 24-Hour hotline: 745-3556). Assistance and resources are available, and you are not required to make a formal complaint or participate in an investigation to access them. Another common example is if you are struggling with an issue that may be traumatic, or under unusual stress. We will likely inform the Dean of Students Office or Counseling Center. If you would like to reach out directly to them for assistance, you can contact them by going to www.uwyo.edu/dos/uwyocares.",
+    "crumbs": [
+      "Course Overview",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Syllabus</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04_syllabus.html#disability-statement",
+    "href": "chapters/04_syllabus.html#disability-statement",
+    "title": "3  Syllabus",
+    "section": "3.12 Disability Statement",
+    "text": "3.12 Disability Statement\nIf you have a physical, learning, sensory or psychological disability and require accommodations, please let me know as soon as possible. You will need to register with, and provide documentation of your disability to University Disability Support Services (UDSS) in SEO, room 330 Knight Hall.",
+    "crumbs": [
+      "Course Overview",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Syllabus</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04_syllabus.html#academic-honesty",
+    "href": "chapters/04_syllabus.html#academic-honesty",
+    "title": "3  Syllabus",
+    "section": "3.13 Academic Honesty",
+    "text": "3.13 Academic Honesty\nThe University of Wyoming is built upon a strong foundation of integrity, respect and trust. All members of the university community have a responsibility to be honest and the right to expect honesty from others. Any form of academic dishonesty is unacceptable to our community and will not be tolerated [from the University Catalog]. Teachers and students should report suspected violations of standards of academic honesty to the instructor, department head, or dean. Other University regulations can be found here",
+    "crumbs": [
+      "Course Overview",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Syllabus</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/calendar_sp26.html",
+    "href": "chapters/calendar_sp26.html",
+    "title": "4  Course calendar",
+    "section": "",
+    "text": "4.1 Calendar overview\nUse the calendar table below to see what’s coming each week; simply click a week (first column link) to jump to full details, and then expand sections to see what to do before, during, and after class. This calendar may change slightly as we progress through the term. You will receive immediate notification of any and all changes.",
+    "crumbs": [
+      "Course Overview",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Course calendar</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/calendar_sp26.html#calendar-overview",
+    "href": "chapters/calendar_sp26.html#calendar-overview",
+    "title": "4  Course calendar",
+    "section": "",
+    "text": "Week\nTopics\nIn-class exercise\nMilestone assignment\nStress level\nGrade weight (%)\n\n\n\n\nWeek 119-Jan-2026\nCourse intro; RStudio setup; AI guardrails\nProject scoping discussion\n—\nVery low\n5\n\n\nWeek 226-Jan-2026\nFile structure; reproducible workflows; AI logs\nFile audit walkthrough\nAnalysis Concept Note\nLow\n5\n\n\nWeek 302-Feb-2026\nData exploration; measurement & uncertainty\nExploratory data analysis walkthrough\n—\nVery low\n0\n\n\nWeek 409-Feb-2026\nGLMs (theory + practice)\nGLM exercise\nData Readiness Note\nLow\n10\n\n\nWeek 516-Feb-2026\nGLMs; AIC & information theory\nModel comparison exercise\n—\nLow\n5\n\n\nWeek 623-Feb-2026\nGLMMs; effective sample size\nGLMM exercise\n—\nModerate\n15\n\n\nWeek 702-Mar-2026\nGAMs\nGAM exercise\nWorking Model (draft)\nModerate\n0\n\n\nWeek 809-Mar-2026\nGAMMs; spatial & temporal heterogeneity\nModel refinement exercise\nWorking Model (final lock)\nModerate\n15\n\n\nWeek 916-Mar-2026\nStudent Spring Break\n—\n—\nNone\n0\n\n\nWeek 1023-Mar-2026\nStructural Causal Modeling (SCM)\nCausal diagram critique\n—\nLow\n10\n\n\nWeek 1130-Mar-2026\nInstructor Spring Break\n—\n—\nNone\n0\n\n\nWeek 1206-Apr-2026\nPrediction & uncertainty\nPrediction checks\nInterpretation Memo\nLow\n10\n\n\nWeek 1313-Apr-2026\nSynthesis & justification\nPeer + AI review\n—\nModerate\n0\n\n\nWeek 1420-Apr-2026\nTables, figures, reporting standards\nTable/figure workshop\nResults Section\nLow\n10\n\n\nWeek 1527-Apr-2026\nWriting Results sections\nDraft clinic\nFull Draft\nModerate\n15\n\n\nWeek 1604-May-2026\nReflection & closure\nCourse wrap-up\nRevision Plan (not executed)\nNone\n5",
+    "crumbs": [
+      "Course Overview",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Course calendar</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/calendar_sp26.html#weekly-information",
+    "href": "chapters/calendar_sp26.html#weekly-information",
+    "title": "4  Course calendar",
+    "section": "4.2 Weekly Information",
+    "text": "4.2 Weekly Information\nClick to expand sections below to see expectations before, during, and after class.\n\n\n\n\n\n\nTipWeek 1 (19-Jan-2026)\n\n\n\n\n\nTopics: Course introduction; RStudio setup; AI guardrails\nStress level: Very low\nGrade weight: 0%\n\nBefore class\n\nAbsolutely nothing.\n\n\n\nIn class\n\nCourse overview and expectations\nReview syllabus\nRead AI policy and documentation expectations\nProject scoping discussion\n\n\n\nAfter class\n\nNo submission due\nInstall R and RStudio\nRead AI use and documentation expectations\nBegin gathering your dataset files\n\n\n\n\n\n\n\n\n\n\n\nTipWeek 2 (26-Jan-2026)\n\n\n\n\n\nTopics: File structure; reproducible workflows; AI logs\nStress level: Low\nGrade weight: 5%\n\nBefore class\n\nReview example project directory structures\nRead guidance on reproducible workflows\n\n\n\nIn class\n\nFile audit walkthrough\nDiscussion of AI interaction logging\n\n\n\nAfter class\n\nSubmit: Analysis Concept Note\n\n\n\n\n\n\n\n\n\n\n\nTipWeek 3 (02-Feb-2026)\n\n\n\n\n\nTopics: Data exploration; measurement & uncertainty\nStress level: Very low\nGrade weight: 5%\n\nBefore class\n\nSkim examples of exploratory data analysis (EDA)\nReview notes on uncertainty and measurement error\n\n\n\nIn class\n\nExploratory data analysis walkthrough\nDiscussion of data limitations and noise\n\n\n\nAfter class\n\nNo submission due\nBegin informal exploration of your own data\n\n\n\n\n\n\n\n\n\n\n\nTipWeek 4 (09-Feb-2026)\n\n\n\n\n\nTopics: GLMs (theory + practice)\nStress level: Low\nGrade weight: 10%\n\nBefore class\n\nRead GLM conceptual overview\nReview examples of common link functions\n\n\n\nIn class\n\nGLM exercise\nTranslating scientific questions into model form\n\n\n\nAfter class\n\nSubmit: Data Readiness Note\n\n\n\n\n\n\n\n\n\n\n\nTipWeek 5 (16-Feb-2026)\n\n\n\n\n\nTopics: GLMs; AIC & information theory\nStress level: Low\nGrade weight: 5%\n\nBefore class\n\nReview information-theoretic model comparison\nRead example AIC workflows\n\n\n\nIn class\n\nModel comparison exercise\nInterpreting relative support\n\n\n\nAfter class\n\nNo submission due\nRefine candidate model sets\n\n\n\n\n\n\n\n\n\n\n\nTipWeek 6 (23-Feb-2026)\n\n\n\n\n\nTopics: GLMMs; effective sample size\nStress level: Moderate\nGrade weight: 15%\n\nBefore class\n\nRead GLMM overview\nReview motivation for random effects\n\n\n\nIn class\n\nGLMM exercise\nDiscussion of pseudoreplication and effective sample size\n\n\n\nAfter class\n\nNo submission due\nBegin transitioning models to mixed frameworks where appropriate\n\n\n\n\n\n\n\n\n\n\n\nTipWeek 7 (02-Mar-2026)\n\n\n\n\n\nTopics: GAMs\nStress level: Moderate\nGrade weight: 0%\n\nBefore class\n\nReview motivation for smooth terms\nRead conceptual introduction to GAMs\n\n\n\nIn class\n\nGAM exercise\nInterpreting smooths vs parametric effects\n\n\n\nAfter class\n\nSubmit: Working Model (draft)\n\n\n\n\n\n\n\n\n\n\n\nTipWeek 8 (09-Mar-2026)\n\n\n\n\n\nTopics: GAMMs; spatial & temporal heterogeneity\nStress level: Moderate\nGrade weight: 15%\n\nBefore class\n\nReview examples of spatial and temporal structure\nRead GAMM case studies\n\n\n\nIn class\n\nModel refinement exercise\nDiagnosing remaining structure in residuals\n\n\n\nAfter class\n\nSubmit: Working Model (final lock)\n\n\n\n\n\n\n\n\n\n\n\nTipWeek 9 (16-Mar-2026)\n\n\n\n\n\nTopics: Student Spring Break\nStress level: None\nGrade weight: 0%\n\nNotes\n\nNo class\nNo assignments due\nRecommended: rest, catch up, or light review if needed\n\n\n\n\n\n\n\n\n\n\n\nTipWeek 10 (23-Mar-2026)\n\n\n\n\n\nTopics: Structural Causal Modeling (SCM)\nStress level: Low\nGrade weight: 10%\n\nBefore class\n\nRead SCM overview and motivation\nReview example causal diagrams\n\n\n\nIn class\n\nCausal diagram critique\nDiscussion of assumptions and identification\n\n\n\nAfter class\n\nNo submission due\nConsider how SCM reframes your modeling decisions\n\n\n\n\n\n\n\n\n\n\n\nTipWeek 11 (30-Mar-2026)\n\n\n\n\n\nTopics: Instructor Spring Break\nStress level: None\nGrade weight: 0%\n\nNotes\n\nNo class\nNo assignments due\n\n\n\n\n\n\n\n\n\n\n\nTipWeek 12 (06-Apr-2026)\n\n\n\n\n\nTopics: Prediction & uncertainty\nStress level: Low\nGrade weight: 10%\n\nBefore class\n\nReview prediction vs inference distinctions\nRead examples of uncertainty communication\n\n\n\nIn class\n\nPrediction checks\nEvaluating extrapolation risk\n\n\n\nAfter class\n\nSubmit: Interpretation Memo\n\n\n\n\n\n\n\n\n\n\n\nTipWeek 13 (13-Apr-2026)\n\n\n\n\n\nTopics: Synthesis & justification\nStress level: Moderate\nGrade weight: 0%\n\nBefore class\n\nReview synthesis examples from prior studies\n\n\n\nIn class\n\nPeer + AI review\nJustifying analytical decisions\n\n\n\nAfter class\n\nNo submission due\nPrepare figures and tables for results\n\n\n\n\n\n\n\n\n\n\n\nTipWeek 14 (20-Apr-2026)\n\n\n\n\n\nTopics: Tables, figures, reporting standards\nStress level: Low\nGrade weight: 10%\n\nBefore class\n\nReview reporting guidelines\nExamine good and bad figure examples\n\n\n\nIn class\n\nTable/figure workshop\nEmphasis on clarity and restraint\n\n\n\nAfter class\n\nSubmit: Results Section\n\n\n\n\n\n\n\n\n\n\n\nTipWeek 15 (27-Apr-2026)\n\n\n\n\n\nTopics: Writing Results sections\nStress level: Moderate\nGrade weight: 15%\n\nBefore class\n\nReview example Results sections\nReflect on narrative flow\n\n\n\nIn class\n\nDraft clinic\nFocused feedback on structure and interpretation\n\n\n\nAfter class\n\nSubmit: Full Draft\n\n\n\n\n\n\n\n\n\n\n\nTipWeek 16 (04-May-2026)\n\n\n\n\n\nTopics: Reflection & closure\nStress level: None\nGrade weight: 5%\n\nBefore class\n\nReview feedback on full draft\n\n\n\nIn class\n\nCourse wrap-up\nReflection on analytical growth\n\n\n\nAfter class\n\nSubmit: Revision Plan (not executed)",
+    "crumbs": [
+      "Course Overview",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Course calendar</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/05_ai.html",
+    "href": "chapters/05_ai.html",
+    "title": "5  GenAI Use Guidelines",
+    "section": "",
+    "text": "5.1 Timeline\nResponsible use of generative artificial intelligence (GenAI)\nThis documented was updated on 06-January-2026. This document should be reviewed periodically, particularly when adopting new GenAI tools or when disciplinary norms evolve (while resisting harmful, shifting baselines).",
+    "crumbs": [
+      "Course Overview",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>GenAI Use Guidelines</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/05_ai.html#purpose",
+    "href": "chapters/05_ai.html#purpose",
+    "title": "5  GenAI Use Guidelines",
+    "section": "5.2 Purpose",
+    "text": "5.2 Purpose\nThis document reviews principles, guard rails, and documentation practices for the responsible use of generative artificial intelligence (GenAI) tools in scientific research and analysis. One such GenAI tool that most of us are familiar with is ChatGPT (Generative Pre-trained Transformer), a GenAI model that can detect (and arguably understand) and generate human-like text by predicting what comes next in a sentence. Large Language Models (LLMs) are very advanced GenAI systems trained on absolutely massive amounts of text to answer complex questions, write in certain rhetorical tones, summarize information, or have conversations in natural language. Given this tool’s widespread utility, it can certainly be misused. Therefore, the guidelines below attempt to ensure that GenAI augments human reasoning without compromising scientific validity, reproducibility, or accountability. In all aspects of the present academic work, GenAI tools like ChatGPT are therefore treated as assistive tools –comparable to statistical software (like R) or calculators– not as autonomous analysts or skilled authors.",
+    "crumbs": [
+      "Course Overview",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>GenAI Use Guidelines</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/05_ai.html#core-principles-of-responsible-use-of-genai",
+    "href": "chapters/05_ai.html#core-principles-of-responsible-use-of-genai",
+    "title": "5  GenAI Use Guidelines",
+    "section": "5.3 Core principles of responsible use of GenAI",
+    "text": "5.3 Core principles of responsible use of GenAI\n\nAccountability: The human researcher retains full responsibility for –and is held accountable for– all analytical decisions, interpretations, text and code, and inference. The use of GenAI does not relieve any burdens of authorship, responsibility, or liability. Importantly, this means that the human researcher is allowed –and, in most cases, is encouraged– to use AI-produced code, as long as the research has vetted and error-checked. This likewise assumes that the researcher accepts responsibility for any and all errors arising from AI assistance. That is, GenAI may accelerate work, but it may not replace understanding. If a researcher cannot defend a decision without the GenAI present, the decision is invalid.\nScientific Primacy: Scientific reasoning precedes and constrains GenAI use. Hypotheses, data-generating assumptions, and model structures must be defined by the researcher. GenAI may clarify or critique these decisions but may not create them from scratch without human justification.\nTransparency: All GenAI use must be documented in a way that allows another scientist to understand how GenAI influenced the work. GenAI-assisted reasoning must be distinguishable from original analysis.\nReproducibility: All results must be reproducible without access to GenAI tools. Data, code, and associated documentation must be sufficient to reproduce results independently. GenAI may assist development but must not be a hidden dependency.\nProportionality: The level of documentation naturally should be proportional to the influence of GenAI. Minor stylistic assistance requires minimal logging, while conceptual or analytical assistance requires a larger volume of explicit documentation and justification.",
+    "crumbs": [
+      "Course Overview",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>GenAI Use Guidelines</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/05_ai.html#what-is-allowed-and-what-is-not-allowed",
+    "href": "chapters/05_ai.html#what-is-allowed-and-what-is-not-allowed",
+    "title": "5  GenAI Use Guidelines",
+    "section": "5.4 What is allowed, and what is not allowed?",
+    "text": "5.4 What is allowed, and what is not allowed?\n\nPermitted Uses of GPTs in Scientific Work\n\nConceptual Clarification: GenAI may be used to explain statistical concepts, examine modeling assumptions, and interpret model diagnostics (at a broad level).\nPlanning and Reflection: GenAI may assist with refining research questions, generating assumption checklists, stress-testing interpretations, and identifying alternative explanations that are then vetted for ecological sanity by the human researcher.\nWriting Support: GenAI may be used to improve clarity, organization, and tone, and to identify points of ambiguity or inferential overreach. AI absolutely must not invent methods, results, or citations.\nCode Understanding: GenAI may explain what existing code does, diagnose warnings or errors conceptually, and suggest stylistic or reproducibility improvements. AI may not replace independent code comprehension.\n\n\n\n\nProhibited or Restricted Uses of GenAIin Scientific Work\n\nReplacement of Scientific Judgment: GenAI must not be used to select models, error distributions, priors, or random-effects structures without independent human justification, nor to interpret results without verification.\nUndocumented Analysis Generation: GenAI must not generate full end-to-end analytical pipelines without explanation, or produce black-box code whose logic is not understood by the researcher.\nFabrication: GenAI must not be used to invent data, methods, results, or citations, or to create post-hoc justifications unsupported by the analysis.\nOutcome Optimization: GenAI must not be used to iteratively prompt for statistically significant results, improved AIC values, or exaggerated certainty.",
+    "crumbs": [
+      "Course Overview",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>GenAI Use Guidelines</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/05_ai.html#genai-interaction-log",
+    "href": "chapters/05_ai.html#genai-interaction-log",
+    "title": "5  GenAI Use Guidelines",
+    "section": "5.5 GenAI Interaction Log",
+    "text": "5.5 GenAI Interaction Log\n\n5.5.1 Purpose of the Log\nResearchers should maintain an AI Interaction Log alongside their analysis notebook to document meaningful AI involvement in the research process. (This is a required component for students in ZOO/ECOL-5500 starting Spring 2026)\n\nRequired Information: Entries record the date, GenAI tool used, purpose of interaction, nature of assistance provided, key takeaway, and the verification step performed.\nWhen Logging Is Required: Logging is required when GenAI influences model choice, interpretation, methodological justification, or scientific claims. Minor stylistic or grammatical use does not require detailed logging.\nVerification Obligations: Any GenAI-suggested content must be independently verified using primary literature, software documentation, diagnostic checks, or independent reasoning. Unverified AI output must not appear in final analyses.\nAuthorship and Attribution: GenAI tools are not authors and do not receive citation credit. If required by journals or funders, GenAI use may be acknowledged in a neutral Methods or Acknowledgments statement.\nEthical Safeguards: GenAI use must not obscure uncertainty, inflate confidence, reduce methodological transparency, or disadvantage collaborators or students with limited access to AI tools.",
+    "crumbs": [
+      "Course Overview",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>GenAI Use Guidelines</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/06_preparing_yourself.html",
+    "href": "chapters/06_preparing_yourself.html",
+    "title": "6  Preparing Yourself",
+    "section": "",
+    "text": "6.1 What do I need to do to get started in this class?\nTo prepare for the course, here is what you are expected to do by the end of the first week (specific information is below this list):",
+    "crumbs": [
+      "Course Overview",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Preparing Yourself</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/06_preparing_yourself.html#what-do-i-need-to-do-to-get-started-in-this-class",
+    "href": "chapters/06_preparing_yourself.html#what-do-i-need-to-do-to-get-started-in-this-class",
+    "title": "6  Preparing Yourself",
+    "section": "",
+    "text": "Join the ZOO-5500 Slack channel\nDownload, Install, and set up RStudio Desktop\nGather your dataset files for your analysis\n\n\n6.1.1 Join the ZOO-5500 Slack channel\nJust click on the list and follow instructions. We will use Slack to encourage ongoing, low-stakes discussion within the class. This will be for sharing questions, ideas, and insights in real time so that learning can continue outside of scheduled class meetings. This allows everyone (even me) to get answers to questions that I might be thinking about at odd times. It also allows for problems to be solved faster; rather than waiting until our synchronous Zoom session to ask about an issue, we can group-think over the course of the week. Remember that this is set up to improve collaboration; it does not mean that anyone should be responding outside of work hours or on the weekends. Below are the preferred channels for different kinds of communication:\n\n#announcements &gt;Read-only channel for important course information like deadlines, corrections, and post-class clarifications. Check this regularly.\n#course-questions &gt;For general course or assignment questions (due dates, unclear wording on websites) that others might also have. Expect peer responses and occasional instructor follow-ups.\n#data-help &gt;For data wrangling and technical data issues (imports, joins, NAs, plots). Not for model choice or interpretation.\n#model-talk &gt;For conceptual questions about models and assumptions. Discussion-focused; no code debugging.\n#analysis-workflow &gt;For questions about reproducibility, organization, reporting, and good analytical habits.\n#ai-use-and-logs For discussing allowed AI use and posting AI interaction logs when requested. No private communication or graded work.\n#papers-good-bad-ugly &gt;For highlighting examples of good and bad analyses in published work.\n#random &gt;For off-topic chat, random links, and fun stuff. This will help keep everything else focused.\n\n\n\n6.1.2 Download, Install, and set up RStudio Desktop\nInstall on your local machine. All coding and file organization will be done in RStudio. Note that the following is a very basic way of creating a set of project folders. You will see boxes with R code. Feel free to copy and run these, if necessary. Here are the basic steps:\n\nDownload and install RStudio Desktop. Navigate to your folder (in this case, your student folder).\nIn “Files” window (lower right panel in RStudio), click “More/Set as Working Directory”. This sets your working directory; this is always a good idea to do.\nCreate a New R Project in your student folder: “File/New Project/Existing Directory”. Name this project appropriately.\nCreate your File structure: Refer to this RStudio tutorial. In this class, we will modify this set of directories to make things a bit easier and more transparent for you. After completing the following steps, place your dataset in your “data/raw_data” folder (after you create it below). Navigate to this folder on your computer and drag-and-drop or copy-paste your data file(s) into this folder.\n\nCreate three folders (one suggested framework):\n\n/data (for raw, processed, clean datasets)\n/r_scripts (for R scripts, each containing a set of related functions)\n/output output (for models, graphs, tables)\n\nWe can do this by staying in our directory (within RStudio) and then using the dir.create function.\n\ndir.create(\"data\")\n\nYou can see your new folder (“data”) appear in the Files in the lower right window within RStudio. Now let’s create the other two folders.\n\ndir.create(\"r_scripts\")\ndir.create(\"output\")\n\nTo help with data processing (i.e. cleaning and organization)–something that we will discuss in coming days within the context of your analytical workflow–, we will create some subfolders within your newly created “data” folder. Let’s do this now. Note how you create a folder within the “data” folder by specifying the path:\n\ndir.create(\"data/raw_data\")\ndir.create(\"data/processed_data\")\ndir.create(\"data/metadata\")\n\nAnd that is how you create a basic R Project in RStudio! What you have done is create a set of folders and subfolders that have names that can be easily understood by other users. Feel free to create other subfolders now. Or, should you not like the file nomenclature used above, change the names to whatever you wish. Just be sure that this structure is as simple as possible so that other users understand what you have done.\nThere is an added benefit to creating an R Project in this way. What you have done is create a minimally reproducible data structure. There are two primary ways this can be accomplished (if you are not familiar with this. First method: A collaborator (or instructor or classmate) can simply navigate to your subfolder, set that as their working directory from within RStudio, and then open the .RProj file. Alternatively, you can create zip your root folder (the one labelled as your name, in this case) and then share your entire analysis, etc. All the recipient would need to do is unzip the folder, open the .Rproj file, and then “Set as Working Directory.”\n\n\n6.1.3 Gather your dataset files for your analysis\nPlace your data in your “data/raw_data” subfolder and then confirm that your files are present by running the list.files function.\n\nlist.files(\"data/raw_data\")\n\n\n\n\n\n\n\nNote\n\n\n\nWorking order means more than a spreadsheet or two.\nA dataset is only complete if it includes metadata. Metadata describe: - what the variables are\n- how the data were collected\n- under what conditions\n- with what assumptions and limitations\nIf you have questions about metadata, I have an old, dedicated lecture on metadata structures, and I strongly encourage you to reach out.\n\n\nYou are now ready to move to the next steps of loading necessary R packages and beginning your journey of data exploration!",
+    "crumbs": [
+      "Course Overview",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Preparing Yourself</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/assignment_grades.html",
+    "href": "chapters/assignment_grades.html",
+    "title": "Assignments & Grades",
+    "section": "",
+    "text": "Milestone Assignment descriptions\nThis page first describes the Milestone Assignments referenced in the course calendar. Each section below explains the purpose of the milestone, what to submit, and what “good” typically looks like. Grading rubrics are described at the end of this page.",
+    "crumbs": [
+      "Course Overview",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Assignments & Grades</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/assignment_grades.html#milestone-assignment-descriptions",
+    "href": "chapters/assignment_grades.html#milestone-assignment-descriptions",
+    "title": "Assignments & Grades",
+    "section": "",
+    "text": "NoteAnalysis Concept Note (Week 2)\n\n\n\n\n\nPurpose:\nLock in a feasible analysis plan early, so you’re not improvising later. This is about scope, clarity, and workflow—not results.\n\nWhat to include\n\nWorking title (can change later)\nYour focal question (1–3 sentences; plain language)\nStudy system and units of analysis (what is one “row,” conceptually?)\nResponse variable(s) and predictor(s) you expect to use (draft list is fine)\nHypothesized relationships\n\nShort bullets; include directionality when possible\n\nData source and file plan\n\nWhere the data live\n\nWhat you will name files\n\nWhat the folder structure will be\n\nPlanned model family (tentative)\n\ne.g., GLM / GLMM / GAM / GAMM, and why that’s your first guess\n\nPotential complications you already suspect\n\nMissing data, non-independence, zero inflation, seasonality, etc.\n\n\n\n\nSubmission format\n\n1–2 pages (PDF) or a short Quarto/Markdown page\nClear headings (don’t bury the key information)\n\n\n\n“Good” looks like\n\nA question that is answerable with the data you actually have\nReasonable scope for one semester\nA workflow plan that makes your project reproducible from day one\n\n\n\n\n\n\n\n\n\n\n\nNoteData Readiness Note (Week 4)\n\n\n\n\n\nPurpose:\nDemonstrate that your dataset is analysis-ready—or identify exactly what still blocks you. This is your chance to be honest about limitations before modeling.\n\nWhat to include\n\nDataset summary\n\nNumber of rows/observations\n\nKey grouping structure (site, individual, date, etc.)\n\nData dictionary (lightweight)\n\nVariable name → meaning → units → type (numeric, factor, date)\n\nMissingness and exclusions\n\nWhat’s missing, where, and what you did about it (if anything)\n\nMeasurement and uncertainty notes\n\nKnown measurement error, detection limits, observer effects, instrument drift, etc.\n\nBasic EDA outputs (minimal but informative)\n\n1–3 plots that reveal structure (distributions, relationships, time trends)\n\nA short paragraph interpreting what matters\n\nReadiness decision\n\n“Ready to model” or “Not ready yet,” with a clear plan to get there\n\n\n\n\nSubmission format\n\n1–2 pages (PDF) or Quarto page with embedded plots\n\n\n\n“Good” looks like\n\nYou can explain what each variable means and whether it’s trustworthy\nYou’ve surfaced the biggest problems early\nYour EDA is purposeful, not a plot dump\n\n\n\n\n\n\n\n\n\n\n\nNoteWorking Model — Draft (Week 7)\n\n\n\n\n\nPurpose:\nPut a real model on the table. This is a draft: imperfect is fine, but it must be runnable and defensible.\n\nWhat to include\n\nYour current model formula(s) (plain language and/or code notation)\nModel type (GLM, GLMM, GAM, etc.) and why it fits the data structure\nKey diagnostics or checks (draft level)\n\nAnything that suggests it’s “in the ballpark” or clearly broken\n\nOne short interpretation paragraph\n\nWhat the model suggests (careful language; no over-claiming)\n\nA short “known issues” list\n\nWhat you know is wrong or incomplete\n\nWhat you plan to try next\n\n\n\n\nSubmission format\n\nQuarto page (preferred) or PDF with model description and outputs\nInclude enough detail that someone else could reproduce the model from your write-up\n\n\n\n“Good” looks like\n\nA runnable model aligned with your question\nHonest diagnostics and a clear plan to improve\n\n\n\n\n\n\n\n\n\n\n\nNoteWorking Model — Final Lock (Week 8)\n\n\n\n\n\nPurpose:\nFreeze the core model so the rest of the semester can focus on prediction, interpretation, and reporting instead of endless tinkering.\n\nWhat to include\n\nFinal model specification\n\nFinal formula, family/link, random effects or smooths, correlation structures if used\n\nJustification\n\nWhy this structure is appropriate for the data and the question\n\nModel checks\n\nA small set of diagnostics you can defend\n\nNotes on remaining limitations\n\nWhat changes are no longer allowed\n\nAfter the lock, presentation and interpretation may improve, but model shopping should stop without compelling justification\n\n\n\n\nSubmission format\n\nQuarto page (preferred) or PDF\nInclude key outputs you’ll rely on later (even if figures improve)\n\n\n\n“Good” looks like\n\nA stable model you can explain to a skeptical reader\nEvidence you tested assumptions rather than hoping\n\n\n\n\n\n\n\n\n\n\n\nNoteInterpretation Memo (Week 12)\n\n\n\n\n\nPurpose:\nPractice disciplined interpretation and uncertainty-aware reasoning. This is where you show that you can tell the truth about what the model does—and does not—say.\n\nWhat to include\n\nMain result(s) in plain language\nUncertainty\n\nWhat is uncertain and why\n\nConfidence intervals, credible intervals, prediction intervals, or other appropriate summaries\n\nPrediction vs. inference clarity\n\nAre you predicting new cases, explaining mechanisms, or both?\n\nSensitivity or robustness (lightweight)\n\nOne small check that increases confidence (or reveals fragility)\n\nLimitations\n\nThe most important threats to inference and how they affect interpretation\n\n\n\n\nSubmission format\n\n~1–2 pages (PDF) or Quarto page\nEmphasis on writing quality and intellectual restraint\n\n\n\n“Good” looks like\n\nClear, honest claims tied directly to model output\nUncertainty is centered, not hidden\nNo story time beyond what the evidence supports\n\n\n\n\n\n\n\n\n\n\n\nNoteResults Section (Week 14)\n\n\n\n\n\nPurpose:\nDraft the Results section you would submit in a real paper or report: concise, structured, and supported by tables and figures.\n\nWhat to include\n\nShort orienting paragraph\n\nWhat you modeled and what the reader should look for\n\nCore results\n\n2–4 key findings, depending on project scope\n\nTables and/or figures\n\nClean, interpretable, labeled, and referenced in text\n\nMinimal interpretation\n\nState what you found; deeper interpretation comes later or is clearly separated\n\n\n\n\nSubmission format\n\nQuarto page (ideal) or PDF\nInclude figure and table captions\n\n\n\n“Good” looks like\n\nFindings are understandable without reading your code\nFigures and tables do real work\nClaims match the evidence shown\n\n\n\n\n\n\n\n\n\n\n\nNoteFull Draft (Week 15)\n\n\n\n\n\nPurpose:\nAssemble a complete, coherent draft that reads like a real scientific product. Structure and flow matter here.\n\nWhat to include\n\nAt minimum: Introduction, Methods, Results, Discussion (or equivalent)\nConsistent terminology\n\nVariable names, units, and definitions do not drift\n\nAll figures and tables in near-final form\nReferences and citations, as appropriate\n\n\n\nSubmission format\n\nQuarto render (HTML or PDF preferred)\nEnsure figures and tables are legible and captioned\n\n\n\n“Good” looks like\n\nA document that could be revised into something publishable\nClear logic and honest uncertainty\nNo missing major components\n\n\n\n\n\n\n\n\n\n\n\nNoteRevision Plan (Not Executed) (Week 16)\n\n\n\n\n\nPurpose:\nDemonstrate that you can revise strategically. You will not execute revisions; you will propose them.\n\nWhat to include\n\nTop five revision priorities\n\nRanked, with a sentence explaining why each matters\n\nWhat you would change (specific)\n\n“Rewrite paragraph X to clarify Y”\n\n“Replace Figure 2 with a plot that shows Z”\n\nWhat evidence you would need\n\nAdditional checks, plots, sensitivity analyses, etc.\n\nIf you had 10 more hours\n\nWhat would you do first?\n\nIf you had 40 more hours\n\nWhat would you do that you cannot do now?\n\n\n\n\nSubmission format\n\n1 page (PDF) or short Quarto page\n\n\n\n“Good” looks like\n\nSpecific, actionable revisions\nClearly prioritized and realistic\nDemonstrates mature judgment about improving inference and communication",
+    "crumbs": [
+      "Course Overview",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Assignments & Grades</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/assignment_grades.html#grading",
+    "href": "chapters/assignment_grades.html#grading",
+    "title": "Assignments & Grades",
+    "section": "Grading",
+    "text": "Grading\n\n\nNumerical grades are downright loathsome. For all assignments, I use the Traffic Signal Grading Scale:\n\n\n\nGrade\nSimple meaning\nScientific judgement\n\n\n\n\nGreen\nGood to Proceed\nScientifically coherent for this milestone\n\n\nYellow\nExercise Caution\nViable, but revision is required\n\n\nRed\nStop and Rework\nNot yet ready for scientific judgment\n\n\n\nYellow is not bad. It just means there are certain elements that you should tighten up before moving on.",
+    "crumbs": [
+      "Course Overview",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Assignments & Grades</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/assignment_grades.html#universal-milestone-grading-rubric",
+    "href": "chapters/assignment_grades.html#universal-milestone-grading-rubric",
+    "title": "Assignments & Grades",
+    "section": "Universal Milestone Grading Rubric",
+    "text": "Universal Milestone Grading Rubric\nThe Traffic Signal Grading Scale applies to all Milestone Assignments. Grading reflects scientific readiness relative to the purpose of the milestone.\n\n\n\n\n\n\n\n\n\nDimension\n🟢 GREEN: Good to Proceed\n🟡 YELLOW: Exercise Caution\n🔴 RED: Stop and Rework\n\n\n\n\nPurpose & intent\nClearly meets the core intent of the milestone\nPartially meets intent; key elements need revision\nDoes not meet the core intent of the milestone\n\n\nQuestion or objective\nClear, focused, and appropriate for this stage\nPresent but vague, drifting, or overly broad\nUnclear, unfocused, or missing\n\n\nAlignment (question–data–methods)\nQuestion, data, and approach are coherently aligned\nPartial alignment; gaps or weak links remain\nFundamental mismatch between components\n\n\nReasoning & assumptions\nReasoning is coherent; assumptions or limitations acknowledged\nReasoning incomplete or assumptions implicit\nReasoning unclear or unsupported\n\n\nClaims & language\nClaims are appropriate for the stage of analysis\nSome overreach or ambiguous language\nClaims exceed what the work can support\n\n\nCourse GPT self-check\nUsed appropriately; issues addressed or justified\nUsed, but issues only partially addressed\nLittle or no meaningful evidence of self-checking\n\n\nScientific readiness\nWork is ready to move to the next stage\nViable but requires targeted revision\nNot yet in a usable scientific state\n\n\n\nThis universal grading scale is meant to help you quickly understand where your work stands, not to highlight small mistakes. My goal here is to make expectations clear, keep grading transparent, and help you focus on doing solid, defensible science –all without unnecessary stress over points or formatting (which we will let GenAI work on for you). The scale’s primary benefits include:\n\nIt is easy to read. The traffic light color scheme (green, yellow, and red) tell you right away whether your work is ready to move forward, needs some fixing, or needs a rethink.\nIt is the same for every assignment. I use this scale for all milestone assignments. Therefore, it is predictable for every assignment.\nIt centers on scientific readiness, not scientific perfection (which, technically, does not exist). You are not being graded on having the “right” answer. What matters most to me is whether your question, data, and reasoning co-exist coherently together.\nIt matches how real science works. Research almost never gets it right on the first try; drafts, checks, and revisions are normal.\nIt allows for rapid feedback. GenAI will do some of the busy work associated with troubleshooting coding issues or improving clarity, which will give me more time to gauge the scientific readiness of your work.",
+    "crumbs": [
+      "Course Overview",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Assignments & Grades</span>"
+    ]
+  }
+]

@@ -1,0 +1,224 @@
+---
+title: "Project Scoping"
+subtitle: "How to choose a project that helps you grow — and finish strong"
+number-sections: false
+toc: true
+---
+
+This course is designed so that your **final product** (Methods + Results + start of Discussion / primary inferences) is built **incrementally** across Milestone Assignments. The fastest way to struggle in this course is to choose a project that is “interesting” but not **workable** (either because it is too big, or it is beyond your current experience level). The fastest way to thrive is to choose a project that is both **meaningful** to _you_ and also has a clearly defined **scope**.
+
+Below are a few concrete recommendations for scoping a project that is:
+
+- **Maximally helpful** for your scientific growth  
+- Something you can **think deeply about** all semester  
+- Something where building an analysis **infrastructure** that rewards you now and later  
+- Something that helps you progress toward your **degree**
+- Something that **excites you** enough to keep returning to it
+
+## The big idea: pick a data analysis project that benefits from the course topics
+
+Every milestone is a checkpoint that asks you to refine the *same* project:
+
+- Week 2: Analysis Concept Note (scope + design clarity + workflow plan)
+- Week 4: Data Readiness Note (data trustworthiness + Exploratory Data Analysis with purpose)
+- Week 7–8: Working Model (runnable → defensible → locked)
+- Week 12: Interpretation Memo (uncertainty-aware reasoning)
+- Week 14: Results Section (clear, concise quantitative reporting)
+- Week 15: Full Draft (coherent paper-like product)
+- Week 16: Revision Plan (strategic improvement thinking)
+
+A well-scoped project means each milestone feels like a **natural next step**, not a complete and uncomfortable reset. 
+
+Below are five Principles of Scoping for projects in this course (click on the boxes to expand):
+
+::: {.callout-tip icon=false collapse=true}
+### **Scoping Principle #1: “You only get one semester of attention”**
+
+Choose a question that you will be happy thinking about repeatedly but only for this finite, semester-long period. If the project is too small, there is a danger that you may become bored. If the project is too big and ambitious, you will likely drown in a turbulent sea of discontent (and then blame me or your housemate).
+
+A good scope has:
+
+- One central question (plain language; 1–3 sentences)
+- One primary response variable (or a tightly related pair)
+- A manageable predictor set (start small; justify later additions)
+- A clear unit of analysis (what is one “row,” conceptually?)
+- A realistic path to *one defensible model* by Week 8
+:::
+
+::: {.callout-tip icon=false collapse=true}
+### **Scoping Principle #2: “Your project should teach you the course”**
+
+This course covers:
+
+- Metrology, uncertainty, and data quality
+- Exploratory Data Analysis for messy data
+- GLMs → GLMMs → GAMs / GAMMs
+- Spatial / temporal heterogeneity
+- Model comparison (AIC)
+- Prediction and validation
+- Structural causal modeling (conceptual level; DAGs)
+- Writing results with restraint (defensible claims)
+
+A strong project doesn’t need to use *every* tool — but it should naturally connect to **several** of them. Ideally, your project has at least *one* “real” complication that forces you to think like a scientist:
+
+- non-independence (repeated measures; clustered sampling)
+- zeros (many true zeros or detection problems)
+- unequal effort / detectability issues
+- seasonality or temporal structure
+- spatial clustering / site heterogeneity
+- measurement uncertainty or instrument drift
+:::
+
+::: {.callout-tip icon=false collapse=true}
+## **Scoping Principle #3: Use this to build an reusable infrastructure**
+
+The biggest hidden benefit of a good scope is that it rewards you for building a clean workflow early:
+
+- clear folder structure
+- reproducible Quarto document(s)
+- a lightweight data dictionary
+- stable variable names and units
+- AI interaction logging for troubleshooting and drift tracking
+
+If your project is well-scoped, each improvement you make in Week 2–4 pays dividends in Weeks 7–15.
+:::
+
+::: {.callout-tip icon=false collapse=true}
+## **Scoping Principle #4: pick something that advances your degree**
+
+If possible, choose a dataset that:
+
+- is from your lab, thesis, dissertation, or a collaborator
+- connects to a real paper/report you *could* write
+- has a real audience beyond this course (advisor, lab group, agency, etc.)
+
+Even if the final product is “only” a course draft, you want it to be a **useful artifact** you can revise later.
+:::
+
+::: {.callout-tip icon=false collapse=true}
+## **Scoping Principle #5: be honest about what you have right now**
+
+A project is not “good” because it is fascinating; it is good because you can **answer something** with the data you actually possess.
+
+Before committing, you should be able to answer:
+
+- Do I have the dataset _in-hand_ by Week 2?
+- Does the dataset need cleaning, and can this be done by Weeks 2-3?
+- Are the key variables already measured?
+- Can I explain each variable’s meaning and units by Week 4?
+- Is the sampling design understandable enough to model by Week 7?
+- Can I reasonably lock a core model by Week 8?
+
+If the answer is _no_ to any of these, you can still proceed, but you must scope down to what is truly feasible.
+:::
+
+## A practical scoping checklist (student-friendly)
+
+Choose a project that meets most of these (given your current knowledge):
+
+- **One question:** you can state clearly in plain language  
+- **One primary response:** that matches the question  
+- **A known sampling structure:** (site / individual / time / observer, etc.)  
+- **A plausible model family:** (GLM / GLMM / GAM / GAMM) you can defend  
+- **One major complication:** you can address explicitly (zeros, clustering, etc.)  
+- **A results story you can tell honestly:** without over-claiming  
+- **A dataset you can understand and trust:** enough to write Methods  
+
+## Examples of good vs. bad scope
+
+Below are examples you can use as patterns. These are **collapsed** so you can skim quickly.
+
+::::: columns
+::: {.column width="48%"}
+::: {.callout-note icon="false" collapse="true" appearance="minimal" title="Good scope example (light green)" style="background-color:#e7f6e7; border-left: 6px solid #2e7d32;"}
+
+**Project title (working):**  
+Canopy structure and bird counts in repeated point counts
+
+**Central question (plain language):**  
+Does canopy cover predict bird counts per visit, after accounting for site-to-site variation?
+
+**Data/design clarity:**  
+- 30 sites, 4 visits per site  
+- Response: count per visit  
+- Predictors: canopy cover, wind, observer  
+- Grouping: site (random intercept)
+
+**Complication (one is enough):**  
+- detection likely declines with canopy and wind  
+- repeated measures → non-independence
+
+**Why this is well-scoped:**  
+- runnable GLMM by Week 7  
+- lockable model by Week 8  
+- meaningful uncertainty-aware interpretation by Week 12  
+- produces a clean Results section by Week 14
+
+**What you *don’t* try to do:**  
+- no “global biodiversity mechanisms”  
+- no causal claims without design support  
+- no multi-species hierarchy unless truly necessary
+
+:::
+:::
+
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+::: {.callout-note icon="false" collapse="true" appearance="minimal" title="Bad scope example (light red)" style="background-color:#fde8e8; border-left: 6px solid #c62828;"}
+
+**Project title (vague):**  
+What drives biodiversity in tropical forests?
+
+**Central question (problem):**  
+Too broad to be answerable in one semester
+
+**Data/design issues:**  
+- response variable not defined  
+- sampling design unclear (“multiple sites and years”)  
+- predictors not specified  
+- unit of analysis unknown (plot? site? species? time?)
+
+**Complications (too many, unbounded):**  
+- spatial structure + temporal trends + detection + species turnover  
+- multiple outcomes (richness + abundance + composition + traits)
+
+**Why this scope probably fails:**  
+- you cannot write Methods early  
+- Week 4 becomes endless data wrangling  
+- Week 7 has no runnable model (or 10 models with no rubric)  
+- Week 8 “lock” is impossible  
+- Results become unfocused and hard to defend
+
+**What this needs to become viable:**  
+- choose one response, one scale, one question, and one model family
+
+:::
+:::
+:::::
+
+## “Scope down” moves that work (and feel good)
+
+If your idea is too big, these moves are almost always helpful (but we can talk about what is best for your particular goals):
+
+- **Pick one response variable** (one outcome, not five)
+- **Choose one spatial scale** (plots *or* sites, not a whole hierarchy)
+- **Choose one time window** (e.g., one season or one year)
+- **Start with one model family** (GLMM *or* GAMM — justify later)
+- **Limit the predictor set** to a small set you can defend
+- **Treat extra complexity as a sensitivity check**, not the core project
+
+## A final recommendation: choose the project you’ll revisit after the course
+
+Pick something you would be proud to show:
+
+- your advisor
+- your lab group
+- a collaborator
+- a future committee member
+- your future self
+
+If you choose well, ZOO/ECOL-5500 will not simply teach methods; it will produce a real, useful product that helps you in the future.
+

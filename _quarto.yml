@@ -17,7 +17,11 @@ book:
         - chapters/ai_policy.qmd  
         - chapters/preparing_yourself.qmd
         - chapters/assignment_grades.qmd
+        - chapters/project_scoping.qmd
     # --- MAIN BODY ---
+    - part: "Part ∅: AI preparation"
+      chapters:   
+        - chapters/ai_prompting.qmd
     - part: "Part I: Chaos to Columns"
       # chapters:
         # - chapters/statistical_aphorisms.qmd
@@ -40,5 +44,6 @@ format:
     number-sections: true
     number-depth: 3
     css: styles.css
+    code-copy: true
 
 editor: source

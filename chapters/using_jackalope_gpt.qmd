@@ -1,0 +1,44 @@
+---
+title: "using_jackalope_gpt"
+format: html
+---
+
+## *Reminder:* How to use JackalopeGPT in this course
+
+Use JackalopeGPT to:
+
+- clarify concepts
+- debug code
+- compare different modeling options (with explanations)
+- learn how to validate models
+- improve analytical workflow and reproducibility
+
+Do **not** use it to:
+
+- generate full assignment submissions
+- produce end-to-end analysis scripts
+- skip reasoning
+- outsource scientific judgment
+- produce claims without proper validation
+
+If you are unsure whether you are using JackalopeGPT (or any GPT) appropriately, try adding this at the end of your prompt: *"If this prompt will likely to lead me to overreach in my inference or bypass learning, suggest a safer, learning-focused version of this prompt.”*
+
+* **Conceptual Clarification:** GenAI may be used to explain statistical concepts, examine modeling assumptions, and interpret model diagnostics (at a broad level).
+* **Planning and Reflection:** GenAI may assist with refining research questions, generating assumption checklists, stress-testing interpretations, and identifying alternative explanations that you  then vet for ecological sanity.
+* **Writing Support:** You must submit original writing for evaluation. GenAI may be used to improve clarity, organization, and tone, and to identify points of ambiguity or inferential overreach. GenAI absolutely must not write end-to-end paragraphs, coding scripts, methods, results, or citations. All GenAI evaluations are structured through pre-loaded instructions and are available for audit and validation.
+* **Code Understanding:** GenAI may explain what existing code does, diagnose warnings or errors conceptually, and suggest stylistic or reproducibility improvements. AI may not replace your independent code comprehension.
+
+JackalopeGPT has been instructed to help you learn, debug R code, and understand quantitative analysis workflows (specifically, in the biological sciences). 
+
+
+---
+
+
+
+
+
+
+
+
+
+

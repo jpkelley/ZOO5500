@@ -20,3 +20,33 @@ numbered: true
 
 [Collaborative Statistics References](https://docs.google.com/document/d/1abc9-8_gHdmGDlnbElgdKHY7udbbKJ33KH7Cckb9Vyg/edit?usp=sharing)
 
+---
+
+This course was created using Quarto (via R Studio) using custom CSS and HTML. 
+
+
+::: {.callout-caution icon=false collapse="true"}
+## AI usage transparency {.unnumbered}
+
+In the construction of this website, GenAI (via ChatGPT) was used in the following ways:
+
+* **Generating graphics of cryptid jackalope species.** This was part of an exercise in prompt engineering—specifically, learning how to design minimalist prompts that produce consistent visual themes across all outputs.
+
+* **Converting the Canvas-based course site into Quarto markdown.** This included restructuring content, standardizing headers, and translating existing materials into a reproducible, version-controlled format (for hosting on GitHub).
+
+* **Assistive learning of custom CSS**, in parallel with consulting online CSS documentation and manuals (i.e., as a tutor and debugger, not a design authority).
+
+* **Reformatting and updating existing tables**, including updating of revised dates, assignments, and course logistics.
+
+* **Error-checking and troubleshooting markdown and Quarto code.** This was necessary during site builds.
+
+* **Improving organization across course components.** This included suggestions for cross-referencing related pages and identifying places where additional examples or clarifications would improve learning outcomes.
+
+* **Evaluating pedagogical alignment.** This involved getting feedback on readability, cognitive load, and whether learning objectives were being met by the material being presented.
+
+* **Editorial support** to ensure that tone and level of explanatory detail was appropriate for graduate students. This included tightening some language and reducing informational redundancy across pages.
+
+GenAI was used as an assistive tool throughout; it was not used as a content authority, decision-maker, or substitute for subject-matter expertise. All instructional choices, interpretations, and final edits remain the responsibility of the instructor (in accordance with [AI Use Policy](../chapters/ai_policy.qmd)).
+:::
+
+

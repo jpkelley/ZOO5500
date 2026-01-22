@@ -30,6 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../chapters/ai_prompting.html" rel="next">
 <link href="../chapters/preparing_yourself.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -41,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-70a47bd5681a7291082a5b9f83d58762.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-f2c6d6e2b784ddc5de38779acc06f37d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -166,6 +167,23 @@ ul.task-list li input[type="checkbox"] {
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part ∅: Testing</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/ai_prompting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">AI Prompting for Analysis</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">
  <span class="menu-text">Part I: Chaos to Columns</span></span>
   </li>
@@ -188,6 +206,7 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#milestone-assignment-descriptions" id="toc-milestone-assignment-descriptions" class="nav-link active" data-scroll-target="#milestone-assignment-descriptions">Milestone Assignment descriptions</a></li>
+  <li><a href="#general-assignment-submission-requirements" id="toc-general-assignment-submission-requirements" class="nav-link" data-scroll-target="#general-assignment-submission-requirements">General assignment submission requirements</a></li>
   <li><a href="#grading" id="toc-grading" class="nav-link" data-scroll-target="#grading">Grading</a></li>
   <li><a href="#universal-milestone-grading-rubric" id="toc-universal-milestone-grading-rubric" class="nav-link" data-scroll-target="#universal-milestone-grading-rubric">Universal Milestone Grading Rubric</a></li>
   </ul>
@@ -234,6 +253,7 @@ ul.task-list li input[type="checkbox"] {
 Lock in a feasible analysis plan early, so you’re not improvising later. This is about scope, clarity, and workflow—not results.</p>
 <section id="what-to-include" class="level3">
 <h3 class="anchored" data-anchor-id="what-to-include">What to include</h3>
+<p><a href="../assignment_templates/template_assignment01.qmd">Download the Analysis Concept Note template (.qmd)</a></p>
 <ul>
 <li>Working title (can change later)</li>
 <li>Your focal question (1–3 sentences; plain language)</li>
@@ -661,6 +681,48 @@ Demonstrate that you can revise strategically. You will not execute revisions; y
 </div>
 </div>
 <hr>
+</section>
+<section id="general-assignment-submission-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="general-assignment-submission-requirements">General assignment submission requirements</h2>
+<p>For all assignments, a template is provided. Each template is formatted using Quarto Markdown, which is preferred to R Markdown. While R Markdown is <strong>not</strong> obsolete by any means, it has a number of disadvantages compared to Quarto; these are summarized in the table below.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Dimension</th>
+<th>R Markdown</th>
+<th>Quarto</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>age</td>
+<td>older</td>
+<td>newer</td>
+</tr>
+<tr class="even">
+<td>primary language</td>
+<td>R</td>
+<td>multi-language</td>
+</tr>
+<tr class="odd">
+<td>document types</td>
+<td>reports</td>
+<td>docs, books, sites, slides</td>
+</tr>
+<tr class="even">
+<td>cross-referencing</td>
+<td>manual</td>
+<td>built-in</td>
+</tr>
+<tr class="odd">
+<td>extensibility</td>
+<td>constrained</td>
+<td>modular</td>
+</tr>
+</tbody>
+</table>
+<p>So, in your own work, if you ever anticipate wanting to streamline your workflow, I recommend migrating your old R Markdown files to Quarto. Note that there are a few steps to do so, steps that involve changing file headers and syntax. I have had to do this with my older R Markdown files, and it doesn’t take much time. Quarto can really add huge advantages, including reproducible creation of scientific presentations (sometimes in minutes and not hours).</p>
+<p>For this course, please use Quarto.</p>
 </section>
 <section id="grading" class="level2">
 <h2 class="anchored" data-anchor-id="grading">Grading</h2>
@@ -1187,6 +1249,9 @@ Demonstrate that you can revise strategically. You will not execute revisions; y
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../chapters/ai_prompting.html" class="pagination-link" aria-label="AI Prompting for Analysis">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">AI Prompting for Analysis</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

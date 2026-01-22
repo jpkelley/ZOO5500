@@ -1,0 +1,260 @@
+---
+title: "AI Prompting for Analysis"
+subtitle: "Writing useful prompts quickly"
+format: html
+toc: true
+number-sections: true
+---
+
+This page covers the basics of Large Language Models (LLM), the fundamentals of good prompt engineering and design, and the specifics of how to interact with the JackalopeGPT, the custom GPT for this course.
+
+## Overview
+
+### What are Large Language Models (e.g. ChatGPT, Gemini, Claude)
+[JackalopeGPT](https://chatgpt.com/g/g-696966777a948191858541cd7986057e-jackalopegpt) is a customized GPT assistant tailored specifically for this course using [OpenAI's ChatGPT](chatgpt.com), a Large Language Model (LLM). Large Language Models (LLMs) like ChatGPT are advanced generative artifical intelligence systems trained on absolutely massive collections of text, enabling them to answer complex questions, summarize information, write in particular styles, and interact using natural language. Large Language Models are trained in two distinct steps that intentionally put humans in the loop:
+
+- **Supervised fine-tuning (SFT)** teaches the model *what to say* by
+  training on human-written input–output examples.
+- **Reinforcement learning from human feedback (RLHF)** teaches the
+  model *how to say it* by rewarding outputs people judge as better
+  (clearer, safer, more helpful, etc.).
+
+The key takeaway is very practical for our purposes in this course: these models are optimized for *interaction* (between the user and LLM). The trade-off is that they are not necessarily built for accuracy. Model responses to users' prompts (see Section 8.1.2) can sound amazingly confident and authoritative even when their information is grossly incorrect. 
+
+
+### What are prompts?
+
+As stated above, you begin each interaction with an LLM using a prompt. A **prompt** is simply your input to the trained model; it is your question or request. There are two broad classes of prompts that are operationally differentiated by their purpose:
+
+- **Evaluative prompts:** Models that *produce* content (e.g., text,
+  code, summaries, or ideas).
+- **Generative prompts:** Models that assess or critique ingested
+  data.
+
+In this course, your goal for JackalopeGPT is not to “get an answer," so we primarily use evaluative prompts. This prompting type keeps you in control of important scientific decisions and constrains the model's role to that of a friendly reviewer or sounding board (rather than an autonomous data scientist).
+
+::: {.callout-note title="Good prompt engineering takes practice"}
+Please note that it may take a bit of practice to concisely write prompts that contain all of this information *and* yield high-quality responses, but this is a good framework to get you started.
+:::
+
+## Engineering Successful Prompts
+
+### The iterative prompting loop
+
+Successful prompting is usually iterative, involving the following basic steps:
+
+1. **State expectations clearly.** Your goal is to produce an output you can evaluate.
+2. **Evaluate the response using a documented rubric.** 
+You should always have an implicit (or explicit) **rubric** in mind: a short set of criteria that defines what a *good* response should contain.
+3. **Revise the prompt to reduce ambiguity and increase verifiability.** Use the rubric to improve the prompt by clarifying the task/topic/context, adding constraints, and requiring formal checks so the response is easier to evaluate. 
+4. **Repeat (briefly, yet thoughtfully).** until the output is actionable.
+
+### Why good prompting matters (and why you should *verify* outputs)
+
+Large Language Models can be extremely helpful, but they are not a scientific authority, and its responses are not “timeless.” That is, the quality of the responses depends heavily on what you ask and when you ask it (given what information has been recently folded into the LLM training). 
+
+### Actions for writing strong prompts
+
+- **Leverage your expertise:** Use your biological knowledge to define what matters: structure of your study design, sources of bias (detectability of individuals), confounding variables, scale, or non-independence.
+- **Be challenging and specific.** Remove the escape routes. Provide the response type, design, predictors,
+  and what you want back (models, diagnostics, interpretation template).
+- **Use explicit constraints:** Tell it *how* to answer (format, scope, evidence requirements), not just *what* to answer.
+- Force juggling: Require it to handle multiple issues at once (e.g., zero inflation + nesting + spatial clustering).
+- **Keep it realistic:** Ask for defensible inference, not magic. Explicitly ask it to flag overreach.
+- **Make prompts reusable:** Favor principles and reasoning over tool/version-specific instructions (unless needed).
+- **Make prompts unambiguous and evaluable:** Avoid “this/that/the above” references that only make sense outside the current chat.
+- **Avoid broad prompts; make outputs verifiable.** Interaction GPTs love to spread their wings when given some wiggle room. 
+- **Write original prompts.** Writing original prompts grounds the model in how you think about a scientific question. The model can help refine language or suggest options, but it should not invent the prompt’s goals.
+
+---
+
+### TRACE: a framework for writing strong prompts
+
+Use **TRACE** as a memory hook (technically, a *acronymic mnemonic*) for what to include in high-quality, repeatable prompts:
+
+- **T (Task/Topic, aka Context):** What problem are you working on?
+  What’s the data/design?
+- **R (Role):** What kind of helper should JackalopeGPT be?
+- **A (Audience):** What level should it explain to?
+- **C (Criteria):** What must a good answer include?
+- **E (Exclusions):** What should it avoid? What is out-of-scope?
+
+Here is a more detailed description. The bracketed, italicized components indicate places where you enter your original prompt components. Examples are given in the Description column. 
+
+::: {.course-info tbl-colwidths="[10, 14, 78]"}
+| **Letter** | **Component** | **Description** |
+|---|---|---|
+| **T** | **Task / Topic** | I am working on: *[system + response + sampling design + sample sizes]. Known issues: [zeros / detectability / spatial clustering / non-independence / confounding]*. <br> <br> Example: I have repeated point counts at 30 sites (4 visits per site). The response variable is bird counts per visit. Predictors include canopy density, wind, and observer. I expect detection of individuals to decline as a function of canopy density and wind.|
+| **R** | **Role** | Act as a *[R tutor / methods advisor / model debugger]*. <br> <br> Example: Act as an ecology methods advisor and R tutor.|
+| **A** | **Audience** | Explain to a *[specified knowledge level]*. <br> <br> Example: Explain to a 1st–2nd year ecology graduate student with basic statistics knowledge, who has 5–6 months’ experience working with Generalized Linear Models (GLMs) in R.|
+| **C** | **Criteria** | A good answer must include: *[(1) restate the design, (2) assumptions, (3) 2–3 candidate approaches, (4) diagnostics and checks, (5) interpretation limits and what would change the recommendation.]* <br> <br> Example: Propose two scientifically defensible modeling approaches. For each, state assumptions, specify the model structure (in words or formula), list at least two scientifically defensible model diagnostics, and explain what result would be misleading if detection bias is not accounted for.|
+| **E** | **Exclusions** | Do not: *[write my full assignment / invent data / claim causality / skip assumptions / provide code if concepts only were requested]*. <br> <br> Example: Do not claim causal effects. Do not invent data. Do not write end-to-end analysis code. If information is missing, list what is needed rather than guessing.|
+:::
+
+::: {.callout-tip collapse="true" icon=false title="TRACE templates for your convenience"}
+
+[**Google Sheet template**](https://docs.google.com/spreadsheets/d/15rYGpF3wQqdCU-ZavdV6zQuujT26Vlanh2aU4xunxMg/edit?usp=sharing) (Read-only; you can copy and paste)
+
+[**Google Doc template**](https://docs.google.com/document/d/1np-z958LhN47FsOl5IAVZatDeBqq7_xHqdKz1VgnpFo/edit?usp=sharing) (Read-only; you can copy and paste)
+:::
+
+## Evaluating LLM Output
+
+### The Rubric-Prompt Synergy
+
+A rubric is your short checklist for what a complete and accurate response must include. Do not skip it or underestimate its utility: LLMs can sound confident while being downright wrong and incomplete. A good rubric --derived from your own expertise-- is how you keep yourself in control of the LLM's behavior.
+
+Think of your **prompt** as a cake recipe and the **rubric** as the taste test. (I am already thinking this analogy isn't worth its salt.) The cake might look finished and ready to bring to the party, but the rubric if what tells you whether the cake is actually edible. In other words, you and your rubric must: 
+
+* **NOT** ask *“Is this answer impressive and sounds smart?”*  
+* Definitely ask *“Is this answer complete, appropriately constrained, and testable or verifiable?”*
+
+### Rubric criteria
+
+After developing and running a conceptually good prompt, you can be satisfied that a response is worth using if it satisfies the following criteria:
+
+- Gets the problem right  
+- States its assumptions  
+- Explains its reasoning  
+- Shows how to check itself  
+- Knows where it could be wrong  
+
+If any one of these is missing, revise the **prompt** before revising your analysis. To see details about each of the above criteria, click on the green box below to expand.
+
+::: {.callout-tip collapse=true icon=false title="Detailed criteria for assessing LLM responses"}
+### Does it get the problem right? {.unnumbered}
+- Check whether the response correctly restates your system, data, and task.
+- Look for invented details or a mischaracterized study design.
+- If this fails, stop and revise the **prompt** (not your interpretation).
+
+---
+
+### Does it state its assumptions? {.unnumbered}
+- Identify whether assumptions are explicit (e.g., independence, sampling, detection, distributional form, causal limits).
+- Missing or vague assumptions make recommendations hard to evaluate.
+- Treat missing assumptions as a **prompt failure**, not a model error.
+
+---
+
+### Does it explain its reasoning? {.unnumbered}
+- Look for a clear, step-by-step chain from **design → model → inference**.
+- Explanations should justify *why* recommendations follow from the setup.
+- Without step-by-step reasoning, we cannot evaluate conclusions.
+
+---
+
+### Is it verifiable? {.unnumbered}
+- The response should include at least one diagnostic, stress test, or sensitivity check (which we will discuss later in the course)
+- It should explain how the recommendation could fail or mislead.
+- Advice without checks is not trustworthy.
+
+---
+
+### Does it know where it could be wrong? {.unnumbered}
+- Check for limits: what cannot be concluded, what would be overreach, what remains uncertain.
+- Look for acknowledgment of uncertainty.
+- Overconfidence is a severe red flag.
+
+:::
+
+### Quantifying Model Drift: Another way to put rubrics to work
+
+Large Language Models are updated and adjusted over time. That means the same prompt can yield different answers across weeks or months—sometimes subtly, sometimes dramatically. To stay scientifically grounded, you need a habit of **validation**, a way to detect when the LLM’s behavior has changed and when outputs should no longer be trusted. Consider the following scenario. Imagine you weigh your study subjects on a scale every morning. A lab jackanape recalibrates the scale every few weeks without telling you. After discovering that this has occurred, would you trust that the measurements are directly comparable across time? However, if your lab protocol included a daily measurement of a standardized set of weights, you could determine exactly when recalibrations were back, and, what's even better, you could adjust your measurements accordingly. Science would be saved! 
+
+::: {.green-box collapse=true}
+**A practical --and easy-- way to assess “model drift” in your own work**
+
+* Keep 3–5 **benchmark prompts** you reuse all semester (e.g., *"fit a GLMM with random intercept for site, explain assumptions, propose diagnostics"*). Ideally, you should document and store these as metadata, so that the phrase(s) can always be connected to a project and also be easily accessed. 
+* Re-run the same benchmark prompt occasionally (at a predefined interval or whenever you begin a new interaction or project). Save (copy/paste) the **prompt + output** into your AI Interaction Log.
+* Examine the output for changes in:
+  - whether it correctly restates the design,
+  - whether it flags assumptions and/or constraints,
+  - whether it proposes diagnostics that are scientifically defensible,
+  - whether it starts inventing details or over-claiming.
+  - *[other criteria that you can think of?]*
+:::
+
+
+## Synthesis: Examples of improving prompts
+
+**Instructions to students:** Read the excessively broad-scope prompt first. Pause and think: 
+* *What information is missing (hint: use the TRACE framework)?*
+* *What verbiage could be added to fill most or all of those missing components?* 
+Then expand the box to see a stronger version (based in the TRACE framework)
+
+**Rubric tag key (TRACE):**  
+- **[T]** Task/Topic context missing or underspecified  
+- **[R]** Role missing  
+- **[A]** Audience missing  
+- **[C]** Criteria missing (what a “good” answer must include)  
+- **[E]** Exclusions missing (scope/safeguards)
+
+---
+
+### Example 1: Debugging R code
+> “My model isn’t working. Help.”
+
+::: {.callout-tip collapse="true" icon=false title="Click to reveal a stronger prompt (TRACE)"}
+**Missing tags:** [T] [R] [A] [C] [E]  
+**Rubric tags addressed:** [T] [R] [A] [C] [E]
+
+> “Act as an **R debugger**. I’m a **beginner–intermediate R user**. I’m fitting a **GLMM for counts** with a **random intercept for site**. Here is my code and the **exact error message**: \[paste\].  
+> A good answer must:  
+> (1) identify the likely cause,  
+> (2) show the minimal fix,  
+> (3) explain why it failed, and  
+> (4) suggest one diagnostic check.  
+> Do not rewrite my entire analysis—just fix the error and explain.”
+:::
+
+---
+
+### Example 2: Choosing a model strategy *(polished but incomplete)*
+
+> “I have ecological count data collected over multiple sites and years, and I want to choose an appropriate statistical model that accounts for structure in the data. Can you recommend a suitable modeling approach and explain why?”
+
+::: {.callout-tip collapse="true" icon=false title="Click to reveal a stronger prompt (TRACE)"}
+
+**Missing tags:** [C] [E]  
+**Rubric tags addressed:** [T] [R] [A] [C] [E]
+
+> “Act as an **ecology methods advisor**. I have **count data with many zeros**; samples **nested** in plots within sites; **repeated measures** over time.  
+> Compare **2–3 modeling strategies** (e.g., **negative binomial GLMM vs zero-inflated vs hurdle**), state **assumptions**, and give **diagnostics that would falsify each**.  
+> Do not claim causality; focus on defensible inference.”
+:::
+
+*Why this works pedagogically:*  
+The initial prompt sounds careful and scientific, but it fails to **bound the answer** and **require checks**, inviting a vague or overbroad response.
+
+---
+
+### Example 3: Interpreting a model result
+
+> “How do I interpret this coefficient?”
+
+::: {.callout-tip collapse="true" icon=false title="Click to reveal a stronger prompt (TRACE)"}
+**Missing tags:** [T] [R] [A] [C] [E]  
+**Rubric tags addressed:** [T] [R] [A] [C] [E]
+
+> “Act as a **statistical interpreter for ecology graduate students**. I’m fitting a **negative binomial GLMM** for bird counts with **canopy cover** as a predictor and **site as a random effect**.  
+> Explain how to interpret the canopy coefficient on the **link scale** and **response scale**, state the **assumptions** required for this interpretation, and describe **one way this interpretation could be misleading**.  
+> Do not claim causal effects.”
+:::
+
+---
+
+### Example 4: Checking model assumptions *(polished but incomplete)*
+
+> “I’m using a Poisson mixed-effects model for count data with repeated measurements across sites. Can you explain the assumptions of this model and whether it’s appropriate for my analysis?”
+
+::: {.callout-tip collapse="true" icon=false title="Click to reveal a stronger prompt (TRACE)"}
+
+**Missing tags:** [C]  
+**Rubric tags addressed:** [T] [R] [A] [C] [E]
+
+> “Act as an **ecology methods advisor**. I’m using a **Poisson GLMM** for count data with **repeated measures per site**.  
+> List the **key assumptions**, propose **2–3 diagnostics** to evaluate them, and explain what **pattern in the diagnostics** would indicate a serious problem.  
+> If information is missing, list what you need rather than guessing.”
+:::
+
+

@@ -12,6 +12,7 @@ This page first describes the Milestone Assignments referenced in the course cal
 Lock in a feasible analysis plan early, so you’re not improvising later. This is about scope, clarity, and workflow—not results.
 
 ### What to include
+[Download the Analysis Concept Note template (.qmd)](../assignment_templates/template_assignment01.qmd)
 
 -   Working title (can change later)
 -   Your focal question (1–3 sentences; plain language)
@@ -236,6 +237,23 @@ Demonstrate that you can revise strategically. You will not execute revisions; y
 :::
 
 ------------------------------------------------------------------------
+
+## General assignment submission requirements
+
+For all assignments, a template is provided. Each template is formatted using Quarto Markdown, which is preferred to R Markdown. While R Markdown is **not** obsolete by any means, it has a number of disadvantages compared to Quarto; these are summarized in the table below.
+
+| Dimension         | R Markdown  | Quarto                     |
+| ----------------- | ----------- | -------------------------- |
+| age               | older       | newer                      |
+| primary language  | R           | multi-language             |
+| document types    | reports     | docs, books, sites, slides |
+| cross-referencing | manual      | built-in                   |
+| extensibility     | constrained | modular                    |
+
+So, in your own work, if you ever anticipate wanting to streamline your workflow, I recommend migrating your old R Markdown files to Quarto. Note that there are a few steps to do so, steps that involve changing file headers and syntax. I have had to do this with my older R Markdown files, and it doesn't take much time. Quarto can really add huge advantages, including reproducible creation of scientific presentations (sometimes in minutes and not hours). 
+
+For this course, please use Quarto.
+
 
 ## Grading
 

@@ -154,5 +154,11 @@
   },
   "chapters/preparing_yourself.qmd": {
     "preparing_yourself.html": "5a45734e"
+  },
+  "chapters/ai_prompting.qmd": {
+    "ai_prompting.html": "cd25e8d9"
+  },
+  "chapters/project_scoping.qmd": {
+    "project_scoping.html": "0141f8b3"
   }
 }

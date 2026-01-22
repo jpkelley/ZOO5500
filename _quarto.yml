@@ -45,5 +45,8 @@ format:
     number-depth: 3
     css: styles.css
     code-copy: true
+    
+website:
+  favicon: graphics/favicon/favicon.ico
 
 editor: source

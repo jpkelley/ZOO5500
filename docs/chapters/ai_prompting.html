@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>8&nbsp; AI Prompting for Analysis – Quantitative Analysis of (Messy) Field Data</title>
+<title>9&nbsp; AI Prompting for Analysis – Quantitative Analysis of (Messy) Field Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/assignment_grades.html" rel="prev">
+<link href="../chapters/project_scoping.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -83,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/ai_prompting.html">Part ∅: Testing</a></li><li class="breadcrumb-item"><a href="../chapters/ai_prompting.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">AI Prompting for Analysis</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/ai_prompting.html">Part ∅: AI preparation</a></li><li class="breadcrumb-item"><a href="../chapters/ai_prompting.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">AI Prompting for Analysis</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -163,12 +163,18 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Assignments &amp; Grades</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/project_scoping.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Project Scoping</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Part ∅: Testing</span></a>
+ <span class="menu-text">Part ∅: AI preparation</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -177,7 +183,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/ai_prompting.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">AI Prompting for Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">AI Prompting for Analysis</span></span></a>
   </div>
 </li>
       </ul>
@@ -204,30 +210,30 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">8.1</span> Overview</a>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">9.1</span> Overview</a>
   <ul class="collapse">
-  <li><a href="#what-are-large-language-models-e.g.-chatgpt-gemini-claude" id="toc-what-are-large-language-models-e.g.-chatgpt-gemini-claude" class="nav-link" data-scroll-target="#what-are-large-language-models-e.g.-chatgpt-gemini-claude"><span class="header-section-number">8.1.1</span> What are Large Language Models (e.g.&nbsp;ChatGPT, Gemini, Claude)</a></li>
-  <li><a href="#what-are-prompts" id="toc-what-are-prompts" class="nav-link" data-scroll-target="#what-are-prompts"><span class="header-section-number">8.1.2</span> What are prompts?</a></li>
+  <li><a href="#what-are-large-language-models-e.g.-chatgpt-gemini-claude" id="toc-what-are-large-language-models-e.g.-chatgpt-gemini-claude" class="nav-link" data-scroll-target="#what-are-large-language-models-e.g.-chatgpt-gemini-claude"><span class="header-section-number">9.1.1</span> What are Large Language Models (e.g.&nbsp;ChatGPT, Gemini, Claude)</a></li>
+  <li><a href="#what-are-prompts" id="toc-what-are-prompts" class="nav-link" data-scroll-target="#what-are-prompts"><span class="header-section-number">9.1.2</span> What are prompts?</a></li>
   </ul></li>
-  <li><a href="#engineering-successful-prompts" id="toc-engineering-successful-prompts" class="nav-link" data-scroll-target="#engineering-successful-prompts"><span class="header-section-number">8.2</span> Engineering Successful Prompts</a>
+  <li><a href="#engineering-successful-prompts" id="toc-engineering-successful-prompts" class="nav-link" data-scroll-target="#engineering-successful-prompts"><span class="header-section-number">9.2</span> Engineering Successful Prompts</a>
   <ul class="collapse">
-  <li><a href="#the-iterative-prompting-loop" id="toc-the-iterative-prompting-loop" class="nav-link" data-scroll-target="#the-iterative-prompting-loop"><span class="header-section-number">8.2.1</span> The iterative prompting loop</a></li>
-  <li><a href="#why-good-prompting-matters-and-why-you-should-verify-outputs" id="toc-why-good-prompting-matters-and-why-you-should-verify-outputs" class="nav-link" data-scroll-target="#why-good-prompting-matters-and-why-you-should-verify-outputs"><span class="header-section-number">8.2.2</span> Why good prompting matters (and why you should <em>verify</em> outputs)</a></li>
-  <li><a href="#actions-for-writing-strong-prompts" id="toc-actions-for-writing-strong-prompts" class="nav-link" data-scroll-target="#actions-for-writing-strong-prompts"><span class="header-section-number">8.2.3</span> Actions for writing strong prompts</a></li>
-  <li><a href="#trace-a-framework-for-writing-strong-prompts" id="toc-trace-a-framework-for-writing-strong-prompts" class="nav-link" data-scroll-target="#trace-a-framework-for-writing-strong-prompts"><span class="header-section-number">8.2.4</span> TRACE: a framework for writing strong prompts</a></li>
+  <li><a href="#the-iterative-prompting-loop" id="toc-the-iterative-prompting-loop" class="nav-link" data-scroll-target="#the-iterative-prompting-loop"><span class="header-section-number">9.2.1</span> The iterative prompting loop</a></li>
+  <li><a href="#why-good-prompting-matters-and-why-you-should-verify-outputs" id="toc-why-good-prompting-matters-and-why-you-should-verify-outputs" class="nav-link" data-scroll-target="#why-good-prompting-matters-and-why-you-should-verify-outputs"><span class="header-section-number">9.2.2</span> Why good prompting matters (and why you should <em>verify</em> outputs)</a></li>
+  <li><a href="#actions-for-writing-strong-prompts" id="toc-actions-for-writing-strong-prompts" class="nav-link" data-scroll-target="#actions-for-writing-strong-prompts"><span class="header-section-number">9.2.3</span> Actions for writing strong prompts</a></li>
+  <li><a href="#trace-a-framework-for-writing-strong-prompts" id="toc-trace-a-framework-for-writing-strong-prompts" class="nav-link" data-scroll-target="#trace-a-framework-for-writing-strong-prompts"><span class="header-section-number">9.2.4</span> TRACE: a framework for writing strong prompts</a></li>
   </ul></li>
-  <li><a href="#evaluating-llm-output" id="toc-evaluating-llm-output" class="nav-link" data-scroll-target="#evaluating-llm-output"><span class="header-section-number">8.3</span> Evaluating LLM Output</a>
+  <li><a href="#evaluating-llm-output" id="toc-evaluating-llm-output" class="nav-link" data-scroll-target="#evaluating-llm-output"><span class="header-section-number">9.3</span> Evaluating LLM Output</a>
   <ul class="collapse">
-  <li><a href="#the-rubric-prompt-synergy" id="toc-the-rubric-prompt-synergy" class="nav-link" data-scroll-target="#the-rubric-prompt-synergy"><span class="header-section-number">8.3.1</span> The Rubric-Prompt Synergy</a></li>
-  <li><a href="#rubric-criteria" id="toc-rubric-criteria" class="nav-link" data-scroll-target="#rubric-criteria"><span class="header-section-number">8.3.2</span> Rubric criteria</a></li>
-  <li><a href="#quantifying-model-drift-another-way-to-put-rubrics-to-work" id="toc-quantifying-model-drift-another-way-to-put-rubrics-to-work" class="nav-link" data-scroll-target="#quantifying-model-drift-another-way-to-put-rubrics-to-work"><span class="header-section-number">8.3.3</span> Quantifying Model Drift: Another way to put rubrics to work</a></li>
+  <li><a href="#the-rubric-prompt-synergy" id="toc-the-rubric-prompt-synergy" class="nav-link" data-scroll-target="#the-rubric-prompt-synergy"><span class="header-section-number">9.3.1</span> The Rubric-Prompt Synergy</a></li>
+  <li><a href="#rubric-criteria" id="toc-rubric-criteria" class="nav-link" data-scroll-target="#rubric-criteria"><span class="header-section-number">9.3.2</span> Rubric criteria</a></li>
+  <li><a href="#quantifying-model-drift-another-way-to-put-rubrics-to-work" id="toc-quantifying-model-drift-another-way-to-put-rubrics-to-work" class="nav-link" data-scroll-target="#quantifying-model-drift-another-way-to-put-rubrics-to-work"><span class="header-section-number">9.3.3</span> Quantifying Model Drift: Another way to put rubrics to work</a></li>
   </ul></li>
-  <li><a href="#synthesis-examples-of-improving-prompts" id="toc-synthesis-examples-of-improving-prompts" class="nav-link" data-scroll-target="#synthesis-examples-of-improving-prompts"><span class="header-section-number">8.4</span> Synthesis: Examples of improving prompts</a>
+  <li><a href="#synthesis-examples-of-improving-prompts" id="toc-synthesis-examples-of-improving-prompts" class="nav-link" data-scroll-target="#synthesis-examples-of-improving-prompts"><span class="header-section-number">9.4</span> Synthesis: Examples of improving prompts</a>
   <ul class="collapse">
-  <li><a href="#example-1-debugging-r-code" id="toc-example-1-debugging-r-code" class="nav-link" data-scroll-target="#example-1-debugging-r-code"><span class="header-section-number">8.4.1</span> Example 1: Debugging R code</a></li>
-  <li><a href="#example-2-choosing-a-model-strategy-polished-but-incomplete" id="toc-example-2-choosing-a-model-strategy-polished-but-incomplete" class="nav-link" data-scroll-target="#example-2-choosing-a-model-strategy-polished-but-incomplete"><span class="header-section-number">8.4.2</span> Example 2: Choosing a model strategy <em>(polished but incomplete)</em></a></li>
-  <li><a href="#example-3-interpreting-a-model-result" id="toc-example-3-interpreting-a-model-result" class="nav-link" data-scroll-target="#example-3-interpreting-a-model-result"><span class="header-section-number">8.4.3</span> Example 3: Interpreting a model result</a></li>
-  <li><a href="#example-4-checking-model-assumptions-polished-but-incomplete" id="toc-example-4-checking-model-assumptions-polished-but-incomplete" class="nav-link" data-scroll-target="#example-4-checking-model-assumptions-polished-but-incomplete"><span class="header-section-number">8.4.4</span> Example 4: Checking model assumptions <em>(polished but incomplete)</em></a></li>
+  <li><a href="#example-1-debugging-r-code" id="toc-example-1-debugging-r-code" class="nav-link" data-scroll-target="#example-1-debugging-r-code"><span class="header-section-number">9.4.1</span> Example 1: Debugging R code</a></li>
+  <li><a href="#example-2-choosing-a-model-strategy-polished-but-incomplete" id="toc-example-2-choosing-a-model-strategy-polished-but-incomplete" class="nav-link" data-scroll-target="#example-2-choosing-a-model-strategy-polished-but-incomplete"><span class="header-section-number">9.4.2</span> Example 2: Choosing a model strategy <em>(polished but incomplete)</em></a></li>
+  <li><a href="#example-3-interpreting-a-model-result" id="toc-example-3-interpreting-a-model-result" class="nav-link" data-scroll-target="#example-3-interpreting-a-model-result"><span class="header-section-number">9.4.3</span> Example 3: Interpreting a model result</a></li>
+  <li><a href="#example-4-checking-model-assumptions-polished-but-incomplete" id="toc-example-4-checking-model-assumptions-polished-but-incomplete" class="nav-link" data-scroll-target="#example-4-checking-model-assumptions-polished-but-incomplete"><span class="header-section-number">9.4.4</span> Example 4: Checking model assumptions <em>(polished but incomplete)</em></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -235,9 +241,9 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/ai_prompting.html">Part ∅: Testing</a></li><li class="breadcrumb-item"><a href="../chapters/ai_prompting.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">AI Prompting for Analysis</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/ai_prompting.html">Part ∅: AI preparation</a></li><li class="breadcrumb-item"><a href="../chapters/ai_prompting.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">AI Prompting for Analysis</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">AI Prompting for Analysis</span></h1>
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">AI Prompting for Analysis</span></h1>
 <p class="subtitle lead">Writing useful prompts quickly</p>
 </div>
 
@@ -256,10 +262,10 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>This page covers the basics of Large Language Models (LLM), the fundamentals of good prompt engineering and design, and the specifics of how to interact with the JackalopeGPT, the custom GPT for this course.</p>
-<section id="overview" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">8.1</span> Overview</h2>
-<section id="what-are-large-language-models-e.g.-chatgpt-gemini-claude" class="level3" data-number="8.1.1">
-<h3 data-number="8.1.1" class="anchored" data-anchor-id="what-are-large-language-models-e.g.-chatgpt-gemini-claude"><span class="header-section-number">8.1.1</span> What are Large Language Models (e.g.&nbsp;ChatGPT, Gemini, Claude)</h3>
+<section id="overview" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">9.1</span> Overview</h2>
+<section id="what-are-large-language-models-e.g.-chatgpt-gemini-claude" class="level3" data-number="9.1.1">
+<h3 data-number="9.1.1" class="anchored" data-anchor-id="what-are-large-language-models-e.g.-chatgpt-gemini-claude"><span class="header-section-number">9.1.1</span> What are Large Language Models (e.g.&nbsp;ChatGPT, Gemini, Claude)</h3>
 <p><a href="https://chatgpt.com/g/g-696966777a948191858541cd7986057e-jackalopegpt">JackalopeGPT</a> is a customized GPT assistant tailored specifically for this course using <a href="chatgpt.com">OpenAI’s ChatGPT</a>, a Large Language Model (LLM). Large Language Models (LLMs) like ChatGPT are advanced generative artifical intelligence systems trained on absolutely massive collections of text, enabling them to answer complex questions, summarize information, write in particular styles, and interact using natural language. Large Language Models are trained in two distinct steps that intentionally put humans in the loop:</p>
 <ul>
 <li><strong>Supervised fine-tuning (SFT)</strong> teaches the model <em>what to say</em> by training on human-written input–output examples.</li>
@@ -267,8 +273,8 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>The key takeaway is very practical for our purposes in this course: these models are optimized for <em>interaction</em> (between the user and LLM). The trade-off is that they are not necessarily built for accuracy. Model responses to users’ prompts (see Section 8.1.2) can sound amazingly confident and authoritative even when their information is grossly incorrect.</p>
 </section>
-<section id="what-are-prompts" class="level3" data-number="8.1.2">
-<h3 data-number="8.1.2" class="anchored" data-anchor-id="what-are-prompts"><span class="header-section-number">8.1.2</span> What are prompts?</h3>
+<section id="what-are-prompts" class="level3" data-number="9.1.2">
+<h3 data-number="9.1.2" class="anchored" data-anchor-id="what-are-prompts"><span class="header-section-number">9.1.2</span> What are prompts?</h3>
 <p>As stated above, you begin each interaction with an LLM using a prompt. A <strong>prompt</strong> is simply your input to the trained model; it is your question or request. There are two broad classes of prompts that are operationally differentiated by their purpose:</p>
 <ul>
 <li><strong>Evaluative prompts:</strong> Models that <em>produce</em> content (e.g., text, code, summaries, or ideas).</li>
@@ -290,10 +296,10 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </section>
 </section>
-<section id="engineering-successful-prompts" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="engineering-successful-prompts"><span class="header-section-number">8.2</span> Engineering Successful Prompts</h2>
-<section id="the-iterative-prompting-loop" class="level3" data-number="8.2.1">
-<h3 data-number="8.2.1" class="anchored" data-anchor-id="the-iterative-prompting-loop"><span class="header-section-number">8.2.1</span> The iterative prompting loop</h3>
+<section id="engineering-successful-prompts" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="engineering-successful-prompts"><span class="header-section-number">9.2</span> Engineering Successful Prompts</h2>
+<section id="the-iterative-prompting-loop" class="level3" data-number="9.2.1">
+<h3 data-number="9.2.1" class="anchored" data-anchor-id="the-iterative-prompting-loop"><span class="header-section-number">9.2.1</span> The iterative prompting loop</h3>
 <p>Successful prompting is usually iterative, involving the following basic steps:</p>
 <ol type="1">
 <li><strong>State expectations clearly.</strong> Your goal is to produce an output you can evaluate.</li>
@@ -302,12 +308,12 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Repeat (briefly, yet thoughtfully).</strong> until the output is actionable.</li>
 </ol>
 </section>
-<section id="why-good-prompting-matters-and-why-you-should-verify-outputs" class="level3" data-number="8.2.2">
-<h3 data-number="8.2.2" class="anchored" data-anchor-id="why-good-prompting-matters-and-why-you-should-verify-outputs"><span class="header-section-number">8.2.2</span> Why good prompting matters (and why you should <em>verify</em> outputs)</h3>
+<section id="why-good-prompting-matters-and-why-you-should-verify-outputs" class="level3" data-number="9.2.2">
+<h3 data-number="9.2.2" class="anchored" data-anchor-id="why-good-prompting-matters-and-why-you-should-verify-outputs"><span class="header-section-number">9.2.2</span> Why good prompting matters (and why you should <em>verify</em> outputs)</h3>
 <p>Large Language Models can be extremely helpful, but they are not a scientific authority, and its responses are not “timeless.” That is, the quality of the responses depends heavily on what you ask and when you ask it (given what information has been recently folded into the LLM training).</p>
 </section>
-<section id="actions-for-writing-strong-prompts" class="level3" data-number="8.2.3">
-<h3 data-number="8.2.3" class="anchored" data-anchor-id="actions-for-writing-strong-prompts"><span class="header-section-number">8.2.3</span> Actions for writing strong prompts</h3>
+<section id="actions-for-writing-strong-prompts" class="level3" data-number="9.2.3">
+<h3 data-number="9.2.3" class="anchored" data-anchor-id="actions-for-writing-strong-prompts"><span class="header-section-number">9.2.3</span> Actions for writing strong prompts</h3>
 <ul>
 <li><strong>Leverage your expertise:</strong> Use your biological knowledge to define what matters: structure of your study design, sources of bias (detectability of individuals), confounding variables, scale, or non-independence.</li>
 <li><strong>Be challenging and specific.</strong> Remove the escape routes. Provide the response type, design, predictors, and what you want back (models, diagnostics, interpretation template).</li>
@@ -321,8 +327,8 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <hr>
 </section>
-<section id="trace-a-framework-for-writing-strong-prompts" class="level3" data-number="8.2.4">
-<h3 data-number="8.2.4" class="anchored" data-anchor-id="trace-a-framework-for-writing-strong-prompts"><span class="header-section-number">8.2.4</span> TRACE: a framework for writing strong prompts</h3>
+<section id="trace-a-framework-for-writing-strong-prompts" class="level3" data-number="9.2.4">
+<h3 data-number="9.2.4" class="anchored" data-anchor-id="trace-a-framework-for-writing-strong-prompts"><span class="header-section-number">9.2.4</span> TRACE: a framework for writing strong prompts</h3>
 <p>Use <strong>TRACE</strong> as a memory hook (technically, a <em>acronymic mnemonic</em>) for what to include in high-quality, repeatable prompts:</p>
 <ul>
 <li><strong>T (Task/Topic, aka Context):</strong> What problem are you working on? What’s the data/design?</li>
@@ -394,10 +400,10 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </section>
 </section>
-<section id="evaluating-llm-output" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="evaluating-llm-output"><span class="header-section-number">8.3</span> Evaluating LLM Output</h2>
-<section id="the-rubric-prompt-synergy" class="level3" data-number="8.3.1">
-<h3 data-number="8.3.1" class="anchored" data-anchor-id="the-rubric-prompt-synergy"><span class="header-section-number">8.3.1</span> The Rubric-Prompt Synergy</h3>
+<section id="evaluating-llm-output" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="evaluating-llm-output"><span class="header-section-number">9.3</span> Evaluating LLM Output</h2>
+<section id="the-rubric-prompt-synergy" class="level3" data-number="9.3.1">
+<h3 data-number="9.3.1" class="anchored" data-anchor-id="the-rubric-prompt-synergy"><span class="header-section-number">9.3.1</span> The Rubric-Prompt Synergy</h3>
 <p>A rubric is your short checklist for what a complete and accurate response must include. Do not skip it or underestimate its utility: LLMs can sound confident while being downright wrong and incomplete. A good rubric –derived from your own expertise– is how you keep yourself in control of the LLM’s behavior.</p>
 <p>Think of your <strong>prompt</strong> as a cake recipe and the <strong>rubric</strong> as the taste test. (I am already thinking this analogy isn’t worth its salt.) The cake might look finished and ready to bring to the party, but the rubric if what tells you whether the cake is actually edible. In other words, you and your rubric must:</p>
 <ul>
@@ -406,8 +412,8 @@ ul.task-list li input[type="checkbox"] {
 <li>Definitely ask <em>“Is this answer complete, appropriately constrained, and testable or verifiable?”</em></li>
 </ul>
 </section>
-<section id="rubric-criteria" class="level3" data-number="8.3.2">
-<h3 data-number="8.3.2" class="anchored" data-anchor-id="rubric-criteria"><span class="header-section-number">8.3.2</span> Rubric criteria</h3>
+<section id="rubric-criteria" class="level3" data-number="9.3.2">
+<h3 data-number="9.3.2" class="anchored" data-anchor-id="rubric-criteria"><span class="header-section-number">9.3.2</span> Rubric criteria</h3>
 <p>After developing and running a conceptually good prompt, you can be satisfied that a response is worth using if it satisfies the following criteria:</p>
 <ul>
 <li>Gets the problem right<br>
@@ -481,8 +487,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </section>
-<section id="quantifying-model-drift-another-way-to-put-rubrics-to-work" class="level3" data-number="8.3.3">
-<h3 data-number="8.3.3" class="anchored" data-anchor-id="quantifying-model-drift-another-way-to-put-rubrics-to-work"><span class="header-section-number">8.3.3</span> Quantifying Model Drift: Another way to put rubrics to work</h3>
+<section id="quantifying-model-drift-another-way-to-put-rubrics-to-work" class="level3" data-number="9.3.3">
+<h3 data-number="9.3.3" class="anchored" data-anchor-id="quantifying-model-drift-another-way-to-put-rubrics-to-work"><span class="header-section-number">9.3.3</span> Quantifying Model Drift: Another way to put rubrics to work</h3>
 <p>Large Language Models are updated and adjusted over time. That means the same prompt can yield different answers across weeks or months—sometimes subtly, sometimes dramatically. To stay scientifically grounded, you need a habit of <strong>validation</strong>, a way to detect when the LLM’s behavior has changed and when outputs should no longer be trusted. Consider the following scenario. Imagine you weigh your study subjects on a scale every morning. A lab jackanape recalibrates the scale every few weeks without telling you. After discovering that this has occurred, would you trust that the measurements are directly comparable across time? However, if your lab protocol included a daily measurement of a standardized set of weights, you could determine exactly when recalibrations were back, and, what’s even better, you could adjust your measurements accordingly. Science would be saved!</p>
 <div class="green-box" data-collapse="true">
 <p><strong>A practical –and easy– way to assess “model drift” in your own work</strong></p>
@@ -501,8 +507,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </section>
 </section>
-<section id="synthesis-examples-of-improving-prompts" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="synthesis-examples-of-improving-prompts"><span class="header-section-number">8.4</span> Synthesis: Examples of improving prompts</h2>
+<section id="synthesis-examples-of-improving-prompts" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="synthesis-examples-of-improving-prompts"><span class="header-section-number">9.4</span> Synthesis: Examples of improving prompts</h2>
 <p><strong>Instructions to students:</strong> Read the excessively broad-scope prompt first. Pause and think: * <em>What information is missing (hint: use the TRACE framework)?</em> * <em>What verbiage could be added to fill most or all of those missing components?</em> Then expand the box to see a stronger version (based in the TRACE framework)</p>
 <p><strong>Rubric tag key (TRACE):</strong><br>
 - <strong>[T]</strong> Task/Topic context missing or underspecified<br>
@@ -511,8 +517,8 @@ ul.task-list li input[type="checkbox"] {
 - <strong>[C]</strong> Criteria missing (what a “good” answer must include)<br>
 - <strong>[E]</strong> Exclusions missing (scope/safeguards)</p>
 <hr>
-<section id="example-1-debugging-r-code" class="level3" data-number="8.4.1">
-<h3 data-number="8.4.1" class="anchored" data-anchor-id="example-1-debugging-r-code"><span class="header-section-number">8.4.1</span> Example 1: Debugging R code</h3>
+<section id="example-1-debugging-r-code" class="level3" data-number="9.4.1">
+<h3 data-number="9.4.1" class="anchored" data-anchor-id="example-1-debugging-r-code"><span class="header-section-number">9.4.1</span> Example 1: Debugging R code</h3>
 <blockquote class="blockquote">
 <p>“My model isn’t working. Help.”</p>
 </blockquote>
@@ -544,8 +550,8 @@ Do not rewrite my entire analysis—just fix the error and explain.”</p>
 </div>
 <hr>
 </section>
-<section id="example-2-choosing-a-model-strategy-polished-but-incomplete" class="level3" data-number="8.4.2">
-<h3 data-number="8.4.2" class="anchored" data-anchor-id="example-2-choosing-a-model-strategy-polished-but-incomplete"><span class="header-section-number">8.4.2</span> Example 2: Choosing a model strategy <em>(polished but incomplete)</em></h3>
+<section id="example-2-choosing-a-model-strategy-polished-but-incomplete" class="level3" data-number="9.4.2">
+<h3 data-number="9.4.2" class="anchored" data-anchor-id="example-2-choosing-a-model-strategy-polished-but-incomplete"><span class="header-section-number">9.4.2</span> Example 2: Choosing a model strategy <em>(polished but incomplete)</em></h3>
 <blockquote class="blockquote">
 <p>“I have ecological count data collected over multiple sites and years, and I want to choose an appropriate statistical model that accounts for structure in the data. Can you recommend a suitable modeling approach and explain why?”</p>
 </blockquote>
@@ -575,8 +581,8 @@ Do not claim causality; focus on defensible inference.”</p>
 The initial prompt sounds careful and scientific, but it fails to <strong>bound the answer</strong> and <strong>require checks</strong>, inviting a vague or overbroad response.</p>
 <hr>
 </section>
-<section id="example-3-interpreting-a-model-result" class="level3" data-number="8.4.3">
-<h3 data-number="8.4.3" class="anchored" data-anchor-id="example-3-interpreting-a-model-result"><span class="header-section-number">8.4.3</span> Example 3: Interpreting a model result</h3>
+<section id="example-3-interpreting-a-model-result" class="level3" data-number="9.4.3">
+<h3 data-number="9.4.3" class="anchored" data-anchor-id="example-3-interpreting-a-model-result"><span class="header-section-number">9.4.3</span> Example 3: Interpreting a model result</h3>
 <blockquote class="blockquote">
 <p>“How do I interpret this coefficient?”</p>
 </blockquote>
@@ -604,8 +610,8 @@ Do not claim causal effects.”</p>
 </div>
 <hr>
 </section>
-<section id="example-4-checking-model-assumptions-polished-but-incomplete" class="level3" data-number="8.4.4">
-<h3 data-number="8.4.4" class="anchored" data-anchor-id="example-4-checking-model-assumptions-polished-but-incomplete"><span class="header-section-number">8.4.4</span> Example 4: Checking model assumptions <em>(polished but incomplete)</em></h3>
+<section id="example-4-checking-model-assumptions-polished-but-incomplete" class="level3" data-number="9.4.4">
+<h3 data-number="9.4.4" class="anchored" data-anchor-id="example-4-checking-model-assumptions-polished-but-incomplete"><span class="header-section-number">9.4.4</span> Example 4: Checking model assumptions <em>(polished but incomplete)</em></h3>
 <blockquote class="blockquote">
 <p>“I’m using a Poisson mixed-effects model for count data with repeated measurements across sites. Can you explain the assumptions of this model and whether it’s appropriate for my analysis?”</p>
 </blockquote>
@@ -1039,8 +1045,8 @@ If information is missing, list what you need rather than guessing.”</p>
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/assignment_grades.html" class="pagination-link" aria-label="Assignments &amp; Grades">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Assignments &amp; Grades</span></span>
+      <a href="../chapters/project_scoping.html" class="pagination-link" aria-label="Project Scoping">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Project Scoping</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

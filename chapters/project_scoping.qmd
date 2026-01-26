@@ -112,7 +112,7 @@ Before committing, you should be able to answer:
 If the answer is _no_ to any of these, you can still proceed, but you must scope down to what is truly feasible.
 :::
 
-## A practical scoping checklist (student-friendly)
+## A practical scoping checklist
 
 Choose a project that meets most of these (given your current knowledge):
 

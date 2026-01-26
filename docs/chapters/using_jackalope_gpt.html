@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2&nbsp; Introduction – Quantitative Analysis of (Messy) Field Data</title>
+<title>10&nbsp; How to Use JackalopeGPT – Quantitative Analysis of (Messy) Field Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/syllabus.html" rel="next">
-<link href="../index.html" rel="prev">
+<link href="../chapters/naming_conventions.html" rel="next">
+<link href="../chapters/ai_prompting.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -84,7 +84,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../index.html">Course Overview</a></li><li class="breadcrumb-item"><a href="../chapters/course_intro.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/ai_prompting.html">Part ∅: AI preparation</a></li><li class="breadcrumb-item"><a href="../chapters/using_jackalope_gpt.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">How to Use JackalopeGPT</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -130,7 +130,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/course_intro.html" class="sidebar-item-text sidebar-link active">
+  <a href="../chapters/course_intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
@@ -189,7 +189,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/using_jackalope_gpt.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/using_jackalope_gpt.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">How to Use JackalopeGPT</span></span></a>
   </div>
 </li>
@@ -230,19 +230,37 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#welcome-to-quantitative-analysis-of-messy-field-data" id="toc-welcome-to-quantitative-analysis-of-messy-field-data" class="nav-link active" data-scroll-target="#welcome-to-quantitative-analysis-of-messy-field-data"><span class="header-section-number">2.1</span> Welcome to Quantitative Analysis of (Messy) Field Data!</a></li>
-  <li><a href="#course-objectives" id="toc-course-objectives" class="nav-link" data-scroll-target="#course-objectives"><span class="header-section-number">2.2</span> Course Objectives</a></li>
-  <li><a href="#topics-covered" id="toc-topics-covered" class="nav-link" data-scroll-target="#topics-covered">Topics covered</a></li>
-  <li><a href="#what-is-new-this-term-spring-2026" id="toc-what-is-new-this-term-spring-2026" class="nav-link" data-scroll-target="#what-is-new-this-term-spring-2026"><span class="header-section-number">2.3</span> What is new this term (Spring 2026)?</a></li>
+  <li><a href="#a-reminder-what-is-jackalopegpt" id="toc-a-reminder-what-is-jackalopegpt" class="nav-link active" data-scroll-target="#a-reminder-what-is-jackalopegpt"><span class="header-section-number">10.1</span> A Reminder: What is JackalopeGPT?</a></li>
+  <li><a href="#how-you-can-start-using-it-important" id="toc-how-you-can-start-using-it-important" class="nav-link" data-scroll-target="#how-you-can-start-using-it-important"><span class="header-section-number">10.2</span> How You Can Start Using It (Important)</a></li>
+  <li><a href="#operating-modes" id="toc-operating-modes" class="nav-link" data-scroll-target="#operating-modes"><span class="header-section-number">10.3</span> Operating Modes</a>
+  <ul class="collapse">
+  <li><a href="#learning-practice-default" id="toc-learning-practice-default" class="nav-link" data-scroll-target="#learning-practice-default"><span class="header-section-number">10.3.1</span> <strong>Learning &amp; Practice (default)</strong></a></li>
+  <li><a href="#scientific-readiness-evaluation" id="toc-scientific-readiness-evaluation" class="nav-link" data-scroll-target="#scientific-readiness-evaluation"><span class="header-section-number">10.3.2</span> <strong>Scientific Readiness Evaluation</strong></a></li>
+  <li><a href="#ai-interaction-logging-to-be-launched-on-monday-26-jan-2026" id="toc-ai-interaction-logging-to-be-launched-on-monday-26-jan-2026" class="nav-link" data-scroll-target="#ai-interaction-logging-to-be-launched-on-monday-26-jan-2026"><span class="header-section-number">10.3.3</span> <strong>AI Interaction Logging</strong> (To be launched on Monday, 26-Jan-2026!!)</a></li>
+  </ul></li>
+  <li><a href="#safeguards-and-constraints" id="toc-safeguards-and-constraints" class="nav-link" data-scroll-target="#safeguards-and-constraints"><span class="header-section-number">10.4</span> Safeguards and Constraints</a></li>
+  <li><a href="#menu-commands-and-triggers" id="toc-menu-commands-and-triggers" class="nav-link" data-scroll-target="#menu-commands-and-triggers"><span class="header-section-number">10.5</span> Menu Commands and Triggers</a></li>
+  <li><a href="#traffic-signal-rubric-how-evaluations-work" id="toc-traffic-signal-rubric-how-evaluations-work" class="nav-link" data-scroll-target="#traffic-signal-rubric-how-evaluations-work"><span class="header-section-number">10.6</span> Traffic-Signal Rubric (How Evaluations Work)</a></li>
+  <li><a href="#how-to-generate-an-evaluation-table-required-for-assignments" id="toc-how-to-generate-an-evaluation-table-required-for-assignments" class="nav-link" data-scroll-target="#how-to-generate-an-evaluation-table-required-for-assignments"><span class="header-section-number">10.7</span> How to Generate an Evaluation Table (Required for Assignments)</a></li>
+  <li><a href="#important-usage-notes" id="toc-important-usage-notes" class="nav-link" data-scroll-target="#important-usage-notes"><span class="header-section-number">10.8</span> Important Usage Notes</a>
+  <ul class="collapse">
+  <li><a href="#interaction-limits" id="toc-interaction-limits" class="nav-link" data-scroll-target="#interaction-limits"><span class="header-section-number">10.8.1</span> Interaction Limits</a></li>
+  <li><a href="#memory-and-sessions" id="toc-memory-and-sessions" class="nav-link" data-scroll-target="#memory-and-sessions"><span class="header-section-number">10.8.2</span> Memory and Sessions</a></li>
+  </ul></li>
+  <li><a href="#a-reminder-about-the-appropriate-use-in-this-course" id="toc-a-reminder-about-the-appropriate-use-in-this-course" class="nav-link" data-scroll-target="#a-reminder-about-the-appropriate-use-in-this-course"><span class="header-section-number">10.9</span> A reminder about the appropriate use in this course</a>
+  <ul class="collapse">
+  <li><a href="#you-may-use-jackalopegpt-to" id="toc-you-may-use-jackalopegpt-to" class="nav-link" data-scroll-target="#you-may-use-jackalopegpt-to"><span class="header-section-number">10.9.1</span> You <strong>may</strong> use JackalopeGPT to:</a></li>
+  <li><a href="#you-may-not-use-jackalopegpt-to" id="toc-you-may-not-use-jackalopegpt-to" class="nav-link" data-scroll-target="#you-may-not-use-jackalopegpt-to"><span class="header-section-number">10.9.2</span> You <strong>may not</strong> use JackalopeGPT to:</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../index.html">Course Overview</a></li><li class="breadcrumb-item"><a href="../chapters/course_intro.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/ai_prompting.html">Part ∅: AI preparation</a></li><li class="breadcrumb-item"><a href="../chapters/using_jackalope_gpt.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">How to Use JackalopeGPT</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></h1>
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">How to Use JackalopeGPT</span></h1>
 </div>
 
 
@@ -259,89 +277,183 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="welcome-to-quantitative-analysis-of-messy-field-data" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="welcome-to-quantitative-analysis-of-messy-field-data"><span class="header-section-number">2.1</span> Welcome to Quantitative Analysis of (Messy) Field Data!</h2>
-<p>Thanks for joining us this term! I couldn’t be more pleased at the large size of the class this term! This means that there are more perspectives to help guide us through the following phases of data analysis:</p>
-<blockquote class="blockquote">
-<p><strong>Messy field or lab data → processed data → models → inference</strong></p>
-</blockquote>
-<p><img src="../graphics/workflow_diagram/basic_workflow.png" class="img-fluid"></p>
-<p>The complexity of the project, difficulty of field conditions, or an impending deadline can make the jumps from data collection to inference horribly daunting to young and old researchers alike. Our joint goal in this course is to become more comfortable with each of these steps, so that we not only work more efficiently but we also know a bit more about how to sense of our complex world. It is my sincerest hope that this course will not only teach you some about statistics (and some statistical traps) but that it will also give you a unique opportunity to work with your peers as you delve into the myriad issues that inevitably arise in data analysis. Working together means that we must first acknowledge that each one of us assimilates new material and produces syntheses in varied ways. All I ask is that each of you</p>
+<section id="a-reminder-what-is-jackalopegpt" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="a-reminder-what-is-jackalopegpt"><span class="header-section-number">10.1</span> A Reminder: What is JackalopeGPT?</h2>
+<p><strong>JackalopeGPT</strong> is a learning assistant designed to support quantitative and methodological reasoning in this course. Its primary purpose is to help you improve scientific rigor and streamline your analytical workflow while allowing you to maintain full responsibility for:</p>
+<ul>
+<li>Reasoning<br>
+</li>
+<li>Interpretation<br>
+</li>
+<li>validation<br>
+</li>
+<li>All final assignment submissions</li>
+</ul>
+<p>JackalopeGPT does <strong>not</strong> assign grades (except for the Traffic-Signal readiness lights), make final evaluative decisions, or fill in missing information. Instead, JackalopeGPT has been customized to emphasize:</p>
+<ul>
+<li>Explicit assumptions</li>
+<li>Transparent reasoning<br>
+</li>
+<li>Scope control<br>
+</li>
+<li>Reproducible workflows</li>
+</ul>
+<p>In other words, JackalopeGPT has been designed to help you think <strong>better</strong>, not to think <strong>less</strong>.</p>
+<hr>
 </section>
-<section id="course-objectives" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="course-objectives"><span class="header-section-number">2.2</span> Course Objectives</h2>
-<p>By the end of this course, you should be able to:</p>
+<section id="how-you-can-start-using-it-important" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="how-you-can-start-using-it-important"><span class="header-section-number">10.2</span> How You Can Start Using It (Important)</h2>
+<p>If you are first using JackalopeGPT to optimize your prompts or evaluate an assignment’s completeness before submission, you should use the Main Menu. However, you <strong>do not need to choose anything from the Main Menu to begin</strong>. The Main Menu exists <strong>only</strong> for structured actions (such as readiness checks or AI interaction logging). Most learning happens without it. It is only provided for a bit more convenience. You may simply start prompting JackalopeGPT naturally, as you would with any chat-based GPT.</p>
+<hr>
+</section>
+<section id="operating-modes" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="operating-modes"><span class="header-section-number">10.3</span> Operating Modes</h2>
+<p>JackalopeGPT operates in three distinct modes:</p>
+<section id="learning-practice-default" class="level3" data-number="10.3.1">
+<h3 data-number="10.3.1" class="anchored" data-anchor-id="learning-practice-default"><span class="header-section-number">10.3.1</span> <strong>Learning &amp; Practice (default)</strong></h3>
 <ul>
-<li><p><strong>Think quantitatively about messy ecological data.</strong> You should be on your way to developing a habit of translating real-world ecological questions into quantitative frameworks, while explicitly acknowledging uncertainty and bias in estimation and measurement.</p></li>
-<li><p><strong>Distinguish between questions/hypotheses, data, and inferences.</strong> You should be able to (1) clearly separate ecological hypotheses, the data actually collected, and the quantities being estimated, and (2) understand why these distinctions matter for interpretation and decision-making.</p></li>
-<li><p><strong>Understand the processes that generate data.</strong> You should be able to recognize how different study designs, variation in detection, observer effects, instrument error, and data processing shape and constrain the structure of ecological datasets.</p></li>
-<li><p><strong>Select, build, and critique statistical models as scientific tools.</strong> You should be comfortable choosing and using statistical models not as black boxes, but as explicit representations of assumptions about ecological processes, variation, and causal structure. You should never blindly choose a statistical model again!</p></li>
-<li><p><strong>Interpret results in ecological —not just statistical— terms.</strong> You should be able to conceptually move beyond p-values and coefficients to clearly articulate what your results mean biologically, mechanistically, and practically.</p></li>
-<li><p><strong>Be comfortable applying causal –and not just correlational– reasoning.</strong> You should be able to use causal thinking (conceptual models and directed acyclic graphs) to evaluate what can —and ehat cannot— be inferred from observational and experimental data.</p></li>
-<li><p><strong>Communicate quantitative results clearly, transparently, and honestl.y</strong> Present analyses, figures, and conclusions in ways that are transparent, reproducible, and appropriate for scientific audiences.</p></li>
-<li><p><strong>Develop durable, reproducible analytical workflows.</strong> You should be increasingly comfortable with good data-science practices that support clarity, versioning (even though we will not delve into GitHub this term), and reusability of analyses.</p></li>
-<li><p><strong>Develop new confidence working with unfamiliar, complex, imperfect datasets.</strong> You should leave this course better prepared to engage with real ecological data —without expecting it to be clean, complete, or simple.</p></li>
+<li>Concept clarification<br>
+</li>
+<li>Code debugging or refactoring<br>
+</li>
+<li>Translating between modeling frameworks<br>
+</li>
+<li>Methodological explanations</li>
+</ul>
+<p>This mode is informal, exploratory, and <strong>never evaluative</strong>.</p>
+</section>
+<section id="scientific-readiness-evaluation" class="level3" data-number="10.3.2">
+<h3 data-number="10.3.2" class="anchored" data-anchor-id="scientific-readiness-evaluation"><span class="header-section-number">10.3.2</span> <strong>Scientific Readiness Evaluation</strong></h3>
+<ul>
+<li>Structured, rubric-based checks of specific artifacts<br>
+</li>
+<li>Executed <strong>only</strong> when explicitly invoked (via menu or trigger phrases)<br>
+</li>
+<li>Used to assess whether work appears <em>ready for submission</em>, not to grade on scientific quality.</li>
 </ul>
 </section>
-<section id="topics-covered" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="topics-covered">Topics covered</h2>
-<p>The course covers the following topics, roughly in the following order:</p>
+<section id="ai-interaction-logging-to-be-launched-on-monday-26-jan-2026" class="level3" data-number="10.3.3">
+<h3 data-number="10.3.3" class="anchored" data-anchor-id="ai-interaction-logging-to-be-launched-on-monday-26-jan-2026"><span class="header-section-number">10.3.3</span> <strong>AI Interaction Logging</strong> (To be launched on Monday, 26-Jan-2026!!)</h3>
 <ul>
-<li>Metrology: measurands, measurement error, uncertainty, and data quality<br>
+<li>Minimal documentation of AI assistance<br>
 </li>
-<li>Exploratory data analysis of messy data<br>
+<li>Triggered <strong>only</strong> by the exact command: <code>log this</code><br>
 </li>
-<li>Generalized Linear Models (GLMs): theory and implementation<br>
-</li>
-<li>Model comparison using AIC and information-theoretic approaches<br>
-</li>
-<li>Generalized Linear Mixed Models (GLMMs) and effective sample size<br>
-</li>
-<li>Generalized Additive Models (GAMs)<br>
-</li>
-<li>Generalized Additive Mixed Models (GAMMs)<br>
-</li>
-<li>Modeling spatial and temporal heterogeneity<br>
-</li>
-<li>Structural Causal Modeling (SCM) and causal diagrams<br>
-</li>
-<li>Prediction, uncertainty propagation, and model validation<br>
-</li>
-<li>Synthesis of analytical results and justification of inference<br>
-</li>
-<li>Tables, figures, and reporting standards for quantitative results<br>
-</li>
-<li>Writing defensible and interpretable Results sections</li>
+<li>Designed for transparency, not surveillance</li>
 </ul>
-<p>Given this ambitious scope, we may only scratch the surface of some topics. Even our cursory treatment is aimed at convincing you why these subjects matter for scientists who have messy data.</p>
+<hr>
 </section>
-<section id="what-is-new-this-term-spring-2026" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="what-is-new-this-term-spring-2026"><span class="header-section-number">2.3</span> What is new this term (Spring 2026)?</h2>
-<p>For Spring 2026, I have added attention to new topics that improve both efficiency of analysis workflows and our ability to understand causality at a deeper level. Specifically, I have chosen to add course components on:</p>
+</section>
+<section id="safeguards-and-constraints" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="safeguards-and-constraints"><span class="header-section-number">10.4</span> Safeguards and Constraints</h2>
+<p>JackalopeGPT is intentionally constrained:</p>
 <ul>
-<li><strong>Using large-language models (LLMs) –via ChatGPT– to improve analytical workflows.</strong> This term, I have integrated ChatGPT into the course as a way to support the <em>process</em> of analysis rather than to automate the analysis itself. Many of the hardest parts of quantitative work happen outside of writing code: figuring out why R code isn’t behaving as expected, checking whether an interpretation actually follows from a model, troubleshooting an obscure error message, or getting feedback on how tp clearly document a decision. Used carefully, ChatGPT can act like a sounding board for troubleshooting, sanity-checking, and refining explanations without taking over your critical thinking. Throughout the course, I have deliberately constrained ChatGPT’s role and scope and have tailored its guardrails to match the course progression. In other words, ChatGPT is used to help improve analytical workflow and decision-making, not to generate results or write code on a student’s behalf. We will work together to assess the utility of this tool as the term advances.</li>
+<li>Non-evaluative by default (but has the Main Menu to allow evaluation)</li>
+<li>Asks <strong>at most one</strong> clarifying question at a time</li>
+<li>Never guesses or silently fills gaps<br>
+</li>
+<li>Does not hallucinate criteria or requirements</li>
+<li>Does not combine Main Menu actions</li>
+<li>Generally limits verbosity unless you request detail explicitly</li>
 </ul>
-<div class="columns">
-<div class="column" style="width:80%;">
+<p>Any evaluation or logging action requires <strong>explicit transparency and user consent</strong>. As a last note, if you are unsure whether your prompt is appropriate, add this line: <em>“If this prompt is likely to cause me to overreach in inference or bypass learning, suggest a safer, learning-focused version.”</em></p>
+<hr>
+</section>
+<section id="menu-commands-and-triggers" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="menu-commands-and-triggers"><span class="header-section-number">10.5</span> Menu Commands and Triggers</h2>
+<p>Typing <code>main menu</code> (or <code>Main Menu</code>) displays all available structured actions (with no analysis). This means that JackalopeGPT has all the course assignments and rubrics uploaded into its working knowledge.</p>
+<p>If you enter a <strong>menu number or a similar matching instruction</strong>, JackalopeGPT will:</p>
+<ol type="1">
+<li>confirm the action<br>
+</li>
+<li>execute the instruction file exactly as specified</li>
+</ol>
+<p>Certain phrases (e.g., assignment-check intent or <code>log this</code>) automatically trigger workflows <strong>before</strong> menu selection.</p>
+<hr>
+</section>
+<section id="traffic-signal-rubric-how-evaluations-work" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="traffic-signal-rubric-how-evaluations-work"><span class="header-section-number">10.6</span> Traffic-Signal Rubric (How Evaluations Work)</h2>
+<p>A <strong>universal Traffic-Signal rubric</strong> is pre-loaded and applied <strong>consistently across all readiness checks</strong>.</p>
+<p>Evaluations return the follwing ratings of scientific readiness:</p>
 <ul>
-<li><strong>Using large-language models (LLMs) to improve teaching at scale.</strong> What does this mean? In past terms, between 10-15 students have been enrolled in this course. This term, I have allowed 26 students to enroll. Without a Teaching Assistant, this spawns a significant issue of scale. This is solvable if we use AI as a helpful tool. So, after spending some time as an LLM-consultant and tester, I decided to explicitly integrate chatGPT’s LLMs into my teaching/grading workflow. This means that students will use a custom GPT that I created specifically for ZOO/ECOL-5500 called <a href="https://chatgpt.com/g/g-696966777a948191858541cd7986057e-jackalopegpt" target="_blank">JackalopeGPT</a> (using ChatGPT) to run checks on their work prior to submission; this will solve some of the “tuning” issues (with codes, grammar, clarity, etc.) that I have seen in student submissions in previous years.</li>
+<li><strong>Green:</strong> Ready to proceed<br>
+</li>
+<li><strong>Yellow:</strong> Exercise caution (revisions necessary)<br>
+</li>
+<li><strong>Red:</strong> Stop and Rework</li>
 </ul>
-</div><div class="column" style="width:20%;">
-<p><img src="../graphics/GPT_logo/jackalopeGPT_logo.png" class="img-fluid"></p>
-</div>
-</div>
+<p>This rubric provides standardized, comparable feedback <strong>without grading</strong>.</p>
+<hr>
+</section>
+<section id="how-to-generate-an-evaluation-table-required-for-assignments" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="how-to-generate-an-evaluation-table-required-for-assignments"><span class="header-section-number">10.7</span> How to Generate an Evaluation Table (Required for Assignments)</h2>
+<p>Before submission, you must evaluate assignments using JackalopeGPT.</p>
+<p><strong>Steps:</strong></p>
+<ol type="1">
+<li>Select the focal assignment from the JackalopeGPT menu<br>
+</li>
+<li>Copy and paste the your completed .qmd file (not rendered output)<br>
+</li>
+<li>Use the model output to revise your file until it meets the assignment standard<br>
+</li>
+<li>Paste the complete <strong>Evaluation Table output</strong> directly from the JackalopeGPT windo (it is already in .qmd format) into the section at the end of each assignment titled <em>JackalopeGPT Pre-Submission Evaluation</em>.</li>
+</ol>
+<p><em>(Tip: hover over the table until the file icon appears at the upper right, then copy.)</em></p>
+<hr>
+</section>
+<section id="important-usage-notes" class="level2" data-number="10.8">
+<h2 data-number="10.8" class="anchored" data-anchor-id="important-usage-notes"><span class="header-section-number">10.8</span> Important Usage Notes</h2>
+<section id="interaction-limits" class="level3" data-number="10.8.1">
+<h3 data-number="10.8.1" class="anchored" data-anchor-id="interaction-limits"><span class="header-section-number">10.8.1</span> Interaction Limits</h3>
+<p>If you are using the <strong>free tier</strong> (recommended), be aware of interaction limits. Plan longer evaluation workflows accordingly.</p>
+</section>
+<section id="memory-and-sessions" class="level3" data-number="10.8.2">
+<h3 data-number="10.8.2" class="anchored" data-anchor-id="memory-and-sessions"><span class="header-section-number">10.8.2</span> Memory and Sessions</h3>
+<p>JackalopeGPT does <strong>not</strong> retain memory across sessions.</p>
+<p>If you start a new session, you must <strong>re-provide context</strong> about:</p>
 <ul>
-<li><p><strong>Structural Causal Models (SCMs)</strong> I added Structural Causal Models (SCMs) at the end of the course to give us a way to think more clearly about complex systems where multiple variables influence each other at the same time. In the first part of the course, students will see the limits of fitting separate models (e.g.&nbsp;GLMs, GLMMs, GAMMs) for singular response variables; those models can work individually, but they often miss shared drivers, indirect effects, or how pieces of the complex system of exogenous and endogenous factors fit together. SCMs give us a way to lay out those relationships explicitly and analyze them as a connected structure (as is present in natural systems) rather than as a collection of isolated models. The goal isn’t to replace the modeling approaches we’ve already used but to improve inference by making our assumptions about the system clear and coherent.</p></li>
-<li><p><strong>Jackalopes!</strong> This course corrects a long-standing perspective that (1) jackalopes had deer-like antlers (Fig. 1), and (2) there was only a single species of jackalopes (Fig. 2). We will use the newly discovered cryptid ecosystem for course exercises and examples.</p></li>
+<li>your study system<br>
+</li>
+<li>your data<br>
+</li>
+<li>your analytical goals</li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../graphics/jackalope_graphics/correct_jackalope.png" class="img-fluid figure-img"></p>
-<figcaption>Figure 1. Illustrations of the correct and incorrect ornament morphology of jackalopes.</figcaption>
-</figure>
-</div>
+<p>Do not assume continuity across chats. It is strongly recommended that you keep a file with your updated and optimized prompts so that you can reuse.</p>
+<hr>
+</section>
+</section>
+<section id="a-reminder-about-the-appropriate-use-in-this-course" class="level2" data-number="10.9">
+<h2 data-number="10.9" class="anchored" data-anchor-id="a-reminder-about-the-appropriate-use-in-this-course"><span class="header-section-number">10.9</span> A reminder about the appropriate use in this course</h2>
+<section id="you-may-use-jackalopegpt-to" class="level3" data-number="10.9.1">
+<h3 data-number="10.9.1" class="anchored" data-anchor-id="you-may-use-jackalopegpt-to"><span class="header-section-number">10.9.1</span> You <strong>may</strong> use JackalopeGPT to:</h3>
+<ul>
+<li>clarify concepts<br>
+</li>
+<li>debug R code<br>
+</li>
+<li>compare modeling approaches (with explanation)<br>
+</li>
+<li>learn how to validate models<br>
+</li>
+<li>improve analytical workflow and reproducibility</li>
+</ul>
+</section>
+<section id="you-may-not-use-jackalopegpt-to" class="level3" data-number="10.9.2">
+<h3 data-number="10.9.2" class="anchored" data-anchor-id="you-may-not-use-jackalopegpt-to"><span class="header-section-number">10.9.2</span> You <strong>may not</strong> use JackalopeGPT to:</h3>
+<ul>
+<li>generate full assignment submissions<br>
+</li>
+<li>write end-to-end analyses, methods, or results<br>
+</li>
+<li>replace your own reasoning<br>
+</li>
+<li>outsource scientific judgment<br>
+</li>
+<li>produce claims without validation</li>
+</ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -747,13 +859,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../index.html" class="pagination-link" aria-label="Information">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Information</span></span>
+      <a href="../chapters/ai_prompting.html" class="pagination-link" aria-label="AI Prompting for Analysis">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">AI Prompting for Analysis</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/syllabus.html" class="pagination-link" aria-label="Syllabus">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Syllabus</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/naming_conventions.html" class="pagination-link" aria-label="Naming conventions and coding style">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Naming conventions and coding style</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

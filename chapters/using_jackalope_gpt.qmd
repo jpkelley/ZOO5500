@@ -1,44 +1,153 @@
 ---
-title: "using_jackalope_gpt"
+title: "How to Use JackalopeGPT"
 format: html
 ---
 
-## *Reminder:* How to use JackalopeGPT in this course
+## A Reminder: What is JackalopeGPT?
 
-Use JackalopeGPT to:
+**JackalopeGPT** is a learning assistant designed to support quantitative and methodological reasoning in this course. Its primary purpose is to help you improve scientific rigor and streamline your analytical workflow while allowing you to maintain full responsibility for:
 
-- clarify concepts
-- debug code
-- compare different modeling options (with explanations)
-- learn how to validate models
-- improve analytical workflow and reproducibility
+- Reasoning  
+- Interpretation  
+- validation  
+- All final assignment submissions  
 
-Do **not** use it to:
+JackalopeGPT does **not** assign grades (except for the Traffic-Signal readiness lights), make final evaluative decisions, or fill in missing information. Instead, JackalopeGPT has been customized to emphasize:
 
-- generate full assignment submissions
-- produce end-to-end analysis scripts
-- skip reasoning
-- outsource scientific judgment
-- produce claims without proper validation
+- Explicit assumptions
+- Transparent reasoning  
+- Scope control  
+- Reproducible workflows
 
-If you are unsure whether you are using JackalopeGPT (or any GPT) appropriately, try adding this at the end of your prompt: *"If this prompt will likely to lead me to overreach in my inference or bypass learning, suggest a safer, learning-focused version of this prompt.”*
-
-* **Conceptual Clarification:** GenAI may be used to explain statistical concepts, examine modeling assumptions, and interpret model diagnostics (at a broad level).
-* **Planning and Reflection:** GenAI may assist with refining research questions, generating assumption checklists, stress-testing interpretations, and identifying alternative explanations that you  then vet for ecological sanity.
-* **Writing Support:** You must submit original writing for evaluation. GenAI may be used to improve clarity, organization, and tone, and to identify points of ambiguity or inferential overreach. GenAI absolutely must not write end-to-end paragraphs, coding scripts, methods, results, or citations. All GenAI evaluations are structured through pre-loaded instructions and are available for audit and validation.
-* **Code Understanding:** GenAI may explain what existing code does, diagnose warnings or errors conceptually, and suggest stylistic or reproducibility improvements. AI may not replace your independent code comprehension.
-
-JackalopeGPT has been instructed to help you learn, debug R code, and understand quantitative analysis workflows (specifically, in the biological sciences). 
-
+In other words, JackalopeGPT has been designed to help you think **better**, not to think **less**.
 
 ---
 
+## How You Can Start Using It (Important)
 
+If you are first using JackalopeGPT to optimize your prompts or evaluate an assignment's completeness before submission, you should use the Main Menu. However, you **do not need to choose anything from the Main Menu to begin**. The Main Menu exists **only** for structured actions (such as readiness checks or AI interaction logging). Most learning happens without it. It is only provided for a bit more convenience. You may simply start prompting JackalopeGPT naturally, as you would with any chat-based GPT. 
 
+---
 
+## Operating Modes
 
+JackalopeGPT operates in three distinct modes:
 
+### **Learning & Practice (default)**
 
+- Concept clarification  
+- Code debugging or refactoring  
+- Translating between modeling frameworks  
+- Methodological explanations  
+
+This mode is informal, exploratory, and **never evaluative**.
+
+### **Scientific Readiness Evaluation**
+
+- Structured, rubric-based checks of specific artifacts  
+- Executed **only** when explicitly invoked (via menu or trigger phrases)  
+- Used to assess whether work appears *ready for submission*, not to grade on scientific quality. 
+
+### **AI Interaction Logging** (To be launched on Monday, 26-Jan-2026!!)
+
+- Minimal documentation of AI assistance  
+- Triggered **only** by the exact command: `log this`  
+- Designed for transparency, not surveillance  
+
+---
+
+## Safeguards and Constraints
+
+JackalopeGPT is intentionally constrained:
+
+- Non-evaluative by default (but has the Main Menu to allow evaluation)
+- Asks **at most one** clarifying question at a time
+- Never guesses or silently fills gaps  
+- Does not hallucinate criteria or requirements
+- Does not combine Main Menu actions
+- Generally limits verbosity unless you request detail explicitly  
+
+Any evaluation or logging action requires **explicit transparency and user consent**. As a last note, if you are unsure whether your prompt is appropriate, add this line: *“If this prompt is likely to cause me to overreach in inference or bypass learning, suggest a safer, learning-focused version.”*
+
+---
+
+## Menu Commands and Triggers
+
+Typing `main menu` (or `Main Menu`) displays all available structured actions (with no analysis). This means that JackalopeGPT has all the course assignments and rubrics uploaded into its working knowledge.
+
+If you enter a **menu number or a similar matching instruction**, JackalopeGPT will:
+
+1. confirm the action  
+2. execute the instruction file exactly as specified  
+
+Certain phrases (e.g., assignment-check intent or `log this`) automatically trigger workflows **before** menu selection.
+
+---
+
+## Traffic-Signal Rubric (How Evaluations Work)
+
+A **universal Traffic-Signal rubric** is pre-loaded and applied **consistently across all readiness checks**.
+
+Evaluations return the follwing ratings of scientific readiness:
+
+- **Green:** Ready to proceed  
+- **Yellow:** Exercise caution (revisions necessary)  
+- **Red:** Stop and Rework
+
+This rubric provides standardized, comparable feedback **without grading**.
+
+---
+
+## How to Generate an Evaluation Table (Required for Assignments)
+
+Before submission, you must evaluate assignments using JackalopeGPT.
+
+**Steps:**
+
+1. Select the focal assignment from the JackalopeGPT menu  
+2. Copy and paste the your completed .qmd file (not rendered output)  
+3. Use the model output to revise your file until it meets the assignment standard  
+4. Paste the complete **Evaluation Table output** directly from the JackalopeGPT windo (it is already in .qmd format) into the section at the end of each assignment titled _JackalopeGPT Pre-Submission Evaluation_.
+
+*(Tip: hover over the table until the file icon appears at the upper right, then copy.)*
+
+---
+
+## Important Usage Notes
+
+### Interaction Limits
+If you are using the **free tier** (recommended), be aware of interaction limits. Plan longer evaluation workflows accordingly.
+
+### Memory and Sessions
+JackalopeGPT does **not** retain memory across sessions.
+
+If you start a new session, you must **re-provide context** about:
+
+- your study system  
+- your data  
+- your analytical goals  
+
+Do not assume continuity across chats. It is strongly recommended that you keep a file with your updated and optimized prompts so that you can reuse. 
+
+---
+
+## A reminder about the appropriate use in this course
+
+### You **may** use JackalopeGPT to:
+
+- clarify concepts  
+- debug R code  
+- compare modeling approaches (with explanation)  
+- learn how to validate models  
+- improve analytical workflow and reproducibility  
+
+### You **may not** use JackalopeGPT to:
+
+- generate full assignment submissions  
+- write end-to-end analyses, methods, or results  
+- replace your own reasoning  
+- outsource scientific judgment  
+- produce claims without validation  
 
 
 

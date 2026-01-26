@@ -22,10 +22,12 @@ book:
     - part: "Part ∅: AI preparation"
       chapters:   
         - chapters/ai_prompting.qmd
+        - chapters/using_jackalope_gpt.qmd
     - part: "Part I: Chaos to Columns"
-      # chapters:
+      chapters:
+        - chapters/naming_conventions.qmd
         # - chapters/statistical_aphorisms.qmd
-        # - chapters/naming_conventions.qmd
+       
         # - chapters/data_exploration.qmd
         # - chapters/preprocessing.qmd
     - part: "Part II: Columns to Curves"

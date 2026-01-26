@@ -92,3 +92,15 @@ h3 { font-size: 0.95rem; }
   display: none;
 }
 
+.good-bad-table thead th {
+  background-color: #d9edf7; /* light blue */
+}
+
+.data-format-table table thead th {
+  background-color: #d9edf7;
+}
+
+.naming-rules-table table thead th {
+  background-color: #d9edf7 !important;
+  border-bottom: 2px solid #bcdff1;
+}

@@ -13,7 +13,7 @@ Use the calendar table below to see what’s coming each week; simply click a we
 ::: {.course-info tbl-colwidths="[14, 32, 18, 18, 10, 8]"}
 | **Week** | **Topics** | **In-class exercise** | **Milestone assignment** | **Stress level** | **Grade weight (%)** |
 |-----------:|------------|------------|------------|------------|------------|
-| [**Week 1**<br>19-Jan-2026](#week-1) | Course intro; RStudio setup; AI guardrails | Project scoping discussion | — | Very low | 5 |
+| [**Week 1**<br>19-Jan-2026](#week-1) | Course intro; RStudio setup; AI guardrails | Project scoping discussion | — | Very low | 0 |
 | [**Week 2**<br>26-Jan-2026](#week-2) | File structure; reproducible workflows; AI logs | File audit walkthrough | Analysis Concept Note | Low | 5 |
 | [**Week 3**<br>02-Feb-2026](#week-3) | Data exploration; measurement & uncertainty | Exploratory data analysis walkthrough | — | Very low | 0 |
 | [**Week 4**<br>09-Feb-2026](#week-4) | GLMs (theory + practice) | GLM exercise | Data Readiness Note | Low | 10 |

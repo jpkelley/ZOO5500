@@ -1,5 +1,5 @@
 ---
-title: "Week 2: Analysis Concept Note"
+title: "Analysis Concept Note"
 author: "[Enter your name here]"
 date: today
 numbered: false
@@ -20,7 +20,7 @@ _Insert a concise, descriptive working title._
 
 ### Research question {.unnumbered}
 
-_State your primary question/hypothesis in 1–3 sentences, in plain language._  
+_State your primary question/hypothesis in 1-3 sentences, in plain language._
 _Avoid methods or results language here._
 
 ---
@@ -124,7 +124,7 @@ _Examples: missing data, unclear metadata, low sample size, confounding, measure
 
 ## What success looks like at this stage {.unnumbered}
 
-_In 2–4 sentences, describe what you would consider a successful outcome for this project by the end of the semester._
+_In 2-4 sentences, describe what you would consider a successful outcome for this project by the end of the semester._
 
 ---
 
@@ -134,32 +134,39 @@ _Anything you want feedback on specifically? Scope, feasibility, model choice, d
 
 ---
 
+## JackalopeGPT Pre-Submission Evaluation (Required) {.unnumbered}
+
+_Paste your complete Evaluation Table from JackalopeGPT here. Please include as many as you wish, but only the final Evaluation Table is required._
+
+---
+
 ## Self-check rubric (complete before submitting) {.unnumbered}
 
 Before submitting, read each item and confirm that your Analysis Concept Note meets the standards below.
 
 ### Clarity and scope
-- ☐ My research question is understandable to a classmate outside my subfield  
-- ☐ The scope is appropriate for one semester (not overly ambitious)  
-- ☐ I can clearly describe what one observation (row) represents  
+- [] My research question is understandable to a classmate outside my subfield  
+- [] The scope is appropriate for one semester (not overly ambitious)  
+- [] I can clearly describe what one observation (row) represents  
 
 ### Data readiness (conceptual)
-- ☐ I know where the data come from and what they represent  
-- ☐ I can name my response variable(s) and explain what they measure  
-- ☐ I can explain why each main predictor is included  
+- [] I know where the data come from and what they represent  
+- [] I can name my response variable(s) and explain what they measure  
+- [] I can explain why each main predictor is included  
 
 ### Analytical thinking
-- ☐ My tentative model choice is motivated by the data structure, not habit  
-- ☐ I have considered non-independence, temporal, or spatial structure where relevant  
-- ☐ I have identified at least one plausible complication or limitation  
+- [] My tentative model choice is motivated by the data structure, not habit  
+- [] I have considered non-independence, temporal, or spatial structure where relevant  
+- [] I have identified at least one plausible complication or limitation  
 
 ### Workflow and reproducibility
-- ☐ I have a clear plan for organizing files and scripts  
-- ☐ Someone else could understand my project structure from my description  
-- ☐ My planned AI use aligns with course expectations  
+- [] I have a clear plan for organizing files and scripts  
+- [] omeone else could understand my project structure from my description  
+- [] My planned AI use aligns with course expectations  
 
 ### Overall check
-- ☐ This document reflects *my current thinking*, not a polished final plan  
-- ☐ Uncertainty and open questions are stated honestly  
-- ☐ I am ready to receive feedback and revise my approach  
+- [] his document reflects *my current thinking*, not a polished final plan  
+- [] Uncertainty and open questions are stated honestly  
+- [] I am ready to receive feedback and revise my approach  
+- []  have completed the JackalopeGPT pre-submission evaluation and pasted the output above
 

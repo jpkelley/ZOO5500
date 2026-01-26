@@ -160,5 +160,8 @@
   },
   "chapters/project_scoping.qmd": {
     "project_scoping.html": "0141f8b3"
+  },
+  "chapters/using_jackalope_gpt.qmd": {
+    "using_jackalope_gpt.html": "9a2a3156"
   }
 }

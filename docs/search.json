@@ -246,7 +246,7 @@
     "href": "chapters/calendar_sp26.html#calendar-overview",
     "title": "4  Course calendar",
     "section": "",
-    "text": "Week\nTopics\nIn-class exercise\nMilestone assignment\nStress level\nGrade weight (%)\n\n\n\n\nWeek 119-Jan-2026\nCourse intro; RStudio setup; AI guardrails\nProject scoping discussion\n—\nVery low\n5\n\n\nWeek 226-Jan-2026\nFile structure; reproducible workflows; AI logs\nFile audit walkthrough\nAnalysis Concept Note\nLow\n5\n\n\nWeek 302-Feb-2026\nData exploration; measurement & uncertainty\nExploratory data analysis walkthrough\n—\nVery low\n0\n\n\nWeek 409-Feb-2026\nGLMs (theory + practice)\nGLM exercise\nData Readiness Note\nLow\n10\n\n\nWeek 516-Feb-2026\nGLMs; AIC & information theory\nModel comparison exercise\n—\nLow\n5\n\n\nWeek 623-Feb-2026\nGLMMs; effective sample size\nGLMM exercise\n—\nModerate\n15\n\n\nWeek 702-Mar-2026\nGAMs\nGAM exercise\nWorking Model (draft)\nModerate\n0\n\n\nWeek 809-Mar-2026\nGAMMs; spatial & temporal heterogeneity\nModel refinement exercise\nWorking Model (final lock)\nModerate\n15\n\n\nWeek 916-Mar-2026\nStudent Spring Break\n—\n—\nNone\n0\n\n\nWeek 1023-Mar-2026\nStructural Causal Modeling (SCM)\nCausal diagram critique\n—\nLow\n10\n\n\nWeek 1130-Mar-2026\nInstructor Spring Break\n—\n—\nNone\n0\n\n\nWeek 1206-Apr-2026\nPrediction & uncertainty\nPrediction checks\nInterpretation Memo\nLow\n10\n\n\nWeek 1313-Apr-2026\nSynthesis & justification\nPeer + AI review\n—\nModerate\n0\n\n\nWeek 1420-Apr-2026\nTables, figures, reporting standards\nTable/figure workshop\nResults Section\nLow\n10\n\n\nWeek 1527-Apr-2026\nWriting Results sections\nDraft clinic\nFull Draft\nModerate\n15\n\n\nWeek 1604-May-2026\nReflection & closure\nCourse wrap-up\nRevision Plan (not executed)\nNone\n5",
+    "text": "Week\nTopics\nIn-class exercise\nMilestone assignment\nStress level\nGrade weight (%)\n\n\n\n\nWeek 119-Jan-2026\nCourse intro; RStudio setup; AI guardrails\nProject scoping discussion\n—\nVery low\n0\n\n\nWeek 226-Jan-2026\nFile structure; reproducible workflows; AI logs\nFile audit walkthrough\nAnalysis Concept Note\nLow\n5\n\n\nWeek 302-Feb-2026\nData exploration; measurement & uncertainty\nExploratory data analysis walkthrough\n—\nVery low\n0\n\n\nWeek 409-Feb-2026\nGLMs (theory + practice)\nGLM exercise\nData Readiness Note\nLow\n10\n\n\nWeek 516-Feb-2026\nGLMs; AIC & information theory\nModel comparison exercise\n—\nLow\n5\n\n\nWeek 623-Feb-2026\nGLMMs; effective sample size\nGLMM exercise\n—\nModerate\n15\n\n\nWeek 702-Mar-2026\nGAMs\nGAM exercise\nWorking Model (draft)\nModerate\n0\n\n\nWeek 809-Mar-2026\nGAMMs; spatial & temporal heterogeneity\nModel refinement exercise\nWorking Model (final lock)\nModerate\n15\n\n\nWeek 916-Mar-2026\nStudent Spring Break\n—\n—\nNone\n0\n\n\nWeek 1023-Mar-2026\nStructural Causal Modeling (SCM)\nCausal diagram critique\n—\nLow\n10\n\n\nWeek 1130-Mar-2026\nInstructor Spring Break\n—\n—\nNone\n0\n\n\nWeek 1206-Apr-2026\nPrediction & uncertainty\nPrediction checks\nInterpretation Memo\nLow\n10\n\n\nWeek 1313-Apr-2026\nSynthesis & justification\nPeer + AI review\n—\nModerate\n0\n\n\nWeek 1420-Apr-2026\nTables, figures, reporting standards\nTable/figure workshop\nResults Section\nLow\n10\n\n\nWeek 1527-Apr-2026\nWriting Results sections\nDraft clinic\nFull Draft\nModerate\n15\n\n\nWeek 1604-May-2026\nReflection & closure\nCourse wrap-up\nRevision Plan (not executed)\nNone\n5",
     "crumbs": [
       "Course Overview",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Course calendar</span>"
@@ -356,7 +356,7 @@
     "href": "chapters/assignment_grades.html#milestone-assignment-descriptions",
     "title": "Assignments & Grades",
     "section": "",
-    "text": "NoteAnalysis Concept Note (Week 2)\n\n\n\n\n\nPurpose:\nLock in a feasible analysis plan early, so you’re not improvising later. This is about scope, clarity, and workflow—not results.\n\nWhat to include\nDownload the Analysis Concept Note template (.qmd)\n\nWorking title (can change later)\nYour focal question (1–3 sentences; plain language)\nStudy system and units of analysis (what is one “row,” conceptually?)\nResponse variable(s) and predictor(s) you expect to use (draft list is fine)\nHypothesized relationships\n\nShort bullets; include directionality when possible\n\nData source and file plan\n\nWhere the data live\n\nWhat you will name files\n\nWhat the folder structure will be\n\nPlanned model family (tentative)\n\ne.g., GLM / GLMM / GAM / GAMM, and why that’s your first guess\n\nPotential complications you already suspect\n\nMissing data, non-independence, zero inflation, seasonality, etc.\n\n\n\n\nSubmission format\n\n1–2 pages (PDF) or a short Quarto/Markdown page\nClear headings (don’t bury the key information)\n\n\n\n“Good” looks like\n\nA question that is answerable with the data you actually have\nReasonable scope for one semester\nA workflow plan that makes your project reproducible from day one\n\n\n\n\n\n\n\n\n\n\n\nNoteData Readiness Note (Week 4)\n\n\n\n\n\nPurpose:\nDemonstrate that your dataset is analysis-ready—or identify exactly what still blocks you. This is your chance to be honest about limitations before modeling.\n\nWhat to include\n\nDataset summary\n\nNumber of rows/observations\n\nKey grouping structure (site, individual, date, etc.)\n\nData dictionary (lightweight)\n\nVariable name → meaning → units → type (numeric, factor, date)\n\nMissingness and exclusions\n\nWhat’s missing, where, and what you did about it (if anything)\n\nMeasurement and uncertainty notes\n\nKnown measurement error, detection limits, observer effects, instrument drift, etc.\n\nBasic EDA outputs (minimal but informative)\n\n1–3 plots that reveal structure (distributions, relationships, time trends)\n\nA short paragraph interpreting what matters\n\nReadiness decision\n\n“Ready to model” or “Not ready yet,” with a clear plan to get there\n\n\n\n\nSubmission format\n\n1–2 pages (PDF) or Quarto page with embedded plots\n\n\n\n“Good” looks like\n\nYou can explain what each variable means and whether it’s trustworthy\nYou’ve surfaced the biggest problems early\nYour EDA is purposeful, not a plot dump\n\n\n\n\n\n\n\n\n\n\n\nNoteWorking Model — Draft (Week 7)\n\n\n\n\n\nPurpose:\nPut a real model on the table. This is a draft: imperfect is fine, but it must be runnable and defensible.\n\nWhat to include\n\nYour current model formula(s) (plain language and/or code notation)\nModel type (GLM, GLMM, GAM, etc.) and why it fits the data structure\nKey diagnostics or checks (draft level)\n\nAnything that suggests it’s “in the ballpark” or clearly broken\n\nOne short interpretation paragraph\n\nWhat the model suggests (careful language; no over-claiming)\n\nA short “known issues” list\n\nWhat you know is wrong or incomplete\n\nWhat you plan to try next\n\n\n\n\nSubmission format\n\nQuarto page (preferred) or PDF with model description and outputs\nInclude enough detail that someone else could reproduce the model from your write-up\n\n\n\n“Good” looks like\n\nA runnable model aligned with your question\nHonest diagnostics and a clear plan to improve\n\n\n\n\n\n\n\n\n\n\n\nNoteWorking Model — Final Lock (Week 8)\n\n\n\n\n\nPurpose:\nFreeze the core model so the rest of the semester can focus on prediction, interpretation, and reporting instead of endless tinkering.\n\nWhat to include\n\nFinal model specification\n\nFinal formula, family/link, random effects or smooths, correlation structures if used\n\nJustification\n\nWhy this structure is appropriate for the data and the question\n\nModel checks\n\nA small set of diagnostics you can defend\n\nNotes on remaining limitations\n\nWhat changes are no longer allowed\n\nAfter the lock, presentation and interpretation may improve, but model shopping should stop without compelling justification\n\n\n\n\nSubmission format\n\nQuarto page (preferred) or PDF\nInclude key outputs you’ll rely on later (even if figures improve)\n\n\n\n“Good” looks like\n\nA stable model you can explain to a skeptical reader\nEvidence you tested assumptions rather than hoping\n\n\n\n\n\n\n\n\n\n\n\nNoteInterpretation Memo (Week 12)\n\n\n\n\n\nPurpose:\nPractice disciplined interpretation and uncertainty-aware reasoning. This is where you show that you can tell the truth about what the model does—and does not—say.\n\nWhat to include\n\nMain result(s) in plain language\nUncertainty\n\nWhat is uncertain and why\n\nConfidence intervals, credible intervals, prediction intervals, or other appropriate summaries\n\nPrediction vs. inference clarity\n\nAre you predicting new cases, explaining mechanisms, or both?\n\nSensitivity or robustness (lightweight)\n\nOne small check that increases confidence (or reveals fragility)\n\nLimitations\n\nThe most important threats to inference and how they affect interpretation\n\n\n\n\nSubmission format\n\n~1–2 pages (PDF) or Quarto page\nEmphasis on writing quality and intellectual restraint\n\n\n\n“Good” looks like\n\nClear, honest claims tied directly to model output\nUncertainty is centered, not hidden\nNo story time beyond what the evidence supports\n\n\n\n\n\n\n\n\n\n\n\nNoteResults Section (Week 14)\n\n\n\n\n\nPurpose:\nDraft the Results section you would submit in a real paper or report: concise, structured, and supported by tables and figures.\n\nWhat to include\n\nShort orienting paragraph\n\nWhat you modeled and what the reader should look for\n\nCore results\n\n2–4 key findings, depending on project scope\n\nTables and/or figures\n\nClean, interpretable, labeled, and referenced in text\n\nMinimal interpretation\n\nState what you found; deeper interpretation comes later or is clearly separated\n\n\n\n\nSubmission format\n\nQuarto page (ideal) or PDF\nInclude figure and table captions\n\n\n\n“Good” looks like\n\nFindings are understandable without reading your code\nFigures and tables do real work\nClaims match the evidence shown\n\n\n\n\n\n\n\n\n\n\n\nNoteFull Draft (Week 15)\n\n\n\n\n\nPurpose:\nAssemble a complete, coherent draft that reads like a real scientific product. Structure and flow matter here.\n\nWhat to include\n\nAt minimum: Introduction, Methods, Results, Discussion (or equivalent)\nConsistent terminology\n\nVariable names, units, and definitions do not drift\n\nAll figures and tables in near-final form\nReferences and citations, as appropriate\n\n\n\nSubmission format\n\nQuarto render (HTML or PDF preferred)\nEnsure figures and tables are legible and captioned\n\n\n\n“Good” looks like\n\nA document that could be revised into something publishable\nClear logic and honest uncertainty\nNo missing major components\n\n\n\n\n\n\n\n\n\n\n\nNoteRevision Plan (Not Executed) (Week 16)\n\n\n\n\n\nPurpose:\nDemonstrate that you can revise strategically. You will not execute revisions; you will propose them.\n\nWhat to include\n\nTop five revision priorities\n\nRanked, with a sentence explaining why each matters\n\nWhat you would change (specific)\n\n“Rewrite paragraph X to clarify Y”\n\n“Replace Figure 2 with a plot that shows Z”\n\nWhat evidence you would need\n\nAdditional checks, plots, sensitivity analyses, etc.\n\nIf you had 10 more hours\n\nWhat would you do first?\n\nIf you had 40 more hours\n\nWhat would you do that you cannot do now?\n\n\n\n\nSubmission format\n\n1 page (PDF) or short Quarto page\n\n\n\n“Good” looks like\n\nSpecific, actionable revisions\nClearly prioritized and realistic\nDemonstrates mature judgment about improving inference and communication",
+    "text": "NoteAnalysis Concept Note (Week 2)\n\n\n\n\n\nPurpose:\nLock in a feasible analysis plan early, so you’re not improvising later. This is about scope, clarity, and workflow—not results.\n\nWhat to include\nDownload the Analysis Concept Note template (.qmd)\n\nWorking title (can change later)\nYour focal question (1–3 sentences; plain language)\nStudy system and units of analysis (what is one “row,” conceptually?)\nResponse variable(s) and predictor(s) you expect to use (draft list is fine)\nHypothesized relationships\n\nShort bullets; include directionality when possible\n\nData source and file plan\n\nWhere the data live\n\nWhat you will name files\n\nWhat the folder structure will be\n\nPlanned model family (tentative)\n\ne.g., GLM / GLMM / GAM / GAMM, and why that’s your first guess\n\nPotential complications you already suspect\n\nMissing data, non-independence, zero inflation, seasonality, etc.\n\n\n\n\nSubmission format\n\n1–2 pages (PDF) or a short Quarto/Markdown page\nClear headings (don’t bury the key information)\n\n\n\n“Good” looks like\n\nA question that is answerable with the data you actually have\nReasonable scope for one semester\nA workflow plan that makes your project reproducible from day one\n\n\n\n\n\n\n\n\n\n\n\nNoteData Readiness Note (Week 4)\n\n\n\n\n\nPurpose:\nDemonstrate that your dataset is analysis-ready—or identify exactly what still blocks you. This is your chance to be honest about limitations before modeling.\n\nWhat to include\n\nDataset summary\n\nNumber of rows/observations\n\nKey grouping structure (site, individual, date, etc.)\n\nData dictionary (lightweight)\n\nVariable name → meaning → units → type (numeric, factor, date)\n\nMissingness and exclusions\n\nWhat’s missing, where, and what you did about it (if anything)\n\nMeasurement and uncertainty notes\n\nKnown measurement error, detection limits, observer effects, instrument drift, etc.\n\nBasic Exploratory Data Analysis outputs (minimal but informative)\n\n1–3 plots that reveal structure (distributions, relationships, time trends)\n\nA short paragraph interpreting what matters\n\nReadiness decision\n\n“Ready to model” or “Not ready yet,” with a clear plan to get there\n\n\n\n\nSubmission format\n\n1–2 pages (PDF) or Quarto page with embedded plots\nIn your Quarto-formatted (.qmd) submission, please include the final Evaluation Table (i.e. rubric-tested) output from JackalopeGPT.\n\n\n\n“Good” looks like\n\nYou can explain what each variable means and whether it Is trustworthy\nYou have surfaced the biggest problems early\nYour Exploratory Data Analysis purposeful, not a plot dump\n\n\n\n\n\n\n\n\n\n\n\nNoteWorking Model — Draft (Week 7)\n\n\n\n\n\nPurpose:\nPut a real model on the table. This is a draft: imperfect is fine, but it must be runnable and defensible.\n\nWhat to include\n\nYour current model formula(s) (plain language and/or code notation)\nModel type (GLM, GLMM, GAM, etc.) and why it fits the data structure\nKey diagnostics or checks (draft level)\n\nAnything that suggests it’s “in the ballpark” or clearly broken\n\nOne short interpretation paragraph\n\nWhat the model suggests (careful language; no over-claiming)\n\nA short “known issues” list\n\nWhat you know is wrong or incomplete\n\nWhat you plan to try next\n\n\n\n\nSubmission format\n\nQuarto page (preferred) or PDF with model description and outputs\nInclude enough detail that someone else could reproduce the model from your write-up\nIn your Quarto-formatted (.qmd) submission, please include the final Evaluation Table (i.e. rubric-tested) output from JackalopeGPT.\n\n\n\n“Good” looks like\n\nA runnable model aligned with your question\nHonest diagnostics and a clear plan to improve\n\n\n\n\n\n\n\n\n\n\n\nNoteWorking Model — Final Lock (Week 8)\n\n\n\n\n\nPurpose:\nFreeze the core model so the rest of the semester can focus on prediction, interpretation, and reporting instead of endless tinkering.\n\nWhat to include\n\nFinal model specification\n\nFinal formula, family/link, random effects or smooths, correlation structures if used\n\nJustification\n\nWhy this structure is appropriate for the data and the question\n\nModel checks\n\nA small set of diagnostics you can defend\n\nNotes on remaining limitations\n\nWhat changes are no longer allowed\n\nAfter the lock, presentation and interpretation may improve, but model shopping should stop without compelling justification\n\n\n\n\nSubmission format\n\nQuarto page (preferred) or PDF\nInclude key outputs you will rely on later (even if figures improve)\nIn your Quarto-formatted (.qmd) submission, please include the final Evaluation Table (i.e. rubric-tested) output from JackalopeGPT.\n\n\n\n“Good” looks like\n\nA stable model you can explain to a skeptical reader\nEvidence you tested assumptions (rather than hoping)\n\n\n\n\n\n\n\n\n\n\n\nNoteInterpretation Memo (Week 12)\n\n\n\n\n\nPurpose:\nPractice disciplined interpretation and uncertainty-aware reasoning. This is where you show that you can tell the truth about what the model does—and does not—say.\n\nWhat to include\n\nMain result(s) in plain language\nUncertainty\n\nWhat is uncertain and why\n\nConfidence intervals, credible intervals, prediction intervals, or other appropriate summaries\n\nPrediction vs. inference clarity\n\nAre you predicting new cases, explaining mechanisms, or both?\n\nSensitivity or robustness (lightweight)\n\nOne small check that increases confidence (or reveals fragility)\n\nLimitations\n\nThe most important threats to inference and how they affect interpretation\n\n\n\n\nSubmission format\n\n~1–2 pages (PDF) or Quarto page\nEmphasis on writing quality and intellectual restraint\nIn your Quarto-formatted (.qmd) submission, please include the final Evaluation Table (i.e. rubric-tested) output from JackalopeGPT.\n\n\n\n“Good” looks like\n\nClear, honest claims tied directly to model output\nUncertainty is centered, not hidden\nNo story time beyond what the evidence supports\n\n\n\n\n\n\n\n\n\n\n\nNoteResults Section (Week 14)\n\n\n\n\n\nPurpose:\nDraft the Results section you would submit in a real paper or report: concise, structured, and supported by tables and figures.\n\nWhat to include\n\nShort orienting paragraph\n\nWhat you modeled and what the reader should look for\n\nCore results\n\n2–4 key findings, depending on project scope\n\nTables and/or figures\n\nClean, interpretable, labeled, and referenced in text\n\nMinimal interpretation\n\nState what you found; deeper interpretation comes later or is clearly separated\n\n\n\n\nSubmission format\n\nQuarto page (ideal) or PDF\nInclude figure and table captions\nIn your Quarto-formatted (.qmd) submission, please include the final Evaluation Table (i.e. rubric-tested) output from JackalopeGPT.\n\n\n\n“Good” looks like\n\nFindings are understandable without reading your code\nFigures and tables do real work\nClaims match the evidence shown\n\n\n\n\n\n\n\n\n\n\n\nNoteFull Draft (Week 15)\n\n\n\n\n\nPurpose:\nAssemble a complete, coherent draft that reads like a real scientific product. Structure and flow matter here.\n\nWhat to include\n\nAt minimum: Introduction, Methods, Results, Discussion (or equivalent)\nConsistent terminology\n\nVariable names, units, and definitions do not drift\n\nAll figures and tables in near-final form\nReferences and citations, as appropriate\n\n\n\nSubmission format\n\nQuarto render (HTML or PDF preferred)\nEnsure figures and tables are legible and captioned\nIn your Quarto-formatted (.qmd) submission, please include the final Evaluation Table (i.e. rubric-tested) output from JackalopeGPT.\n\n\n\n“Good” looks like\n\nA document that could be revised into something publishable\nClear logic and honest uncertainty\nNo missing major components\n\n\n\n\n\n\n\n\n\n\n\nNoteRevision Plan (Not Executed) (Week 16)\n\n\n\n\n\nPurpose:\nDemonstrate that you can revise strategically. You will not execute revisions; you will propose them.\n\nWhat to include\n\nTop five revision priorities\n\nRanked, with a sentence explaining why each matters\n\nWhat you would change (specific)\n\n“Rewrite paragraph X to clarify Y”\n\n“Replace Figure 2 with a plot that shows Z”\n\nWhat evidence you would need\n\nAdditional checks, plots, sensitivity analyses, etc.\n\nIf you had 10 more hours\n\nWhat would you do first?\n\nIf you had 40 more hours\n\nWhat would you do that you cannot do now?\n\n\n\n\nSubmission format\n\n1 page (PDF) or short Quarto page\nIn your Quarto-formatted (.qmd) submission, please include the final Evaluation Table (i.e. rubric-tested) output from JackalopeGPT.\n\n\n\n“Good” looks like\n\nSpecific, actionable revisions\nClearly prioritized and realistic\nDemonstrates mature judgment about improving inference and communication",
     "crumbs": [
       "Course Overview",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Assignments & Grades</span>"
@@ -418,11 +418,11 @@
     ]
   },
   {
-    "objectID": "chapters/project_scoping.html#a-practical-scoping-checklist-student-friendly",
-    "href": "chapters/project_scoping.html#a-practical-scoping-checklist-student-friendly",
+    "objectID": "chapters/project_scoping.html#a-practical-scoping-checklist",
+    "href": "chapters/project_scoping.html#a-practical-scoping-checklist",
     "title": "Project Scoping",
-    "section": "A practical scoping checklist (student-friendly)",
-    "text": "A practical scoping checklist (student-friendly)\nChoose a project that meets most of these (given your current knowledge):\n\nOne question: you can state clearly in plain language\n\nOne primary response: that matches the question\n\nA known sampling structure: (site / individual / time / observer, etc.)\n\nA plausible model family: (GLM / GLMM / GAM / GAMM) you can defend\n\nOne major complication: you can address explicitly (zeros, clustering, etc.)\n\nA results story you can tell honestly: without over-claiming\n\nA dataset you can understand and trust: enough to write Methods",
+    "section": "A practical scoping checklist",
+    "text": "A practical scoping checklist\nChoose a project that meets most of these (given your current knowledge):\n\nOne question: you can state clearly in plain language\n\nOne primary response: that matches the question\n\nA known sampling structure: (site / individual / time / observer, etc.)\n\nA plausible model family: (GLM / GLMM / GAM / GAMM) you can defend\n\nOne major complication: you can address explicitly (zeros, clustering, etc.)\n\nA results story you can tell honestly: without over-claiming\n\nA dataset you can understand and trust: enough to write Methods",
     "crumbs": [
       "Course Overview",
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Project Scoping</span>"
@@ -514,6 +514,193 @@
     "crumbs": [
       "Part ∅: AI preparation",
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>AI Prompting for Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/using_jackalope_gpt.html",
+    "href": "chapters/using_jackalope_gpt.html",
+    "title": "10  How to Use JackalopeGPT",
+    "section": "",
+    "text": "10.1 A Reminder: What is JackalopeGPT?\nJackalopeGPT is a learning assistant designed to support quantitative and methodological reasoning in this course. Its primary purpose is to help you improve scientific rigor and streamline your analytical workflow while allowing you to maintain full responsibility for:\nJackalopeGPT does not assign grades (except for the Traffic-Signal readiness lights), make final evaluative decisions, or fill in missing information. Instead, JackalopeGPT has been customized to emphasize:\nIn other words, JackalopeGPT has been designed to help you think better, not to think less.",
+    "crumbs": [
+      "Part ∅: AI preparation",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>How to Use JackalopeGPT</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/using_jackalope_gpt.html#a-reminder-what-is-jackalopegpt",
+    "href": "chapters/using_jackalope_gpt.html#a-reminder-what-is-jackalopegpt",
+    "title": "10  How to Use JackalopeGPT",
+    "section": "",
+    "text": "Reasoning\n\nInterpretation\n\nvalidation\n\nAll final assignment submissions\n\n\n\nExplicit assumptions\nTransparent reasoning\n\nScope control\n\nReproducible workflows",
+    "crumbs": [
+      "Part ∅: AI preparation",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>How to Use JackalopeGPT</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/using_jackalope_gpt.html#how-you-can-start-using-it-important",
+    "href": "chapters/using_jackalope_gpt.html#how-you-can-start-using-it-important",
+    "title": "10  How to Use JackalopeGPT",
+    "section": "10.2 How You Can Start Using It (Important)",
+    "text": "10.2 How You Can Start Using It (Important)\nIf you are first using JackalopeGPT to optimize your prompts or evaluate an assignment’s completeness before submission, you should use the Main Menu. However, you do not need to choose anything from the Main Menu to begin. The Main Menu exists only for structured actions (such as readiness checks or AI interaction logging). Most learning happens without it. It is only provided for a bit more convenience. You may simply start prompting JackalopeGPT naturally, as you would with any chat-based GPT.",
+    "crumbs": [
+      "Part ∅: AI preparation",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>How to Use JackalopeGPT</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/using_jackalope_gpt.html#operating-modes",
+    "href": "chapters/using_jackalope_gpt.html#operating-modes",
+    "title": "10  How to Use JackalopeGPT",
+    "section": "10.3 Operating Modes",
+    "text": "10.3 Operating Modes\nJackalopeGPT operates in three distinct modes:\n\n10.3.1 Learning & Practice (default)\n\nConcept clarification\n\nCode debugging or refactoring\n\nTranslating between modeling frameworks\n\nMethodological explanations\n\nThis mode is informal, exploratory, and never evaluative.\n\n\n10.3.2 Scientific Readiness Evaluation\n\nStructured, rubric-based checks of specific artifacts\n\nExecuted only when explicitly invoked (via menu or trigger phrases)\n\nUsed to assess whether work appears ready for submission, not to grade on scientific quality.\n\n\n\n10.3.3 AI Interaction Logging (To be launched on Monday, 26-Jan-2026!!)\n\nMinimal documentation of AI assistance\n\nTriggered only by the exact command: log this\n\nDesigned for transparency, not surveillance",
+    "crumbs": [
+      "Part ∅: AI preparation",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>How to Use JackalopeGPT</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/using_jackalope_gpt.html#safeguards-and-constraints",
+    "href": "chapters/using_jackalope_gpt.html#safeguards-and-constraints",
+    "title": "10  How to Use JackalopeGPT",
+    "section": "10.4 Safeguards and Constraints",
+    "text": "10.4 Safeguards and Constraints\nJackalopeGPT is intentionally constrained:\n\nNon-evaluative by default (but has the Main Menu to allow evaluation)\nAsks at most one clarifying question at a time\nNever guesses or silently fills gaps\n\nDoes not hallucinate criteria or requirements\nDoes not combine Main Menu actions\nGenerally limits verbosity unless you request detail explicitly\n\nAny evaluation or logging action requires explicit transparency and user consent. As a last note, if you are unsure whether your prompt is appropriate, add this line: “If this prompt is likely to cause me to overreach in inference or bypass learning, suggest a safer, learning-focused version.”",
+    "crumbs": [
+      "Part ∅: AI preparation",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>How to Use JackalopeGPT</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/using_jackalope_gpt.html#menu-commands-and-triggers",
+    "href": "chapters/using_jackalope_gpt.html#menu-commands-and-triggers",
+    "title": "10  How to Use JackalopeGPT",
+    "section": "10.5 Menu Commands and Triggers",
+    "text": "10.5 Menu Commands and Triggers\nTyping main menu (or Main Menu) displays all available structured actions (with no analysis). This means that JackalopeGPT has all the course assignments and rubrics uploaded into its working knowledge.\nIf you enter a menu number or a similar matching instruction, JackalopeGPT will:\n\nconfirm the action\n\nexecute the instruction file exactly as specified\n\nCertain phrases (e.g., assignment-check intent or log this) automatically trigger workflows before menu selection.",
+    "crumbs": [
+      "Part ∅: AI preparation",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>How to Use JackalopeGPT</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/using_jackalope_gpt.html#traffic-signal-rubric-how-evaluations-work",
+    "href": "chapters/using_jackalope_gpt.html#traffic-signal-rubric-how-evaluations-work",
+    "title": "10  How to Use JackalopeGPT",
+    "section": "10.6 Traffic-Signal Rubric (How Evaluations Work)",
+    "text": "10.6 Traffic-Signal Rubric (How Evaluations Work)\nA universal Traffic-Signal rubric is pre-loaded and applied consistently across all readiness checks.\nEvaluations return the follwing ratings of scientific readiness:\n\nGreen: Ready to proceed\n\nYellow: Exercise caution (revisions necessary)\n\nRed: Stop and Rework\n\nThis rubric provides standardized, comparable feedback without grading.",
+    "crumbs": [
+      "Part ∅: AI preparation",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>How to Use JackalopeGPT</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/using_jackalope_gpt.html#how-to-generate-an-evaluation-table-required-for-assignments",
+    "href": "chapters/using_jackalope_gpt.html#how-to-generate-an-evaluation-table-required-for-assignments",
+    "title": "10  How to Use JackalopeGPT",
+    "section": "10.7 How to Generate an Evaluation Table (Required for Assignments)",
+    "text": "10.7 How to Generate an Evaluation Table (Required for Assignments)\nBefore submission, you must evaluate assignments using JackalopeGPT.\nSteps:\n\nSelect the focal assignment from the JackalopeGPT menu\n\nCopy and paste the your completed .qmd file (not rendered output)\n\nUse the model output to revise your file until it meets the assignment standard\n\nPaste the complete Evaluation Table output directly from the JackalopeGPT windo (it is already in .qmd format) into the section at the end of each assignment titled JackalopeGPT Pre-Submission Evaluation.\n\n(Tip: hover over the table until the file icon appears at the upper right, then copy.)",
+    "crumbs": [
+      "Part ∅: AI preparation",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>How to Use JackalopeGPT</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/using_jackalope_gpt.html#important-usage-notes",
+    "href": "chapters/using_jackalope_gpt.html#important-usage-notes",
+    "title": "10  How to Use JackalopeGPT",
+    "section": "10.8 Important Usage Notes",
+    "text": "10.8 Important Usage Notes\n\n10.8.1 Interaction Limits\nIf you are using the free tier (recommended), be aware of interaction limits. Plan longer evaluation workflows accordingly.\n\n\n10.8.2 Memory and Sessions\nJackalopeGPT does not retain memory across sessions.\nIf you start a new session, you must re-provide context about:\n\nyour study system\n\nyour data\n\nyour analytical goals\n\nDo not assume continuity across chats. It is strongly recommended that you keep a file with your updated and optimized prompts so that you can reuse.",
+    "crumbs": [
+      "Part ∅: AI preparation",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>How to Use JackalopeGPT</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/using_jackalope_gpt.html#a-reminder-about-the-appropriate-use-in-this-course",
+    "href": "chapters/using_jackalope_gpt.html#a-reminder-about-the-appropriate-use-in-this-course",
+    "title": "10  How to Use JackalopeGPT",
+    "section": "10.9 A reminder about the appropriate use in this course",
+    "text": "10.9 A reminder about the appropriate use in this course\n\n10.9.1 You may use JackalopeGPT to:\n\nclarify concepts\n\ndebug R code\n\ncompare modeling approaches (with explanation)\n\nlearn how to validate models\n\nimprove analytical workflow and reproducibility\n\n\n\n10.9.2 You may not use JackalopeGPT to:\n\ngenerate full assignment submissions\n\nwrite end-to-end analyses, methods, or results\n\nreplace your own reasoning\n\noutsource scientific judgment\n\nproduce claims without validation",
+    "crumbs": [
+      "Part ∅: AI preparation",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>How to Use JackalopeGPT</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/naming_conventions.html",
+    "href": "chapters/naming_conventions.html",
+    "title": "11  Naming conventions and coding style",
+    "section": "",
+    "text": "11.1 Why you should care (even if you “just want to model stuff”)\nNaming conventions and coding style are not decoration. They are infrastructure.\nIf your names are inconsistent, your code becomes harder to read, harder to debug, and harder to share—especially once your project grows beyond “one file, one afternoon.”",
+    "crumbs": [
+      "Part I: Chaos to Columns",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Naming conventions and coding style</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/naming_conventions.html#why-you-should-care-even-if-you-just-want-to-model-stuff",
+    "href": "chapters/naming_conventions.html#why-you-should-care-even-if-you-just-want-to-model-stuff",
+    "title": "11  Naming conventions and coding style",
+    "section": "",
+    "text": "“It’s the hardest job to come up with new and unique names for a variable every time you create one but this is the difference between an average programmer and a good one.”\n— Vikram Singh Rawat\n\n\n\n\n\n\n\nNoteThe three costs of sloppy naming\n\n\n\n\nInteroperability cost: Unconventional naming in R can cause issues for other programming languages.\n\nCollaboration cost: Inconsistency makes it harder for other people (including Future You) to work with your data.\n\nTime cost: You will spend more time fixing small issues and less time doing science.",
+    "crumbs": [
+      "Part I: Chaos to Columns",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Naming conventions and coding style</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/naming_conventions.html#naming-conventions-for-variables-and-files",
+    "href": "chapters/naming_conventions.html#naming-conventions-for-variables-and-files",
+    "title": "11  Naming conventions and coding style",
+    "section": "11.2 Naming conventions for variables and files",
+    "text": "11.2 Naming conventions for variables and files\n\n11.2.1 What are “naming conventions”?\nThey are simply a consistent set of rules for naming:\n\nvariables (columns in your dataset)\nobjects in R (data frames, models, plots)\nfiles and folders (scripts, data, outputs)\n\n\n\n11.2.2 Three common naming styles\nYou will see these everywhere:\n\ncamelCase (meanDepth)\nPascalCase (MeanDepth)\nsnake_case (mean_depth)\n\nIn this course, we will default to snake_case for variables and files. This is strongly recommended for analysis scripts.\n\n\n11.2.3 General guidelines (the “please don’t make future you angry” list)\nThese are simple rules that prevent a shocking number of problems:\n\n\n\n\n\n\n\n\n\nRule\nWhy it matters\nExample of poor form\n\n\n\n\nAvoid blank spaces\nSpaces complicate coding and break formulas, file paths, and scripting\nMean Depth, Site Name, Final Data.csv\n\n\nOmit special symbols like ?, $, *, +, #, (, ), -, /, }, {, |, &gt;, &lt;, etc.\nMany special characters are treated as operators or commands in R, so using them in names can break code or make it harder to work with.\nmass(g), count#, Y/N?, depth&gt;10\n\n\nUse _ as a separator\nUnderscores are safe, readable, and standard\nmean-depth, mean.depth, mean depth\n\n\nDo not begin names with numbers\nNames starting with numbers are invalid or confusing in R\n100m_depth, 2023_data\n\n\nMake names unique\nNon-unique names cause overwriting and ambiguity\ndata, data2, final, final_final\n\n\nBe consistent with case\nR is case-sensitive; inconsistency causes silent bugs\nDepth, depth, DEPTH in same project\n\n\nAvoid blank rows in data\nBlank rows can be misread as data or missing values\nEmpty rows between observations in CSV\n\n\nRemove comments from data files\nComments belong in scripts or metadata, not raw data\n# measured in June inside a CSV\n\n\nDefine and document NA values\nAmbiguous missing values lead to incorrect analyses\nMixing NA, 0, -999, . without explanation\n\n\nUse clear, documented date formats\nAmbiguous dates are easy to misinterpret\n03/04/21 (is this March 4 or April 3?)\n\n\n\n\n\n\n11.2.4 “Bad → Good” examples for variable names\nYour variable names should be: - readable at a glance - easy to type - consistent across files and projects\nHere are examples aligned with the tidyverse style guide (Hadley Wickham):\nA quick translation rule:\n\nUse units as suffixes: depth_cm, mass_g, distance_m (do not use parentheses around units)\nUse clear boolean names: yes_no or better: is_adult, has_nest\nPrefer meaning over brevity: percentile_50 beats p50 (unless p50 is a defined term in your field)",
+    "crumbs": [
+      "Part I: Chaos to Columns",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Naming conventions and coding style</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/naming_conventions.html#naming-conventions-for-folders-project-structure",
+    "href": "chapters/naming_conventions.html#naming-conventions-for-folders-project-structure",
+    "title": "11  Naming conventions and coding style",
+    "section": "11.3 Naming conventions for folders (project structure)",
+    "text": "11.3 Naming conventions for folders (project structure)\n\n11.3.1 Why folder names matter\nA good folder structure makes it hard to lose track of: - raw versus processed data - inputs versus outputs - code versus results - files that you can re-create versus ones you cannot (i.e. that you should never overwrite)\nIn this course, we care about reproducibility, which means: - raw data is always treated as read-only - processed data is created by scripts, acting on raw data, and never manually edited - results are generated by scripts and never manually edited\n\n\n\n\n\n\nTipA folder structure that scales\n\n\n\n\n\nA simple, stable structure (example):\n\ndata/\n\nraw_data/ (never edited)\nprocessed_data/ (created by scripts)\n\nr_scripts/ (functions + helpers)\nanalysis/ (analysis note / exercises )\noutputs/\n\nfigures/\ntables/\n\n\n\n\n\nFolder naming rules (same spirit as variable naming): - lowercase (snake_case) - no spaces - prefer underscores - descriptive names over clever names",
+    "crumbs": [
+      "Part I: Chaos to Columns",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Naming conventions and coding style</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/naming_conventions.html#conventions-for-legible-and-consistent-r-code",
+    "href": "chapters/naming_conventions.html#conventions-for-legible-and-consistent-r-code",
+    "title": "11  Naming conventions and coding style",
+    "section": "11.4 Conventions for legible and consistent R code",
+    "text": "11.4 Conventions for legible and consistent R code\n\n11.4.1 Why code style matters\nCode style is not about being fancy. It’s about making your thinking legible.\nGood style: - reduces bugs - improves peer review (including lab mates and future you) - makes it easier to modify models without breaking things\n\n\n\n\n\n\nNoteTwo extremely useful packages for checking R code formatting\n\n\n\n\nlintr checks your code for style problems (like a spellcheck for R code).\nstyler automatically formats your code to match a consistent style.\n\n\n\n\n\n11.4.2 “Bad → Good” examples for R code and files\nThese examples follow the tidyverse style guide (Hadley Wickham):\n\n\n\n\n\n\n\n\n\nBad\nWhy was it bad?\nGood\n\n\n\n\nFit models.r\nContains spaces; inconsistent casing; harder to reference in code\nfit_models.R\n\n\n##########\nNo semantic meaning; comments should describe intent, not fill space\n# extract elevation -----\n\n\nfindat\nVague name; gives no clue about content or structure\nfindat_mat\n\n\nfindat_mat\nRedundant and unclear; does not describe what the matrix contains\nmass_mat\n\n\n\n\nA few rules we will use repeatedly:\n\n\n11.4.3 1) Use nouns for objects and verbs for functions\n\nObjects (things): pufferi, pufferi_clean, model_gam\nFunctions (actions): clean_data(), fit_model(), plot_effects()\n\n\n\n11.4.4 2) Make “intermediate objects” obvious\nIf an object is temporary, label it like it is: - *_raw, *_clean, *_long, *_wide, *_summary\n\n\n11.4.5 3) Prefer readable code over clever code\n\n\n\n\n\n\n\n\nNoteOver-piped, confusing code\n\n\n\n\n\nsummary_df &lt;-\n  raw_df |&gt;\n  dplyr::filter(!is.na(count), year &gt;= 2015) |&gt;\n  dplyr::group_by(site, species) |&gt;\n  dplyr::summarise(\n    mean_count = mean(count),\n    sd_count   = sd(count),\n    n          = dplyr::n(),\n    .groups = \"drop\"\n  ) |&gt;\n  dplyr::filter(n &gt;= 5) |&gt;\n  dplyr::mutate(\n    cv = sd_count / mean_count,\n    log_mean = log(mean_count)\n  ) |&gt;\n  dplyr::arrange(dplyr::desc(log_mean))\n\n\n\n\n\n\n\n\n\n\n\n\nNoteLonger but readable code\n\n\n\n\n\n# Step 1: keep valid observations from recent years\ndf_filtered &lt;- raw_df |&gt;\n  dplyr::filter(!is.na(count), year &gt;= 2015)\n\n# Step 2: summarize counts by site and species\ndf_summary &lt;- df_filtered |&gt;\n  dplyr::group_by(site, species) |&gt;\n  dplyr::summarise(\n    mean_count = mean(count),\n    sd_count   = sd(count),\n    n          = dplyr::n(),\n    .groups = \"drop\"\n  )\n\n# Step 3: retain well-sampled groups\ndf_sufficient &lt;- df_summary |&gt;\n  dplyr::filter(n &gt;= 5)\n\n# Step 4: compute derived metrics\ndf_metrics &lt;- df_sufficient |&gt;\n  dplyr::mutate(\n    cv       = sd_count / mean_count,\n    log_mean = log(mean_count)\n  )\n\n# Step 5: order results for inspection\nsummary_df &lt;- df_metrics |&gt;\n  dplyr::arrange(dplyr::desc(log_mean))\n\n\n\n\n\n\n\n\n\n\nTipPractical guidance\n\n\n\n\nUse CSV/TSV when the dataset is small enough to load quickly and inspect easily.\nConsider .RDS when you want an R-native format that preserves object structure.\nConsider .parquet when files get big and you care about speed + file size.",
+    "crumbs": [
+      "Part I: Chaos to Columns",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Naming conventions and coding style</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/naming_conventions.html#your-minimum-standard-checklist-use-this-before-you-submit-anything",
+    "href": "chapters/naming_conventions.html#your-minimum-standard-checklist-use-this-before-you-submit-anything",
+    "title": "11  Naming conventions and coding style",
+    "section": "11.5 Your “minimum standard” checklist (use this before you submit anything)",
+    "text": "11.5 Your “minimum standard” checklist (use this before you submit anything)\n\n\n\n\n\n\nNoteNaming + style checklist\n\n\n\nData + variables\n\nColumn names are snake_case\nNo spaces or special characters in column names\nUnits are explicit where relevant (_m, _cm, _g, _s)\nMissing values are documented (what is NA, what is 0, what is “not observed”?)\nDates are in a clear, documented format (and the order is not ambiguous)\n\nFolders + files\n\nFolder names are lowercase and descriptive\nRaw data are not edited in place\nProcessed data are created by scripts (not by hand)\n\nR code\n\nObjects use nouns; functions use verbs\nScripts are readable (spacing, line breaks, consistent naming)\nYou can restart R and run the workflow without relying on “things in memory”",
+    "crumbs": [
+      "Part I: Chaos to Columns",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Naming conventions and coding style</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/naming_conventions.html#practice-task-recommended",
+    "href": "chapters/naming_conventions.html#practice-task-recommended",
+    "title": "11  Naming conventions and coding style",
+    "section": "11.6 Practice task (recommended)",
+    "text": "11.6 Practice task (recommended)\n\nPick one of your current projects (or a past project).\nRename:\n\n5 confusing variables\n3 confusing files\n1 confusing folder\n\nMake one small style improvement:\n\nconsistent naming\nreadable comments\nbreak one long chunk into 2–3 meaningful steps\n\n\nThe goal is not perfection. The goal is to start practicing now.",
+    "crumbs": [
+      "Part I: Chaos to Columns",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Naming conventions and coding style</span>"
     ]
   }
 ]

@@ -12,7 +12,7 @@ This page first describes the Milestone Assignments referenced in the course cal
 Lock in a feasible analysis plan early, so you’re not improvising later. This is about scope, clarity, and workflow—not results.
 
 ### What to include
-[Download the Analysis Concept Note template (.qmd)](../assignment_templates/template_assignment01.qmd)
+[Download the Analysis Concept Note template (.qmd)](../assignment_templates/01_template.qmd)
 
 -   Working title (can change later)
 -   Your focal question (1–3 sentences; plain language)
@@ -56,7 +56,7 @@ Demonstrate that your dataset is analysis-ready—or identify exactly what still
     -   What’s missing, where, and what you did about it (if anything)
 -   Measurement and uncertainty notes
     -   Known measurement error, detection limits, observer effects, instrument drift, etc.
--   Basic EDA outputs (minimal but informative)
+-   Basic Exploratory Data Analysis outputs (minimal but informative)
     -   1–3 plots that reveal structure (distributions, relationships, time trends)\
     -   A short paragraph interpreting what matters
 -   Readiness decision
@@ -65,12 +65,13 @@ Demonstrate that your dataset is analysis-ready—or identify exactly what still
 ### Submission format
 
 -   1–2 pages (PDF) or Quarto page with embedded plots
+-   In your Quarto-formatted (.qmd) submission, please include the final Evaluation Table (i.e. rubric-tested) output from JackalopeGPT. 
 
 ### “Good” looks like
 
--   You can explain what each variable means and whether it’s trustworthy
--   You’ve surfaced the biggest problems early
--   Your EDA is purposeful, not a plot dump
+-   You can explain what each variable means and whether it Is trustworthy
+-   You have surfaced the biggest problems early
+-   Your Exploratory Data Analysis purposeful, not a plot dump
 :::
 
 ::: {.callout-note title="**Working Model — Draft (Week 7)**" icon="false" collapse="true"}
@@ -93,6 +94,7 @@ Put a real model on the table. This is a draft: imperfect is fine, but it must b
 
 -   Quarto page (preferred) or PDF with model description and outputs
 -   Include enough detail that someone else could reproduce the model from your write-up
+-   In your Quarto-formatted (.qmd) submission, please include the final Evaluation Table (i.e. rubric-tested) output from JackalopeGPT. 
 
 ### “Good” looks like
 
@@ -119,12 +121,13 @@ Freeze the core model so the rest of the semester can focus on prediction, inter
 ### Submission format
 
 -   Quarto page (preferred) or PDF
--   Include key outputs you’ll rely on later (even if figures improve)
+-   Include key outputs you will rely on later (even if figures improve)
+-   In your Quarto-formatted (.qmd) submission, please include the final Evaluation Table (i.e. rubric-tested) output from JackalopeGPT. 
 
 ### “Good” looks like
 
 -   A stable model you can explain to a skeptical reader
--   Evidence you tested assumptions rather than hoping
+-   Evidence you tested assumptions (rather than hoping)
 :::
 
 ::: {.callout-note title="**Interpretation Memo (Week 12)**" icon="false" collapse="true"}
@@ -148,6 +151,7 @@ Practice disciplined interpretation and uncertainty-aware reasoning. This is whe
 
 -   \~1–2 pages (PDF) or Quarto page
 -   Emphasis on writing quality and intellectual restraint
+-   In your Quarto-formatted (.qmd) submission, please include the final Evaluation Table (i.e. rubric-tested) output from JackalopeGPT. 
 
 ### “Good” looks like
 
@@ -175,6 +179,7 @@ Draft the Results section you would submit in a real paper or report: concise, s
 
 -   Quarto page (ideal) or PDF
 -   Include figure and table captions
+-   In your Quarto-formatted (.qmd) submission, please include the final Evaluation Table (i.e. rubric-tested) output from JackalopeGPT. 
 
 ### “Good” looks like
 
@@ -199,6 +204,7 @@ Assemble a complete, coherent draft that reads like a real scientific product. S
 
 -   Quarto render (HTML or PDF preferred)
 -   Ensure figures and tables are legible and captioned
+-   In your Quarto-formatted (.qmd) submission, please include the final Evaluation Table (i.e. rubric-tested) output from JackalopeGPT. 
 
 ### “Good” looks like
 
@@ -228,6 +234,7 @@ Demonstrate that you can revise strategically. You will not execute revisions; y
 ### Submission format
 
 -   1 page (PDF) or short Quarto page
+-   In your Quarto-formatted (.qmd) submission, please include the final Evaluation Table (i.e. rubric-tested) output from JackalopeGPT. 
 
 ### “Good” looks like
 

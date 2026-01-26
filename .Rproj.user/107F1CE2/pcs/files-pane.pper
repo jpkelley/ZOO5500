@@ -5,5 +5,9 @@
             "ascending": true
         }
     ],
+<<<<<<< HEAD
     "path": "~/GitHub_projects/ZOO5500/quant_course_sp2026"
+=======
+    "path": "~/GitHub_projects/ZOO5500/quant_course_sp2026/chapters"
+>>>>>>> 17b62c61d07a27abf21356ed94765bedead10647
 }

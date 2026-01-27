@@ -163,5 +163,17 @@
   },
   "chapters/using_jackalope_gpt.qmd": {
     "using_jackalope_gpt.html": "9a2a3156"
+  },
+  "chapters/reproducible_analyses.qmd": {
+    "reproducible_analyses.html": "5016ec07"
+  },
+  "chapters/reproducible_workflow_intro.qmd": {
+    "reproducible_workflow_intro.html": "14677ef7"
+  },
+  "chapters/nature_of_data.qmd": {
+    "nature_of_data.html": "a5f1b244"
+  },
+  "chapters/metadata_low_friction.qmd": {
+    "metadata_low_friction.html": "c4343186"
   }
 }

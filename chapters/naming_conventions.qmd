@@ -17,19 +17,38 @@ If your names are inconsistent, your code becomes harder to read, harder to debu
 > “It’s the hardest job to come up with new and unique names for a variable every time you create one but this is the difference between an average programmer and a good one.”  
 > — Vikram Singh Rawat
 
+In scientific workflows, this difference is not about elegance.
+It is about **traceability**.
+
+A workflow that depends on unstable or unclear names cannot be audited, reused, or trusted.
+
 ::: {.callout-note icon=false}
 
-## The three costs of sloppy naming
+## The three scientific costs of sloppy naming
 
-- **Interoperability cost:** Unconventional naming in R can cause issues for other programming languages.  
-- **Collaboration cost:** Inconsistency makes it harder for other people (including Future You) to work with your data.  
-- **Time cost:** You will spend more time fixing small issues and less time doing science.
+- **Interoperability cost:**  
+  Non-standard names break workflows across tools, languages, and collaborators.
+
+- **Collaboration cost:**  
+  Inconsistent naming forces others (including Future You) to reverse-engineer intent.
+
+- **Reproducibility cost:**  
+  When names drift, inputs and outputs become ambiguous, and results can no longer be traced back to their sources.
 
 :::
 
+Before we talk about modeling or automation, we need to ensure that the basic objects in our workflow—variables, files, and folders—are named in a way that makes their roles unambiguous.
+
+This is what allows:
+
+- metadata to point to the correct data,
+- scripts to operate predictably,
+- and workflows to declare dependencies explicitly.
 
 ## Naming conventions for *variables* and *files*
 
+::::: columns
+::: {.column width="48%"}
 ### What are “naming conventions”?
 
 They are simply a consistent set of rules for naming:
@@ -41,6 +60,7 @@ They are simply a consistent set of rules for naming:
 
 ### Three common naming styles
 
+
 You will see these everywhere:
 
 - **camelCase** (`meanDepth`)
@@ -48,7 +68,13 @@ You will see these everywhere:
 - **snake_case** (`mean_depth`)
 
 In this course, we will default to **snake_case** for *variables and files*. This is strongly recommended for analysis scripts. 
+:::
 
+::: {.column width="48%"}
+![From Allison Horst. Cartoon representations of common cases in coding. A snake screams "SCREAMING_SNAKE_CASE" into the face of a camel (wearing ear muffs) with "camelCase" written along its back. Vegetables on a skewer spell out "kebab-case" (words on a skewer). A mellow, happy looking snake has text "snake_case" along it.](../graphics/other_stylized_graphics/horst_allison_cases.png)
+
+:::
+:::::
 
 
 ### General guidelines (the “please don’t make future you angry” list)
@@ -156,16 +182,16 @@ These examples follow the tidyverse style guide (Hadley Wickham):
 
 A few rules we will use repeatedly:
 
-### 1) Use **nouns** for objects and **verbs** for functions
+### Use **nouns** for objects and **verbs** for functions
 - Objects (things): `pufferi`, `pufferi_clean`, `model_gam`
 - Functions (actions): `clean_data()`, `fit_model()`, `plot_effects()`
 
-### 2) Make “intermediate objects” obvious
+### Make “intermediate objects” obvious
 If an object is temporary, label it like it is:
 - `*_raw`, `*_clean`, `*_long`, `*_wide`, `*_summary`
 
-### 3) Prefer readable code over clever code
-:::: columns
+### Prefer readable code over clever code
+::::: columns
 ::: {.column width="48%"}
 ::: {.callout-note icon=false collapse=true appearance="minimal" title="**Over-piped, confusing code**" style="background-color:#FF9999; border-left: 6px solid #FD5D59;"}
 
@@ -189,7 +215,6 @@ summary_df <-
 ```
 :::
 :::
-::::
 
 ::: {.column width="48%"}
 ::: {.callout-note icon=false collapse=true appearance="minimal" title="**Longer but readable code**" style="background-color:#e7f6e7; border-left: 6px solid #2e7d32;"}
@@ -226,6 +251,13 @@ summary_df <- df_metrics |>
 ```
 :::
 ::: 
+:::::
+
+### A final note about reproducible analyses
+
+In workflow tools like `targets`, names are not simply cosmetic.
+They define nodes in a dependency graph (i.e. the ways all your inputs, processes, and outputs are connected). If names are unclear, the graph is unclear. If the graph is unclear, the workflow is **not** reproducible.
+
 
 
 ::: {.callout-tip icon=false}

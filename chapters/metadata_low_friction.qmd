@@ -1,0 +1,183 @@
+---
+title: "Metadata: A Low-Friction Approach"
+format: html
+toc: true
+number-sections: false
+---
+
+## What metadata are (and are not)
+
+> **Metadata are data about data.**
+
+That definition is technically correct, but it is not very helpful. A more useful way to think about metadata is this:
+
+> **Metadata describe the context in which data were generated.**
+
+Metadata tell us:
+
+- who collected the data  
+- when and where they were collected  
+- how measurements were made  
+- what files belong together  
+- what assumptions, constraints, or limitations were present upstream  
+
+Metadata are not bureaucracy. They are **scientific memory.**
+
+Without metadata, data quickly lose their meaning, especially once they leave the hands of the person who collected them.
+
+---
+
+## Why metadata are essential
+
+Raw data without metadata are often completely and utterly **uninterpretable**, even to the original researcher after some time has passed. 
+
+A column of numbers without:
+
+- units  
+- provenance  
+- spatial or temporal context  
+
+simply is not reusable scientific data; it is just a sequence of values.
+
+Metadata allow others (and future you) to:
+
+- understand what the data actually represent  
+- judge whether the data are fit for a new purpose  
+- reproduce analytical and modeling decisions  
+
+In practice, most irreproducible analyses fail **before modeling begins**, because key contextual information was never recorded. 
+
+---
+
+## Metadata and reproducibility
+
+Reproducibility is not just about rerunning code. It also requires being able to answer questions like:
+
+- What exactly was measured?  
+- Under what conditions?  
+- Using which instruments or protocols?  
+- With what known limitations or sources of error?
+
+Metadata provide the bridge between **raw data** and **scientific inference**. They allow measurements to be interpreted in light of their collection context and make clear what kinds of estimands the data can legitimately support.
+
+> **If raw data are the recorded traces of measurement, metadata explain how those traces came to exist.**
+
+---
+
+## Metadata and the FAIR principles
+
+At their core, the FAIR principles recognize that data are only useful if their **context travels with them**. Metadata are what make this possible. Much of the modern emphasis on metadata comes from the **FAIR principles**, which aim to ensure that scientific data are:
+
+- **Findable:** Metadata allow datasets to be indexed and discovered.
+- **Accessible:** Metadata explain how data can be obtained and interpreted.
+- **Interoperable:** Metadata clarify formats, units, and conventions.
+- **Reusable:** Metadata document assumptions, methods, and limitations.
+
+Crucially, FAIR is not about perfection; it is about **future usability**.
+
+::: {.callout-note}
+You are *not* expected to memorize FAIR acronyms. What matters is understanding what FAIR is trying to protect.
+:::
+
+---
+
+## A simplified metadata approach (very important)
+
+No doubt you have heard about the myriad metadata formats out there. No matter who you are or what your skill level is, you do **not** need to master complex metadata standards for this course. You barely need to know them at all.
+
+Our approach is intentionally low-friction, as we have adopted a simple philosophy:
+> *Let repositories handle standardization. Your job is to record clear, honest, human-readable metadata.*
+
+Repositories such as Datavers, Zenodo, Dryad, GBIF, or institutional archives can translate your documentation into formal schemas later. That translation only works if the underlying information exists in the first place.
+
+---
+
+## The lab-level rule
+
+Each project should have **one canonical metadata record**:
+
+- written once  
+- updated as needed  
+- reused everywhere  
+
+This record should live *with the data* and be version controlled.
+
+Acceptable formats include:
+
+- a small YAML file (**preferred**)  
+- a structured Google Sheet  
+- a clear README file  
+
+What matters is **clarity and completeness**, not compliance with a specific standard.
+
+---
+
+## Minimal metadata you should always record
+
+At a minimum, metadata should answer the following questions:
+
+1. What are these data?  
+2. Who created them?  
+3. When and where were they collected?  
+4. How were measurements made?  
+5. What files belong together?  
+
+If another scientifically literate person cannot answer these questions, the dataset is not reusable—no matter how sophisticated the analysis.
+
+---
+
+## Low-friction tools
+
+::: {.callout-note}
+**Good enough is good enough.**
+:::
+
+Common approaches include:
+
+- **YAML templates** for reproducible projects  
+- **Google Sheets** for field or lab coordination  
+- **README.md** files for small or exploratory projects  
+
+You will be provided templates in this course.  
+You are not expected to invent schemas from scratch.
+
+---
+
+## Metadata and indexing
+
+Metadata become especially powerful when they are **indexed**.
+
+Indexing means that:
+
+- metadata are registered in a searchable repository  
+- datasets become discoverable by others  
+- persistent identifiers (e.g., DOIs) can be assigned  
+
+Importantly, it is the **metadata**, not the raw data files themselves, that are indexed and searched.
+
+---
+
+## Metadata in the analytical workflow
+
+Within the broader analytical workflow:
+
+- raw data + metadata → **complete dataset**  
+- complete datasets can be verified, versioned, and shared  
+- processing and modeling build on this foundation  
+
+> Metadata are not an afterthought; **they are part of the data.**
+
+---
+
+## Pause and reflect
+
+::: {.callout-note collapse="true"}
+For your dataset:
+
+1. What metadata already exist?
+2. What information currently lives only in your head?
+3. What would someone else need to reuse these data responsibly?
+:::
+
+The next chapter moves from documentation to computation:  
+how reproducible workflows explicitly map **inputs → transformations → outputs**.

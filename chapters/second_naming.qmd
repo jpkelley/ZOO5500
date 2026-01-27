@@ -1,0 +1,35 @@
+
+---
+title: "Naming Conventions and Coding Style"
+subtitle: "Why names (and style) are part of your statistical method"
+format:
+  pptx:
+    slide-level: 2
+---
+
+::: {.callout-note}
+## Project root file structure (reproducible + FAIR-ready)
+
+```
+project_root/
+├── README.md
+├── CITATION.cff
+├── LICENSE
+├── .gitignore
+├── renv/            # optional: R environment management
+├── renv.lock        # optional: pinned package versions
+├── _targets.R       # optional: workflow pipeline
+├── metadata/
+├── data/
+├── scripts/
+├── r_functions/
+├── analysis/
+├── outputs/
+└── docs/            # optional: rendered Quarto site
+```
+
+**Conventions**
+- `raw_data/` (inside `data/`) is never edited  
+- Everything else is script-generated or reproducible  
+- `renv/` and `_targets.R` are optional but recommended for scale
+:::

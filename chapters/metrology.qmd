@@ -1,0 +1,103 @@
+---
+title: "The Nature of Data, Measurement, and Targets"
+format:
+  pptx:
+    slide-level: 2
+---
+
+
+## **Why this matters**
+
+- Defensible inference starts with **what your data are**
+- Most confusion comes from mixing:
+  - **measurand** (what you wish to measure)
+  - **data** (recorded outputs)
+  - **estimand** (what your model estimates)
+- No modeling skill fixes unclear foundations
+
+---
+
+## **Metrology (science of measurement)**
+
+- A framework for measurement that emphasizes:
+  - **traceability** to standards
+  - **uncertainty**
+  - **reproducibility** across time/people/tools
+- Happens **upstream of analysis** (at data generation)
+
+**Key idea:** measurement is not “just a number”
+
+---
+
+## **Measurand**
+
+- **Conceptual quantity in the world** to be measured
+- Exists **independently** of observers and instruments
+- Defined **before measurement**
+- Almost never directly observed
+
+Examples: true wing length, true activity level, real abundance
+
+---
+
+## **Estimand**
+
+- Quantity a **statistical model is designed to estimate**
+- Defined by:
+  - scientific question **and**
+  - data + measurement process + assumptions + model
+- Defined **before analysis**
+- Not the same as the measurand
+
+Examples: mean wing length in sampled population; expected activity level under sampling design; abundance under a specified model
+
+---
+
+## **Measurand vs estimand (quick compare)**
+
+| Concept | Measurand | Estimand |
+|---|---|---|
+| Nature | scientific / conceptual | statistical / formal |
+| Exists without data? | yes | no |
+| Depends on model? | no | yes |
+| Defined when? | before measurement | before estimation |
+
+---
+
+## **Where each belongs in a paper**
+
+| Concept | Paper section |
+|---|---|
+| Measurand | Introduction |
+| Estimand | Methods |
+| Estimate | Results |
+| Interpretation (back to measurand) | Discussion |
+
+---
+
+## **What are data?**
+
+- **Data** = recorded facts from measurement
+- **Information** = what we extract from data using models + assumptions
+- We do not collect “information” — we collect data, then create information
+
+**Reproducibility requires this distinction**
+
+---
+
+## **Raw data**
+
+**Raw data** = facts produced at observation time, preserved **without post-hoc modification**
+
+Examples:
+- on-device audio waveforms
+- collar GPS logs (pre-download edits)
+- field datasheet counts (pre-transcription edits)
+- camera sensor pixel values
+
+**Common misconceptions (not raw):**
+- cleaned/tidy tables
+- summaries/aggregates
+- “analysis-ready” spreadsheets
+
+**Takeaway:** raw data need **metadata** (context) to be reusable

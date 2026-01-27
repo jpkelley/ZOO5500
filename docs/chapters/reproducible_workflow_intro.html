@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2&nbsp; Introduction – Quantitative Analysis of (Messy) Field Data</title>
+<title>11&nbsp; Reproducible Analyses – Quantitative Analysis of (Messy) Field Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/syllabus.html" rel="next">
-<link href="../index.html" rel="prev">
+<link href="../chapters/nature_of_data.html" rel="next">
+<link href="../chapters/using_jackalope_gpt.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -84,7 +84,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../index.html">Course Overview</a></li><li class="breadcrumb-item"><a href="../chapters/course_intro.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/reproducible_workflow_intro.html">Part I: Reproducible Analyses</a></li><li class="breadcrumb-item"><a href="../chapters/reproducible_workflow_intro.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Reproducible Analyses</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -130,7 +130,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/course_intro.html" class="sidebar-item-text sidebar-link active">
+  <a href="../chapters/course_intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
@@ -206,7 +206,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/reproducible_workflow_intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/reproducible_workflow_intro.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Reproducible Analyses</span></span></a>
   </div>
 </li>
@@ -246,19 +246,20 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#welcome-to-quantitative-analysis-of-messy-field-data" id="toc-welcome-to-quantitative-analysis-of-messy-field-data" class="nav-link active" data-scroll-target="#welcome-to-quantitative-analysis-of-messy-field-data"><span class="header-section-number">2.1</span> Welcome to Quantitative Analysis of (Messy) Field Data!</a></li>
-  <li><a href="#course-objectives" id="toc-course-objectives" class="nav-link" data-scroll-target="#course-objectives"><span class="header-section-number">2.2</span> Course Objectives</a></li>
-  <li><a href="#topics-covered" id="toc-topics-covered" class="nav-link" data-scroll-target="#topics-covered">Topics covered</a></li>
-  <li><a href="#what-is-new-this-term-spring-2026" id="toc-what-is-new-this-term-spring-2026" class="nav-link" data-scroll-target="#what-is-new-this-term-spring-2026"><span class="header-section-number">2.3</span> What is new this term (Spring 2026)?</a></li>
+  <li><a href="#why-start-with-reproducible-analysis-workflows" id="toc-why-start-with-reproducible-analysis-workflows" class="nav-link active" data-scroll-target="#why-start-with-reproducible-analysis-workflows"><span class="header-section-number">11.1</span> Why start with reproducible analysis workflows?</a></li>
+  <li><a href="#what-is-a-reproducible-analytical-workflow" id="toc-what-is-a-reproducible-analytical-workflow" class="nav-link" data-scroll-target="#what-is-a-reproducible-analytical-workflow"><span class="header-section-number">11.2</span> What is a reproducible analytical workflow?</a></li>
+  <li><a href="#why-workflows-matter-scientifically" id="toc-why-workflows-matter-scientifically" class="nav-link" data-scroll-target="#why-workflows-matter-scientifically"><span class="header-section-number">11.4</span> Why workflows matter scientifically</a></li>
+  <li><a href="#how-part-i-reproducible-analyses-is-organized" id="toc-how-part-i-reproducible-analyses-is-organized" class="nav-link" data-scroll-target="#how-part-i-reproducible-analyses-is-organized"><span class="header-section-number">11.5</span> How <strong>Part I: Reproducible Analyses</strong> is organized</a></li>
+  <li><a href="#a-guiding-principle" id="toc-a-guiding-principle" class="nav-link" data-scroll-target="#a-guiding-principle"><span class="header-section-number">11.6</span> A guiding principle</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../index.html">Course Overview</a></li><li class="breadcrumb-item"><a href="../chapters/course_intro.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/reproducible_workflow_intro.html">Part I: Reproducible Analyses</a></li><li class="breadcrumb-item"><a href="../chapters/reproducible_workflow_intro.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Reproducible Analyses</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></h1>
+<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Reproducible Analyses</span></h1>
 </div>
 
 
@@ -275,87 +276,89 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="welcome-to-quantitative-analysis-of-messy-field-data" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="welcome-to-quantitative-analysis-of-messy-field-data"><span class="header-section-number">2.1</span> Welcome to Quantitative Analysis of (Messy) Field Data!</h2>
-<p>Thanks for joining us this term! I couldn’t be more pleased at the large size of the class this term! This means that there are more perspectives to help guide us through the following phases of data analysis:</p>
-<blockquote class="blockquote">
-<p><strong>Messy field or lab data → processed data → models → inference</strong></p>
-</blockquote>
-<p><img src="../graphics/workflow_diagram/basic_workflow.png" class="img-fluid"></p>
-<p>The complexity of the project, difficulty of field conditions, or an impending deadline can make the jumps from data collection to inference horribly daunting to young and old researchers alike. Our joint goal in this course is to become more comfortable with each of these steps, so that we not only work more efficiently but we also know a bit more about how to sense of our complex world. It is my sincerest hope that this course will not only teach you some about statistics (and some statistical traps) but that it will also give you a unique opportunity to work with your peers as you delve into the myriad issues that inevitably arise in data analysis. Working together means that we must first acknowledge that each one of us assimilates new material and produces syntheses in varied ways. All I ask is that each of you</p>
+<section id="why-start-with-reproducible-analysis-workflows" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="why-start-with-reproducible-analysis-workflows"><span class="header-section-number">11.1</span> Why start with reproducible analysis workflows?</h2>
+<p>Although ZOO/ECOL-5500 focuses on quantitative analysis and modeling, those tools are only as reliable as the infrastructure that supports them. Establishing a clear, reproducible workflow creates a solid foundation that can scale appropriately as new data arrive –whether that means new sensor downloads, ongoing field observations, or ever-expanding datasets– without requiring you to constantly restructure, reinvent, or debug your analysis.</p>
+<p>This chapter provides the broad <strong>conceptual map</strong> for the rest of Part I. Subsequent chapters focus on individual components of this workflow.</p>
 </section>
-<section id="course-objectives" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="course-objectives"><span class="header-section-number">2.2</span> Course Objectives</h2>
-<p>By the end of this course, you should be able to:</p>
+<section id="what-is-a-reproducible-analytical-workflow" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="what-is-a-reproducible-analytical-workflow"><span class="header-section-number">11.2</span> What is a reproducible analytical workflow?</h2>
+<p>A common misconception—especially early in graduate training—is that <strong>reproducibility means sharing files and code</strong> on GitHub, Dryad, or similar repositories. Those components are necessary, but they is not sufficient.</p>
+<p>A reproducible analytical workflow is a structured system that explicitly and completely describes how scientific results are generated. Such a workflow:</p>
 <ul>
-<li><p><strong>Think quantitatively about messy ecological data.</strong> You should be on your way to developing a habit of translating real-world ecological questions into quantitative frameworks, while explicitly acknowledging uncertainty and bias in estimation and measurement.</p></li>
-<li><p><strong>Distinguish between questions/hypotheses, data, and inferences.</strong> You should be able to (1) clearly separate ecological hypotheses, the data actually collected, and the quantities being estimated, and (2) understand why these distinctions matter for interpretation and decision-making.</p></li>
-<li><p><strong>Understand the processes that generate data.</strong> You should be able to recognize how different study designs, variation in detection, observer effects, instrument error, and data processing shape and constrain the structure of ecological datasets.</p></li>
-<li><p><strong>Select, build, and critique statistical models as scientific tools.</strong> You should be comfortable choosing and using statistical models not as black boxes, but as explicit representations of assumptions about ecological processes, variation, and causal structure. You should never blindly choose a statistical model again!</p></li>
-<li><p><strong>Interpret results in ecological —not just statistical— terms.</strong> You should be able to conceptually move beyond p-values and coefficients to clearly articulate what your results mean biologically, mechanistically, and practically.</p></li>
-<li><p><strong>Be comfortable applying causal –and not just correlational– reasoning.</strong> You should be able to use causal thinking (conceptual models and directed acyclic graphs) to evaluate what can —and ehat cannot— be inferred from observational and experimental data.</p></li>
-<li><p><strong>Communicate quantitative results clearly, transparently, and honestl.y</strong> Present analyses, figures, and conclusions in ways that are transparent, reproducible, and appropriate for scientific audiences.</p></li>
-<li><p><strong>Develop durable, reproducible analytical workflows.</strong> You should be increasingly comfortable with good data-science practices that support clarity, versioning (even though we will not delve into GitHub this term), and reusability of analyses.</p></li>
-<li><p><strong>Develop new confidence working with unfamiliar, complex, imperfect datasets.</strong> You should leave this course better prepared to engage with real ecological data —without expecting it to be clean, complete, or simple.</p></li>
+<li>starts with observations of the world, not the computer</li>
+<li>treats measurement as a translation (or signal-transduction) process</li>
+<li>clearly and explicitly documents where data come from</li>
+<li>separates data, metadata, processing, and inference</li>
+<li>records inputs → transformations → outputs at each step (this is key!)</li>
+<li>makes explicit where assumptions or biases are introduced</li>
+<li>allows another person (or you, six months later) to reconstruct the results</li>
 </ul>
+<p>Together, these features ensure that analyses can be understood, repeated, extended, and scaled as new data arrive.</p>
+<hr>
 </section>
-<section id="topics-covered" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="topics-covered">Topics covered</h2>
-<p>The course covers the following topics, roughly in the following order:</p>
-<ul>
-<li>Metrology: measurands, measurement error, uncertainty, and data quality<br>
-</li>
-<li>Exploratory data analysis of messy data<br>
-</li>
-<li>Generalized Linear Models (GLMs): theory and implementation<br>
-</li>
-<li>Model comparison using AIC and information-theoretic approaches<br>
-</li>
-<li>Generalized Linear Mixed Models (GLMMs) and effective sample size<br>
-</li>
-<li>Generalized Additive Models (GAMs)<br>
-</li>
-<li>Generalized Additive Mixed Models (GAMMs)<br>
-</li>
-<li>Modeling spatial and temporal heterogeneity<br>
-</li>
-<li>Structural Causal Modeling (SCM) and causal diagrams<br>
-</li>
-<li>Prediction, uncertainty propagation, and model validation<br>
-</li>
-<li>Synthesis of analytical results and justification of inference<br>
-</li>
-<li>Tables, figures, and reporting standards for quantitative results<br>
-</li>
-<li>Writing defensible and interpretable Results sections</li>
-</ul>
-<p>Given this ambitious scope, we may only scratch the surface of some topics. Even our cursory treatment is aimed at convincing you why these subjects matter for scientists who have messy data.</p>
-</section>
-<section id="what-is-new-this-term-spring-2026" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="what-is-new-this-term-spring-2026"><span class="header-section-number">2.3</span> What is new this term (Spring 2026)?</h2>
-<p>For Spring 2026, I have added attention to new topics that improve both efficiency of analysis workflows and our ability to understand causality at a deeper level. Specifically, I have chosen to add course components on:</p>
-<ul>
-<li><strong>Using large-language models (LLMs) –via ChatGPT– to improve analytical workflows.</strong> This term, I have integrated ChatGPT into the course as a way to support the <em>process</em> of analysis rather than to automate the analysis itself. Many of the hardest parts of quantitative work happen outside of writing code: figuring out why R code isn’t behaving as expected, checking whether an interpretation actually follows from a model, troubleshooting an obscure error message, or getting feedback on how tp clearly document a decision. Used carefully, ChatGPT can act like a sounding board for troubleshooting, sanity-checking, and refining explanations without taking over your critical thinking. Throughout the course, I have deliberately constrained ChatGPT’s role and scope and have tailored its guardrails to match the course progression. In other words, ChatGPT is used to help improve analytical workflow and decision-making, not to generate results or write code on a student’s behalf. We will work together to assess the utility of this tool as the term advances.</li>
-</ul>
 <div class="columns">
-<div class="column" style="width:80%;">
+<div class="column" style="width:47%;">
+<section id="the-reproducible-analytical-workflow-as-a-causal-system" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="the-reproducible-analytical-workflow-as-a-causal-system"><span class="header-section-number">11.3</span> The reproducible analytical workflow as a causal system</h2>
+<p>The reproducible analytical workflow can be understood as a causal system in which each step produces downstream consequences: measurement choices shape the raw data, data processing constrains what can be modeled, and modeling assumptions determine what can be inferred. Thinking causally about the workflow makes it clear that results do not simply <strong>“come from the data,”</strong> but from a chain of decisions that can be traced, tested, and reproduced. Generally, this pipeline looks like this:</p>
+<blockquote class="blockquote">
+<p><strong>World → Data → Models → Inference → Interpretation</strong></p>
+</blockquote>
+<p>More explicitly, as seen in the diagram at right, we have the following general steps:</p>
+<ol type="1">
+<li><strong>World / phenomena:</strong> Processes exist whether or not we observe them (or like them!)</li>
+<li><strong>Measurement &amp; observation:</strong> Instruments and observers translate phenomena into recorded values.</li>
+<li><strong>Raw data + metadata:</strong> Raw data must have metadata as context.</li>
+<li><strong>Processing &amp; derivation:</strong> Filtering, organizing, feature extraction, etc.</li>
+<li><strong>Models &amp; inference rules:</strong> Assumptions can be documented and coded explicitly.</li>
+<li><strong>Interpretation:</strong> Human judgment (which is usually not reproducible, unless codified).</li>
+</ol>
+</section>
+</div><div class="column" style="width:3%;">
+
+</div><div class="column" style="width:50%;">
+<p><img src="../graphics/workflow_diagram/analytical_workflow_01.png" class="img-fluid"></p>
+</div>
+</div>
+<p>Everything up to (and including) production of figures and tables <strong>can and should be reproducible</strong>. That is, (1) you should be able to rerun an entire analysis and produce tables and figures (and fill in values in a Results section) with a simple click of a button, and (2) another user should be able to reproduce all steps in your analysis pipeline, even with minimal code. Framing the workflow as a casual path makes obvious how each result is causally linked to specific inputs, transformations, and assumptions.</p>
+<hr>
+<section id="why-workflows-matter-scientifically" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="why-workflows-matter-scientifically"><span class="header-section-number">11.4</span> Why workflows matter scientifically</h2>
+<p>Reproducibility in a scientific workflow is not primarily about convenience, though it often becomes convenient over time. A convenient –but non-reproducible– workflow focuses on rerunning an analysis quickly, often relying on memory, manual steps, and undocumented choices. That approach may work in the short term, but it does not scale and rarely holds up weeks, months, or years later. A reproducible workflow, by contrast, is designed so that every result can be traced back to its origins, including the data, code, assumptions, and decisions that produced it.</p>
+<p>At a broader scale, reproducible workflows allow us to:</p>
 <ul>
-<li><strong>Using large-language models (LLMs) to improve teaching at scale.</strong> What does this mean? In past terms, between 10-15 students have been enrolled in this course. This term, I have allowed 26 students to enroll. Without a Teaching Assistant, this spawns a significant issue of scale. This is solvable if we use AI as a helpful tool. So, after spending some time as an LLM-consultant and tester, I decided to explicitly integrate chatGPT’s LLMs into my teaching/grading workflow. This means that students will use a custom GPT that I created specifically for ZOO/ECOL-5500 called <a href="https://chatgpt.com/g/g-696966777a948191858541cd7986057e-jackalopegpt" target="_blank">JackalopeGPT</a> (using ChatGPT) to run checks on their work prior to submission; this will solve some of the “tuning” issues (with codes, grammar, clarity, etc.) that I have seen in student submissions in previous years.</li>
+<li>diagnose errors</li>
+<li>understand sensitivity to assumptions</li>
+<li>reuse data responsibly</li>
+<li>build on previous work without re-guessing decisions</li>
+<li>reduce long-term computational and cognitive overhead</li>
 </ul>
-</div><div class="column" style="width:20%;">
-<p><img src="../graphics/GPT_logo/jackalopeGPT_logo.png" class="img-fluid"></p>
-</div>
-</div>
+<p>In short:</p>
 <ul>
-<li><p><strong>Structural Causal Models (SCMs)</strong> I added Structural Causal Models (SCMs) at the end of the course to give us a way to think more clearly about complex systems where multiple variables influence each other at the same time. In the first part of the course, students will see the limits of fitting separate models (e.g.&nbsp;GLMs, GLMMs, GAMMs) for singular response variables; those models can work individually, but they often miss shared drivers, indirect effects, or how pieces of the complex system of exogenous and endogenous factors fit together. SCMs give us a way to lay out those relationships explicitly and analyze them as a connected structure (as is present in natural systems) rather than as a collection of isolated models. The goal isn’t to replace the modeling approaches we’ve already used but to improve inference by making our assumptions about the system clear and coherent.</p></li>
-<li><p><strong>Jackalopes!</strong> This course corrects a long-standing perspective that (1) jackalopes had deer-like antlers (Fig. 1), and (2) there was only a single species of jackalopes (Fig. 2). We will use the newly discovered cryptid ecosystem for course exercises and examples.</p></li>
+<li><strong>Convenience:</strong> <em>“Can I run this analysis again?”</em></li>
+<li><strong>Reproducibility:</strong> <em>“Can I clearly show how these results were produced?”</em></li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../graphics/jackalope_graphics/correct_jackalope.png" class="img-fluid figure-img"></p>
-<figcaption>Figure 1. Illustrations of the correct and incorrect ornament morphology of jackalopes.</figcaption>
-</figure>
-</div>
+<hr>
+</section>
+<section id="how-part-i-reproducible-analyses-is-organized" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="how-part-i-reproducible-analyses-is-organized"><span class="header-section-number">11.5</span> How <strong>Part I: Reproducible Analyses</strong> is organized</h2>
+<p>This Part follows the workflow in stages:</p>
+<ol type="1">
+<li><strong>Nature of data:</strong> What data are, how measurement works, and what <em>raw data</em> means.</li>
+<li><strong>Metadata (low friction):</strong> How to document context without drowning in formatting standards.</li>
+<li><strong>Reproducible workflows:</strong> Why multiple step-by-step scripts are not enough; the need for explicit input–output mapping.</li>
+<li><strong>Inference and interpretation:</strong> Where assumptions enter and where reproducibility ends.</li>
+</ol>
+<p>Each chapter is responsible for a <strong>specific region of the workflow</strong>.</p>
+<hr>
+</section>
+<section id="a-guiding-principle" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="a-guiding-principle"><span class="header-section-number">11.6</span> A guiding principle</h2>
+<blockquote class="blockquote">
+<p><strong>If you cannot say what a result depends on, it is not reproducible.</strong></p>
+</blockquote>
+<p>Keep this sentence in mind as you move forward. The next chapter starts where all workflows begin: with the <strong>nature of data themselves</strong>.</p>
 
 
 </section>
@@ -763,13 +766,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../index.html" class="pagination-link" aria-label="Information">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Information</span></span>
+      <a href="../chapters/using_jackalope_gpt.html" class="pagination-link" aria-label="How to Use JackalopeGPT">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">How to Use JackalopeGPT</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/syllabus.html" class="pagination-link" aria-label="Syllabus">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Syllabus</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/nature_of_data.html" class="pagination-link" aria-label="The Nature of Data">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Nature of Data</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

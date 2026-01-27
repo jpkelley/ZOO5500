@@ -23,18 +23,20 @@ book:
       chapters:   
         - chapters/ai_prompting.qmd
         - chapters/using_jackalope_gpt.qmd
-    - part: "Part I: Chaos to Columns"
-      chapters:
+    - part: "Part I: Reproducible Analyses"
+      chapters: 
+        - chapters/reproducible_workflow_intro.qmd
+        - chapters/nature_of_data.qmd
+        # - chapters/metadata_low_friction.qmd
         - chapters/naming_conventions.qmd
-        # - chapters/statistical_aphorisms.qmd
-       
-        # - chapters/data_exploration.qmd
-        # - chapters/preprocessing.qmd
-    - part: "Part II: Columns to Curves"
+    - part: "Part II: Chaos to Columns"
+      # chapters:
+
+    - part: "Part III: Columns to Curves"
       # chapters: 
         # - chapters/intro_modeling.qmd
         # - chapters/glm_poisson.qmd
-    - part: "Part III: Curves to Meaning"
+    - part: "Part IV: Curves to Meaning"
 
 
 format:

@@ -627,80 +627,212 @@
     ]
   },
   {
+    "objectID": "chapters/reproducible_workflow_intro.html",
+    "href": "chapters/reproducible_workflow_intro.html",
+    "title": "11  Reproducible Analyses",
+    "section": "",
+    "text": "11.1 Why start with reproducible analysis workflows?\nAlthough ZOO/ECOL-5500 focuses on quantitative analysis and modeling, those tools are only as reliable as the infrastructure that supports them. Establishing a clear, reproducible workflow creates a solid foundation that can scale appropriately as new data arrive –whether that means new sensor downloads, ongoing field observations, or ever-expanding datasets– without requiring you to constantly restructure, reinvent, or debug your analysis.\nThis chapter provides the broad conceptual map for the rest of Part I. Subsequent chapters focus on individual components of this workflow.\nEverything up to (and including) production of figures and tables can and should be reproducible. That is, (1) you should be able to rerun an entire analysis and produce tables and figures (and fill in values in a Results section) with a simple click of a button, and (2) another user should be able to reproduce all steps in your analysis pipeline, even with minimal code. Framing the workflow as a casual path makes obvious how each result is causally linked to specific inputs, transformations, and assumptions.",
+    "crumbs": [
+      "Part I: Reproducible Analyses",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Reproducible Analyses</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/reproducible_workflow_intro.html#what-is-a-reproducible-analytical-workflow",
+    "href": "chapters/reproducible_workflow_intro.html#what-is-a-reproducible-analytical-workflow",
+    "title": "11  Reproducible Analyses",
+    "section": "11.2 What is a reproducible analytical workflow?",
+    "text": "11.2 What is a reproducible analytical workflow?\nA common misconception—especially early in graduate training—is that reproducibility means sharing files and code on GitHub, Dryad, or similar repositories. Those components are necessary, but they is not sufficient.\nA reproducible analytical workflow is a structured system that explicitly and completely describes how scientific results are generated. Such a workflow:\n\nstarts with observations of the world, not the computer\ntreats measurement as a translation (or signal-transduction) process\nclearly and explicitly documents where data come from\nseparates data, metadata, processing, and inference\nrecords inputs → transformations → outputs at each step (this is key!)\nmakes explicit where assumptions or biases are introduced\nallows another person (or you, six months later) to reconstruct the results\n\nTogether, these features ensure that analyses can be understood, repeated, extended, and scaled as new data arrive.",
+    "crumbs": [
+      "Part I: Reproducible Analyses",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Reproducible Analyses</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/reproducible_workflow_intro.html#the-reproducible-analytical-workflow-as-a-causal-system",
+    "href": "chapters/reproducible_workflow_intro.html#the-reproducible-analytical-workflow-as-a-causal-system",
+    "title": "11  Reproducible Analyses",
+    "section": "11.3 The reproducible analytical workflow as a causal system",
+    "text": "11.3 The reproducible analytical workflow as a causal system\nThe reproducible analytical workflow can be understood as a causal system in which each step produces downstream consequences: measurement choices shape the raw data, data processing constrains what can be modeled, and modeling assumptions determine what can be inferred. Thinking causally about the workflow makes it clear that results do not simply “come from the data,” but from a chain of decisions that can be traced, tested, and reproduced. Generally, this pipeline looks like this:\n\nWorld → Data → Models → Inference → Interpretation\n\nMore explicitly, as seen in the diagram at right, we have the following general steps:\n\nWorld / phenomena: Processes exist whether or not we observe them (or like them!)\nMeasurement & observation: Instruments and observers translate phenomena into recorded values.\nRaw data + metadata: Raw data must have metadata as context.\nProcessing & derivation: Filtering, organizing, feature extraction, etc.\nModels & inference rules: Assumptions can be documented and coded explicitly.\nInterpretation: Human judgment (which is usually not reproducible, unless codified).",
+    "crumbs": [
+      "Part I: Reproducible Analyses",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Reproducible Analyses</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/reproducible_workflow_intro.html#why-workflows-matter-scientifically",
+    "href": "chapters/reproducible_workflow_intro.html#why-workflows-matter-scientifically",
+    "title": "11  Reproducible Analyses",
+    "section": "11.4 Why workflows matter scientifically",
+    "text": "11.4 Why workflows matter scientifically\nReproducibility in a scientific workflow is not primarily about convenience, though it often becomes convenient over time. A convenient –but non-reproducible– workflow focuses on rerunning an analysis quickly, often relying on memory, manual steps, and undocumented choices. That approach may work in the short term, but it does not scale and rarely holds up weeks, months, or years later. A reproducible workflow, by contrast, is designed so that every result can be traced back to its origins, including the data, code, assumptions, and decisions that produced it.\nAt a broader scale, reproducible workflows allow us to:\n\ndiagnose errors\nunderstand sensitivity to assumptions\nreuse data responsibly\nbuild on previous work without re-guessing decisions\nreduce long-term computational and cognitive overhead\n\nIn short:\n\nConvenience: “Can I run this analysis again?”\nReproducibility: “Can I clearly show how these results were produced?”",
+    "crumbs": [
+      "Part I: Reproducible Analyses",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Reproducible Analyses</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/reproducible_workflow_intro.html#how-part-i-reproducible-analyses-is-organized",
+    "href": "chapters/reproducible_workflow_intro.html#how-part-i-reproducible-analyses-is-organized",
+    "title": "11  Reproducible Analyses",
+    "section": "11.5 How Part I: Reproducible Analyses is organized",
+    "text": "11.5 How Part I: Reproducible Analyses is organized\nThis Part follows the workflow in stages:\n\nNature of data: What data are, how measurement works, and what raw data means.\nMetadata (low friction): How to document context without drowning in formatting standards.\nReproducible workflows: Why multiple step-by-step scripts are not enough; the need for explicit input–output mapping.\nInference and interpretation: Where assumptions enter and where reproducibility ends.\n\nEach chapter is responsible for a specific region of the workflow.",
+    "crumbs": [
+      "Part I: Reproducible Analyses",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Reproducible Analyses</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/reproducible_workflow_intro.html#a-guiding-principle",
+    "href": "chapters/reproducible_workflow_intro.html#a-guiding-principle",
+    "title": "11  Reproducible Analyses",
+    "section": "11.6 A guiding principle",
+    "text": "11.6 A guiding principle\n\nIf you cannot say what a result depends on, it is not reproducible.\n\nKeep this sentence in mind as you move forward. The next chapter starts where all workflows begin: with the nature of data themselves.",
+    "crumbs": [
+      "Part I: Reproducible Analyses",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Reproducible Analyses</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/nature_of_data.html",
+    "href": "chapters/nature_of_data.html",
+    "title": "12  The Nature of Data",
+    "section": "",
+    "text": "12.1 Introduction\nUnderstanding the nature of your data is the first real step toward defensible ecological inference.You were asked to come into this course with a dataset in hand. Some of you have undoubtedly arrived with very well-organized spreadsheets. Others have long lists of folders full of raw sensor outputs, GIS layers, audio files, camera-trap images, or field notes that only you can currently interpret. All of that is perfect for this course.\nBefore we analyze anything, however, we need to be precise about three things:\nMost scientific confusion comes from mixing these three up. If you do not understand these three critical components, no amount of fancy R coding will save your analysis.\nSo, we begin where all data originate: measurement. And, for that, it helps to start with a brief introduction to the field of metrology.",
+    "crumbs": [
+      "Part I: Reproducible Analyses",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>The Nature of Data</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/nature_of_data.html#introduction",
+    "href": "chapters/nature_of_data.html#introduction",
+    "title": "12  The Nature of Data",
+    "section": "",
+    "text": "What measurements represent\n\nWhat data are\n\nWhat we are actually trying to estimate",
+    "crumbs": [
+      "Part I: Reproducible Analyses",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>The Nature of Data</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/nature_of_data.html#metrological-terminology",
+    "href": "chapters/nature_of_data.html#metrological-terminology",
+    "title": "12  The Nature of Data",
+    "section": "12.2 Metrological Terminology",
+    "text": "12.2 Metrological Terminology\nMetrology is simply the science of measurement. Whereas it has traditionally focused on the physical sciences and engineered systems, it applies just as much to biology and its messier subfields (e.g. ecology) as it does to physics or chemistry.\nMetrology establishes a formal framework for ensuring that scientific measurements are traceable to standards, reported with uncertainty, and reproducible across space, time, and observers. Crucially, this framework operates upstream of analysis—at the moment when information about the world are collected an raw data are generated. Metrology naturally integrates with our discussion of reproducible analyses because, instead of a number standing alone, a measurement comes bundled with information about what it was trying to measure, how reliable it is, and what assumptions were made along the way. That lets future researchers decide whether datasets are truly comparable, whether old data can answer new and exciting questions, and how much trust researchers should place in a result without having to guess what the original researcher meant.\nTwo term must be clearly differentiated from measurements and estimates. These terms are:\n\nmeasurand\nestimand\n\n\n\n\n\n\n\nNoteEtymology of measurand and estimand\n\n\n\n\n\nThe suffix –and comes from Latin –andus\n(“that which is to be acted upon [a target]”)\n\n\n\nTarget (–and)\nResult\n\n\n\n\nMeasurand\nMeasurement\n\n\nEstimand\nEstimate\n\n\n\n\n\n\n\n\n\n12.2.1 Measurand!\n\nThe theoretical quantity of interest in the world to be measured.\n\nA measurand:\n\nexists independently of observers\n\nis defined conceptually, not instrumentally\n\nis the quantity you wish you could measure directly\n\nExamples:\n\ntrue wing length\n\nactual activity level\n\nreal population abundance\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\nThe measurand is defined before measurement and never directly observed.\n\n\n\n\n\n\n\n\n\n\nNoteCan we ever directly achieve the measurand?\n\n\n\nShort answer: Almost never—and that is normal science.\n\n\n\n\n\n\n12.2.2 Estimand! (the missing precision tool)\n\nThe quantity that a statistical model is designed to estimate, given the available data.\n\nThough we will discuss estimands at length later in the course during the modeling exercises, it helps to discuss it in the context of measurands. An estimand:\n\nis defined by both the scientific question and the analysis model\n\ndepends on the data, measurement process, and assumptions\n\nis the quantity you can actually estimate from the data\n\nExamples:\n\nmean wing length in the sampled population\n\nexpected activity level given detection and sampling design\n\nestimated population abundance under a specified model\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\nThe estimand is defined before analysis, depends on modeling choices, and is not the same as the measurand.",
+    "crumbs": [
+      "Part I: Reproducible Analyses",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>The Nature of Data</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/nature_of_data.html#summary-measurand-vs-estimand",
+    "href": "chapters/nature_of_data.html#summary-measurand-vs-estimand",
+    "title": "12  The Nature of Data",
+    "section": "12.3 Summary: Measurand vs Estimand",
+    "text": "12.3 Summary: Measurand vs Estimand\n\n\n\nConcept\nMeasurand\nEstimand\n\n\n\n\nNature\nConceptual / scientific\nFormal / statistical\n\n\nExists without data?\nYes\nNo\n\n\nDepends on model?\nNo\nYes\n\n\nDefined when?\nBefore measurement\nBefore estimation\n\n\n\n\n\n\n\n\n\n\nNoteWhere does each concept belong in a scientific paper?\n\n\n\n\n\n\n\n\nConcept\nSection\n\n\n\n\nMeasurand\nIntroduction\n\n\nEstimand\nMethods\n\n\nEstimate\nResults\n\n\nInterpretation (circling back to measurand)\nDiscussion",
+    "crumbs": [
+      "Part I: Reproducible Analyses",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>The Nature of Data</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/nature_of_data.html#what-are-data",
+    "href": "chapters/nature_of_data.html#what-are-data",
+    "title": "12  The Nature of Data",
+    "section": "12.4 What are data?",
+    "text": "12.4 What are data?\nOnly after measurement do we get data, the recorded outputs of those measurement processes. To understand what is meant by data, let us consult a dictionary first. Two definitions from the Merriam-Webster Dictionary—188 years apart—are especially revealing:\n\n\n\n\n\n\n\n\nNoteMerriam-Webster (2016)\n\n\n\n“Facts or information used usually to calculate, analyze, or plan something.”\n\n\n\n\n\n\n\n\n\n\n\nNoteMerriam-Webster (1828)\n\n\n\n“Quantities, principles, or facts given or admitted, by which to find things or results unknown.”\n\n\n\n\nModern usage treats data and information as synonymous. But scientifically, this is misleading.\nData are observed facts. Information is what we extract from those facts using models and assumptions.\nWe do not collect information. We collect data, and then we extract or create information. This distinction is critical for reproducibility.",
+    "crumbs": [
+      "Part I: Reproducible Analyses",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>The Nature of Data</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/nature_of_data.html#raw-data",
+    "href": "chapters/nature_of_data.html#raw-data",
+    "title": "12  The Nature of Data",
+    "section": "12.5 Raw data",
+    "text": "12.5 Raw data\nBecause measurands cannot be observed directly and estimands depend on how data are generated and modeled, raw data are the critical link between scientific questions (filled with measurands) and strong inference. Raw data preserve the closest recorded traces of the measurement process, making it possible to understand how observations relate to the underlying measurand and what estimands the data can actually support.\nBy now, we have all been conducting formal scientific inquiry for many years. It is common to see folders labeled /raw_data/ that contain offloaded sensor files or spreadsheets transcribed from field notebooks. These data may feel “raw,” but often they are not.\n\nRaw data are the facts produced by an instrument or observer through a domain-specific translation, recorded at the time of observation, and preserved without post-hoc modification.\n\n\n\nWhen we offload data from a sensor or transcribe notes into a spreadsheet, our actions have a non-zero probability of influencing the data.\nExamples of raw data include:\n\naudio waveforms recorded at a study site (on the device)\n\nGPS locations logged by a collar (not yet downloaded)\n\ncounts written on a datasheet (not yet transcribed)\n\npixel values collected by a camera sensor\n\n\n\n\n\n\n\n\n\n\n\n\nWarningCommon misconceptions about raw data\n\n\n\n\n\n\nRaw data are not clean, tidy, or analysis-ready\n\nProcessed tables and summaries are not raw data\n\nRaw data are not the truth—they are translated observations\n\nRaw data are not limited to numbers\n\nMessiness does not imply poor data quality\n\nEarly processing choices permanently change the data\n\n\n\n\n\nRaw data are the foundation of all scientific analysis. On their own, however, they are incomplete. To be interpretable, reusable, and reproducible, raw data require context.\nThat context comes from metadata, which are introduced on the next page. Keeping the focus here on raw data helps avoid mixing observations of the world with explanations about how those observations were produced. Metadata play a different conceptual role, and treating them separately keeps that distinction clear.",
+    "crumbs": [
+      "Part I: Reproducible Analyses",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>The Nature of Data</span>"
+    ]
+  },
+  {
     "objectID": "chapters/naming_conventions.html",
     "href": "chapters/naming_conventions.html",
-    "title": "11  Naming conventions and coding style",
+    "title": "13  Naming conventions and coding style",
     "section": "",
-    "text": "11.1 Why you should care (even if you “just want to model stuff”)\nNaming conventions and coding style are not decoration. They are infrastructure.\nIf your names are inconsistent, your code becomes harder to read, harder to debug, and harder to share—especially once your project grows beyond “one file, one afternoon.”",
+    "text": "13.1 Why you should care (even if you “just want to model stuff”)\nNaming conventions and coding style are not decoration. They are infrastructure.\nIf your names are inconsistent, your code becomes harder to read, harder to debug, and harder to share—especially once your project grows beyond “one file, one afternoon.”\nIn scientific workflows, this difference is not about elegance. It is about traceability.\nA workflow that depends on unstable or unclear names cannot be audited, reused, or trusted.\nBefore we talk about modeling or automation, we need to ensure that the basic objects in our workflow—variables, files, and folders—are named in a way that makes their roles unambiguous.\nThis is what allows:",
     "crumbs": [
-      "Part I: Chaos to Columns",
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Naming conventions and coding style</span>"
+      "Part I: Reproducible Analyses",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Naming conventions and coding style</span>"
     ]
   },
   {
     "objectID": "chapters/naming_conventions.html#why-you-should-care-even-if-you-just-want-to-model-stuff",
     "href": "chapters/naming_conventions.html#why-you-should-care-even-if-you-just-want-to-model-stuff",
-    "title": "11  Naming conventions and coding style",
+    "title": "13  Naming conventions and coding style",
     "section": "",
-    "text": "“It’s the hardest job to come up with new and unique names for a variable every time you create one but this is the difference between an average programmer and a good one.”\n— Vikram Singh Rawat\n\n\n\n\n\n\n\nNoteThe three costs of sloppy naming\n\n\n\n\nInteroperability cost: Unconventional naming in R can cause issues for other programming languages.\n\nCollaboration cost: Inconsistency makes it harder for other people (including Future You) to work with your data.\n\nTime cost: You will spend more time fixing small issues and less time doing science.",
+    "text": "“It’s the hardest job to come up with new and unique names for a variable every time you create one but this is the difference between an average programmer and a good one.”\n— Vikram Singh Rawat\n\n\n\n\n\n\n\n\n\nNoteThe three scientific costs of sloppy naming\n\n\n\n\nInteroperability cost:\nNon-standard names break workflows across tools, languages, and collaborators.\nCollaboration cost:\nInconsistent naming forces others (including Future You) to reverse-engineer intent.\nReproducibility cost:\nWhen names drift, inputs and outputs become ambiguous, and results can no longer be traced back to their sources.\n\n\n\n\n\n\nmetadata to point to the correct data,\nscripts to operate predictably,\nand workflows to declare dependencies explicitly.",
     "crumbs": [
-      "Part I: Chaos to Columns",
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Naming conventions and coding style</span>"
+      "Part I: Reproducible Analyses",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Naming conventions and coding style</span>"
     ]
   },
   {
     "objectID": "chapters/naming_conventions.html#naming-conventions-for-variables-and-files",
     "href": "chapters/naming_conventions.html#naming-conventions-for-variables-and-files",
-    "title": "11  Naming conventions and coding style",
-    "section": "11.2 Naming conventions for variables and files",
-    "text": "11.2 Naming conventions for variables and files\n\n11.2.1 What are “naming conventions”?\nThey are simply a consistent set of rules for naming:\n\nvariables (columns in your dataset)\nobjects in R (data frames, models, plots)\nfiles and folders (scripts, data, outputs)\n\n\n\n11.2.2 Three common naming styles\nYou will see these everywhere:\n\ncamelCase (meanDepth)\nPascalCase (MeanDepth)\nsnake_case (mean_depth)\n\nIn this course, we will default to snake_case for variables and files. This is strongly recommended for analysis scripts.\n\n\n11.2.3 General guidelines (the “please don’t make future you angry” list)\nThese are simple rules that prevent a shocking number of problems:\n\n\n\n\n\n\n\n\n\nRule\nWhy it matters\nExample of poor form\n\n\n\n\nAvoid blank spaces\nSpaces complicate coding and break formulas, file paths, and scripting\nMean Depth, Site Name, Final Data.csv\n\n\nOmit special symbols like ?, $, *, +, #, (, ), -, /, }, {, |, &gt;, &lt;, etc.\nMany special characters are treated as operators or commands in R, so using them in names can break code or make it harder to work with.\nmass(g), count#, Y/N?, depth&gt;10\n\n\nUse _ as a separator\nUnderscores are safe, readable, and standard\nmean-depth, mean.depth, mean depth\n\n\nDo not begin names with numbers\nNames starting with numbers are invalid or confusing in R\n100m_depth, 2023_data\n\n\nMake names unique\nNon-unique names cause overwriting and ambiguity\ndata, data2, final, final_final\n\n\nBe consistent with case\nR is case-sensitive; inconsistency causes silent bugs\nDepth, depth, DEPTH in same project\n\n\nAvoid blank rows in data\nBlank rows can be misread as data or missing values\nEmpty rows between observations in CSV\n\n\nRemove comments from data files\nComments belong in scripts or metadata, not raw data\n# measured in June inside a CSV\n\n\nDefine and document NA values\nAmbiguous missing values lead to incorrect analyses\nMixing NA, 0, -999, . without explanation\n\n\nUse clear, documented date formats\nAmbiguous dates are easy to misinterpret\n03/04/21 (is this March 4 or April 3?)\n\n\n\n\n\n\n11.2.4 “Bad → Good” examples for variable names\nYour variable names should be: - readable at a glance - easy to type - consistent across files and projects\nHere are examples aligned with the tidyverse style guide (Hadley Wickham):\nA quick translation rule:\n\nUse units as suffixes: depth_cm, mass_g, distance_m (do not use parentheses around units)\nUse clear boolean names: yes_no or better: is_adult, has_nest\nPrefer meaning over brevity: percentile_50 beats p50 (unless p50 is a defined term in your field)",
+    "title": "13  Naming conventions and coding style",
+    "section": "13.2 Naming conventions for variables and files",
+    "text": "13.2 Naming conventions for variables and files\n\n\n\n13.2.1 What are “naming conventions”?\nThey are simply a consistent set of rules for naming:\n\nvariables (columns in your dataset)\nobjects in R (data frames, models, plots)\nfiles and folders (scripts, data, outputs)\n\n\n\n13.2.2 Three common naming styles\nYou will see these everywhere:\n\ncamelCase (meanDepth)\nPascalCase (MeanDepth)\nsnake_case (mean_depth)\n\nIn this course, we will default to snake_case for variables and files. This is strongly recommended for analysis scripts.\n\n\n\n\n\nFrom Allison Horst. Cartoon representations of common cases in coding. A snake screams “SCREAMING_SNAKE_CASE” into the face of a camel (wearing ear muffs) with “camelCase” written along its back. Vegetables on a skewer spell out “kebab-case” (words on a skewer). A mellow, happy looking snake has text “snake_case” along it.\n\n\n\n\n\n13.2.3 General guidelines (the “please don’t make future you angry” list)\nThese are simple rules that prevent a shocking number of problems:\n\n\n\n\n\n\n\n\n\nRule\nWhy it matters\nExample of poor form\n\n\n\n\nAvoid blank spaces\nSpaces complicate coding and break formulas, file paths, and scripting\nMean Depth, Site Name, Final Data.csv\n\n\nOmit special symbols like ?, $, *, +, #, (, ), -, /, }, {, |, &gt;, &lt;, etc.\nMany special characters are treated as operators or commands in R, so using them in names can break code or make it harder to work with.\nmass(g), count#, Y/N?, depth&gt;10\n\n\nUse _ as a separator\nUnderscores are safe, readable, and standard\nmean-depth, mean.depth, mean depth\n\n\nDo not begin names with numbers\nNames starting with numbers are invalid or confusing in R\n100m_depth, 2023_data\n\n\nMake names unique\nNon-unique names cause overwriting and ambiguity\ndata, data2, final, final_final\n\n\nBe consistent with case\nR is case-sensitive; inconsistency causes silent bugs\nDepth, depth, DEPTH in same project\n\n\nAvoid blank rows in data\nBlank rows can be misread as data or missing values\nEmpty rows between observations in CSV\n\n\nRemove comments from data files\nComments belong in scripts or metadata, not raw data\n# measured in June inside a CSV\n\n\nDefine and document NA values\nAmbiguous missing values lead to incorrect analyses\nMixing NA, 0, -999, . without explanation\n\n\nUse clear, documented date formats\nAmbiguous dates are easy to misinterpret\n03/04/21 (is this March 4 or April 3?)\n\n\n\n\n\n\n13.2.4 “Bad → Good” examples for variable names\nYour variable names should be: - readable at a glance - easy to type - consistent across files and projects\nHere are examples aligned with the tidyverse style guide (Hadley Wickham):\nA quick translation rule:\n\nUse units as suffixes: depth_cm, mass_g, distance_m (do not use parentheses around units)\nUse clear boolean names: yes_no or better: is_adult, has_nest\nPrefer meaning over brevity: percentile_50 beats p50 (unless p50 is a defined term in your field)",
     "crumbs": [
-      "Part I: Chaos to Columns",
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Naming conventions and coding style</span>"
+      "Part I: Reproducible Analyses",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Naming conventions and coding style</span>"
     ]
   },
   {
     "objectID": "chapters/naming_conventions.html#naming-conventions-for-folders-project-structure",
     "href": "chapters/naming_conventions.html#naming-conventions-for-folders-project-structure",
-    "title": "11  Naming conventions and coding style",
-    "section": "11.3 Naming conventions for folders (project structure)",
-    "text": "11.3 Naming conventions for folders (project structure)\n\n11.3.1 Why folder names matter\nA good folder structure makes it hard to lose track of: - raw versus processed data - inputs versus outputs - code versus results - files that you can re-create versus ones you cannot (i.e. that you should never overwrite)\nIn this course, we care about reproducibility, which means: - raw data is always treated as read-only - processed data is created by scripts, acting on raw data, and never manually edited - results are generated by scripts and never manually edited\n\n\n\n\n\n\nTipA folder structure that scales\n\n\n\n\n\nA simple, stable structure (example):\n\ndata/\n\nraw_data/ (never edited)\nprocessed_data/ (created by scripts)\n\nr_scripts/ (functions + helpers)\nanalysis/ (analysis note / exercises )\noutputs/\n\nfigures/\ntables/\n\n\n\n\n\nFolder naming rules (same spirit as variable naming): - lowercase (snake_case) - no spaces - prefer underscores - descriptive names over clever names",
+    "title": "13  Naming conventions and coding style",
+    "section": "13.3 Naming conventions for folders (project structure)",
+    "text": "13.3 Naming conventions for folders (project structure)\n\n13.3.1 Why folder names matter\nA good folder structure makes it hard to lose track of: - raw versus processed data - inputs versus outputs - code versus results - files that you can re-create versus ones you cannot (i.e. that you should never overwrite)\nIn this course, we care about reproducibility, which means: - raw data is always treated as read-only - processed data is created by scripts, acting on raw data, and never manually edited - results are generated by scripts and never manually edited\n\n\n\n\n\n\nTipA folder structure that scales\n\n\n\n\n\nA simple, stable structure (example):\n\ndata/\n\nraw_data/ (never edited)\nprocessed_data/ (created by scripts)\n\nr_scripts/ (functions + helpers)\nanalysis/ (analysis note / exercises )\noutputs/\n\nfigures/\ntables/\n\n\n\n\n\nFolder naming rules (same spirit as variable naming): - lowercase (snake_case) - no spaces - prefer underscores - descriptive names over clever names",
     "crumbs": [
-      "Part I: Chaos to Columns",
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Naming conventions and coding style</span>"
+      "Part I: Reproducible Analyses",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Naming conventions and coding style</span>"
     ]
   },
   {
     "objectID": "chapters/naming_conventions.html#conventions-for-legible-and-consistent-r-code",
     "href": "chapters/naming_conventions.html#conventions-for-legible-and-consistent-r-code",
-    "title": "11  Naming conventions and coding style",
-    "section": "11.4 Conventions for legible and consistent R code",
-    "text": "11.4 Conventions for legible and consistent R code\n\n11.4.1 Why code style matters\nCode style is not about being fancy. It’s about making your thinking legible.\nGood style: - reduces bugs - improves peer review (including lab mates and future you) - makes it easier to modify models without breaking things\n\n\n\n\n\n\nNoteTwo extremely useful packages for checking R code formatting\n\n\n\n\nlintr checks your code for style problems (like a spellcheck for R code).\nstyler automatically formats your code to match a consistent style.\n\n\n\n\n\n11.4.2 “Bad → Good” examples for R code and files\nThese examples follow the tidyverse style guide (Hadley Wickham):\n\n\n\n\n\n\n\n\n\nBad\nWhy was it bad?\nGood\n\n\n\n\nFit models.r\nContains spaces; inconsistent casing; harder to reference in code\nfit_models.R\n\n\n##########\nNo semantic meaning; comments should describe intent, not fill space\n# extract elevation -----\n\n\nfindat\nVague name; gives no clue about content or structure\nfindat_mat\n\n\nfindat_mat\nRedundant and unclear; does not describe what the matrix contains\nmass_mat\n\n\n\n\nA few rules we will use repeatedly:\n\n\n11.4.3 1) Use nouns for objects and verbs for functions\n\nObjects (things): pufferi, pufferi_clean, model_gam\nFunctions (actions): clean_data(), fit_model(), plot_effects()\n\n\n\n11.4.4 2) Make “intermediate objects” obvious\nIf an object is temporary, label it like it is: - *_raw, *_clean, *_long, *_wide, *_summary\n\n\n11.4.5 3) Prefer readable code over clever code\n\n\n\n\n\n\n\n\nNoteOver-piped, confusing code\n\n\n\n\n\nsummary_df &lt;-\n  raw_df |&gt;\n  dplyr::filter(!is.na(count), year &gt;= 2015) |&gt;\n  dplyr::group_by(site, species) |&gt;\n  dplyr::summarise(\n    mean_count = mean(count),\n    sd_count   = sd(count),\n    n          = dplyr::n(),\n    .groups = \"drop\"\n  ) |&gt;\n  dplyr::filter(n &gt;= 5) |&gt;\n  dplyr::mutate(\n    cv = sd_count / mean_count,\n    log_mean = log(mean_count)\n  ) |&gt;\n  dplyr::arrange(dplyr::desc(log_mean))\n\n\n\n\n\n\n\n\n\n\n\n\nNoteLonger but readable code\n\n\n\n\n\n# Step 1: keep valid observations from recent years\ndf_filtered &lt;- raw_df |&gt;\n  dplyr::filter(!is.na(count), year &gt;= 2015)\n\n# Step 2: summarize counts by site and species\ndf_summary &lt;- df_filtered |&gt;\n  dplyr::group_by(site, species) |&gt;\n  dplyr::summarise(\n    mean_count = mean(count),\n    sd_count   = sd(count),\n    n          = dplyr::n(),\n    .groups = \"drop\"\n  )\n\n# Step 3: retain well-sampled groups\ndf_sufficient &lt;- df_summary |&gt;\n  dplyr::filter(n &gt;= 5)\n\n# Step 4: compute derived metrics\ndf_metrics &lt;- df_sufficient |&gt;\n  dplyr::mutate(\n    cv       = sd_count / mean_count,\n    log_mean = log(mean_count)\n  )\n\n# Step 5: order results for inspection\nsummary_df &lt;- df_metrics |&gt;\n  dplyr::arrange(dplyr::desc(log_mean))\n\n\n\n\n\n\n\n\n\n\nTipPractical guidance\n\n\n\n\nUse CSV/TSV when the dataset is small enough to load quickly and inspect easily.\nConsider .RDS when you want an R-native format that preserves object structure.\nConsider .parquet when files get big and you care about speed + file size.",
+    "title": "13  Naming conventions and coding style",
+    "section": "13.4 Conventions for legible and consistent R code",
+    "text": "13.4 Conventions for legible and consistent R code\n\n13.4.1 Why code style matters\nCode style is not about being fancy. It’s about making your thinking legible.\nGood style: - reduces bugs - improves peer review (including lab mates and future you) - makes it easier to modify models without breaking things\n\n\n\n\n\n\nNoteTwo extremely useful packages for checking R code formatting\n\n\n\n\nlintr checks your code for style problems (like a spellcheck for R code).\nstyler automatically formats your code to match a consistent style.\n\n\n\n\n\n13.4.2 “Bad → Good” examples for R code and files\nThese examples follow the tidyverse style guide (Hadley Wickham):\n\n\n\n\n\n\n\n\n\nBad\nWhy was it bad?\nGood\n\n\n\n\nFit models.r\nContains spaces; inconsistent casing; harder to reference in code\nfit_models.R\n\n\n##########\nNo semantic meaning; comments should describe intent, not fill space\n# extract elevation -----\n\n\nfindat\nVague name; gives no clue about content or structure\nfindat_mat\n\n\nfindat_mat\nRedundant and unclear; does not describe what the matrix contains\nmass_mat\n\n\n\n\nA few rules we will use repeatedly:\n\n\n13.4.3 Use nouns for objects and verbs for functions\n\nObjects (things): pufferi, pufferi_clean, model_gam\nFunctions (actions): clean_data(), fit_model(), plot_effects()\n\n\n\n13.4.4 Make “intermediate objects” obvious\nIf an object is temporary, label it like it is: - *_raw, *_clean, *_long, *_wide, *_summary\n\n\n13.4.5 Prefer readable code over clever code\n\n\n\n\n\n\n\n\nNoteOver-piped, confusing code\n\n\n\n\n\nsummary_df &lt;-\n  raw_df |&gt;\n  dplyr::filter(!is.na(count), year &gt;= 2015) |&gt;\n  dplyr::group_by(site, species) |&gt;\n  dplyr::summarise(\n    mean_count = mean(count),\n    sd_count   = sd(count),\n    n          = dplyr::n(),\n    .groups = \"drop\"\n  ) |&gt;\n  dplyr::filter(n &gt;= 5) |&gt;\n  dplyr::mutate(\n    cv = sd_count / mean_count,\n    log_mean = log(mean_count)\n  ) |&gt;\n  dplyr::arrange(dplyr::desc(log_mean))\n\n\n\n\n\n\n\n\n\n\nNoteLonger but readable code\n\n\n\n\n\n# Step 1: keep valid observations from recent years\ndf_filtered &lt;- raw_df |&gt;\n  dplyr::filter(!is.na(count), year &gt;= 2015)\n\n# Step 2: summarize counts by site and species\ndf_summary &lt;- df_filtered |&gt;\n  dplyr::group_by(site, species) |&gt;\n  dplyr::summarise(\n    mean_count = mean(count),\n    sd_count   = sd(count),\n    n          = dplyr::n(),\n    .groups = \"drop\"\n  )\n\n# Step 3: retain well-sampled groups\ndf_sufficient &lt;- df_summary |&gt;\n  dplyr::filter(n &gt;= 5)\n\n# Step 4: compute derived metrics\ndf_metrics &lt;- df_sufficient |&gt;\n  dplyr::mutate(\n    cv       = sd_count / mean_count,\n    log_mean = log(mean_count)\n  )\n\n# Step 5: order results for inspection\nsummary_df &lt;- df_metrics |&gt;\n  dplyr::arrange(dplyr::desc(log_mean))\n\n\n\n\n\n\n\n13.4.6 A final note about reproducible analyses\nIn workflow tools like targets, names are not simply cosmetic. They define nodes in a dependency graph (i.e. the ways all your inputs, processes, and outputs are connected). If names are unclear, the graph is unclear. If the graph is unclear, the workflow is not reproducible.\n\n\n\n\n\n\nTipPractical guidance\n\n\n\n\nUse CSV/TSV when the dataset is small enough to load quickly and inspect easily.\nConsider .RDS when you want an R-native format that preserves object structure.\nConsider .parquet when files get big and you care about speed + file size.",
     "crumbs": [
-      "Part I: Chaos to Columns",
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Naming conventions and coding style</span>"
+      "Part I: Reproducible Analyses",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Naming conventions and coding style</span>"
     ]
   },
   {
     "objectID": "chapters/naming_conventions.html#your-minimum-standard-checklist-use-this-before-you-submit-anything",
     "href": "chapters/naming_conventions.html#your-minimum-standard-checklist-use-this-before-you-submit-anything",
-    "title": "11  Naming conventions and coding style",
-    "section": "11.5 Your “minimum standard” checklist (use this before you submit anything)",
-    "text": "11.5 Your “minimum standard” checklist (use this before you submit anything)\n\n\n\n\n\n\nNoteNaming + style checklist\n\n\n\nData + variables\n\nColumn names are snake_case\nNo spaces or special characters in column names\nUnits are explicit where relevant (_m, _cm, _g, _s)\nMissing values are documented (what is NA, what is 0, what is “not observed”?)\nDates are in a clear, documented format (and the order is not ambiguous)\n\nFolders + files\n\nFolder names are lowercase and descriptive\nRaw data are not edited in place\nProcessed data are created by scripts (not by hand)\n\nR code\n\nObjects use nouns; functions use verbs\nScripts are readable (spacing, line breaks, consistent naming)\nYou can restart R and run the workflow without relying on “things in memory”",
+    "title": "13  Naming conventions and coding style",
+    "section": "13.5 Your “minimum standard” checklist (use this before you submit anything)",
+    "text": "13.5 Your “minimum standard” checklist (use this before you submit anything)\n\n\n\n\n\n\nNoteNaming + style checklist\n\n\n\nData + variables\n\nColumn names are snake_case\nNo spaces or special characters in column names\nUnits are explicit where relevant (_m, _cm, _g, _s)\nMissing values are documented (what is NA, what is 0, what is “not observed”?)\nDates are in a clear, documented format (and the order is not ambiguous)\n\nFolders + files\n\nFolder names are lowercase and descriptive\nRaw data are not edited in place\nProcessed data are created by scripts (not by hand)\n\nR code\n\nObjects use nouns; functions use verbs\nScripts are readable (spacing, line breaks, consistent naming)\nYou can restart R and run the workflow without relying on “things in memory”",
     "crumbs": [
-      "Part I: Chaos to Columns",
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Naming conventions and coding style</span>"
+      "Part I: Reproducible Analyses",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Naming conventions and coding style</span>"
     ]
   },
   {
     "objectID": "chapters/naming_conventions.html#practice-task-recommended",
     "href": "chapters/naming_conventions.html#practice-task-recommended",
-    "title": "11  Naming conventions and coding style",
-    "section": "11.6 Practice task (recommended)",
-    "text": "11.6 Practice task (recommended)\n\nPick one of your current projects (or a past project).\nRename:\n\n5 confusing variables\n3 confusing files\n1 confusing folder\n\nMake one small style improvement:\n\nconsistent naming\nreadable comments\nbreak one long chunk into 2–3 meaningful steps\n\n\nThe goal is not perfection. The goal is to start practicing now.",
+    "title": "13  Naming conventions and coding style",
+    "section": "13.6 Practice task (recommended)",
+    "text": "13.6 Practice task (recommended)\n\nPick one of your current projects (or a past project).\nRename:\n\n5 confusing variables\n3 confusing files\n1 confusing folder\n\nMake one small style improvement:\n\nconsistent naming\nreadable comments\nbreak one long chunk into 2–3 meaningful steps\n\n\nThe goal is not perfection. The goal is to start practicing now.",
     "crumbs": [
-      "Part I: Chaos to Columns",
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Naming conventions and coding style</span>"
+      "Part I: Reproducible Analyses",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Naming conventions and coding style</span>"
     ]
   }
 ]

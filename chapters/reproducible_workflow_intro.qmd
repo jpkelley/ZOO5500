@@ -1,0 +1,100 @@
+---
+title: "Reproducible Analyses"
+format: html
+toc: true
+---
+
+## Why start with reproducible analysis workflows?
+
+Although ZOO/ECOL-5500 focuses on quantitative analysis and modeling, those tools are only as reliable as the infrastructure that supports them. Establishing a clear, reproducible workflow creates a solid foundation that can scale appropriately as new data arrive --whether that means new sensor downloads, ongoing field observations, or ever-expanding datasets-- without requiring you to constantly restructure, reinvent, or debug your analysis. 
+
+This chapter provides the broad **conceptual map** for the rest of Part I. Subsequent chapters focus on individual components of this workflow.
+
+## What is a reproducible analytical workflow?
+
+A common misconception—especially early in graduate training—is that **reproducibility means sharing files and code** on GitHub, Dryad, or similar repositories. Those components are necessary, but they is not sufficient.
+
+A reproducible analytical workflow is a structured system that explicitly and completely describes how scientific results are generated. Such a workflow:
+
+* starts with observations of the world, not the computer
+* treats measurement as a translation (or signal-transduction) process
+* clearly and explicitly documents where data come from
+* separates data, metadata, processing, and inference
+* records inputs → transformations → outputs at each step (this is key!)
+* makes explicit where assumptions or biases are introduced
+* allows another person (or you, six months later) to reconstruct the results
+
+Together, these features ensure that analyses can be understood, repeated, extended, and scaled as new data arrive.
+
+---
+
+::::: columns
+
+::: {.column width="47%"}
+
+## The reproducible analytical workflow as a causal system
+
+The reproducible analytical workflow can be understood as a causal system in which each step produces downstream consequences: measurement choices shape the raw data, data processing constrains what can be modeled, and modeling assumptions determine what can be inferred. Thinking causally about the workflow makes it clear that results do not simply **“come from the data,”** but from a chain of decisions that can be traced, tested, and reproduced. Generally, this pipeline looks like this:
+
+> **World → Data → Models → Inference → Interpretation**
+
+More explicitly, as seen in the diagram at right, we have the following general steps:
+
+1. **World / phenomena:** Processes exist whether or not we observe them (or like them!)
+2. **Measurement & observation:** Instruments and observers translate phenomena into recorded values.
+3. **Raw data + metadata:** Raw data must have metadata as context. 
+4. **Processing & derivation:** Filtering, organizing, feature extraction, etc.
+5. **Models & inference rules:** Assumptions can be documented and coded explicitly.
+6. **Interpretation:** Human judgment (which is usually not reproducible, unless codified).
+:::
+
+::: {.column width="3%"}
+:::
+
+::: {.column width="50%"}
+![](../graphics/workflow_diagram/analytical_workflow_01.png)
+:::
+
+:::::
+
+Everything up to (and including) production of figures and tables **can and should be reproducible**. That is, (1) you should be able to rerun an entire analysis and produce tables and figures (and fill in values in a Results section) with a simple click of a button, and (2) another user should be able to reproduce all steps in your analysis pipeline, even with minimal code. Framing the workflow as a casual path makes obvious how each result is causally linked to specific inputs, transformations, and assumptions.
+
+---
+
+## Why workflows matter scientifically
+
+Reproducibility in a scientific workflow is not primarily about convenience, though it often becomes convenient over time. A convenient --but non-reproducible-- workflow focuses on rerunning an analysis quickly, often relying on memory, manual steps, and undocumented choices. That approach may work in the short term, but it does not scale and rarely holds up weeks, months, or years later. A reproducible workflow, by contrast, is designed so that every result can be traced back to its origins, including the data, code, assumptions, and decisions that produced it.
+
+At a broader scale, reproducible workflows allow us to:
+
+* diagnose errors
+* understand sensitivity to assumptions
+* reuse data responsibly
+* build on previous work without re-guessing decisions
+* reduce long-term computational and cognitive overhead
+
+In short:
+
+* **Convenience:** _“Can I run this analysis again?”_
+* **Reproducibility:** _“Can I clearly show how these results were produced?”_
+
+---
+
+## How **Part I: Reproducible Analyses** is organized
+
+This Part follows the workflow in stages:
+
+1. **Nature of data:** What data are, how measurement works, and what _raw data_ means.
+2. **Metadata (low friction):** How to document context without drowning in formatting standards.
+3. **Reproducible workflows:** Why multiple step-by-step scripts are not enough; the need for explicit input–output mapping.
+4. **Inference and interpretation:** Where assumptions enter and where reproducibility ends.
+
+Each chapter is responsible for a **specific region of the workflow**.
+
+---
+
+## A guiding principle
+
+> **If you cannot say what a result depends on, it is not reproducible.**
+
+Keep this sentence in mind as you move forward. The next chapter starts where all workflows begin: with the **nature of data themselves**.

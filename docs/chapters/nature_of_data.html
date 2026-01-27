@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2&nbsp; Introduction – Quantitative Analysis of (Messy) Field Data</title>
+<title>12&nbsp; The Nature of Data – Quantitative Analysis of (Messy) Field Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/syllabus.html" rel="next">
-<link href="../index.html" rel="prev">
+<link href="../chapters/naming_conventions.html" rel="next">
+<link href="../chapters/reproducible_workflow_intro.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -84,7 +84,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../index.html">Course Overview</a></li><li class="breadcrumb-item"><a href="../chapters/course_intro.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/reproducible_workflow_intro.html">Part I: Reproducible Analyses</a></li><li class="breadcrumb-item"><a href="../chapters/nature_of_data.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Nature of Data</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -130,7 +130,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/course_intro.html" class="sidebar-item-text sidebar-link active">
+  <a href="../chapters/course_intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
@@ -212,7 +212,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/nature_of_data.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/nature_of_data.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Nature of Data</span></span></a>
   </div>
 </li>
@@ -246,19 +246,20 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#welcome-to-quantitative-analysis-of-messy-field-data" id="toc-welcome-to-quantitative-analysis-of-messy-field-data" class="nav-link active" data-scroll-target="#welcome-to-quantitative-analysis-of-messy-field-data"><span class="header-section-number">2.1</span> Welcome to Quantitative Analysis of (Messy) Field Data!</a></li>
-  <li><a href="#course-objectives" id="toc-course-objectives" class="nav-link" data-scroll-target="#course-objectives"><span class="header-section-number">2.2</span> Course Objectives</a></li>
-  <li><a href="#topics-covered" id="toc-topics-covered" class="nav-link" data-scroll-target="#topics-covered">Topics covered</a></li>
-  <li><a href="#what-is-new-this-term-spring-2026" id="toc-what-is-new-this-term-spring-2026" class="nav-link" data-scroll-target="#what-is-new-this-term-spring-2026"><span class="header-section-number">2.3</span> What is new this term (Spring 2026)?</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">12.1</span> Introduction</a></li>
+  <li><a href="#metrological-terminology" id="toc-metrological-terminology" class="nav-link" data-scroll-target="#metrological-terminology"><span class="header-section-number">12.2</span> Metrological Terminology</a></li>
+  <li><a href="#summary-measurand-vs-estimand" id="toc-summary-measurand-vs-estimand" class="nav-link" data-scroll-target="#summary-measurand-vs-estimand"><span class="header-section-number">12.3</span> Summary: Measurand vs Estimand</a></li>
+  <li><a href="#what-are-data" id="toc-what-are-data" class="nav-link" data-scroll-target="#what-are-data"><span class="header-section-number">12.4</span> What are data?</a></li>
+  <li><a href="#raw-data" id="toc-raw-data" class="nav-link" data-scroll-target="#raw-data"><span class="header-section-number">12.5</span> Raw data</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../index.html">Course Overview</a></li><li class="breadcrumb-item"><a href="../chapters/course_intro.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/reproducible_workflow_intro.html">Part I: Reproducible Analyses</a></li><li class="breadcrumb-item"><a href="../chapters/nature_of_data.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Nature of Data</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></h1>
+<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Nature of Data</span></h1>
 </div>
 
 
@@ -275,87 +276,338 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="welcome-to-quantitative-analysis-of-messy-field-data" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="welcome-to-quantitative-analysis-of-messy-field-data"><span class="header-section-number">2.1</span> Welcome to Quantitative Analysis of (Messy) Field Data!</h2>
-<p>Thanks for joining us this term! I couldn’t be more pleased at the large size of the class this term! This means that there are more perspectives to help guide us through the following phases of data analysis:</p>
-<blockquote class="blockquote">
-<p><strong>Messy field or lab data → processed data → models → inference</strong></p>
-</blockquote>
-<p><img src="../graphics/workflow_diagram/basic_workflow.png" class="img-fluid"></p>
-<p>The complexity of the project, difficulty of field conditions, or an impending deadline can make the jumps from data collection to inference horribly daunting to young and old researchers alike. Our joint goal in this course is to become more comfortable with each of these steps, so that we not only work more efficiently but we also know a bit more about how to sense of our complex world. It is my sincerest hope that this course will not only teach you some about statistics (and some statistical traps) but that it will also give you a unique opportunity to work with your peers as you delve into the myriad issues that inevitably arise in data analysis. Working together means that we must first acknowledge that each one of us assimilates new material and produces syntheses in varied ways. All I ask is that each of you</p>
-</section>
-<section id="course-objectives" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="course-objectives"><span class="header-section-number">2.2</span> Course Objectives</h2>
-<p>By the end of this course, you should be able to:</p>
+<section id="introduction" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">12.1</span> Introduction</h2>
+<p>Understanding the <em>nature of your data</em> is the first real step toward defensible ecological inference.You were asked to come into this course with a dataset <em>in hand</em>. Some of you have undoubtedly arrived with very well-organized spreadsheets. Others have long lists of folders full of raw sensor outputs, GIS layers, audio files, camera-trap images, or field notes that only you can currently interpret. All of that is perfect for this course.</p>
+<p>Before we analyze anything, however, we need to be precise about three things:</p>
 <ul>
-<li><p><strong>Think quantitatively about messy ecological data.</strong> You should be on your way to developing a habit of translating real-world ecological questions into quantitative frameworks, while explicitly acknowledging uncertainty and bias in estimation and measurement.</p></li>
-<li><p><strong>Distinguish between questions/hypotheses, data, and inferences.</strong> You should be able to (1) clearly separate ecological hypotheses, the data actually collected, and the quantities being estimated, and (2) understand why these distinctions matter for interpretation and decision-making.</p></li>
-<li><p><strong>Understand the processes that generate data.</strong> You should be able to recognize how different study designs, variation in detection, observer effects, instrument error, and data processing shape and constrain the structure of ecological datasets.</p></li>
-<li><p><strong>Select, build, and critique statistical models as scientific tools.</strong> You should be comfortable choosing and using statistical models not as black boxes, but as explicit representations of assumptions about ecological processes, variation, and causal structure. You should never blindly choose a statistical model again!</p></li>
-<li><p><strong>Interpret results in ecological —not just statistical— terms.</strong> You should be able to conceptually move beyond p-values and coefficients to clearly articulate what your results mean biologically, mechanistically, and practically.</p></li>
-<li><p><strong>Be comfortable applying causal –and not just correlational– reasoning.</strong> You should be able to use causal thinking (conceptual models and directed acyclic graphs) to evaluate what can —and ehat cannot— be inferred from observational and experimental data.</p></li>
-<li><p><strong>Communicate quantitative results clearly, transparently, and honestl.y</strong> Present analyses, figures, and conclusions in ways that are transparent, reproducible, and appropriate for scientific audiences.</p></li>
-<li><p><strong>Develop durable, reproducible analytical workflows.</strong> You should be increasingly comfortable with good data-science practices that support clarity, versioning (even though we will not delve into GitHub this term), and reusability of analyses.</p></li>
-<li><p><strong>Develop new confidence working with unfamiliar, complex, imperfect datasets.</strong> You should leave this course better prepared to engage with real ecological data —without expecting it to be clean, complete, or simple.</p></li>
+<li><strong>What measurements represent</strong><br>
+</li>
+<li><strong>What data are</strong><br>
+</li>
+<li><strong>What we are <em>actually</em> trying to estimate</strong></li>
 </ul>
+<p>Most scientific confusion comes from mixing these three up. If you do not understand these three critical components, no amount of fancy R coding will save your analysis.</p>
+<p>So, we begin where all data originate: <strong>measurement</strong>. And, for that, it helps to start with a brief introduction to the field of <em>metrology</em>.</p>
 </section>
-<section id="topics-covered" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="topics-covered">Topics covered</h2>
-<p>The course covers the following topics, roughly in the following order:</p>
+<section id="metrological-terminology" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="metrological-terminology"><span class="header-section-number">12.2</span> Metrological Terminology</h2>
+<p>Metrology is simply the science of measurement. Whereas it has traditionally focused on the physical sciences and engineered systems, it applies just as much to biology and its messier subfields (e.g.&nbsp;ecology) as it does to physics or chemistry.</p>
+<p>Metrology establishes a formal framework for ensuring that scientific measurements are traceable to standards, reported with uncertainty, and reproducible across space, time, and observers. Crucially, this framework operates upstream of analysis—at the moment when information about the world are collected an raw data are generated. Metrology naturally integrates with our discussion of reproducible analyses because, instead of a number standing alone, a measurement comes bundled with information about what it was trying to measure, how reliable it is, and what assumptions were made along the way. That lets future researchers decide whether datasets are truly comparable, whether old data can answer new and exciting questions, and how much trust researchers should place in a result without having to guess what the original researcher meant.</p>
+<p>Two term must be clearly differentiated from measurements and estimates. These terms are:</p>
 <ul>
-<li>Metrology: measurands, measurement error, uncertainty, and data quality<br>
-</li>
-<li>Exploratory data analysis of messy data<br>
-</li>
-<li>Generalized Linear Models (GLMs): theory and implementation<br>
-</li>
-<li>Model comparison using AIC and information-theoretic approaches<br>
-</li>
-<li>Generalized Linear Mixed Models (GLMMs) and effective sample size<br>
-</li>
-<li>Generalized Additive Models (GAMs)<br>
-</li>
-<li>Generalized Additive Mixed Models (GAMMs)<br>
-</li>
-<li>Modeling spatial and temporal heterogeneity<br>
-</li>
-<li>Structural Causal Modeling (SCM) and causal diagrams<br>
-</li>
-<li>Prediction, uncertainty propagation, and model validation<br>
-</li>
-<li>Synthesis of analytical results and justification of inference<br>
-</li>
-<li>Tables, figures, and reporting standards for quantitative results<br>
-</li>
-<li>Writing defensible and interpretable Results sections</li>
+<li>measurand</li>
+<li>estimand</li>
 </ul>
-<p>Given this ambitious scope, we may only scratch the surface of some topics. Even our cursory treatment is aimed at convincing you why these subjects matter for scientists who have messy data.</p>
-</section>
-<section id="what-is-new-this-term-spring-2026" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="what-is-new-this-term-spring-2026"><span class="header-section-number">2.3</span> What is new this term (Spring 2026)?</h2>
-<p>For Spring 2026, I have added attention to new topics that improve both efficiency of analysis workflows and our ability to understand causality at a deeper level. Specifically, I have chosen to add course components on:</p>
-<ul>
-<li><strong>Using large-language models (LLMs) –via ChatGPT– to improve analytical workflows.</strong> This term, I have integrated ChatGPT into the course as a way to support the <em>process</em> of analysis rather than to automate the analysis itself. Many of the hardest parts of quantitative work happen outside of writing code: figuring out why R code isn’t behaving as expected, checking whether an interpretation actually follows from a model, troubleshooting an obscure error message, or getting feedback on how tp clearly document a decision. Used carefully, ChatGPT can act like a sounding board for troubleshooting, sanity-checking, and refining explanations without taking over your critical thinking. Throughout the course, I have deliberately constrained ChatGPT’s role and scope and have tailored its guardrails to match the course progression. In other words, ChatGPT is used to help improve analytical workflow and decision-making, not to generate results or write code on a student’s behalf. We will work together to assess the utility of this tool as the term advances.</li>
-</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span><strong>Etymology of <em>measurand</em> and <em>estimand</em></strong>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The suffix <strong>–and</strong> comes from Latin <em>–andus</em><br>
+(<em>“that which is to be acted upon [a target]”</em>)</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Target (–and)</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Measurand</td>
+<td>Measurement</td>
+</tr>
+<tr class="even">
+<td>Estimand</td>
+<td>Estimate</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 <div class="columns">
-<div class="column" style="width:80%;">
+<div class="column" style="width:40%;">
+<section id="measurand" class="level3" data-number="12.2.1">
+<h3 data-number="12.2.1" class="anchored" data-anchor-id="measurand"><span class="header-section-number">12.2.1</span> Measurand!</h3>
+<blockquote class="blockquote">
+<p>The theoretical quantity of interest in the world <em>to be measured</em>.</p>
+</blockquote>
+<p>A measurand:</p>
 <ul>
-<li><strong>Using large-language models (LLMs) to improve teaching at scale.</strong> What does this mean? In past terms, between 10-15 students have been enrolled in this course. This term, I have allowed 26 students to enroll. Without a Teaching Assistant, this spawns a significant issue of scale. This is solvable if we use AI as a helpful tool. So, after spending some time as an LLM-consultant and tester, I decided to explicitly integrate chatGPT’s LLMs into my teaching/grading workflow. This means that students will use a custom GPT that I created specifically for ZOO/ECOL-5500 called <a href="https://chatgpt.com/g/g-696966777a948191858541cd7986057e-jackalopegpt" target="_blank">JackalopeGPT</a> (using ChatGPT) to run checks on their work prior to submission; this will solve some of the “tuning” issues (with codes, grammar, clarity, etc.) that I have seen in student submissions in previous years.</li>
+<li>exists independently of observers<br>
+</li>
+<li>is defined conceptually, not instrumentally<br>
+</li>
+<li>is the quantity you <em>wish</em> you could measure directly</li>
 </ul>
-</div><div class="column" style="width:20%;">
-<p><img src="../graphics/GPT_logo/jackalopeGPT_logo.png" class="img-fluid"></p>
-</div>
-</div>
+<p>Examples:</p>
 <ul>
-<li><p><strong>Structural Causal Models (SCMs)</strong> I added Structural Causal Models (SCMs) at the end of the course to give us a way to think more clearly about complex systems where multiple variables influence each other at the same time. In the first part of the course, students will see the limits of fitting separate models (e.g.&nbsp;GLMs, GLMMs, GAMMs) for singular response variables; those models can work individually, but they often miss shared drivers, indirect effects, or how pieces of the complex system of exogenous and endogenous factors fit together. SCMs give us a way to lay out those relationships explicitly and analyze them as a connected structure (as is present in natural systems) rather than as a collection of isolated models. The goal isn’t to replace the modeling approaches we’ve already used but to improve inference by making our assumptions about the system clear and coherent.</p></li>
-<li><p><strong>Jackalopes!</strong> This course corrects a long-standing perspective that (1) jackalopes had deer-like antlers (Fig. 1), and (2) there was only a single species of jackalopes (Fig. 2). We will use the newly discovered cryptid ecosystem for course exercises and examples.</p></li>
+<li>true wing length<br>
+</li>
+<li>actual activity level<br>
+</li>
+<li>real population abundance<br>
+</li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../graphics/jackalope_graphics/correct_jackalope.png" class="img-fluid figure-img"></p>
-<figcaption>Figure 1. Illustrations of the correct and incorrect ornament morphology of jackalopes.</figcaption>
-</figure>
+</section>
+</div><div class="column" style="width:60%;">
+<p><img src="../graphics/jackalope_graphics/measurand_graphic.png" class="img-fluid"></p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The measurand is <strong>defined before measurement</strong> and <strong>never directly observed</strong>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="**Can we ever directly achieve the measurand?**">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span><strong>Can we ever directly achieve the measurand?</strong>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Short answer:</strong> Almost never—and that is normal science.</p>
+</div>
+</div>
+<hr>
+<div class="columns">
+<div class="column" style="width:40%;">
+<section id="estimand-the-missing-precision-tool" class="level3" data-number="12.2.2">
+<h3 data-number="12.2.2" class="anchored" data-anchor-id="estimand-the-missing-precision-tool"><span class="header-section-number">12.2.2</span> Estimand! (the missing precision tool)</h3>
+<blockquote class="blockquote">
+<p>The quantity that a statistical model is designed to estimate, given the available data.</p>
+</blockquote>
+<p>Though we will discuss estimands at length later in the course during the modeling exercises, it helps to discuss it in the context of measurands. An estimand:</p>
+<ul>
+<li>is defined by both the scientific question <strong>and</strong> the analysis model<br>
+</li>
+<li>depends on the data, measurement process, and assumptions<br>
+</li>
+<li>is the quantity you can <em>actually</em> estimate from the data</li>
+</ul>
+<p>Examples:</p>
+<ul>
+<li>mean wing length in the sampled population<br>
+</li>
+<li>expected activity level given detection and sampling design<br>
+</li>
+<li>estimated population abundance under a specified model<br>
+</li>
+</ul>
+</section>
+</div><div class="column" style="width:60%;">
+<p><img src="../graphics/jackalope_graphics/estimand_graphic.png" class="img-fluid"></p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The estimand is <strong>defined before analysis</strong>, depends on modeling choices, and is <strong>not the same as the measurand</strong>.</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="summary-measurand-vs-estimand" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="summary-measurand-vs-estimand"><span class="header-section-number">12.3</span> Summary: Measurand vs Estimand</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Concept</th>
+<th>Measurand</th>
+<th>Estimand</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Nature</td>
+<td>Conceptual / scientific</td>
+<td>Formal / statistical</td>
+</tr>
+<tr class="even">
+<td>Exists without data?</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>Depends on model?</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td>Defined when?</td>
+<td>Before measurement</td>
+<td>Before estimation</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span><strong>Where does each concept belong in a scientific paper?</strong>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Concept</th>
+<th>Section</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Measurand</td>
+<td>Introduction</td>
+</tr>
+<tr class="even">
+<td>Estimand</td>
+<td>Methods</td>
+</tr>
+<tr class="odd">
+<td>Estimate</td>
+<td>Results</td>
+</tr>
+<tr class="even">
+<td>Interpretation (circling back to measurand)</td>
+<td>Discussion</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="what-are-data" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="what-are-data"><span class="header-section-number">12.4</span> What are data?</h2>
+<p>Only after measurement do we get <strong>data</strong>, the recorded outputs of those measurement processes. To understand what is meant by data, let us consult a dictionary first. Two definitions from the <em>Merriam-Webster Dictionary</em>—188 years apart—are especially revealing:</p>
+<div class="columns">
+<div class="column" style="width:48%;">
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span><em>Merriam-Webster (2016)</em>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>“Facts or information used usually to calculate, analyze, or plan something.”</em></p>
+</div>
+</div>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:48%;">
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span><em>Merriam-Webster (1828)</em>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>“Quantities, principles, or facts given or admitted, by which to find things or results unknown.”</em></p>
+</div>
+</div>
+</div>
+</div>
+<p>Modern usage treats <em>data</em> and <em>information</em> as synonymous. But scientifically, this is misleading.<br>
+<strong>Data</strong> are observed facts. <strong>Information</strong> is what we extract from those facts using models and assumptions.</p>
+<p>We do not collect information. We collect data, and then we <em>extract</em> or <em>create</em> information. This distinction is critical for reproducibility.</p>
+<hr>
+</section>
+<section id="raw-data" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="raw-data"><span class="header-section-number">12.5</span> Raw data</h2>
+<p>Because measurands cannot be observed directly and estimands depend on how data are generated and modeled, raw data are the critical link between scientific questions (filled with measurands) and strong inference. Raw data preserve the closest recorded traces of the measurement process, making it possible to understand how observations relate to the underlying measurand and what estimands the data can actually support.</p>
+<p>By now, we have all been conducting formal scientific inquiry for many years. It is common to see folders labeled <code>/raw_data/</code> that contain offloaded sensor files or spreadsheets transcribed from field notebooks. These data may feel “raw,” but often they are not.</p>
+<blockquote class="blockquote">
+<p><strong>Raw data</strong> are the facts produced by an instrument or observer through a domain-specific translation, recorded at the time of observation, and preserved <em>without post-hoc modification</em>.</p>
+</blockquote>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p>When we offload data from a sensor or transcribe notes into a spreadsheet, our actions have a non-zero probability of influencing the data.</p>
+<p>Examples of raw data include:</p>
+<ul>
+<li>audio waveforms recorded at a study site (on the device)<br>
+</li>
+<li>GPS locations logged by a collar (not yet downloaded)<br>
+</li>
+<li>counts written on a datasheet (not yet transcribed)<br>
+</li>
+<li>pixel values collected by a camera sensor<br>
+</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img src="../graphics/other_stylized_graphics/milestone02_notebook.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Common misconceptions about raw data
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Raw data are <strong>not</strong> clean, tidy, or analysis-ready<br>
+</li>
+<li>Processed tables and summaries are <strong>not</strong> raw data<br>
+</li>
+<li>Raw data are <strong>not</strong> the truth—they are translated observations<br>
+</li>
+<li>Raw data are <strong>not</strong> limited to numbers<br>
+</li>
+<li>Messiness does <strong>not</strong> imply poor data quality<br>
+</li>
+<li>Early processing choices permanently change the data<br>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<p>Raw data are the foundation of all scientific analysis. On their own, however, they are incomplete. To be interpretable, reusable, and reproducible, raw data require <strong>context</strong>.</p>
+<p>That context comes from <strong>metadata</strong>, which are introduced on the next page. Keeping the focus here on raw data helps avoid mixing observations of the world with explanations about how those observations were produced. Metadata play a different conceptual role, and treating them separately keeps that distinction clear.</p>
 
 
 </section>
@@ -763,13 +1015,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../index.html" class="pagination-link" aria-label="Information">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Information</span></span>
+      <a href="../chapters/reproducible_workflow_intro.html" class="pagination-link" aria-label="Reproducible Analyses">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Reproducible Analyses</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/syllabus.html" class="pagination-link" aria-label="Syllabus">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Syllabus</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/naming_conventions.html" class="pagination-link" aria-label="Naming conventions and coding style">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Naming conventions and coding style</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

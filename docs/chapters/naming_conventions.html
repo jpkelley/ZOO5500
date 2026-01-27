@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>11&nbsp; Naming conventions and coding style – Quantitative Analysis of (Messy) Field Data</title>
+<title>13&nbsp; Naming conventions and coding style – Quantitative Analysis of (Messy) Field Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/using_jackalope_gpt.html" rel="prev">
+<link href="../chapters/nature_of_data.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -118,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/naming_conventions.html">Part I: Chaos to Columns</a></li><li class="breadcrumb-item"><a href="../chapters/naming_conventions.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Naming conventions and coding style</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/reproducible_workflow_intro.html">Part I: Reproducible Analyses</a></li><li class="breadcrumb-item"><a href="../chapters/naming_conventions.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Naming conventions and coding style</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -232,7 +232,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Part I: Chaos to Columns</span></a>
+ <span class="menu-text">Part I: Reproducible Analyses</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -240,19 +240,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../chapters/reproducible_workflow_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Reproducible Analyses</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/nature_of_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Nature of Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../chapters/naming_conventions.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Naming conventions and coding style</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Naming conventions and coding style</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Part II: Columns to Curves</span></span>
+ <span class="menu-text">Part II: Chaos to Columns</span></span>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Part III: Curves to Meaning</span></span>
+ <span class="menu-text">Part III: Columns to Curves</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Part IV: Curves to Meaning</span></span>
   </li>
     </ul>
     </div>
@@ -264,37 +280,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#why-you-should-care-even-if-you-just-want-to-model-stuff" id="toc-why-you-should-care-even-if-you-just-want-to-model-stuff" class="nav-link active" data-scroll-target="#why-you-should-care-even-if-you-just-want-to-model-stuff"><span class="header-section-number">11.1</span> Why you should care (even if you “just want to model stuff”)</a></li>
-  <li><a href="#naming-conventions-for-variables-and-files" id="toc-naming-conventions-for-variables-and-files" class="nav-link" data-scroll-target="#naming-conventions-for-variables-and-files"><span class="header-section-number">11.2</span> Naming conventions for <em>variables</em> and <em>files</em></a>
+  <li><a href="#why-you-should-care-even-if-you-just-want-to-model-stuff" id="toc-why-you-should-care-even-if-you-just-want-to-model-stuff" class="nav-link active" data-scroll-target="#why-you-should-care-even-if-you-just-want-to-model-stuff"><span class="header-section-number">13.1</span> Why you should care (even if you “just want to model stuff”)</a></li>
+  <li><a href="#naming-conventions-for-variables-and-files" id="toc-naming-conventions-for-variables-and-files" class="nav-link" data-scroll-target="#naming-conventions-for-variables-and-files"><span class="header-section-number">13.2</span> Naming conventions for <em>variables</em> and <em>files</em></a>
   <ul class="collapse">
-  <li><a href="#what-are-naming-conventions" id="toc-what-are-naming-conventions" class="nav-link" data-scroll-target="#what-are-naming-conventions"><span class="header-section-number">11.2.1</span> What are “naming conventions”?</a></li>
-  <li><a href="#three-common-naming-styles" id="toc-three-common-naming-styles" class="nav-link" data-scroll-target="#three-common-naming-styles"><span class="header-section-number">11.2.2</span> Three common naming styles</a></li>
-  <li><a href="#general-guidelines-the-please-dont-make-future-you-angry-list" id="toc-general-guidelines-the-please-dont-make-future-you-angry-list" class="nav-link" data-scroll-target="#general-guidelines-the-please-dont-make-future-you-angry-list"><span class="header-section-number">11.2.3</span> General guidelines (the “please don’t make future you angry” list)</a></li>
-  <li><a href="#bad-good-examples-for-variable-names" id="toc-bad-good-examples-for-variable-names" class="nav-link" data-scroll-target="#bad-good-examples-for-variable-names"><span class="header-section-number">11.2.4</span> “Bad → Good” examples for variable names</a></li>
+  <li><a href="#general-guidelines-the-please-dont-make-future-you-angry-list" id="toc-general-guidelines-the-please-dont-make-future-you-angry-list" class="nav-link" data-scroll-target="#general-guidelines-the-please-dont-make-future-you-angry-list"><span class="header-section-number">13.2.3</span> General guidelines (the “please don’t make future you angry” list)</a></li>
+  <li><a href="#bad-good-examples-for-variable-names" id="toc-bad-good-examples-for-variable-names" class="nav-link" data-scroll-target="#bad-good-examples-for-variable-names"><span class="header-section-number">13.2.4</span> “Bad → Good” examples for variable names</a></li>
   </ul></li>
-  <li><a href="#naming-conventions-for-folders-project-structure" id="toc-naming-conventions-for-folders-project-structure" class="nav-link" data-scroll-target="#naming-conventions-for-folders-project-structure"><span class="header-section-number">11.3</span> Naming conventions for <em>folders</em> (project structure)</a>
+  <li><a href="#naming-conventions-for-folders-project-structure" id="toc-naming-conventions-for-folders-project-structure" class="nav-link" data-scroll-target="#naming-conventions-for-folders-project-structure"><span class="header-section-number">13.3</span> Naming conventions for <em>folders</em> (project structure)</a>
   <ul class="collapse">
-  <li><a href="#why-folder-names-matter" id="toc-why-folder-names-matter" class="nav-link" data-scroll-target="#why-folder-names-matter"><span class="header-section-number">11.3.1</span> Why folder names matter</a></li>
+  <li><a href="#why-folder-names-matter" id="toc-why-folder-names-matter" class="nav-link" data-scroll-target="#why-folder-names-matter"><span class="header-section-number">13.3.1</span> Why folder names matter</a></li>
   </ul></li>
-  <li><a href="#conventions-for-legible-and-consistent-r-code" id="toc-conventions-for-legible-and-consistent-r-code" class="nav-link" data-scroll-target="#conventions-for-legible-and-consistent-r-code"><span class="header-section-number">11.4</span> Conventions for legible and consistent R code</a>
+  <li><a href="#conventions-for-legible-and-consistent-r-code" id="toc-conventions-for-legible-and-consistent-r-code" class="nav-link" data-scroll-target="#conventions-for-legible-and-consistent-r-code"><span class="header-section-number">13.4</span> Conventions for legible and consistent R code</a>
   <ul class="collapse">
-  <li><a href="#why-code-style-matters" id="toc-why-code-style-matters" class="nav-link" data-scroll-target="#why-code-style-matters"><span class="header-section-number">11.4.1</span> Why code style matters</a></li>
-  <li><a href="#bad-good-examples-for-r-code-and-files" id="toc-bad-good-examples-for-r-code-and-files" class="nav-link" data-scroll-target="#bad-good-examples-for-r-code-and-files"><span class="header-section-number">11.4.2</span> “Bad → Good” examples for R code and files</a></li>
-  <li><a href="#use-nouns-for-objects-and-verbs-for-functions" id="toc-use-nouns-for-objects-and-verbs-for-functions" class="nav-link" data-scroll-target="#use-nouns-for-objects-and-verbs-for-functions"><span class="header-section-number">11.4.3</span> 1) Use <strong>nouns</strong> for objects and <strong>verbs</strong> for functions</a></li>
-  <li><a href="#make-intermediate-objects-obvious" id="toc-make-intermediate-objects-obvious" class="nav-link" data-scroll-target="#make-intermediate-objects-obvious"><span class="header-section-number">11.4.4</span> 2) Make “intermediate objects” obvious</a></li>
-  <li><a href="#prefer-readable-code-over-clever-code" id="toc-prefer-readable-code-over-clever-code" class="nav-link" data-scroll-target="#prefer-readable-code-over-clever-code"><span class="header-section-number">11.4.5</span> 3) Prefer readable code over clever code</a></li>
+  <li><a href="#why-code-style-matters" id="toc-why-code-style-matters" class="nav-link" data-scroll-target="#why-code-style-matters"><span class="header-section-number">13.4.1</span> Why code style matters</a></li>
+  <li><a href="#bad-good-examples-for-r-code-and-files" id="toc-bad-good-examples-for-r-code-and-files" class="nav-link" data-scroll-target="#bad-good-examples-for-r-code-and-files"><span class="header-section-number">13.4.2</span> “Bad → Good” examples for R code and files</a></li>
+  <li><a href="#use-nouns-for-objects-and-verbs-for-functions" id="toc-use-nouns-for-objects-and-verbs-for-functions" class="nav-link" data-scroll-target="#use-nouns-for-objects-and-verbs-for-functions"><span class="header-section-number">13.4.3</span> Use <strong>nouns</strong> for objects and <strong>verbs</strong> for functions</a></li>
+  <li><a href="#make-intermediate-objects-obvious" id="toc-make-intermediate-objects-obvious" class="nav-link" data-scroll-target="#make-intermediate-objects-obvious"><span class="header-section-number">13.4.4</span> Make “intermediate objects” obvious</a></li>
+  <li><a href="#prefer-readable-code-over-clever-code" id="toc-prefer-readable-code-over-clever-code" class="nav-link" data-scroll-target="#prefer-readable-code-over-clever-code"><span class="header-section-number">13.4.5</span> Prefer readable code over clever code</a></li>
+  <li><a href="#a-final-note-about-reproducible-analyses" id="toc-a-final-note-about-reproducible-analyses" class="nav-link" data-scroll-target="#a-final-note-about-reproducible-analyses"><span class="header-section-number">13.4.6</span> A final note about reproducible analyses</a></li>
   </ul></li>
-  <li><a href="#your-minimum-standard-checklist-use-this-before-you-submit-anything" id="toc-your-minimum-standard-checklist-use-this-before-you-submit-anything" class="nav-link" data-scroll-target="#your-minimum-standard-checklist-use-this-before-you-submit-anything"><span class="header-section-number">11.5</span> Your “minimum standard” checklist (use this before you submit anything)</a></li>
-  <li><a href="#practice-task-recommended" id="toc-practice-task-recommended" class="nav-link" data-scroll-target="#practice-task-recommended"><span class="header-section-number">11.6</span> Practice task (recommended)</a></li>
+  <li><a href="#your-minimum-standard-checklist-use-this-before-you-submit-anything" id="toc-your-minimum-standard-checklist-use-this-before-you-submit-anything" class="nav-link" data-scroll-target="#your-minimum-standard-checklist-use-this-before-you-submit-anything"><span class="header-section-number">13.5</span> Your “minimum standard” checklist (use this before you submit anything)</a></li>
+  <li><a href="#practice-task-recommended" id="toc-practice-task-recommended" class="nav-link" data-scroll-target="#practice-task-recommended"><span class="header-section-number">13.6</span> Practice task (recommended)</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/naming_conventions.html">Part I: Chaos to Columns</a></li><li class="breadcrumb-item"><a href="../chapters/naming_conventions.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Naming conventions and coding style</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/reproducible_workflow_intro.html">Part I: Reproducible Analyses</a></li><li class="breadcrumb-item"><a href="../chapters/naming_conventions.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Naming conventions and coding style</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Naming conventions and coding style</span></h1>
+<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Naming conventions and coding style</span></h1>
 <p class="subtitle lead">Why names (and style) are part of your statistical method</p>
 </div>
 
@@ -312,38 +327,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="why-you-should-care-even-if-you-just-want-to-model-stuff" class="level2" data-number="11.1">
-<h2 data-number="11.1" class="anchored" data-anchor-id="why-you-should-care-even-if-you-just-want-to-model-stuff"><span class="header-section-number">11.1</span> Why you should care (even if you “just want to model stuff”)</h2>
+<section id="why-you-should-care-even-if-you-just-want-to-model-stuff" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="why-you-should-care-even-if-you-just-want-to-model-stuff"><span class="header-section-number">13.1</span> Why you should care (even if you “just want to model stuff”)</h2>
 <p>Naming conventions and coding style are not decoration. They are <em>infrastructure</em>.</p>
 <p>If your names are inconsistent, your code becomes harder to read, harder to debug, and harder to share—especially once your project grows beyond “one file, one afternoon.”</p>
 <blockquote class="blockquote">
 <p>“It’s the hardest job to come up with new and unique names for a variable every time you create one but this is the difference between an average programmer and a good one.”<br>
 — Vikram Singh Rawat</p>
 </blockquote>
+<p>In scientific workflows, this difference is not about elegance. It is about <strong>traceability</strong>.</p>
+<p>A workflow that depends on unstable or unclear names cannot be audited, reused, or trusted.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>The three costs of sloppy naming
+<span class="screen-reader-only">Note</span>The three scientific costs of sloppy naming
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li><strong>Interoperability cost:</strong> Unconventional naming in R can cause issues for other programming languages.<br>
-</li>
-<li><strong>Collaboration cost:</strong> Inconsistency makes it harder for other people (including Future You) to work with your data.<br>
-</li>
-<li><strong>Time cost:</strong> You will spend more time fixing small issues and less time doing science.</li>
+<li><p><strong>Interoperability cost:</strong><br>
+Non-standard names break workflows across tools, languages, and collaborators.</p></li>
+<li><p><strong>Collaboration cost:</strong><br>
+Inconsistent naming forces others (including Future You) to reverse-engineer intent.</p></li>
+<li><p><strong>Reproducibility cost:</strong><br>
+When names drift, inputs and outputs become ambiguous, and results can no longer be traced back to their sources.</p></li>
 </ul>
 </div>
 </div>
+<p>Before we talk about modeling or automation, we need to ensure that the basic objects in our workflow—variables, files, and folders—are named in a way that makes their roles unambiguous.</p>
+<p>This is what allows:</p>
+<ul>
+<li>metadata to point to the correct data,</li>
+<li>scripts to operate predictably,</li>
+<li>and workflows to declare dependencies explicitly.</li>
+</ul>
 </section>
-<section id="naming-conventions-for-variables-and-files" class="level2" data-number="11.2">
-<h2 data-number="11.2" class="anchored" data-anchor-id="naming-conventions-for-variables-and-files"><span class="header-section-number">11.2</span> Naming conventions for <em>variables</em> and <em>files</em></h2>
-<section id="what-are-naming-conventions" class="level3" data-number="11.2.1">
-<h3 data-number="11.2.1" class="anchored" data-anchor-id="what-are-naming-conventions"><span class="header-section-number">11.2.1</span> What are “naming conventions”?</h3>
+<section id="naming-conventions-for-variables-and-files" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="naming-conventions-for-variables-and-files"><span class="header-section-number">13.2</span> Naming conventions for <em>variables</em> and <em>files</em></h2>
+<div class="columns">
+<div class="column" style="width:48%;">
+<section id="what-are-naming-conventions" class="level3" data-number="13.2.1">
+<h3 data-number="13.2.1" class="anchored" data-anchor-id="what-are-naming-conventions"><span class="header-section-number">13.2.1</span> What are “naming conventions”?</h3>
 <p>They are simply a consistent set of rules for naming:</p>
 <ul>
 <li>variables (columns in your dataset)</li>
@@ -351,8 +378,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>files and folders (scripts, data, outputs)</li>
 </ul>
 </section>
-<section id="three-common-naming-styles" class="level3" data-number="11.2.2">
-<h3 data-number="11.2.2" class="anchored" data-anchor-id="three-common-naming-styles"><span class="header-section-number">11.2.2</span> Three common naming styles</h3>
+<section id="three-common-naming-styles" class="level3" data-number="13.2.2">
+<h3 data-number="13.2.2" class="anchored" data-anchor-id="three-common-naming-styles"><span class="header-section-number">13.2.2</span> Three common naming styles</h3>
 <p>You will see these everywhere:</p>
 <ul>
 <li><strong>camelCase</strong> (<code>meanDepth</code>)</li>
@@ -361,8 +388,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>In this course, we will default to <strong>snake_case</strong> for <em>variables and files</em>. This is strongly recommended for analysis scripts.</p>
 </section>
-<section id="general-guidelines-the-please-dont-make-future-you-angry-list" class="level3" data-number="11.2.3">
-<h3 data-number="11.2.3" class="anchored" data-anchor-id="general-guidelines-the-please-dont-make-future-you-angry-list"><span class="header-section-number">11.2.3</span> General guidelines (the “please don’t make future you angry” list)</h3>
+</div><div class="column" style="width:48%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../graphics/other_stylized_graphics/horst_allison_cases.png" class="img-fluid figure-img"></p>
+<figcaption>From Allison Horst. Cartoon representations of common cases in coding. A snake screams “SCREAMING_SNAKE_CASE” into the face of a camel (wearing ear muffs) with “camelCase” written along its back. Vegetables on a skewer spell out “kebab-case” (words on a skewer). A mellow, happy looking snake has text “snake_case” along it.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<section id="general-guidelines-the-please-dont-make-future-you-angry-list" class="level3" data-number="13.2.3">
+<h3 data-number="13.2.3" class="anchored" data-anchor-id="general-guidelines-the-please-dont-make-future-you-angry-list"><span class="header-section-number">13.2.3</span> General guidelines (the “please don’t make future you angry” list)</h3>
 <p>These are simple rules that prevent a shocking number of problems:</p>
 <div class="naming-rules-table" data-tbl-cap="Basic naming and data hygiene rules (with examples of poor form)" data-tbl-colwidths="[35,35,30]">
 <table class="caption-top table">
@@ -433,8 +469,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 </div>
 </section>
-<section id="bad-good-examples-for-variable-names" class="level3" data-number="11.2.4">
-<h3 data-number="11.2.4" class="anchored" data-anchor-id="bad-good-examples-for-variable-names"><span class="header-section-number">11.2.4</span> “Bad → Good” examples for variable names</h3>
+<section id="bad-good-examples-for-variable-names" class="level3" data-number="13.2.4">
+<h3 data-number="13.2.4" class="anchored" data-anchor-id="bad-good-examples-for-variable-names"><span class="header-section-number">13.2.4</span> “Bad → Good” examples for variable names</h3>
 <p>Your variable names should be: - readable at a glance - easy to type - consistent across files and projects</p>
 <p>Here are examples aligned with the tidyverse style guide (Hadley Wickham):</p>
 <p><strong>A quick translation rule:</strong></p>
@@ -445,10 +481,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </section>
 </section>
-<section id="naming-conventions-for-folders-project-structure" class="level2" data-number="11.3">
-<h2 data-number="11.3" class="anchored" data-anchor-id="naming-conventions-for-folders-project-structure"><span class="header-section-number">11.3</span> Naming conventions for <em>folders</em> (project structure)</h2>
-<section id="why-folder-names-matter" class="level3" data-number="11.3.1">
-<h3 data-number="11.3.1" class="anchored" data-anchor-id="why-folder-names-matter"><span class="header-section-number">11.3.1</span> Why folder names matter</h3>
+<section id="naming-conventions-for-folders-project-structure" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="naming-conventions-for-folders-project-structure"><span class="header-section-number">13.3</span> Naming conventions for <em>folders</em> (project structure)</h2>
+<section id="why-folder-names-matter" class="level3" data-number="13.3.1">
+<h3 data-number="13.3.1" class="anchored" data-anchor-id="why-folder-names-matter"><span class="header-section-number">13.3.1</span> Why folder names matter</h3>
 <p>A good folder structure makes it hard to lose track of: - raw versus processed data - inputs versus outputs - code versus results - files that you can re-create versus ones you cannot (i.e.&nbsp;that you should never overwrite)</p>
 <p>In this course, we care about <strong>reproducibility</strong>, which means: - raw data is always treated as read-only - processed data is created by scripts, acting on raw data, and never manually edited - results are generated by scripts and never manually edited</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
@@ -484,10 +520,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Folder naming rules (same spirit as variable naming):</strong> - lowercase (<strong>snake_case</strong>) - no spaces - prefer underscores - descriptive names over clever names</p>
 </section>
 </section>
-<section id="conventions-for-legible-and-consistent-r-code" class="level2" data-number="11.4">
-<h2 data-number="11.4" class="anchored" data-anchor-id="conventions-for-legible-and-consistent-r-code"><span class="header-section-number">11.4</span> Conventions for legible and consistent R code</h2>
-<section id="why-code-style-matters" class="level3" data-number="11.4.1">
-<h3 data-number="11.4.1" class="anchored" data-anchor-id="why-code-style-matters"><span class="header-section-number">11.4.1</span> Why code style matters</h3>
+<section id="conventions-for-legible-and-consistent-r-code" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="conventions-for-legible-and-consistent-r-code"><span class="header-section-number">13.4</span> Conventions for legible and consistent R code</h2>
+<section id="why-code-style-matters" class="level3" data-number="13.4.1">
+<h3 data-number="13.4.1" class="anchored" data-anchor-id="why-code-style-matters"><span class="header-section-number">13.4.1</span> Why code style matters</h3>
 <p>Code style is not about being fancy. It’s about making your thinking <em>legible</em>.</p>
 <p>Good style: - reduces bugs - improves peer review (including lab mates and future you) - makes it easier to modify models without breaking things</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
@@ -507,8 +543,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="bad-good-examples-for-r-code-and-files" class="level3" data-number="11.4.2">
-<h3 data-number="11.4.2" class="anchored" data-anchor-id="bad-good-examples-for-r-code-and-files"><span class="header-section-number">11.4.2</span> “Bad → Good” examples for R code and files</h3>
+<section id="bad-good-examples-for-r-code-and-files" class="level3" data-number="13.4.2">
+<h3 data-number="13.4.2" class="anchored" data-anchor-id="bad-good-examples-for-r-code-and-files"><span class="header-section-number">13.4.2</span> “Bad → Good” examples for R code and files</h3>
 <p>These examples follow the tidyverse style guide (Hadley Wickham):</p>
 <div class="good-bad-table" data-tbl-cap="Examples of poor vs. good naming conventions (and why they matter)" data-tbl-colwidths="[15,60,25]">
 <table class="caption-top table">
@@ -550,19 +586,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>A few rules we will use repeatedly:</p>
 </section>
-<section id="use-nouns-for-objects-and-verbs-for-functions" class="level3" data-number="11.4.3">
-<h3 data-number="11.4.3" class="anchored" data-anchor-id="use-nouns-for-objects-and-verbs-for-functions"><span class="header-section-number">11.4.3</span> 1) Use <strong>nouns</strong> for objects and <strong>verbs</strong> for functions</h3>
+<section id="use-nouns-for-objects-and-verbs-for-functions" class="level3" data-number="13.4.3">
+<h3 data-number="13.4.3" class="anchored" data-anchor-id="use-nouns-for-objects-and-verbs-for-functions"><span class="header-section-number">13.4.3</span> Use <strong>nouns</strong> for objects and <strong>verbs</strong> for functions</h3>
 <ul>
 <li>Objects (things): <code>pufferi</code>, <code>pufferi_clean</code>, <code>model_gam</code></li>
 <li>Functions (actions): <code>clean_data()</code>, <code>fit_model()</code>, <code>plot_effects()</code></li>
 </ul>
 </section>
-<section id="make-intermediate-objects-obvious" class="level3" data-number="11.4.4">
-<h3 data-number="11.4.4" class="anchored" data-anchor-id="make-intermediate-objects-obvious"><span class="header-section-number">11.4.4</span> 2) Make “intermediate objects” obvious</h3>
+<section id="make-intermediate-objects-obvious" class="level3" data-number="13.4.4">
+<h3 data-number="13.4.4" class="anchored" data-anchor-id="make-intermediate-objects-obvious"><span class="header-section-number">13.4.4</span> Make “intermediate objects” obvious</h3>
 <p>If an object is temporary, label it like it is: - <code>*_raw</code>, <code>*_clean</code>, <code>*_long</code>, <code>*_wide</code>, <code>*_summary</code></p>
 </section>
-<section id="prefer-readable-code-over-clever-code" class="level3" data-number="11.4.5">
-<h3 data-number="11.4.5" class="anchored" data-anchor-id="prefer-readable-code-over-clever-code"><span class="header-section-number">11.4.5</span> 3) Prefer readable code over clever code</h3>
+<section id="prefer-readable-code-over-clever-code" class="level3" data-number="13.4.5">
+<h3 data-number="13.4.5" class="anchored" data-anchor-id="prefer-readable-code-over-clever-code"><span class="header-section-number">13.4.5</span> Prefer readable code over clever code</h3>
 <div class="columns">
 <div class="column" style="width:48%;">
 <div class="callout callout-style-simple callout-note no-icon callout-titled" title="**Over-piped, confusing code**" style="background-color:#FF9999; border-left: 6px solid #FD5D59;">
@@ -596,9 +632,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="column" style="width:48%;">
+</div><div class="column" style="width:48%;">
 <div class="callout callout-style-simple callout-note no-icon callout-titled" title="**Longer but readable code**" style="background-color:#e7f6e7; border-left: 6px solid #2e7d32;">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -643,6 +677,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+</div>
+</section>
+<section id="a-final-note-about-reproducible-analyses" class="level3" data-number="13.4.6">
+<h3 data-number="13.4.6" class="anchored" data-anchor-id="a-final-note-about-reproducible-analyses"><span class="header-section-number">13.4.6</span> A final note about reproducible analyses</h3>
+<p>In workflow tools like <code>targets</code>, names are not simply cosmetic. They define nodes in a dependency graph (i.e.&nbsp;the ways all your inputs, processes, and outputs are connected). If names are unclear, the graph is unclear. If the graph is unclear, the workflow is <strong>not</strong> reproducible.</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -663,8 +702,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr>
 </section>
 </section>
-<section id="your-minimum-standard-checklist-use-this-before-you-submit-anything" class="level2" data-number="11.5">
-<h2 data-number="11.5" class="anchored" data-anchor-id="your-minimum-standard-checklist-use-this-before-you-submit-anything"><span class="header-section-number">11.5</span> Your “minimum standard” checklist (use this before you submit anything)</h2>
+<section id="your-minimum-standard-checklist-use-this-before-you-submit-anything" class="level2" data-number="13.5">
+<h2 data-number="13.5" class="anchored" data-anchor-id="your-minimum-standard-checklist-use-this-before-you-submit-anything"><span class="header-section-number">13.5</span> Your “minimum standard” checklist (use this before you submit anything)</h2>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -698,8 +737,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="practice-task-recommended" class="level2" data-number="11.6">
-<h2 data-number="11.6" class="anchored" data-anchor-id="practice-task-recommended"><span class="header-section-number">11.6</span> Practice task (recommended)</h2>
+<section id="practice-task-recommended" class="level2" data-number="13.6">
+<h2 data-number="13.6" class="anchored" data-anchor-id="practice-task-recommended"><span class="header-section-number">13.6</span> Practice task (recommended)</h2>
 <ol type="1">
 <li>Pick one of your current projects (or a past project).</li>
 <li>Rename:
@@ -1123,8 +1162,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/using_jackalope_gpt.html" class="pagination-link" aria-label="How to Use JackalopeGPT">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">How to Use JackalopeGPT</span></span>
+      <a href="../chapters/nature_of_data.html" class="pagination-link" aria-label="The Nature of Data">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Nature of Data</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

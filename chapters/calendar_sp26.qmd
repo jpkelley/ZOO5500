@@ -10,8 +10,12 @@ toc-depth: 1
 
 Use the calendar table below to see what’s coming each week; simply click a week (first column link) to jump to full details, and then expand sections to see what to do before, during, and after class. This calendar may change slightly as we progress through the term. You will receive immediate notification of any and all changes.
 
+::: callout-note
+All Milestone Assignments due by end of day on Friday.
+:::
+
 ::: {.course-info tbl-colwidths="[14, 32, 18, 18, 10, 8]"}
-| **Week** | **Topics** | **In-class exercise** | **Milestone assignment** | **Stress level** | **Grade weight (%)** |
+| **Week** | **Topics** | **In-class exercise** | **Milestone assignment** (due Friday) | **Stress level** | **Grade weight (%)** |
 |-----------:|------------|------------|------------|------------|------------|
 | [**Week 1**<br>19-Jan-2026](#week-1) | Course intro; RStudio setup; AI guardrails | Project scoping discussion | — | Very low | 0 |
 | [**Week 2**<br>26-Jan-2026](#week-2) | File structure; reproducible workflows; AI logs | File audit walkthrough | Analysis Concept Note | Low | 5 |

@@ -30,6 +30,7 @@ book:
         - chapters/nature_of_data.qmd
         - chapters/metadata_low_friction.qmd
         - chapters/naming_conventions.qmd
+        - chapters/statistical_aphorisms.qmd
     - part: "Part II: Chaos to Columns"
       # chapters:
 

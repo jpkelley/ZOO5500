@@ -638,11 +638,22 @@
     ]
   },
   {
+    "objectID": "chapters/reproducible_workflow_intro.html#analytical-workflow",
+    "href": "chapters/reproducible_workflow_intro.html#analytical-workflow",
+    "title": "11  Reproducible Analyses",
+    "section": "11.2 Analytical Workflow",
+    "text": "11.2 Analytical Workflow\nA statistical philosophy only works if it is supported by a deliberate, reproducible analytical workflow. This workflow description is doing a lot of work, so let us be very clear about the meaning.\n\nAnalytical workflow: The data and computational infrastructure that translates raw observations into scientifically defensible results and inferences.\n\nA workflow include everything about how datasets are stored, cleaned, explored, modeled, and reported. Importantly, it also includes how decisions are documented and how analyses can be reproduced by someone else (including your future, more frenetic self).\nDesigning a good analytical workflow is hardly a casual endeavor. In fact, it should be a target of formal and toughtful analysis itself, answering questions like:\n\nIs your workflow efficient in terms of your valuable time?\nIs your workflow efficient in terms of your computational infrastucture and abilities?\nIs your workflow clear, or does it create confusion and induce mission/scope creep?\nDoes your workflow allow you to stop and restart without losing your place?\n\nA good workflow constrains your behavior in productive ways. It limits wandering, enforces transparency, and makes progress visible. That is, there is no single correct workflow. As Rudyard Kipling wrote (In the Neolithic Age):\n\nHere’s my wisdom for your use, as I learned it when the moose And the reindeer roamed where Paris roars to-night: “There are nine and sixty ways of constructing tribal lays, And—every—single—one—of—them—is—right!\n\nThere are many ways of constructing something useful and meaningful, and every single one of them can be right. What matters is that your workflow is intentional, scientifically defensible, and aligned with your scientific goals. So, I encourage you to start formalizing a philosophical workflow that reduces bias, controls scope, and supports efficient thinking. Then stick to it until you learn something better. That moment will come, and when it does, simply update your philosophy through slow iteration rather than abandoning it.",
+    "crumbs": [
+      "Part I: Reproducible Analyses",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Reproducible Analyses</span>"
+    ]
+  },
+  {
     "objectID": "chapters/reproducible_workflow_intro.html#what-is-a-reproducible-analytical-workflow",
     "href": "chapters/reproducible_workflow_intro.html#what-is-a-reproducible-analytical-workflow",
     "title": "11  Reproducible Analyses",
-    "section": "11.2 What is a reproducible analytical workflow?",
-    "text": "11.2 What is a reproducible analytical workflow?\nA common misconception—especially early in graduate training—is that reproducibility means sharing files and code on GitHub, Dryad, or similar repositories. Those components are necessary, but they is not sufficient.\nA reproducible analytical workflow is a structured system that explicitly and completely describes how scientific results are generated. Such a workflow:\n\nstarts with observations of the world, not the computer\ntreats measurement as a translation (or signal-transduction) process\nclearly and explicitly documents where data come from\nseparates data, metadata, processing, and inference\nrecords inputs → transformations → outputs at each step (this is key!)\nmakes explicit where assumptions or biases are introduced\nallows another person (or you, six months later) to reconstruct the results\n\nTogether, these features ensure that analyses can be understood, repeated, extended, and scaled as new data arrive.",
+    "section": "11.3 What is a reproducible analytical workflow?",
+    "text": "11.3 What is a reproducible analytical workflow?\nA common misconception—especially early in graduate training—is that reproducibility means sharing files and code on GitHub, Dryad, or similar repositories. Those components are necessary, but they is not sufficient.\nA reproducible analytical workflow is a structured system that explicitly and completely describes how scientific results are generated. Such a workflow:\n\nstarts with observations of the world, not the computer\ntreats measurement as a translation (or signal-transduction) process\nclearly and explicitly documents where data come from\nseparates data, metadata, processing, and inference\nrecords inputs → transformations → outputs at each step (this is key!)\nmakes explicit where assumptions or biases are introduced\nallows another person (or you, six months later) to reconstruct the results\n\nTogether, these features ensure that analyses can be understood, repeated, extended, and scaled as new data arrive.",
     "crumbs": [
       "Part I: Reproducible Analyses",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Reproducible Analyses</span>"
@@ -652,8 +663,8 @@
     "objectID": "chapters/reproducible_workflow_intro.html#the-reproducible-analytical-workflow-as-a-causal-system",
     "href": "chapters/reproducible_workflow_intro.html#the-reproducible-analytical-workflow-as-a-causal-system",
     "title": "11  Reproducible Analyses",
-    "section": "11.3 The reproducible analytical workflow as a causal system",
-    "text": "11.3 The reproducible analytical workflow as a causal system\nThe reproducible analytical workflow can be understood as a causal system in which each step produces downstream consequences: measurement choices shape the raw data, data processing constrains what can be modeled, and modeling assumptions determine what can be inferred. Thinking causally about the workflow makes it clear that results do not simply “come from the data,” but from a chain of decisions that can be traced, tested, and reproduced. Generally, this pipeline looks like this:\n\nWorld → Data → Models → Inference → Interpretation\n\nMore explicitly, as seen in the diagram at right, we have the following general steps:\n\nWorld / phenomena: Processes exist whether or not we observe them (or like them!)\nMeasurement & observation: Instruments and observers translate phenomena into recorded values.\nRaw data + metadata: Raw data must have metadata as context.\nProcessing & derivation: Filtering, organizing, feature extraction, etc.\nModels & inference rules: Assumptions can be documented and coded explicitly.\nInterpretation: Human judgment (which is usually not reproducible, unless codified).",
+    "section": "11.4 The reproducible analytical workflow as a causal system",
+    "text": "11.4 The reproducible analytical workflow as a causal system\nThe reproducible analytical workflow can be understood as a causal system in which each step produces downstream consequences: measurement choices shape the raw data, data processing constrains what can be modeled, and modeling assumptions determine what can be inferred. Thinking causally about the workflow makes it clear that results do not simply “come from the data,” but from a chain of decisions that can be traced, tested, and reproduced. Generally, this pipeline looks like this:\n\nWorld → Data → Models → Inference → Interpretation\n\nMore explicitly, as seen in the diagram at right, we have the following general steps:\n\nWorld / phenomena: Processes exist whether or not we observe them (or like them!)\nMeasurement & observation: Instruments and observers translate phenomena into recorded values.\nRaw data + metadata: Raw data must have metadata as context.\nProcessing & derivation: Filtering, organizing, feature extraction, etc.\nModels & inference rules: Assumptions can be documented and coded explicitly.\nInterpretation: Human judgment (which is usually not reproducible, unless codified).",
     "crumbs": [
       "Part I: Reproducible Analyses",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Reproducible Analyses</span>"
@@ -663,8 +674,8 @@
     "objectID": "chapters/reproducible_workflow_intro.html#why-workflows-matter-scientifically",
     "href": "chapters/reproducible_workflow_intro.html#why-workflows-matter-scientifically",
     "title": "11  Reproducible Analyses",
-    "section": "11.4 Why workflows matter scientifically",
-    "text": "11.4 Why workflows matter scientifically\nReproducibility in a scientific workflow is not primarily about convenience, though it often becomes convenient over time. A convenient –but non-reproducible– workflow focuses on rerunning an analysis quickly, often relying on memory, manual steps, and undocumented choices. That approach may work in the short term, but it does not scale and rarely holds up weeks, months, or years later. A reproducible workflow, by contrast, is designed so that every result can be traced back to its origins, including the data, code, assumptions, and decisions that produced it.\nAt a broader scale, reproducible workflows allow us to:\n\ndiagnose errors\nunderstand sensitivity to assumptions\nreuse data responsibly\nbuild on previous work without re-guessing decisions\nreduce long-term computational and cognitive overhead\n\nIn short:\n\nConvenience: “Can I run this analysis again?”\nReproducibility: “Can I clearly show how these results were produced?”",
+    "section": "11.5 Why workflows matter scientifically",
+    "text": "11.5 Why workflows matter scientifically\nReproducibility in a scientific workflow is not primarily about convenience, though it often becomes convenient over time. A convenient –but non-reproducible– workflow focuses on rerunning an analysis quickly, often relying on memory, manual steps, and undocumented choices. That approach may work in the short term, but it does not scale and rarely holds up weeks, months, or years later. A reproducible workflow, by contrast, is designed so that every result can be traced back to its origins, including the data, code, assumptions, and decisions that produced it.\nAt a broader scale, reproducible workflows allow us to:\n\ndiagnose errors\nunderstand sensitivity to assumptions\nreuse data responsibly\nbuild on previous work without re-guessing decisions\nreduce long-term computational and cognitive overhead\n\nIn short:\n\nConvenience: “Can I run this analysis again?”\nReproducibility: “Can I clearly show how these results were produced?”",
     "crumbs": [
       "Part I: Reproducible Analyses",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Reproducible Analyses</span>"
@@ -674,8 +685,8 @@
     "objectID": "chapters/reproducible_workflow_intro.html#how-part-i-reproducible-analyses-is-organized",
     "href": "chapters/reproducible_workflow_intro.html#how-part-i-reproducible-analyses-is-organized",
     "title": "11  Reproducible Analyses",
-    "section": "11.5 How Part I: Reproducible Analyses is organized",
-    "text": "11.5 How Part I: Reproducible Analyses is organized\nThis Part follows the workflow in stages:\n\nNature of data: What data are, how measurement works, and what raw data means.\nMetadata (low friction): How to document context without drowning in formatting standards.\nReproducible workflows: Why multiple step-by-step scripts are not enough; the need for explicit input–output mapping.\nInference and interpretation: Where assumptions enter and where reproducibility ends.\n\nEach chapter is responsible for a specific region of the workflow.",
+    "section": "11.6 How Part I: Reproducible Analyses is organized",
+    "text": "11.6 How Part I: Reproducible Analyses is organized\nThis Part follows the workflow in stages:\n\nNature of data: What data are, how measurement works, and what raw data means.\nMetadata (low friction): How to document context without drowning in formatting standards.\nReproducible workflows: Why multiple step-by-step scripts are not enough; the need for explicit input–output mapping.\nInference and interpretation: Where assumptions enter and where reproducibility ends.\n\nEach chapter is responsible for a specific region of the workflow.",
     "crumbs": [
       "Part I: Reproducible Analyses",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Reproducible Analyses</span>"
@@ -685,8 +696,19 @@
     "objectID": "chapters/reproducible_workflow_intro.html#a-guiding-principle",
     "href": "chapters/reproducible_workflow_intro.html#a-guiding-principle",
     "title": "11  Reproducible Analyses",
-    "section": "11.6 A guiding principle",
-    "text": "11.6 A guiding principle\n\nIf you cannot say what a result depends on, it is not reproducible.\n\nKeep this sentence in mind as you move forward. The next chapter starts where all workflows begin: with the nature of data themselves.",
+    "section": "11.7 A guiding principle",
+    "text": "11.7 A guiding principle\n\nIf you cannot say what a result depends on, it is not reproducible.\n\nKeep this sentence in mind as you move forward. The next chapter starts where all workflows begin: with the nature of data themselves.",
+    "crumbs": [
+      "Part I: Reproducible Analyses",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Reproducible Analyses</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/reproducible_workflow_intro.html#a-parting-note",
+    "href": "chapters/reproducible_workflow_intro.html#a-parting-note",
+    "title": "11  Reproducible Analyses",
+    "section": "11.8 A parting note",
+    "text": "11.8 A parting note\nIn the next section, I take a step back and offer a set of statistical aphorisms that can help us remain vigilane about workflow weaknesses, leaky assumptions, incorrect modeling approach, or cryptic biases.",
     "crumbs": [
       "Part I: Reproducible Analyses",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Reproducible Analyses</span>"

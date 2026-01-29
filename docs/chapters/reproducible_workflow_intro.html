@@ -253,10 +253,12 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#why-start-with-reproducible-analysis-workflows" id="toc-why-start-with-reproducible-analysis-workflows" class="nav-link active" data-scroll-target="#why-start-with-reproducible-analysis-workflows"><span class="header-section-number">11.1</span> Why start with reproducible analysis workflows?</a></li>
-  <li><a href="#what-is-a-reproducible-analytical-workflow" id="toc-what-is-a-reproducible-analytical-workflow" class="nav-link" data-scroll-target="#what-is-a-reproducible-analytical-workflow"><span class="header-section-number">11.2</span> What is a reproducible analytical workflow?</a></li>
-  <li><a href="#why-workflows-matter-scientifically" id="toc-why-workflows-matter-scientifically" class="nav-link" data-scroll-target="#why-workflows-matter-scientifically"><span class="header-section-number">11.4</span> Why workflows matter scientifically</a></li>
-  <li><a href="#how-part-i-reproducible-analyses-is-organized" id="toc-how-part-i-reproducible-analyses-is-organized" class="nav-link" data-scroll-target="#how-part-i-reproducible-analyses-is-organized"><span class="header-section-number">11.5</span> How <strong>Part I: Reproducible Analyses</strong> is organized</a></li>
-  <li><a href="#a-guiding-principle" id="toc-a-guiding-principle" class="nav-link" data-scroll-target="#a-guiding-principle"><span class="header-section-number">11.6</span> A guiding principle</a></li>
+  <li><a href="#analytical-workflow" id="toc-analytical-workflow" class="nav-link" data-scroll-target="#analytical-workflow"><span class="header-section-number">11.2</span> Analytical Workflow</a></li>
+  <li><a href="#what-is-a-reproducible-analytical-workflow" id="toc-what-is-a-reproducible-analytical-workflow" class="nav-link" data-scroll-target="#what-is-a-reproducible-analytical-workflow"><span class="header-section-number">11.3</span> What is a reproducible analytical workflow?</a></li>
+  <li><a href="#why-workflows-matter-scientifically" id="toc-why-workflows-matter-scientifically" class="nav-link" data-scroll-target="#why-workflows-matter-scientifically"><span class="header-section-number">11.5</span> Why workflows matter scientifically</a></li>
+  <li><a href="#how-part-i-reproducible-analyses-is-organized" id="toc-how-part-i-reproducible-analyses-is-organized" class="nav-link" data-scroll-target="#how-part-i-reproducible-analyses-is-organized"><span class="header-section-number">11.6</span> How <strong>Part I: Reproducible Analyses</strong> is organized</a></li>
+  <li><a href="#a-guiding-principle" id="toc-a-guiding-principle" class="nav-link" data-scroll-target="#a-guiding-principle"><span class="header-section-number">11.7</span> A guiding principle</a></li>
+  <li><a href="#a-parting-note" id="toc-a-parting-note" class="nav-link" data-scroll-target="#a-parting-note"><span class="header-section-number">11.8</span> A parting note</a></li>
   </ul>
 </nav>
     </div>
@@ -286,9 +288,31 @@ ul.task-list li input[type="checkbox"] {
 <h2 data-number="11.1" class="anchored" data-anchor-id="why-start-with-reproducible-analysis-workflows"><span class="header-section-number">11.1</span> Why start with reproducible analysis workflows?</h2>
 <p>Although ZOO/ECOL-5500 focuses on quantitative analysis and modeling, those tools are only as reliable as the infrastructure that supports them. Establishing a clear, reproducible workflow creates a solid foundation that can scale appropriately as new data arrive –whether that means new sensor downloads, ongoing field observations, or ever-expanding datasets– without requiring you to constantly restructure, reinvent, or debug your analysis.</p>
 <p>This chapter provides the broad <strong>conceptual map</strong> for the rest of Part I. Subsequent chapters focus on individual components of this workflow.</p>
+<hr>
 </section>
-<section id="what-is-a-reproducible-analytical-workflow" class="level2" data-number="11.2">
-<h2 data-number="11.2" class="anchored" data-anchor-id="what-is-a-reproducible-analytical-workflow"><span class="header-section-number">11.2</span> What is a reproducible analytical workflow?</h2>
+<section id="analytical-workflow" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="analytical-workflow"><span class="header-section-number">11.2</span> Analytical Workflow</h2>
+<p>A statistical philosophy only works if it is supported by a deliberate, reproducible analytical workflow. This workflow description is doing a lot of work, so let us be very clear about the meaning.</p>
+<blockquote class="blockquote">
+<p><em><strong>Analytical workflow:</strong> The data and computational infrastructure that translates raw observations into scientifically defensible results and inferences.</em></p>
+</blockquote>
+<p>A workflow include everything about how datasets are stored, cleaned, explored, modeled, and reported. Importantly, it also includes how decisions are documented and how analyses can be reproduced by someone else (including your future, more frenetic self).</p>
+<p>Designing a good analytical workflow is hardly a casual endeavor. In fact, it should be a target of formal and toughtful analysis itself, answering questions like:</p>
+<ul>
+<li>Is your workflow efficient in terms of your valuable time?</li>
+<li>Is your workflow efficient in terms of your computational infrastucture and abilities?</li>
+<li>Is your workflow clear, or does it create confusion and induce mission/scope creep?</li>
+<li>Does your workflow allow you to stop and restart without losing your place?</li>
+</ul>
+<p>A good workflow constrains your behavior in productive ways. It limits wandering, enforces transparency, and makes progress visible. That is, <strong><em>there is no single correct workflow.</em></strong> As Rudyard Kipling wrote (<em>In the Neolithic Age</em>):</p>
+<blockquote class="blockquote">
+<p><em>Here’s my wisdom for your use, as I learned it when the moose And the reindeer roamed where Paris roars to-night: “There are nine and sixty ways of constructing tribal lays, And—every—single—one—of—them—is—right!</em></p>
+</blockquote>
+<p>There are many ways of constructing something useful and meaningful, and every single one of them can be right. What matters is that your workflow is intentional, scientifically defensible, and aligned with your scientific goals. So, I encourage you to start formalizing a philosophical workflow that reduces bias, controls scope, and supports efficient thinking. Then stick to it until you learn something better. That moment will come, and when it does, simply update your philosophy through slow iteration rather than abandoning it.</p>
+<hr>
+</section>
+<section id="what-is-a-reproducible-analytical-workflow" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="what-is-a-reproducible-analytical-workflow"><span class="header-section-number">11.3</span> What is a reproducible analytical workflow?</h2>
 <p>A common misconception—especially early in graduate training—is that <strong>reproducibility means sharing files and code</strong> on GitHub, Dryad, or similar repositories. Those components are necessary, but they is not sufficient.</p>
 <p>A reproducible analytical workflow is a structured system that explicitly and completely describes how scientific results are generated. Such a workflow:</p>
 <ul>
@@ -305,8 +329,8 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <div class="columns">
 <div class="column" style="width:47%;">
-<section id="the-reproducible-analytical-workflow-as-a-causal-system" class="level2" data-number="11.3">
-<h2 data-number="11.3" class="anchored" data-anchor-id="the-reproducible-analytical-workflow-as-a-causal-system"><span class="header-section-number">11.3</span> The reproducible analytical workflow as a causal system</h2>
+<section id="the-reproducible-analytical-workflow-as-a-causal-system" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="the-reproducible-analytical-workflow-as-a-causal-system"><span class="header-section-number">11.4</span> The reproducible analytical workflow as a causal system</h2>
 <p>The reproducible analytical workflow can be understood as a causal system in which each step produces downstream consequences: measurement choices shape the raw data, data processing constrains what can be modeled, and modeling assumptions determine what can be inferred. Thinking causally about the workflow makes it clear that results do not simply <strong>“come from the data,”</strong> but from a chain of decisions that can be traced, tested, and reproduced. Generally, this pipeline looks like this:</p>
 <blockquote class="blockquote">
 <p><strong>World → Data → Models → Inference → Interpretation</strong></p>
@@ -329,8 +353,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <p>Everything up to (and including) production of figures and tables <strong>can and should be reproducible</strong>. That is, (1) you should be able to rerun an entire analysis and produce tables and figures (and fill in values in a Results section) with a simple click of a button, and (2) another user should be able to reproduce all steps in your analysis pipeline, even with minimal code. Framing the workflow as a casual path makes obvious how each result is causally linked to specific inputs, transformations, and assumptions.</p>
 <hr>
-<section id="why-workflows-matter-scientifically" class="level2" data-number="11.4">
-<h2 data-number="11.4" class="anchored" data-anchor-id="why-workflows-matter-scientifically"><span class="header-section-number">11.4</span> Why workflows matter scientifically</h2>
+<section id="why-workflows-matter-scientifically" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="why-workflows-matter-scientifically"><span class="header-section-number">11.5</span> Why workflows matter scientifically</h2>
 <p>Reproducibility in a scientific workflow is not primarily about convenience, though it often becomes convenient over time. A convenient –but non-reproducible– workflow focuses on rerunning an analysis quickly, often relying on memory, manual steps, and undocumented choices. That approach may work in the short term, but it does not scale and rarely holds up weeks, months, or years later. A reproducible workflow, by contrast, is designed so that every result can be traced back to its origins, including the data, code, assumptions, and decisions that produced it.</p>
 <p>At a broader scale, reproducible workflows allow us to:</p>
 <ul>
@@ -347,8 +371,8 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <hr>
 </section>
-<section id="how-part-i-reproducible-analyses-is-organized" class="level2" data-number="11.5">
-<h2 data-number="11.5" class="anchored" data-anchor-id="how-part-i-reproducible-analyses-is-organized"><span class="header-section-number">11.5</span> How <strong>Part I: Reproducible Analyses</strong> is organized</h2>
+<section id="how-part-i-reproducible-analyses-is-organized" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="how-part-i-reproducible-analyses-is-organized"><span class="header-section-number">11.6</span> How <strong>Part I: Reproducible Analyses</strong> is organized</h2>
 <p>This Part follows the workflow in stages:</p>
 <ol type="1">
 <li><strong>Nature of data:</strong> What data are, how measurement works, and what <em>raw data</em> means.</li>
@@ -359,12 +383,16 @@ ul.task-list li input[type="checkbox"] {
 <p>Each chapter is responsible for a <strong>specific region of the workflow</strong>.</p>
 <hr>
 </section>
-<section id="a-guiding-principle" class="level2" data-number="11.6">
-<h2 data-number="11.6" class="anchored" data-anchor-id="a-guiding-principle"><span class="header-section-number">11.6</span> A guiding principle</h2>
+<section id="a-guiding-principle" class="level2" data-number="11.7">
+<h2 data-number="11.7" class="anchored" data-anchor-id="a-guiding-principle"><span class="header-section-number">11.7</span> A guiding principle</h2>
 <blockquote class="blockquote">
 <p><strong>If you cannot say what a result depends on, it is not reproducible.</strong></p>
 </blockquote>
 <p>Keep this sentence in mind as you move forward. The next chapter starts where all workflows begin: with the <strong>nature of data themselves</strong>.</p>
+</section>
+<section id="a-parting-note" class="level2" data-number="11.8">
+<h2 data-number="11.8" class="anchored" data-anchor-id="a-parting-note"><span class="header-section-number">11.8</span> A parting note</h2>
+<p>In the next section, I take a step back and offer a set of statistical aphorisms that can help us remain vigilane about workflow weaknesses, leaky assumptions, incorrect modeling approach, or cryptic biases.</p>
 
 
 </section>

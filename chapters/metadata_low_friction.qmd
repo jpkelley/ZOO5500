@@ -4,7 +4,6 @@ format: html
 toc: true
 ---
 
-
 ::::: columns
 
 ::: {.column width="48%"}
@@ -65,14 +64,85 @@ Within the broader analytical workflow, raw data and metadata together form a **
 
 ---
 
+## Types of metadata: what different layers do
+
+In practice, metadata operate at several conceptual layers. Each layer answers a different scientific question and constrains how hypotheses and models can be formulated. 
+
+> **Together:**  
+> Structural metadata define what exists.  
+> Measurement metadata define what it represents.  
+> Contextual metadata define what it can be used to infer.
+
+
+::: {.callout-tip icon=false collapse=true}
+## Structural Metadata  
+
+*What is in the dataset*
+
+Structural metadata describe the **literal structure of the data file**: variable names, units, data types, allowed values, and how missing values are encoded. This layer tells a reader (and software) what each column represents and how it should be interpreted at a basic level.
+
+Structural metadata directly constrain hypotheses and models by determining:
+
+- what variables exist  
+- what scales and transformations are meaningful  
+- what distributional assumptions are even plausible  
+
+> Structural metadata define **what questions can be expressed** with the data at all.
+
+:::
+
+::: {.callout-tip icon=false collapse=true}
+
+## Measurement Metadata  
+
+*How values were generated*
+
+Measurement metadata describe the **process by which values came into existence**: instruments or observers, protocols, calibration or standardization, accuracy, resolution, and the role of human judgment versus sensors.
+
+This layer determines whether variables are:
+
+- direct measurements or proxies  
+- comparable across space, time, or observers  
+- subject to detection error or measurement error  
+
+Measurement metadata shape hypotheses by clarifying *what the variables actually represent* in the real world, and they constrain model choice by determining whether additional structure (e.g., detection submodels) is required.
+
+> Measurement metadata define **what your variables mean**.
+
+:::
+
+::: {.callout-tip icon=false collapse=true}
+
+## Contextual Metadata  
+
+*Why the dataset looks the way it does*
+
+Contextual metadata describe the **study design and constraints** that shaped the dataset: sampling units, spatial and temporal scope, missingness mechanisms, access limitations, and known biases.
+
+This layer determines:
+
+- which comparisons are valid  
+- whether observations are independent or repeated  
+- whether certain hypotheses are testable at all  
+
+Contextual metadata are where limitations become explicit and where interpretive boundaries are drawn.
+
+> Contextual metadata define **what inferences the data can support**.
+
+:::
+
+
+
+---
+
 ## What good metadata enable (FAIR, in plain language)
 
 At their core, the FAIR principles ([Wilkinson _et al._ (2016)](https://www.nature.com/articles/sdata201618)) recognize that data are only useful if their **context travels with them**. Metadata are what make this possible. Much of the modern emphasis on metadata comes from the **FAIR principles**, which aim to ensure that scientific data are:
 
-- **Findable:** Metadata help other people *find that the data exist*.
-- **Accessible:** Metadata explain *how to get the data and what the files mean*.
-- **Interoperable:** Metadata make it clear *how the data are formatted and measured*, so they work with other data.
-- **Reusable:** Metadata explain *how the data were collected and what their limits are*, so others can use them correctly.
+- **Findable:** Metadata help other people *find that the data exist*.  
+- **Accessible:** Metadata explain *how to get the data and what the files mean*.  
+- **Interoperable:** Metadata make it clear *how the data are formatted and measured*, so they work with other data.  
+- **Reusable:** Metadata explain *how the data were collected and what their limits are*, so others can use them correctly.  
 
 Crucially, FAIR is not about ensuring perfection; it is about increasing the probability of **future usability**.
 
@@ -127,14 +197,12 @@ To support that transition from your mind (or Google Sheets), this course adopts
 ## YAML: What's in a name?
 
 Originally, YAML was an abbreviation for _"Yet Another Markup Language"_. Later, it become _"YAML Ain't Markup Language"_.
-
 :::
 
 ::: callout-note
 ## What the heck is _canonical_ in this context?
 
-_Canonical_ simply means that there is exactly one place where your dataset is formally defined; it does _not_ mean that your metadata exists as exactly one file (thought it could).
-
+_Canonical_ simply means that there is exactly one place where your dataset is formally defined; it does _not_ mean that your metadata exists as exactly one file (though it could).
 :::
 
 There are several advantages to using YAML, including:
@@ -142,12 +210,12 @@ There are several advantages to using YAML, including:
 - **human-readable and easy to edit**  
 - **structured and explicit about relationships**  
 - **easy to version-control**  
-- **simple to validate and extend** (i.e. Quarto markdown files have YAML headers)
-- **straightforward to convert into repository-specific schemas later**
+- **simple to validate and extend** (i.e. Quarto markdown files have YAML headers)  
+- **straightforward to convert into repository-specific schemas later**  
 
 Most importantly, YAML encourages you to think carefully about **what varies**, **what stays constant**, and **how different pieces of a dataset relate to one another**.
 
-In the next section, we will walk through the structure of a well-designed YAML metadata file, using concrete examples and expandable templates to show how common research scenarios —such as multiple instruments, deployments, or sampling rates— can be documented clearly and correctly (at least, I hope so).
+In the next section, we will walk through the structure of a well-designed YAML metadata file, using concrete examples and expandable templates to show how common research scenarios —such as multiple instruments, deployments, or sampling rates— can be documented clearly and correctly.
 
 ---
 
@@ -250,195 +318,12 @@ This level answers: *What is true about this specific file, record, or observati
 1. **Place metadata at the highest level where they are constant.**  
    If a sampling rate never changes across a deployment, store it at the deployment or instrument level.
 
-2. **If a metadata value varies, do not summarize it; map it explicitly by adding another metadata entry (see Example 3-4 below.**  
-   Never write “sampling_rate_hz: 48000” plus “some files differ.”Instead, record which files have which values.
-   
+2. **If a metadata value varies, do not summarize it; map it explicitly by adding another metadata entry.**  
+   Never write “sampling_rate_hz: 48000” plus “some files differ.” Instead, record which files have which values.
 :::
 
 ---
 
-## Examples: recording metadata at different levels
-
-The examples below illustrate how metadata structure changes depending on what varies in a dataset. Each example shows the same basic information organized at different levels to preserve clarity and traceability. The goal is not to memorize a template, but to understand how scope and variation determine where metadata belong.
-
-The following examples illustrate common scenarios using YAML. Each example shows how scope and variation determine where information belongs. Note that the Creative Commons Non-commercial (_CC-BY-NC_) is a good place to start in terms of specifying who has access to your data.  
-
-::: {.callout-caution icon=false collapse=true}
-
-## **Example 1:** [**_One_**]{style="color:#984ea3;"} recorder type, multiple recordings with the [**_same_**]{style="color:#377eb8;"} settings
-
-All recordings were made using the same type of recorder with identical acquisition settings (sampling rate, bit depth, etc.). Because the sampling rate and bit depth never change, those values are recorded once at the instrument level and inherited by each file. This avoids duplication while preserving clarity.
-
-```yaml
-title: "Understory bird recordings (Panama)"
-description: "Autonomous recordings from fixed forest plots."
-license: "CC-BY-4.0"
-
-creators:
-  - name: "Patrick Kelley"
-    orcid: "0000-0002-1234-5678"
-    affiliation: "University of Wyoming"
-
-instruments:
-  - instrument_id: aru_01
-    type: "Autonomous recording unit"
-    manufacturer: "Wildlife Acoustics"
-    model: "SM4"
-    sampling_rate_hz: 48000
-    bit_depth: 24
-
-recordings:
-  - file: "plot1_2025-01-15_0600.wav"
-    instrument_id: aru_01
-  - file: "plot1_2025-01-15_0700.wav"
-    instrument_id: aru_01
-  - file: "plot1_2025-01-15_0800.wav"
-    instrument_id: aru_01
-```
-
-:::
-
-
-::: {.callout-caution icon=false collapse=true}
-
-## **Example 2:** [**_One_**]{style="color:#984ea3;"} recorder type, multiple recordings with [**_different_**]{style="color:#e41a1c;"} settings
-
-Although the same recorder model was used throughout, some recordings were made with different sampling rates. Because this parameter varies, it must be recorded explicitly for each file rather than summarized at the instrument-level.
-
-```yaml
-title: "Understory bird recordings (Panama)"
-description: "Autonomous recordings; some files recorded at different sampling rates."
-license: "CC-BY-4.0"
-
-creators:
-  - name: "Patrick Kelley"
-    orcid: "0000-0002-1234-5678"
-    affiliation: "University of Wyoming"
-
-instruments:
-  - instrument_id: aru_01
-    type: "Autonomous recording unit"
-    manufacturer: "Wildlife Acoustics"
-    model: "SM4"
-    bit_depth: 24
-    default_sampling_rate_hz: 48000
-
-recordings:
-  - file: "plot1_2025-01-15_0600.wav"
-    instrument_id: aru_01
-    sampling_rate_hz: 48000
-
-  - file: "plot1_2025-01-15_0700.wav"
-    instrument_id: aru_01
-    sampling_rate_hz: 48000
-
-  - file: "plot1_2025-01-16_0600.wav"
-    instrument_id: aru_01
-    sampling_rate_hz: 24000
-
-  - file: "plot1_2025-01-16_0700.wav"
-    instrument_id: aru_01
-    sampling_rate_hz: 24000
-```
-
-:::
-
-::: {.callout-caution icon=false collapse=true}
-
-## **Example 3:** [**_Two_**]{style="color:#4daf4a;"} recorder types, multiple recordings with the [**_same_**]{style="color:#377eb8;"} settings
-
-Two different recorder models were used, but each model operated with consistent settings across its recordings. Instrument-level metadata capture these stable differences, while individual files simply reference the appropriate instrument. This cleanly separates hardware differences from recording settings.
-
-```yaml
-title: "Understory bird recordings (Panama)"
-description: "Recordings collected using two recorder models."
-license: "CC-BY-4.0"
-
-creators:
-  - name: "Patrick Kelley"
-    orcid: "0000-0002-1234-5678"
-    affiliation: "University of Wyoming"
-
-instruments:
-  - instrument_id: aru_01
-    type: "Autonomous recording unit"
-    manufacturer: "Wildlife Acoustics"
-    model: "SM4"
-    sampling_rate_hz: 48000
-    bit_depth: 24
-
-  - instrument_id: aru_02
-    type: "Autonomous recording unit"
-    manufacturer: "Audiomoth"
-    model: "AudioMoth v1.2.0"
-    sampling_rate_hz: 48000
-    bit_depth: 16
-
-recordings:
-  - file: "plot1_2025-01-15_0600.wav"
-    instrument_id: aru_01
-  - file: "plot1_2025-01-15_0700.wav"
-    instrument_id: aru_01
-
-  - file: "plot2_2025-01-15_0600.wav"
-    instrument_id: aru_02
-  - file: "plot2_2025-01-15_0700.wav"
-    instrument_id: aru_02
-```
-
-:::
-
-::: {.callout-caution icon=false collapse=true}
-
-## **Example 4:** [**_Two_**]{style="color:#4daf4a;"} recorder types, multiple recordings with [**_different_**]{style="color:#e41a1c;"} settings
-
-Both the recorder model and acquisition settings vary across recordings. In this case, instrument-level metadata define stable properties, while file-level metadata explicitly record variable settings such as sampling rate. This structure is necessary to fully document complexity without removing valuable variation.
-
-```yaml
-title: "Understory bird recordings (Panama)"
-description: "Two recorder models with file-level variation in settings."
-license: "CC-BY-4.0"
-
-creators:
-  - name: "Patrick Kelley"
-    orcid: "0000-0002-1234-5678"
-    affiliation: "University of Wyoming"
-
-instruments:
-  - instrument_id: aru_01
-    type: "Autonomous recording unit"
-    manufacturer: "Wildlife Acoustics"
-    model: "SM4"
-    bit_depth: 24
-    default_sampling_rate_hz: 48000
-
-  - instrument_id: aru_02
-    type: "Autonomous recording unit"
-    manufacturer: "Audiomoth"
-    model: "AudioMoth v1.2.0"
-    bit_depth: 16
-    default_sampling_rate_hz: 48000
-
-recordings:
-  - file: "plot1_2025-01-15_0600.wav"
-    instrument_id: aru_01
-    sampling_rate_hz: 48000
-
-  - file: "plot1_2025-01-16_0600.wav"
-    instrument_id: aru_01
-    sampling_rate_hz: 24000
-
-  - file: "plot2_2025-01-15_0600.wav"
-    instrument_id: aru_02
-    sampling_rate_hz: 48000
-
-  - file: "plot2_2025-01-16_0600.wav"
-    instrument_id: aru_02
-    sampling_rate_hz: 32000
-```
-
-:::
-
 ## Wrapping this up
 
-Clear and clean metadata describe what your data are and how they were generated. Just as importantly, the names you give to files, variables, and folders determine whether that information remains interpretable as projects grow. In the next section, we turn to the topic of naming conventions and coding style --small and seemingly trivial decisions that play an outsized role in scientific reproducibility. Let's proceed!
+Clear and clean metadata describe what your data are and how they were generated. Just as importantly, the names you give to files, variables, and folders determine whether that information remains interpretable as projects grow. In the next section, we turn to the topic of naming conventions and coding style —small and seemingly trivial decisions that play an outsized role in scientific reproducibility. Let’s proceed!

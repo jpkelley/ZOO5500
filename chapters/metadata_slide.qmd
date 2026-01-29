@@ -1,0 +1,129 @@
+---
+title: "Metadata as the Bridge from Data to Hypotheses and Models"
+format:
+  pptx:
+    slide-level: 2
+---
+
+## Why Metadata Come *Before* Modeling
+
+Metadata do not merely document data. They **define what hypotheses are meaningful and what models are allowed**.
+
+> **Metadata define what questions your data can answer.  
+> Hypotheses choose which of those questions you ask.  
+> Models are how you attempt to answer them.**
+
+---
+
+## Three Types of Metadata (Overview)
+
+Ecological datasets require **three distinct layers of metadata**:
+
+1. **Structural metadata:** what is in the file  
+2. **Measurement metadata:** how values were generated  
+3. **Contextual metadata:** why the dataset looks the way it does  
+
+Each metadata layer constrains hypotheses and model choices in different ways.
+
+---
+
+## Structural Metadata  
+### *What the dataset literally contains*
+
+Includes:
+
+- Variable names and definitions
+- Units and scales
+- Data types
+- Allowed values / factor levels
+- Missing-value codes
+
+Structural metadata determine:
+
+- What variables exist
+- What transformations are meaningful
+- What distributions and link functions are plausible
+
+> Structural metadata answer:  
+> **“What hypotheses can even be expressed with these data?”**
+
+---
+
+## Measurement Metadata  
+### *How each value came into existence*
+
+Includes:
+
+- Instruments, observers
+- Measurement protocols
+- Calibration or standardization
+- Accuracy, precision, resolution
+- Human judgment vs sensor output
+
+Measurement metadata determine:
+
+- Whether variables are direct measurements or proxies
+- Whether values are comparable across space, time, or observers
+- Whether detection or measurement-error models are required
+
+> Measurement metadata answer:  
+> **“What do these variables actually represent in the real world?”**
+
+---
+
+## Contextual Metadata  
+### *Why the dataset looks the way it does*
+
+Includes:
+
+- Study design and sampling unit
+- Spatial and temporal scope
+- Constraints and biases
+- Missingness mechanisms
+- Known limitations
+
+Contextual metadata determine:
+
+- What comparisons are valid
+- Whether observations are independent
+- Whether hypotheses are testable at all
+
+> Contextual metadata answer:  
+> **“What variation does this dataset genuinely support?”**
+
+---
+
+## Metadata constrain hypotheses
+
+Metadata constrain hypotheses by:
+- Limiting temporal or spatial claims (e.g. annual or daily variation)
+- Defining whether effects concern abundance, detection, or measurement
+- Limiting contrasts due to design (and/or missing data)
+
+> You cannot suggest hypotheses that your metadata do not support.
+
+---
+
+## Metadata establish estimands
+
+Before any model is chosen, metadata already determine:
+- What quantity is being estimated
+- What variation is treated as signal vs noise
+- What interpretations are defensible
+
+> **The estimand is fixed when the data are generated —-  
+> not after the model is fit.**
+
+---
+
+## Metadata constrain model types
+
+Metadata constrain entire *classes* of models:
+
+- Structural metadata → distributions, link functions, transformations (proper)  
+- Measurement metadata → detection submodels, measurement-error terms  
+- Contextual metadata → random effects, repeated measures, causal/descriptive framing  
+
+> Models are not chosen to “fit the data.”  
+> Models are chosen to respect what the data *are*.
+

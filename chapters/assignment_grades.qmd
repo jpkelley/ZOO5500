@@ -47,6 +47,8 @@ Demonstrate that your dataset is analysis-ready—or identify exactly what still
 
 ### What to include
 
+_Note that many of the components in the list below should be included in a formal metadata file. For this component, it is strongly suggested you use [**YAML Metadata Template**](../templates/metadata_template.yaml), but you may also create a temporary metadata document using a spreadsheet.
+
 -   Dataset summary
     -   Number of rows/observations\
     -   Key grouping structure (site, individual, date, etc.)

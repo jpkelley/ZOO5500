@@ -18,7 +18,46 @@ numbered: true
 
 ## Quicklinks {.unnumbered}
 
+
+::::: columns
+::: {.column width="30%"}
+
+::: {.callout-note icon=false collapse=true}
+## **Class collaboration tools**
+
 [Collaborative Statistics References](https://docs.google.com/document/d/1abc9-8_gHdmGDlnbElgdKHY7udbbKJ33KH7Cckb9Vyg/edit?usp=sharing)
+:::
+
+::: {.column width="2%"}
+:::
+
+
+::: {.column width="30%"}
+
+::: {.callout-warning icon=false collapse=true}
+## **Workflow templates**
+
+[YAML Metadata Template (general)](templates/metadata_template.yaml)
+:::
+:::
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="30%"}
+
+::: {.callout-tip icon=false collapse=true}
+## **Assignment templates**
+
+[Assignment 01 (week 1) template](templates/01_template.qmd)
+:::
+
+:::
+:::::
+
+
+
 
 ---
 

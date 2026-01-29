@@ -20,41 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -263,6 +228,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Conventions and Style</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/statistical_aphorisms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Statistical Philosophy</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -289,13 +260,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#why-metadata-are-essential" id="toc-why-metadata-are-essential" class="nav-link active" data-scroll-target="#why-metadata-are-essential"><span class="header-section-number">13.2</span> Why metadata are essential</a></li>
   <li><a href="#metadata-within-a-reproducible-analytical-workflow" id="toc-metadata-within-a-reproducible-analytical-workflow" class="nav-link" data-scroll-target="#metadata-within-a-reproducible-analytical-workflow"><span class="header-section-number">13.3</span> Metadata within a reproducible analytical workflow</a></li>
-  <li><a href="#what-good-metadata-enable-fair-in-plain-language" id="toc-what-good-metadata-enable-fair-in-plain-language" class="nav-link" data-scroll-target="#what-good-metadata-enable-fair-in-plain-language"><span class="header-section-number">13.4</span> What good metadata enable (FAIR, in plain language)</a></li>
-  <li><a href="#a-low-friction-approach-to-metadata" id="toc-a-low-friction-approach-to-metadata" class="nav-link" data-scroll-target="#a-low-friction-approach-to-metadata"><span class="header-section-number">13.5</span> A low-friction approach to metadata</a></li>
-  <li><a href="#what-good-enough-metadata-must-accomplish" id="toc-what-good-enough-metadata-must-accomplish" class="nav-link" data-scroll-target="#what-good-enough-metadata-must-accomplish"><span class="header-section-number">13.6</span> What “good enough” metadata must accomplish</a></li>
-  <li><a href="#practical-formats-for-early-stage-metadata" id="toc-practical-formats-for-early-stage-metadata" class="nav-link" data-scroll-target="#practical-formats-for-early-stage-metadata"><span class="header-section-number">13.7</span> Practical formats for early-stage metadata</a></li>
-  <li><a href="#why-we-use-yaml" id="toc-why-we-use-yaml" class="nav-link" data-scroll-target="#why-we-use-yaml"><span class="header-section-number">13.8</span> Why we use YAML</a></li>
-  <li><a href="#levels-of-metadata-where-information-belongs-and-where-it-does-not" id="toc-levels-of-metadata-where-information-belongs-and-where-it-does-not" class="nav-link" data-scroll-target="#levels-of-metadata-where-information-belongs-and-where-it-does-not"><span class="header-section-number">13.9</span> Levels of metadata: where information belongs (and where it does <em>not</em>)</a></li>
-  <li><a href="#examples-recording-metadata-at-different-levels" id="toc-examples-recording-metadata-at-different-levels" class="nav-link" data-scroll-target="#examples-recording-metadata-at-different-levels"><span class="header-section-number">13.10</span> Examples: recording metadata at different levels</a></li>
+  <li><a href="#types-of-metadata-what-different-layers-do" id="toc-types-of-metadata-what-different-layers-do" class="nav-link" data-scroll-target="#types-of-metadata-what-different-layers-do"><span class="header-section-number">13.4</span> Types of metadata: what different layers do</a></li>
+  <li><a href="#what-good-metadata-enable-fair-in-plain-language" id="toc-what-good-metadata-enable-fair-in-plain-language" class="nav-link" data-scroll-target="#what-good-metadata-enable-fair-in-plain-language"><span class="header-section-number">13.5</span> What good metadata enable (FAIR, in plain language)</a></li>
+  <li><a href="#a-low-friction-approach-to-metadata" id="toc-a-low-friction-approach-to-metadata" class="nav-link" data-scroll-target="#a-low-friction-approach-to-metadata"><span class="header-section-number">13.6</span> A low-friction approach to metadata</a></li>
+  <li><a href="#what-good-enough-metadata-must-accomplish" id="toc-what-good-enough-metadata-must-accomplish" class="nav-link" data-scroll-target="#what-good-enough-metadata-must-accomplish"><span class="header-section-number">13.7</span> What “good enough” metadata must accomplish</a></li>
+  <li><a href="#practical-formats-for-early-stage-metadata" id="toc-practical-formats-for-early-stage-metadata" class="nav-link" data-scroll-target="#practical-formats-for-early-stage-metadata"><span class="header-section-number">13.8</span> Practical formats for early-stage metadata</a></li>
+  <li><a href="#why-we-use-yaml" id="toc-why-we-use-yaml" class="nav-link" data-scroll-target="#why-we-use-yaml"><span class="header-section-number">13.9</span> Why we use YAML</a></li>
+  <li><a href="#levels-of-metadata-where-information-belongs-and-where-it-does-not" id="toc-levels-of-metadata-where-information-belongs-and-where-it-does-not" class="nav-link" data-scroll-target="#levels-of-metadata-where-information-belongs-and-where-it-does-not"><span class="header-section-number">13.10</span> Levels of metadata: where information belongs (and where it does <em>not</em>)</a></li>
   <li><a href="#wrapping-this-up" id="toc-wrapping-this-up" class="nav-link" data-scroll-target="#wrapping-this-up"><span class="header-section-number">13.11</span> Wrapping this up</a></li>
   </ul>
 </nav>
@@ -385,13 +356,113 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </blockquote>
 <hr>
 </section>
-<section id="what-good-metadata-enable-fair-in-plain-language" class="level2" data-number="13.4">
-<h2 data-number="13.4" class="anchored" data-anchor-id="what-good-metadata-enable-fair-in-plain-language"><span class="header-section-number">13.4</span> What good metadata enable (FAIR, in plain language)</h2>
+<section id="types-of-metadata-what-different-layers-do" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="types-of-metadata-what-different-layers-do"><span class="header-section-number">13.4</span> Types of metadata: what different layers do</h2>
+<p>In practice, metadata operate at several conceptual layers. Each layer answers a different scientific question and constrains how hypotheses and models can be formulated.</p>
+<blockquote class="blockquote">
+<p><strong>Together:</strong><br>
+Structural metadata define what exists.<br>
+Measurement metadata define what it represents.<br>
+Contextual metadata define what it can be used to infer.</p>
+</blockquote>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Structural Metadata
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><em>What is in the dataset</em></p>
+<p>Structural metadata describe the <strong>literal structure of the data file</strong>: variable names, units, data types, allowed values, and how missing values are encoded. This layer tells a reader (and software) what each column represents and how it should be interpreted at a basic level.</p>
+<p>Structural metadata directly constrain hypotheses and models by determining:</p>
+<ul>
+<li>what variables exist<br>
+</li>
+<li>what scales and transformations are meaningful<br>
+</li>
+<li>what distributional assumptions are even plausible</li>
+</ul>
+<blockquote class="blockquote">
+<p>Structural metadata define <strong>what questions can be expressed</strong> with the data at all.</p>
+</blockquote>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Measurement Metadata
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><em>How values were generated</em></p>
+<p>Measurement metadata describe the <strong>process by which values came into existence</strong>: instruments or observers, protocols, calibration or standardization, accuracy, resolution, and the role of human judgment versus sensors.</p>
+<p>This layer determines whether variables are:</p>
+<ul>
+<li>direct measurements or proxies<br>
+</li>
+<li>comparable across space, time, or observers<br>
+</li>
+<li>subject to detection error or measurement error</li>
+</ul>
+<p>Measurement metadata shape hypotheses by clarifying <em>what the variables actually represent</em> in the real world, and they constrain model choice by determining whether additional structure (e.g., detection submodels) is required.</p>
+<blockquote class="blockquote">
+<p>Measurement metadata define <strong>what your variables mean</strong>.</p>
+</blockquote>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Contextual Metadata
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><em>Why the dataset looks the way it does</em></p>
+<p>Contextual metadata describe the <strong>study design and constraints</strong> that shaped the dataset: sampling units, spatial and temporal scope, missingness mechanisms, access limitations, and known biases.</p>
+<p>This layer determines:</p>
+<ul>
+<li>which comparisons are valid<br>
+</li>
+<li>whether observations are independent or repeated<br>
+</li>
+<li>whether certain hypotheses are testable at all</li>
+</ul>
+<p>Contextual metadata are where limitations become explicit and where interpretive boundaries are drawn.</p>
+<blockquote class="blockquote">
+<p>Contextual metadata define <strong>what inferences the data can support</strong>.</p>
+</blockquote>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="what-good-metadata-enable-fair-in-plain-language" class="level2" data-number="13.5">
+<h2 data-number="13.5" class="anchored" data-anchor-id="what-good-metadata-enable-fair-in-plain-language"><span class="header-section-number">13.5</span> What good metadata enable (FAIR, in plain language)</h2>
 <p>At their core, the FAIR principles (<a href="https://www.nature.com/articles/sdata201618">Wilkinson <em>et al.</em> (2016)</a>) recognize that data are only useful if their <strong>context travels with them</strong>. Metadata are what make this possible. Much of the modern emphasis on metadata comes from the <strong>FAIR principles</strong>, which aim to ensure that scientific data are:</p>
 <ul>
-<li><strong>Findable:</strong> Metadata help other people <em>find that the data exist</em>.</li>
-<li><strong>Accessible:</strong> Metadata explain <em>how to get the data and what the files mean</em>.</li>
-<li><strong>Interoperable:</strong> Metadata make it clear <em>how the data are formatted and measured</em>, so they work with other data.</li>
+<li><strong>Findable:</strong> Metadata help other people <em>find that the data exist</em>.<br>
+</li>
+<li><strong>Accessible:</strong> Metadata explain <em>how to get the data and what the files mean</em>.<br>
+</li>
+<li><strong>Interoperable:</strong> Metadata make it clear <em>how the data are formatted and measured</em>, so they work with other data.<br>
+</li>
 <li><strong>Reusable:</strong> Metadata explain <em>how the data were collected and what their limits are</em>, so others can use them correctly.</li>
 </ul>
 <p>Crucially, FAIR is not about ensuring perfection; it is about increasing the probability of <strong>future usability</strong>.</p>
@@ -410,8 +481,8 @@ Note
 </div>
 <hr>
 </section>
-<section id="a-low-friction-approach-to-metadata" class="level2" data-number="13.5">
-<h2 data-number="13.5" class="anchored" data-anchor-id="a-low-friction-approach-to-metadata"><span class="header-section-number">13.5</span> A low-friction approach to metadata</h2>
+<section id="a-low-friction-approach-to-metadata" class="level2" data-number="13.6">
+<h2 data-number="13.6" class="anchored" data-anchor-id="a-low-friction-approach-to-metadata"><span class="header-section-number">13.6</span> A low-friction approach to metadata</h2>
 <p>You have probably encountered the long list of formal metadata standards used across scientific disciplines. For this course, you do <strong>not</strong> need to master any of them, and, in fact, you barely need to know them at all.</p>
 <p>Our approach to metadata is intentionally <strong>low friction</strong>. That means it fits naturally into you (and others) already work: without extra tools or unnecessary extra steps, and without specialized expertise. The goal is not blind compliance to reporting standards; first and foremost, it is about scientific clarity. We therefore adopt a simple guiding principle:</p>
 <blockquote class="blockquote">
@@ -420,8 +491,8 @@ Note
 <p>Repositories such as Dataverse, Zenodo, Dryad, GBIF, and institutional archives are designed to translate user-supplied documentation into formal metadata schemas. That translation only works, however, if the essential information about your data exists in the first place. What matters most at this stage is <strong>clarity and completeness</strong>, not adherence to a specific –and often over-specified– standard.</p>
 <hr>
 </section>
-<section id="what-good-enough-metadata-must-accomplish" class="level2" data-number="13.6">
-<h2 data-number="13.6" class="anchored" data-anchor-id="what-good-enough-metadata-must-accomplish"><span class="header-section-number">13.6</span> What “good enough” metadata must accomplish</h2>
+<section id="what-good-enough-metadata-must-accomplish" class="level2" data-number="13.7">
+<h2 data-number="13.7" class="anchored" data-anchor-id="what-good-enough-metadata-must-accomplish"><span class="header-section-number">13.7</span> What “good enough” metadata must accomplish</h2>
 <p>At a minimum, metadata should allow another scientifically literate person—someone outside your project—to answer the following questions:</p>
 <ul>
 <li>What are these data?<br>
@@ -437,8 +508,8 @@ Note
 <p>If these questions cannot be answered from the metadata alone, the dataset is not reusable—no matter how sophisticated the analysis or modeling may be.</p>
 <hr>
 </section>
-<section id="practical-formats-for-early-stage-metadata" class="level2" data-number="13.7">
-<h2 data-number="13.7" class="anchored" data-anchor-id="practical-formats-for-early-stage-metadata"><span class="header-section-number">13.7</span> Practical formats for early-stage metadata</h2>
+<section id="practical-formats-for-early-stage-metadata" class="level2" data-number="13.8">
+<h2 data-number="13.8" class="anchored" data-anchor-id="practical-formats-for-early-stage-metadata"><span class="header-section-number">13.8</span> Practical formats for early-stage metadata</h2>
 <p>In everyday research workflows, metadata often begin life in simple, familiar formats such as:</p>
 <ul>
 <li><strong>Google Sheet</strong> (good for coordinating field or lab work)<br>
@@ -448,8 +519,8 @@ Note
 <p>These formats are perfectly acceptable as <em>starting points</em>. They lower the barrier to documentation and encourage metadata to be written early in the analysis life-cycle rather than postponed. However, these format are usually best treated as <strong>temporary representations</strong>. As projects grow, metadata need to become more structured, more explicit, and easier to validate and reuse. But, if you are more comfortable beginning your journey using a version-controlled spreadsheet platform (like Google Sheets), you are welcome to do so.</p>
 <hr>
 </section>
-<section id="why-we-use-yaml" class="level2" data-number="13.8">
-<h2 data-number="13.8" class="anchored" data-anchor-id="why-we-use-yaml"><span class="header-section-number">13.8</span> Why we use YAML</h2>
+<section id="why-we-use-yaml" class="level2" data-number="13.9">
+<h2 data-number="13.9" class="anchored" data-anchor-id="why-we-use-yaml"><span class="header-section-number">13.9</span> Why we use YAML</h2>
 <p>To support that transition from your mind (or Google Sheets), this course adopts <strong>YAML</strong> as the canonical format for project-level metadata.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -474,7 +545,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><em>Canonical</em> simply means that there is exactly one place where your dataset is formally defined; it does <em>not</em> mean that your metadata exists as exactly one file (thought it could).</p>
+<p><em>Canonical</em> simply means that there is exactly one place where your dataset is formally defined; it does <em>not</em> mean that your metadata exists as exactly one file (though it could).</p>
 </div>
 </div>
 <p>There are several advantages to using YAML, including:</p>
@@ -485,20 +556,21 @@ Note
 </li>
 <li><strong>easy to version-control</strong><br>
 </li>
-<li><strong>simple to validate and extend</strong> (i.e.&nbsp;Quarto markdown files have YAML headers)</li>
+<li><strong>simple to validate and extend</strong> (i.e.&nbsp;Quarto markdown files have YAML headers)<br>
+</li>
 <li><strong>straightforward to convert into repository-specific schemas later</strong></li>
 </ul>
 <p>Most importantly, YAML encourages you to think carefully about <strong>what varies</strong>, <strong>what stays constant</strong>, and <strong>how different pieces of a dataset relate to one another</strong>.</p>
-<p>In the next section, we will walk through the structure of a well-designed YAML metadata file, using concrete examples and expandable templates to show how common research scenarios —such as multiple instruments, deployments, or sampling rates— can be documented clearly and correctly (at least, I hope so).</p>
+<p>In the next section, we will walk through the structure of a well-designed YAML metadata file, using concrete examples and expandable templates to show how common research scenarios —such as multiple instruments, deployments, or sampling rates— can be documented clearly and correctly.</p>
 <hr>
 </section>
-<section id="levels-of-metadata-where-information-belongs-and-where-it-does-not" class="level2" data-number="13.9">
-<h2 data-number="13.9" class="anchored" data-anchor-id="levels-of-metadata-where-information-belongs-and-where-it-does-not"><span class="header-section-number">13.9</span> Levels of metadata: where information belongs (and where it does <em>not</em>)</h2>
+<section id="levels-of-metadata-where-information-belongs-and-where-it-does-not" class="level2" data-number="13.10">
+<h2 data-number="13.10" class="anchored" data-anchor-id="levels-of-metadata-where-information-belongs-and-where-it-does-not"><span class="header-section-number">13.10</span> Levels of metadata: where information belongs (and where it does <em>not</em>)</h2>
 <p>When you document metadata, your main job is to put information at the <strong>right level of scope</strong>. This keeps metadata clear, avoids duplication, and prevents the most common failure mode: <strong>collapsing variation</strong>.</p>
 <p>A useful way to think about this is a hierarchy of levels, from broad context to individual files.</p>
 <hr>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -507,7 +579,7 @@ Note
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>This level answers: <em>What is this data set, broadly, and how should it be cited, discovered, and reused?</em></p>
 <p><strong>What belongs at this level</strong></p>
@@ -541,7 +613,7 @@ Note
 </div>
 </div>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -550,7 +622,7 @@ Note
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>This level answers: <em>What system, instrument, or process produced the measurements, and what are its stable properties?</em></p>
 <p><strong>What belongs at this level</strong></p>
@@ -574,7 +646,7 @@ Note
 </div>
 </div>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -583,7 +655,7 @@ Note
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>This level answers: <em>When and under what conditions was the system used with a consistent configuration?</em></p>
 <p><strong>What belongs at this level</strong></p>
@@ -609,7 +681,7 @@ Note
 </div>
 </div>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -618,7 +690,7 @@ Note
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>This level answers: <em>What is true about this specific file, record, or observation?</em></p>
 <p><strong>What belongs at this level</strong></p>
@@ -645,7 +717,7 @@ Note
 </div>
 <hr>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -654,222 +726,22 @@ Note
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li><p><strong>Place metadata at the highest level where they are constant.</strong><br>
 If a sampling rate never changes across a deployment, store it at the deployment or instrument level.</p></li>
-<li><p><strong>If a metadata value varies, do not summarize it; map it explicitly by adding another metadata entry (see Example 3-4 below.</strong><br>
-Never write “sampling_rate_hz: 48000” plus “some files differ.”Instead, record which files have which values.</p></li>
+<li><p><strong>If a metadata value varies, do not summarize it; map it explicitly by adding another metadata entry.</strong><br>
+Never write “sampling_rate_hz: 48000” plus “some files differ.” Instead, record which files have which values.</p></li>
 </ol>
 </div>
 </div>
 </div>
 <hr>
 </section>
-<section id="examples-recording-metadata-at-different-levels" class="level2" data-number="13.10">
-<h2 data-number="13.10" class="anchored" data-anchor-id="examples-recording-metadata-at-different-levels"><span class="header-section-number">13.10</span> Examples: recording metadata at different levels</h2>
-<p>The examples below illustrate how metadata structure changes depending on what varies in a dataset. Each example shows the same basic information organized at different levels to preserve clarity and traceability. The goal is not to memorize a template, but to understand how scope and variation determine where metadata belong.</p>
-<p>The following examples illustrate common scenarios using YAML. Each example shows how scope and variation determine where information belongs. Note that the Creative Commons Non-commercial (<em>CC-BY-NC</em>) is a good place to start in terms of specifying who has access to your data.</p>
-<div class="callout callout-style-default callout-caution no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Caution</span><strong>Example 1:</strong> <span style="color:#984ea3;"><strong><em>One</em></strong></span> recorder type, multiple recordings with the <span style="color:#377eb8;"><strong><em>same</em></strong></span> settings
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>All recordings were made using the same type of recorder with identical acquisition settings (sampling rate, bit depth, etc.). Because the sampling rate and bit depth never change, those values are recorded once at the instrument level and inherited by each file. This avoids duplication while preserving clarity.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Understory bird recordings (Panama)"</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"Autonomous recordings from fixed forest plots."</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">license</span><span class="kw">:</span><span class="at"> </span><span class="st">"CC-BY-4.0"</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">creators</span><span class="kw">:</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">"Patrick Kelley"</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">orcid</span><span class="kw">:</span><span class="at"> </span><span class="st">"0000-0002-1234-5678"</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">affiliation</span><span class="kw">:</span><span class="at"> </span><span class="st">"University of Wyoming"</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">instruments</span><span class="kw">:</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">instrument_id</span><span class="kw">:</span><span class="at"> aru_01</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"Autonomous recording unit"</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">manufacturer</span><span class="kw">:</span><span class="at"> </span><span class="st">"Wildlife Acoustics"</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">model</span><span class="kw">:</span><span class="at"> </span><span class="st">"SM4"</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">sampling_rate_hz</span><span class="kw">:</span><span class="at"> </span><span class="dv">48000</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">bit_depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">24</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">recordings</span><span class="kw">:</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">file</span><span class="kw">:</span><span class="at"> </span><span class="st">"plot1_2025-01-15_0600.wav"</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">instrument_id</span><span class="kw">:</span><span class="at"> aru_01</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">file</span><span class="kw">:</span><span class="at"> </span><span class="st">"plot1_2025-01-15_0700.wav"</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">instrument_id</span><span class="kw">:</span><span class="at"> aru_01</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">file</span><span class="kw">:</span><span class="at"> </span><span class="st">"plot1_2025-01-15_0800.wav"</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">instrument_id</span><span class="kw">:</span><span class="at"> aru_01</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-caution no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Caution</span><strong>Example 2:</strong> <span style="color:#984ea3;"><strong><em>One</em></strong></span> recorder type, multiple recordings with <span style="color:#e41a1c;"><strong><em>different</em></strong></span> settings
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Although the same recorder model was used throughout, some recordings were made with different sampling rates. Because this parameter varies, it must be recorded explicitly for each file rather than summarized at the instrument-level.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Understory bird recordings (Panama)"</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"Autonomous recordings; some files recorded at different sampling rates."</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">license</span><span class="kw">:</span><span class="at"> </span><span class="st">"CC-BY-4.0"</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">creators</span><span class="kw">:</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">"Patrick Kelley"</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">orcid</span><span class="kw">:</span><span class="at"> </span><span class="st">"0000-0002-1234-5678"</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">affiliation</span><span class="kw">:</span><span class="at"> </span><span class="st">"University of Wyoming"</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">instruments</span><span class="kw">:</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">instrument_id</span><span class="kw">:</span><span class="at"> aru_01</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"Autonomous recording unit"</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">manufacturer</span><span class="kw">:</span><span class="at"> </span><span class="st">"Wildlife Acoustics"</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">model</span><span class="kw">:</span><span class="at"> </span><span class="st">"SM4"</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">bit_depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">24</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">default_sampling_rate_hz</span><span class="kw">:</span><span class="at"> </span><span class="dv">48000</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="fu">recordings</span><span class="kw">:</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">file</span><span class="kw">:</span><span class="at"> </span><span class="st">"plot1_2025-01-15_0600.wav"</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">instrument_id</span><span class="kw">:</span><span class="at"> aru_01</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">sampling_rate_hz</span><span class="kw">:</span><span class="at"> </span><span class="dv">48000</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">file</span><span class="kw">:</span><span class="at"> </span><span class="st">"plot1_2025-01-15_0700.wav"</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">instrument_id</span><span class="kw">:</span><span class="at"> aru_01</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">sampling_rate_hz</span><span class="kw">:</span><span class="at"> </span><span class="dv">48000</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">file</span><span class="kw">:</span><span class="at"> </span><span class="st">"plot1_2025-01-16_0600.wav"</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">instrument_id</span><span class="kw">:</span><span class="at"> aru_01</span></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">sampling_rate_hz</span><span class="kw">:</span><span class="at"> </span><span class="dv">24000</span></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">file</span><span class="kw">:</span><span class="at"> </span><span class="st">"plot1_2025-01-16_0700.wav"</span></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">instrument_id</span><span class="kw">:</span><span class="at"> aru_01</span></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">sampling_rate_hz</span><span class="kw">:</span><span class="at"> </span><span class="dv">24000</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-caution no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Caution</span><strong>Example 3:</strong> <span style="color:#4daf4a;"><strong><em>Two</em></strong></span> recorder types, multiple recordings with the <span style="color:#377eb8;"><strong><em>same</em></strong></span> settings
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Two different recorder models were used, but each model operated with consistent settings across its recordings. Instrument-level metadata capture these stable differences, while individual files simply reference the appropriate instrument. This cleanly separates hardware differences from recording settings.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Understory bird recordings (Panama)"</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"Recordings collected using two recorder models."</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">license</span><span class="kw">:</span><span class="at"> </span><span class="st">"CC-BY-4.0"</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">creators</span><span class="kw">:</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">"Patrick Kelley"</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">orcid</span><span class="kw">:</span><span class="at"> </span><span class="st">"0000-0002-1234-5678"</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">affiliation</span><span class="kw">:</span><span class="at"> </span><span class="st">"University of Wyoming"</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">instruments</span><span class="kw">:</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">instrument_id</span><span class="kw">:</span><span class="at"> aru_01</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"Autonomous recording unit"</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">manufacturer</span><span class="kw">:</span><span class="at"> </span><span class="st">"Wildlife Acoustics"</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">model</span><span class="kw">:</span><span class="at"> </span><span class="st">"SM4"</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">sampling_rate_hz</span><span class="kw">:</span><span class="at"> </span><span class="dv">48000</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">bit_depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">24</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">instrument_id</span><span class="kw">:</span><span class="at"> aru_02</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"Autonomous recording unit"</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">manufacturer</span><span class="kw">:</span><span class="at"> </span><span class="st">"Audiomoth"</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">model</span><span class="kw">:</span><span class="at"> </span><span class="st">"AudioMoth v1.2.0"</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">sampling_rate_hz</span><span class="kw">:</span><span class="at"> </span><span class="dv">48000</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">bit_depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">16</span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="fu">recordings</span><span class="kw">:</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">file</span><span class="kw">:</span><span class="at"> </span><span class="st">"plot1_2025-01-15_0600.wav"</span></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">instrument_id</span><span class="kw">:</span><span class="at"> aru_01</span></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">file</span><span class="kw">:</span><span class="at"> </span><span class="st">"plot1_2025-01-15_0700.wav"</span></span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">instrument_id</span><span class="kw">:</span><span class="at"> aru_01</span></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">file</span><span class="kw">:</span><span class="at"> </span><span class="st">"plot2_2025-01-15_0600.wav"</span></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">instrument_id</span><span class="kw">:</span><span class="at"> aru_02</span></span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">file</span><span class="kw">:</span><span class="at"> </span><span class="st">"plot2_2025-01-15_0700.wav"</span></span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">instrument_id</span><span class="kw">:</span><span class="at"> aru_02</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-caution no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Caution</span><strong>Example 4:</strong> <span style="color:#4daf4a;"><strong><em>Two</em></strong></span> recorder types, multiple recordings with <span style="color:#e41a1c;"><strong><em>different</em></strong></span> settings
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Both the recorder model and acquisition settings vary across recordings. In this case, instrument-level metadata define stable properties, while file-level metadata explicitly record variable settings such as sampling rate. This structure is necessary to fully document complexity without removing valuable variation.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Understory bird recordings (Panama)"</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"Two recorder models with file-level variation in settings."</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">license</span><span class="kw">:</span><span class="at"> </span><span class="st">"CC-BY-4.0"</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">creators</span><span class="kw">:</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">"Patrick Kelley"</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">orcid</span><span class="kw">:</span><span class="at"> </span><span class="st">"0000-0002-1234-5678"</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">affiliation</span><span class="kw">:</span><span class="at"> </span><span class="st">"University of Wyoming"</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">instruments</span><span class="kw">:</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">instrument_id</span><span class="kw">:</span><span class="at"> aru_01</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"Autonomous recording unit"</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">manufacturer</span><span class="kw">:</span><span class="at"> </span><span class="st">"Wildlife Acoustics"</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">model</span><span class="kw">:</span><span class="at"> </span><span class="st">"SM4"</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">bit_depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">24</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">default_sampling_rate_hz</span><span class="kw">:</span><span class="at"> </span><span class="dv">48000</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">instrument_id</span><span class="kw">:</span><span class="at"> aru_02</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"Autonomous recording unit"</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">manufacturer</span><span class="kw">:</span><span class="at"> </span><span class="st">"Audiomoth"</span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">model</span><span class="kw">:</span><span class="at"> </span><span class="st">"AudioMoth v1.2.0"</span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">bit_depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">16</span></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">default_sampling_rate_hz</span><span class="kw">:</span><span class="at"> </span><span class="dv">48000</span></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="fu">recordings</span><span class="kw">:</span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">file</span><span class="kw">:</span><span class="at"> </span><span class="st">"plot1_2025-01-15_0600.wav"</span></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">instrument_id</span><span class="kw">:</span><span class="at"> aru_01</span></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">sampling_rate_hz</span><span class="kw">:</span><span class="at"> </span><span class="dv">48000</span></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">file</span><span class="kw">:</span><span class="at"> </span><span class="st">"plot1_2025-01-16_0600.wav"</span></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">instrument_id</span><span class="kw">:</span><span class="at"> aru_01</span></span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">sampling_rate_hz</span><span class="kw">:</span><span class="at"> </span><span class="dv">24000</span></span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">file</span><span class="kw">:</span><span class="at"> </span><span class="st">"plot2_2025-01-15_0600.wav"</span></span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">instrument_id</span><span class="kw">:</span><span class="at"> aru_02</span></span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">sampling_rate_hz</span><span class="kw">:</span><span class="at"> </span><span class="dv">48000</span></span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">file</span><span class="kw">:</span><span class="at"> </span><span class="st">"plot2_2025-01-16_0600.wav"</span></span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">instrument_id</span><span class="kw">:</span><span class="at"> aru_02</span></span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">sampling_rate_hz</span><span class="kw">:</span><span class="at"> </span><span class="dv">32000</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-</div>
-</section>
 <section id="wrapping-this-up" class="level2" data-number="13.11">
 <h2 data-number="13.11" class="anchored" data-anchor-id="wrapping-this-up"><span class="header-section-number">13.11</span> Wrapping this up</h2>
-<p>Clear and clean metadata describe what your data are and how they were generated. Just as importantly, the names you give to files, variables, and folders determine whether that information remains interpretable as projects grow. In the next section, we turn to the topic of naming conventions and coding style –small and seemingly trivial decisions that play an outsized role in scientific reproducibility. Let’s proceed!</p>
+<p>Clear and clean metadata describe what your data are and how they were generated. Just as importantly, the names you give to files, variables, and folders determine whether that information remains interpretable as projects grow. In the next section, we turn to the topic of naming conventions and coding style —small and seemingly trivial decisions that play an outsized role in scientific reproducibility. Let’s proceed!</p>
 
 
 </section>

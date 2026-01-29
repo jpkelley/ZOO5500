@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Quantitative Analysis of (Messy) Field Data</title>
+<title>15&nbsp; Statistical Philosophy – Quantitative Analysis of (Messy) Field Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,25 +23,25 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./chapters/course_intro.html" rel="next">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-f2c6d6e2b784ddc5de38779acc06f37d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/naming_conventions.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-f2c6d6e2b784ddc5de38779acc06f37d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -71,7 +71,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -83,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Course Overview</a></li><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Information</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/reproducible_workflow_intro.html">Part I: Reproducible Analyses</a></li><li class="breadcrumb-item"><a href="../chapters/statistical_aphorisms.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Statistical Philosophy</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -97,12 +97,12 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="./index.html" class="sidebar-logo-link">
-      <img src="./graphics/jackalope_graphics/analytical_jackalope.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
-      <img src="./graphics/jackalope_graphics/analytical_jackalope.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../graphics/jackalope_graphics/analytical_jackalope.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="../graphics/jackalope_graphics/analytical_jackalope.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Quantitative Analysis of (Messy) Field Data</a> 
+      <a href="../">Quantitative Analysis of (Messy) Field Data</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -114,58 +114,58 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Course Overview</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Information</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/course_intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/course_intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/syllabus.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/syllabus.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Syllabus</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/calendar_sp26.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/calendar_sp26.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Course calendar</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/ai_policy.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/ai_policy.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">GenAI Use Guidelines</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/preparing_yourself.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/preparing_yourself.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Preparing Yourself</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/assignment_grades.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/assignment_grades.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Assignments &amp; Grades</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/project_scoping.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/project_scoping.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Project Scoping</span></span></a>
   </div>
 </li>
@@ -182,13 +182,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/ai_prompting.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/ai_prompting.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">AI Prompting for Analysis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/using_jackalope_gpt.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/using_jackalope_gpt.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Using JackalopeGPT</span></span></a>
   </div>
 </li>
@@ -196,40 +196,40 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
  <span class="menu-text">Part I: Reproducible Analyses</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/reproducible_workflow_intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/reproducible_workflow_intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Reproducible Analyses</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/nature_of_data.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/nature_of_data.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Nature of Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/metadata_low_friction.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/metadata_low_friction.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Metadata</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/naming_conventions.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/naming_conventions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Conventions and Style</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/statistical_aphorisms.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/statistical_aphorisms.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Statistical Philosophy</span></span></a>
   </div>
 </li>
@@ -257,18 +257,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#essential-course-information" id="toc-essential-course-information" class="nav-link active" data-scroll-target="#essential-course-information">Essential Course Information</a></li>
-  <li><a href="#quicklinks" id="toc-quicklinks" class="nav-link" data-scroll-target="#quicklinks">Quicklinks</a></li>
+  <li><a href="#some-larger-scale-advice-before-moving-into-modeling" id="toc-some-larger-scale-advice-before-moving-into-modeling" class="nav-link active" data-scroll-target="#some-larger-scale-advice-before-moving-into-modeling"><span class="header-section-number">15.1</span> Some larger-scale advice before moving into modeling</a></li>
+  <li><a href="#four-statistical-aphorisms" id="toc-four-statistical-aphorisms" class="nav-link" data-scroll-target="#four-statistical-aphorisms"><span class="header-section-number">15.2</span> Four Statistical Aphorisms</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Course Overview</a></li><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Information</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/reproducible_workflow_intro.html">Part I: Reproducible Analyses</a></li><li class="breadcrumb-item"><a href="../chapters/statistical_aphorisms.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Statistical Philosophy</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Quantitative Analysis of (Messy) Field Data</h1>
-<p class="subtitle lead">University of Wyoming – ZOO-5500 (CRN 13415) | ECOL-5500 (CRN 13417)</p>
+<h1 class="title"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Statistical Philosophy</span></h1>
 </div>
 
 
@@ -285,133 +284,109 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="essential-course-information" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="essential-course-information">Essential Course Information</h2>
-<div class="course-info">
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Instructor</th>
-<th>Patrick Kelley</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Email</strong></td>
-<td>jkelle24@uwyo.edu</td>
-</tr>
-<tr class="even">
-<td><strong>Schedule</strong></td>
-<td>Tu / Th, 11:00–12:15 MT</td>
-</tr>
-<tr class="odd">
-<td><strong>Dates</strong></td>
-<td>20-Jan-2026 to 08-May-2026</td>
-</tr>
-<tr class="even">
-<td><strong>Meeting Type</strong></td>
-<td>synchronous remote</td>
-</tr>
-<tr class="odd">
-<td><strong>Location</strong></td>
-<td><a href="https://uwyo.zoom.us/j/99162811558?pwd=bqQfpeVAW4Gwrs6qF40zlyKJYq1GCM.1" target="_blank">Join via Zoom</a></td>
-</tr>
-<tr class="even">
-<td><strong>Communication</strong></td>
-<td>Slack (private link sent to your email)</td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="quicklinks" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="quicklinks">Quicklinks</h2>
-<div class="columns">
-<div class="column" style="width:30%;">
-<div class="callout callout-style-default callout-note no-icon callout-titled">
+<section id="some-larger-scale-advice-before-moving-into-modeling" class="level2" data-number="15.1">
+<h2 data-number="15.1" class="anchored" data-anchor-id="some-larger-scale-advice-before-moving-into-modeling"><span class="header-section-number">15.1</span> Some larger-scale advice before moving into modeling</h2>
+<p>More than any single method, R (or Python) package, or complex statistical model, the ultimate goal of this course is for you to develop a personal and operational statistical philosophy. This term is often thrown around, so we define a statistical philosophy as:</p>
+<blockquote class="blockquote">
+<p>A set of principles that consistently guides how you think about data, models, uncertainty, and decisions.</p>
+</blockquote>
+<p>In other words, a good statistical philosophy is not a set of rules; it does not tell you exactly what to do in every situation. Instead, it functions to reduce bias, prevent analytical wandering, promote clarity, encourage efficiency. Most importantly, a good statistical philosophy evolves with you, as you learn more. I will offer a set of guiding principles and aphorisms early in the course. You should modify them, reject them, or replace them entirely. What matters is that you have something guiding your choices. This is how you become consistent, thoughtful, and credible as a scientist rather than someone who simply runs analyses.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span><strong>Class collaboration tools</strong>
+<span class="screen-reader-only">Tip</span>**Keep your eyes out!
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><a href="https://docs.google.com/document/d/1abc9-8_gHdmGDlnbElgdKHY7udbbKJ33KH7Cckb9Vyg/edit?usp=sharing">Collaborative Statistics References</a></p>
+<p>Look and listen to your graduate student peers, postdoctoral researchers, and faculty who you interact with and pay close attention to the different statistical perspectives that exist. It’s a fascinating amount of variation! One good example is how different practitioners interpret the output from multimodel (AIC, BIC, or DIC) comparisons. Whenever you hear a different perspective, ask the researcher about how the philosophy that guides their inferential decisions.</p>
 </div>
 </div>
 </div>
-<div class="column" style="width:2%;">
-
-</div>
-<div class="column" style="width:30%;">
-<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<p>What follows are two components. First, I describe four statistical aphorisms. They are intentionally broad. Again, think of them as guardrails rather than rules. Then, I explain what I mean by <em>analytical workflow,</em> which supports an operational statistical philosophy.</p>
+</section>
+<section id="four-statistical-aphorisms" class="level2" data-number="15.2">
+<h2 data-number="15.2" class="anchored" data-anchor-id="four-statistical-aphorisms"><span class="header-section-number">15.2</span> Four Statistical Aphorisms</h2>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span><strong>Workflow templates</strong>
+<span class="screen-reader-only">Note</span>Aphorism #1: Accept imperfection
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><a href="templates/metadata_template.yaml">YAML Metadata Template (general)</a></p>
+<p>Beware perfection. In data analysis, one can be paralyzed by by the moving target of the <em>perfect</em> solution. But what does <em>perfection</em> really mean in practice? Does it mean that an analysis looks complex enough to impress your colleagues or instructors, even if it is does not match the scope or intent of your questions (or, worse yet, is blatantly incorrect)? Is it an analysis that works flawlessly the first time, right out of the box? Or is it one that is quickly built and deployed but also hides critical assumptions or produces error-filled predictions?</p>
+<p>The danger in seeking statistical (or, more generally, scientific) perfection lies in waiting for an ideal solution that may never arrive, or may arrive too late. In doing so, your and your collaborators’ progress stalls, opportunities are missed, and, perhaps most importantly, learning is sorely delayed. This idea is captured poetically in the words of Robert Watson-Watt, the inventor of radar:</p>
+<blockquote class="blockquote">
+<p><strong><em>Give them the third best to go on with; the second best comes too late, the best never comes.</em></strong></p>
+</blockquote>
+<p>Watson-Watt’s advice should remind us that, in dynamic and complex fields such as radar development or our own messy statistical modeling, timely action often outweighs our vision of perfection. A solution that is simply good enough today allows you to:</p>
+<ul>
+<li><strong>Learn through deployment:</strong> Practical application often reveals insights that you cannot anticipate.</li>
+<li><strong>Iterate and improve:</strong> Real-world feedback reveals issues far faster than endless refinement in isolation!</li>
+<li><strong>Transparently communicate analytical limitations:</strong> Collaborators and stakeholders can better understand assumptions, uncertainties, and the scope of your work.</li>
+</ul>
+<p>In short (as as you know), perfection is often the enemy of good progress. By purposefully embracing imperfection, you will be able to better learn, iterate, and produce work that is timely, practical, and ultimately more impactful.</p>
 </div>
 </div>
 </div>
-</div>
-</div><div class="column" style="width:2%;">
-
-</div><div class="column" style="width:30%;">
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Assignment templates</strong>
+<span class="screen-reader-only">Note</span>Aphorism #2: Embrace complexity.
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><a href="templates/01_template.qmd">Assignment 01 (week 1) template</a></p>
+<p>There is a reason why my lab is called the Behavioral Complexity Lab. Ecological and biological systems are wonderfully complex, thrillingly messy, and often only partially observed. Pretending that such complexities do not exist does not make your analysis stronger or more robust; it just makes the analysis less honest and transparent. Actively embracing complexity does not mean building the most complicated model you can imagine. It means acknowledging that the process generating your data is rarely simple and that oversimplification might be very costly.</p>
+<p>At the same time, complexity must be earned. Adding complex model structure, more parameters, or more nested hierarchical layers should be motivated by expert knowledge of biology (at any level) or study design, not by the existence of a published paper, an established method, or a online tutorial. Tis better to manage complexity rather than avoid it (mainly because complexity is all around us). Good analysts learn how to represent complexity in ways that are interpretable, testable, and aligned with the question being asked.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<hr>
-<p>This course was created using Quarto (via R Studio) using custom CSS and HTML.</p>
-<div class="callout callout-style-default callout-caution no-icon callout-titled">
+<div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Caution</span>AI usage transparency
+<span class="screen-reader-only">Note</span>Aphorism #3: Beware of Armadillo Burrows.
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>In the construction of this website, GenAI (via ChatGPT) was used in the following ways:</p>
-<ul>
-<li><p><strong>Generating graphics of cryptid jackalope species.</strong> This was part of an exercise in prompt engineering—specifically, learning how to design minimalist prompts that produce consistent visual themes across all outputs.</p></li>
-<li><p><strong>Converting the Canvas-based course site into Quarto markdown.</strong> This included restructuring content, standardizing headers, and translating existing materials into a reproducible, version-controlled format (for hosting on GitHub).</p></li>
-<li><p><strong>Assistive learning of custom CSS</strong>, in parallel with consulting online CSS documentation and manuals (i.e., as a tutor and debugger, not a design authority).</p></li>
-<li><p><strong>Reformatting and updating existing tables</strong>, including updating of revised dates, assignments, and course logistics.</p></li>
-<li><p><strong>Error-checking and troubleshooting markdown and Quarto code.</strong> This was necessary during site builds.</p></li>
-<li><p><strong>Improving organization across course components.</strong> This included suggestions for cross-referencing related pages and identifying places where additional examples or clarifications would improve learning outcomes.</p></li>
-<li><p><strong>Evaluating pedagogical alignment.</strong> This involved getting feedback on readability, cognitive load, and whether learning objectives were being met by the material being presented.</p></li>
-<li><p><strong>Editorial support</strong> to ensure that tone and level of explanatory detail was appropriate for graduate students. This included tightening some language and reducing informational redundancy across pages.</p></li>
-</ul>
-<p>GenAI was used as an assistive tool throughout; it was not used as a content authority, decision-maker, or substitute for subject-matter expertise. All instructional choices, interpretations, and final edits remain the responsibility of the instructor (in accordance with <a href="../chapters/ai_policy.qmd">AI Use Policy</a>).</p>
+<p>This is based on a real sign I saw on a hiking trail in southern Brazil, and I thought it was a good metaphorical reminder to not fall into someone else’s statistical trap!</p>
+<p>Consider a statistical approach of a senior colleague or advisor that they deem the <em>correct</em> or <em>optimal</em> approach (without justification)? One of the fastest ways to absolutely derail an otherwise good analysis is to blindly inherit and use a statistical framework without understanding why it was chosen in the first place. If you blindly accepted it, what is to say that the previous scientist did not also do the same, <em>ad infinitum</em>? Methods might be copied or carried over from published papers, lab traditions, or online examples without careful thought. Every statistical choice embeds assumptions about scale, error, independence, and causality. When you adopt someone else’s approach wholesale, you also adopt <em>all</em> of their assumptions, whether or not they apply to your data. So, please be cautious.</p>
+<p>The assignments in this course will repeatedly (<em>ad nauseum</em>) ask you to justify your modeling decisions clearly. And your analysis decisions should align with your question, your data, and your scientific goals.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Aphorism #4: Beware paralysis of analysis.
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>There is a point at which conducting more data exploration, running more (and different) models, and sifting through more diagnostics stop improving understanding and start delaying decisions. This is <em>paralysis of analysis</em>, and it is insidious. It often shows up as endless model tweaking, perpetual searching for the perfect model structure, or reluctance to commit to an inferential path (which can lead to never-ending arguments with co-authors),</p>
+<p>A good analytical workflow balances scientific rigor with momentum. Certainly, you may end up with data that are near-perfect and easy to work with. You also may use models that are well-matched to your data constraints without you ever lifting an analytical finger. But this is rare. You should aim for models that are good enough to answer the question at hand, given the data you have, within the constraints you face. This does not mean lowering your standards, especially when faced with looming deadlines. This simply means recognizing diminishing returns and knowing when to move forward. Science advances through iteration and improvement, not achieving perfection on a first attempt.</p>
 </div>
 </div>
 </div>
@@ -822,11 +797,11 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../chapters/naming_conventions.html" class="pagination-link" aria-label="Conventions and Style">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Conventions and Style</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./chapters/course_intro.html" class="pagination-link" aria-label="Introduction">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

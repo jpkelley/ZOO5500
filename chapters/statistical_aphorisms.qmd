@@ -3,6 +3,8 @@ title: "Statistical Philosophy"
 format: html
 ---
 
+## Some larger-scale advice before moving into modeling
+
 More than any single method, R (or Python) package, or complex statistical model, the ultimate goal of this course is for you to develop a personal and operational statistical philosophy. This term is often thrown around, so we define a statistical philosophy as:
 
 > A set of principles that consistently guides how you think about data, models, uncertainty, and decisions.

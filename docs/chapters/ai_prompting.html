@@ -115,13 +115,13 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Course Overview</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
@@ -190,20 +190,20 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/using_jackalope_gpt.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">How to Use JackalopeGPT</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Using JackalopeGPT</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
  <span class="menu-text">Part I: Reproducible Analyses</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/reproducible_workflow_intro.html" class="sidebar-item-text sidebar-link">
@@ -218,8 +218,14 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../chapters/metadata_low_friction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Metadata</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../chapters/naming_conventions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Naming conventions and coding style</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Conventions and Style</span></span></a>
   </div>
 </li>
       </ul>
@@ -269,7 +275,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#example-1-debugging-r-code" id="toc-example-1-debugging-r-code" class="nav-link" data-scroll-target="#example-1-debugging-r-code"><span class="header-section-number">9.4.1</span> Example 1: Debugging R code</a></li>
   <li><a href="#example-2-choosing-a-model-strategy-polished-but-incomplete" id="toc-example-2-choosing-a-model-strategy-polished-but-incomplete" class="nav-link" data-scroll-target="#example-2-choosing-a-model-strategy-polished-but-incomplete"><span class="header-section-number">9.4.2</span> Example 2: Choosing a model strategy <em>(polished but incomplete)</em></a></li>
   <li><a href="#example-3-interpreting-a-model-result" id="toc-example-3-interpreting-a-model-result" class="nav-link" data-scroll-target="#example-3-interpreting-a-model-result"><span class="header-section-number">9.4.3</span> Example 3: Interpreting a model result</a></li>
-  <li><a href="#example-4-checking-model-assumptions-polished-but-incomplete" id="toc-example-4-checking-model-assumptions-polished-but-incomplete" class="nav-link" data-scroll-target="#example-4-checking-model-assumptions-polished-but-incomplete"><span class="header-section-number">9.4.4</span> Example 4: Checking model assumptions <em>(polished but incomplete)</em></a></li>
+  <li><a href="#example-4-checking-model-assumptions" id="toc-example-4-checking-model-assumptions" class="nav-link" data-scroll-target="#example-4-checking-model-assumptions"><span class="header-section-number">9.4.4</span> Example 4: Checking model assumptions</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -545,19 +551,29 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="synthesis-examples-of-improving-prompts" class="level2" data-number="9.4">
 <h2 data-number="9.4" class="anchored" data-anchor-id="synthesis-examples-of-improving-prompts"><span class="header-section-number">9.4</span> Synthesis: Examples of improving prompts</h2>
-<p><strong>Instructions to students:</strong> Read the excessively broad-scope prompt first. Pause and think: * <em>What information is missing (hint: use the TRACE framework)?</em> * <em>What verbiage could be added to fill most or all of those missing components?</em> Then expand the box to see a stronger version (based in the TRACE framework)</p>
-<p><strong>Rubric tag key (TRACE):</strong><br>
-- <strong>[T]</strong> Task/Topic context missing or underspecified<br>
-- <strong>[R]</strong> Role missing<br>
-- <strong>[A]</strong> Audience missing<br>
-- <strong>[C]</strong> Criteria missing (what a “good” answer must include)<br>
-- <strong>[E]</strong> Exclusions missing (scope/safeguards)</p>
+<p><strong>Instructions to students:</strong> Read the excessively broad-scope prompt first. Pause and think:</p>
+<ul>
+<li><em>What information is missing (hint: use the TRACE framework)?</em></li>
+<li><em>What verbiage could be added to fill most or all of those missing components?</em> Then expand the box to see a stronger version (based in the TRACE framework)</li>
+</ul>
+<p><strong>Rubric tag key (TRACE):</strong></p>
+<ul>
+<li><span style="color:#e41a1c;"><strong>[T]</strong> Task/Topic context missing or underspecified</span></li>
+<li><span style="color:#377eb8;"><strong>[R]</strong> Role missing</span><br>
+</li>
+<li><span style="color:#4daf4a;"><strong>[A]</strong> Audience missing</span><br>
+</li>
+<li><span style="color:#984ea3;"><strong>[C]</strong> Criteria missing (what a “good” answer must include)</span><br>
+</li>
+<li><span style="color:#ff7f00;"><strong>[E]</strong> Exclusions missing (scope/safeguards)</span></li>
+</ul>
 <hr>
 <section id="example-1-debugging-r-code" class="level3" data-number="9.4.1">
 <h3 data-number="9.4.1" class="anchored" data-anchor-id="example-1-debugging-r-code"><span class="header-section-number">9.4.1</span> Example 1: Debugging R code</h3>
 <blockquote class="blockquote">
 <p>“My model isn’t working. Help.”</p>
 </blockquote>
+<p>This prompt lacks all components of a useful prompt. This would lead to an overly broad response from the Large Language Model. <strong>Before clicking to expand this example, think about ways you could improve this prompt.</strong></p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled" title="Click to reveal a stronger prompt (TRACE)">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -570,16 +586,10 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Missing tags:</strong> [T] [R] [A] [C] [E]<br>
-<strong>Rubric tags addressed:</strong> [T] [R] [A] [C] [E]</p>
+<p><strong>Missing tags:</strong> <span style="color:#e41a1c;"><strong>[T]</strong></span> <span style="color:#377eb8;"><strong>[R]</strong></span> <span style="color:#4daf4a;"><strong>[A]</strong></span> <span style="color:#984ea3;"><strong>[C]</strong></span> <span style="color:#ff7f00;"><strong>[E]</strong></span></p>
+<p><strong>Rubric tags addressed:</strong> <span style="color:#e41a1c;"><strong>[T]</strong></span> <span style="color:#377eb8;"><strong>[R]</strong></span> <span style="color:#4daf4a;"><strong>[A]</strong></span> <span style="color:#984ea3;"><strong>[C]</strong></span> <span style="color:#ff7f00;"><strong>[E]</strong></span></p>
 <blockquote class="blockquote">
-<p>“Act as an <strong>R debugger</strong>. I’m a <strong>beginner–intermediate R user</strong>. I’m fitting a <strong>GLMM for counts</strong> with a <strong>random intercept for site</strong>. Here is my code and the <strong>exact error message</strong>: [paste].<br>
-A good answer must:<br>
-(1) identify the likely cause,<br>
-(2) show the minimal fix,<br>
-(3) explain why it failed, and<br>
-(4) suggest one diagnostic check.<br>
-Do not rewrite my entire analysis—just fix the error and explain.”</p>
+<p>Act as an <span style="color:#377eb8;"><strong>R debugger</strong></span>. <span style="color:#4daf4a;"><strong>I’m a beginner–intermediate R user</strong></span>. <span style="color:#e41a1c;"><strong>I’m fitting a GLMM for counts with a random intercept for site</strong></span>. <span style="color:#e41a1c;"><strong>Here is my code and the exact error message</strong></span>:. <span style="color:#984ea3;"><strong>A good answer must:</strong></span> <span style="color:#984ea3;"><strong>(1) identify the likely cause,</strong></span> <span style="color:#984ea3;"><strong>(2) show the minimal fix,</strong></span> <span style="color:#984ea3;"><strong>(3) explain why it failed,</strong></span> <span style="color:#984ea3;"><strong>(4) suggest one diagnostic check.</strong></span> <span style="color:#ff7f00;"><strong>Do not rewrite my entire analysis—just fix the error and explain.</strong></span></p>
 </blockquote>
 </div>
 </div>
@@ -591,6 +601,7 @@ Do not rewrite my entire analysis—just fix the error and explain.”</p>
 <blockquote class="blockquote">
 <p>“I have ecological count data collected over multiple sites and years, and I want to choose an appropriate statistical model that accounts for structure in the data. Can you recommend a suitable modeling approach and explain why?”</p>
 </blockquote>
+<p>This prompt sounds careful and scientific, but it fails to <strong>bound the answer</strong> and <strong>require checks</strong>, inviting a vague or overbroad response. <strong>Before clicking to expand this example, think about ways you could improve this prompt.</strong></p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled" title="Click to reveal a stronger prompt (TRACE)">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -603,18 +614,14 @@ Do not rewrite my entire analysis—just fix the error and explain.”</p>
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Missing tags:</strong> [C] [E]<br>
-<strong>Rubric tags addressed:</strong> [T] [R] [A] [C] [E]</p>
+<p><strong>Missing tags:</strong> <span style="color:#984ea3;"><strong>[C]</strong></span> <span style="color:#ff7f00;"><strong>[E]</strong></span></p>
+<p><strong>Rubric tags addressed:</strong> <span style="color:#e41a1c;"><strong>[T]</strong></span> <span style="color:#377eb8;"><strong>[R]</strong></span> <span style="color:#4daf4a;"><strong>[A]</strong></span> <span style="color:#984ea3;"><strong>[C]</strong></span> <span style="color:#ff7f00;"><strong>[E]</strong></span></p>
 <blockquote class="blockquote">
-<p>“Act as an <strong>ecology methods advisor</strong>. I have <strong>count data with many zeros</strong>; samples <strong>nested</strong> in plots within sites; <strong>repeated measures</strong> over time.<br>
-Compare <strong>2–3 modeling strategies</strong> (e.g., <strong>negative binomial GLMM vs zero-inflated vs hurdle</strong>), state <strong>assumptions</strong>, and give <strong>diagnostics that would falsify each</strong>.<br>
-Do not claim causality; focus on defensible inference.”</p>
+<p>Act as <span style="color:#377eb8;"><strong>an ecology methods advisor</strong></span>. I am <span style="color:#4daf4a;"><strong>a graduate student in ecology with variable experience in statistical modeling</strong></span>. I have <span style="color:#e41a1c;"><strong>count data with many zeros; samples nested in plots within sites; repeated measures over time</strong></span>. Compare <span style="color:#984ea3;"><strong>2–3 modeling strategies (e.g., negative binomial GLMM vs zero-inflated vs hurdle), state assumptions, and give diagnostics that would falsify each</strong></span>. <span style="color:#ff7f00;"><strong>Do not claim causality; focus on defensible inference</strong></span>.</p>
 </blockquote>
 </div>
 </div>
 </div>
-<p><em>Why this works pedagogically:</em><br>
-The initial prompt sounds careful and scientific, but it fails to <strong>bound the answer</strong> and <strong>require checks</strong>, inviting a vague or overbroad response.</p>
 <hr>
 </section>
 <section id="example-3-interpreting-a-model-result" class="level3" data-number="9.4.3">
@@ -622,6 +629,7 @@ The initial prompt sounds careful and scientific, but it fails to <strong>bound 
 <blockquote class="blockquote">
 <p>“How do I interpret this coefficient?”</p>
 </blockquote>
+<p>This is another example of a prompt that is vague even by the standards of a simple web search. This approach invites a vague response or evil hallucinations by the Large Language Model. <strong>Before clicking to expand this example, think about ways you could improve this prompt.</strong></p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled" title="Click to reveal a stronger prompt (TRACE)">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -634,23 +642,22 @@ The initial prompt sounds careful and scientific, but it fails to <strong>bound 
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Missing tags:</strong> [T] [R] [A] [C] [E]<br>
-<strong>Rubric tags addressed:</strong> [T] [R] [A] [C] [E]</p>
+<p><strong>Missing tags:</strong> <span style="color:#e41a1c;"><strong>[T]</strong></span> <span style="color:#377eb8;"><strong>[R]</strong></span> <span style="color:#4daf4a;"><strong>[A]</strong></span> <span style="color:#984ea3;"><strong>[C]</strong></span> <span style="color:#ff7f00;"><strong>[E]</strong></span></p>
+<p><strong>Rubric tags addressed:</strong> <span style="color:#e41a1c;"><strong>[T]</strong></span> <span style="color:#377eb8;"><strong>[R]</strong></span> <span style="color:#4daf4a;"><strong>[A]</strong></span> <span style="color:#984ea3;"><strong>[C]</strong></span> <span style="color:#ff7f00;"><strong>[E]</strong></span></p>
 <blockquote class="blockquote">
-<p>“Act as a <strong>statistical interpreter for ecology graduate students</strong>. I’m fitting a <strong>negative binomial GLMM</strong> for bird counts with <strong>canopy cover</strong> as a predictor and <strong>site as a random effect</strong>.<br>
-Explain how to interpret the canopy coefficient on the <strong>link scale</strong> and <strong>response scale</strong>, state the <strong>assumptions</strong> required for this interpretation, and describe <strong>one way this interpretation could be misleading</strong>.<br>
-Do not claim causal effects.”</p>
+<p>Act as a <span style="color:#377eb8;"><strong>statistical interpreter for ecology graduate students</strong></span>. I am <span style="color:#4daf4a;"><strong>a graduate student learning how to interpret fitted models rather than build them</strong></span>. I’m fitting a <span style="color:#e41a1c;"><strong>negative binomial GLMM for bird counts with canopy cover as a predictor and site as a random effect</strong></span>. Explain <span style="color:#984ea3;"><strong>how to interpret the canopy coefficient on the link scale and response scale, state the assumptions required for this interpretation, and describe one way this interpretation could be misleading</strong></span>. <span style="color:#ff7f00;"><strong>Do not claim causal effects</strong></span>.</p>
 </blockquote>
 </div>
 </div>
 </div>
 <hr>
 </section>
-<section id="example-4-checking-model-assumptions-polished-but-incomplete" class="level3" data-number="9.4.4">
-<h3 data-number="9.4.4" class="anchored" data-anchor-id="example-4-checking-model-assumptions-polished-but-incomplete"><span class="header-section-number">9.4.4</span> Example 4: Checking model assumptions <em>(polished but incomplete)</em></h3>
+<section id="example-4-checking-model-assumptions" class="level3" data-number="9.4.4">
+<h3 data-number="9.4.4" class="anchored" data-anchor-id="example-4-checking-model-assumptions"><span class="header-section-number">9.4.4</span> Example 4: Checking model assumptions</h3>
 <blockquote class="blockquote">
 <p>“I’m using a Poisson mixed-effects model for count data with repeated measurements across sites. Can you explain the assumptions of this model and whether it’s appropriate for my analysis?”</p>
 </blockquote>
+<p>This prompt is very polished but incomplete as it lacks a set of criteria for which a good answer <em>must</em> include. Adding such criteria helps the model craft a more useful response. <strong>Before clicking to expand this example, think about ways you could improve this prompt.</strong></p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled" title="Click to reveal a stronger prompt (TRACE)">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -663,12 +670,10 @@ Do not claim causal effects.”</p>
 </div>
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Missing tags:</strong> [C]<br>
-<strong>Rubric tags addressed:</strong> [T] [R] [A] [C] [E]</p>
+<p><strong>Missing tags:</strong> <span style="color:#984ea3;"><strong>[C]</strong></span></p>
+<p><strong>Rubric tags addressed:</strong> <span style="color:#e41a1c;"><strong>[T]</strong></span> <span style="color:#377eb8;"><strong>[R]</strong></span> <span style="color:#4daf4a;"><strong>[A]</strong></span> <span style="color:#984ea3;"><strong>[C]</strong></span> <span style="color:#ff7f00;"><strong>[E]</strong></span></p>
 <blockquote class="blockquote">
-<p>“Act as an <strong>ecology methods advisor</strong>. I’m using a <strong>Poisson GLMM</strong> for count data with <strong>repeated measures per site</strong>.<br>
-List the <strong>key assumptions</strong>, propose <strong>2–3 diagnostics</strong> to evaluate them, and explain what <strong>pattern in the diagnostics</strong> would indicate a serious problem.<br>
-If information is missing, list what you need rather than guessing.”</p>
+<p>Act as an <span style="color:#377eb8;"><strong>ecology methods advisor</strong></span>. I am <span style="color:#4daf4a;"><strong>a graduate student in ecology with limited but growing experience using mixed-effects models</strong></span>. I’m using a <span style="color:#e41a1c;"><strong>Poisson GLMM for count data with repeated measures per site</strong></span>. List <span style="color:#984ea3;"><strong>the key assumptions, propose 2–3 diagnostics to evaluate them, and explain what pattern in the diagnostics would indicate a serious problem</strong></span>. <span style="color:#ff7f00;"><strong>If information is missing, list what you need rather than guessing</strong></span>.</p>
 </blockquote>
 </div>
 </div>
@@ -1086,8 +1091,8 @@ If information is missing, list what you need rather than guessing.”</p>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/using_jackalope_gpt.html" class="pagination-link" aria-label="How to Use JackalopeGPT">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">How to Use JackalopeGPT</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/using_jackalope_gpt.html" class="pagination-link" aria-label="Using JackalopeGPT">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Using JackalopeGPT</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

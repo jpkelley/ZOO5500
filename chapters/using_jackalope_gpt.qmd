@@ -1,5 +1,5 @@
 ---
-title: "How to Use JackalopeGPT"
+title: "Using JackalopeGPT"
 format: html
 ---
 

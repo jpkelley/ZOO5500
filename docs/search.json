@@ -510,7 +510,7 @@
     "href": "chapters/ai_prompting.html#synthesis-examples-of-improving-prompts",
     "title": "9  AI Prompting for Analysis",
     "section": "9.4 Synthesis: Examples of improving prompts",
-    "text": "9.4 Synthesis: Examples of improving prompts\nInstructions to students: Read the excessively broad-scope prompt first. Pause and think: * What information is missing (hint: use the TRACE framework)? * What verbiage could be added to fill most or all of those missing components? Then expand the box to see a stronger version (based in the TRACE framework)\nRubric tag key (TRACE):\n- [T] Task/Topic context missing or underspecified\n- [R] Role missing\n- [A] Audience missing\n- [C] Criteria missing (what a “good” answer must include)\n- [E] Exclusions missing (scope/safeguards)\n\n\n9.4.1 Example 1: Debugging R code\n\n“My model isn’t working. Help.”\n\n\n\n\n\n\n\nTipClick to reveal a stronger prompt (TRACE)\n\n\n\n\n\nMissing tags: [T] [R] [A] [C] [E]\nRubric tags addressed: [T] [R] [A] [C] [E]\n\n“Act as an R debugger. I’m a beginner–intermediate R user. I’m fitting a GLMM for counts with a random intercept for site. Here is my code and the exact error message: [paste].\nA good answer must:\n(1) identify the likely cause,\n(2) show the minimal fix,\n(3) explain why it failed, and\n(4) suggest one diagnostic check.\nDo not rewrite my entire analysis—just fix the error and explain.”\n\n\n\n\n\n\n\n9.4.2 Example 2: Choosing a model strategy (polished but incomplete)\n\n“I have ecological count data collected over multiple sites and years, and I want to choose an appropriate statistical model that accounts for structure in the data. Can you recommend a suitable modeling approach and explain why?”\n\n\n\n\n\n\n\nTipClick to reveal a stronger prompt (TRACE)\n\n\n\n\n\nMissing tags: [C] [E]\nRubric tags addressed: [T] [R] [A] [C] [E]\n\n“Act as an ecology methods advisor. I have count data with many zeros; samples nested in plots within sites; repeated measures over time.\nCompare 2–3 modeling strategies (e.g., negative binomial GLMM vs zero-inflated vs hurdle), state assumptions, and give diagnostics that would falsify each.\nDo not claim causality; focus on defensible inference.”\n\n\n\n\nWhy this works pedagogically:\nThe initial prompt sounds careful and scientific, but it fails to bound the answer and require checks, inviting a vague or overbroad response.\n\n\n\n9.4.3 Example 3: Interpreting a model result\n\n“How do I interpret this coefficient?”\n\n\n\n\n\n\n\nTipClick to reveal a stronger prompt (TRACE)\n\n\n\n\n\nMissing tags: [T] [R] [A] [C] [E]\nRubric tags addressed: [T] [R] [A] [C] [E]\n\n“Act as a statistical interpreter for ecology graduate students. I’m fitting a negative binomial GLMM for bird counts with canopy cover as a predictor and site as a random effect.\nExplain how to interpret the canopy coefficient on the link scale and response scale, state the assumptions required for this interpretation, and describe one way this interpretation could be misleading.\nDo not claim causal effects.”\n\n\n\n\n\n\n\n9.4.4 Example 4: Checking model assumptions (polished but incomplete)\n\n“I’m using a Poisson mixed-effects model for count data with repeated measurements across sites. Can you explain the assumptions of this model and whether it’s appropriate for my analysis?”\n\n\n\n\n\n\n\nTipClick to reveal a stronger prompt (TRACE)\n\n\n\n\n\nMissing tags: [C]\nRubric tags addressed: [T] [R] [A] [C] [E]\n\n“Act as an ecology methods advisor. I’m using a Poisson GLMM for count data with repeated measures per site.\nList the key assumptions, propose 2–3 diagnostics to evaluate them, and explain what pattern in the diagnostics would indicate a serious problem.\nIf information is missing, list what you need rather than guessing.”",
+    "text": "9.4 Synthesis: Examples of improving prompts\nInstructions to students: Read the excessively broad-scope prompt first. Pause and think:\n\nWhat information is missing (hint: use the TRACE framework)?\nWhat verbiage could be added to fill most or all of those missing components? Then expand the box to see a stronger version (based in the TRACE framework)\n\nRubric tag key (TRACE):\n\n[T] Task/Topic context missing or underspecified\n[R] Role missing\n\n[A] Audience missing\n\n[C] Criteria missing (what a “good” answer must include)\n\n[E] Exclusions missing (scope/safeguards)\n\n\n\n9.4.1 Example 1: Debugging R code\n\n“My model isn’t working. Help.”\n\nThis prompt lacks all components of a useful prompt. This would lead to an overly broad response from the Large Language Model. Before clicking to expand this example, think about ways you could improve this prompt.\n\n\n\n\n\n\nTipClick to reveal a stronger prompt (TRACE)\n\n\n\n\n\nMissing tags: [T] [R] [A] [C] [E]\nRubric tags addressed: [T] [R] [A] [C] [E]\n\nAct as an R debugger. I’m a beginner–intermediate R user. I’m fitting a GLMM for counts with a random intercept for site. Here is my code and the exact error message:. A good answer must: (1) identify the likely cause, (2) show the minimal fix, (3) explain why it failed, (4) suggest one diagnostic check. Do not rewrite my entire analysis—just fix the error and explain.\n\n\n\n\n\n\n\n9.4.2 Example 2: Choosing a model strategy (polished but incomplete)\n\n“I have ecological count data collected over multiple sites and years, and I want to choose an appropriate statistical model that accounts for structure in the data. Can you recommend a suitable modeling approach and explain why?”\n\nThis prompt sounds careful and scientific, but it fails to bound the answer and require checks, inviting a vague or overbroad response. Before clicking to expand this example, think about ways you could improve this prompt.\n\n\n\n\n\n\nTipClick to reveal a stronger prompt (TRACE)\n\n\n\n\n\nMissing tags: [C] [E]\nRubric tags addressed: [T] [R] [A] [C] [E]\n\nAct as an ecology methods advisor. I am a graduate student in ecology with variable experience in statistical modeling. I have count data with many zeros; samples nested in plots within sites; repeated measures over time. Compare 2–3 modeling strategies (e.g., negative binomial GLMM vs zero-inflated vs hurdle), state assumptions, and give diagnostics that would falsify each. Do not claim causality; focus on defensible inference.\n\n\n\n\n\n\n\n9.4.3 Example 3: Interpreting a model result\n\n“How do I interpret this coefficient?”\n\nThis is another example of a prompt that is vague even by the standards of a simple web search. This approach invites a vague response or evil hallucinations by the Large Language Model. Before clicking to expand this example, think about ways you could improve this prompt.\n\n\n\n\n\n\nTipClick to reveal a stronger prompt (TRACE)\n\n\n\n\n\nMissing tags: [T] [R] [A] [C] [E]\nRubric tags addressed: [T] [R] [A] [C] [E]\n\nAct as a statistical interpreter for ecology graduate students. I am a graduate student learning how to interpret fitted models rather than build them. I’m fitting a negative binomial GLMM for bird counts with canopy cover as a predictor and site as a random effect. Explain how to interpret the canopy coefficient on the link scale and response scale, state the assumptions required for this interpretation, and describe one way this interpretation could be misleading. Do not claim causal effects.\n\n\n\n\n\n\n\n9.4.4 Example 4: Checking model assumptions\n\n“I’m using a Poisson mixed-effects model for count data with repeated measurements across sites. Can you explain the assumptions of this model and whether it’s appropriate for my analysis?”\n\nThis prompt is very polished but incomplete as it lacks a set of criteria for which a good answer must include. Adding such criteria helps the model craft a more useful response. Before clicking to expand this example, think about ways you could improve this prompt.\n\n\n\n\n\n\nTipClick to reveal a stronger prompt (TRACE)\n\n\n\n\n\nMissing tags: [C]\nRubric tags addressed: [T] [R] [A] [C] [E]\n\nAct as an ecology methods advisor. I am a graduate student in ecology with limited but growing experience using mixed-effects models. I’m using a Poisson GLMM for count data with repeated measures per site. List the key assumptions, propose 2–3 diagnostics to evaluate them, and explain what pattern in the diagnostics would indicate a serious problem. If information is missing, list what you need rather than guessing.",
     "crumbs": [
       "Part ∅: AI preparation",
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>AI Prompting for Analysis</span>"
@@ -519,111 +519,111 @@
   {
     "objectID": "chapters/using_jackalope_gpt.html",
     "href": "chapters/using_jackalope_gpt.html",
-    "title": "10  How to Use JackalopeGPT",
+    "title": "10  Using JackalopeGPT",
     "section": "",
     "text": "10.1 A Reminder: What is JackalopeGPT?\nJackalopeGPT is a learning assistant designed to support quantitative and methodological reasoning in this course. Its primary purpose is to help you improve scientific rigor and streamline your analytical workflow while allowing you to maintain full responsibility for:\nJackalopeGPT does not assign grades (except for the Traffic-Signal readiness lights), make final evaluative decisions, or fill in missing information. Instead, JackalopeGPT has been customized to emphasize:\nIn other words, JackalopeGPT has been designed to help you think better, not to think less.",
     "crumbs": [
       "Part ∅: AI preparation",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>How to Use JackalopeGPT</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Using JackalopeGPT</span>"
     ]
   },
   {
     "objectID": "chapters/using_jackalope_gpt.html#a-reminder-what-is-jackalopegpt",
     "href": "chapters/using_jackalope_gpt.html#a-reminder-what-is-jackalopegpt",
-    "title": "10  How to Use JackalopeGPT",
+    "title": "10  Using JackalopeGPT",
     "section": "",
     "text": "Reasoning\n\nInterpretation\n\nvalidation\n\nAll final assignment submissions\n\n\n\nExplicit assumptions\nTransparent reasoning\n\nScope control\n\nReproducible workflows",
     "crumbs": [
       "Part ∅: AI preparation",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>How to Use JackalopeGPT</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Using JackalopeGPT</span>"
     ]
   },
   {
     "objectID": "chapters/using_jackalope_gpt.html#how-you-can-start-using-it-important",
     "href": "chapters/using_jackalope_gpt.html#how-you-can-start-using-it-important",
-    "title": "10  How to Use JackalopeGPT",
+    "title": "10  Using JackalopeGPT",
     "section": "10.2 How You Can Start Using It (Important)",
     "text": "10.2 How You Can Start Using It (Important)\nIf you are first using JackalopeGPT to optimize your prompts or evaluate an assignment’s completeness before submission, you should use the Main Menu. However, you do not need to choose anything from the Main Menu to begin. The Main Menu exists only for structured actions (such as readiness checks or AI interaction logging). Most learning happens without it. It is only provided for a bit more convenience. You may simply start prompting JackalopeGPT naturally, as you would with any chat-based GPT.",
     "crumbs": [
       "Part ∅: AI preparation",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>How to Use JackalopeGPT</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Using JackalopeGPT</span>"
     ]
   },
   {
     "objectID": "chapters/using_jackalope_gpt.html#operating-modes",
     "href": "chapters/using_jackalope_gpt.html#operating-modes",
-    "title": "10  How to Use JackalopeGPT",
+    "title": "10  Using JackalopeGPT",
     "section": "10.3 Operating Modes",
     "text": "10.3 Operating Modes\nJackalopeGPT operates in three distinct modes:\n\n10.3.1 Learning & Practice (default)\n\nConcept clarification\n\nCode debugging or refactoring\n\nTranslating between modeling frameworks\n\nMethodological explanations\n\nThis mode is informal, exploratory, and never evaluative.\n\n\n10.3.2 Scientific Readiness Evaluation\n\nStructured, rubric-based checks of specific artifacts\n\nExecuted only when explicitly invoked (via menu or trigger phrases)\n\nUsed to assess whether work appears ready for submission, not to grade on scientific quality.\n\n\n\n10.3.3 AI Interaction Logging (To be launched on Monday, 26-Jan-2026!!)\n\nMinimal documentation of AI assistance\n\nTriggered only by the exact command: log this\n\nDesigned for transparency, not surveillance",
     "crumbs": [
       "Part ∅: AI preparation",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>How to Use JackalopeGPT</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Using JackalopeGPT</span>"
     ]
   },
   {
     "objectID": "chapters/using_jackalope_gpt.html#safeguards-and-constraints",
     "href": "chapters/using_jackalope_gpt.html#safeguards-and-constraints",
-    "title": "10  How to Use JackalopeGPT",
+    "title": "10  Using JackalopeGPT",
     "section": "10.4 Safeguards and Constraints",
     "text": "10.4 Safeguards and Constraints\nJackalopeGPT is intentionally constrained:\n\nNon-evaluative by default (but has the Main Menu to allow evaluation)\nAsks at most one clarifying question at a time\nNever guesses or silently fills gaps\n\nDoes not hallucinate criteria or requirements\nDoes not combine Main Menu actions\nGenerally limits verbosity unless you request detail explicitly\n\nAny evaluation or logging action requires explicit transparency and user consent. As a last note, if you are unsure whether your prompt is appropriate, add this line: “If this prompt is likely to cause me to overreach in inference or bypass learning, suggest a safer, learning-focused version.”",
     "crumbs": [
       "Part ∅: AI preparation",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>How to Use JackalopeGPT</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Using JackalopeGPT</span>"
     ]
   },
   {
     "objectID": "chapters/using_jackalope_gpt.html#menu-commands-and-triggers",
     "href": "chapters/using_jackalope_gpt.html#menu-commands-and-triggers",
-    "title": "10  How to Use JackalopeGPT",
+    "title": "10  Using JackalopeGPT",
     "section": "10.5 Menu Commands and Triggers",
     "text": "10.5 Menu Commands and Triggers\nTyping main menu (or Main Menu) displays all available structured actions (with no analysis). This means that JackalopeGPT has all the course assignments and rubrics uploaded into its working knowledge.\nIf you enter a menu number or a similar matching instruction, JackalopeGPT will:\n\nconfirm the action\n\nexecute the instruction file exactly as specified\n\nCertain phrases (e.g., assignment-check intent or log this) automatically trigger workflows before menu selection.",
     "crumbs": [
       "Part ∅: AI preparation",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>How to Use JackalopeGPT</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Using JackalopeGPT</span>"
     ]
   },
   {
     "objectID": "chapters/using_jackalope_gpt.html#traffic-signal-rubric-how-evaluations-work",
     "href": "chapters/using_jackalope_gpt.html#traffic-signal-rubric-how-evaluations-work",
-    "title": "10  How to Use JackalopeGPT",
+    "title": "10  Using JackalopeGPT",
     "section": "10.6 Traffic-Signal Rubric (How Evaluations Work)",
     "text": "10.6 Traffic-Signal Rubric (How Evaluations Work)\nA universal Traffic-Signal rubric is pre-loaded and applied consistently across all readiness checks.\nEvaluations return the follwing ratings of scientific readiness:\n\nGreen: Ready to proceed\n\nYellow: Exercise caution (revisions necessary)\n\nRed: Stop and Rework\n\nThis rubric provides standardized, comparable feedback without grading.",
     "crumbs": [
       "Part ∅: AI preparation",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>How to Use JackalopeGPT</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Using JackalopeGPT</span>"
     ]
   },
   {
     "objectID": "chapters/using_jackalope_gpt.html#how-to-generate-an-evaluation-table-required-for-assignments",
     "href": "chapters/using_jackalope_gpt.html#how-to-generate-an-evaluation-table-required-for-assignments",
-    "title": "10  How to Use JackalopeGPT",
+    "title": "10  Using JackalopeGPT",
     "section": "10.7 How to Generate an Evaluation Table (Required for Assignments)",
     "text": "10.7 How to Generate an Evaluation Table (Required for Assignments)\nBefore submission, you must evaluate assignments using JackalopeGPT.\nSteps:\n\nSelect the focal assignment from the JackalopeGPT menu\n\nCopy and paste the your completed .qmd file (not rendered output)\n\nUse the model output to revise your file until it meets the assignment standard\n\nPaste the complete Evaluation Table output directly from the JackalopeGPT windo (it is already in .qmd format) into the section at the end of each assignment titled JackalopeGPT Pre-Submission Evaluation.\n\n(Tip: hover over the table until the file icon appears at the upper right, then copy.)",
     "crumbs": [
       "Part ∅: AI preparation",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>How to Use JackalopeGPT</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Using JackalopeGPT</span>"
     ]
   },
   {
     "objectID": "chapters/using_jackalope_gpt.html#important-usage-notes",
     "href": "chapters/using_jackalope_gpt.html#important-usage-notes",
-    "title": "10  How to Use JackalopeGPT",
+    "title": "10  Using JackalopeGPT",
     "section": "10.8 Important Usage Notes",
     "text": "10.8 Important Usage Notes\n\n10.8.1 Interaction Limits\nIf you are using the free tier (recommended), be aware of interaction limits. Plan longer evaluation workflows accordingly.\n\n\n10.8.2 Memory and Sessions\nJackalopeGPT does not retain memory across sessions.\nIf you start a new session, you must re-provide context about:\n\nyour study system\n\nyour data\n\nyour analytical goals\n\nDo not assume continuity across chats. It is strongly recommended that you keep a file with your updated and optimized prompts so that you can reuse.",
     "crumbs": [
       "Part ∅: AI preparation",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>How to Use JackalopeGPT</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Using JackalopeGPT</span>"
     ]
   },
   {
     "objectID": "chapters/using_jackalope_gpt.html#a-reminder-about-the-appropriate-use-in-this-course",
     "href": "chapters/using_jackalope_gpt.html#a-reminder-about-the-appropriate-use-in-this-course",
-    "title": "10  How to Use JackalopeGPT",
+    "title": "10  Using JackalopeGPT",
     "section": "10.9 A reminder about the appropriate use in this course",
     "text": "10.9 A reminder about the appropriate use in this course\n\n10.9.1 You may use JackalopeGPT to:\n\nclarify concepts\n\ndebug R code\n\ncompare modeling approaches (with explanation)\n\nlearn how to validate models\n\nimprove analytical workflow and reproducibility\n\n\n\n10.9.2 You may not use JackalopeGPT to:\n\ngenerate full assignment submissions\n\nwrite end-to-end analyses, methods, or results\n\nreplace your own reasoning\n\noutsource scientific judgment\n\nproduce claims without validation",
     "crumbs": [
       "Part ∅: AI preparation",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>How to Use JackalopeGPT</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Using JackalopeGPT</span>"
     ]
   },
   {
@@ -759,80 +759,212 @@
     ]
   },
   {
-    "objectID": "chapters/naming_conventions.html",
-    "href": "chapters/naming_conventions.html",
-    "title": "13  Naming conventions and coding style",
+    "objectID": "chapters/metadata_low_friction.html",
+    "href": "chapters/metadata_low_friction.html",
+    "title": "13  Metadata",
     "section": "",
-    "text": "13.1 Why you should care (even if you “just want to model stuff”)\nNaming conventions and coding style are not decoration. They are infrastructure.\nIf your names are inconsistent, your code becomes harder to read, harder to debug, and harder to share—especially once your project grows beyond “one file, one afternoon.”\nIn scientific workflows, this difference is not about elegance. It is about traceability.\nA workflow that depends on unstable or unclear names cannot be audited, reused, or trusted.\nBefore we talk about modeling or automation, we need to ensure that the basic objects in our workflow—variables, files, and folders—are named in a way that makes their roles unambiguous.\nThis is what allows:",
+    "text": "13.2 Why metadata are essential\nMetadata record the information needed to interpret measurements correctly. They tell us:\nMetadata are not bureaucracy. They are scientific memory. Without metadata, data quickly lose meaning—especially once they leave the hands of the person who collected them.\nRaw data without metadata are often difficult—or impossible—to interpret, even by the original researcher. In practice, many irreproducible analyses fail before modeling begins, because key contextual information was never recorded. A column of numbers without units, provenance, or spatial and temporal context is just a sequence of values. It is not reusable scientific data.\nAt a broad level, good metadata allow others (and future you) to:\nMetadata do not guarantee good science, but their absence almost guarantees future confusion.",
     "crumbs": [
       "Part I: Reproducible Analyses",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Naming conventions and coding style</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Metadata</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/metadata_low_friction.html#what-metadata-are-and-are-not",
+    "href": "chapters/metadata_low_friction.html#what-metadata-are-and-are-not",
+    "title": "13  Metadata",
+    "section": "13.1 What metadata are (and are not)",
+    "text": "13.1 What metadata are (and are not)\n\nMetadata are data about data.\n\nThis definition is technically correct, but not very useful on its own. A more practical way to think about metadata is this:\n\nMetadata describe the context in which data were generated.",
+    "crumbs": [
+      "Part I: Reproducible Analyses",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Metadata</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/metadata_low_friction.html#why-metadata-are-essential",
+    "href": "chapters/metadata_low_friction.html#why-metadata-are-essential",
+    "title": "13  Metadata",
+    "section": "",
+    "text": "understand what the data actually represent, and what their limitations are\n\njudge whether the data are appropriate for a new purpose or analysis\n\nreconstruct and evaluate analytical decisions made downstream",
+    "crumbs": [
+      "Part I: Reproducible Analyses",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Metadata</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/metadata_low_friction.html#metadata-within-a-reproducible-analytical-workflow",
+    "href": "chapters/metadata_low_friction.html#metadata-within-a-reproducible-analytical-workflow",
+    "title": "13  Metadata",
+    "section": "13.3 Metadata within a reproducible analytical workflow",
+    "text": "13.3 Metadata within a reproducible analytical workflow\nReproducibility is not just about being able to rerun code indefinitely. It also requires being able to answer core questions about the data themselves, such as:\n\nWhat exactly was measured?\n\nUnder what conditions were the measurements taken?\n\nWhat instruments or protocols were used?\n\nWhat were the data’s limitations or sources of error?\n\nMetadata provide the necessary bridge between raw data and scientific inference. They explain how measurements came to exist and clarify which kinds of estimands the data can —and cannot— support.\nWithin the broader analytical workflow, raw data and metadata together form a complete dataset. Complete datasets can be verified, versioned, shared, and reused. All subsequent processing, modeling, and inference depend on this foundation.\n\nTo emphasize, metadata are not an afterthought; they are part of the data.",
+    "crumbs": [
+      "Part I: Reproducible Analyses",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Metadata</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/metadata_low_friction.html#what-good-metadata-enable-fair-in-plain-language",
+    "href": "chapters/metadata_low_friction.html#what-good-metadata-enable-fair-in-plain-language",
+    "title": "13  Metadata",
+    "section": "13.4 What good metadata enable (FAIR, in plain language)",
+    "text": "13.4 What good metadata enable (FAIR, in plain language)\nAt their core, the FAIR principles (Wilkinson et al. (2016)) recognize that data are only useful if their context travels with them. Metadata are what make this possible. Much of the modern emphasis on metadata comes from the FAIR principles, which aim to ensure that scientific data are:\n\nFindable: Metadata help other people find that the data exist.\nAccessible: Metadata explain how to get the data and what the files mean.\nInteroperable: Metadata make it clear how the data are formatted and measured, so they work with other data.\nReusable: Metadata explain how the data were collected and what their limits are, so others can use them correctly.\n\nCrucially, FAIR is not about ensuring perfection; it is about increasing the probability of future usability.\n\n\n\n\n\n\nNote\n\n\n\nYou are not expected to memorize the FAIR acronym. What matters most is understanding what FAIR is trying to do (specifically, what it is trying to protect)!",
+    "crumbs": [
+      "Part I: Reproducible Analyses",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Metadata</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/metadata_low_friction.html#a-low-friction-approach-to-metadata",
+    "href": "chapters/metadata_low_friction.html#a-low-friction-approach-to-metadata",
+    "title": "13  Metadata",
+    "section": "13.5 A low-friction approach to metadata",
+    "text": "13.5 A low-friction approach to metadata\nYou have probably encountered the long list of formal metadata standards used across scientific disciplines. For this course, you do not need to master any of them, and, in fact, you barely need to know them at all.\nOur approach to metadata is intentionally low friction. That means it fits naturally into you (and others) already work: without extra tools or unnecessary extra steps, and without specialized expertise. The goal is not blind compliance to reporting standards; first and foremost, it is about scientific clarity. We therefore adopt a simple guiding principle:\n\nLet repositories handle standardization. Your job is to record clear, honest, human-readable metadata.\n\nRepositories such as Dataverse, Zenodo, Dryad, GBIF, and institutional archives are designed to translate user-supplied documentation into formal metadata schemas. That translation only works, however, if the essential information about your data exists in the first place. What matters most at this stage is clarity and completeness, not adherence to a specific –and often over-specified– standard.",
+    "crumbs": [
+      "Part I: Reproducible Analyses",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Metadata</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/metadata_low_friction.html#what-good-enough-metadata-must-accomplish",
+    "href": "chapters/metadata_low_friction.html#what-good-enough-metadata-must-accomplish",
+    "title": "13  Metadata",
+    "section": "13.6 What “good enough” metadata must accomplish",
+    "text": "13.6 What “good enough” metadata must accomplish\nAt a minimum, metadata should allow another scientifically literate person—someone outside your project—to answer the following questions:\n\nWhat are these data?\n\nWho created them?\n\nWhen and where were they collected?\n\nHow were the measurements made?\n\nWhat files belong together, and how?\n\nIf these questions cannot be answered from the metadata alone, the dataset is not reusable—no matter how sophisticated the analysis or modeling may be.",
+    "crumbs": [
+      "Part I: Reproducible Analyses",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Metadata</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/metadata_low_friction.html#practical-formats-for-early-stage-metadata",
+    "href": "chapters/metadata_low_friction.html#practical-formats-for-early-stage-metadata",
+    "title": "13  Metadata",
+    "section": "13.7 Practical formats for early-stage metadata",
+    "text": "13.7 Practical formats for early-stage metadata\nIn everyday research workflows, metadata often begin life in simple, familiar formats such as:\n\nGoogle Sheet (good for coordinating field or lab work)\n\nplain-text or Markdown file (good for small or exploratory projects)\n\nThese formats are perfectly acceptable as starting points. They lower the barrier to documentation and encourage metadata to be written early in the analysis life-cycle rather than postponed. However, these format are usually best treated as temporary representations. As projects grow, metadata need to become more structured, more explicit, and easier to validate and reuse. But, if you are more comfortable beginning your journey using a version-controlled spreadsheet platform (like Google Sheets), you are welcome to do so.",
+    "crumbs": [
+      "Part I: Reproducible Analyses",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Metadata</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/metadata_low_friction.html#why-we-use-yaml",
+    "href": "chapters/metadata_low_friction.html#why-we-use-yaml",
+    "title": "13  Metadata",
+    "section": "13.8 Why we use YAML",
+    "text": "13.8 Why we use YAML\nTo support that transition from your mind (or Google Sheets), this course adopts YAML as the canonical format for project-level metadata.\n\n\n\n\n\n\nNoteYAML: What’s in a name?\n\n\n\nOriginally, YAML was an abbreviation for “Yet Another Markup Language”. Later, it become “YAML Ain’t Markup Language”.\n\n\n\n\n\n\n\n\nNoteWhat the heck is canonical in this context?\n\n\n\nCanonical simply means that there is exactly one place where your dataset is formally defined; it does not mean that your metadata exists as exactly one file (thought it could).\n\n\nThere are several advantages to using YAML, including:\n\nhuman-readable and easy to edit\n\nstructured and explicit about relationships\n\neasy to version-control\n\nsimple to validate and extend (i.e. Quarto markdown files have YAML headers)\nstraightforward to convert into repository-specific schemas later\n\nMost importantly, YAML encourages you to think carefully about what varies, what stays constant, and how different pieces of a dataset relate to one another.\nIn the next section, we will walk through the structure of a well-designed YAML metadata file, using concrete examples and expandable templates to show how common research scenarios —such as multiple instruments, deployments, or sampling rates— can be documented clearly and correctly (at least, I hope so).",
+    "crumbs": [
+      "Part I: Reproducible Analyses",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Metadata</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/metadata_low_friction.html#levels-of-metadata-where-information-belongs-and-where-it-does-not",
+    "href": "chapters/metadata_low_friction.html#levels-of-metadata-where-information-belongs-and-where-it-does-not",
+    "title": "13  Metadata",
+    "section": "13.9 Levels of metadata: where information belongs (and where it does not)",
+    "text": "13.9 Levels of metadata: where information belongs (and where it does not)\nWhen you document metadata, your main job is to put information at the right level of scope. This keeps metadata clear, avoids duplication, and prevents the most common failure mode: collapsing variation.\nA useful way to think about this is a hierarchy of levels, from broad context to individual files.\n\n\n\n\n\n\n\nNoteDataset-level metadata (the whole project)\n\n\n\n\n\nThis level answers: What is this data set, broadly, and how should it be cited, discovered, and reused?\nWhat belongs at this level\n\ntitle, description, and keywords\n\ncreators, affiliations, persistent identifiers (e.g., ORCID)\n\noverall spatial and temporal scope (broad bounds, if applicable)\n\nlicense and usage rights\n\nrelated identifiers (publications, code repositories, DOIs)\n\nhigh-level description of how the data were generated\n\nprovenance summary (e.g., “data collection + processing workflow”)\n\nWhat does not belong at this level\n\nfile-specific settings or parameters\n\nvalues that vary across observations or files\n\nderived results (means, medians, model outputs)\n\nvague summaries such as “most values were…”\n\n\n\n\n\n\n\n\n\n\n\nNoteInstrument- or system-level metadata (the measurement system)\n\n\n\n\n\nThis level answers: What system, instrument, or process produced the measurements, and what are its stable properties?\nWhat belongs at this level\n\nsystem or instrument type, manufacturer, and model\n\nserial number, asset ID, or logical identifier\n\nsoftware or firmware version (if relevant)\n\nproperties that are stable across use (e.g., resolution, precision, bit depth)\n\nWhat does not belong at this level\n\nsettings that vary across observations unless explicitly declared as defaults\n\ntime- or location-specific information\n\n\n\n\n\n\n\n\n\n\n\nNoteDeployment- or configuration-level metadata (a consistent setup)\n\n\n\n\n\nThis level answers: When and under what conditions was the system used with a consistent configuration?\nWhat belongs at this level\n\nconfiguration or deployment identifier\n\ncontextual identifiers (e.g., site, batch, experiment, run)\n\nstart and end dates or times\n\nparameters that were constant during this configuration\n\ncalibration notes, protocols, or procedural references\n\nWhat does not belong at this level\n\nindividual file or observation exceptions unless explicitly mapped\n\nvalues that vary within the configuration without structure\n\n\n\n\n\n\n\n\n\n\n\nNoteFile- or observation-level metadata (individual data units)\n\n\n\n\n\nThis level answers: What is true about this specific file, record, or observation?\nWhat belongs at this level\n\nfilename or observation identifier\n\ndate and time of acquisition or creation\n\nparameter values that vary (e.g., sampling rate, resolution, settings)\n\ncontextual attributes that differ across observations\n\nlocation information, if variable\n\nWhat does not belong at this level\n\ndataset-wide descriptions\n\ninterpretive judgments (e.g., “high quality”) unless defined by a controlled scheme\n\n\n\n\n\n\n\n\n\n\n\n\nTipTwo rules that prevent most metadata mistakes\n\n\n\n\n\n\nPlace metadata at the highest level where they are constant.\nIf a sampling rate never changes across a deployment, store it at the deployment or instrument level.\nIf a metadata value varies, do not summarize it; map it explicitly by adding another metadata entry (see Example 3-4 below.\nNever write “sampling_rate_hz: 48000” plus “some files differ.”Instead, record which files have which values.",
+    "crumbs": [
+      "Part I: Reproducible Analyses",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Metadata</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/metadata_low_friction.html#examples-recording-metadata-at-different-levels",
+    "href": "chapters/metadata_low_friction.html#examples-recording-metadata-at-different-levels",
+    "title": "13  Metadata",
+    "section": "13.10 Examples: recording metadata at different levels",
+    "text": "13.10 Examples: recording metadata at different levels\nThe examples below illustrate how metadata structure changes depending on what varies in a dataset. Each example shows the same basic information organized at different levels to preserve clarity and traceability. The goal is not to memorize a template, but to understand how scope and variation determine where metadata belong.\nThe following examples illustrate common scenarios using YAML. Each example shows how scope and variation determine where information belongs. Note that the Creative Commons Non-commercial (CC-BY-NC) is a good place to start in terms of specifying who has access to your data.\n\n\n\n\n\n\nCautionExample 1: One recorder type, multiple recordings with the same settings\n\n\n\n\n\nAll recordings were made using the same type of recorder with identical acquisition settings (sampling rate, bit depth, etc.). Because the sampling rate and bit depth never change, those values are recorded once at the instrument level and inherited by each file. This avoids duplication while preserving clarity.\ntitle: \"Understory bird recordings (Panama)\"\ndescription: \"Autonomous recordings from fixed forest plots.\"\nlicense: \"CC-BY-4.0\"\n\ncreators:\n  - name: \"Patrick Kelley\"\n    orcid: \"0000-0002-1234-5678\"\n    affiliation: \"University of Wyoming\"\n\ninstruments:\n  - instrument_id: aru_01\n    type: \"Autonomous recording unit\"\n    manufacturer: \"Wildlife Acoustics\"\n    model: \"SM4\"\n    sampling_rate_hz: 48000\n    bit_depth: 24\n\nrecordings:\n  - file: \"plot1_2025-01-15_0600.wav\"\n    instrument_id: aru_01\n  - file: \"plot1_2025-01-15_0700.wav\"\n    instrument_id: aru_01\n  - file: \"plot1_2025-01-15_0800.wav\"\n    instrument_id: aru_01\n\n\n\n\n\n\n\n\n\nCautionExample 2: One recorder type, multiple recordings with different settings\n\n\n\n\n\nAlthough the same recorder model was used throughout, some recordings were made with different sampling rates. Because this parameter varies, it must be recorded explicitly for each file rather than summarized at the instrument-level.\ntitle: \"Understory bird recordings (Panama)\"\ndescription: \"Autonomous recordings; some files recorded at different sampling rates.\"\nlicense: \"CC-BY-4.0\"\n\ncreators:\n  - name: \"Patrick Kelley\"\n    orcid: \"0000-0002-1234-5678\"\n    affiliation: \"University of Wyoming\"\n\ninstruments:\n  - instrument_id: aru_01\n    type: \"Autonomous recording unit\"\n    manufacturer: \"Wildlife Acoustics\"\n    model: \"SM4\"\n    bit_depth: 24\n    default_sampling_rate_hz: 48000\n\nrecordings:\n  - file: \"plot1_2025-01-15_0600.wav\"\n    instrument_id: aru_01\n    sampling_rate_hz: 48000\n\n  - file: \"plot1_2025-01-15_0700.wav\"\n    instrument_id: aru_01\n    sampling_rate_hz: 48000\n\n  - file: \"plot1_2025-01-16_0600.wav\"\n    instrument_id: aru_01\n    sampling_rate_hz: 24000\n\n  - file: \"plot1_2025-01-16_0700.wav\"\n    instrument_id: aru_01\n    sampling_rate_hz: 24000\n\n\n\n\n\n\n\n\n\nCautionExample 3: Two recorder types, multiple recordings with the same settings\n\n\n\n\n\nTwo different recorder models were used, but each model operated with consistent settings across its recordings. Instrument-level metadata capture these stable differences, while individual files simply reference the appropriate instrument. This cleanly separates hardware differences from recording settings.\ntitle: \"Understory bird recordings (Panama)\"\ndescription: \"Recordings collected using two recorder models.\"\nlicense: \"CC-BY-4.0\"\n\ncreators:\n  - name: \"Patrick Kelley\"\n    orcid: \"0000-0002-1234-5678\"\n    affiliation: \"University of Wyoming\"\n\ninstruments:\n  - instrument_id: aru_01\n    type: \"Autonomous recording unit\"\n    manufacturer: \"Wildlife Acoustics\"\n    model: \"SM4\"\n    sampling_rate_hz: 48000\n    bit_depth: 24\n\n  - instrument_id: aru_02\n    type: \"Autonomous recording unit\"\n    manufacturer: \"Audiomoth\"\n    model: \"AudioMoth v1.2.0\"\n    sampling_rate_hz: 48000\n    bit_depth: 16\n\nrecordings:\n  - file: \"plot1_2025-01-15_0600.wav\"\n    instrument_id: aru_01\n  - file: \"plot1_2025-01-15_0700.wav\"\n    instrument_id: aru_01\n\n  - file: \"plot2_2025-01-15_0600.wav\"\n    instrument_id: aru_02\n  - file: \"plot2_2025-01-15_0700.wav\"\n    instrument_id: aru_02\n\n\n\n\n\n\n\n\n\nCautionExample 4: Two recorder types, multiple recordings with different settings\n\n\n\n\n\nBoth the recorder model and acquisition settings vary across recordings. In this case, instrument-level metadata define stable properties, while file-level metadata explicitly record variable settings such as sampling rate. This structure is necessary to fully document complexity without removing valuable variation.\ntitle: \"Understory bird recordings (Panama)\"\ndescription: \"Two recorder models with file-level variation in settings.\"\nlicense: \"CC-BY-4.0\"\n\ncreators:\n  - name: \"Patrick Kelley\"\n    orcid: \"0000-0002-1234-5678\"\n    affiliation: \"University of Wyoming\"\n\ninstruments:\n  - instrument_id: aru_01\n    type: \"Autonomous recording unit\"\n    manufacturer: \"Wildlife Acoustics\"\n    model: \"SM4\"\n    bit_depth: 24\n    default_sampling_rate_hz: 48000\n\n  - instrument_id: aru_02\n    type: \"Autonomous recording unit\"\n    manufacturer: \"Audiomoth\"\n    model: \"AudioMoth v1.2.0\"\n    bit_depth: 16\n    default_sampling_rate_hz: 48000\n\nrecordings:\n  - file: \"plot1_2025-01-15_0600.wav\"\n    instrument_id: aru_01\n    sampling_rate_hz: 48000\n\n  - file: \"plot1_2025-01-16_0600.wav\"\n    instrument_id: aru_01\n    sampling_rate_hz: 24000\n\n  - file: \"plot2_2025-01-15_0600.wav\"\n    instrument_id: aru_02\n    sampling_rate_hz: 48000\n\n  - file: \"plot2_2025-01-16_0600.wav\"\n    instrument_id: aru_02\n    sampling_rate_hz: 32000",
+    "crumbs": [
+      "Part I: Reproducible Analyses",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Metadata</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/metadata_low_friction.html#wrapping-this-up",
+    "href": "chapters/metadata_low_friction.html#wrapping-this-up",
+    "title": "13  Metadata",
+    "section": "13.11 Wrapping this up",
+    "text": "13.11 Wrapping this up\nClear and clean metadata describe what your data are and how they were generated. Just as importantly, the names you give to files, variables, and folders determine whether that information remains interpretable as projects grow. In the next section, we turn to the topic of naming conventions and coding style –small and seemingly trivial decisions that play an outsized role in scientific reproducibility. Let’s proceed!",
+    "crumbs": [
+      "Part I: Reproducible Analyses",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Metadata</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/naming_conventions.html",
+    "href": "chapters/naming_conventions.html",
+    "title": "14  Conventions and Style",
+    "section": "",
+    "text": "14.1 Why you should care (even if you “just want to model stuff”)\nNaming conventions and coding style are not decoration. They are infrastructure.\nIf your names are inconsistent, your code becomes harder to read, harder to debug, and harder to share—especially once your project grows beyond “one file, one afternoon.”\nIn scientific workflows, this difference is not about elegance. It is about traceability.\nA workflow that depends on unstable or unclear names cannot be audited, reused, or trusted.\nBefore we talk about modeling or automation, we need to ensure that the basic objects in our workflow—variables, files, and folders—are named in a way that makes their roles unambiguous.\nThis is what allows:",
+    "crumbs": [
+      "Part I: Reproducible Analyses",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Conventions and Style</span>"
     ]
   },
   {
     "objectID": "chapters/naming_conventions.html#why-you-should-care-even-if-you-just-want-to-model-stuff",
     "href": "chapters/naming_conventions.html#why-you-should-care-even-if-you-just-want-to-model-stuff",
-    "title": "13  Naming conventions and coding style",
+    "title": "14  Conventions and Style",
     "section": "",
     "text": "“It’s the hardest job to come up with new and unique names for a variable every time you create one but this is the difference between an average programmer and a good one.”\n— Vikram Singh Rawat\n\n\n\n\n\n\n\n\n\nNoteThe three scientific costs of sloppy naming\n\n\n\n\nInteroperability cost:\nNon-standard names break workflows across tools, languages, and collaborators.\nCollaboration cost:\nInconsistent naming forces others (including Future You) to reverse-engineer intent.\nReproducibility cost:\nWhen names drift, inputs and outputs become ambiguous, and results can no longer be traced back to their sources.\n\n\n\n\n\n\nmetadata to point to the correct data,\nscripts to operate predictably,\nand workflows to declare dependencies explicitly.",
     "crumbs": [
       "Part I: Reproducible Analyses",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Naming conventions and coding style</span>"
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Conventions and Style</span>"
     ]
   },
   {
     "objectID": "chapters/naming_conventions.html#naming-conventions-for-variables-and-files",
     "href": "chapters/naming_conventions.html#naming-conventions-for-variables-and-files",
-    "title": "13  Naming conventions and coding style",
-    "section": "13.2 Naming conventions for variables and files",
-    "text": "13.2 Naming conventions for variables and files\n\n\n\n13.2.1 What are “naming conventions”?\nThey are simply a consistent set of rules for naming:\n\nvariables (columns in your dataset)\nobjects in R (data frames, models, plots)\nfiles and folders (scripts, data, outputs)\n\n\n\n13.2.2 Three common naming styles\nYou will see these everywhere:\n\ncamelCase (meanDepth)\nPascalCase (MeanDepth)\nsnake_case (mean_depth)\n\nIn this course, we will default to snake_case for variables and files. This is strongly recommended for analysis scripts.\n\n\n\n\n\nFrom Allison Horst. Cartoon representations of common cases in coding. A snake screams “SCREAMING_SNAKE_CASE” into the face of a camel (wearing ear muffs) with “camelCase” written along its back. Vegetables on a skewer spell out “kebab-case” (words on a skewer). A mellow, happy looking snake has text “snake_case” along it.\n\n\n\n\n\n13.2.3 General guidelines (the “please don’t make future you angry” list)\nThese are simple rules that prevent a shocking number of problems:\n\n\n\n\n\n\n\n\n\nRule\nWhy it matters\nExample of poor form\n\n\n\n\nAvoid blank spaces\nSpaces complicate coding and break formulas, file paths, and scripting\nMean Depth, Site Name, Final Data.csv\n\n\nOmit special symbols like ?, $, *, +, #, (, ), -, /, }, {, |, &gt;, &lt;, etc.\nMany special characters are treated as operators or commands in R, so using them in names can break code or make it harder to work with.\nmass(g), count#, Y/N?, depth&gt;10\n\n\nUse _ as a separator\nUnderscores are safe, readable, and standard\nmean-depth, mean.depth, mean depth\n\n\nDo not begin names with numbers\nNames starting with numbers are invalid or confusing in R\n100m_depth, 2023_data\n\n\nMake names unique\nNon-unique names cause overwriting and ambiguity\ndata, data2, final, final_final\n\n\nBe consistent with case\nR is case-sensitive; inconsistency causes silent bugs\nDepth, depth, DEPTH in same project\n\n\nAvoid blank rows in data\nBlank rows can be misread as data or missing values\nEmpty rows between observations in CSV\n\n\nRemove comments from data files\nComments belong in scripts or metadata, not raw data\n# measured in June inside a CSV\n\n\nDefine and document NA values\nAmbiguous missing values lead to incorrect analyses\nMixing NA, 0, -999, . without explanation\n\n\nUse clear, documented date formats\nAmbiguous dates are easy to misinterpret\n03/04/21 (is this March 4 or April 3?)\n\n\n\n\n\n\n13.2.4 “Bad → Good” examples for variable names\nYour variable names should be: - readable at a glance - easy to type - consistent across files and projects\nHere are examples aligned with the tidyverse style guide (Hadley Wickham):\nA quick translation rule:\n\nUse units as suffixes: depth_cm, mass_g, distance_m (do not use parentheses around units)\nUse clear boolean names: yes_no or better: is_adult, has_nest\nPrefer meaning over brevity: percentile_50 beats p50 (unless p50 is a defined term in your field)",
+    "title": "14  Conventions and Style",
+    "section": "14.2 Naming conventions for variables and files",
+    "text": "14.2 Naming conventions for variables and files\n\n\n\n14.2.1 What are “naming conventions”?\nThey are simply a consistent set of rules for naming:\n\nvariables (columns in your dataset)\nobjects in R (data frames, models, plots)\nfiles and folders (scripts, data, outputs)\n\n\n\n14.2.2 Three common naming styles\nYou will see these everywhere:\n\ncamelCase (meanDepth)\nPascalCase (MeanDepth)\nsnake_case (mean_depth)\n\nIn this course, we will default to snake_case for variables and files. This is strongly recommended for analysis scripts.\n\n\n\n\n\nFrom Allison Horst. Cartoon representations of common cases in coding. A snake screams “SCREAMING_SNAKE_CASE” into the face of a camel (wearing ear muffs) with “camelCase” written along its back. Vegetables on a skewer spell out “kebab-case” (words on a skewer). A mellow, happy looking snake has text “snake_case” along it.\n\n\n\n\n\n14.2.3 General guidelines (the “please don’t make future you angry” list)\nThese are simple rules that prevent a shocking number of problems:\n\n\n\n\n\n\n\n\n\nRule\nWhy it matters\nExample of poor form\n\n\n\n\nAvoid blank spaces\nSpaces complicate coding and break formulas, file paths, and scripting\nMean Depth, Site Name, Final Data.csv\n\n\nOmit special symbols like ?, $, *, +, #, (, ), -, /, }, {, |, &gt;, &lt;, etc.\nMany special characters are treated as operators or commands in R, so using them in names can break code or make it harder to work with.\nmass(g), count#, Y/N?, depth&gt;10\n\n\nUse _ as a separator\nUnderscores are safe, readable, and standard\nmean-depth, mean.depth, mean depth\n\n\nDo not begin names with numbers\nNames starting with numbers are invalid or confusing in R\n100m_depth, 2023_data\n\n\nMake names unique\nNon-unique names cause overwriting and ambiguity\ndata, data2, final, final_final\n\n\nBe consistent with case\nR is case-sensitive; inconsistency causes silent bugs\nDepth, depth, DEPTH in same project\n\n\nAvoid blank rows in data\nBlank rows can be misread as data or missing values\nEmpty rows between observations in CSV\n\n\nRemove comments from data files\nComments belong in scripts or metadata, not raw data\n# measured in June inside a CSV\n\n\nDefine and document NA values\nAmbiguous missing values lead to incorrect analyses\nMixing NA, 0, -999, . without explanation\n\n\nUse clear, documented date formats\nAmbiguous dates are easy to misinterpret\n03/04/21 (is this March 4 or April 3?)\n\n\n\n\n\n\n14.2.4 “Bad → Good” examples for variable names\nYour variable names should be: - readable at a glance - easy to type - consistent across files and projects\nHere are examples aligned with the tidyverse style guide (Hadley Wickham):\nA quick translation rule:\n\nUse units as suffixes: depth_cm, mass_g, distance_m (do not use parentheses around units)\nUse clear boolean names: yes_no or better: is_adult, has_nest\nPrefer meaning over brevity: percentile_50 beats p50 (unless p50 is a defined term in your field)",
     "crumbs": [
       "Part I: Reproducible Analyses",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Naming conventions and coding style</span>"
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Conventions and Style</span>"
     ]
   },
   {
     "objectID": "chapters/naming_conventions.html#naming-conventions-for-folders-project-structure",
     "href": "chapters/naming_conventions.html#naming-conventions-for-folders-project-structure",
-    "title": "13  Naming conventions and coding style",
-    "section": "13.3 Naming conventions for folders (project structure)",
-    "text": "13.3 Naming conventions for folders (project structure)\n\n13.3.1 Why folder names matter\nA good folder structure makes it hard to lose track of: - raw versus processed data - inputs versus outputs - code versus results - files that you can re-create versus ones you cannot (i.e. that you should never overwrite)\nIn this course, we care about reproducibility, which means: - raw data is always treated as read-only - processed data is created by scripts, acting on raw data, and never manually edited - results are generated by scripts and never manually edited\n\n\n\n\n\n\nTipA folder structure that scales\n\n\n\n\n\nA simple, stable structure (example):\n\ndata/\n\nraw_data/ (never edited)\nprocessed_data/ (created by scripts)\n\nr_scripts/ (functions + helpers)\nanalysis/ (analysis note / exercises )\noutputs/\n\nfigures/\ntables/\n\n\n\n\n\nFolder naming rules (same spirit as variable naming): - lowercase (snake_case) - no spaces - prefer underscores - descriptive names over clever names",
+    "title": "14  Conventions and Style",
+    "section": "14.3 Naming conventions for folders (project structure)",
+    "text": "14.3 Naming conventions for folders (project structure)\n\n14.3.1 Why folder names matter\nA good folder structure makes it hard to lose track of: - raw versus processed data - inputs versus outputs - code versus results - files that you can re-create versus ones you cannot (i.e. that you should never overwrite)\nIn this course, we care about reproducibility, which means: - raw data is always treated as read-only - processed data is created by scripts, acting on raw data, and never manually edited - results are generated by scripts and never manually edited\n\n\n\n\n\n\nTipA folder structure that scales\n\n\n\n\n\nA simple, stable structure (example):\n\ndata/\n\nraw_data/ (never edited)\nprocessed_data/ (created by scripts)\n\nr_scripts/ (functions + helpers)\nanalysis/ (analysis note / exercises )\noutputs/\n\nfigures/\ntables/\n\n\n\n\n\nFolder naming rules (same spirit as variable naming): - lowercase (snake_case) - no spaces - prefer underscores - descriptive names over clever names",
     "crumbs": [
       "Part I: Reproducible Analyses",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Naming conventions and coding style</span>"
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Conventions and Style</span>"
     ]
   },
   {
     "objectID": "chapters/naming_conventions.html#conventions-for-legible-and-consistent-r-code",
     "href": "chapters/naming_conventions.html#conventions-for-legible-and-consistent-r-code",
-    "title": "13  Naming conventions and coding style",
-    "section": "13.4 Conventions for legible and consistent R code",
-    "text": "13.4 Conventions for legible and consistent R code\n\n13.4.1 Why code style matters\nCode style is not about being fancy. It’s about making your thinking legible.\nGood style: - reduces bugs - improves peer review (including lab mates and future you) - makes it easier to modify models without breaking things\n\n\n\n\n\n\nNoteTwo extremely useful packages for checking R code formatting\n\n\n\n\nlintr checks your code for style problems (like a spellcheck for R code).\nstyler automatically formats your code to match a consistent style.\n\n\n\n\n\n13.4.2 “Bad → Good” examples for R code and files\nThese examples follow the tidyverse style guide (Hadley Wickham):\n\n\n\n\n\n\n\n\n\nBad\nWhy was it bad?\nGood\n\n\n\n\nFit models.r\nContains spaces; inconsistent casing; harder to reference in code\nfit_models.R\n\n\n##########\nNo semantic meaning; comments should describe intent, not fill space\n# extract elevation -----\n\n\nfindat\nVague name; gives no clue about content or structure\nfindat_mat\n\n\nfindat_mat\nRedundant and unclear; does not describe what the matrix contains\nmass_mat\n\n\n\n\nA few rules we will use repeatedly:\n\n\n13.4.3 Use nouns for objects and verbs for functions\n\nObjects (things): pufferi, pufferi_clean, model_gam\nFunctions (actions): clean_data(), fit_model(), plot_effects()\n\n\n\n13.4.4 Make “intermediate objects” obvious\nIf an object is temporary, label it like it is: - *_raw, *_clean, *_long, *_wide, *_summary\n\n\n13.4.5 Prefer readable code over clever code\n\n\n\n\n\n\n\n\nNoteOver-piped, confusing code\n\n\n\n\n\nsummary_df &lt;-\n  raw_df |&gt;\n  dplyr::filter(!is.na(count), year &gt;= 2015) |&gt;\n  dplyr::group_by(site, species) |&gt;\n  dplyr::summarise(\n    mean_count = mean(count),\n    sd_count   = sd(count),\n    n          = dplyr::n(),\n    .groups = \"drop\"\n  ) |&gt;\n  dplyr::filter(n &gt;= 5) |&gt;\n  dplyr::mutate(\n    cv = sd_count / mean_count,\n    log_mean = log(mean_count)\n  ) |&gt;\n  dplyr::arrange(dplyr::desc(log_mean))\n\n\n\n\n\n\n\n\n\n\nNoteLonger but readable code\n\n\n\n\n\n# Step 1: keep valid observations from recent years\ndf_filtered &lt;- raw_df |&gt;\n  dplyr::filter(!is.na(count), year &gt;= 2015)\n\n# Step 2: summarize counts by site and species\ndf_summary &lt;- df_filtered |&gt;\n  dplyr::group_by(site, species) |&gt;\n  dplyr::summarise(\n    mean_count = mean(count),\n    sd_count   = sd(count),\n    n          = dplyr::n(),\n    .groups = \"drop\"\n  )\n\n# Step 3: retain well-sampled groups\ndf_sufficient &lt;- df_summary |&gt;\n  dplyr::filter(n &gt;= 5)\n\n# Step 4: compute derived metrics\ndf_metrics &lt;- df_sufficient |&gt;\n  dplyr::mutate(\n    cv       = sd_count / mean_count,\n    log_mean = log(mean_count)\n  )\n\n# Step 5: order results for inspection\nsummary_df &lt;- df_metrics |&gt;\n  dplyr::arrange(dplyr::desc(log_mean))\n\n\n\n\n\n\n\n13.4.6 A final note about reproducible analyses\nIn workflow tools like targets, names are not simply cosmetic. They define nodes in a dependency graph (i.e. the ways all your inputs, processes, and outputs are connected). If names are unclear, the graph is unclear. If the graph is unclear, the workflow is not reproducible.\n\n\n\n\n\n\nTipPractical guidance\n\n\n\n\nUse CSV/TSV when the dataset is small enough to load quickly and inspect easily.\nConsider .RDS when you want an R-native format that preserves object structure.\nConsider .parquet when files get big and you care about speed + file size.",
+    "title": "14  Conventions and Style",
+    "section": "14.4 Conventions for legible and consistent R code",
+    "text": "14.4 Conventions for legible and consistent R code\n\n14.4.1 Why code style matters\nCode style is not about being fancy. It’s about making your thinking legible.\nGood style: - reduces bugs - improves peer review (including lab mates and future you) - makes it easier to modify models without breaking things\n\n\n\n\n\n\nNoteTwo extremely useful packages for checking R code formatting\n\n\n\n\nlintr checks your code for style problems (like a spellcheck for R code).\nstyler automatically formats your code to match a consistent style.\n\n\n\n\n\n14.4.2 “Bad → Good” examples for R code and files\nThese examples follow the tidyverse style guide (Hadley Wickham):\n\n\n\n\n\n\n\n\n\nBad\nWhy was it bad?\nGood\n\n\n\n\nFit models.r\nContains spaces; inconsistent casing; harder to reference in code\nfit_models.R\n\n\n##########\nNo semantic meaning; comments should describe intent, not fill space\n# extract elevation -----\n\n\nfindat\nVague name; gives no clue about content or structure\nfindat_mat\n\n\nfindat_mat\nRedundant and unclear; does not describe what the matrix contains\nmass_mat\n\n\n\n\nA few rules we will use repeatedly:\n\n\n14.4.3 Use nouns for objects and verbs for functions\n\nObjects (things): pufferi, pufferi_clean, model_gam\nFunctions (actions): clean_data(), fit_model(), plot_effects()\n\n\n\n14.4.4 Make “intermediate objects” obvious\nIf an object is temporary, label it like it is: - *_raw, *_clean, *_long, *_wide, *_summary\n\n\n14.4.5 Prefer readable code over clever code\n\n\n\n\n\n\n\n\nNoteOver-piped, confusing code\n\n\n\n\n\nsummary_df &lt;-\n  raw_df |&gt;\n  dplyr::filter(!is.na(count), year &gt;= 2015) |&gt;\n  dplyr::group_by(site, species) |&gt;\n  dplyr::summarise(\n    mean_count = mean(count),\n    sd_count   = sd(count),\n    n          = dplyr::n(),\n    .groups = \"drop\"\n  ) |&gt;\n  dplyr::filter(n &gt;= 5) |&gt;\n  dplyr::mutate(\n    cv = sd_count / mean_count,\n    log_mean = log(mean_count)\n  ) |&gt;\n  dplyr::arrange(dplyr::desc(log_mean))\n\n\n\n\n\n\n\n\n\n\n\n\nNoteLonger but readable code\n\n\n\n\n\n# Step 1: keep valid observations from recent years\ndf_filtered &lt;- raw_df |&gt;\n  dplyr::filter(!is.na(count), year &gt;= 2015)\n\n# Step 2: summarize counts by site and species\ndf_summary &lt;- df_filtered |&gt;\n  dplyr::group_by(site, species) |&gt;\n  dplyr::summarise(\n    mean_count = mean(count),\n    sd_count   = sd(count),\n    n          = dplyr::n(),\n    .groups = \"drop\"\n  )\n\n# Step 3: retain well-sampled groups\ndf_sufficient &lt;- df_summary |&gt;\n  dplyr::filter(n &gt;= 5)\n\n# Step 4: compute derived metrics\ndf_metrics &lt;- df_sufficient |&gt;\n  dplyr::mutate(\n    cv       = sd_count / mean_count,\n    log_mean = log(mean_count)\n  )\n\n# Step 5: order results for inspection\nsummary_df &lt;- df_metrics |&gt;\n  dplyr::arrange(dplyr::desc(log_mean))\n\n\n\n\n\n\n\n14.4.6 A final note about reproducible analyses\nIn workflow tools like targets, names are not simply cosmetic. They define nodes in a dependency graph (i.e. the ways all your inputs, processes, and outputs are connected). If names are unclear, the graph is unclear. If the graph is unclear, the workflow is not reproducible.\n\n\n\n\n\n\nTipPractical guidance\n\n\n\n\nUse CSV/TSV when the dataset is small enough to load quickly and inspect easily.\nConsider .RDS when you want an R-native format that preserves object structure.\nConsider .parquet when files get big and you care about speed + file size.",
     "crumbs": [
       "Part I: Reproducible Analyses",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Naming conventions and coding style</span>"
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Conventions and Style</span>"
     ]
   },
   {
     "objectID": "chapters/naming_conventions.html#your-minimum-standard-checklist-use-this-before-you-submit-anything",
     "href": "chapters/naming_conventions.html#your-minimum-standard-checklist-use-this-before-you-submit-anything",
-    "title": "13  Naming conventions and coding style",
-    "section": "13.5 Your “minimum standard” checklist (use this before you submit anything)",
-    "text": "13.5 Your “minimum standard” checklist (use this before you submit anything)\n\n\n\n\n\n\nNoteNaming + style checklist\n\n\n\nData + variables\n\nColumn names are snake_case\nNo spaces or special characters in column names\nUnits are explicit where relevant (_m, _cm, _g, _s)\nMissing values are documented (what is NA, what is 0, what is “not observed”?)\nDates are in a clear, documented format (and the order is not ambiguous)\n\nFolders + files\n\nFolder names are lowercase and descriptive\nRaw data are not edited in place\nProcessed data are created by scripts (not by hand)\n\nR code\n\nObjects use nouns; functions use verbs\nScripts are readable (spacing, line breaks, consistent naming)\nYou can restart R and run the workflow without relying on “things in memory”",
+    "title": "14  Conventions and Style",
+    "section": "14.5 Your “minimum standard” checklist (use this before you submit anything)",
+    "text": "14.5 Your “minimum standard” checklist (use this before you submit anything)\n\n\n\n\n\n\nNoteNaming + style checklist\n\n\n\nData + variables\n\nColumn names are snake_case\nNo spaces or special characters in column names\nUnits are explicit where relevant (_m, _cm, _g, _s)\nMissing values are documented (what is NA, what is 0, what is “not observed”?)\nDates are in a clear, documented format (and the order is not ambiguous)\n\nFolders + files\n\nFolder names are lowercase and descriptive\nRaw data are not edited in place\nProcessed data are created by scripts (not by hand)\n\nR code\n\nObjects use nouns; functions use verbs\nScripts are readable (spacing, line breaks, consistent naming)\nYou can restart R and run the workflow without relying on “things in memory”",
     "crumbs": [
       "Part I: Reproducible Analyses",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Naming conventions and coding style</span>"
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Conventions and Style</span>"
     ]
   },
   {
     "objectID": "chapters/naming_conventions.html#practice-task-recommended",
     "href": "chapters/naming_conventions.html#practice-task-recommended",
-    "title": "13  Naming conventions and coding style",
-    "section": "13.6 Practice task (recommended)",
-    "text": "13.6 Practice task (recommended)\n\nPick one of your current projects (or a past project).\nRename:\n\n5 confusing variables\n3 confusing files\n1 confusing folder\n\nMake one small style improvement:\n\nconsistent naming\nreadable comments\nbreak one long chunk into 2–3 meaningful steps\n\n\nThe goal is not perfection. The goal is to start practicing now.",
+    "title": "14  Conventions and Style",
+    "section": "14.6 Practice task (recommended)",
+    "text": "14.6 Practice task (recommended)\n\nPick one of your current projects (or a past project).\nRename:\n\n5 confusing variables\n3 confusing files\n1 confusing folder\n\nMake one small style improvement:\n\nconsistent naming\nreadable comments\nbreak one long chunk into 2–3 meaningful steps\n\n\nThe goal is not perfection. The goal is to start practicing now.",
     "crumbs": [
       "Part I: Reproducible Analyses",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Naming conventions and coding style</span>"
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Conventions and Style</span>"
     ]
   }
 ]

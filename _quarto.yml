@@ -7,6 +7,7 @@ book:
   subtitle: "University of Wyoming -- ZOO-5500 (CRN 13415) | ECOL-5500 (CRN 13417)"
   sidebar:
     logo: graphics/jackalope_graphics/analytical_jackalope.png
+    collapse-level: 1
   chapters:
     - part: "Course Overview"
       chapters:   
@@ -27,7 +28,7 @@ book:
       chapters: 
         - chapters/reproducible_workflow_intro.qmd
         - chapters/nature_of_data.qmd
-        # - chapters/metadata_low_friction.qmd
+        - chapters/metadata_low_friction.qmd
         - chapters/naming_conventions.qmd
     - part: "Part II: Chaos to Columns"
       # chapters:

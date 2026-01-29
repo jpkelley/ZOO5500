@@ -1,0 +1,119 @@
+# ============================================================
+# METADATA TEMPLATE
+# Canonical, human-authored metadata record for a dataset
+#
+# This file describes the CONTEXT and STRUCTURE of the data.
+# It does NOT contain data values or analysis results.
+# It can be supplemented with custome fields, if necessary.
+# ============================================================
+
+
+# ------------------------------------------------------------
+# DATASET-LEVEL METADATA
+# Applies to the dataset as a whole
+# ------------------------------------------------------------
+
+dataset:
+  title: ""                  # REQUIRED: concise, descriptive title
+  description: ""            # REQUIRED: what these data are and why they exist
+  keywords: []               # OPTIONAL: list of keywords for file-searching
+
+  creators:                 # REQUIRED: one or more people
+    - name: ""               # REQUIRED
+      affiliation: ""        # OPTIONAL
+      orcid: ""              # OPTIONAL but encouraged
+    - name: ""               # OPTIONAL (example of how to add a second creator)
+      affiliation: ""        # OPTIONAL
+      orcid: ""              # OPTIONAL but encouraged
+
+  license: "CC-BY-4.0"       # REQUIRED: default license for this course
+
+  dates:                     # OPTIONAL but recommended
+    data_collection_start: ""  # ISO 8601 date (YYYY-MM-DD)
+    data_collection_end: ""    # ISO 8601 date (YYYY-MM-DD)
+
+  spatial_coverage:          # OPTIONAL; omit if not applicable
+    description: ""          # e.g., region, site name, system
+    coordinates: ""          # e.g., bounding box or representative point
+    coordinate_reference_system: ""  # e.g., EPSG:4326
+
+  related_identifiers:       # OPTIONAL
+    - relation: ""           # e.g., isSupplementTo, isDerivedFrom
+      identifier: ""         # DOI, URL, or accession number
+
+  provenance:                # REQUIRED (high-level)
+    description: ""          # e.g., "Data collection + processing workflow"
+    processing_notes: ""     # OPTIONAL: brief notes on upstream processing
+
+
+# ------------------------------------------------------------
+# INSTRUMENT / SYSTEM-LEVEL METADATA
+# Stable properties of measurement systems
+# ------------------------------------------------------------
+
+instruments:
+  - instrument_id: ""        # REQUIRED: unique local ID (e.g., instr_01)
+    type: ""                 # REQUIRED: instrument or system type
+    manufacturer: ""         # OPTIONAL
+    model: ""                # OPTIONAL
+    serial_number: ""        # OPTIONAL
+    software_or_firmware: "" # OPTIONAL
+    properties: # OPTIONAL but encouraged; stable properties (inherent to the hardware or system)
+      resolution: ""         # OPTIONAL
+      precision: ""          # OPTIONAL
+      bit_depth: ""          # OPTIONAL
+      notes: ""              # OPTIONAL
+
+
+# ------------------------------------------------------------
+# DEPLOYMENT / CONFIGURATION-LEVEL METADATA
+# Use this section ONLY if there are consistent configurations
+# across time, space, or experimental runs.
+# ------------------------------------------------------------
+
+deployments:
+  - deployment_id: ""        # REQUIRED if section used
+    instrument_id: ""        # REQUIRED: must match an instrument_id
+    context: ""              # e.g., site, experiment, batch, run
+    start_date: ""           # OPTIONAL
+    end_date: ""             # OPTIONAL
+    constant_parameters:     # Parameters constant during this deployment
+      # Example:
+      # sampling_rate_hz: 48000
+    notes: ""                # OPTIONAL
+
+
+# ------------------------------------------------------------
+# FILE- OR OBSERVATION-LEVEL METADATA
+# One entry per file or observational unit
+# ------------------------------------------------------------
+
+records:
+  - record_id: ""            # REQUIRED: filename or unique identifier
+    instrument_id: ""        # REQUIRED
+    deployment_id: ""        # OPTIONAL: include if deployments are used
+
+    datetime: ""             # OPTIONAL: ISO 8601 datetime
+
+    parameters:              # REQUIRED if values vary across records
+      # Example:
+      # sampling_rate_hz: 48000
+      # channels: 2
+
+    location:                # OPTIONAL
+      latitude: ""
+      longitude: ""
+      coordinate_reference_system: ""
+
+    notes: ""                # OPTIONAL: factual notes only (no interpretation)
+
+
+# ============================================================
+# END OF TEMPLATE
+#
+# RULES:
+# - Do not summarize (or add vagueness to) variable values (e.g., "most files...")
+# - If a value (like a setting) varies, map it at the lowest level possible
+# - This file is the single source of truth for metadata
+# - [other?]
+# ============================================================

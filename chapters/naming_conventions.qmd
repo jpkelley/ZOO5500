@@ -1,5 +1,5 @@
 ---
-title: "Naming conventions and coding style"
+title: "Conventions and Style"
 subtitle: "Why names (and style) are part of your statistical method"
 format:
   html:
@@ -193,7 +193,7 @@ If an object is temporary, label it like it is:
 ### Prefer readable code over clever code
 ::::: columns
 ::: {.column width="48%"}
-::: {.callout-note icon=false collapse=true appearance="minimal" title="**Over-piped, confusing code**" style="background-color:#FF9999; border-left: 6px solid #FD5D59;"}
+::: {.callout-note icon=false collapse=true appearance="minimal" title="**Over-piped, confusing code**" style="background-color:#FEAAA8; border-left: 6px solid #C00000;"}
 
 ```r
 summary_df <-
@@ -214,6 +214,9 @@ summary_df <-
   dplyr::arrange(dplyr::desc(log_mean))
 ```
 :::
+:::
+
+::: {.column width="4%"}
 :::
 
 ::: {.column width="48%"}

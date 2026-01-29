@@ -1,183 +1,444 @@
 ---
-title: "Metadata: A Low-Friction Approach"
+title: "Metadata"
 format: html
 toc: true
-number-sections: false
 ---
 
+
+::::: columns
+
+::: {.column width="48%"}
 ## What metadata are (and are not)
 
 > **Metadata are data about data.**
 
-That definition is technically correct, but it is not very helpful. A more useful way to think about metadata is this:
+This definition is technically correct, but not very useful on its own. A more practical way to think about metadata is this:
 
 > **Metadata describe the context in which data were generated.**
+:::
 
-Metadata tell us:
+::: {.column width="48%"}
+![](../graphics/other_stylized_graphics/metadata_graphic.png)
+:::
+::::::
+
+Metadata record the information needed to interpret measurements correctly. They tell us:
 
 - who collected the data  
 - when and where they were collected  
 - how measurements were made  
 - what files belong together  
-- what assumptions, constraints, or limitations were present upstream  
+- what assumptions, constraints, or limitations existed upstream  
 
-Metadata are not bureaucracy. They are **scientific memory.**
-
-Without metadata, data quickly lose their meaning, especially once they leave the hands of the person who collected them.
+Metadata are not bureaucracy. They are **scientific memory**. Without metadata, data quickly lose meaning—especially once they leave the hands of the person who collected them.
 
 ---
 
 ## Why metadata are essential
 
-Raw data without metadata are often completely and utterly **uninterpretable**, even to the original researcher after some time has passed. 
+Raw data without metadata are often difficult—or impossible—to interpret, even by the original researcher. In practice, many irreproducible analyses fail **before modeling begins**, because key contextual information was never recorded. A column of numbers without units, provenance, or spatial and temporal context is just a sequence of values. It is not reusable scientific data.
 
-A column of numbers without:
+At a broad level, good metadata allow others (and future you) to:
 
-- units  
-- provenance  
-- spatial or temporal context  
+- understand what the data actually represent, and what their limitations are  
+- judge whether the data are appropriate for a new purpose or analysis  
+- reconstruct and evaluate analytical decisions made downstream  
 
-simply is not reusable scientific data; it is just a sequence of values.
-
-Metadata allow others (and future you) to:
-
-- understand what the data actually represent  
-- judge whether the data are fit for a new purpose  
-- reproduce analytical and modeling decisions  
-
-In practice, most irreproducible analyses fail **before modeling begins**, because key contextual information was never recorded. 
+Metadata do not guarantee good science, but their absence almost guarantees future confusion.
 
 ---
 
-## Metadata and reproducibility
+## Metadata within a reproducible analytical workflow
 
-Reproducibility is not just about rerunning code. It also requires being able to answer questions like:
+Reproducibility is not just about being able to rerun code indefinitely. It also requires being able to answer core questions about the data themselves, such as:
 
-- What exactly was measured?  
-- Under what conditions?  
-- Using which instruments or protocols?  
-- With what known limitations or sources of error?
+- What *exactly* was measured?  
+- Under what conditions were the measurements taken?  
+- What instruments or protocols were used?  
+- What were the data’s limitations or sources of error?
 
-Metadata provide the bridge between **raw data** and **scientific inference**. They allow measurements to be interpreted in light of their collection context and make clear what kinds of estimands the data can legitimately support.
+Metadata provide the necessary bridge between **raw data** and **scientific inference**. They explain how measurements came to exist and clarify which kinds of estimands the data can —and cannot— support.
 
-> **If raw data are the recorded traces of measurement, metadata explain how those traces came to exist.**
+Within the broader analytical workflow, raw data and metadata together form a **complete dataset**. Complete datasets can be verified, versioned, shared, and reused. All subsequent processing, modeling, and inference depend on this foundation.
+
+> To emphasize, metadata are _not_ an afterthought; **they are part of the data.**
 
 ---
 
-## Metadata and the FAIR principles
+## What good metadata enable (FAIR, in plain language)
 
-At their core, the FAIR principles recognize that data are only useful if their **context travels with them**. Metadata are what make this possible. Much of the modern emphasis on metadata comes from the **FAIR principles**, which aim to ensure that scientific data are:
+At their core, the FAIR principles ([Wilkinson _et al._ (2016)](https://www.nature.com/articles/sdata201618)) recognize that data are only useful if their **context travels with them**. Metadata are what make this possible. Much of the modern emphasis on metadata comes from the **FAIR principles**, which aim to ensure that scientific data are:
 
-- **Findable:** Metadata allow datasets to be indexed and discovered.
-- **Accessible:** Metadata explain how data can be obtained and interpreted.
-- **Interoperable:** Metadata clarify formats, units, and conventions.
-- **Reusable:** Metadata document assumptions, methods, and limitations.
+- **Findable:** Metadata help other people *find that the data exist*.
+- **Accessible:** Metadata explain *how to get the data and what the files mean*.
+- **Interoperable:** Metadata make it clear *how the data are formatted and measured*, so they work with other data.
+- **Reusable:** Metadata explain *how the data were collected and what their limits are*, so others can use them correctly.
 
-Crucially, FAIR is not about perfection; it is about **future usability**.
+Crucially, FAIR is not about ensuring perfection; it is about increasing the probability of **future usability**.
 
 ::: {.callout-note}
-You are *not* expected to memorize FAIR acronyms. What matters is understanding what FAIR is trying to protect.
+You are *not* expected to memorize the FAIR acronym. What matters most is understanding what FAIR is trying to do (specifically, what it is trying to protect)!
 :::
 
 ---
 
-## A simplified metadata approach (very important)
+## A low-friction approach to metadata
 
-No doubt you have heard about the myriad metadata formats out there. No matter who you are or what your skill level is, you do **not** need to master complex metadata standards for this course. You barely need to know them at all.
+You have probably encountered the long list of formal metadata standards used across scientific disciplines. For this course, you do **not** need to master any of them, and, in fact, you barely need to know them at all.
 
-Our approach is intentionally low-friction, as we have adopted a simple philosophy:
+Our approach to metadata is intentionally **low friction**. That means it fits naturally into you (and others) already work: without extra tools or unnecessary extra steps, and without specialized expertise. The goal is not blind compliance to reporting standards; first and foremost, it is about scientific clarity. We therefore adopt a simple guiding principle:
+
 > *Let repositories handle standardization. Your job is to record clear, honest, human-readable metadata.*
 
-Repositories such as Datavers, Zenodo, Dryad, GBIF, or institutional archives can translate your documentation into formal schemas later. That translation only works if the underlying information exists in the first place.
+Repositories such as Dataverse, Zenodo, Dryad, GBIF, and institutional archives are designed to translate user-supplied documentation into formal metadata schemas. That translation only works, however, if the essential information about your data exists in the first place. What matters most at this stage is **clarity and completeness**, not adherence to a specific --and often over-specified-- standard.
 
 ---
 
-## The lab-level rule
+## What “good enough” metadata must accomplish
 
-Each project should have **one canonical metadata record**:
+At a minimum, metadata should allow another scientifically literate person—someone outside your project—to answer the following questions:
 
-- written once  
-- updated as needed  
-- reused everywhere  
+- What are these data?  
+- Who created them?  
+- When and where were they collected?  
+- How were the measurements made?  
+- What files belong together, and how?  
 
-This record should live *with the data* and be version controlled.
-
-Acceptable formats include:
-
-- a small YAML file (**preferred**)  
-- a structured Google Sheet  
-- a clear README file  
-
-What matters is **clarity and completeness**, not compliance with a specific standard.
+If these questions cannot be answered from the metadata alone, the dataset is not reusable—no matter how sophisticated the analysis or modeling may be.
 
 ---
 
-## Minimal metadata you should always record
+## Practical formats for early-stage metadata
 
-At a minimum, metadata should answer the following questions:
+In everyday research workflows, metadata often begin life in simple, familiar formats such as:
 
-1. What are these data?  
-2. Who created them?  
-3. When and where were they collected?  
-4. How were measurements made?  
-5. What files belong together?  
+- **Google Sheet** (good for coordinating field or lab work)  
+- **plain-text or Markdown file** (good for small or exploratory projects)  
 
-If another scientifically literate person cannot answer these questions, the dataset is not reusable—no matter how sophisticated the analysis.
+These formats are perfectly acceptable as *starting points*. They lower the barrier to documentation and encourage metadata to be written early in the analysis life-cycle rather than postponed. However, these format are usually best treated as **temporary representations**. As projects grow, metadata need to become more structured, more explicit, and easier to validate and reuse. But, if you are more comfortable beginning your journey using a version-controlled spreadsheet platform (like Google Sheets), you are welcome to do so.
 
 ---
 
-## Low-friction tools
+## Why we use YAML
 
-::: {.callout-note}
-**Good enough is good enough.**
+To support that transition from your mind (or Google Sheets), this course adopts **YAML** as the canonical format for project-level metadata.
+
+::: callout-note
+## YAML: What's in a name?
+
+Originally, YAML was an abbreviation for _"Yet Another Markup Language"_. Later, it become _"YAML Ain't Markup Language"_.
+
 :::
 
-Common approaches include:
+::: callout-note
+## What the heck is _canonical_ in this context?
 
-- **YAML templates** for reproducible projects  
-- **Google Sheets** for field or lab coordination  
-- **README.md** files for small or exploratory projects  
+_Canonical_ simply means that there is exactly one place where your dataset is formally defined; it does _not_ mean that your metadata exists as exactly one file (thought it could).
 
-You will be provided templates in this course.  
-You are not expected to invent schemas from scratch.
-
----
-
-## Metadata and indexing
-
-Metadata become especially powerful when they are **indexed**.
-
-Indexing means that:
-
-- metadata are registered in a searchable repository  
-- datasets become discoverable by others  
-- persistent identifiers (e.g., DOIs) can be assigned  
-
-Importantly, it is the **metadata**, not the raw data files themselves, that are indexed and searched.
-
----
-
-## Metadata in the analytical workflow
-
-Within the broader analytical workflow:
-
-- raw data + metadata → **complete dataset**  
-- complete datasets can be verified, versioned, and shared  
-- processing and modeling build on this foundation  
-
-> Metadata are not an afterthought; **they are part of the data.**
-
----
-
-## Pause and reflect
-
-::: {.callout-note collapse="true"}
-For your dataset:
-
-1. What metadata already exist?
-2. What information currently lives only in your head?
-3. What would someone else need to reuse these data responsibly?
 :::
 
-The next chapter moves from documentation to computation:  
-how reproducible workflows explicitly map **inputs → transformations → outputs**.
+There are several advantages to using YAML, including:
+
+- **human-readable and easy to edit**  
+- **structured and explicit about relationships**  
+- **easy to version-control**  
+- **simple to validate and extend** (i.e. Quarto markdown files have YAML headers)
+- **straightforward to convert into repository-specific schemas later**
+
+Most importantly, YAML encourages you to think carefully about **what varies**, **what stays constant**, and **how different pieces of a dataset relate to one another**.
+
+In the next section, we will walk through the structure of a well-designed YAML metadata file, using concrete examples and expandable templates to show how common research scenarios —such as multiple instruments, deployments, or sampling rates— can be documented clearly and correctly (at least, I hope so).
+
+---
+
+## Levels of metadata: where information belongs (and where it does *not*)
+
+When you document metadata, your main job is to put information at the **right level of scope**. This keeps metadata clear, avoids duplication, and prevents the most common failure mode: **collapsing variation**.
+
+A useful way to think about this is a hierarchy of levels, from broad context to individual files.
+
+---
+
+::: {.callout-note icon=false collapse=true}
+
+### **Dataset-level metadata** (the whole project)
+
+This level answers: *What is this data set, broadly, and how should it be cited, discovered, and reused?*
+
+**What belongs at this level**
+
+- title, description, and keywords  
+- creators, affiliations, persistent identifiers (e.g., ORCID)  
+- overall spatial and temporal scope (broad bounds, if applicable)  
+- license and usage rights  
+- related identifiers (publications, code repositories, DOIs)  
+- high-level description of how the data were generated  
+- provenance summary (e.g., “data collection + processing workflow”)  
+
+**What does _not_ belong at this level**
+
+- file-specific settings or parameters  
+- values that vary across observations or files  
+- derived results (means, medians, model outputs)  
+- vague summaries such as “most values were…”  
+:::
+
+::: {.callout-note icon=false collapse=true}
+
+### **Instrument- or system-level metadata** (the measurement system)
+
+This level answers: *What system, instrument, or process produced the measurements, and what are its stable properties?*
+
+**What belongs at this level**
+
+- system or instrument type, manufacturer, and model  
+- serial number, asset ID, or logical identifier  
+- software or firmware version (if relevant)  
+- properties that are stable across use (e.g., resolution, precision, bit depth)  
+
+**What does _not_ belong at this level**
+
+- settings that vary across observations unless explicitly declared as defaults  
+- time- or location-specific information  
+:::
+
+::: {.callout-note icon=false collapse=true}
+
+### **Deployment- or configuration-level metadata** (a consistent setup)
+
+This level answers: *When and under what conditions was the system used with a consistent configuration?*
+
+**What belongs at this level**
+
+- configuration or deployment identifier  
+- contextual identifiers (e.g., site, batch, experiment, run)  
+- start and end dates or times  
+- parameters that were constant during this configuration  
+- calibration notes, protocols, or procedural references  
+
+**What does _not_ belong at this level**
+
+- individual file or observation exceptions unless explicitly mapped  
+- values that vary within the configuration without structure  
+:::
+
+::: {.callout-note icon=false collapse=true}
+
+### **File- or observation-level metadata** (individual data units)
+
+This level answers: *What is true about this specific file, record, or observation?*
+
+**What belongs at this level**
+
+- filename or observation identifier  
+- date and time of acquisition or creation  
+- parameter values that vary (e.g., sampling rate, resolution, settings)  
+- contextual attributes that differ across observations  
+- location information, if variable  
+
+**What does _not_ belong at this level**
+
+- dataset-wide descriptions  
+- interpretive judgments (e.g., “high quality”) unless defined by a controlled scheme  
+:::
+
+---
+
+::: {.callout-tip collapse=true}
+### Two rules that prevent most metadata mistakes
+
+1. **Place metadata at the highest level where they are constant.**  
+   If a sampling rate never changes across a deployment, store it at the deployment or instrument level.
+
+2. **If a metadata value varies, do not summarize it; map it explicitly by adding another metadata entry (see Example 3-4 below.**  
+   Never write “sampling_rate_hz: 48000” plus “some files differ.”Instead, record which files have which values.
+   
+:::
+
+---
+
+## Examples: recording metadata at different levels
+
+The examples below illustrate how metadata structure changes depending on what varies in a dataset. Each example shows the same basic information organized at different levels to preserve clarity and traceability. The goal is not to memorize a template, but to understand how scope and variation determine where metadata belong.
+
+The following examples illustrate common scenarios using YAML. Each example shows how scope and variation determine where information belongs. Note that the Creative Commons Non-commercial (_CC-BY-NC_) is a good place to start in terms of specifying who has access to your data.  
+
+::: {.callout-caution icon=false collapse=true}
+
+## **Example 1:** [**_One_**]{style="color:#984ea3;"} recorder type, multiple recordings with the [**_same_**]{style="color:#377eb8;"} settings
+
+All recordings were made using the same type of recorder with identical acquisition settings (sampling rate, bit depth, etc.). Because the sampling rate and bit depth never change, those values are recorded once at the instrument level and inherited by each file. This avoids duplication while preserving clarity.
+
+```yaml
+title: "Understory bird recordings (Panama)"
+description: "Autonomous recordings from fixed forest plots."
+license: "CC-BY-4.0"
+
+creators:
+  - name: "Patrick Kelley"
+    orcid: "0000-0002-1234-5678"
+    affiliation: "University of Wyoming"
+
+instruments:
+  - instrument_id: aru_01
+    type: "Autonomous recording unit"
+    manufacturer: "Wildlife Acoustics"
+    model: "SM4"
+    sampling_rate_hz: 48000
+    bit_depth: 24
+
+recordings:
+  - file: "plot1_2025-01-15_0600.wav"
+    instrument_id: aru_01
+  - file: "plot1_2025-01-15_0700.wav"
+    instrument_id: aru_01
+  - file: "plot1_2025-01-15_0800.wav"
+    instrument_id: aru_01
+```
+
+:::
+
+
+::: {.callout-caution icon=false collapse=true}
+
+## **Example 2:** [**_One_**]{style="color:#984ea3;"} recorder type, multiple recordings with [**_different_**]{style="color:#e41a1c;"} settings
+
+Although the same recorder model was used throughout, some recordings were made with different sampling rates. Because this parameter varies, it must be recorded explicitly for each file rather than summarized at the instrument-level.
+
+```yaml
+title: "Understory bird recordings (Panama)"
+description: "Autonomous recordings; some files recorded at different sampling rates."
+license: "CC-BY-4.0"
+
+creators:
+  - name: "Patrick Kelley"
+    orcid: "0000-0002-1234-5678"
+    affiliation: "University of Wyoming"
+
+instruments:
+  - instrument_id: aru_01
+    type: "Autonomous recording unit"
+    manufacturer: "Wildlife Acoustics"
+    model: "SM4"
+    bit_depth: 24
+    default_sampling_rate_hz: 48000
+
+recordings:
+  - file: "plot1_2025-01-15_0600.wav"
+    instrument_id: aru_01
+    sampling_rate_hz: 48000
+
+  - file: "plot1_2025-01-15_0700.wav"
+    instrument_id: aru_01
+    sampling_rate_hz: 48000
+
+  - file: "plot1_2025-01-16_0600.wav"
+    instrument_id: aru_01
+    sampling_rate_hz: 24000
+
+  - file: "plot1_2025-01-16_0700.wav"
+    instrument_id: aru_01
+    sampling_rate_hz: 24000
+```
+
+:::
+
+::: {.callout-caution icon=false collapse=true}
+
+## **Example 3:** [**_Two_**]{style="color:#4daf4a;"} recorder types, multiple recordings with the [**_same_**]{style="color:#377eb8;"} settings
+
+Two different recorder models were used, but each model operated with consistent settings across its recordings. Instrument-level metadata capture these stable differences, while individual files simply reference the appropriate instrument. This cleanly separates hardware differences from recording settings.
+
+```yaml
+title: "Understory bird recordings (Panama)"
+description: "Recordings collected using two recorder models."
+license: "CC-BY-4.0"
+
+creators:
+  - name: "Patrick Kelley"
+    orcid: "0000-0002-1234-5678"
+    affiliation: "University of Wyoming"
+
+instruments:
+  - instrument_id: aru_01
+    type: "Autonomous recording unit"
+    manufacturer: "Wildlife Acoustics"
+    model: "SM4"
+    sampling_rate_hz: 48000
+    bit_depth: 24
+
+  - instrument_id: aru_02
+    type: "Autonomous recording unit"
+    manufacturer: "Audiomoth"
+    model: "AudioMoth v1.2.0"
+    sampling_rate_hz: 48000
+    bit_depth: 16
+
+recordings:
+  - file: "plot1_2025-01-15_0600.wav"
+    instrument_id: aru_01
+  - file: "plot1_2025-01-15_0700.wav"
+    instrument_id: aru_01
+
+  - file: "plot2_2025-01-15_0600.wav"
+    instrument_id: aru_02
+  - file: "plot2_2025-01-15_0700.wav"
+    instrument_id: aru_02
+```
+
+:::
+
+::: {.callout-caution icon=false collapse=true}
+
+## **Example 4:** [**_Two_**]{style="color:#4daf4a;"} recorder types, multiple recordings with [**_different_**]{style="color:#e41a1c;"} settings
+
+Both the recorder model and acquisition settings vary across recordings. In this case, instrument-level metadata define stable properties, while file-level metadata explicitly record variable settings such as sampling rate. This structure is necessary to fully document complexity without removing valuable variation.
+
+```yaml
+title: "Understory bird recordings (Panama)"
+description: "Two recorder models with file-level variation in settings."
+license: "CC-BY-4.0"
+
+creators:
+  - name: "Patrick Kelley"
+    orcid: "0000-0002-1234-5678"
+    affiliation: "University of Wyoming"
+
+instruments:
+  - instrument_id: aru_01
+    type: "Autonomous recording unit"
+    manufacturer: "Wildlife Acoustics"
+    model: "SM4"
+    bit_depth: 24
+    default_sampling_rate_hz: 48000
+
+  - instrument_id: aru_02
+    type: "Autonomous recording unit"
+    manufacturer: "Audiomoth"
+    model: "AudioMoth v1.2.0"
+    bit_depth: 16
+    default_sampling_rate_hz: 48000
+
+recordings:
+  - file: "plot1_2025-01-15_0600.wav"
+    instrument_id: aru_01
+    sampling_rate_hz: 48000
+
+  - file: "plot1_2025-01-16_0600.wav"
+    instrument_id: aru_01
+    sampling_rate_hz: 24000
+
+  - file: "plot2_2025-01-15_0600.wav"
+    instrument_id: aru_02
+    sampling_rate_hz: 48000
+
+  - file: "plot2_2025-01-16_0600.wav"
+    instrument_id: aru_02
+    sampling_rate_hz: 32000
+```
+
+:::
+
+## Wrapping this up
+
+Clear and clean metadata describe what your data are and how they were generated. Just as importantly, the names you give to files, variables, and folders determine whether that information remains interpretable as projects grow. In the next section, we turn to the topic of naming conventions and coding style --small and seemingly trivial decisions that play an outsized role in scientific reproducibility. Let's proceed!

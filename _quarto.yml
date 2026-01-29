@@ -8,8 +8,7 @@ book:
   sidebar:
     logo: graphics/jackalope_graphics/analytical_jackalope.png
     collapse-level: 1
-    
-chapters:
+  chapters:
     - part: "Course Overview"
       chapters:   
         - index.qmd

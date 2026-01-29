@@ -1,6 +1,0 @@
-[1,"==> quarto preview index.qmd --to html --no-watch-inputs --no-browse\n\n"]
-[1,"pandoc \n  to: html\n  output-file: index.html\n  standalone: true\n  toc: true\n  number-sections: true\n  title-prefix: Quantitative Analysis of (Messy) Field Data\n  section-divs: true\n  html-math-method: mathjax\n  wrap: none\n  default-image-extension: png\n  css:\n    - styles.css\n  variables: {}\n  \nmetadata\n  crossref:\n    chapters: true\n  document-css: false\n  link-citations: true\n  date-format: long\n  lang: en\n  editor: visual\n  theme:\n    - cosmo\n    - brand\n  number-depth: 3\n  title: Quantitative Analysis of (Messy) Field Data\n  subtitle: University of Wyoming -- ZOO-5500 (CRN 13415) | ECOL-5500 (CRN 13417)\n  \n"]
-[1,"Output created: _book\\index.html\n\nPreparing to preview\n"]
-[1,"\nWatching files for changes\nBrowse at http://localhost:7992/\nListening on http://127.0.0.1:7992/\n"]
-[1,"GET: /\n"]
-[1,"GET: /chapters/02_course_intro.html\n"]

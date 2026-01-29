@@ -20,7 +20,7 @@ This definition is technically correct, but not very useful on its own. A more p
 ::: {.column width="48%"}
 ![](../graphics/other_stylized_graphics/metadata_graphic.png)
 :::
-::::::
+:::::
 
 Metadata record the information needed to interpret measurements correctly. They tell us:
 

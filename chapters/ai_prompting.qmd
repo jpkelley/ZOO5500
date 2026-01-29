@@ -178,33 +178,38 @@ Large Language Models are updated and adjusted over time. That means the same pr
 ## Synthesis: Examples of improving prompts
 
 **Instructions to students:** Read the excessively broad-scope prompt first. Pause and think: 
+
 * *What information is missing (hint: use the TRACE framework)?*
 * *What verbiage could be added to fill most or all of those missing components?* 
 Then expand the box to see a stronger version (based in the TRACE framework)
 
-**Rubric tag key (TRACE):**  
-- **[T]** Task/Topic context missing or underspecified  
-- **[R]** Role missing  
-- **[A]** Audience missing  
-- **[C]** Criteria missing (what a “good” answer must include)  
-- **[E]** Exclusions missing (scope/safeguards)
+**Rubric tag key (TRACE):** 
+
+- [**[T]** Task/Topic context missing or underspecified]{style="color:#e41a1c;"} 
+- [**[R]** Role missing]{style="color:#377eb8;"}  
+- [**[A]** Audience missing]{style="color:#4daf4a;"}  
+- [**[C]** Criteria missing (what a “good” answer must include)]{style="color:#984ea3;"}  
+- [**[E]** Exclusions missing (scope/safeguards)]{style="color:#ff7f00;"}
 
 ---
 
 ### Example 1: Debugging R code
 > “My model isn’t working. Help.”
 
-::: {.callout-tip collapse="true" icon=false title="Click to reveal a stronger prompt (TRACE)"}
-**Missing tags:** [T] [R] [A] [C] [E]  
-**Rubric tags addressed:** [T] [R] [A] [C] [E]
+This prompt lacks all components of a useful prompt. This would lead to an overly broad response from the Large Language Model. **Before clicking to expand this example, think about ways you could improve this prompt.**
 
-> “Act as an **R debugger**. I’m a **beginner–intermediate R user**. I’m fitting a **GLMM for counts** with a **random intercept for site**. Here is my code and the **exact error message**: \[paste\].  
-> A good answer must:  
-> (1) identify the likely cause,  
-> (2) show the minimal fix,  
-> (3) explain why it failed, and  
-> (4) suggest one diagnostic check.  
-> Do not rewrite my entire analysis—just fix the error and explain.”
+::: {.callout-tip collapse="true" icon=false title="Click to reveal a stronger prompt (TRACE)"}
+**Missing tags:** [**[T]**]{style="color:#e41a1c;"} [**[R]**]{style="color:#377eb8;"} [**[A]**]{style="color:#4daf4a;"} [**[C]**]{style="color:#984ea3;"} [**[E]**]{style="color:#ff7f00;"}  
+
+**Rubric tags addressed:** [**[T]**]{style="color:#e41a1c;"} [**[R]**]{style="color:#377eb8;"} [**[A]**]{style="color:#4daf4a;"} [**[C]**]{style="color:#984ea3;"} [**[E]**]{style="color:#ff7f00;"}
+
+> Act as an [**R debugger**]{style="color:#377eb8;"}. [**I’m a beginner–intermediate R user**]{style="color:#4daf4a;"}. [**I’m fitting a GLMM for counts with a random intercept for site**]{style="color:#e41a1c;"}. [**Here is my code and the exact error message**]{style="color:#e41a1c;"}:. [**A good answer must:**]{style="color:#984ea3;"}
+> [**(1) identify the likely cause,**]{style="color:#984ea3;"}
+> [**(2) show the minimal fix,**]{style="color:#984ea3;"}
+> [**(3) explain why it failed,**]{style="color:#984ea3;"}
+> [**(4) suggest one diagnostic check.**]{style="color:#984ea3;"}
+> [**Do not rewrite my entire analysis—just fix the error and explain.**]{style="color:#ff7f00;"}
+
 :::
 
 ---
@@ -213,18 +218,16 @@ Then expand the box to see a stronger version (based in the TRACE framework)
 
 > “I have ecological count data collected over multiple sites and years, and I want to choose an appropriate statistical model that accounts for structure in the data. Can you recommend a suitable modeling approach and explain why?”
 
+This prompt sounds careful and scientific, but it fails to **bound the answer** and **require checks**, inviting a vague or overbroad response. **Before clicking to expand this example, think about ways you could improve this prompt.**
+
 ::: {.callout-tip collapse="true" icon=false title="Click to reveal a stronger prompt (TRACE)"}
 
-**Missing tags:** [C] [E]  
-**Rubric tags addressed:** [T] [R] [A] [C] [E]
+**Missing tags:** [**[C]**]{style="color:#984ea3;"} [**[E]**]{style="color:#ff7f00;"}
 
-> “Act as an **ecology methods advisor**. I have **count data with many zeros**; samples **nested** in plots within sites; **repeated measures** over time.  
-> Compare **2–3 modeling strategies** (e.g., **negative binomial GLMM vs zero-inflated vs hurdle**), state **assumptions**, and give **diagnostics that would falsify each**.  
-> Do not claim causality; focus on defensible inference.”
+**Rubric tags addressed:** [**[T]**]{style="color:#e41a1c;"} [**[R]**]{style="color:#377eb8;"} [**[A]**]{style="color:#4daf4a;"} [**[C]**]{style="color:#984ea3;"} [**[E]**]{style="color:#ff7f00;"}
+
+> Act as [**an ecology methods advisor**]{style="color:#377eb8;"}. I am [**a graduate student in ecology with variable experience in statistical modeling**]{style="color:#4daf4a;"}. I have [**count data with many zeros; samples nested in plots within sites; repeated measures over time**]{style="color:#e41a1c;"}. Compare [**2–3 modeling strategies (e.g., negative binomial GLMM vs zero-inflated vs hurdle), state assumptions, and give diagnostics that would falsify each**]{style="color:#984ea3;"}. [**Do not claim causality; focus on defensible inference**]{style="color:#ff7f00;"}.
 :::
-
-*Why this works pedagogically:*  
-The initial prompt sounds careful and scientific, but it fails to **bound the answer** and **require checks**, inviting a vague or overbroad response.
 
 ---
 
@@ -232,29 +235,33 @@ The initial prompt sounds careful and scientific, but it fails to **bound the an
 
 > “How do I interpret this coefficient?”
 
-::: {.callout-tip collapse="true" icon=false title="Click to reveal a stronger prompt (TRACE)"}
-**Missing tags:** [T] [R] [A] [C] [E]  
-**Rubric tags addressed:** [T] [R] [A] [C] [E]
+This is another example of a prompt that is vague even by the standards of a simple web search. This approach invites a vague response or evil hallucinations by the Large Language Model. **Before clicking to expand this example, think about ways you could improve this prompt.**
 
-> “Act as a **statistical interpreter for ecology graduate students**. I’m fitting a **negative binomial GLMM** for bird counts with **canopy cover** as a predictor and **site as a random effect**.  
-> Explain how to interpret the canopy coefficient on the **link scale** and **response scale**, state the **assumptions** required for this interpretation, and describe **one way this interpretation could be misleading**.  
-> Do not claim causal effects.”
+::: {.callout-tip collapse="true" icon=false title="Click to reveal a stronger prompt (TRACE)"}
+**Missing tags:** [**\[T\]**]{style="color:#e41a1c;"} [**[R]**]{style="color:#377eb8;"} [**[A]**]{style="color:#4daf4a;"} [**[C]**]{style="color:#984ea3;"} [**[E]**]{style="color:#ff7f00;"}
+
+**Rubric tags addressed:** [**[T]**]{style="color:#e41a1c;"} [**[R]**]{style="color:#377eb8;"} [**[A]**]{style="color:#4daf4a;"} [**[C]**]{style="color:#984ea3;"} [**[E]**]{style="color:#ff7f00;"}
+
+> Act as a [**statistical interpreter for ecology graduate students**]{style="color:#377eb8;"}. I am [**a graduate student learning how to interpret fitted models rather than build them**]{style="color:#4daf4a;"}. I’m fitting a [**negative binomial GLMM for bird counts with canopy cover as a predictor and site as a random effect**]{style="color:#e41a1c;"}. Explain [**how to interpret the canopy coefficient on the link scale and response scale, state the assumptions required for this interpretation, and describe one way this interpretation could be misleading**]{style="color:#984ea3;"}. [**Do not claim causal effects**]{style="color:#ff7f00;"}.
+
 :::
 
 ---
 
-### Example 4: Checking model assumptions *(polished but incomplete)*
+### Example 4: Checking model assumptions 
 
 > “I’m using a Poisson mixed-effects model for count data with repeated measurements across sites. Can you explain the assumptions of this model and whether it’s appropriate for my analysis?”
 
+This prompt is very polished but incomplete as it lacks a set of criteria for which a good answer _must_ include. Adding such criteria helps the model craft a more useful response. **Before clicking to expand this example, think about ways you could improve this prompt.**
+
 ::: {.callout-tip collapse="true" icon=false title="Click to reveal a stronger prompt (TRACE)"}
 
-**Missing tags:** [C]  
-**Rubric tags addressed:** [T] [R] [A] [C] [E]
+**Missing tags:** [**[C]**]{style="color:#984ea3;"}  
 
-> “Act as an **ecology methods advisor**. I’m using a **Poisson GLMM** for count data with **repeated measures per site**.  
-> List the **key assumptions**, propose **2–3 diagnostics** to evaluate them, and explain what **pattern in the diagnostics** would indicate a serious problem.  
-> If information is missing, list what you need rather than guessing.”
+**Rubric tags addressed:** [**[T]**]{style="color:#e41a1c;"} [**[R]**]{style="color:#377eb8;"} [**[A]**]{style="color:#4daf4a;"} [**[C]**]{style="color:#984ea3;"} [**[E]**]{style="color:#ff7f00;"}
+
+> Act as an [**ecology methods advisor**]{style="color:#377eb8;"}. I am [**a graduate student in ecology with limited but growing experience using mixed-effects models**]{style="color:#4daf4a;"}. I’m using a [**Poisson GLMM for count data with repeated measures per site**]{style="color:#e41a1c;"}. List [**the key assumptions, propose 2–3 diagnostics to evaluate them, and explain what pattern in the diagnostics would indicate a serious problem**]{style="color:#984ea3;"}. [**If information is missing, list what you need rather than guessing**]{style="color:#ff7f00;"}.
+
 :::
 
 

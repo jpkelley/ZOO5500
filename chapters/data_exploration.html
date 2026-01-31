@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Data Exploration</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="data_exploration_files/libs/clipboard/clipboard.min.js"></script>
+<script src="data_exploration_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="data_exploration_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="data_exploration_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="data_exploration_files/libs/quarto-html/popper.min.js"></script>
+<script src="data_exploration_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="data_exploration_files/libs/quarto-html/anchor.min.js"></script>
+<link href="data_exploration_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="data_exploration_files/libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="data_exploration_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="data_exploration_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="data_exploration_files/libs/bootstrap/bootstrap-9e3ffae467580fdb927a41352e75a2e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Data Exploration</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Consider the following scenario. Being an expert in one type of analysis, you are asked (by some really awesome colleagues) to analyze a dataset that you have never seen. You meet with your colleagues; they describe the data, their goals, and their timeline; you send some appropriate follow-up questions. They answer. All seems good. You jump right into analysis. You spend two weeks (!) working on a complex analysis only to discover that your collegues failed to explain that (1) half of the data were problematic because, unbeknowst to them, one of their study subjects (yep, a jackalope) infiltrated the field crew and collected data for a month, and (2) several data points represented samples that were contaminated with jackalope saliva.</p>
+<p>Without spending time to explore the nature of the dataset –something that should be done every time– you chose to skip a vital step and wasted quite a bit of time. All of the actions downstream in your analytical workflow are now rife with issues. The obvious lesson here is to take your time with and be very systematic in your approach to data exploration. Even if you are the data collector, do not assume that you can skip the step. Data Demons always work their way into a given dataset, especially when you are at the tail end of a project or your degree.</p>
+</section>
+<section id="goals-for-this-week-week-3" class="level2">
+<h2 class="anchored" data-anchor-id="goals-for-this-week-week-3">Goals for this week (Week 3)</h2>
+<p>By the end of this week, you should be able to:</p>
+<ul>
+<li>Describe some of the advantages and disadvantages of several types of data exploration approaches</li>
+<li>Justify the removal of outliers</li>
+<li>Examine your own dataset for outliers</li>
+<li>Realize the importance of taking your good ole’ sweet time with data exploration</li>
+</ul>
+</section>
+<section id="relevant-readings" class="level2">
+<h2 class="anchored" data-anchor-id="relevant-readings">Relevant readings</h2>
+<p><em>These are not required readings. These are simply some useful references for you.</em></p>
+<ul>
+<li><a href="https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/j.2041-210X.2010.00021.x">O’Hara &amp; Kotze (2010)</a> on why you should not log transform count data.</li>
+<li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11444780/"><strong>Beltran &amp; Tarwater (2024)</strong></a> on why you should not categorize some data.</li>
+<li><a href="https://besjournals.onlinelibrary.wiley.com/doi/10.1111/j.2041-210X.2009.00001.x"><strong>Zuur et al.&nbsp;(2010)</strong></a></li>
+</ul>
+<div class="columns">
+<p>::: {.column width=““70%”} ## Introduction</p><p>In this tutorial, you will learn some of the common approaches to examine datasets for outliers and multicollinearity. To do these exercises on your own, you will need the following files:</p><ul>
+<li><code>lepusantilocapra_pelonates_experiment.csv</code></li>
+<li><code>lepusantilocapra_climate_data.csv</code></li>
+<li><code>load_packages.r</code></li>
+</ul><p>Place the data files into your <code>data</code> folder.</p>
+</div>
+<div class="column" style="width:30%;">
+<p><img src="../graphics/jackalope_graphics/muddwelling_jackalope.png" class="img-fluid"></p>
+</div>
+<p>:::::</p>
+</section>
+<section id="workspace-set-up" class="level2">
+<h2 class="anchored" data-anchor-id="workspace-set-up">Workspace set-up</h2>
+<p>You are free to organize your R Project folder in whatever way works best for you, as this course imposes very little file-structure overhead. One simple option is to create a subfolder such as <code>data/class_example_data</code> (using the <code>dir.create("data/class_example_data")</code> command to hold any example files used in class. If you need a refresher on project setup and organization, refer back to the <a href="https://jpkelley.github.io/ZOO5500/"><strong>Preparing Yourself</strong></a> section from Week 1.</p>
+<p>First, load the required packages by sourcing the <code>load_packages.r</code> file. There a number of ways to do this (I have noticed several ways that different labs at UW do this, and that is more than acceptable). For your convenience, I have provided</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"class_r_scripts/load_packages.r"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>You should include this step at the beginning of all independent R scripts. The exception is if and when you use a formal reproducible analysis workflow packages like the <code>targets</code> package, in which case you will load packages and their dependencies in another way. This will necessitate removing the <code>source</code> function below.</p>
+<hr>
+</section>
+<section id="data-ingestion" class="level2">
+<h2 class="anchored" data-anchor-id="data-ingestion">Data ingestion</h2>
+<p>These data come from a totally absolutely real experiment on a newly discovered species of jackalope, <em>Lepusantilocapra pelonates</em> (“mud-dwelling jackalope”). Researchers observed that mudflats with higher densities of <em>L. pelonate’s</em> tended to have higher dissolved oxygen. At the same time, nearby forest salt licks varied naturally, and <em>L. pelonates</em> were frequently observed foraging at them.</p>
+<p>To test whether jackalope density and salt availability had causal effects on dissolved oxygen, the researchers constructed artificial mudflats and experimentally varied the number of <em>L. pelonates</em> (0–4 individuals) and salt availability (low, medium, high). Each unique combination was represented by a single mudflat, and dissolved oxygen was measured at each site. These are the data from that totally real experiment.</p>
+<p>Let us read in these data and save it to an object called <code>d</code> (for “data”). Yes, according to best practices for naming, this could have a more informative name. Because this is (a) a singular dataset for a simple analysis, and (b) a simple class example, we will use a shorthand to prevent some extra keystrokes. But just know this is technically <em>very bad practice</em>. Already, we are flawed programmers. Let us move forward and try to forget this incident.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"class_data/lepusantilocapra_pelonates_experiment.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This was a successful (and very simple) data ingestion. (Again, there are many ways to ingest data, so use whatever you are most comfortable with.)</p>
+<p>What is the next step (assuming the data have undergone quality control checks)?</p>
+</section>
+<section id="examine-the-data-structure" class="level2">
+<h2 class="anchored" data-anchor-id="examine-the-data-structure">Examine the data structure</h2>
+<p>First, we need to check the data types that were imported; this is a critical first step, as this can let you immediately detect any red flags. Though the <code>str()</code> functions is good for checking</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(d)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   45 obs. of  3 variables:
+ $ number_jackalope: int  0 0 0 1 1 1 2 2 2 3 ...
+ $ salt_treatment  : chr  "1_low" "1_low" "1_low" "1_low" ...
+ $ oxygen_ppm      : num  0.67 0.97 0.97 2.67 1.37 4.35 3.23 3 2.17 3.23 ...</code></pre>
+</div>
+</div>
+<p>We note that <code>number_jackalope</code> is an integer. We could certainly keep it like this, but, given how few categories there are (and the fact that this was an experimental condition), we decide that it is best to convert it to a factor.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">number_jackalope =</span> <span class="fu">factor</span>(number_jackalope )) <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">salt_treatment =</span> <span class="fu">factor</span>(salt_treatment))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>You can then run <code>str(d)</code> again to see this change.</p>
+<p>Let us now examine how the treatments and the response variable are structured and if there are any statistical outliers. There are many approaches to this, and most of these formal outlier tests (Grubb’s test, Dixon’s Q test, and Rosner’s test) are based on the condition of dat normality. As such, they have context-dependent performance; that is, they fail at low sample sizes and have variable ability to detect outliers dependent on sample size. If you want to use these tests despite these weaknesses, you can find them in the <code>EnvStats</code> and <code>outliers</code> packages.</p>
+<p>It is important at this step to avoid making any inferences about the relationships. As far as you, the responsible data analyst, are concerned, there are no relationships. You are simply looking for anything odd in the dataset: spurious datapoints, data outside the range of data (though you could use the <code>range()</code> function to see this), etc. Let us conduct a simple examination using one tabular and six graphical approaches:</p>
+<ul>
+<li>Simple <code>summary</code></li>
+<li>Boxplot (Tukey-style)</li>
+<li>Violin plot</li>
+<li>Interaction plot</li>
+<li>Scatterplot</li>
+<li>Density plot</li>
+<li>Heatmap</li>
+</ul>
+<section id="simple-summary-and-examination-of-data-structure" class="level4">
+<h4 class="anchored" data-anchor-id="simple-summary-and-examination-of-data-structure">Simple <code>summary</code> and examination of data structure</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(d)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> number_jackalope  salt_treatment   oxygen_ppm    
+ 0:9              1_low   :15     Min.   : 0.670  
+ 1:9              2_medium:15     1st Qu.: 3.000  
+ 2:9              3_high  :15     Median : 5.370  
+ 3:9                              Mean   : 7.456  
+ 4:9                              3rd Qu.:12.300  
+                                  Max.   :19.560  </code></pre>
+</div>
+</div>
+<p>This returns information about range, median value, and sample size within groups. Use this first to discover any major issues.</p>
+<p>You can then graphically view aspects of your raw dataset. So, let us create a few plots using the ggplot2 package. Please refer to the <code>ggplot2</code> cheat sheet for more information about this. Note that the following code does not use the pipe operator; this is just another way of doing things (it is good to see both in practice).</p>
+</section>
+<section id="boxplot-tukey-style" class="level4">
+<h4 class="anchored" data-anchor-id="boxplot-tukey-style">Boxplot (Tukey-style)</h4>
+<p>This is one of the oldest known ways of examining a data distribution concurrent with putative outliers. There are a few issues with the way</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> number_jackalope, <span class="at">y =</span> oxygen_ppm, <span class="at">fill =</span> salt_treatment)) <span class="sc">+</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Oxygen ppm by # jackalope and salt treatment"</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"number of jackalope"</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Oxygen ppm"</span>) <span class="sc">+</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="data_exploration_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="violin-plot" class="level4">
+<h4 class="anchored" data-anchor-id="violin-plot">Violin plot</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> number_jackalope, <span class="at">y =</span> oxygen_ppm, <span class="at">fill =</span> salt_treatment)) <span class="sc">+</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="at">trim =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"distribution of oxygen ppm by # jackalope and salt treatment"</span>,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"number of jackalopes"</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"oxygen ppm"</span>) <span class="sc">+</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="data_exploration_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Because violin plots do not explicitly show outliers, they may be worse than Tukey-style boxplots for visual data exploration. Furthermore, violin plots may be harder to interpret than boxplot, may be space-inefficient (in terms of Tufte’s well-known call for reduced non-data ink in visualizations), and may smooth over important details of the data (i.e.&nbsp;it’s difficult to visually assess where the 25th and 75th percentiles are). Violin plots also can be misleading, especially with small sample sizes. Be cautious of their utility.</p>
+</section>
+<section id="interaction-plot" class="level4">
+<h4 class="anchored" data-anchor-id="interaction-plot">Interaction plot</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> number_jackalope, <span class="at">y =</span> oxygen_ppm)) <span class="sc">+</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>salt_treatment) <span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Oxygen ppm by number of jackalopes across salt treatments"</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"# jackalope"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"oxygen ppm"</span>) <span class="sc">+</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="data_exploration_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This visualization can give you a good idea about the variance within each unique treatment combination.</p>
+</section>
+<section id="scatter-plot" class="level4">
+<h4 class="anchored" data-anchor-id="scatter-plot">Scatter plot</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> number_jackalope, <span class="at">y =</span> oxygen_ppm, <span class="at">color =</span> salt_treatment, <span class="at">shape =</span> salt_treatment)) <span class="sc">+</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">height =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"oxygen ppm scatter plot by # jackalope and salt treatment"</span>,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"# jackalope"</span>,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"oxygen ppm"</span>) <span class="sc">+</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="data_exploration_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="density-plot" class="level4">
+<h4 class="anchored" data-anchor-id="density-plot">Density plot</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> oxygen_ppm, <span class="at">fill =</span> salt_treatment)) <span class="sc">+</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"density of oxygen ppm by salt treatment"</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"oxygen ppm"</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"density"</span>) <span class="sc">+</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="data_exploration_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This gives us a good idea of the relative spread of each of salt_treatment response. We can also produce the same plot, but we could split it by jackalope treatment instead. (In this case, it’s a bit messy.)</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> oxygen_ppm, <span class="at">fill =</span> number_jackalope)) <span class="sc">+</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"density of oxygen ppm by # jackalope"</span>,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"oxygen ppm"</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"density"</span>) <span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="data_exploration_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="heatmap" class="level4">
+<h4 class="anchored">Heatmap</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(number_jackalope, salt_treatment) <span class="sc">|&gt;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_oxygen =</span> <span class="fu">mean</span>(oxygen_ppm), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> number_jackalope, <span class="at">y =</span> salt_treatment, <span class="at">fill =</span> mean_oxygen)) <span class="sc">+</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"lightblue"</span>, <span class="at">high =</span> <span class="st">"darkblue"</span>) <span class="sc">+</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"heatmap: mean oxygen ppm by # jackalope and salt treatment"</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"number of jackalope"</span>,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"salt treatment"</span>,</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"mean oxygen ppm"</span>) <span class="sc">+</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="data_exploration_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Pipes: <code>base</code> versus <code>magrittr</code>/<code>tidyverse</code> pipes
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 30%">
+<col style="width: 56%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Feature</th>
+<th><code>|&gt;</code> (<code>base</code> R)</th>
+<th><code>%&gt;%</code> (<code>magrittr</code> / <code>tidyverse</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Introduced</td>
+<td>R 4.1.0 (<code>base</code> R)</td>
+<td>Earlier (via <code>**</code>magrittr<code>**</code>, widely adopted by tidyverse)</td>
+</tr>
+<tr class="even">
+<td>Requires package</td>
+<td>No</td>
+<td>Yes (<code>library(magrittr)</code> or <code>library(tidyverse)</code>)</td>
+</tr>
+<tr class="odd">
+<td>Default recommendation</td>
+<td>Preferred going forward</td>
+<td>Legacy / tidyverse-centric</td>
+</tr>
+<tr class="even">
+<td>Placeholder support</td>
+<td>No implicit placeholder</td>
+<td>Supports <code>.</code> placeholder</td>
+</tr>
+<tr class="odd">
+<td>Example placeholder use</td>
+<td>Not possible</td>
+<td><code>df %&gt;% mutate(x = . + 1)</code></td>
+</tr>
+<tr class="even">
+<td>Anonymous functions</td>
+<td>Uses <code>\(x)</code> syntax</td>
+<td>Uses <code>.</code> or <code>{}</code> blocks</td>
+</tr>
+<tr class="odd">
+<td>Example</td>
+<td><code>x |&gt; mean()</code></td>
+<td><code>x %&gt;% mean()</code></td>
+</tr>
+<tr class="even">
+<td>Readability (simple pipelines)</td>
+<td>Very clean</td>
+<td>Very clean</td>
+</tr>
+<tr class="odd">
+<td>Readability (complex pipelines)</td>
+<td>Can become verbose</td>
+<td>Often clearer due to <code>.</code></td>
+</tr>
+<tr class="even">
+<td>Compatibility with older R</td>
+<td>Requires R ≥ 4.1</td>
+<td>Works in older R</td>
+</tr>
+<tr class="odd">
+<td>Debugging / tooling</td>
+<td>Excellent (native)</td>
+<td>Excellent</td>
+</tr>
+<tr class="even">
+<td>Performance</td>
+<td>Slightly faster (base)</td>
+<td>Slight overhead (negligible)</td>
+</tr>
+<tr class="odd">
+<td>Teaching clarity</td>
+<td>Emphasizes base R</td>
+<td>️ Adds extra abstraction</td>
+</tr>
+<tr class="even">
+<td>Future-proofing</td>
+<td>Yes</td>
+<td>️ Likely to persist but not expand</td>
+</tr>
+<tr class="odd">
+<td>Works with tidyverse verbs</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>::</p>
+<p>This is not particularly useful for detecting data anomalies, but it could be useful for helping you understand where data may be sparse (i.e.&nbsp;low sample sizes) or where there may be missing combinations of treatments (which can lead to lack of model convergence).</p>
+<p>Now that you’ve explored your data a bit, it’s time to get to the business of formally detecting outliers.</p>
+<section id="step-1-identifying-univariate-outliers-before-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-identifying-univariate-outliers-before-analysis">Step 1: Identifying univariate outliers (before analysis)</h2>
+<p>Visual inspection is often the best way to identify outliers. The following code takes our dataset (d) and then sends it forward to the ggplot function. As you read on the cheat sheet, you need to set what is called an “aesthetic” (abbreviated to “aes” in the function) that contains what you want to be your x and y variables. You can also set the fill color to vary by salt_treatments too. Then, the next lines add some axis and graph labels and set a theme (i.e.&nbsp;changes colors of the whole plotting area).</p>
+<p>Note that the native pipe operator <code>|&gt;</code> is used here.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> salt_treatment, <span class="at">y =</span> oxygen_ppm, <span class="at">fill =</span> salt_treatment)) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Boxplot by salt treatment"</span>, <span class="at">x =</span> <span class="st">"salt_treatment"</span>, <span class="at">y =</span> <span class="st">"oxygen_ppm"</span>) <span class="sc">+</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="data_exploration_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Are there outliers? Recall that Tukey boxplots (as we have here) can tell us if there are potential outliers. This is how Tukey-style boxplots are defined. In our boxplot, we see two black dots each group that seem to be outside of the normal range of those groups. These are potential outliers. You should go back and examine these datapoints to see if there’s anything strange about them. But be aware of how Tukey-style boxplots calculate outliers; it’s a bit nefarious. Let’s also examine the boxplots by different L. pelonates densities (i.e.&nbsp;the jackalope density treatments):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> number_jackalope, <span class="at">y =</span> oxygen_ppm, <span class="at">fill =</span> number_jackalope)) <span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Boxplot by number of jackalope"</span>, <span class="at">x =</span> <span class="st">"number_jackalope"</span>, <span class="at">y =</span> <span class="st">"oxygen_ppm"</span>) <span class="sc">+</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="data_exploration_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The Tukey boxplot is not showing any black “outlier” dots in the groups. So, using this approach, there don’t seem to be any outliers.</p>
+<p>You can repeat this process on every variable in your dataset. It’s generally effective for detecting major outliers (anomalous values, etc.).</p>
+</section>
+<section id="step-3-inspecting-for-multicollinearity" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-inspecting-for-multicollinearity">Step 3: Inspecting for multicollinearity</h2>
+<p>The jackalopeologists then conducted a preliminary quantification of the climate in which L. pelonates was found. They used remote sensors to measure humidity, precipitation, temperature, temperature variability, and heating degree days. We don’t think we can include all the variables in our statistical model, so we want to first inspect if any of the variables are correlated (i.e.&nbsp;they tell us redundant information). Let’s read in these climate data and save it to an object called “climate”:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>climate <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"class_data/lepusantilocapra_climate_data.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>And then look at the structure of the data:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(climate)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   37 obs. of  5 variables:
+ $ humidity        : int  1 1 3 1 1 0 2 0 3 0 ...
+ $ precipitation   : int  692 874 852 990 650 741 1301 368 1148 669 ...
+ $ temperature     : num  94 100 106 112 116 ...
+ $ temp_variation  : num  8.2 8.3 8.6 9.2 8.95 9.1 9.35 9.45 10.4 9.4 ...
+ $ heating_deg_days: num  2710 2514 2334 2156 2048 ...</code></pre>
+</div>
+</div>
+<p>Normally, we would have the associated metadata so that you could see the units for each of these variables. For this example, the units are not important.</p>
+<p>We will proceed to visually examine multicollinearity (correlation) between these climate metrics, but we will also include–as a basic measure of strength of any correlation– the Pearson correlation metric. Let’s use a pairwise plot to visually inspect these. Note that the correlation coefficient (which varies between 0-1) is on the opposite diagonal from the graph.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>climate <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggpairs</span>(</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">upper =</span> <span class="fu">list</span>(<span class="at">continuous =</span> <span class="st">"cor"</span>),</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">lower =</span> <span class="fu">list</span>(<span class="at">continuous =</span> <span class="st">"smooth"</span>),</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">diag  =</span> <span class="fu">list</span>(<span class="at">continuous =</span> <span class="st">"barDiag"</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="data_exploration_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># "upper" = Show Pearson correlation coefficients in the upper panel</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># "lower" = Optionally show scatterplots with smoothing in the lower panel</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># "diag"  = Optionally show histograms on the diagonal</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The <code>GGally::ggpairs</code> function markedly improves upon similar functionality of base R. What do we see? We see that:</p>
+<ul>
+<li>humidity and precipitation are strongly and positively correlated (r = 0.648)</li>
+<li>temperature and temperature variation are strongly and positively correlated (r = 0.584)</li>
+<li>temperature and heating degree days are strongly and negatively correlated (r = -0.998)</li>
+<li>temperature variation and heating degree days are strongly and negatively correlated (r = -0.588)</li>
+</ul>
+<p>So, what to do, what to do, what to do? The next part is one solution to this issue. We clearly have some variables that might be providing redundant information. This could impact our modeling (specifically inflating the variance of a given regression coefficient). We can explicitly examine this using Variance Inflation Factors (VIFs), which are calculated for each term in a model. There are options for VIFs applied to both continuous and categorical variables. Let us do this for continuous variables for these climate data. Most available functions in R require regression models; however, there are some approaches–such as the <code>usdm</code> package–that require only data frames of multiple variables. So, let us use that.:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>vif_results <span class="ot">&lt;-</span> usdm<span class="sc">::</span><span class="fu">vif</span>(climate)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>vif_results</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         Variables        VIF
+1         humidity   1.774591
+2    precipitation   1.764116
+3      temperature 244.453457
+4   temp_variation   1.555291
+5 heating_deg_days 246.129937</code></pre>
+</div>
+</div>
+<p>This is a clear example that two variables, temperature and heating_deg_days, are highly correlated with a number of other variables. That is, they potentially provide redundant information.</p>
+<p>If variables are negatively correlated, consider retaining them both. From there, you can decide to:</p>
+<ul>
+<li>Eliminate one of the positively correlated variables from our analysis.</li>
+<li>Conduct a factor-reduction analysis to create a new variable that captures the correlated variation between correlated variables.</li>
+</ul>
+<p>The former sounds lazy and arbitrary. Let us proceed with a factor reduction approach. For this, one of the most widely accepted approaches is a principal components analysis (PCA). There are many related factor reduction methods out there as well that may work better for non-normal data, etc., but PCA generally works fairly well.</p>
+<p>Our first step is to conduct a PCA without specifying how many new components (new variables) should be generated.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>pca_results <span class="ot">&lt;-</span> <span class="fu">princomp</span>(</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span> humidity <span class="sc">+</span> precipitation <span class="sc">+</span> temperature <span class="sc">+</span> temp_variation <span class="sc">+</span> heating_deg_days,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> climate,</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">cor =</span> <span class="cn">TRUE</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Note that the above code does not work with pipes. This behavior happens sometimes with <code>tidy</code>.</p>
+<p>Let us now examine the results output, specifically the standard deviation values (i.e.&nbsp;“Comp.1”, etc.). If you square these values, you will have what is called an <em>eigenvalue</em>, where values &gt;1 indicate that the new principal component accounts for more variance than the original variables. So, your first step is square the standard deviations and then use this <em>eigenvalue</em> to decide how many new components (i.e.&nbsp;new variables) to retain.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>pca_results<span class="sc">$</span>sdev <span class="sc">^</span> <span class="dv">2</span>  <span class="co"># this squares the standard deviations</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Comp.1      Comp.2      Comp.3      Comp.4      Comp.5 
+2.688766244 1.452196831 0.507234299 0.349760919 0.002041707 </code></pre>
+</div>
+</div>
+<p>It looks like the first two components work well. Now, we want to force a PCA to contain just two components, and we want those two variables to be as independent as follows. We therefore conduct what is called a rotated PCA to achieve maximum information of each component. Note that we are now using the <code>principal</code> function found in the <code>psych</code> package:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>pca_results_rotated <span class="ot">&lt;-</span> <span class="fu">principal</span>(climate, <span class="at">nfactors =</span> <span class="dv">2</span>, <span class="at">rotate =</span> <span class="st">"varimax"</span>, <span class="at">covar =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>pca_results_rotated<span class="sc">$</span>loadings</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Loadings:
+                 RC1    RC2   
+humidity         -0.124  0.892
+precipitation            0.905
+temperature       0.944 -0.196
+temp_variation    0.799       
+heating_deg_days -0.945  0.196
+
+                 RC1   RC2
+SS loadings    2.444 1.697
+Proportion Var 0.489 0.339
+Cumulative Var 0.489 0.828</code></pre>
+</div>
+</div>
+<p>Let’s dissect this. First, look at the loadings table. These show the linear correlations between the rotated principal components (RC1 and RC2) and the original climate variables. Therefore, RC1 is strongly correlated with temperature, temperature variation, and heating degree days, whereas RC2 is correlated with humidity and precipitation.</p>
+<p>You can see this generally reflected when you plot PCA axes of variation. A safe default is to biplot the <code>princomp()</code> object:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pca_results)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="data_exploration_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>One advantage of PCA/ICA or other factor reduction methods is that you can use expert knowledge to decide on the number of resulting axes. Certainly, in the end, these may not capture much total variation. This flexibility may improve interpretability.</p>
+<p>We can then create two new rotated scores for each observation (row). These are just new variables that capture the variation attributable to the set of variables that correlated with each rotated component (PC1, PC2, etc.). Usually, it’s good to consider all rotated components that add to &gt;80% of cumulative variation. You can output these new variables (“scores”) by running the following and then inputting these as new columns in your dataset. Then, run the model with each of these as factors in your model(s):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>pca_results_rotated<span class="sc">$</span>scores</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            RC1         RC2
+1  -2.297743319 -0.93979095
+2  -1.615079146 -0.56215540
+3  -0.742103374  0.43524344
+4   0.168491793 -0.07924539
+5   0.175054065 -0.81591440
+6   0.319233549 -1.07322356
+7  -0.151659949  1.05198229
+8  -1.153591365 -1.67740452
+9   1.731717862  1.53557338
+10  1.531908063 -1.13298910
+11 -0.710144408 -0.01812957
+12 -0.835747218  0.30459876
+13  0.642890086 -0.30633196
+14 -0.163440060  0.94065321
+15 -0.005344451 -0.47011057
+16  0.593689628  0.62454354
+17 -0.537374119 -0.19831498
+18  1.575800238  0.43229319
+19  1.236151237  0.89397481
+20  0.837959614 -1.25849702
+21  0.815647774 -0.81482061
+22 -0.001440188  0.48095893
+23  0.684009759  0.72280254
+24  0.679808842  0.25259784
+25 -0.882679835 -0.23250232
+26  0.367779897  1.47725934
+27 -0.619318068 -1.21317733
+28 -0.983554574 -0.13256898
+29 -0.027524574 -0.59730235
+30  1.368900971 -0.86595054
+31  1.536240251 -0.64932937
+32  0.688559658 -0.20506311
+33 -0.105285111 -0.35740682
+34 -1.659241971 -0.15264062
+35 -0.749029761  0.32033636
+36 -0.444050160  0.60008159
+37 -1.269491637  3.67997024</code></pre>
+</div>
+</div>
+</section>
+</div>
+</div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

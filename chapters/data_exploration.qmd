@@ -11,18 +11,63 @@ execute:
 editor: visual
 ---
 
+## Introduction
+
+Consider the following scenario. Being an expert in one type of analysis, you are asked (by some really awesome colleagues) to analyze a dataset that you have never seen. You meet with your colleagues; they describe the data, their goals, and their timeline; you send some appropriate follow-up questions. They answer. All seems good. You jump right into analysis. You spend two weeks (!) working on a complex analysis only to discover that your collegues failed to explain that (1) half of the data were problematic because, unbeknowst to them, one of their study subjects (yep, a jackalope) infiltrated the field crew and collected data for a month, and (2) several data points represented samples that were contaminated with jackalope saliva.
+
+Without spending time to explore the nature of the dataset –something that should be done every time– you chose to skip a vital step and wasted quite a bit of time. All of the actions downstream in your analytical workflow are now rife with issues. The obvious lesson here is to take your time with and be very systematic in your approach to data exploration. Even if you are the data collector, do not assume that you can skip the step. Data Demons always work their way into a given dataset, especially when you are at the tail end of a project or your degree.
+
+## Goals for this week (Week 3)
+
+By the end of this week, you should be able to:
+
+* Describe some of the advantages and disadvantages of several types of data exploration approaches
+* Justify the removal of outliers
+* Examine your own dataset for outliers
+* Realize the importance of taking your good ole’ sweet time with data exploration
+
+## Relevant readings
+
+_These are not required readings. These are simply some useful references for you._
+
+* [O'Hara & Kotze (2010)](https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/j.2041-210X.2010.00021.x) on why you should not log transform count data.
+* [**Beltran & Tarwater (2024)**](https://pmc.ncbi.nlm.nih.gov/articles/PMC11444780/) on why you should not categorize some data.
+* [**Zuur et al. (2010)**](https://besjournals.onlinelibrary.wiley.com/doi/10.1111/j.2041-210X.2009.00001.x)
+
 ```{r}
 #| label: setup
 #| include: false
 
 knitr::opts_chunk$set(error = FALSE, warning = FALSE, message = FALSE)
 
+# Core plotting & tidy data
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(stringr)
+library(lubridate)
+library(tidyverse)   # meta-package (includes several above)
+
+# Data reshaping & I/O
+library(reshape2)
+library(rio)
+
+# Modeling & inference
+library(mgcv)
+library(MASS)
+library(MuMIn)
+library(insight)
+library(ggeffects)
+library(GGally)
+library(Matrix)
+library(fields)
+library(psych)
+
 ```
 
-
-::::: columns
-::: {.column width=""70%"}
-## Introduction
+::: columns
+::: {.column width=""70%"} \## Introduction
 
 In this tutorial, you will learn some of the common approaches to examine datasets for outliers and multicollinearity. To do these exercises on your own, you will need the following files:
 
@@ -36,13 +81,14 @@ Place the data files into your `data` folder.
 ::: {.column width="30%"}
 ![](../graphics/jackalope_graphics/muddwelling_jackalope.png)
 :::
+
 :::::
 
 ## Workspace set-up
 
 You are free to organize your R Project folder in whatever way works best for you, as this course imposes very little file-structure overhead. One simple option is to create a subfolder such as `data/class_example_data` (using the `dir.create("data/class_example_data")` command to hold any example files used in class. If you need a refresher on project setup and organization, refer back to the [**Preparing Yourself**](https://jpkelley.github.io/ZOO5500/) section from Week 1.
 
-First, load the required packages by sourcing the `load_packages.r` file. There a number of ways to do this (I have noticed several ways that different labs at UW do this, and that is more than acceptable). For your convenience, I have provided 
+First, load the required packages by sourcing the `load_packages.r` file. There a number of ways to do this (I have noticed several ways that different labs at UW do this, and that is more than acceptable). For your convenience, I have provided
 
 ```{r}
 #| eval: false
@@ -50,10 +96,7 @@ First, load the required packages by sourcing the `load_packages.r` file. There 
 source("class_r_scripts/load_packages.r")
 ```
 
-
-
 You should include this step at the beginning of all independent R scripts. The exception is if and when you use a formal reproducible analysis workflow packages like the `targets` package, in which case you will load packages and their dependencies in another way. This will necessitate removing the `source` function below.
-
 
 ------------------------------------------------------------------------
 
@@ -63,19 +106,19 @@ These data come from a totally absolutely real experiment on a newly discovered 
 
 To test whether jackalope density and salt availability had causal effects on dissolved oxygen, the researchers constructed artificial mudflats and experimentally varied the number of *L. pelonates* (0–4 individuals) and salt availability (low, medium, high). Each unique combination was represented by a single mudflat, and dissolved oxygen was measured at each site. These are the data from that totally real experiment.
 
-Let us read in these data and save it to an object called `d` (for “data”). Yes, according to best practices for naming, this could have a more informative name. Because this is (a) a singular dataset for a simple analysis, and (b) a simple class example, we will use a shorthand to prevent some extra keystrokes. But just know this is technically _very bad practice_. Already, we are flawed programmers. Let us move forward and try to forget this incident.
+Let us read in these data and save it to an object called `d` (for “data”). Yes, according to best practices for naming, this could have a more informative name. Because this is (a) a singular dataset for a simple analysis, and (b) a simple class example, we will use a shorthand to prevent some extra keystrokes. But just know this is technically *very bad practice*. Already, we are flawed programmers. Let us move forward and try to forget this incident.
 
 ```{r}
 d <- read.csv("class_data/lepusantilocapra_pelonates_experiment.csv")
 ```
 
-This was a successful (and very simple) data ingestion. (Again, there are many ways to ingest data, so use whatever you are most comfortable with.) 
+This was a successful (and very simple) data ingestion. (Again, there are many ways to ingest data, so use whatever you are most comfortable with.)
 
 What is the next step (assuming the data have undergone quality control checks)?
 
 ## Examine the data structure
 
-First, we need to check the data types that were imported; this is a critical first step, as this can let you immediately detect any red flags. Though the `str()` functions is good for checking 
+First, we need to check the data types that were imported; this is a critical first step, as this can let you immediately detect any red flags. Though the `str()` functions is good for checking
 
 ```{r}
 str(d)
@@ -201,6 +244,28 @@ d |>
        fill = "mean oxygen ppm") +
   theme_minimal()
 ```
+
+::: {.callout-warning collapse=true}
+## Pipes: `base` versus `magrittr`/`tidyverse` pipes
+
+| Feature | `|>` (`base` R) | `%>%` (`magrittr` / `tidyverse`) |
+|--------|-------------------|-----------------------------------|
+| Introduced | R 4.1.0 (`base` R) | Earlier (via `**`magrittr`**`, widely adopted by tidyverse) |
+| Requires package | No | Yes (`library(magrittr)` or `library(tidyverse)`) |
+| Default recommendation | Preferred going forward | Legacy / tidyverse-centric |
+| Placeholder support | No implicit placeholder | Supports `.` placeholder |
+| Example placeholder use | Not possible | `df %>% mutate(x = . + 1)` |
+| Anonymous functions | Uses `\(x)` syntax | Uses `.` or `{}` blocks |
+| Example | `x |> mean()` | `x %>% mean()` |
+| Readability (simple pipelines) | Very clean | Very clean |
+| Readability (complex pipelines) | Can become verbose | Often clearer due to `.` |
+| Compatibility with older R | Requires R ≥ 4.1 |  Works in older R |
+| Debugging / tooling | Excellent (native) | Excellent |
+| Performance | Slightly faster (base) | Slight overhead (negligible) |
+| Teaching clarity | Emphasizes base R |️ Adds extra abstraction |
+| Future-proofing | Yes |️ Likely to persist but not expand |
+| Works with tidyverse verbs | Yes | Yes |
+::
 
 This is not particularly useful for detecting data anomalies, but it could be useful for helping you understand where data may be sparse (i.e. low sample sizes) or where there may be missing combinations of treatments (which can lead to lack of model convergence).
 

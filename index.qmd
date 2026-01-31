@@ -17,9 +17,8 @@ numbered: true
 :::
 
 ## Quicklinks {.unnumbered}
+:::: columns
 
-
-::::: columns
 ::: {.column width="30%"}
 
 ::: {.callout-note icon=false collapse=true}
@@ -28,9 +27,11 @@ numbered: true
 [Collaborative Statistics References](https://docs.google.com/document/d/1abc9-8_gHdmGDlnbElgdKHY7udbbKJ33KH7Cckb9Vyg/edit?usp=sharing)
 :::
 
-::: {.column width="2%"}
 :::
 
+::: {.column width="4%"}
+
+:::
 
 ::: {.column width="30%"}
 
@@ -39,10 +40,11 @@ numbered: true
 
 [YAML Metadata Template (general)](templates/metadata_template.yaml)
 :::
-:::
+
 :::
 
-::: {.column width="2%"}
+::: {.column width="4%"}
+
 :::
 
 ::: {.column width="30%"}
@@ -50,13 +52,12 @@ numbered: true
 ::: {.callout-tip icon=false collapse=true}
 ## **Assignment templates**
 
-[Assignment 01 (week 1) template](templates/01_template.qmd)
+[Assignment 01 (week 1)](templates/01_template.qmd)
 :::
 
 :::
-:::::
 
-
+::::
 
 
 ---

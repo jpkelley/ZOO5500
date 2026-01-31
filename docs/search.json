@@ -1005,7 +1005,7 @@
     "href": "chapters/statistical_aphorisms.html#some-larger-scale-advice-before-moving-into-modeling",
     "title": "15  Statistical Philosophy",
     "section": "",
-    "text": "A set of principles that consistently guides how you think about data, models, uncertainty, and decisions.\n\n\n\n\n\n\n\n\nTip**Keep your eyes out!\n\n\n\n\n\nLook and listen to your graduate student peers, postdoctoral researchers, and faculty who you interact with and pay close attention to the different statistical perspectives that exist. It’s a fascinating amount of variation! One good example is how different practitioners interpret the output from multimodel (AIC, BIC, or DIC) comparisons. Whenever you hear a different perspective, ask the researcher about how the philosophy that guides their inferential decisions.",
+    "text": "A set of principles that consistently guides how you think about data, models, uncertainty, and decisions.\n\n\n\n\n\n\n\n\nTipKeep your eyes out!\n\n\n\n\n\nLook and listen to your graduate student peers, postdoctoral researchers, and faculty who you interact with and pay close attention to the different statistical perspectives that exist. It’s a fascinating amount of variation! One good example is how different practitioners interpret the output from multimodel (AIC, BIC, or DIC) comparisons. Whenever you hear a different perspective, ask the researcher about how the philosophy that guides their inferential decisions.",
     "crumbs": [
       "Part I: Reproducible Analyses",
       "<span class='chapter-number'>15</span>  <span class='chapter-title'>Statistical Philosophy</span>"

@@ -12,7 +12,7 @@ More than any single method, R (or Python) package, or complex statistical model
 In other words, a good statistical philosophy is not a set of rules; it does not tell you exactly what to do in every situation. Instead, it functions to reduce bias, prevent analytical wandering, promote clarity, encourage efficiency. Most importantly, a good statistical philosophy evolves with you, as you learn more. I will offer a set of guiding principles and aphorisms early in the course. You should modify them, reject them, or replace them entirely. What matters is that you have something guiding your choices. This is how you become consistent, thoughtful, and credible as a scientist rather than someone who simply runs analyses.
 
 ::: {.callout-tip collapse=true}
-### **Keep your eyes out! 
+### **Keep your eyes out!** 
 
 Look and listen to your graduate student peers, postdoctoral researchers, and faculty who you interact with and pay close attention to the different statistical perspectives that exist. It's a fascinating amount of variation! One good example is how different practitioners interpret the output from multimodel (AIC, BIC, or DIC) comparisons. Whenever you hear a different perspective, ask the researcher about how the philosophy that guides their inferential decisions.  
 :::
@@ -22,7 +22,7 @@ What follows are two components. First, I describe four statistical aphorisms. T
 ## Four Statistical Aphorisms
 
 ::: {.callout-note icon=false collapse=true}
-### Aphorism #1: Accept imperfection
+### **Aphorism #1: Accept imperfection**
 
 Beware perfection. In data analysis, one can be paralyzed by by the moving target of the *perfect* solution. But what does *perfection* really mean in practice? Does it mean that an analysis looks complex enough to impress your colleagues or instructors, even if it is does not match the scope or intent of your questions (or, worse yet, is blatantly incorrect)? Is it an analysis that works flawlessly the first time, right out of the box? Or is it one that is quickly built and deployed but also hides critical assumptions or produces error-filled predictions? 
 
@@ -39,14 +39,14 @@ Watson-Watt’s advice should remind us that, in dynamic and complex fields such
 In short (as as you know), perfection is often the enemy of good progress. By purposefully embracing imperfection, you will be able to better learn, iterate, and produce work that is timely, practical, and ultimately more impactful. 
 :::
 ::: {.callout-note icon=false collapse=true}
-### Aphorism #2: Embrace complexity.
+### **Aphorism #2: Embrace complexity.**
 
 There is a reason why my lab is called the Behavioral Complexity Lab. Ecological and biological systems are wonderfully complex, thrillingly messy, and often only partially observed. Pretending that such complexities do not exist does not make your analysis stronger or more robust; it just makes the analysis less honest and transparent. Actively embracing complexity does not mean building the most complicated model you can imagine. It means acknowledging that the process generating your data is rarely simple and that oversimplification might be very costly.
 
 At the same time, complexity must be earned. Adding complex model structure, more parameters, or more nested hierarchical layers should be motivated by expert knowledge of biology (at any level) or study design, not by the existence of a published paper, an established method, or a online tutorial. Tis better to manage complexity rather than avoid it (mainly because complexity is all around us). Good analysts learn how to represent complexity in ways that are interpretable, testable, and aligned with the question being asked.
 :::
 ::: {.callout-note icon=false collapse=true}
-### Aphorism #3: Beware of Armadillo Burrows.
+### **Aphorism #3: Beware of Armadillo Burrows.**
 
 This is based on a real sign I saw on a hiking trail in southern Brazil, and I thought it was a good metaphorical reminder to not fall into someone else’s statistical trap! 
 
@@ -56,7 +56,7 @@ The assignments in this course will repeatedly (*ad nauseum*) ask you to justify
 :::
 
 ::: {.callout-note icon=false collapse=true}
-### Aphorism #4: Beware paralysis of analysis.
+### **Aphorism #4: Beware paralysis of analysis.**
 
 There is a point at which conducting more data exploration, running more (and different) models, and sifting through more diagnostics stop improving understanding and start delaying decisions. This is *paralysis of analysis*, and it is insidious. It often shows up as endless model tweaking, perpetual searching for the perfect model structure, or reluctance to commit to an inferential path (which can lead to never-ending arguments with co-authors),
 

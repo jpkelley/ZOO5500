@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Project Scoping – Quantitative Analysis of (Messy) Field Data</title>
+<title>18&nbsp; Tool 1: Outliers – Quantitative Analysis of (Messy) Field Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +65,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/ai_prompting.html" rel="next">
-<link href="../chapters/assignment_grades.html" rel="prev">
+<link href="../chapters/tutorial_data_exploration.html" rel="next">
+<link href="../chapters/data_exploration_toolkit.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -71,6 +106,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -84,7 +148,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../index.html">Course Overview</a></li><li class="breadcrumb-item"><a href="../chapters/project_scoping.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Project Scoping</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/data_exploration_intro.html">Part II: Chaos to Columns</a></li><li class="breadcrumb-item"><a href="../chapters/outliers.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Tool 1: Outliers</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -115,13 +179,13 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Course Overview</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
@@ -166,7 +230,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/project_scoping.html" class="sidebar-item-text sidebar-link active">
+  <a href="../chapters/project_scoping.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Project Scoping</span></span></a>
   </div>
 </li>
@@ -238,13 +302,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
  <span class="menu-text">Part II: Chaos to Columns</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/data_exploration_intro.html" class="sidebar-item-text sidebar-link">
@@ -259,7 +323,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/outliers.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/outliers.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Tool 1: Outliers</span></span></a>
   </div>
 </li>
@@ -289,21 +353,26 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#the-big-idea-pick-a-data-analysis-project-that-benefits-from-the-course-topics" id="toc-the-big-idea-pick-a-data-analysis-project-that-benefits-from-the-course-topics" class="nav-link active" data-scroll-target="#the-big-idea-pick-a-data-analysis-project-that-benefits-from-the-course-topics">The big idea: pick a data analysis project that benefits from the course topics</a></li>
-  <li><a href="#a-practical-scoping-checklist" id="toc-a-practical-scoping-checklist" class="nav-link" data-scroll-target="#a-practical-scoping-checklist">A practical scoping checklist</a></li>
-  <li><a href="#examples-of-good-vs.-bad-scope" id="toc-examples-of-good-vs.-bad-scope" class="nav-link" data-scroll-target="#examples-of-good-vs.-bad-scope">Examples of good vs.&nbsp;bad scope</a></li>
-  <li><a href="#scope-down-moves-that-work-and-feel-good" id="toc-scope-down-moves-that-work-and-feel-good" class="nav-link" data-scroll-target="#scope-down-moves-that-work-and-feel-good">“Scope down” moves that work (and feel good)</a></li>
-  <li><a href="#a-final-recommendation-choose-the-project-youll-revisit-after-the-course" id="toc-a-final-recommendation-choose-the-project-youll-revisit-after-the-course" class="nav-link" data-scroll-target="#a-final-recommendation-choose-the-project-youll-revisit-after-the-course">A final recommendation: choose the project you’ll revisit after the course</a></li>
+  <li><a href="#tool-1-assessing-potential-outliers" id="toc-tool-1-assessing-potential-outliers" class="nav-link active" data-scroll-target="#tool-1-assessing-potential-outliers"><span class="header-section-number">18.1</span> Tool #1: Assessing Potential Outliers</a></li>
+  <li><a href="#what-is-an-outlier" id="toc-what-is-an-outlier" class="nav-link" data-scroll-target="#what-is-an-outlier"><span class="header-section-number">18.2</span> What is an outlier?</a></li>
+  <li><a href="#types-of-outliers" id="toc-types-of-outliers" class="nav-link" data-scroll-target="#types-of-outliers"><span class="header-section-number">18.4</span> Types of outliers</a></li>
+  <li><a href="#univariate-outliers" id="toc-univariate-outliers" class="nav-link" data-scroll-target="#univariate-outliers"><span class="header-section-number">18.5</span> Univariate Outliers</a>
+  <ul class="collapse">
+  <li><a href="#graphical-approaches-to-univariate-outliers" id="toc-graphical-approaches-to-univariate-outliers" class="nav-link" data-scroll-target="#graphical-approaches-to-univariate-outliers"><span class="header-section-number">18.5.1</span> Graphical approaches to univariate outliers</a></li>
+  <li><a href="#tukey-box-plots" id="toc-tukey-box-plots" class="nav-link" data-scroll-target="#tukey-box-plots"><span class="header-section-number">18.5.2</span> Tukey Box Plots</a></li>
+  <li><a href="#warnings-about-detecting-univariate-outliers-from-visual-inspection" id="toc-warnings-about-detecting-univariate-outliers-from-visual-inspection" class="nav-link" data-scroll-target="#warnings-about-detecting-univariate-outliers-from-visual-inspection"><span class="header-section-number">18.5.4</span> Warnings about detecting univariate outliers from visual inspection</a></li>
+  </ul></li>
+  <li><a href="#multivariate-outliers" id="toc-multivariate-outliers" class="nav-link" data-scroll-target="#multivariate-outliers"><span class="header-section-number">18.6</span> Multivariate Outliers</a></li>
+  <li><a href="#mahalanobis-distance-identifying-multivariate-outliers" id="toc-mahalanobis-distance-identifying-multivariate-outliers" class="nav-link" data-scroll-target="#mahalanobis-distance-identifying-multivariate-outliers"><span class="header-section-number">18.7</span> Mahalanobis Distance: Identifying Multivariate Outliers</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../index.html">Course Overview</a></li><li class="breadcrumb-item"><a href="../chapters/project_scoping.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Project Scoping</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/data_exploration_intro.html">Part II: Chaos to Columns</a></li><li class="breadcrumb-item"><a href="../chapters/outliers.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Tool 1: Outliers</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">Project Scoping</span></h1>
-<p class="subtitle lead">How to choose a project that helps you grow — and finish strong</p>
+<h1 class="title"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Tool 1: Outliers</span></h1>
 </div>
 
 
@@ -320,288 +389,220 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This course is designed so that your <strong>final product</strong> (Methods + Results + start of Discussion / primary inferences) is built <strong>incrementally</strong> across Milestone Assignments. The fastest way to struggle in this course is to choose a project that is “interesting” but not <strong>workable</strong> (either because it is too big, or it is beyond your current experience level). The fastest way to thrive is to choose a project that is both <strong>meaningful</strong> to <em>you</em> and also has a clearly defined <strong>scope</strong>.</p>
-<p>Below are a few concrete recommendations for scoping a project that is:</p>
-<ul>
-<li><strong>Maximally helpful</strong> for your scientific growth<br>
-</li>
-<li>Something you can <strong>think deeply about</strong> all semester<br>
-</li>
-<li>Something where building an analysis <strong>infrastructure</strong> that rewards you now and later<br>
-</li>
-<li>Something that helps you progress toward your <strong>degree</strong></li>
-<li>Something that <strong>excites you</strong> enough to keep returning to it</li>
-</ul>
-<section id="the-big-idea-pick-a-data-analysis-project-that-benefits-from-the-course-topics" class="level2">
-<h2 class="anchored" data-anchor-id="the-big-idea-pick-a-data-analysis-project-that-benefits-from-the-course-topics">The big idea: pick a data analysis project that benefits from the course topics</h2>
-<p>Every milestone is a checkpoint that asks you to refine the <em>same</em> project:</p>
-<ul>
-<li>Week 2: Analysis Concept Note (scope + design clarity + workflow plan)</li>
-<li>Week 4: Data Readiness Note (data trustworthiness + Exploratory Data Analysis with purpose)</li>
-<li>Week 7–8: Working Model (runnable → defensible → locked)</li>
-<li>Week 12: Interpretation Memo (uncertainty-aware reasoning)</li>
-<li>Week 14: Results Section (clear, concise quantitative reporting)</li>
-<li>Week 15: Full Draft (coherent paper-like product)</li>
-<li>Week 16: Revision Plan (strategic improvement thinking)</li>
-</ul>
-<p>A well-scoped project means each milestone feels like a <strong>natural next step</strong>, not a complete and uncomfortable reset.</p>
-<p>Below are five Principles of Scoping for projects in this course (click on the boxes to expand):</p>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Scoping Principle #1: “You only get one semester of attention”</strong>
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Choose a question that you will be happy thinking about repeatedly but only for this finite, semester-long period. If the project is too small, there is a danger that you may become bored. If the project is too big and ambitious, you will likely drown in a turbulent sea of discontent (and then blame me or your housemate).</p>
-<p>A good scope has:</p>
-<ul>
-<li>One central question (plain language; 1–3 sentences)</li>
-<li>One primary response variable (or a tightly related pair)</li>
-<li>A manageable predictor set (start small; justify later additions)</li>
-<li>A clear unit of analysis (what is one “row,” conceptually?)</li>
-<li>A realistic path to <em>one defensible model</em> by Week 8</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Scoping Principle #2: “Your project should teach you the course”</strong>
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>This course covers:</p>
-<ul>
-<li>Metrology, uncertainty, and data quality</li>
-<li>Exploratory Data Analysis for messy data</li>
-<li>GLMs → GLMMs → GAMs / GAMMs</li>
-<li>Spatial / temporal heterogeneity</li>
-<li>Model comparison (AIC)</li>
-<li>Prediction and validation</li>
-<li>Structural causal modeling (conceptual level; DAGs)</li>
-<li>Writing results with restraint (defensible claims)</li>
-</ul>
-<p>A strong project doesn’t need to use <em>every</em> tool — but it should naturally connect to <strong>several</strong> of them. Ideally, your project has at least <em>one</em> “real” complication that forces you to think like a scientist:</p>
-<ul>
-<li>non-independence (repeated measures; clustered sampling)</li>
-<li>zeros (many true zeros or detection problems)</li>
-<li>unequal effort / detectability issues</li>
-<li>seasonality or temporal structure</li>
-<li>spatial clustering / site heterogeneity</li>
-<li>measurement uncertainty or instrument drift</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Scoping Principle #3: Use this to build an reusable infrastructure</strong>
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>The biggest hidden benefit of a good scope is that it rewards you for building a clean workflow early:</p>
-<ul>
-<li>clear folder structure</li>
-<li>reproducible Quarto document(s)</li>
-<li>a lightweight data dictionary</li>
-<li>stable variable names and units</li>
-<li>AI interaction logging for troubleshooting and drift tracking</li>
-</ul>
-<p>If your project is well-scoped, each improvement you make in Week 2–4 pays dividends in Weeks 7–15.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Scoping Principle #4: pick something that advances your degree</strong>
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>If possible, choose a dataset that:</p>
-<ul>
-<li>is from your lab, thesis, dissertation, or a collaborator</li>
-<li>connects to a real paper/report you <em>could</em> write</li>
-<li>has a real audience beyond this course (advisor, lab group, agency, etc.)</li>
-</ul>
-<p>Even if the final product is “only” a course draft, you want it to be a <strong>useful artifact</strong> you can revise later.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Scoping Principle #5: be honest about what you have right now</strong>
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>A project is not “good” because it is fascinating; it is good because you can <strong>answer something</strong> with the data you actually possess.</p>
-<p>Before committing, you should be able to answer:</p>
-<ul>
-<li>Do I have the dataset <em>in-hand</em> by Week 2?</li>
-<li>Does the dataset need cleaning, and can this be done by Weeks 2-3?</li>
-<li>Are the key variables already measured?</li>
-<li>Can I explain each variable’s meaning and units by Week 4?</li>
-<li>Is the sampling design understandable enough to model by Week 7?</li>
-<li>Can I reasonably lock a core model by Week 8?</li>
-</ul>
-<p>If the answer is <em>no</em> to any of these, you can still proceed, but you must scope down to what is truly feasible.</p>
-</div>
-</div>
-</div>
+<section id="tool-1-assessing-potential-outliers" class="level2" data-number="18.1">
+<h2 data-number="18.1" class="anchored" data-anchor-id="tool-1-assessing-potential-outliers"><span class="header-section-number">18.1</span> Tool #1: Assessing Potential Outliers</h2>
+<p>This section introduces the first core tool of <em>ante hoc</em> Data Exploration Toolkit: assessing potential outliers. The goal is not to identify “bad” data, but to flag observations that warrant closer inspection and understanding before any modeling decisions are made. Throughout this section, outliers are treated as diagnostic signals rather than problems to be fixed, following this guideline:</p>
+<blockquote class="blockquote">
+<p><strong>Outlier rules guide scrutiny; they do not justify removal.</strong></p>
+</blockquote>
 </section>
-<section id="a-practical-scoping-checklist" class="level2">
-<h2 class="anchored" data-anchor-id="a-practical-scoping-checklist">A practical scoping checklist</h2>
-<p>Choose a project that meets most of these (given your current knowledge):</p>
-<ul>
-<li><strong>One question:</strong> you can state clearly in plain language<br>
-</li>
-<li><strong>One primary response:</strong> that matches the question<br>
-</li>
-<li><strong>A known sampling structure:</strong> (site / individual / time / observer, etc.)<br>
-</li>
-<li><strong>A plausible model family:</strong> (GLM / GLMM / GAM / GAMM) you can defend<br>
-</li>
-<li><strong>One major complication:</strong> you can address explicitly (zeros, clustering, etc.)<br>
-</li>
-<li><strong>A results story you can tell honestly:</strong> without over-claiming<br>
-</li>
-<li><strong>A dataset you can understand and trust:</strong> enough to write Methods</li>
-</ul>
+<section id="what-is-an-outlier" class="level2" data-number="18.2">
+<h2 data-number="18.2" class="anchored" data-anchor-id="what-is-an-outlier"><span class="header-section-number">18.2</span> What is an outlier?</h2>
+<p>A commonly cited definition is:</p>
+<blockquote class="blockquote">
+<p><em>“…an outlier is an observation that lies outside the overall pattern of a distribution.”</em> (Moore &amp; McCabe, 1999)</p>
+</blockquote>
+<p>This definition is intentionally broad and inherently <strong>univariate</strong>. It tells us <em>where</em> an observation sits relative to others—but not <em>why</em> it is unusual, nor what should be done about it. Perhaps a more operational –but more vague– definition is that of <a href="https://besjournals.onlinelibrary.wiley.com/doi/10.1111/j.2041-210X.2009.00001.x">Zuur et al.&nbsp;(2010)</a>:</p>
+<blockquote class="blockquote">
+<p><em>“…an observation that has a relatively large or small value compared to the majority of observations”</em></p>
+</blockquote>
 </section>
-<section id="examples-of-good-vs.-bad-scope" class="level2">
-<h2 class="anchored" data-anchor-id="examples-of-good-vs.-bad-scope">Examples of good vs.&nbsp;bad scope</h2>
-<p>Below are examples you can use as patterns. These are <strong>collapsed</strong> so you can skim quickly.</p>
 <div class="columns">
-<div class="column" style="width:48%;">
-<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Good scope example (light green)" style="background-color:#e7f6e7; border-left: 6px solid #2e7d32;">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Good scope example (light green)
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Project title (working):</strong><br>
-Canopy structure and bird counts in repeated point counts</p>
-<p><strong>Central question (plain language):</strong><br>
-Does canopy cover predict bird counts per visit, after accounting for site-to-site variation?</p>
-<p><strong>Data/design clarity:</strong><br>
-- 30 sites, 4 visits per site<br>
-- Response: count per visit<br>
-- Predictors: canopy cover, wind, observer<br>
-- Grouping: site (random intercept)</p>
-<p><strong>Complication (one is enough):</strong><br>
-- detection likely declines with canopy and wind<br>
-- repeated measures → non-independence</p>
-<p><strong>Why this is well-scoped:</strong><br>
-- runnable GLMM by Week 7<br>
-- lockable model by Week 8<br>
-- meaningful uncertainty-aware interpretation by Week 12<br>
-- produces a clean Results section by Week 14</p>
-<p><strong>What you <em>don’t</em> try to do:</strong><br>
-- no “global biodiversity mechanisms”<br>
-- no causal claims without design support<br>
-- no multi-species hierarchy unless truly necessary</p>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:4%;">
-
-</div><div class="column" style="width:48%;">
-<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Bad scope example (light red)" style="background-color:#fde8e8; border-left: 6px solid #c62828;">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Bad scope example (light red)
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Project title (vague):</strong><br>
-What drives biodiversity in tropical forests?</p>
-<p><strong>Central question (problem):</strong><br>
-Too broad to be answerable in one semester</p>
-<p><strong>Data/design issues:</strong><br>
-- response variable not defined<br>
-- sampling design unclear (“multiple sites and years”)<br>
-- predictors not specified<br>
-- unit of analysis unknown (plot? site? species? time?)</p>
-<p><strong>Complications (too many, unbounded):</strong><br>
-- spatial structure + temporal trends + detection + species turnover<br>
-- multiple outcomes (richness + abundance + composition + traits)</p>
-<p><strong>Why this scope probably fails:</strong><br>
-- you cannot write Methods early<br>
-- Week 4 becomes endless data wrangling<br>
-- Week 7 has no runnable model (or 10 models with no rubric)<br>
-- Week 8 “lock” is impossible<br>
-- Results become unfocused and hard to defend</p>
-<p><strong>What this needs to become viable:</strong><br>
-- choose one response, one scale, one question, and one model family</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="scope-down-moves-that-work-and-feel-good" class="level2">
-<h2 class="anchored" data-anchor-id="scope-down-moves-that-work-and-feel-good">“Scope down” moves that work (and feel good)</h2>
-<p>If your idea is too big, these moves are almost always helpful (but we can talk about what is best for your particular goals):</p>
+<div class="column" style="width:50%;">
+<section id="what-causes-outliers" class="level2" data-number="18.3">
+<h2 data-number="18.3" class="anchored" data-anchor-id="what-causes-outliers"><span class="header-section-number">18.3</span> What causes outliers?</h2>
+<p>Outliers arise for many reasons (any number of data-generating processes), including, but not limited to:</p>
 <ul>
-<li><strong>Pick one response variable</strong> (one outcome, not five)</li>
-<li><strong>Choose one spatial scale</strong> (plots <em>or</em> sites, not a whole hierarchy)</li>
-<li><strong>Choose one time window</strong> (e.g., one season or one year)</li>
-<li><strong>Start with one model family</strong> (GLMM <em>or</em> GAMM — justify later)</li>
-<li><strong>Limit the predictor set</strong> to a small set you can defend</li>
-<li><strong>Treat extra complexity as a sensitivity check</strong>, not the core project</li>
+<li>extreme relative to distributional assumptions<br>
+</li>
+<li>measurement error</li>
+<li>error during data entry</li>
+<li>extremely rare but biologically plausible (so called <em>Black Swan</em> events)</li>
 </ul>
 </section>
-<section id="a-final-recommendation-choose-the-project-youll-revisit-after-the-course" class="level2">
-<h2 class="anchored" data-anchor-id="a-final-recommendation-choose-the-project-youll-revisit-after-the-course">A final recommendation: choose the project you’ll revisit after the course</h2>
-<p>Pick something you would be proud to show:</p>
+</div><div class="column" style="width:50%;">
+<p><img src="../graphics/jackalope_graphics/black_jackalope.png" class="img-fluid"></p>
+</div>
+</div>
+<p>The goal of data exploration is to <strong>understand why an observation is unusual</strong>, not to justify its immediate removal. Towards this goal, we will follow a simple guiding principle:</p>
+<section id="types-of-outliers" class="level2" data-number="18.4">
+<h2 data-number="18.4" class="anchored" data-anchor-id="types-of-outliers"><span class="header-section-number">18.4</span> Types of outliers</h2>
+<p>A useful first distinction to make in our discussion of outlier detection is whether an observation is unusual:</p>
 <ul>
-<li>your advisor</li>
-<li>your lab group</li>
-<li>a collaborator</li>
-<li>a future committee member</li>
-<li>your future self</li>
+<li><strong>In a single variable</strong> (univariate outlier), or<br>
+</li>
+<li><strong>Only when variables are considered jointly</strong> (multivariate outlier)</li>
 </ul>
-<p>If you choose well, ZOO/ECOL-5500 will not simply teach methods; it will produce a real, useful product that helps you in the future.</p>
+<p>These are conceptually different problems and require different tools.</p>
+</section>
+<section id="univariate-outliers" class="level2" data-number="18.5">
+<h2 data-number="18.5" class="anchored" data-anchor-id="univariate-outliers"><span class="header-section-number">18.5</span> Univariate Outliers</h2>
+<p>Univariate outliers occur along a single dimension (i.e.&nbsp;in a single variable). For example, a body size measurement that is much larger than most others. Such univariate outliers should <em>never</em> be removed automatically. Their role in <em>ante hoc</em> exploration is to <strong>flag observations that deserve closer inspection</strong>. So, how can we identify univariate outliers? Univariate outliers can be flagged using two approaches:</p>
+<ul>
+<li><strong>Statistical rules:</strong> rules depend on assumptions and sample size<br>
+</li>
+<li><strong>Expert judgment:</strong> assessment that relies on domain knowledge</li>
+</ul>
+<p>Both approaches have advantages and limitations. Statistical rules can be fragile with small samples, while expert judgment can be applied inconsistently over time and across contexts.</p>
+<section id="graphical-approaches-to-univariate-outliers" class="level3" data-number="18.5.1">
+<h3 data-number="18.5.1" class="anchored" data-anchor-id="graphical-approaches-to-univariate-outliers"><span class="header-section-number">18.5.1</span> Graphical approaches to univariate outliers</h3>
+<p>Before modeling, graphical inspection provides an extremely valuable first pass at outlier detection. All of these methods are <strong>subjective</strong> but effective for identifying values that warrant extra scrutiny. Because these myriad approaches essentially allow you to see the same dimensions in your dataset from slightly different perspective, we do not go all of the graphing types. Here are a few useful graphing types for your reference:</p>
+<ul>
+<li><a href="https://r-charts.com/distribution/cleveland-dot-plot/">Cleveland dot plot</a></li>
+<li><a href="https://rpubs.com/pg2000in/StripCharts">Strip plot</a></li>
+<li><a href="https://r-graph-gallery.com/density-plot.html">Generalized density plot</a></li>
+<li><a href="https://r-graph-gallery.com/heatmap">Heat map</a></li>
+<li><a href="https://r-graph-gallery.com/"><em>a myriad others</em></a></li>
+</ul>
+</section>
+<section id="tukey-box-plots" class="level3" data-number="18.5.2">
+<h3 data-number="18.5.2" class="anchored" data-anchor-id="tukey-box-plots"><span class="header-section-number">18.5.2</span> Tukey Box Plots</h3>
+<p>Tukey-style box plots are based on <strong>quantiles</strong>, not distributional assumptions. Traditional Tukey-style boxplots, which you will find in several R packages, have several core features:</p>
+<ul>
+<li>The interquartile range (IQR), or the difference between the 75% precentile (Q<sub>3</sub>) and the 25% percentile (Q<sub>1</sub>):</li>
+</ul>
+<p><span class="math display">\[
+\text{IQR} = Q_3 - Q_1
+\]</span></p>
+<ul>
+<li>Whiskers extending to <span class="math inline">\(1.5 \times \text{IQR}\)</span></li>
+<li>Points beyond this threshold flagged as outliers<br>
+</li>
+<li>Points beyond <span class="math inline">\(3 \times \text{IQR}\)</span> sometimes flagged as <em>extreme</em> outliers</li>
+</ul>
+<p>These cutoffs are <strong>conventional and not inferential</strong>. They provide a rule of thumb; they <strong><em>do not</em></strong> provide a statistical test. (You should see a theme: use outlier tests to flag values for extra scrutiny.)</p>
+<p>::: {callout-note collapse=true icon=false} ## Tukey-style boxplots and non-normal data: do not worry! Tukey-style boxplot whiskers are nonparametric; that is, they rely on quantiles (IQR), which are <em>order statistics</em>, and not distributional assumptions. Because outlier flagging at the lower bound is based on ranks, departures from normality are acceptable. :::</p>
+</section>
+<div class="columns">
+<div class="column" style="width:40%;">
+<section id="conditional-boxplots" class="level3" data-number="18.5.3">
+<h3 data-number="18.5.3" class="anchored" data-anchor-id="conditional-boxplots"><span class="header-section-number">18.5.3</span> Conditional Boxplots</h3>
+<p>Conditional boxplots extend the univariate, Tukey-style boxplot by stratifying the data by a grouping factor (e.g., site, treatment, time). These plots are especially useful for diagnosing heterogeneity across groups and identifying where flagged values originate. At first, the simplicity of these plots may give the impression that they are not useful, but you will quickly find that piecing together many of these visualizations can help uncover subtle issues with your data.</p>
+</section>
+</div><div class="column" style="width:60%;">
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="outliers_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Conditional boxplot allowing the user to visualize potential extreme values within specific groups.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr>
+<section id="warnings-about-detecting-univariate-outliers-from-visual-inspection" class="level3" data-number="18.5.4">
+<h3 data-number="18.5.4" class="anchored" data-anchor-id="warnings-about-detecting-univariate-outliers-from-visual-inspection"><span class="header-section-number">18.5.4</span> Warnings about detecting univariate outliers from visual inspection</h3>
+<p>Rules of outlier detection must be interpreted very cautiously, especially if univariate datesets exhibit <strong>small sample sizes</strong> or <strong>skewed (i.e.&nbsp;non-normal) distributions</strong>. For example, data drawn from a Gamma distribution—bounded at zero and right-skewed—may naturally produce values flagged by Tukey’s rule even when no anomaly is present.</p>
+<p>Univariate screening should therefore be viewed as a <strong>question-generating step</strong>, not an answer-generating one.</p>
+<hr>
+</section>
+</section>
+<section id="multivariate-outliers" class="level2" data-number="18.6">
+<h2 data-number="18.6" class="anchored" data-anchor-id="multivariate-outliers"><span class="header-section-number">18.6</span> Multivariate Outliers</h2>
+<p>Multivariate outliers occur when an observation is unusual <strong>in combination across variables</strong>, even if it appears unremarkable in any single variable. These are common in real datasets and often more consequential than univariate outliers. Because they depend on covariance structure (how one variable relates to another), multivariate outliers are invisible to univariate screening methods.</p>
+<p>Consider this example:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="outliers_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="outliers_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>The Tukey-style boxplot did not flag outliers in either of the univariate dimensions. But, given the bivariate scatterplot at right, there is clearly a single value that seems to fall outside of the joint data distribution. This is why we need additional tools to help us flag potentially problematic values when dealing with multivariate data (which is probably the norm).</p>
+</section>
+<section id="mahalanobis-distance-identifying-multivariate-outliers" class="level2" data-number="18.7">
+<h2 data-number="18.7" class="anchored" data-anchor-id="mahalanobis-distance-identifying-multivariate-outliers"><span class="header-section-number">18.7</span> Mahalanobis Distance: Identifying Multivariate Outliers</h2>
+<p>Most ecological and biological datasets are inherently multivariate. A point may fall near the center of each marginal distribution yet be extreme in joint space. One tool that we can use is Mahalanobis Distance, which is a standard tool for identifying multivariate outliers because it accounts for covariance among variables. Conceptually, it measures distance from the multivariate centroid.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>What the Mahalanobis distance means (plain language)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The Mahalanobis distance tells us <strong>how unusual a data point is when we consider several variables together</strong>.</p>
+<p><span class="math display">\[
+D^2 = (x - \mu)^T \Sigma^{-1} (x - \mu)
+\]</span></p>
+<p>Think of it this way:</p>
+<ul>
+<li><strong>(x)</strong> = the values for one observation (e.g., oxygen and temperature at one site)<br>
+</li>
+<li><strong>()</strong> = the average values across all observations<br>
+</li>
+<li><strong>((x - ))</strong> = how far that observation is from the “typical” point<br>
+</li>
+<li><strong>(^{-1})</strong> = a correction that accounts for different units and correlations between variables<br>
+</li>
+<li><strong>(D^2)</strong> = a single number summarizing how extreme the observation is <em>given the relationships in the data</em></li>
+</ul>
+<p>A point can look normal for each variable by itself, but still have a large Mahalanobis distance if it <strong>breaks the usual relationship between variables</strong>.</p>
+<p>That’s why Mahalanobis distance is useful for finding <strong>multivariate (conditional) outliers</strong>, not just extreme values.</p>
+</div>
+</div>
+<p>In practice, this can be implemented using existing R packages (e.g., <code>stats::mahalanobis</code>). For the dataset plotted above, the code here correctly flags the odd data point (complete, reproducible example):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">120</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>xy <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">runif</span>(n, <span class="at">min =</span> <span class="fl">5.5</span>, <span class="at">max =</span> <span class="fl">8.5</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="dv">14</span> <span class="sc">*</span> x <span class="sc">-</span> <span class="dv">20</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="fu">n</span>(), <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">x =</span> <span class="fl">7.0</span>, <span class="at">y =</span> <span class="fl">95.0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">is_conditional_outlier =</span> <span class="fu">row_number</span>() <span class="sc">==</span> <span class="fu">n</span>())</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Mahalanobis distance (stats::mahalanobis) ---</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(xy <span class="sc">%&gt;%</span> <span class="fu">select</span>(x, y))</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>md <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">mahalanobis</span>(X, <span class="at">center =</span> <span class="fu">colMeans</span>(X), <span class="at">cov =</span> stats<span class="sc">::</span><span class="fu">cov</span>(X))</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Cutoff: chi-square quantile with df = 2 (x and y)</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>cut <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">qchisq</span>(<span class="fl">0.975</span>, <span class="at">df =</span> <span class="dv">2</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>xy <span class="ot">&lt;-</span> xy <span class="sc">%&gt;%</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">md =</span> md,</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">md_outlier =</span> md <span class="sc">&gt;</span> cut</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Which rows are flagged?</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>xy <span class="sc">%&gt;%</span> <span class="fu">filter</span>(md_outlier) <span class="sc">%&gt;%</span> <span class="fu">select</span>(x, y, md, md_outlier, is_conditional_outlier)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 5
+      x     y    md md_outlier is_conditional_outlier
+  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;      &lt;lgl&gt;                 
+1     7    95  86.9 TRUE       TRUE                  </code></pre>
+</div>
+</div>
+<p>As with univariate methods, flagged points should prompt investigation—not automatic exclusion.</p>
+<hr>
+<p>In the next section, we will apply the <em>ante hoc</em> Data Exploration Toolki to a real dataset. This example will showcase outlier detection but will also demonstrate how to apply some of the other tools in this Toolkit.</p>
 
 
 </section>
@@ -1009,13 +1010,13 @@ Too broad to be answerable in one semester</p>
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/assignment_grades.html" class="pagination-link" aria-label="Assignments &amp; Grades">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Assignments &amp; Grades</span></span>
+      <a href="../chapters/data_exploration_toolkit.html" class="pagination-link" aria-label="Data Exploration Toolkit">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Data Exploration Toolkit</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/ai_prompting.html" class="pagination-link" aria-label="AI Prompting for Analysis">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">AI Prompting for Analysis</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/tutorial_data_exploration.html" class="pagination-link" aria-label="Tutorial: Data Exploration">
+        <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Tutorial: Data Exploration</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

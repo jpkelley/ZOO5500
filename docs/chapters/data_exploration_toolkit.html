@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Project Scoping – Quantitative Analysis of (Messy) Field Data</title>
+<title>17&nbsp; Data Exploration Toolkit – Quantitative Analysis of (Messy) Field Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/ai_prompting.html" rel="next">
-<link href="../chapters/assignment_grades.html" rel="prev">
+<link href="../chapters/outliers.html" rel="next">
+<link href="../chapters/data_exploration_intro.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -84,7 +84,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../index.html">Course Overview</a></li><li class="breadcrumb-item"><a href="../chapters/project_scoping.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Project Scoping</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/data_exploration_intro.html">Part II: Chaos to Columns</a></li><li class="breadcrumb-item"><a href="../chapters/data_exploration_toolkit.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Data Exploration Toolkit</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -115,13 +115,13 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Course Overview</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
@@ -166,7 +166,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/project_scoping.html" class="sidebar-item-text sidebar-link active">
+  <a href="../chapters/project_scoping.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Project Scoping</span></span></a>
   </div>
 </li>
@@ -238,13 +238,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
  <span class="menu-text">Part II: Chaos to Columns</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/data_exploration_intro.html" class="sidebar-item-text sidebar-link">
@@ -253,7 +253,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/data_exploration_toolkit.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/data_exploration_toolkit.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Data Exploration Toolkit</span></span></a>
   </div>
 </li>
@@ -289,21 +289,18 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#the-big-idea-pick-a-data-analysis-project-that-benefits-from-the-course-topics" id="toc-the-big-idea-pick-a-data-analysis-project-that-benefits-from-the-course-topics" class="nav-link active" data-scroll-target="#the-big-idea-pick-a-data-analysis-project-that-benefits-from-the-course-topics">The big idea: pick a data analysis project that benefits from the course topics</a></li>
-  <li><a href="#a-practical-scoping-checklist" id="toc-a-practical-scoping-checklist" class="nav-link" data-scroll-target="#a-practical-scoping-checklist">A practical scoping checklist</a></li>
-  <li><a href="#examples-of-good-vs.-bad-scope" id="toc-examples-of-good-vs.-bad-scope" class="nav-link" data-scroll-target="#examples-of-good-vs.-bad-scope">Examples of good vs.&nbsp;bad scope</a></li>
-  <li><a href="#scope-down-moves-that-work-and-feel-good" id="toc-scope-down-moves-that-work-and-feel-good" class="nav-link" data-scroll-target="#scope-down-moves-that-work-and-feel-good">“Scope down” moves that work (and feel good)</a></li>
-  <li><a href="#a-final-recommendation-choose-the-project-youll-revisit-after-the-course" id="toc-a-final-recommendation-choose-the-project-youll-revisit-after-the-course" class="nav-link" data-scroll-target="#a-final-recommendation-choose-the-project-youll-revisit-after-the-course">A final recommendation: choose the project you’ll revisit after the course</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">17.1</span> Overview</a></li>
+  <li><a href="#the-ante-hoc-data-exploration-toolkit" id="toc-the-ante-hoc-data-exploration-toolkit" class="nav-link" data-scroll-target="#the-ante-hoc-data-exploration-toolkit"><span class="header-section-number">17.2</span> The <em>ante hoc</em> Data Exploration Toolkit</a></li>
+  <li><a href="#scope-and-next-steps" id="toc-scope-and-next-steps" class="nav-link" data-scroll-target="#scope-and-next-steps"><span class="header-section-number">17.3</span> Scope and Next Steps</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../index.html">Course Overview</a></li><li class="breadcrumb-item"><a href="../chapters/project_scoping.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Project Scoping</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/data_exploration_intro.html">Part II: Chaos to Columns</a></li><li class="breadcrumb-item"><a href="../chapters/data_exploration_toolkit.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Data Exploration Toolkit</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">Project Scoping</span></h1>
-<p class="subtitle lead">How to choose a project that helps you grow — and finish strong</p>
+<h1 class="title"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Data Exploration Toolkit</span></h1>
 </div>
 
 
@@ -320,288 +317,61 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This course is designed so that your <strong>final product</strong> (Methods + Results + start of Discussion / primary inferences) is built <strong>incrementally</strong> across Milestone Assignments. The fastest way to struggle in this course is to choose a project that is “interesting” but not <strong>workable</strong> (either because it is too big, or it is beyond your current experience level). The fastest way to thrive is to choose a project that is both <strong>meaningful</strong> to <em>you</em> and also has a clearly defined <strong>scope</strong>.</p>
-<p>Below are a few concrete recommendations for scoping a project that is:</p>
+<section id="overview" class="level2" data-number="17.1">
+<h2 data-number="17.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">17.1</span> Overview</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
+<p>Data exploration is not a single step to complete before analysis; it consists of a <strong>set of diagnostic tools applied iteratively across an analytical workflow</strong>. In this course, we distinguish –using very non-standard but arguably useful nomenclature– between two complementary phases of data exploration:</p>
 <ul>
-<li><strong>Maximally helpful</strong> for your scientific growth<br>
-</li>
-<li>Something you can <strong>think deeply about</strong> all semester<br>
-</li>
-<li>Something where building an analysis <strong>infrastructure</strong> that rewards you now and later<br>
-</li>
-<li>Something that helps you progress toward your <strong>degree</strong></li>
-<li>Something that <strong>excites you</strong> enough to keep returning to it</li>
+<li><strong><em>Ante hoc</em></strong> <strong>data exploration</strong>: diagnostic checks performed <em>before</em> formal modeling, used to assess data structure, measurement quality, and basic data and model assumptions.</li>
+<li><strong><em>Post hoc</em></strong> <strong>data exploration</strong>: diagnostic checks performed <em>after</em> initial models are fit and used to reassess data in light of model behavior (e.g., leverage, influence, residual structure, convergence failures, factor reduction, or model respecification).</li>
 </ul>
-<section id="the-big-idea-pick-a-data-analysis-project-that-benefits-from-the-course-topics" class="level2">
-<h2 class="anchored" data-anchor-id="the-big-idea-pick-a-data-analysis-project-that-benefits-from-the-course-topics">The big idea: pick a data analysis project that benefits from the course topics</h2>
-<p>Every milestone is a checkpoint that asks you to refine the <em>same</em> project:</p>
+<p>Both phases are essential. <em>Ante hoc</em> exploration helps prevent obvious problems from being baked into models, while post hoc exploration helps identify more subtle issues that only become visible after a model has been fit.</p>
+<p>This section introduces a coarse yet practical <em>ante hoc</em> Data Exploration Toolkit, a subset of exploratory tools that should always be considered <em>before</em> formal modeling begins. <em>Post hoc</em> diagnostics are introduced later in the course within the context of formal data modeling.</p>
+</div><div class="column" style="width:30%;">
+<p><img src="../graphics/jackalope_graphics/sherlock_jackalope.png" class="img-fluid"></p>
+</div>
+</div>
+<hr>
+</section>
+<section id="the-ante-hoc-data-exploration-toolkit" class="level2" data-number="17.2">
+<h2 data-number="17.2" class="anchored" data-anchor-id="the-ante-hoc-data-exploration-toolkit"><span class="header-section-number">17.2</span> The <em>ante hoc</em> Data Exploration Toolkit</h2>
+<p>In the R exercises used this course, we will repeatedly apply the following steps of the <em>ante hoc</em> Data Exploration Toolkit:</p>
 <ul>
-<li>Week 2: Analysis Concept Note (scope + design clarity + workflow plan)</li>
-<li>Week 4: Data Readiness Note (data trustworthiness + Exploratory Data Analysis with purpose)</li>
-<li>Week 7–8: Working Model (runnable → defensible → locked)</li>
-<li>Week 12: Interpretation Memo (uncertainty-aware reasoning)</li>
-<li>Week 14: Results Section (clear, concise quantitative reporting)</li>
-<li>Week 15: Full Draft (coherent paper-like product)</li>
-<li>Week 16: Revision Plan (strategic improvement thinking)</li>
+<li>Tool #1: Assess <em>potential</em> outliers (univariate and multivariate)</li>
+<li>Tool #2: Assess the presence of excess zeros</li>
+<li>Tool #3: Assess potential information redundancy among covariates (e.g., multicollinearity)</li>
+<li>Tool #4: Explore interactions and structural relationships</li>
+<li>Tool #5: Decide whether covariate standardization is warranted (this could also be used during <em>post hoc</em> data exploration)</li>
 </ul>
-<p>A well-scoped project means each milestone feels like a <strong>natural next step</strong>, not a complete and uncomfortable reset.</p>
-<p>Below are five Principles of Scoping for projects in this course (click on the boxes to expand):</p>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<p>This toolkit is <strong>intentionally coarse and non-exhaustive</strong>. Its purpose is not to <em>fix</em> the data, but rather to identify critical and fatal issues when they are easiest to diagnose and least costly to address. Skipping these steps often leads to confusion or <a href="https://jpkelley.github.io/ZOO5500/chapters/statistical_aphorisms.html">Paralysis of Analysis</a> during modeling. Many of these are mistakes I have made myself over the years…and learned from the hard way.</p>
+<p>This section focuses on the first three most important tools within this toolkit: assessing potential outliers, assessing potential excess of zero values, and assessing potential information redundancy among covariates. The first section –outliers– will be discussed on its own; for the sake of course timing, the other two will be discussed in the tutorial and later in the course.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Scoping Principle #1: “You only get one semester of attention”</strong>
+<span class="screen-reader-only">Tip</span>GLMMs and GAMMs: why homogeneity of variance is not required
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Choose a question that you will be happy thinking about repeatedly but only for this finite, semester-long period. If the project is too small, there is a danger that you may become bored. If the project is too big and ambitious, you will likely drown in a turbulent sea of discontent (and then blame me or your housemate).</p>
-<p>A good scope has:</p>
-<ul>
-<li>One central question (plain language; 1–3 sentences)</li>
-<li>One primary response variable (or a tightly related pair)</li>
-<li>A manageable predictor set (start small; justify later additions)</li>
-<li>A clear unit of analysis (what is one “row,” conceptually?)</li>
-<li>A realistic path to <em>one defensible model</em> by Week 8</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Scoping Principle #2: “Your project should teach you the course”</strong>
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>This course covers:</p>
-<ul>
-<li>Metrology, uncertainty, and data quality</li>
-<li>Exploratory Data Analysis for messy data</li>
-<li>GLMs → GLMMs → GAMs / GAMMs</li>
-<li>Spatial / temporal heterogeneity</li>
-<li>Model comparison (AIC)</li>
-<li>Prediction and validation</li>
-<li>Structural causal modeling (conceptual level; DAGs)</li>
-<li>Writing results with restraint (defensible claims)</li>
-</ul>
-<p>A strong project doesn’t need to use <em>every</em> tool — but it should naturally connect to <strong>several</strong> of them. Ideally, your project has at least <em>one</em> “real” complication that forces you to think like a scientist:</p>
-<ul>
-<li>non-independence (repeated measures; clustered sampling)</li>
-<li>zeros (many true zeros or detection problems)</li>
-<li>unequal effort / detectability issues</li>
-<li>seasonality or temporal structure</li>
-<li>spatial clustering / site heterogeneity</li>
-<li>measurement uncertainty or instrument drift</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Scoping Principle #3: Use this to build an reusable infrastructure</strong>
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>The biggest hidden benefit of a good scope is that it rewards you for building a clean workflow early:</p>
-<ul>
-<li>clear folder structure</li>
-<li>reproducible Quarto document(s)</li>
-<li>a lightweight data dictionary</li>
-<li>stable variable names and units</li>
-<li>AI interaction logging for troubleshooting and drift tracking</li>
-</ul>
-<p>If your project is well-scoped, each improvement you make in Week 2–4 pays dividends in Weeks 7–15.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Scoping Principle #4: pick something that advances your degree</strong>
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>If possible, choose a dataset that:</p>
-<ul>
-<li>is from your lab, thesis, dissertation, or a collaborator</li>
-<li>connects to a real paper/report you <em>could</em> write</li>
-<li>has a real audience beyond this course (advisor, lab group, agency, etc.)</li>
-</ul>
-<p>Even if the final product is “only” a course draft, you want it to be a <strong>useful artifact</strong> you can revise later.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Scoping Principle #5: be honest about what you have right now</strong>
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>A project is not “good” because it is fascinating; it is good because you can <strong>answer something</strong> with the data you actually possess.</p>
-<p>Before committing, you should be able to answer:</p>
-<ul>
-<li>Do I have the dataset <em>in-hand</em> by Week 2?</li>
-<li>Does the dataset need cleaning, and can this be done by Weeks 2-3?</li>
-<li>Are the key variables already measured?</li>
-<li>Can I explain each variable’s meaning and units by Week 4?</li>
-<li>Is the sampling design understandable enough to model by Week 7?</li>
-<li>Can I reasonably lock a core model by Week 8?</li>
-</ul>
-<p>If the answer is <em>no</em> to any of these, you can still proceed, but you must scope down to what is truly feasible.</p>
+<p>Most ecological data are far more complex than what simple Analysis of Variance (ANOVA) or linear model frameworks can handle, often involving non-Gaussian dependent variables, hierarchical structures (i.e.&nbsp;nested data), and uneven sampling. In this context, enforcing homogeneity of variance in the classical sense is not required; in face, it is appropriate.</p>
+<p>In Generalized Linear Mixed Model (GLMMs) and Generalized Additive Mixed Models (GAMMs), variance is explicitly modeled through the choice of error distribution, link function, and hierarchical structure. As a result, heterogeneity of variance on the response scale is not a violation of assumptions; it is often an expected property of the data.</p>
+<blockquote class="blockquote">
+<p>Takeaway: In GLMMs and GAMMs, variance diagnostics evaluate model adequacy, not whether of not the data meet the homoscedasticity assumption <em>a priori</em>. In other words, you can skip that irrelevant section of <a href="https://besjournals.onlinelibrary.wiley.com/doi/10.1111/j.2041-210X.2009.00001.x"><strong>Zuur et al.&nbsp;(2010)</strong></a>.</p>
+</blockquote>
 </div>
 </div>
 </div>
 </section>
-<section id="a-practical-scoping-checklist" class="level2">
-<h2 class="anchored" data-anchor-id="a-practical-scoping-checklist">A practical scoping checklist</h2>
-<p>Choose a project that meets most of these (given your current knowledge):</p>
-<ul>
-<li><strong>One question:</strong> you can state clearly in plain language<br>
-</li>
-<li><strong>One primary response:</strong> that matches the question<br>
-</li>
-<li><strong>A known sampling structure:</strong> (site / individual / time / observer, etc.)<br>
-</li>
-<li><strong>A plausible model family:</strong> (GLM / GLMM / GAM / GAMM) you can defend<br>
-</li>
-<li><strong>One major complication:</strong> you can address explicitly (zeros, clustering, etc.)<br>
-</li>
-<li><strong>A results story you can tell honestly:</strong> without over-claiming<br>
-</li>
-<li><strong>A dataset you can understand and trust:</strong> enough to write Methods</li>
-</ul>
-</section>
-<section id="examples-of-good-vs.-bad-scope" class="level2">
-<h2 class="anchored" data-anchor-id="examples-of-good-vs.-bad-scope">Examples of good vs.&nbsp;bad scope</h2>
-<p>Below are examples you can use as patterns. These are <strong>collapsed</strong> so you can skim quickly.</p>
-<div class="columns">
-<div class="column" style="width:48%;">
-<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Good scope example (light green)" style="background-color:#e7f6e7; border-left: 6px solid #2e7d32;">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Good scope example (light green)
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Project title (working):</strong><br>
-Canopy structure and bird counts in repeated point counts</p>
-<p><strong>Central question (plain language):</strong><br>
-Does canopy cover predict bird counts per visit, after accounting for site-to-site variation?</p>
-<p><strong>Data/design clarity:</strong><br>
-- 30 sites, 4 visits per site<br>
-- Response: count per visit<br>
-- Predictors: canopy cover, wind, observer<br>
-- Grouping: site (random intercept)</p>
-<p><strong>Complication (one is enough):</strong><br>
-- detection likely declines with canopy and wind<br>
-- repeated measures → non-independence</p>
-<p><strong>Why this is well-scoped:</strong><br>
-- runnable GLMM by Week 7<br>
-- lockable model by Week 8<br>
-- meaningful uncertainty-aware interpretation by Week 12<br>
-- produces a clean Results section by Week 14</p>
-<p><strong>What you <em>don’t</em> try to do:</strong><br>
-- no “global biodiversity mechanisms”<br>
-- no causal claims without design support<br>
-- no multi-species hierarchy unless truly necessary</p>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:4%;">
-
-</div><div class="column" style="width:48%;">
-<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Bad scope example (light red)" style="background-color:#fde8e8; border-left: 6px solid #c62828;">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Bad scope example (light red)
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Project title (vague):</strong><br>
-What drives biodiversity in tropical forests?</p>
-<p><strong>Central question (problem):</strong><br>
-Too broad to be answerable in one semester</p>
-<p><strong>Data/design issues:</strong><br>
-- response variable not defined<br>
-- sampling design unclear (“multiple sites and years”)<br>
-- predictors not specified<br>
-- unit of analysis unknown (plot? site? species? time?)</p>
-<p><strong>Complications (too many, unbounded):</strong><br>
-- spatial structure + temporal trends + detection + species turnover<br>
-- multiple outcomes (richness + abundance + composition + traits)</p>
-<p><strong>Why this scope probably fails:</strong><br>
-- you cannot write Methods early<br>
-- Week 4 becomes endless data wrangling<br>
-- Week 7 has no runnable model (or 10 models with no rubric)<br>
-- Week 8 “lock” is impossible<br>
-- Results become unfocused and hard to defend</p>
-<p><strong>What this needs to become viable:</strong><br>
-- choose one response, one scale, one question, and one model family</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="scope-down-moves-that-work-and-feel-good" class="level2">
-<h2 class="anchored" data-anchor-id="scope-down-moves-that-work-and-feel-good">“Scope down” moves that work (and feel good)</h2>
-<p>If your idea is too big, these moves are almost always helpful (but we can talk about what is best for your particular goals):</p>
-<ul>
-<li><strong>Pick one response variable</strong> (one outcome, not five)</li>
-<li><strong>Choose one spatial scale</strong> (plots <em>or</em> sites, not a whole hierarchy)</li>
-<li><strong>Choose one time window</strong> (e.g., one season or one year)</li>
-<li><strong>Start with one model family</strong> (GLMM <em>or</em> GAMM — justify later)</li>
-<li><strong>Limit the predictor set</strong> to a small set you can defend</li>
-<li><strong>Treat extra complexity as a sensitivity check</strong>, not the core project</li>
-</ul>
-</section>
-<section id="a-final-recommendation-choose-the-project-youll-revisit-after-the-course" class="level2">
-<h2 class="anchored" data-anchor-id="a-final-recommendation-choose-the-project-youll-revisit-after-the-course">A final recommendation: choose the project you’ll revisit after the course</h2>
-<p>Pick something you would be proud to show:</p>
-<ul>
-<li>your advisor</li>
-<li>your lab group</li>
-<li>a collaborator</li>
-<li>a future committee member</li>
-<li>your future self</li>
-</ul>
-<p>If you choose well, ZOO/ECOL-5500 will not simply teach methods; it will produce a real, useful product that helps you in the future.</p>
+<section id="scope-and-next-steps" class="level2" data-number="17.3">
+<h2 data-number="17.3" class="anchored" data-anchor-id="scope-and-next-steps"><span class="header-section-number">17.3</span> Scope and Next Steps</h2>
+<p>At this <strong>ante hoc</strong> stage, the goal is to <strong>recognize potential problems</strong>, not to resolve them.</p>
+<p>In the next sections, we tackle each one of the tools in the toolkit. After focusing on each of these, in turn, we present a hands-on tutorial (discussed in class) that walks through these diagnostics using real data, illustrating how rule-based flags arise and how they should be interpreted responsibly within an analytical workflow.</p>
+<p>As a reminder, <em>post hoc</em> data exploration will be introduced later in the course, once models are fitted and can provide additional information about how the data and model interact.</p>
 
 
 </section>
@@ -1009,13 +779,13 @@ Too broad to be answerable in one semester</p>
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/assignment_grades.html" class="pagination-link" aria-label="Assignments &amp; Grades">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Assignments &amp; Grades</span></span>
+      <a href="../chapters/data_exploration_intro.html" class="pagination-link" aria-label="Data Exploration">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data Exploration</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/ai_prompting.html" class="pagination-link" aria-label="AI Prompting for Analysis">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">AI Prompting for Analysis</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/outliers.html" class="pagination-link" aria-label="Tool 1: Outliers">
+        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Tool 1: Outliers</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

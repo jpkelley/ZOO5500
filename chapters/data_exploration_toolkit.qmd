@@ -1,0 +1,68 @@
+---
+title: "Data Exploration Toolkit"
+date: ""
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+execute:
+  echo: true
+  warning: false
+  message: false
+  error: false
+editor: visual
+---
+
+## Overview
+
+::::: columns
+::: {.column width="70%"}
+Data exploration is not a single step to complete before analysis; it consists of a **set of diagnostic tools applied iteratively across an analytical workflow**. In this course, we distinguish --using very non-standard but arguably useful nomenclature-- between two complementary phases of data exploration:
+
+-   ***Ante hoc*** **data exploration**: diagnostic checks performed *before* formal modeling, used to assess data structure, measurement quality, and basic data and model assumptions.
+-   ***Post hoc*** **data exploration**: diagnostic checks performed *after* initial models are fit and used to reassess data in light of model behavior (e.g., leverage, influence, residual structure, convergence failures, factor reduction, or model respecification).
+
+Both phases are essential. *Ante hoc* exploration helps prevent obvious problems from being baked into models, while post hoc exploration helps identify more subtle issues that only become visible after a model has been fit.
+
+This section introduces a coarse yet practical *ante hoc* Data Exploration Toolkit, a subset of exploratory tools that should always be considered *before* formal modeling begins. *Post hoc* diagnostics are introduced later in the course within the context of formal data modeling.
+:::
+
+::: {.column width="30%"}
+![](../graphics/jackalope_graphics/sherlock_jackalope.png)
+:::
+:::::
+
+------------------------------------------------------------------------
+
+## The *ante hoc* Data Exploration Toolkit
+
+In the R exercises used this course, we will repeatedly apply the following steps of the *ante hoc* Data Exploration Toolkit:
+
+-   Tool #1: Assess *potential* outliers (univariate and multivariate)
+-   Tool #2: Assess the presence of excess zeros
+-   Tool #3: Assess potential information redundancy among covariates (e.g., multicollinearity)
+-   Tool #4: Explore interactions and structural relationships
+-   Tool #5: Decide whether covariate standardization is warranted (this could also be used during *post hoc* data exploration)
+
+This toolkit is **intentionally coarse and non-exhaustive**. Its purpose is not to *fix* the data, but rather to identify critical and fatal issues when they are easiest to diagnose and least costly to address. Skipping these steps often leads to confusion or [Paralysis of Analysis](https://jpkelley.github.io/ZOO5500/chapters/statistical_aphorisms.html) during modeling. Many of these are mistakes I have made myself over the years...and learned from the hard way.
+
+This section focuses on the first three most important tools within this toolkit: assessing potential outliers, assessing potential excess of zero values, and assessing potential information redundancy among covariates. The first section --outliers-- will be discussed on its own; for the sake of course timing, the other two will be discussed in the tutorial and later in the course.
+
+::: {.callout-tip collapse="true"}
+## GLMMs and GAMMs: why homogeneity of variance is not required
+
+Most ecological data are far more complex than what simple Analysis of Variance (ANOVA) or linear model frameworks can handle, often involving non-Gaussian dependent variables, hierarchical structures (i.e. nested data), and uneven sampling. In this context, enforcing homogeneity of variance in the classical sense is not required; in face, it is appropriate.
+
+In Generalized Linear Mixed Model (GLMMs) and Generalized Additive Mixed Models (GAMMs), variance is explicitly modeled through the choice of error distribution, link function, and hierarchical structure. As a result, heterogeneity of variance on the response scale is not a violation of assumptions; it is often an expected property of the data.
+
+> Takeaway: In GLMMs and GAMMs, variance diagnostics evaluate model adequacy, not whether of not the data meet the homoscedasticity assumption *a priori*. In other words, you can skip that irrelevant section of [**Zuur et al. (2010)**](https://besjournals.onlinelibrary.wiley.com/doi/10.1111/j.2041-210X.2009.00001.x).
+:::
+
+## Scope and Next Steps
+
+At this **ante hoc** stage, the goal is to **recognize potential problems**, not to resolve them.
+
+In the next sections, we tackle each one of the tools in the toolkit. After focusing on each of these, in turn, we present a hands-on tutorial (discussed in class) that walks through these diagnostics using real data, illustrating how rule-based flags arise and how they should be interpreted responsibly within an analytical workflow.
+
+As a reminder, *post hoc* data exploration will be introduced later in the course, once models are fitted and can provide additional information about how the data and model interact.

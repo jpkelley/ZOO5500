@@ -32,8 +32,11 @@ book:
         - chapters/naming_conventions.qmd
         - chapters/statistical_aphorisms.qmd
     - part: "Part II: Chaos to Columns"
-      # chapters:
-
+      chapters:
+        - chapters/data_exploration_intro.qmd
+        - chapters/data_exploration_toolkit.qmd
+        - chapters/outliers.qmd
+        - chapters/tutorial_data_exploration.qmd
     - part: "Part III: Columns to Curves"
       # chapters: 
         # - chapters/intro_modeling.qmd

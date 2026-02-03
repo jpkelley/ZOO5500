@@ -175,5 +175,17 @@
   },
   "chapters/metadata_low_friction.qmd": {
     "metadata_low_friction.html": "c4343186"
+  },
+  "chapters/data_exploration_intro.qmd": {
+    "data_exploration_intro.html": "7c6256ea"
+  },
+  "chapters/tutorial_data_exploration.qmd": {
+    "tutorial_data_exploration.html": "2be940e1"
+  },
+  "chapters/data_exploration_toolkit.qmd": {
+    "data_exploration_toolkit.html": "ad6fa31d"
+  },
+  "chapters/outliers.qmd": {
+    "outliers.html": "8a880cf5"
   }
 }

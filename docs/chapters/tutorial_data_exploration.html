@@ -378,9 +378,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="workspace-set-up" class="level2" data-number="19.2">
 <h2 data-number="19.2" class="anchored" data-anchor-id="workspace-set-up"><span class="header-section-number">19.2</span> Workspace set-up</h2>
 <p>You are free to organize your R Project folder in whatever way works best for you, as this course imposes very little file-structure overhead. One simple option is to create a subfolder such as <code>data/class_exercise_data</code> (using the <code>dir.create("data/class_exercise_data")</code> command to hold any example files used in class. If you need a refresher on project setup and organization, refer back to the <a href="https://jpkelley.github.io/ZOO5500/"><strong>Preparing Yourself</strong></a> section from Week 1.</p>
-<p>First, load the required packages by sourcing the file below. There a number of ways to do this (I have noticed several ways that different labs at UW do this, and that is more than acceptable). For your convenience, I have provided the following file:</p>
+<p>First, load the required packages by sourcing the file below. There a number of ways to do this (I have noticed several ways that different labs at UW do this, and that is more than acceptable). For your convenience, I have provided the following file (right click on link to save the linked file to your drive):</p>
 <ul>
-<li><a href="../chapters/class_r_scripts/load_packages.r"><code>load_packages.r</code></a> <a href="../chapters/class_r_scripts/load_packages.r" target="_blank" rel="noopener">Download the <code>load_packages.r</code> file</a></li>
+<li><a href="../chapters/class_r_scripts/load_packages.r"><code>load_packages.r</code></a></li>
 </ul>
 <p>Place this file into a folder called <code>class_r_scripts</code> (just a recommendation!).</p>
 <div class="cell">
@@ -424,8 +424,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>To do these exercises on your own, you will need the following files (right click on link to save the linked file to your drive):</p>
 <ul>
-<li><a href="../chapters/class_data/lepusantilocapra_pelonates_experiment.csv"><code>lepusantilocapra_pelonates_experiment.csv</code></a></li>
-<li><a href="../chapters/class_data/lepusantilocapra_climate_data.csv"><code>lepusantilocapra_climate_data.csv</code></a></li>
+<li><a href="../chapters/class_exercise_data/lepusantilocapra_pelonates_experiment.csv"><code>lepusantilocapra_pelonates_experiment.csv</code></a></li>
+<li><a href="../chapters/class_exercise_data/lepusantilocapra_climate_data.csv"><code>lepusantilocapra_climate_data.csv</code></a></li>
 </ul>
 <p>Place the data files into your <code>class_exercise_data</code> folder.</p>
 <p>Let us read in these data and save it to an object called <code>d</code> (for “data”). Yes, according to best practices for naming, this could have a more informative name. Because this is (a) a singular dataset for a simple analysis, and (b) a simple class example, we will use a shorthand to prevent some extra keystrokes. But just know this is technically <em>very bad practice</em>. Also, for the sake of streamlining this example, this file has no associated metadata (this will be shown later when we get to the modeling phase). Already, we are flawed programmers. Let us move forward and try to forget these incidents.</p>

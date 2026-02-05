@@ -148,8 +148,6 @@ ggplot(d, aes(x = treatment, y = y)) +
 :::
 :::::
 
-------------------------------------------------------------------------
-
 ### Warnings about detecting univariate outliers from visual inspection
 
 Rules of outlier detection must be interpreted very cautiously, especially if univariate datesets exhibit **small sample sizes** or **skewed (i.e. non-normal) distributions**. For example, data drawn from a Gamma distribution—bounded at zero and right-skewed—may naturally produce values flagged by Tukey’s rule even when no anomaly is present.
@@ -277,11 +275,12 @@ $$
 
 Think of it this way:
 
--   **(x)** = the values for one observation (e.g., oxygen and temperature at one site)\
--   **(**\mu) = the average values across all observations\
--   **((x -** \mu)) = how far that observation is from the “typical” point\
--   **(**\Sigma\^{-1}) = a correction that accounts for different units and correlations between variables\
--   **(D\^2)** = a single number summarizing how extreme the observation is *given the relationships in the data*
+- **$x$** = the values for one observation (e.g., oxygen and temperature at one site)  
+- **$\mu$** = the average values across all observations  
+- **$(x - \mu)$** = how far that observation is from the “typical” point  
+- **$\Sigma^{-1}$** = a correction that accounts for different units *and* correlations between variables  
+- **$D^2$** = a single number summarizing how extreme the observation is *given the relationships in the data*
+
 
 A point can look normal for each variable by itself, but still have a large Mahalanobis distance if it **breaks the usual relationship between variables**.
 

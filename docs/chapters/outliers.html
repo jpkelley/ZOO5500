@@ -391,7 +391,7 @@ window.Quarto = {
 
 <section id="tool-1-assessing-potential-outliers" class="level2" data-number="18.1">
 <h2 data-number="18.1" class="anchored" data-anchor-id="tool-1-assessing-potential-outliers"><span class="header-section-number">18.1</span> Tool #1: Assessing Potential Outliers</h2>
-<p>This section introduces the first core tool of <em>ante hoc</em> Data Exploration Toolkit: assessing potential outliers. The goal is not to identify “bad” data, but to flag observations that warrant closer inspection and understanding before any modeling decisions are made. Throughout this section, outliers are treated as diagnostic signals rather than problems to be fixed, following this guideline:</p>
+<p>This section introduces the first core tool of <em>ante hoc</em> Data Exploration Toolkit: assessing potential outliers. The goal is not to justify a data point’s immediate removal, but rather to <strong>flag and understand why an observation is unusual</strong> before any modeling decisions are made. Throughout this section, outliers are treated as diagnostic signals rather than problems to be fixed,following a simple guiding principle:</p>
 <blockquote class="blockquote">
 <p><strong>Outlier rules guide scrutiny; they do not justify removal.</strong></p>
 </blockquote>
@@ -424,7 +424,6 @@ window.Quarto = {
 <p><img src="../graphics/jackalope_graphics/black_jackalope.png" class="img-fluid"></p>
 </div>
 </div>
-<p>The goal of data exploration is to <strong>understand why an observation is unusual</strong>, not to justify its immediate removal. Towards this goal, we will follow a simple guiding principle:</p>
 <section id="types-of-outliers" class="level2" data-number="18.4">
 <h2 data-number="18.4" class="anchored" data-anchor-id="types-of-outliers"><span class="header-section-number">18.4</span> Types of outliers</h2>
 <p>A useful first distinction to make in our discussion of outlier detection is whether an observation is unusual:</p>
@@ -492,7 +491,6 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<hr>
 <section id="warnings-about-detecting-univariate-outliers-from-visual-inspection" class="level3" data-number="18.5.4">
 <h3 data-number="18.5.4" class="anchored" data-anchor-id="warnings-about-detecting-univariate-outliers-from-visual-inspection"><span class="header-section-number">18.5.4</span> Warnings about detecting univariate outliers from visual inspection</h3>
 <p>Rules of outlier detection must be interpreted very cautiously, especially if univariate datesets exhibit <strong>small sample sizes</strong> or <strong>skewed (i.e.&nbsp;non-normal) distributions</strong>. For example, data drawn from a Gamma distribution—bounded at zero and right-skewed—may naturally produce values flagged by Tukey’s rule even when no anomaly is present.</p>
@@ -548,15 +546,15 @@ D^2 = (x - \mu)^T \Sigma^{-1} (x - \mu)
 \]</span></p>
 <p>Think of it this way:</p>
 <ul>
-<li><strong>(x)</strong> = the values for one observation (e.g., oxygen and temperature at one site)<br>
+<li><strong><span class="math inline">\(x\)</span></strong> = the values for one observation (e.g., oxygen and temperature at one site)<br>
 </li>
-<li><strong>()</strong> = the average values across all observations<br>
+<li><strong><span class="math inline">\(\mu\)</span></strong> = the average values across all observations<br>
 </li>
-<li><strong>((x - ))</strong> = how far that observation is from the “typical” point<br>
+<li><strong><span class="math inline">\((x - \mu)\)</span></strong> = how far that observation is from the “typical” point<br>
 </li>
-<li><strong>(^{-1})</strong> = a correction that accounts for different units and correlations between variables<br>
+<li><strong><span class="math inline">\(\Sigma^{-1}\)</span></strong> = a correction that accounts for different units <em>and</em> correlations between variables<br>
 </li>
-<li><strong>(D^2)</strong> = a single number summarizing how extreme the observation is <em>given the relationships in the data</em></li>
+<li><strong><span class="math inline">\(D^2\)</span></strong> = a single number summarizing how extreme the observation is <em>given the relationships in the data</em></li>
 </ul>
 <p>A point can look normal for each variable by itself, but still have a large Mahalanobis distance if it <strong>breaks the usual relationship between variables</strong>.</p>
 <p>That’s why Mahalanobis distance is useful for finding <strong>multivariate (conditional) outliers</strong>, not just extreme values.</p>

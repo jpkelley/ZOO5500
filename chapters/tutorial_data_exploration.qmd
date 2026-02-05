@@ -17,10 +17,10 @@ editor_options:
 
 In the tutorial below, you will witness some common approaches to examine datasets for outliers and multicollinearity. Some of these have severe limitations, which will be explained. The primary takeaway from this initial approach is that there is not a single, optimal recipe for understanding all the issues with your data *prior* to analysis. The process of discovery is iterative across several parts of your workflow. So, just be patient with this first step.
 
-::: {.callout-note collapse=false}
+::: {.callout-note collapse="false"}
 # What to expect from future tutorials
-In future weeks, you will be given a similar tutorial (with a very simple worked example) to work through on your own prior to class. In-class sessions will be used to answer questions pertaining to (1) the exercise itself and (2) the application of the tools and approaches to your own dataset.
 
+In future weeks, you will be given a similar tutorial (with a very simple worked example) to work through on your own prior to class. In-class sessions will be used to answer questions pertaining to (1) the exercise itself and (2) the application of the tools and approaches to your own dataset.
 :::
 
 ## Workspace set-up
@@ -29,7 +29,8 @@ You are free to organize your R Project folder in whatever way works best for yo
 
 First, load the required packages by sourcing the file below. There a number of ways to do this (I have noticed several ways that different labs at UW do this, and that is more than acceptable). For your convenience, I have provided the following file:
 
-* [`load_packages.r`](../class_r_scripts/load_packages.r)
+-   [`load_packages.r`](../chapters/class_r_scripts/load_packages.r)
+<a href="../chapters/class_r_scripts/load_packages.r" target="_blank" rel="noopener">Download the `load_packages.r` file</a>
 
 Place this file into a folder called `class_r_scripts` (just a recommendation!).
 
@@ -79,7 +80,6 @@ Keep in my that the `tidyverse` package in R is a *meta* package and contains ma
 :::
 
 ------------------------------------------------------------------------
-
 
 ## Our dataset: Impacts of mud-dwelling jackalopes on dissolved oxygen
 
@@ -152,30 +152,12 @@ This returns information about range, median value, and sample size within group
 
 You can then graphically view aspects of your raw dataset. So, let us create a few plots using the ggplot2 package. Please refer to the `ggplot2` [Cheat Sheet](class_exercise_data/data_visualization.pdf) (right click for download) for more information about this. Note that the following code does not use the pipe operator; this is just another way of doing things (it is good to see both in practice).
 
-::: {.callout-tip collapse=true}
-## **A recipe for a `ggplot2` visualization
+::: {.callout-tip collapse="true"}
+## \*\*A recipe for a `ggplot2` visualization
 
-`
-data |>
-  ggplot(
-    aes(
-      x = <x_variable>,
-      y = <y_variable>,
-      <optional_aesthetic> = <variable>
-    )
-  ) +
-  geom_<geometry>(<geometry_options>) +
-  labs(
-    title = "<plot title>",
-    x = "<x-axis label>",
-    y = "<y-axis label>",
-    <other_labels>
-  ) +
-  theme_<theme_name>() +
-  <optional_additional_layers>
-  
-`
+\` data \|\> ggplot( aes( x = <x_variable>, y = <y_variable>, <optional_aesthetic> = <variable> ) ) + geom\_<geometry>(<geometry_options>) + labs( title = "<plot title>", x = "<x-axis label>", y = "<y-axis label>", <other_labels> ) + theme\_<theme_name>() + <optional_additional_layers>
 
+\`
 :::
 
 #### Boxplot (Tukey-style)
@@ -271,7 +253,7 @@ d |>
 ## Pipes: `base` versus `magrittr`/`tidyverse` pipes
 
 | Feature | `|>` (`base` R) | `%>%` (`magrittr` / `tidyverse`) |
-|------------------|-------------------|------------------------------------|
+|------------------|-------------------|-----------------------------------|
 | Introduced | R 4.1.0 (`base` R) | Earlier (via `**`magrittr`**`, widely adopted by tidyverse) |
 | Requires package | No | Yes (`library(magrittr)` or `library(tidyverse)`) |
 | Default recommendation | Preferred going forward | Legacy / tidyverse-centric |
@@ -308,6 +290,7 @@ d |>
 ```
 
 ## Cleveland Dot Plot
+
 ```{r}
 #| message: false
 #| warning: false
@@ -323,7 +306,7 @@ d |>
   theme_minimal()
 ```
 
-Are there outliers? Recall that Tukey boxplots (as we have here) can tell us if there are potential outliers. This is how Tukey-style boxplots are defined. In our boxplot, we see two black dots each group that seem to be outside of the normal range of those groups. These are potential outliers. You should go back and examine these datapoints to see if there is anything strange about them. But be aware of how Tukey-style boxplots calculate outliers; it can be misleading if you do not understand Tukey's original approach. Let u also examine the boxplots by different _L. pelonates_ densities (i.e. the jackalope density treatments):
+Are there outliers? Recall that Tukey boxplots (as we have here) can tell us if there are potential outliers. This is how Tukey-style boxplots are defined. In our boxplot, we see two black dots each group that seem to be outside of the normal range of those groups. These are potential outliers. You should go back and examine these datapoints to see if there is anything strange about them. But be aware of how Tukey-style boxplots calculate outliers; it can be misleading if you do not understand Tukey's original approach. Let u also examine the boxplots by different *L. pelonates* densities (i.e. the jackalope density treatments):
 
 ```{r}
 d |> 
@@ -337,7 +320,7 @@ The Tukey boxplot is not showing any black “outlier” dots in the groups. So,
 
 ## Step 3: Inspecting for multicollinearity
 
-The jackalopeologists then conducted a preliminary quantification of the climate in which _L. pelonates_ was found. They used remote sensors to measure humidity, precipitation, temperature, temperature variability, and heating degree days. We don’t think we can include all the variables in our statistical model, so we want to first inspect if any of the variables are correlated (i.e. they tell us redundant information). Let’s read in these climate data and save it to an object called “climate”:
+The jackalopeologists then conducted a preliminary quantification of the climate in which *L. pelonates* was found. They used remote sensors to measure humidity, precipitation, temperature, temperature variability, and heating degree days. We don’t think we can include all the variables in our statistical model, so we want to first inspect if any of the variables are correlated (i.e. they tell us redundant information). Let’s read in these climate data and save it to an object called “climate”:
 
 ```{r}
 climate <- import("class_exercise_data/lepusantilocapra_climate_data.csv")
@@ -423,18 +406,10 @@ biplot(pca_results)
 
 One advantage of PCA/ICA or other factor reduction methods is that you can use expert knowledge to decide on the number of resulting axes. Certainly, in the end, these may not capture much total variation. This flexibility may improve interpretability.
 
-We can then create two new rotated scores for each observation (row). But what are these new values? These are simply new continous values that capture the variation attributable to the set of variables that correlated with each rotated component (PC1, PC2, etc.). 
+We can then create two new rotated scores for each observation (row). But what are these new values? These are simply new continous values that capture the variation attributable to the set of variables that correlated with each rotated component (PC1, PC2, etc.).
 
-The statistical convention in most fields is to accept all rotated components that sum to **>80%** of cumulative explained variation. You can output these new rotated scores by running the following code and then inputting these as new columns in your dataset. Then, run the model with each of these new _proxy variables_ as new factors in your model(s):
+The statistical convention in most fields is to accept all rotated components that sum to **\>80%** of cumulative explained variation. You can output these new rotated scores by running the following code and then inputting these as new columns in your dataset. Then, run the model with each of these new *proxy variables* as new factors in your model(s):
 
 ```{r}
 pca_results_rotated$scores
 ```
-
-
-
-
-
-
-
-

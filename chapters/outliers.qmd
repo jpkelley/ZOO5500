@@ -282,7 +282,7 @@ Think of it this way:
 - **$D^2$** = a single number summarizing how extreme the observation is *given the relationships in the data*
 
 
-A point can look normal for each variable by itself, but still have a large Mahalanobis distance if it **breaks the usual relationship between variables**.
+A point can look reasonable on its own but still have a large Mahalanobis distance if it **breaks the usual relationship between variables**.
 
 That’s why Mahalanobis distance is useful for finding **multivariate (conditional) outliers**, not just extreme values.
 :::

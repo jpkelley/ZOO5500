@@ -27,7 +27,7 @@ In future weeks, you will be given a similar tutorial (with a very simple worked
 
 You are free to organize your R Project folder in whatever way works best for you, as this course imposes very little file-structure overhead. One simple option is to create a subfolder such as `data/class_exercise_data` (using the `dir.create("data/class_exercise_data")` command to hold any example files used in class. If you need a refresher on project setup and organization, refer back to the [**Preparing Yourself**](https://jpkelley.github.io/ZOO5500/) section from Week 1.
 
-First, load the required packages by sourcing the file below. There a number of ways to do this (I have noticed several ways that different labs at UW do this, and that is more than acceptable). For your convenience, I have provided the following file (right click on link to save the linked file to your drive):
+First, load the required packages by sourcing the file below. There a number of ways to do this (I have noticed several ways that different labs at UW do this, and that is more than acceptable). For your convenience, I have provided the following file (click to save; you may need to add the `.r` extension manually):
 
 -   [`load_packages.r`](../chapters/class_r_scripts/load_packages.r)
 
@@ -94,7 +94,7 @@ To test whether jackalope density and salt availability had causal effects on di
 :::
 :::::
 
-To do these exercises on your own, you will need the following files (right click on link to save the linked file to your drive):
+To do these exercises on your own, you will need the following files (simply click to save):
 
 -   [`lepusantilocapra_pelonates_experiment.csv`](../chapters/class_exercise_data/lepusantilocapra_pelonates_experiment.csv)
 -   [`lepusantilocapra_climate_data.csv`](../chapters/class_exercise_data/lepusantilocapra_climate_data.csv)
@@ -109,9 +109,21 @@ d <- read.csv("class_exercise_data/lepusantilocapra_pelonates_experiment.csv")
 
 This was a successful (and very simple) data ingestion. (Again, there are many ways to ingest data, so use whatever you are most comfortable with.)
 
-What is the next step (assuming the data have undergone quality control checks)?
+---
 
-## Examine the data structure
+## Applying the Data Exploration Toolkit
+
+As you recall, we have the following steps of the *ante hoc* Data Exploration Toolkit:
+
+-   Tool #1: Assess *potential* outliers (univariate and multivariate)
+-   Tool #2: Assess the presence of excess zeros
+-   Tool #3: Explore interactions and structural relationships
+-   Tool #4: Assess potential information redundancy among covariates (e.g., multicollinearity)
+-   Tool #5: Decide whether covariate standardization is warranted
+
+The good news is that we can generally combine the first three steps by simply looking at the overall structure of your dataset in several ways. These "ways" are non-prescriptive; you should continue to explore until you understand all the dimensions of your raw data. Let's begin!
+
+## Basic examination of broad-scale data structure
 
 First, we need to check the data types that were imported; this is a critical first step, as this can let you immediately detect any red flags. Though the `str()` (or the `glimpse()` function) is good for initial checking:
 
@@ -127,144 +139,10 @@ d <- d |>
   mutate(salt_treatment = factor(salt_treatment))
 ```
 
-You can then run `str(d)` or `glimpse()` again to see this change.
-
-Let us now examine how the treatments and the response variable are structured and if there are any statistical outliers. There are many approaches to this, and most of these formal outlier tests (Grubb's test, Dixon's Q test, and Rosner's test) are based on the condition of dat normality. As such, they have context-dependent performance; that is, they fail at low sample sizes and have variable ability to detect outliers dependent on sample size. If you want to use these tests despite these weaknesses, you can find them in the `EnvStats` and `outliers` packages.
-
-It is important at this step to avoid making any inferences about the relationships. As far as you, the responsible data analyst, are concerned, there are no relationships. You are simply looking for anything odd in the dataset: spurious datapoints, data outside the range of data (though you could use the `range()` function to see this), etc. Let us conduct a simple examination using one tabular and six graphical approaches:
-
--   Step 1: Simple `summary`
--   Step 2: Boxplot (Tukey-style)
--   Step 3: Violin plot
--   Step 4: Interaction plot
--   Step 5: Scatterplot
--   Step 6: Density plot
--   Step 7: Heatmap
-
-#### Simple `summary` and examination of data structure
-
-```{r}
-summary(d)
-```
-
-This returns information about range, median value, and sample size within groups. **Use this first to discover any major issues.**
-
-You can then graphically view aspects of your raw dataset. So, let us create a few plots using the ggplot2 package. Please refer to the `ggplot2` [Cheat Sheet](class_exercise_data/data_visualization.pdf) (right click for download) for more information about this. Note that the following code does not use the pipe operator; this is just another way of doing things (it is good to see both in practice).
-
-::: {.callout-tip collapse="true"}
-## **A recipe for a `ggplot2` visualization**
-
-```{r}
-#| eval: false
-
-data |> 
-  ggplot(
-    aes(x = <x_variable>, y = <y_variable>, <optional_aesthetic> = <variable>)
-  ) +
-  geom_<geometry>(<geometry_options>) + 
-  labs(
-    title = "<plot title>",
-    x = "<x-axis label>",
-    y = "<y-axis label>",
-    <other_labels>
-    ) +
-  theme_<theme_name>() + 
-  <optional_additional_layers>
-```
-
-:::
-
-#### Boxplot (Tukey-style)
-
-This is one of the oldest known ways of examining a data distribution concurrent with putative outliers. There are a few issues with the way
-
-```{r}
-ggplot(d, aes(x = number_jackalope, y = oxygen_ppm, fill = salt_treatment)) +
-  geom_boxplot() +
-  labs(title = "Oxygen ppm by # jackalope and salt treatment",
-       x = "number of jackalope",
-       y = "Oxygen ppm") +
-  theme_minimal()
-```
-
-#### Violin plot
-
-```{r}
-ggplot(d, aes(x = number_jackalope, y = oxygen_ppm, fill = salt_treatment)) +
-  geom_violin(trim = FALSE) +
-  labs(title = "distribution of oxygen ppm by # jackalope and salt treatment",
-       x = "number of jackalopes",
-       y = "oxygen ppm") +
-  theme_minimal()
-```
-
-Because violin plots do not explicitly show outliers, they may be worse than Tukey-style boxplots for visual data exploration. Furthermore, violin plots may be harder to interpret than boxplot, may be space-inefficient (in terms of Tufte's well-known call for reduced non-data ink in visualizations), and may smooth over important details of the data (i.e. it's difficult to visually assess where the 25th and 75th percentiles are). Violin plots also can be misleading, especially with small sample sizes. Be cautious of their utility.
-
-#### Interaction plot
-
-```{r}
-ggplot(d, aes(x = number_jackalope, y = oxygen_ppm)) +
-  geom_boxplot() +
-  facet_wrap(~salt_treatment) +
-  labs(title = "Oxygen ppm by number of jackalopes across salt treatments",
-       x = "# jackalope",
-       y = "oxygen ppm") +
-  theme_minimal()
-```
-
-This visualization can give you a good idea about the variance within each unique treatment combination.
-
-#### Scatter plot
-
-```{r}
-ggplot(d, aes(x = number_jackalope, y = oxygen_ppm, color = salt_treatment, shape = salt_treatment)) +
-  geom_jitter(width = 0.1, height = 0) +
-  labs(title = "oxygen ppm scatter plot by # jackalope and salt treatment",
-       x = "# jackalope",
-       y = "oxygen ppm") +
-  theme_minimal()
-```
-
-#### Density plot
-
-```{r}
-ggplot(d, aes(x = oxygen_ppm, fill = salt_treatment)) +
-  geom_density(alpha = 0.5) +
-  labs(title = "density of oxygen ppm by salt treatment",
-       x = "oxygen ppm",
-       y = "density") +
-  theme_minimal()
-```
-
-This gives us a good idea of the relative spread of each of salt_treatment response. We can also produce the same plot, but we could split it by jackalope treatment instead. (In this case, it's a bit messy.)
-
-```{r}
-ggplot(d, aes(x = oxygen_ppm, fill = number_jackalope)) +
-  geom_density(alpha = 0.5) +
-  labs(title = "density of oxygen ppm by # jackalope",
-       x = "oxygen ppm",
-       y = "density") +
-  theme_minimal()
-```
-
-#### Heatmap
-
-```{r}
-d |>
-  group_by(number_jackalope, salt_treatment) |>
-  summarise(mean_oxygen = mean(oxygen_ppm), .groups = "drop") |>
-  ggplot(aes(x = number_jackalope, y = salt_treatment, fill = mean_oxygen)) +
-  geom_tile() +
-  scale_fill_gradient(low = "lightblue", high = "darkblue") +
-  labs(title = "heatmap: mean oxygen ppm by # jackalope and salt treatment",
-       x = "number of jackalope",
-       y = "salt treatment",
-       fill = "mean oxygen ppm") +
-  theme_minimal()
-```
-
 ::: {.callout-warning collapse="true"}
-## Pipes: `base` versus `magrittr`/`tidyverse` pipes
+## Digression about `base` versus `magrittr`/`tidyverse` pipes
+
+Note that the native pipe operator `|>` was used in the above `tidy` code snippit.
 
 | Feature | `|>` (`base` R) | `%>%` (`magrittr` / `tidyverse`) |
 |------------------|-------------------|-----------------------------------|
@@ -285,15 +163,61 @@ d |>
 | Works with tidyverse verbs | Yes | Yes |
 :::
 
-This is not particularly useful for detecting data anomalies, but it could be useful for helping you understand where data may be sparse (i.e. low sample sizes) or where there may be missing combinations of treatments (which can lead to lack of model convergence).
+You can then run `str(d)` or `glimpse()` again to see this change.
 
-Now that you've explored your data a bit, it's time to get to the business of formally detecting outliers.
+## Data structure: visualizing variation within and among groups
 
-## Step 1: Identifying univariate outliers (before analysis)
+Let us now examine how the treatments and the response variable are structured and if there are any statistical outliers. There are many approaches to this, and most of these formal outlier tests (Grubb's test, Dixon's Q test, and Rosner's test) are based on the condition of dat normality. As such, they have context-dependent performance; that is, they fail at low sample sizes and have variable ability to detect outliers dependent on sample size. If you want to use these tests despite these weaknesses, you can find them in the `EnvStats` and `outliers` packages.
 
-Visual inspection is often the best way to identify outliers. The following code takes our dataset (d) and then sends it forward to the ggplot function. As you read on the cheat sheet, you need to set what is called an “aesthetic” (abbreviated to “aes” in the function) that contains what you want to be your x and y variables. You can also set the fill color to vary by salt_treatments too. Then, the next lines add some axis and graph labels and set a theme (i.e. changes colors of the whole plotting area).
+It is important at this step to avoid making any inferences about the relationships. As far as you, the responsible data analyst, are concerned, there are no relationships. You are simply looking for anything odd in the dataset: spurious datapoints, data outside the range of data (though you could use the `range()` function to see this), etc. Let us conduct a simple examination using one tabular and six graphical approaches:
 
-Note that the native pipe operator `|>` is used here (see above note).
+-   Step 1: Simple `summary`
+-   Step 2: Boxplot (Tukey-style)
+-   Step 3: Violin plot
+-   Step 4: Scatterplot
+-   Step 5: Density plot
+-   Step 6: Heatmap
+-   Step 7: Interaction plot
+
+### Simple `summary` and examination of data structure
+
+```{r}
+summary(d)
+```
+
+This returns information about range, median value, and sample size within groups. **Use this first to discover any major issues.**
+
+You can then graphically view aspects of your raw dataset. So, let us create a few plots using the ggplot2 package. Please refer to the `ggplot2` [**Cheat Sheet**](../chapters/class_exercise_data/data_visualization.pdf) (right click for download) for more information about this.  
+
+::: {.callout-tip collapse="true"}
+## **A recipe for a `ggplot2` visualization**
+
+Use the `ggplot2` [**Cheat Sheet**](../chapters/class_exercise_data/data_visualization.pdf) (right click for download) and find the appropriately useful arguments to replace the angle bracketed (`< >`) sections (that is, remove the angle brackets in your final code).
+
+```{r}
+#| eval: false
+
+data |> 
+  ggplot(
+    aes(x = <x_variable>, y = <y_variable>, <optional_aesthetic> = <variable>)
+  ) +
+  geom_<geometry>(<geometry_options>) + 
+  labs(
+    title = "<plot title>",
+    x = "<x-axis label>",
+    y = "<y-axis label>",
+    <other_labels>
+    ) +
+  theme_<theme_name>() + 
+  <optional_additional_layers>
+
+```
+This follows the [Grammar of Graphics (GoG)](https://en.wikipedia.org/wiki/Wilkinson's_Grammar_of_Graphics) approach introduced by Leland Wilkinson in 1999. All the verbiage (e.g. _facets_, _aesthetics_, _geometry_) was then used as the basis for the first `ggplot` version by Hadley Wickham in 2007 (first book published in 2009; [now available online](https://ggplot2-book.org/)). Wilkinson's book on graphical theory is a great read and a great example of how to develop a set or irreducible guidelines for a seemingly complex system. 
+:::
+
+### Boxplot (Tukey-style)
+
+For Step #1 of our Data Exploration Toolkit, we can start the process of identifying potential univariate outliers by using a Tukey-style boxplot for visual inspection. The following code takes our dataset (d) and then sends it forward to the `ggplot` function. As you read on the Cheat Sheet (linked above) and the brief recipe in the callout box above, you need to set what is called an “aesthetic” (abbreviated to “aes” in the function) that contains what you want to be your `x` and `y` variables. You can also set the fill color to vary by `salt_treatment`s too. Then, the next lines add some axis and graph labels and set a theme (i.e. changes colors of the whole plotting area).
 
 ```{r}
 d |> 
@@ -303,7 +227,9 @@ d |>
   theme_minimal()
 ```
 
-## Cleveland Dot Plot
+### Cleveland Dot Plot
+
+This is another simple way of visualizing potential outlier. Fancy name; unfancy visualization. 
 
 ```{r}
 #| message: false
@@ -320,7 +246,7 @@ d |>
   theme_minimal()
 ```
 
-Are there outliers? Recall that Tukey boxplots (as we have here) can tell us if there are potential outliers. This is how Tukey-style boxplots are defined. In our boxplot, we see two black dots each group that seem to be outside of the normal range of those groups. These are potential outliers. You should go back and examine these datapoints to see if there is anything strange about them. But be aware of how Tukey-style boxplots calculate outliers; it can be misleading if you do not understand Tukey's original approach. Let u also examine the boxplots by different *L. pelonates* densities (i.e. the jackalope density treatments):
+Now, what can be said about potential outliers? In our boxplot, we see two black dots each group that seem to be outside of the normal range of those groups. These are _potential_ outliers. You should go back and examine these datapoints to see if there is anything strange about them. But be aware of how Tukey-style boxplots calculate outliers; it can be misleading if you do not understand Tukey's original approach. Let us also examine the boxplots by different *L. pelonates* densities (i.e. the jackalope density treatments):
 
 ```{r}
 d |> 
@@ -330,9 +256,94 @@ d |>
   theme_minimal()
 ```
 
-The Tukey boxplot is not showing any black “outlier” dots in the groups. So, using this approach, there do not seem to be any structural outliers. You can repeat this process on every variable in your dataset. It is generally effective for flagging major issues (anomalous values, etc.). Most likely, however, this approach will flag values that end up being perfectly reasonable. That is more than acceptable. At the very worst, you have put your eyes on the dataset a few more times.
+The Tukey boxplot is not showing any black “outlier” dots in the groups. So, using this approach, there do not seem to be any structural outliers. You can **repeat this process** on every variable in your dataset. It is generally effective for flagging major issues (anomalous values, etc.). Most likely, however, this approach will flag values that end up being perfectly reasonable. That is more than acceptable. At the very worst, you have put your eyes on the dataset a few more times.
 
-## Step 3: Inspecting for multicollinearity
+
+### Violin plot
+
+A violin plot visualizes distributions using a mirrored density plot. As such, the default is to extend the density profile past the data boundaries. This feature can be suppressed by setting the `trim` argument in the `geom_violin` to `FALSE`.
+
+```{r}
+ggplot(d, aes(x = number_jackalope, y = oxygen_ppm, fill = salt_treatment)) +
+  geom_violin(trim = FALSE) +
+  labs(title = "distribution of oxygen ppm by # jackalope and salt treatment",
+       x = "number of jackalopes",
+       y = "oxygen ppm") +
+  theme_minimal()
+```
+
+Because violin plots do not explicitly show outliers, they may be worse in some ways than Tukey-style boxplots for visual data exploration. Furthermore, violin plots may be harder to interpret than boxplot, may be space-inefficient (in terms of Edward Tufte's [well-known argument for reduced non-data ink](https://jtr13.github.io/cc19/tuftes-principles-of-data-ink.html) in visualizations), and may smooth over important details of the data (i.e. it's difficult to visually assess the location of the 25th and 75th percentiles, if that is something you are accustomed to). Violin plots also can be misleading, especially with small sample sizes. Use them, but think critically about what information they are providing.
+
+### Scatter plot
+
+Do not overlook the utility of simple scatterplot. A scatterplot is useful for seeing the raw relationship between a predictor and a response across treatments. It helps you assess overall trends, clustering, and potential outliers while keeping individual observations visible.
+
+```{r}
+ggplot(d, aes(x = number_jackalope, y = oxygen_ppm, color = salt_treatment, shape = salt_treatment)) +
+  geom_jitter(width = 0.1, height = 0) +
+  labs(title = "oxygen ppm scatter plot by # jackalope and salt treatment",
+       x = "# jackalope",
+       y = "oxygen ppm") +
+  theme_minimal()
+```
+
+### Density plot
+
+A density plot is very useful for quickly comparing the overall distribution of a response variable within or between groups. It helps you see differences in spread, skewness, and overlap between treatments that may not be obvious from summary statistics alone.
+
+```{r}
+ggplot(d, aes(x = oxygen_ppm, fill = salt_treatment)) +
+  geom_density(alpha = 0.5) +
+  labs(title = "density of oxygen ppm by salt treatment",
+       x = "oxygen ppm",
+       y = "density") +
+  theme_minimal()
+```
+For our example, this approach gives us a good idea of the relative spread of each of salt_treatment response. We can also produce the same plot, but we could split it by jackalope treatment instead. (In this case, it's a bit messy.)
+
+```{r}
+ggplot(d, aes(x = oxygen_ppm, fill = number_jackalope)) +
+  geom_density(alpha = 0.5) +
+  labs(title = "density of oxygen ppm by # jackalope",
+       x = "oxygen ppm",
+       y = "density") +
+  theme_minimal()
+```
+
+### Heatmap
+
+```{r}
+d |>
+  group_by(number_jackalope, salt_treatment) |>
+  summarise(mean_oxygen = mean(oxygen_ppm), .groups = "drop") |>
+  ggplot(aes(x = number_jackalope, y = salt_treatment, fill = mean_oxygen)) +
+  geom_tile() +
+  scale_fill_gradient(low = "lightblue", high = "darkblue") +
+  labs(title = "heatmap: mean oxygen ppm by # jackalope and salt treatment",
+       x = "number of jackalope",
+       y = "salt treatment",
+       fill = "mean oxygen ppm") +
+  theme_minimal()
+```
+
+### Interaction plot (Step #3)
+
+Step #3 of our Data Exploration Toolkit is to examine our interaction structure. A simple interaction plot is useful for getting a quick, visual sense of whether the relationship between a predictor and a response might change across levels of another factor. By faceting the same boxplot across salt treatments (i.e. creating "small multiples" _sensu_ Edward Tufte), you can more easily compare both the typical oxygen levels and the spread of the data for each jackalope count within each treatment. This does _not_ test for an interaction, but it is a fairly good reality check for overall patterns --such as shifts in medians or changes in variance-- that might justify including an interaction term later on. 
+
+```{r}
+ggplot(d, aes(x = number_jackalope, y = oxygen_ppm)) +
+  geom_boxplot() +
+  facet_wrap(~salt_treatment) +
+  labs(title = "Oxygen ppm by number of jackalopes across salt treatments",
+       x = "# jackalope",
+       y = "oxygen ppm") +
+  theme_minimal()
+```
+
+This is not particularly useful for detecting data anomalies, but it could be useful for helping you understand where data may be sparse (i.e. low sample sizes) or where there may be missing combinations of treatments (which can lead to lack of model convergence).
+
+---
+## Inspecting for multicollinearity (Step #4)
 
 The jackalopeologists then conducted a preliminary quantification of the climate in which *L. pelonates* was found. They used remote sensors to measure humidity, precipitation, temperature, temperature variability, and heating degree days. We don’t think we can include all the variables in our statistical model, so we want to first inspect if any of the variables are correlated (i.e. they tell us redundant information). Let’s read in these climate data and save it to an object called “climate”:
 
@@ -427,3 +438,8 @@ The statistical convention in most fields is to accept all rotated components th
 ```{r}
 pca_results_rotated$scores
 ```
+
+
+
+
+**End of tutorial**

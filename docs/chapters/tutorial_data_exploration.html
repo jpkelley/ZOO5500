@@ -326,10 +326,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#tutorial-data-exploration" id="toc-tutorial-data-exploration" class="nav-link active" data-scroll-target="#tutorial-data-exploration"><span class="header-section-number">19.1</span> Tutorial: Data Exploration</a></li>
   <li><a href="#workspace-set-up" id="toc-workspace-set-up" class="nav-link" data-scroll-target="#workspace-set-up"><span class="header-section-number">19.2</span> Workspace set-up</a></li>
   <li><a href="#our-dataset-impacts-of-mud-dwelling-jackalopes-on-dissolved-oxygen" id="toc-our-dataset-impacts-of-mud-dwelling-jackalopes-on-dissolved-oxygen" class="nav-link" data-scroll-target="#our-dataset-impacts-of-mud-dwelling-jackalopes-on-dissolved-oxygen"><span class="header-section-number">19.3</span> Our dataset: Impacts of mud-dwelling jackalopes on dissolved oxygen</a></li>
-  <li><a href="#examine-the-data-structure" id="toc-examine-the-data-structure" class="nav-link" data-scroll-target="#examine-the-data-structure"><span class="header-section-number">19.4</span> Examine the data structure</a></li>
-  <li><a href="#step-1-identifying-univariate-outliers-before-analysis" id="toc-step-1-identifying-univariate-outliers-before-analysis" class="nav-link" data-scroll-target="#step-1-identifying-univariate-outliers-before-analysis"><span class="header-section-number">19.5</span> Step 1: Identifying univariate outliers (before analysis)</a></li>
-  <li><a href="#cleveland-dot-plot" id="toc-cleveland-dot-plot" class="nav-link" data-scroll-target="#cleveland-dot-plot"><span class="header-section-number">19.6</span> Cleveland Dot Plot</a></li>
-  <li><a href="#step-3-inspecting-for-multicollinearity" id="toc-step-3-inspecting-for-multicollinearity" class="nav-link" data-scroll-target="#step-3-inspecting-for-multicollinearity"><span class="header-section-number">19.7</span> Step 3: Inspecting for multicollinearity</a></li>
+  <li><a href="#applying-the-data-exploration-toolkit" id="toc-applying-the-data-exploration-toolkit" class="nav-link" data-scroll-target="#applying-the-data-exploration-toolkit"><span class="header-section-number">19.4</span> Applying the Data Exploration Toolkit</a></li>
+  <li><a href="#basic-examination-of-broad-scale-data-structure" id="toc-basic-examination-of-broad-scale-data-structure" class="nav-link" data-scroll-target="#basic-examination-of-broad-scale-data-structure"><span class="header-section-number">19.5</span> Basic examination of broad-scale data structure</a></li>
+  <li><a href="#data-structure-visualizing-variation-within-and-among-groups" id="toc-data-structure-visualizing-variation-within-and-among-groups" class="nav-link" data-scroll-target="#data-structure-visualizing-variation-within-and-among-groups"><span class="header-section-number">19.6</span> Data structure: visualizing variation within and among groups</a>
+  <ul class="collapse">
+  <li><a href="#simple-summary-and-examination-of-data-structure" id="toc-simple-summary-and-examination-of-data-structure" class="nav-link" data-scroll-target="#simple-summary-and-examination-of-data-structure"><span class="header-section-number">19.6.1</span> Simple <code>summary</code> and examination of data structure</a></li>
+  <li><a href="#boxplot-tukey-style" id="toc-boxplot-tukey-style" class="nav-link" data-scroll-target="#boxplot-tukey-style"><span class="header-section-number">19.6.2</span> Boxplot (Tukey-style)</a></li>
+  <li><a href="#cleveland-dot-plot" id="toc-cleveland-dot-plot" class="nav-link" data-scroll-target="#cleveland-dot-plot"><span class="header-section-number">19.6.3</span> Cleveland Dot Plot</a></li>
+  <li><a href="#violin-plot" id="toc-violin-plot" class="nav-link" data-scroll-target="#violin-plot"><span class="header-section-number">19.6.4</span> Violin plot</a></li>
+  <li><a href="#scatter-plot" id="toc-scatter-plot" class="nav-link" data-scroll-target="#scatter-plot"><span class="header-section-number">19.6.5</span> Scatter plot</a></li>
+  <li><a href="#density-plot" id="toc-density-plot" class="nav-link" data-scroll-target="#density-plot"><span class="header-section-number">19.6.6</span> Density plot</a></li>
+  <li><a href="#heatmap" id="toc-heatmap" class="nav-link" data-scroll-target="#heatmap"><span class="header-section-number">19.6.7</span> Heatmap</a></li>
+  <li><a href="#interaction-plot-step-3" id="toc-interaction-plot-step-3" class="nav-link" data-scroll-target="#interaction-plot-step-3"><span class="header-section-number">19.6.8</span> Interaction plot (Step #3)</a></li>
+  </ul></li>
+  <li><a href="#inspecting-for-multicollinearity-step-4" id="toc-inspecting-for-multicollinearity-step-4" class="nav-link" data-scroll-target="#inspecting-for-multicollinearity-step-4"><span class="header-section-number">19.7</span> Inspecting for multicollinearity (Step #4)</a></li>
   </ul>
 </nav>
     </div>
@@ -378,7 +388,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="workspace-set-up" class="level2" data-number="19.2">
 <h2 data-number="19.2" class="anchored" data-anchor-id="workspace-set-up"><span class="header-section-number">19.2</span> Workspace set-up</h2>
 <p>You are free to organize your R Project folder in whatever way works best for you, as this course imposes very little file-structure overhead. One simple option is to create a subfolder such as <code>data/class_exercise_data</code> (using the <code>dir.create("data/class_exercise_data")</code> command to hold any example files used in class. If you need a refresher on project setup and organization, refer back to the <a href="https://jpkelley.github.io/ZOO5500/"><strong>Preparing Yourself</strong></a> section from Week 1.</p>
-<p>First, load the required packages by sourcing the file below. There a number of ways to do this (I have noticed several ways that different labs at UW do this, and that is more than acceptable). For your convenience, I have provided the following file (right click on link to save the linked file to your drive):</p>
+<p>First, load the required packages by sourcing the file below. There a number of ways to do this (I have noticed several ways that different labs at UW do this, and that is more than acceptable). For your convenience, I have provided the following file (click to save; you may need to add the <code>.r</code> extension manually):</p>
 <ul>
 <li><a href="../chapters/class_r_scripts/load_packages.r"><code>load_packages.r</code></a></li>
 </ul>
@@ -422,7 +432,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="../graphics/jackalope_graphics/muddwelling_jackalope.png" class="img-fluid"></p>
 </div>
 </div>
-<p>To do these exercises on your own, you will need the following files (right click on link to save the linked file to your drive):</p>
+<p>To do these exercises on your own, you will need the following files (simply click to save):</p>
 <ul>
 <li><a href="../chapters/class_exercise_data/lepusantilocapra_pelonates_experiment.csv"><code>lepusantilocapra_pelonates_experiment.csv</code></a></li>
 <li><a href="../chapters/class_exercise_data/lepusantilocapra_climate_data.csv"><code>lepusantilocapra_climate_data.csv</code></a></li>
@@ -433,10 +443,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"class_exercise_data/lepusantilocapra_pelonates_experiment.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>This was a successful (and very simple) data ingestion. (Again, there are many ways to ingest data, so use whatever you are most comfortable with.)</p>
-<p>What is the next step (assuming the data have undergone quality control checks)?</p>
+<hr>
 </section>
-<section id="examine-the-data-structure" class="level2" data-number="19.4">
-<h2 data-number="19.4" class="anchored" data-anchor-id="examine-the-data-structure"><span class="header-section-number">19.4</span> Examine the data structure</h2>
+<section id="applying-the-data-exploration-toolkit" class="level2" data-number="19.4">
+<h2 data-number="19.4" class="anchored" data-anchor-id="applying-the-data-exploration-toolkit"><span class="header-section-number">19.4</span> Applying the Data Exploration Toolkit</h2>
+<p>As you recall, we have the following steps of the <em>ante hoc</em> Data Exploration Toolkit:</p>
+<ul>
+<li>Tool #1: Assess <em>potential</em> outliers (univariate and multivariate)</li>
+<li>Tool #2: Assess the presence of excess zeros</li>
+<li>Tool #3: Explore interactions and structural relationships</li>
+<li>Tool #4: Assess potential information redundancy among covariates (e.g., multicollinearity)</li>
+<li>Tool #5: Decide whether covariate standardization is warranted</li>
+</ul>
+<p>The good news is that we can generally combine the first three steps by simply looking at the overall structure of your dataset in several ways. These “ways” are non-prescriptive; you should continue to explore until you understand all the dimensions of your raw data. Let’s begin!</p>
+</section>
+<section id="basic-examination-of-broad-scale-data-structure" class="level2" data-number="19.5">
+<h2 data-number="19.5" class="anchored" data-anchor-id="basic-examination-of-broad-scale-data-structure"><span class="header-section-number">19.5</span> Basic examination of broad-scale data structure</h2>
 <p>First, we need to check the data types that were imported; this is a critical first step, as this can let you immediately detect any red flags. Though the <code>str()</code> (or the <code>glimpse()</code> function) is good for initial checking:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(d)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -453,209 +475,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">number_jackalope =</span> <span class="fu">factor</span>(number_jackalope )) <span class="sc">|&gt;</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">salt_treatment =</span> <span class="fu">factor</span>(salt_treatment))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>You can then run <code>str(d)</code> or <code>glimpse()</code> again to see this change.</p>
-<p>Let us now examine how the treatments and the response variable are structured and if there are any statistical outliers. There are many approaches to this, and most of these formal outlier tests (Grubb’s test, Dixon’s Q test, and Rosner’s test) are based on the condition of dat normality. As such, they have context-dependent performance; that is, they fail at low sample sizes and have variable ability to detect outliers dependent on sample size. If you want to use these tests despite these weaknesses, you can find them in the <code>EnvStats</code> and <code>outliers</code> packages.</p>
-<p>It is important at this step to avoid making any inferences about the relationships. As far as you, the responsible data analyst, are concerned, there are no relationships. You are simply looking for anything odd in the dataset: spurious datapoints, data outside the range of data (though you could use the <code>range()</code> function to see this), etc. Let us conduct a simple examination using one tabular and six graphical approaches:</p>
-<ul>
-<li>Step 1: Simple <code>summary</code></li>
-<li>Step 2: Boxplot (Tukey-style)</li>
-<li>Step 3: Violin plot</li>
-<li>Step 4: Interaction plot</li>
-<li>Step 5: Scatterplot</li>
-<li>Step 6: Density plot</li>
-<li>Step 7: Heatmap</li>
-</ul>
-<section id="simple-summary-and-examination-of-data-structure" class="level4">
-<h4 class="anchored" data-anchor-id="simple-summary-and-examination-of-data-structure">Simple <code>summary</code> and examination of data structure</h4>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(d)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> number_jackalope  salt_treatment   oxygen_ppm    
- 0:9              1_low   :15     Min.   : 0.670  
- 1:9              2_medium:15     1st Qu.: 3.000  
- 2:9              3_high  :15     Median : 5.370  
- 3:9                              Mean   : 7.456  
- 4:9                              3rd Qu.:12.300  
-                                  Max.   :19.560  </code></pre>
-</div>
-</div>
-<p>This returns information about range, median value, and sample size within groups. <strong>Use this first to discover any major issues.</strong></p>
-<p>You can then graphically view aspects of your raw dataset. So, let us create a few plots using the ggplot2 package. Please refer to the <code>ggplot2</code> <a href="class_exercise_data/data_visualization.pdf">Cheat Sheet</a> (right click for download) for more information about this. Note that the following code does not use the pipe operator; this is just another way of doing things (it is good to see both in practice).</p>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>A recipe for a <code>ggplot2</code> visualization</strong>
+<span class="screen-reader-only">Warning</span>Digression about <code>base</code> versus <code>magrittr</code>/<code>tidyverse</code> pipes
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> <span class="sc">&lt;</span>x_variable<span class="sc">&gt;</span>, <span class="at">y =</span> <span class="sc">&lt;</span>y_variable<span class="sc">&gt;</span>, <span class="sc">&lt;</span>optional_aesthetic<span class="sc">&gt;</span> <span class="er">=</span> <span class="er">&lt;</span>variable<span class="sc">&gt;</span>)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  geom_<span class="sc">&lt;</span>geometry<span class="sc">&gt;</span>(<span class="sc">&lt;</span>geometry_options<span class="sc">&gt;</span>) <span class="sc">+</span> </span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"&lt;plot title&gt;"</span>,</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"&lt;x-axis label&gt;"</span>,</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"&lt;y-axis label&gt;"</span>,</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="sc">&lt;</span>other_labels<span class="sc">&gt;</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  theme_<span class="sc">&lt;</span>theme_name<span class="sc">&gt;</span>() <span class="sc">+</span> </span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="er">&lt;</span>optional_additional_layers<span class="sc">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="boxplot-tukey-style" class="level4">
-<h4 class="anchored" data-anchor-id="boxplot-tukey-style">Boxplot (Tukey-style)</h4>
-<p>This is one of the oldest known ways of examining a data distribution concurrent with putative outliers. There are a few issues with the way</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> number_jackalope, <span class="at">y =</span> oxygen_ppm, <span class="at">fill =</span> salt_treatment)) <span class="sc">+</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Oxygen ppm by # jackalope and salt treatment"</span>,</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"number of jackalope"</span>,</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Oxygen ppm"</span>) <span class="sc">+</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="tutorial_data_exploration_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="violin-plot" class="level4">
-<h4 class="anchored" data-anchor-id="violin-plot">Violin plot</h4>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> number_jackalope, <span class="at">y =</span> oxygen_ppm, <span class="at">fill =</span> salt_treatment)) <span class="sc">+</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="at">trim =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"distribution of oxygen ppm by # jackalope and salt treatment"</span>,</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"number of jackalopes"</span>,</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"oxygen ppm"</span>) <span class="sc">+</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="tutorial_data_exploration_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Because violin plots do not explicitly show outliers, they may be worse than Tukey-style boxplots for visual data exploration. Furthermore, violin plots may be harder to interpret than boxplot, may be space-inefficient (in terms of Tufte’s well-known call for reduced non-data ink in visualizations), and may smooth over important details of the data (i.e.&nbsp;it’s difficult to visually assess where the 25th and 75th percentiles are). Violin plots also can be misleading, especially with small sample sizes. Be cautious of their utility.</p>
-</section>
-<section id="interaction-plot" class="level4">
-<h4 class="anchored" data-anchor-id="interaction-plot">Interaction plot</h4>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> number_jackalope, <span class="at">y =</span> oxygen_ppm)) <span class="sc">+</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>salt_treatment) <span class="sc">+</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Oxygen ppm by number of jackalopes across salt treatments"</span>,</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"# jackalope"</span>,</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"oxygen ppm"</span>) <span class="sc">+</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="tutorial_data_exploration_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>This visualization can give you a good idea about the variance within each unique treatment combination.</p>
-</section>
-<section id="scatter-plot" class="level4">
-<h4 class="anchored" data-anchor-id="scatter-plot">Scatter plot</h4>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> number_jackalope, <span class="at">y =</span> oxygen_ppm, <span class="at">color =</span> salt_treatment, <span class="at">shape =</span> salt_treatment)) <span class="sc">+</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">height =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"oxygen ppm scatter plot by # jackalope and salt treatment"</span>,</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"# jackalope"</span>,</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"oxygen ppm"</span>) <span class="sc">+</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="tutorial_data_exploration_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="density-plot" class="level4">
-<h4 class="anchored" data-anchor-id="density-plot">Density plot</h4>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> oxygen_ppm, <span class="at">fill =</span> salt_treatment)) <span class="sc">+</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"density of oxygen ppm by salt treatment"</span>,</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"oxygen ppm"</span>,</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"density"</span>) <span class="sc">+</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="tutorial_data_exploration_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>This gives us a good idea of the relative spread of each of salt_treatment response. We can also produce the same plot, but we could split it by jackalope treatment instead. (In this case, it’s a bit messy.)</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> oxygen_ppm, <span class="at">fill =</span> number_jackalope)) <span class="sc">+</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"density of oxygen ppm by # jackalope"</span>,</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"oxygen ppm"</span>,</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"density"</span>) <span class="sc">+</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="tutorial_data_exploration_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="heatmap" class="level4">
-<h4 class="anchored" data-anchor-id="heatmap">Heatmap</h4>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(number_jackalope, salt_treatment) <span class="sc">|&gt;</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_oxygen =</span> <span class="fu">mean</span>(oxygen_ppm), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> number_jackalope, <span class="at">y =</span> salt_treatment, <span class="at">fill =</span> mean_oxygen)) <span class="sc">+</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"lightblue"</span>, <span class="at">high =</span> <span class="st">"darkblue"</span>) <span class="sc">+</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"heatmap: mean oxygen ppm by # jackalope and salt treatment"</span>,</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"number of jackalope"</span>,</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"salt treatment"</span>,</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"mean oxygen ppm"</span>) <span class="sc">+</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="tutorial_data_exploration_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>Pipes: <code>base</code> versus <code>magrittr</code>/<code>tidyverse</code> pipes
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
+<p>Note that the native pipe operator <code>|&gt;</code> was used in the above <code>tidy</code> code snippit.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -750,20 +582,214 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>This is not particularly useful for detecting data anomalies, but it could be useful for helping you understand where data may be sparse (i.e.&nbsp;low sample sizes) or where there may be missing combinations of treatments (which can lead to lack of model convergence).</p>
-<p>Now that you’ve explored your data a bit, it’s time to get to the business of formally detecting outliers.</p>
+<p>You can then run <code>str(d)</code> or <code>glimpse()</code> again to see this change.</p>
 </section>
-</section>
-<section id="step-1-identifying-univariate-outliers-before-analysis" class="level2" data-number="19.5">
-<h2 data-number="19.5" class="anchored" data-anchor-id="step-1-identifying-univariate-outliers-before-analysis"><span class="header-section-number">19.5</span> Step 1: Identifying univariate outliers (before analysis)</h2>
-<p>Visual inspection is often the best way to identify outliers. The following code takes our dataset (d) and then sends it forward to the ggplot function. As you read on the cheat sheet, you need to set what is called an “aesthetic” (abbreviated to “aes” in the function) that contains what you want to be your x and y variables. You can also set the fill color to vary by salt_treatments too. Then, the next lines add some axis and graph labels and set a theme (i.e.&nbsp;changes colors of the whole plotting area).</p>
-<p>Note that the native pipe operator <code>|&gt;</code> is used here (see above note).</p>
+<section id="data-structure-visualizing-variation-within-and-among-groups" class="level2" data-number="19.6">
+<h2 data-number="19.6" class="anchored" data-anchor-id="data-structure-visualizing-variation-within-and-among-groups"><span class="header-section-number">19.6</span> Data structure: visualizing variation within and among groups</h2>
+<p>Let us now examine how the treatments and the response variable are structured and if there are any statistical outliers. There are many approaches to this, and most of these formal outlier tests (Grubb’s test, Dixon’s Q test, and Rosner’s test) are based on the condition of dat normality. As such, they have context-dependent performance; that is, they fail at low sample sizes and have variable ability to detect outliers dependent on sample size. If you want to use these tests despite these weaknesses, you can find them in the <code>EnvStats</code> and <code>outliers</code> packages.</p>
+<p>It is important at this step to avoid making any inferences about the relationships. As far as you, the responsible data analyst, are concerned, there are no relationships. You are simply looking for anything odd in the dataset: spurious datapoints, data outside the range of data (though you could use the <code>range()</code> function to see this), etc. Let us conduct a simple examination using one tabular and six graphical approaches:</p>
+<ul>
+<li>Step 1: Simple <code>summary</code></li>
+<li>Step 2: Boxplot (Tukey-style)</li>
+<li>Step 3: Violin plot</li>
+<li>Step 4: Scatterplot</li>
+<li>Step 5: Density plot</li>
+<li>Step 6: Heatmap</li>
+<li>Step 7: Interaction plot</li>
+</ul>
+<section id="simple-summary-and-examination-of-data-structure" class="level3" data-number="19.6.1">
+<h3 data-number="19.6.1" class="anchored" data-anchor-id="simple-summary-and-examination-of-data-structure"><span class="header-section-number">19.6.1</span> Simple <code>summary</code> and examination of data structure</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span> </span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> salt_treatment, <span class="at">y =</span> oxygen_ppm, <span class="at">fill =</span> salt_treatment)) <span class="sc">+</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Boxplot by salt treatment"</span>, <span class="at">x =</span> <span class="st">"salt_treatment"</span>, <span class="at">y =</span> <span class="st">"oxygen_ppm"</span>) <span class="sc">+</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(d)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> number_jackalope  salt_treatment   oxygen_ppm    
+ 0:9              1_low   :15     Min.   : 0.670  
+ 1:9              2_medium:15     1st Qu.: 3.000  
+ 2:9              3_high  :15     Median : 5.370  
+ 3:9                              Mean   : 7.456  
+ 4:9                              3rd Qu.:12.300  
+                                  Max.   :19.560  </code></pre>
+</div>
+</div>
+<p>This returns information about range, median value, and sample size within groups. <strong>Use this first to discover any major issues.</strong></p>
+<p>You can then graphically view aspects of your raw dataset. So, let us create a few plots using the ggplot2 package. Please refer to the <code>ggplot2</code> <a href="../chapters/class_exercise_data/data_visualization.pdf"><strong>Cheat Sheet</strong></a> (right click for download) for more information about this.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span><strong>A recipe for a <code>ggplot2</code> visualization</strong>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Use the <code>ggplot2</code> <a href="../chapters/class_exercise_data/data_visualization.pdf"><strong>Cheat Sheet</strong></a> (right click for download) and find the appropriately useful arguments to replace the angle bracketed (<code>&lt; &gt;</code>) sections (that is, remove the angle brackets in your final code).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> <span class="sc">&lt;</span>x_variable<span class="sc">&gt;</span>, <span class="at">y =</span> <span class="sc">&lt;</span>y_variable<span class="sc">&gt;</span>, <span class="sc">&lt;</span>optional_aesthetic<span class="sc">&gt;</span> <span class="er">=</span> <span class="er">&lt;</span>variable<span class="sc">&gt;</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  geom_<span class="sc">&lt;</span>geometry<span class="sc">&gt;</span>(<span class="sc">&lt;</span>geometry_options<span class="sc">&gt;</span>) <span class="sc">+</span> </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"&lt;plot title&gt;"</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"&lt;x-axis label&gt;"</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"&lt;y-axis label&gt;"</span>,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="sc">&lt;</span>other_labels<span class="sc">&gt;</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  theme_<span class="sc">&lt;</span>theme_name<span class="sc">&gt;</span>() <span class="sc">+</span> </span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="er">&lt;</span>optional_additional_layers<span class="sc">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This follows the <a href="https://en.wikipedia.org/wiki/Wilkinson's_Grammar_of_Graphics">Grammar of Graphics (GoG)</a> approach introduced by Leland Wilkinson in 1999. All the verbiage (e.g.&nbsp;<em>facets</em>, <em>aesthetics</em>, <em>geometry</em>) was then used as the basis for the first <code>ggplot</code> version by Hadley Wickham in 2007 (first book published in 2009; <a href="https://ggplot2-book.org/">now available online</a>). Wilkinson’s book on graphical theory is a great read and a great example of how to develop a set or irreducible guidelines for a seemingly complex system.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="boxplot-tukey-style" class="level3" data-number="19.6.2">
+<h3 data-number="19.6.2" class="anchored" data-anchor-id="boxplot-tukey-style"><span class="header-section-number">19.6.2</span> Boxplot (Tukey-style)</h3>
+<p>For Step #1 of our Data Exploration Toolkit, we can start the process of identifying potential univariate outliers by using a Tukey-style boxplot for visual inspection. The following code takes our dataset (d) and then sends it forward to the <code>ggplot</code> function. As you read on the Cheat Sheet (linked above) and the brief recipe in the callout box above, you need to set what is called an “aesthetic” (abbreviated to “aes” in the function) that contains what you want to be your <code>x</code> and <code>y</code> variables. You can also set the fill color to vary by <code>salt_treatment</code>s too. Then, the next lines add some axis and graph labels and set a theme (i.e.&nbsp;changes colors of the whole plotting area).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> salt_treatment, <span class="at">y =</span> oxygen_ppm, <span class="at">fill =</span> salt_treatment)) <span class="sc">+</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Boxplot by salt treatment"</span>, <span class="at">x =</span> <span class="st">"salt_treatment"</span>, <span class="at">y =</span> <span class="st">"oxygen_ppm"</span>) <span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tutorial_data_exploration_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="cleveland-dot-plot" class="level3" data-number="19.6.3">
+<h3 data-number="19.6.3" class="anchored" data-anchor-id="cleveland-dot-plot"><span class="header-section-number">19.6.3</span> Cleveland Dot Plot</h3>
+<p>This is another simple way of visualizing potential outlier. Fancy name; unfancy visualization.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> oxygen_ppm, <span class="at">y =</span> salt_treatment)) <span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Cleveland dot plot by salt treatment"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"oxygen_ppm"</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"salt_treatment"</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tutorial_data_exploration_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now, what can be said about potential outliers? In our boxplot, we see two black dots each group that seem to be outside of the normal range of those groups. These are <em>potential</em> outliers. You should go back and examine these datapoints to see if there is anything strange about them. But be aware of how Tukey-style boxplots calculate outliers; it can be misleading if you do not understand Tukey’s original approach. Let us also examine the boxplots by different <em>L. pelonates</em> densities (i.e.&nbsp;the jackalope density treatments):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> number_jackalope, <span class="at">y =</span> oxygen_ppm, <span class="at">fill =</span> number_jackalope)) <span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Boxplot by number of jackalope"</span>, <span class="at">x =</span> <span class="st">"number_jackalope"</span>, <span class="at">y =</span> <span class="st">"oxygen_ppm"</span>) <span class="sc">+</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tutorial_data_exploration_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The Tukey boxplot is not showing any black “outlier” dots in the groups. So, using this approach, there do not seem to be any structural outliers. You can <strong>repeat this process</strong> on every variable in your dataset. It is generally effective for flagging major issues (anomalous values, etc.). Most likely, however, this approach will flag values that end up being perfectly reasonable. That is more than acceptable. At the very worst, you have put your eyes on the dataset a few more times.</p>
+</section>
+<section id="violin-plot" class="level3" data-number="19.6.4">
+<h3 data-number="19.6.4" class="anchored" data-anchor-id="violin-plot"><span class="header-section-number">19.6.4</span> Violin plot</h3>
+<p>A violin plot visualizes distributions using a mirrored density plot. As such, the default is to extend the density profile past the data boundaries. This feature can be suppressed by setting the <code>trim</code> argument in the <code>geom_violin</code> to <code>FALSE</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> number_jackalope, <span class="at">y =</span> oxygen_ppm, <span class="at">fill =</span> salt_treatment)) <span class="sc">+</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="at">trim =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"distribution of oxygen ppm by # jackalope and salt treatment"</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"number of jackalopes"</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"oxygen ppm"</span>) <span class="sc">+</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tutorial_data_exploration_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Because violin plots do not explicitly show outliers, they may be worse in some ways than Tukey-style boxplots for visual data exploration. Furthermore, violin plots may be harder to interpret than boxplot, may be space-inefficient (in terms of Edward Tufte’s <a href="https://jtr13.github.io/cc19/tuftes-principles-of-data-ink.html">well-known argument for reduced non-data ink</a> in visualizations), and may smooth over important details of the data (i.e.&nbsp;it’s difficult to visually assess the location of the 25th and 75th percentiles, if that is something you are accustomed to). Violin plots also can be misleading, especially with small sample sizes. Use them, but think critically about what information they are providing.</p>
+</section>
+<section id="scatter-plot" class="level3" data-number="19.6.5">
+<h3 data-number="19.6.5" class="anchored" data-anchor-id="scatter-plot"><span class="header-section-number">19.6.5</span> Scatter plot</h3>
+<p>Do not overlook the utility of simple scatterplot. A scatterplot is useful for seeing the raw relationship between a predictor and a response across treatments. It helps you assess overall trends, clustering, and potential outliers while keeping individual observations visible.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> number_jackalope, <span class="at">y =</span> oxygen_ppm, <span class="at">color =</span> salt_treatment, <span class="at">shape =</span> salt_treatment)) <span class="sc">+</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">height =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"oxygen ppm scatter plot by # jackalope and salt treatment"</span>,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"# jackalope"</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"oxygen ppm"</span>) <span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tutorial_data_exploration_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="density-plot" class="level3" data-number="19.6.6">
+<h3 data-number="19.6.6" class="anchored" data-anchor-id="density-plot"><span class="header-section-number">19.6.6</span> Density plot</h3>
+<p>A density plot is very useful for quickly comparing the overall distribution of a response variable within or between groups. It helps you see differences in spread, skewness, and overlap between treatments that may not be obvious from summary statistics alone.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> oxygen_ppm, <span class="at">fill =</span> salt_treatment)) <span class="sc">+</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"density of oxygen ppm by salt treatment"</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"oxygen ppm"</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"density"</span>) <span class="sc">+</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tutorial_data_exploration_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>For our example, this approach gives us a good idea of the relative spread of each of salt_treatment response. We can also produce the same plot, but we could split it by jackalope treatment instead. (In this case, it’s a bit messy.)</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> oxygen_ppm, <span class="at">fill =</span> number_jackalope)) <span class="sc">+</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"density of oxygen ppm by # jackalope"</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"oxygen ppm"</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"density"</span>) <span class="sc">+</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tutorial_data_exploration_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="heatmap" class="level3" data-number="19.6.7">
+<h3 data-number="19.6.7" class="anchored" data-anchor-id="heatmap"><span class="header-section-number">19.6.7</span> Heatmap</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(number_jackalope, salt_treatment) <span class="sc">|&gt;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_oxygen =</span> <span class="fu">mean</span>(oxygen_ppm), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> number_jackalope, <span class="at">y =</span> salt_treatment, <span class="at">fill =</span> mean_oxygen)) <span class="sc">+</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"lightblue"</span>, <span class="at">high =</span> <span class="st">"darkblue"</span>) <span class="sc">+</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"heatmap: mean oxygen ppm by # jackalope and salt treatment"</span>,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"number of jackalope"</span>,</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"salt treatment"</span>,</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"mean oxygen ppm"</span>) <span class="sc">+</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -773,18 +799,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="cleveland-dot-plot" class="level2" data-number="19.6">
-<h2 data-number="19.6" class="anchored" data-anchor-id="cleveland-dot-plot"><span class="header-section-number">19.6</span> Cleveland Dot Plot</h2>
+<section id="interaction-plot-step-3" class="level3" data-number="19.6.8">
+<h3 data-number="19.6.8" class="anchored" data-anchor-id="interaction-plot-step-3"><span class="header-section-number">19.6.8</span> Interaction plot (Step #3)</h3>
+<p>Step #3 of our Data Exploration Toolkit is to examine our interaction structure. A simple interaction plot is useful for getting a quick, visual sense of whether the relationship between a predictor and a response might change across levels of another factor. By faceting the same boxplot across salt treatments (i.e.&nbsp;creating “small multiples” <em>sensu</em> Edward Tufte), you can more easily compare both the typical oxygen levels and the spread of the data for each jackalope count within each treatment. This does <em>not</em> test for an interaction, but it is a fairly good reality check for overall patterns –such as shifts in medians or changes in variance– that might justify including an interaction term later on.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> oxygen_ppm, <span class="at">y =</span> salt_treatment)) <span class="sc">+</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Cleveland dot plot by salt treatment"</span>,</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"oxygen_ppm"</span>,</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"salt_treatment"</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> number_jackalope, <span class="at">y =</span> oxygen_ppm)) <span class="sc">+</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>salt_treatment) <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Oxygen ppm by number of jackalopes across salt treatments"</span>,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"# jackalope"</span>,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"oxygen ppm"</span>) <span class="sc">+</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -793,32 +818,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Are there outliers? Recall that Tukey boxplots (as we have here) can tell us if there are potential outliers. This is how Tukey-style boxplots are defined. In our boxplot, we see two black dots each group that seem to be outside of the normal range of those groups. These are potential outliers. You should go back and examine these datapoints to see if there is anything strange about them. But be aware of how Tukey-style boxplots calculate outliers; it can be misleading if you do not understand Tukey’s original approach. Let u also examine the boxplots by different <em>L. pelonates</em> densities (i.e.&nbsp;the jackalope density treatments):</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span> </span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> number_jackalope, <span class="at">y =</span> oxygen_ppm, <span class="at">fill =</span> number_jackalope)) <span class="sc">+</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Boxplot by number of jackalope"</span>, <span class="at">x =</span> <span class="st">"number_jackalope"</span>, <span class="at">y =</span> <span class="st">"oxygen_ppm"</span>) <span class="sc">+</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="tutorial_data_exploration_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>The Tukey boxplot is not showing any black “outlier” dots in the groups. So, using this approach, there do not seem to be any structural outliers. You can repeat this process on every variable in your dataset. It is generally effective for flagging major issues (anomalous values, etc.). Most likely, however, this approach will flag values that end up being perfectly reasonable. That is more than acceptable. At the very worst, you have put your eyes on the dataset a few more times.</p>
+<p>This is not particularly useful for detecting data anomalies, but it could be useful for helping you understand where data may be sparse (i.e.&nbsp;low sample sizes) or where there may be missing combinations of treatments (which can lead to lack of model convergence).</p>
+<hr>
 </section>
-<section id="step-3-inspecting-for-multicollinearity" class="level2" data-number="19.7">
-<h2 data-number="19.7" class="anchored" data-anchor-id="step-3-inspecting-for-multicollinearity"><span class="header-section-number">19.7</span> Step 3: Inspecting for multicollinearity</h2>
+</section>
+<section id="inspecting-for-multicollinearity-step-4" class="level2" data-number="19.7">
+<h2 data-number="19.7" class="anchored" data-anchor-id="inspecting-for-multicollinearity-step-4"><span class="header-section-number">19.7</span> Inspecting for multicollinearity (Step #4)</h2>
 <p>The jackalopeologists then conducted a preliminary quantification of the climate in which <em>L. pelonates</em> was found. They used remote sensors to measure humidity, precipitation, temperature, temperature variability, and heating degree days. We don’t think we can include all the variables in our statistical model, so we want to first inspect if any of the variables are correlated (i.e.&nbsp;they tell us redundant information). Let’s read in these climate data and save it to an object called “climate”:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>climate <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"class_exercise_data/lepusantilocapra_climate_data.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>climate <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"class_exercise_data/lepusantilocapra_climate_data.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>And then look at the structure of the data:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(climate)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(climate)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   37 obs. of  5 variables:
  $ humidity        : int  1 1 3 1 1 0 2 0 3 0 ...
@@ -831,22 +843,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Normally, we would have the associated metadata so that you could see the units for each of these variables. For this example, the units are not important.</p>
 <p>We will proceed to visually examine multicollinearity (correlation) between these climate metrics, but we will also include–as a basic measure of strength of any correlation– the Pearson correlation metric. Let’s use a pairwise plot to visually inspect these. Note that the correlation coefficient (which varies between 0-1) is on the opposite diagonal from the graph.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>climate <span class="sc">|&gt;</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggpairs</span>(</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">upper =</span> <span class="fu">list</span>(<span class="at">continuous =</span> <span class="st">"cor"</span>),</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">lower =</span> <span class="fu">list</span>(<span class="at">continuous =</span> <span class="st">"smooth"</span>),</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">diag  =</span> <span class="fu">list</span>(<span class="at">continuous =</span> <span class="st">"barDiag"</span>)</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>climate <span class="sc">|&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggpairs</span>(</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">upper =</span> <span class="fu">list</span>(<span class="at">continuous =</span> <span class="st">"cor"</span>),</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">lower =</span> <span class="fu">list</span>(<span class="at">continuous =</span> <span class="st">"smooth"</span>),</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">diag  =</span> <span class="fu">list</span>(<span class="at">continuous =</span> <span class="st">"barDiag"</span>)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="tutorial_data_exploration_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="tutorial_data_exploration_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># "upper" = Show Pearson correlation coefficients in the upper panel</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># "lower" = Optionally show scatterplots with smoothing in the lower panel</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># "diag"  = Optionally show histograms on the diagonal</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># "upper" = Show Pearson correlation coefficients in the upper panel</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># "lower" = Optionally show scatterplots with smoothing in the lower panel</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># "diag"  = Optionally show histograms on the diagonal</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The <code>GGally::ggpairs</code> function markedly improves upon similar functionality of base R. What do we see? We see that:</p>
 <ul>
@@ -857,8 +869,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>So, what to do, what to do, what to do? The next part is one solution to this issue. We clearly have some variables that might be providing redundant information. This could impact our modeling (specifically inflating the variance of a given regression coefficient). We can explicitly examine this using Variance Inflation Factors (VIFs), which are calculated for each term in a model. Note that there are options for VIFs applied to both continuous and categorical variables. Let us do this for continuous variables for these climate data. Most available functions in R require regression models; however, there are some approaches–such as the <code>usdm</code> package–that require only data frames of multiple variables. So, let us use that.:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>vif_results <span class="ot">&lt;-</span> usdm<span class="sc">::</span><span class="fu">vif</span>(climate)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>vif_results</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>vif_results <span class="ot">&lt;-</span> usdm<span class="sc">::</span><span class="fu">vif</span>(climate)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>vif_results</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         Variables        VIF
 1         humidity   1.774591
@@ -877,16 +889,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The former sounds lazy and arbitrary. Let us proceed with a factor reduction approach. For this, one of the most widely accepted approaches is a principal components analysis (PCA). There are many related factor reduction methods out there as well that may work better for non-normal data, etc., but PCA generally works fairly well.</p>
 <p>Our first step is to conduct a PCA without specifying how many new components (new variables) should be generated.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>pca_results <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">princomp</span>(</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span> humidity <span class="sc">+</span> precipitation <span class="sc">+</span> temperature <span class="sc">+</span> temp_variation <span class="sc">+</span> heating_deg_days,</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> climate,</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">cor =</span> <span class="cn">TRUE</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>) <span class="co"># using the namespace operator</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>pca_results <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">princomp</span>(</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span> humidity <span class="sc">+</span> precipitation <span class="sc">+</span> temperature <span class="sc">+</span> temp_variation <span class="sc">+</span> heating_deg_days,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> climate,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">cor =</span> <span class="cn">TRUE</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>) <span class="co"># using the namespace operator</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Note that the above code does not work with pipes. This behavior happens sometimes with <code>tidy</code>.</p>
 <p>Let us now examine the results output, specifically the standard deviation values (i.e.&nbsp;“Comp.1”, etc.). If you square these values, you will have what is called an <em>eigenvalue</em>, where values &gt;1 indicate that the new principal component accounts for more variance than the original variables. So, your first step is square the standard deviations and then use this <em>eigenvalue</em> to decide how many new components (i.e.&nbsp;new variables) to retain.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>pca_results<span class="sc">$</span>sdev <span class="sc">^</span> <span class="dv">2</span>  <span class="co"># this squares the standard deviations</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>pca_results<span class="sc">$</span>sdev <span class="sc">^</span> <span class="dv">2</span>  <span class="co"># this squares the standard deviations</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     Comp.1      Comp.2      Comp.3      Comp.4      Comp.5 
 2.688766244 1.452196831 0.507234299 0.349760919 0.002041707 </code></pre>
@@ -894,8 +906,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>It looks like the first two components work well. Now, we want to force a PCA to contain just two components, and we want those two variables to be as independent as follows. We therefore conduct what is called a rotated PCA to achieve maximum information of each component. Note that we are now using the <code>principal</code> function found in the <code>psych</code> package:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>pca_results_rotated <span class="ot">&lt;-</span> psych<span class="sc">::</span><span class="fu">principal</span>(climate, <span class="at">nfactors =</span> <span class="dv">2</span>, <span class="at">rotate =</span> <span class="st">"varimax"</span>, <span class="at">covar =</span> <span class="cn">FALSE</span>) <span class="co"># using a namespace operator</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>pca_results_rotated<span class="sc">$</span>loadings</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>pca_results_rotated <span class="ot">&lt;-</span> psych<span class="sc">::</span><span class="fu">principal</span>(climate, <span class="at">nfactors =</span> <span class="dv">2</span>, <span class="at">rotate =</span> <span class="st">"varimax"</span>, <span class="at">covar =</span> <span class="cn">FALSE</span>) <span class="co"># using a namespace operator</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>pca_results_rotated<span class="sc">$</span>loadings</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Loadings:
@@ -915,11 +927,11 @@ Cumulative Var 0.489 0.828</code></pre>
 <p>Let’s dissect this. First, look at the loadings table. These show the linear correlations between the rotated principal components (RC1 and RC2) and the original climate variables. Therefore, RC1 is strongly correlated with temperature, temperature variation, and heating degree days, whereas RC2 is correlated with humidity and precipitation.</p>
 <p>You can see this generally reflected when you plot PCA axes of variation. A safe default is to biplot the <code>princomp()</code> object:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pca_results)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pca_results)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="tutorial_data_exploration_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="tutorial_data_exploration_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -928,7 +940,7 @@ Cumulative Var 0.489 0.828</code></pre>
 <p>We can then create two new rotated scores for each observation (row). But what are these new values? These are simply new continous values that capture the variation attributable to the set of variables that correlated with each rotated component (PC1, PC2, etc.).</p>
 <p>The statistical convention in most fields is to accept all rotated components that sum to <strong>&gt;80%</strong> of cumulative explained variation. You can output these new rotated scores by running the following code and then inputting these as new columns in your dataset. Then, run the model with each of these new <em>proxy variables</em> as new factors in your model(s):</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>pca_results_rotated<span class="sc">$</span>scores</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>pca_results_rotated<span class="sc">$</span>scores</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            RC1         RC2
 1  -2.297743319 -0.93979095
@@ -970,6 +982,7 @@ Cumulative Var 0.489 0.828</code></pre>
 37 -1.269491637  3.67997024</code></pre>
 </div>
 </div>
+<p><strong>End of tutorial</strong></p>
 
 
 </section>

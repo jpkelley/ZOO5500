@@ -41,8 +41,8 @@ In the R exercises used this course, we will repeatedly apply the following step
 
 -   Tool #1: Assess *potential* outliers (univariate and multivariate)
 -   Tool #2: Assess the presence of excess zeros
--   Tool #3: Assess potential information redundancy among covariates (e.g., multicollinearity)
--   Tool #4: Explore interactions and structural relationships
+-   Tool #3: Explore interactions and structural relationships
+-   Tool #4: Assess potential information redundancy among covariates (e.g., multicollinearity)
 -   Tool #5: Decide whether covariate standardization is warranted (this could also be used during *post hoc* data exploration)
 
 This toolkit is **intentionally coarse and non-exhaustive**. Its purpose is not to *fix* the data, but rather to identify critical and fatal issues when they are easiest to diagnose and least costly to address. Skipping these steps often leads to confusion or [Paralysis of Analysis](https://jpkelley.github.io/ZOO5500/chapters/statistical_aphorisms.html) during modeling. Many of these are mistakes I have made myself over the years...and learned from the hard way.

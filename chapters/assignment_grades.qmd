@@ -42,38 +42,48 @@ Lock in a feasible analysis plan early, so you’re not improvising later. This 
 :::
 
 ::: {.callout-note title="**Data Readiness Note (Week 4)**" icon="false" collapse="true"}
-**Purpose:**\
-Demonstrate that your dataset is analysis-ready—or identify exactly what still blocks you. This is your chance to be honest about limitations before modeling.
+**Purpose:**
+For your Data Readiness Note, you will build upon your Analysis Concept Note. (Note that this does _not_ mean that you should simply paste the information below at the end of your Analysis Concept Note; it means that you should recycle.reuse the materials from your Analysis Concept Note as a foundation for your metadata and data readiness statement.) 
+
+The primary goal of the Data Readiness Note is to demonstrate that your dataset is analysis-ready—or identify exactly what still blocks you. This is your chance to be honest about limitations before modeling. 
+
+### Submission format
+
+Unlike Assignment #1 (Analysis Concept Note), there is flexibility in the submission format. As you will see below, I recommend using the YAML template for Part 1 (metadata), but the format is otherwise up to you. If you submit in a rendered PDF or HTML, I will provide general feedback in text form (Word document, etc.); if you submit as QMD file, I will respond within callout boxes. Whatever works best for your workflow also works for me!
 
 ### What to include
 
-_Note that many of the components in the list below should be included in a formal metadata file. For this component, it is strongly suggested you use [**YAML Metadata Template**](../templates/metadata_template.yaml), but you may also create a temporary metadata document using a spreadsheet.
+The components in the list below should be included in your assignment submission; keep these in _separate_ files for your own records, but please --if you can-- combine them all into a single file before submitting via email. 
 
--   Dataset summary
-    -   Number of rows/observations\
-    -   Key grouping structure (site, individual, date, etc.)
--   Data dictionary (lightweight)
-    -   Variable name → meaning → units → type (numeric, factor, date)
--   Missingness and exclusions
-    -   What’s missing, where, and what you did about it (if anything)
--   Measurement and uncertainty notes
-    -   Known measurement error, detection limits, observer effects, instrument drift, etc.
--   Basic Exploratory Data Analysis outputs (minimal but informative)
-    -   1–3 plots that reveal structure (distributions, relationships, time trends)\
+**Part 1: Metadata file**
+It is strongly suggested you use [**YAML Metadata Template**](../templates/metadata_template.yaml), but you may also create a temporary metadata document using a spreadsheet. Your submission should include a _very good initial attempt_ at making a formal metadata file that includes the following kinds of information (but could include more):
+
+-   Dataset summary: Number of rows/observations, key grouping structure (site, individual, date, etc.)
+-   Data dictionary (lightweight): Variable name → meaning → units → type (numeric, factor, date)
+-   Missingness and exclusions: what is missing, where is it missing from, and what you did about it (if anything)
+-   Measurement and uncertainty notes: Known measurement error, detection limits, observer effects, instrument drift, etc.
+
+**Part 2: Basic Exploratory Data Analysis outputs**
+This component should include _minimal but informative_ exploratory data analysis. You _do not_ need to show density plots of all 1000+ variables. Highlight a few approaches that detected problematic issues, if possible. Again, make this useful for your own documentation purposes. This short section should include:
+    
+-   Basic graphs or tables
+    -   1–3 plots that reveal structure (distributions, relationships, time trends)
     -   A short paragraph interpreting what matters
 -   Readiness decision
     -   “Ready to model” or “Not ready yet,” with a clear plan to get there
 
-### Submission format
-
--   1–2 pages (PDF) or Quarto page with embedded plots
--   In your Quarto-formatted (.qmd) submission, please include the final Evaluation Table (i.e. rubric-tested) output from JackalopeGPT. 
+**Part 3: AI-based Evaluation Table**
+A document showing that you used JackalopeGPT to include the final Evaluation Table (i.e. rubric-tested) output from JackalopeGPT. 
 
 ### “Good” looks like
 
--   You can explain what each variable means and whether it Is trustworthy
--   You have surfaced the biggest problems early
--   Your Exploratory Data Analysis purposeful, not a plot dump
+A submission of high quality will demonstrate:
+-   that you have a clear idea about (and can explain) what each variable means and whether it is trustworthy
+-   that you recognize your responsibility to document your metadata in a way that can be understood by future users
+-   that you purposefully applied basic approaches of Exploratory Data Analysis (and have not used this as a simple plot dump)
+-   that you are ready to move on to data analysis!
+
+
 :::
 
 ::: {.callout-note title="**Working Model — Draft (Week 7)**" icon="false" collapse="true"}
@@ -249,7 +259,9 @@ Demonstrate that you can revise strategically. You will not execute revisions; y
 
 ## General assignment submission requirements
 
-For all assignments, a template is provided. Each template is formatted using Quarto Markdown, which is preferred to R Markdown. While R Markdown is **not** obsolete by any means, it has a number of disadvantages compared to Quarto; these are summarized in the table below.
+For many assignments, at least a partial template is provided (e.g. YAML or QMD). You may choose to submit a raw Quarto Markdown file or submit a version of it rendered as a PDF or in HTML (viewable in a browser). As long as it is legible and, more importantly, makes sense within your own workflow, it works for me.
+
+Here is a brief note about Quarto Markdown, which is preferred to R Markdown. While R Markdown is **not** obsolete by any means, it has a number of disadvantages compared to Quarto; these are summarized in the table below.
 
 | Dimension         | R Markdown  | Quarto                     |
 | ----------------- | ----------- | -------------------------- |

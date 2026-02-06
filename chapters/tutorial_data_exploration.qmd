@@ -408,7 +408,7 @@ pca_results <- stats::princomp(
 
 Note that the above code does not work with pipes. This behavior happens sometimes with `tidy`.
 
-Let us now examine the results output, specifically the standard deviation values (i.e. “Comp.1”, etc.). If you square these values, you will have what is called an *eigenvalue*, where values \>1 indicate that the new principal component accounts for more variance than the original variables. So, your first step is square the standard deviations and then use this *eigenvalue* to decide how many new components (i.e. new variables) to retain.
+Let us now examine the results output, specifically the standard deviation values (i.e. “Comp.1”, etc.). Your first step is square the standard deviations and then use this *eigenvalue* to decide how many new components (i.e. new variables) to retain. Values >1 indicate that the new principal component accounts for more variance than the original variables; _this is the critically important part of PCA_. 
 
 ```{r}
 pca_results$sdev ^ 2  # this squares the standard deviations

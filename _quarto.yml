@@ -30,7 +30,6 @@ book:
         - chapters/nature_of_data.qmd
         - chapters/metadata_low_friction.qmd
         - chapters/naming_conventions.qmd
-        - chapters/statistical_aphorisms.qmd
     - part: "Part II: Chaos to Columns"
       chapters:
         - chapters/data_exploration_intro.qmd
@@ -38,7 +37,8 @@ book:
         - chapters/outliers.qmd
         - chapters/tutorial_data_exploration.qmd
     - part: "Part III: Columns to Curves"
-      # chapters: 
+      chapters: 
+        - chapters/statistical_aphorisms.qmd
         # - chapters/intro_modeling.qmd
         # - chapters/glm_poisson.qmd
     - part: "Part IV: Curves to Meaning"

@@ -1,0 +1,21 @@
+---
+title: "causality"
+format: html
+---
+
+Judea Pearl's Ladder of Causality
+
+https://hpccsystems.com/resources/causality-2021/
+
+
+:::: columns
+
+::: {.column width="30%"}
+
+
+![](./graphics/glm/gif_low_sample.gif)
+
+
+:::
+
+::::

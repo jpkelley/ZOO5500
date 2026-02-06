@@ -1,0 +1,202 @@
+
+---
+title: "Introduction to Statistical Modeling"
+format: html
+---
+
+
+
+
+## 1. Start with the Data-Generating Process
+
+**Goal:** Break students out of *“data = spreadsheet”* thinking.
+
+### Key ideas
+
+- Data are outcomes of **processes**, not abstract numbers
+- Every variable implies:
+  - a mechanism
+  - constraints (bounds, discreteness)
+  - inherent randomness
+
+**Framing line:**  
+> Models are hypotheses about how the data were generated.
+
+This sets up everything that follows.
+
+---
+
+## 2. Signal vs Noise (Why Models Exist)
+
+**Goal:** Introduce error *before* statistics.
+
+### Key ideas
+
+- Observed data = **systematic structure (signal)** + **unexplained variation (noise)**
+- Noise is not a nuisance — it is part of the process
+- Different processes generate different kinds of noise
+
+This naturally motivates:
+- error distributions
+- residuals
+- why assumptions exist at all
+
+**Teaching pivot:**  
+> Normality assumptions are about what the model fails to explain, not the phenomenon itself.
+
+![spider web picture]
+---
+
+## 3. Data Distributions as Stories About Noise
+
+**Goal:** Make distributions feel scientific, not technical.
+
+### Key ideas
+
+- **Gaussian** → additive continuous noise
+- **Poisson** → counting variability
+- **Binomial** → trial-based uncertainty
+- **Gamma** → positive, right-skewed accumulation
+
+**Core message:**  
+> Choosing a distribution is choosing a story about how randomness arises.
+
+This flows directly into GLMs.
+
+---
+
+## 4. Why Ecologists Are (Quietly) Doing Causality
+
+**Goal:** Reframe *“association”* language.
+
+### Key ideas
+
+- Ecologists motivate predictors biologically
+- Models are directional by construction
+- Management, prediction, and climate inference require causal belief
+
+### Introduce
+
+- implicit causality
+- counterfactual thinking (light touch)
+- why sensitivity analysis exists
+
+**Key line:**  
+> Correlation is what the math gives you; causality is what the science is trying to argue.
+
+
+
+:::: columns
+::: {.column width="40%"}
+test
+:::
+
+::: {.column width="60%"}
+![](../graphics/other_stylized_graphics/causal_verbiage_paper.png)
+:::
+::::
+
+---
+
+## 5. ANOVAs and *t*-tests as Special Cases
+
+**Goal:** Demystify classical statistics and lower resistance.
+
+### Key ideas
+
+- *t*-tests and ANOVAs are **linear models**
+- They assume:
+  - Gaussian errors
+  - identity link
+- Group means = predictors with factor coding
+
+**Crucial reframing:**  
+> We don’t abandon ANOVAs — we outgrow them.
+
+This primes GLMs as a generalization, not a replacement.
+
+---
+
+## 6. The Structure of the GLM
+
+**Goal:** Show how everything connects.
+
+### Three components
+
+1. **Random component** — distribution → noise  
+2. **Systematic component** — linear predictor → signal  
+3. **Link function** — connects the two  
+
+### Key clarifications
+
+- The link acts on the **mean**, not the data
+- The distribution constrains support and variance
+- Linear regression is just a GLM with an identity link and Gaussian errors
+
+**One-liner:**  
+> GLMs separate what varies, why it varies, and how randomness behaves.
+
+---
+
+## 7. From GLMs to GLMMs (Briefly)
+
+**Goal:** Introduce hierarchy as structure, not complication.
+
+### Key ideas
+
+- Random effects model shared history or dependence
+- They don’t *fix* bad models
+- They encode biological or sampling structure
+
+**Position GLMMs as:**  
+> Models of conditional independence, not magic bullets.
+
+---
+
+## 8. Diagnostics as Questions, Not Rituals
+
+**Goal:** Avoid checklist thinking.
+
+### Frame diagnostics as
+
+- Is the noise behaving as assumed?
+- Is there unmodeled structure?
+- Are predictions reasonable?
+
+### Key checks
+
+- residual patterns
+- dispersion
+- leverage / influence
+- biological plausibility
+
+**Closing line:**  
+> Diagnostics ask whether the imaginary world you built still resembles reality.
+
+---
+
+## Suggested Lecture Arc (One Sentence Each)
+
+- Data come from processes  
+- Processes generate signal and noise  
+- Distributions describe noise  
+- Ecology rarely stops at correlation  
+- Classical tests are just simple models  
+- GLMs unify everything  
+- GLMMs add structure  
+- Diagnostics test the story  
+
+---
+
+## Meta-Teaching Insight
+
+If students understand:
+- data-generating processes
+- signal vs noise
+- unit-level reasoning
+
+Then GLMs stop being *“advanced statistics”* and become:
+
+> a formal language for ecological thinking
+
+That’s the throughline worth preserving as you integrate the old material.

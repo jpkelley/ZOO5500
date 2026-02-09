@@ -1,34 +1,28 @@
 
 ---
-title: "Introduction to Statistical Modeling"
+title: "Introduction to Models"
 format: html
 ---
 
+## Data-Generating Processes
 
+You have now entered your data into a spreadsheet (or some other organized data table). Now, it is time to suspend this *“data = spreadsheet”* thinking.
 
+Perhaps the most interesting aspect of `data` is that they are outcomes of often complex **processes**; they are not simply abstract numbers. As a thought exercise, consider a set of mass values for a jackalope. Observed jackalope mass varies because individuals differ in body size and condition. Depending on recent food capture or hydration state, mass may fluctuate within individuals over very short time scales. Additional variation also arises during measurement due to instrument precision, calibration drift, and movement or posture on the scale. In sum, there are a myriad processes leading to a simple measurement. 
 
-## 1. Start with the Data-Generating Process
+Every variable in any dataset say something fundamental about a system's:
 
-**Goal:** Break students out of *“data = spreadsheet”* thinking.
-
-### Key ideas
-
-- Data are outcomes of **processes**, not abstract numbers
-- Every variable implies:
-  - a mechanism
+  - mechanisms
   - constraints (bounds, discreteness)
-  - inherent randomness
+  - randomness
 
-**Framing line:**  
+Once you start thinking this way about data, it becomes very clear that not all variation in a given dataset carries the same meaning. Some variation reflects real structure in the system that we care about. Other variation comes from randomness, measurement limits, or processes that we did not explicitly track. Our task, then, is to separate the patterns that carry information from the variation that does not. This leads directly to the ideas of signal and noise and to why we use models in the first place. Put another way:
+
 > Models are hypotheses about how the data were generated.
-
-This sets up everything that follows.
 
 ---
 
-## 2. Signal vs Noise (Why Models Exist)
-
-**Goal:** Introduce error *before* statistics.
+## Why models exist: signal versus noise
 
 ### Key ideas
 
@@ -47,7 +41,7 @@ This naturally motivates:
 ![spider web picture]
 ---
 
-## 3. Data Distributions as Stories About Noise
+## Data Distributions as Stories About Noise
 
 **Goal:** Make distributions feel scientific, not technical.
 

@@ -187,5 +187,8 @@
   },
   "chapters/outliers.qmd": {
     "outliers.html": "8a880cf5"
+  },
+  "chapters/intro2.qmd": {
+    "intro2.html": "85a572a6"
   }
 }

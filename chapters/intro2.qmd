@@ -1,0 +1,279 @@
+---
+title: "Introduction to Statistical Modeling"
+format: html
+---
+
+:::: columns
+::: {.column width="48%"}
+
+::: {.callout-tip collapse="true" icon="false" title="**Elevated temperature induces heat-shock gene expression**"}
+**Answer:** Causal  
+**Why:** The verb *induces* asserts a directional mechanism from temperature to gene expression.
+:::
+
+::: {.callout-tip collapse="true" icon="false" title="**Foraging duration and prey density are negatively associated in seabirds**"}
+**Answer:** Associational  
+**Why:** The statement reports a relationship without asserting a mechanism or direction of effect.
+:::
+
+::: {.callout-tip collapse="true" icon="false" title="**Forest fragmentation reduces nesting success**"}
+**Answer:** Causal  
+**Why:** The phrase *reduces* explicitly claims that fragmentation produces a change in nesting success.
+:::
+
+::: {.callout-tip collapse="true" icon="false" title="**Heat-shock gene expression is associated with ambient temperature**"}
+**Answer:** Associational  
+**Why:** The wording describes a correlation pattern without implying intervention or mechanism.
+:::
+
+::: {.callout-tip collapse="true" icon="false" title="**Nitrogen availability causes faster leaf expansion**"}
+**Answer:** Causal  
+**Why:** The verb *causes* signals a direct causal claim about nitrogen’s effect on growth.
+:::
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+::: {.callout-tip collapse="true" icon="false" title="**Metabolic rate and activity level are associated across mammals**"}
+**Answer:** Associational  
+**Why:** The statement summarizes a cross-species pattern without claiming direction or mechanism.
+:::
+
+::: {.callout-tip collapse="true" icon="false" title="**Bird species richness is higher in forested landscapes**"}
+**Answer:** Associational  
+**Why:** This reports a pattern across landscapes but does not assert that forest cover drives richness.
+:::
+
+::: {.callout-tip collapse="true" icon="false" title="**Higher prey density shortens foraging trips**"}
+**Answer:** Causal  
+**Why:** The verb *shortens* implies that prey density actively changes foraging behavior.
+:::
+
+::: {.callout-tip collapse="true" icon="false" title="**Increased activity elevates metabolic rate**"}
+**Answer:** Causal  
+**Why:** The statement claims a physiological mechanism linking activity to metabolism.
+:::
+
+::: {.callout-tip collapse="true" icon="false" title="**Tree growth and temperature are associated after accounting for elevation**"}
+**Answer:** Associational  
+**Why:** Conditioning on elevation defines a conditional association without asserting causation.
+:::
+:::
+::::
+
+
+## 1. Start with the Data-Generating Process
+
+**Goal:** Break students out of *“data = spreadsheet”* thinking.
+
+Statistical models begin with an idea about how the data were produced. Numbers do not appear magically; they are outcomes of ecological, biological, or sampling processes. Thinking this way helps us choose appropriate models later, rather than forcing data to fit familiar tools.
+
+### Key ideas
+
+- Data are outcomes of **real processes**
+- Variables imply:
+  - mechanisms
+  - constraints (bounds, discreteness)
+  - randomness
+- Modeling starts before statistics
+
+**Framing line:**  
+> Models are hypotheses about how the data were generated.
+
+---
+
+## 2. Signal vs Noise (Why Models Exist)
+
+**Goal:** Introduce error *before* statistics.
+
+Observed data contain both structure we want to explain and variation we cannot. Statistical models exist to separate these components. Importantly, unexplained variation is not a failure—it is an inherent feature of natural systems.
+
+### Key ideas
+
+- Observed data = **signal + noise**
+- Noise is part of the process, not a nuisance
+- Different processes produce different noise patterns
+
+This motivates:
+- residuals
+- error distributions
+- model assumptions
+
+**Teaching pivot:**  
+> Normality assumptions are about what the model fails to explain, not the phenomenon itself.
+
+---
+
+## 3. Data Distributions as Stories About Noise
+
+**Goal:** Make distributions feel scientific, not technical.
+
+Distributions describe how unexplained variation behaves. Choosing a distribution is not a mathematical trick—it is a scientific statement about how randomness arises in the system.
+
+### Key ideas
+
+- **Gaussian** → additive continuous noise
+- **Poisson** → variability in counts
+- **Binomial** → uncertainty from trials
+- **Gamma** → positive, right-skewed accumulation
+- Zero-inflation → excess structural zeros
+
+**Core message:**  
+> Choosing a distribution is choosing a story about how randomness arises.
+
+---
+
+## 4. Why Ecologists Are (Quietly) Doing Causality
+
+**Goal:** Reframe *“association”* language.
+
+Ecological models are rarely atheoretical. Predictors are chosen because we believe they influence outcomes. Even when we use associational language, our interpretations, predictions, and management decisions rely on causal assumptions.
+
+### Key ideas
+
+- Predictors are biologically motivated
+- Models are directional by construction
+- Inference often implies causal belief
+
+**Key line:**  
+> Correlation is what the math gives you; causality is what the science is trying to argue.
+
+---
+
+## 5. ANOVAs and *t*-tests as Special Cases
+
+**Goal:** Demystify classical statistics and lower resistance.
+
+Traditional tests like *t*-tests and ANOVAs are not fundamentally different tools—they are special cases of linear models with specific assumptions.
+
+Simulation examples show that *t*-tests, ANOVAs, and GLMs give **identical test statistics** when testing the same hypothesis under the same assumptions.
+
+### Key ideas
+
+- *t*-tests and ANOVAs are linear models
+- They assume:
+  - Gaussian errors
+  - identity link
+- They test the same hypotheses as GLMs
+
+**Crucial reframing:**  
+> We don’t abandon ANOVAs — we outgrow them.
+
+---
+
+## 6. The Structure of the GLM
+
+**Goal:** Show how everything connects.
+
+Generalized linear models separate the parts of a model that describe signal from those that describe noise. This separation is what gives the framework its flexibility.
+
+### Three components
+
+1. **Random component**  
+   - Error distribution  
+   - Describes variance and noise  
+
+2. **Systematic component**  
+   - Linear predictor  
+   - Encodes hypotheses and structure  
+
+3. **Link function**  
+   - Connects predictors to the mean of the response  
+   - Ensures predictions respect natural bounds  
+
+### Key clarifications
+
+- The link acts on the **mean**, not the data
+- Linear regression is a GLM with:
+  - Gaussian errors
+  - identity link
+
+**One-liner:**  
+> GLMs separate what varies, why it varies, and how randomness behaves.
+
+---
+
+## 7. Why GLMs Are So Powerful
+
+**Goal:** Explain why this framework dominates modern ecology.
+
+GLMs unify many traditional tests while offering greater flexibility. They handle real-world data complications that classical methods struggle with.
+
+### Key advantages
+
+- Robust to **unbalanced sample sizes**
+- Appropriate for **non-normal data**
+- Respect **natural data boundaries**
+- Allow meaningful visualization of modeled effects
+- Easily extended to more complex models
+
+---
+
+## 8. From GLMs to GLMMs (Briefly)
+
+**Goal:** Introduce hierarchy as structure, not complication.
+
+Many ecological data sets include clustering, repeated measures, or shared history. GLMMs extend GLMs by modeling this dependence explicitly.
+
+### Key ideas
+
+- Random effects encode dependence
+- They represent structure, not error correction
+- They improve inference when data are non-independent
+
+**Position GLMMs as:**  
+> Models of conditional independence, not magic bullets.
+
+---
+
+## 9. Diagnostics as Questions, Not Rituals
+
+**Goal:** Avoid checklist thinking.
+
+Model diagnostics are tools for asking whether the model you built is consistent with the data and the biology—not boxes to check mechanically.
+
+### Frame diagnostics as
+
+- Is the noise behaving as assumed?
+- Is there unmodeled structure?
+- Are predictions biologically reasonable?
+
+### Key emphasis
+
+- Assumptions apply to **residuals**, not raw data
+- Structured residuals indicate model misspecification
+- Many problems disappear with better model choice
+
+**Closing line:**  
+> Diagnostics ask whether the imaginary world you built still resembles reality.
+
+---
+
+## Suggested Lecture Arc (One Sentence Each)
+
+- Data come from processes  
+- Processes generate signal and noise  
+- Distributions describe noise  
+- Ecology rarely stops at correlation  
+- Classical tests are simple models  
+- GLMs unify everything  
+- GLMMs add structure  
+- Diagnostics test the story  
+
+---
+
+## Meta-Teaching Insight
+
+If students understand:
+- data-generating processes
+- signal vs noise
+- residual-based reasoning
+- biological motivation of predictors
+
+Then GLMs stop being *“advanced statistics”* and become:
+
+> a formal language for ecological thinking

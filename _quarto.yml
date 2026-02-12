@@ -40,7 +40,7 @@ book:
       chapters: 
         - chapters/statistical_aphorisms.qmd
         - chapters/intro_modeling.qmd
-        - chapters/tutorial_[glms_part02].qmd
+        - chapters/tutorial_glms.qmd
     - part: "Part IV: Curves to Meaning"
 
 

@@ -1,0 +1,223 @@
+---
+title: "Introduction to Models"
+format:
+  pptx:
+    slide-level: 2
+execute:
+  echo: false
+  message: false
+  warning: false
+---
+
+```{r setup}
+knitr::opts_chunk$set(fig.width = 7, fig.height = 4.2, dpi = 220)
+source("class_r_scripts/load_packages.r")
+library(tidyverse)
+library(ggplot2)
+library(knitr)
+```
+
+## From data to processes
+
+- Data are outcomes of processes  
+- Measurements mix signal and noise  
+- Models formalize that mix  
+
+![](../graphics/jackalope_graphics/marshwater_jackalope.png)
+
+## Signal
+
+- Signal = systematic structure  
+- Predictors represent mechanisms  
+- Goal: explain mean patterns  
+
+![](../graphics/other_stylized_graphics/causal_verbiage_paper.png)
+
+## Noise
+
+- Noise = unmeasured variation  
+- Not “junk”; it’s informative  
+- Distributions describe noise  
+
+## Distributions as noise models
+
+- Values allowed (support)  
+- Discrete vs continuous  
+- Mean–variance relationship  
+
+## Common distributions
+
+- Ecology is often non-normal  
+- Choose distributions deliberately  
+- Then choose link functions  
+
+```{r dist_table}
+dist_tbl <- tibble::tribble(
+  ~Distribution, ~Type, ~Support, ~MeanVariance,
+  "Gaussian", "Continuous", "(-∞, ∞)", "Var constant",
+  "Gamma", "Continuous", "(0, ∞)", "Var increases with mean",
+  "Poisson", "Discrete", "{0,1,2,…}", "Var = mean",
+  "Binomial", "Discrete", "{0,…,n}", "Var = np(1-p)",
+  "Beta", "Continuous", "(0,1)", "Var depends on mean + precision",
+  "Neg. binomial", "Discrete", "{0,1,2,…}", "Var > mean",
+  "Zero-infl. Poisson", "Discrete", "{0,1,2,…}", "Extra zeros inflate Var"
+)
+
+knitr::kable(dist_tbl, format = "pipe")
+```
+
+## Gaussian: additive noise
+
+- Continuous outcomes  
+- Symmetric deviations  
+- Constant variance  
+
+```{r gaussian_plot}
+x <- seq(-4, 4, length.out = 400)
+df_norm <- tibble(x = x, y = dnorm(x, mean = 0, sd = 1))
+
+ggplot(df_norm, aes(x, y)) +
+  geom_line(linewidth = 1) +
+  labs(x = "Value", y = "Density") +
+  theme_minimal(base_size = 16)
+```
+
+## Gamma: positive, skewed
+
+- Positive outcomes only  
+- Right-skew common  
+- Variance grows fast  
+
+```{r gamma_plot}
+x <- seq(0, 10, length.out = 400)
+df_gamma <- tibble(x = x, y = dgamma(x, shape = 3, rate = 1))
+
+ggplot(df_gamma, aes(x, y)) +
+  geom_line(linewidth = 1) +
+  labs(x = "Value", y = "Density") +
+  theme_minimal(base_size = 16)
+```
+
+## Poisson: counts
+
+- Counts: 0,1,2,…  
+- Variance ≈ mean  
+- Mean must be positive  
+
+```{r poisson_plot}
+x <- 0:15
+df_pois <- tibble(x = x, y = dpois(x, lambda = 4))
+
+ggplot(df_pois, aes(x, y)) +
+  geom_col() +
+  labs(x = "Count", y = "Probability") +
+  theme_minimal(base_size = 16)
+```
+
+## Binomial: successes
+
+- Bounded by 0…n  
+- Trials + probability  
+- Variance depends on p  
+
+```{r binomial_plot}
+x <- 0:10
+df_binom <- tibble(x = x, y = dbinom(x, size = 10, prob = 0.5))
+
+ggplot(df_binom, aes(x, y)) +
+  geom_col() +
+  labs(x = "Successes", y = "Probability") +
+  theme_minimal(base_size = 16)
+```
+
+## Beta: proportions
+
+- Continuous 0–1  
+- Flexible shapes  
+- Precision matters  
+
+```{r beta_plot}
+x <- seq(0.001, 0.999, length.out = 400)
+df_beta <- tibble(
+  x = x,
+  a2b5 = dbeta(x, 2, 5),
+  a5b2 = dbeta(x, 5, 2),
+  a3b3 = dbeta(x, 3, 3)
+) |>
+  pivot_longer(-x, names_to = "shape", values_to = "density")
+
+ggplot(df_beta, aes(x, density, color = shape)) +
+  geom_line(linewidth = 1) +
+  labs(x = "Proportion", y = "Density") +
+  theme_minimal(base_size = 16) +
+  theme(legend.title = element_blank())
+```
+
+## Negative binomial: overdispersed counts
+
+- Counts, clustered events  
+- Variance > mean  
+- Common in ecology  
+
+```{r nb_plot}
+x <- 0:20
+df_nb <- tibble(x = x, y = dnbinom(x, size = 2, mu = 6))
+
+ggplot(df_nb, aes(x, y)) +
+  geom_col() +
+  labs(x = "Count", y = "Probability") +
+  theme_minimal(base_size = 16)
+```
+
+## Zero-inflated Poisson: extra zeros
+
+- Two processes: zero vs count  
+- Many structural zeros  
+- Variance inflated  
+
+```{r zip_plot}
+x <- 0:15
+lambda <- 3
+pi0 <- 0.4
+zip_prob <- ifelse(
+  x == 0,
+  pi0 + (1 - pi0) * dpois(x, lambda),
+  (1 - pi0) * dpois(x, lambda)
+)
+df_zip <- tibble(x = x, y = zip_prob)
+
+ggplot(df_zip, aes(x, y)) +
+  geom_col() +
+  labs(x = "Count", y = "Probability") +
+  theme_minimal(base_size = 16)
+```
+
+## Why Poisson GLM (vs Gaussian)?
+
+- Counts are discrete  
+- Means must be positive  
+- Variance grows with mean  
+
+## GLM: three components
+
+- Signal: linear predictor  
+- Noise: distribution  
+- Link: connects mean to predictor  
+
+## Poisson GLM specification
+
+- $Y_i \sim \text{Poisson}(\mu_i)$  
+- $\eta_i = \beta_0 + \beta_1 X_i$  
+- $\log(\mu_i) = \eta_i$  
+
+## Link function: what it connects
+
+- Link acts on the mean  
+- Connects $\mu_i$ to $\eta_i$  
+- Ensures valid predictions  
+
+## Take-home
+
+- Choose distribution for noise  
+- Choose predictors for signal  
+- Choose link for realism  

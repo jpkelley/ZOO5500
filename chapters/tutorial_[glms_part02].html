@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>GLMs: an introduction</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="tutorial_[glms_part02]_files/libs/clipboard/clipboard.min.js"></script>
+<script src="tutorial_[glms_part02]_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="tutorial_[glms_part02]_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="tutorial_[glms_part02]_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="tutorial_[glms_part02]_files/libs/quarto-html/popper.min.js"></script>
+<script src="tutorial_[glms_part02]_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="tutorial_[glms_part02]_files/libs/quarto-html/anchor.min.js"></script>
+<link href="tutorial_[glms_part02]_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="tutorial_[glms_part02]_files/libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="tutorial_[glms_part02]_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="tutorial_[glms_part02]_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="tutorial_[glms_part02]_files/libs/bootstrap/bootstrap-9e3ffae467580fdb927a41352e75a2e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">GLMs: an introduction</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p><img src="../graphics/jackalope_graphics/puffer_pelican.png" class="img-fluid"></p>
+<p>In this tutorial, we introduce Generalized Linear Models (GLMs), starting with how to construct a Poisson GLM. This example purposefully starts with a simple –and inaccurate– model to illustrate the process of building a better, more explanatory model.</p>
+<p>This should highlight the idea discussed in the video that identifying an optimal model structure often solves many of the issues with model assumptions.</p>
+<p>For this first example, we will use a dataset (real but changed for this example) collected on <em>Lepusantilocapra pufferi</em> (puffer jackalope), starting in the mid-1970s. The data include the following variables:</p>
+<ul>
+<li><code>site</code>: where the individuals were sampled</li>
+<li><code>abund</code>: number of individuals detected at each location</li>
+<li><code>dens</code>: density of individuals at each sampling location</li>
+<li><code>mean_depth</code>: mean depth, in meters of the sampling location</li>
+<li><code>year</code>: year of the study</li>
+<li><code>period</code>: 1=before and 2= after introduction of <em>Pelicanus pufferivorus</em> (puffer-jackalope pelican)</li>
+<li><code>x_km</code>: longitude (decimal degrees) of sampling location</li>
+<li><code>y_km</code>: latitude (decimal degrees) of sampling location</li>
+<li><code>swept_area</code>: size in square meters of the sampling location (effort)</li>
+</ul>
+<p>You are tasked with examining/testing the relationship between total <em>Lepusantilocapra pufferi</em> abundance and mean depth for each time period (before/after introduction of puffer-jackalope pelican).</p>
+</section>
+<section id="set-up-workspace" class="level2">
+<h2 class="anchored" data-anchor-id="set-up-workspace">Set up workspace</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"class_r_scripts/load_packages.r"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="generalized-linear-model-gaussian-error-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="generalized-linear-model-gaussian-error-distribution">Generalized Linear Model (Gaussian error distribution)</h2>
+<p>Read in the <em>Lorax pufferi</em> dataset and examine its structure. Remember that you can also use the <code>glimpse</code> function here.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pufferi <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"class_exercise_data/lepusantilocapra_pufferi_abundance.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(pufferi) <span class="co"># examine data structure</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   146 obs. of  9 variables:
+ $ site      : int  1 2 3 4 5 6 7 8 9 10 ...
+ $ abund     : int  76 161 39 410 177 695 352 674 624 736 ...
+ $ dens      : num  0.00207 0.00352 0.000981 0.008039 0.005933 ...
+ $ mean_depth: int  804 808 809 848 853 960 977 982 985 986 ...
+ $ year      : int  1978 2001 2001 1979 2002 1980 1981 1979 1982 1980 ...
+ $ period    : int  1 2 2 1 2 1 1 1 1 1 ...
+ $ x_km      : num  98.8 76.8 103.8 91.5 107.1 ...
+ $ y_km      : num  -57.5 178.6 -50.1 146.4 -37.1 ...
+ $ swept_area: num  36710 45741 39775 51000 29831 ...</code></pre>
+</div>
+</div>
+<p>Note: Though the <code>readr::read_csv</code> function is commonly used, the initial warning messages upon import may throw off users who are unfamiliar with what it is doing. The function does provide quite a bit more flexibility in defining column types, but we do not need it for this example. So, here, we are using the base R function <code>read.csv</code>. You should feel free to use any data import function that you prefer.</p>
+<p>Let us explore the data a bit to see what we are up against. Obviously, a formal exploratory data analysis requires quite a bit more detailed examination, but this should serve us well right now.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(pufferi, <span class="fu">aes</span>(<span class="at">x =</span> mean_depth, <span class="at">y =</span> abund)) <span class="sc">+</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> period, <span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">nrow =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"mean depth (km)"</span>, <span class="at">y =</span> <span class="st">"number of _L. pufferi_"</span>) <span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tutorial_%5Bglms_part02%5D_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>From this two-panel scatterplot, we observe (but do not <em>yet</em> find statistical support for) a general decline in <em>L. pufferi</em> abundance with mean depth. Of course, our desire to see a pattern might be influenced by a general decrease in variation in the number of <em>L. pufferi</em> as mean depth increases. So, let us change this informal notion about what the data show to something more scientific. Specifically, we need a framework that separates effectively separates the signal from the underlying noise.</p>
+<p>; let us develop our first GLM. There are a variety of packages and functions for GLMs and their more complicated and powerful extensions. In this course, we will try to use the packages/functions that (1) have similar model syntax (even though used in Bayesian approaches), and (2) are used in the majority of published work of the last few years.</p>
+<p>Let us run a GLM without considering the distribution of our response variable. We use the <code>mass::glm</code> function, a versatile model function for non-clustered data (i.e.&nbsp;data that has no hierarchical structure like multiple samples collected for each individual, or multiple students from multiple schools from multiple school districts).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>base_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(abund <span class="sc">~</span> mean_depth, <span class="at">data =</span> pufferi)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This model structure will be very similar across all the modeling functions we discuss in the course. This is a very standard formula structure in R. This structure simply means tht abundance is modeled as a function of mean_depth. That is, the response variable (<code>abund</code>) is on the left side of the tilde (~) and the predictors are on the right side of the tilde.</p>
+<p>Let us view the summary output of this model in two ways: First, use the <code>summary</code> function to review the summary of the model object you just created (<code>base_model</code>). For many model objects in R, the <code>summary</code> function yields the same result.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(base_model) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = abund ~ mean_depth, data = pufferi)
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 451.39068   33.28310  13.562  &lt; 2e-16 ***
+mean_depth   -0.09758    0.01232  -7.918 5.92e-13 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 34192.14)
+
+    Null deviance: 7067483  on 145  degrees of freedom
+Residual deviance: 4923668  on 144  degrees of freedom
+AIC: 1942.5
+
+Number of Fisher Scoring iterations: 2</code></pre>
+</div>
+</div>
+<p>Results in this table can sometimes be a bit daunting if you are not familiar with regression. A relatively newcomer to the R package scene is the <code>broom</code> package. You can use the <code>broom</code> package to make the model output more human-friendly. This also saves you –to some extent– from learning how to extract specific output components from model objects from different packages. And the <code>broom</code> functions will certainly save you a huge amount of time outputting model results, residuals, and predicted values.</p>
+<p>First, just examine the effect sizes.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tidy model coefficients</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>tidy_glm <span class="ot">&lt;-</span> <span class="fu">tidy</span>(base_model, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(tidy_glm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 7
+  term        estimate std.error statistic  p.value conf.low conf.high
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept) 451.       33.3        13.6  1.63e-27  386.     517.    
+2 mean_depth   -0.0976    0.0123     -7.92 5.92e-13   -0.122   -0.0734</code></pre>
+</div>
+</div>
+<p>Then, you can check out the model fit. This is just for your information; we will do this in depth when we discuss how to report your results. But it is avdantageous to build some strong habits now! And I also want to give you some tools, so you can start adding them to your ever-improving analytical workflow!</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Glance at model-level statistics</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>glance_glm <span class="ot">&lt;-</span> <span class="fu">glance</span>(base_model)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(glance_glm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 8
+  null.deviance df.null logLik   AIC   BIC deviance df.residual  nobs
+          &lt;dbl&gt;   &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt; &lt;int&gt;
+1      7067483.     145  -968. 1943. 1951. 4923668.         144   146</code></pre>
+</div>
+</div>
+<p>Next, we can calculate model residuals and then add these values to (i.e.&nbsp;“augment”) our original dataset.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Augment the original data with predictions and residuals</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>augment_glm <span class="ot">&lt;-</span> <span class="fu">augment</span>(base_model)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(augment_glm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 146 × 8
+   abund mean_depth .fitted  .resid   .hat .sigma    .cooksd .std.resid
+   &lt;int&gt;      &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
+ 1    76        804    373. -297.   0.0181   184. 0.0243        -1.62  
+ 2   161        808    373. -212.   0.0181   185. 0.0123        -1.15  
+ 3    39        809    372. -333.   0.0181   183. 0.0305        -1.82  
+ 4   410        848    369.   41.4  0.0175   186. 0.000454       0.226 
+ 5   177        853    368. -191.   0.0175   185. 0.00966       -1.04  
+ 6   695        960    358.  337.   0.0160   183. 0.0276         1.84  
+ 7   352        977    356.   -4.05 0.0158   186. 0.00000393    -0.0221
+ 8   674        982    356.  318.   0.0158   184. 0.0241         1.74  
+ 9   624        985    355.  269.   0.0157   184. 0.0171         1.46  
+10   736        986    355.  381.   0.0157   183. 0.0344         2.08  
+# ℹ 136 more rows</code></pre>
+</div>
+</div>
+<p>The results (from <code>summary()</code> or <code>broom::tidy</code> functions) show a significant effect of <code>mean_death</code>. As an aside, it might not be the best to use the term <em>effect,</em> as this technically implies a causal structure. But it is common usage, so we will stick to it. Just be cautious of using wording that does not match with your hypotheses and predictions.</p>
+</section>
+<section id="checking-residuals-for-heteroscedaticity-and-violations-to-normality." class="level1">
+<h1>Checking residuals for heteroscedaticity and violations to normality.</h1>
+<p>For every final model, we need to check the structure of the residuals. In the past, this was a relatively tiresome task, which involved visual inspection of Pearson residuals. With the advent of the DHARMa package in R, this becomes much easier. A vignette for this package is exceptional and can be found [here] (<a href="https://cran.r-project.org/web/packages/DHARMa/vignettes/DHARMa.html#calculating-scaled-residuals" class="uri">https://cran.r-project.org/web/packages/DHARMa/vignettes/DHARMa.html#calculating-scaled-residuals</a>).</p>
+<p>The package does not use Pearson residuals and instead generates simulated (standardized) residuals, making it more suitable for diagnosing generalized linear models (GLMs), mixed models, and other complex models. This simulation-based approach makes this step insensitive to sample size and allows you to more easily detect overdispersion, zero-inflation, heteroscedasticity, and model misspecification.</p>
+<p>The most general function is for the simulation of residuals, <code>simulateResiduals()</code>, which is run on the fitted model.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>sim_res <span class="ot">&lt;-</span> <span class="fu">simulateResiduals</span>(base_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We can then plot this simulation:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sim_res)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tutorial_%5Bglms_part02%5D_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>You can immediately an abundance of red-colored text, indicating that there are some series issues. These issues may be caused diretly by variance issues, non-normality, or, most likely, model misspecification. The left plot indicates issues with normality and outlliers. The right plot is very informative as well; it converts the residuals into percentiles (y-axis), and then tests the 25%, 50%, and 75% percentiles of the model’s residuals against those expected percentiles. Ideally, the three lines would follow the horizontal lines drawn at 0.25, 0.50, and 0.75. In this case, they do not.</p>
+<p>There are other built-in functions as well, including the following (these descriptions are taken directly from the [DHARMa package vignette] (<a href="https://cran.r-project.org/web/packages/DHARMa/vignettes/DHARMa.html#calculating-scaled-residuals" class="uri">https://cran.r-project.org/web/packages/DHARMa/vignettes/DHARMa.html#calculating-scaled-residuals</a>):</p>
+<ul>
+<li><code>testUniformity()</code> - tests if the overall distribution conforms to expectations</li>
+<li><code>testOutliers()</code> - tests if there are more simulation outliers than expected</li>
+<li><code>testDispersion()</code> - tests if the simulated dispersion is equal to the observed dispersion</li>
+<li><code>testQuantiles()</code> - fits a quantile regression or residuals against a predictor (default predicted value), and tests of this conforms to the expected quantile</li>
+<li><code>testCategorical(simulationOutput, catPred = testData\$group)</code> tests residuals against a categorical predictor</li>
+<li><code>testZeroinflation()</code> - tests if there are more zeros in the data than expected from the simulations</li>
+<li><code>testGeneric()</code> - test if a generic summary statistics (user-defined) deviates from model expectations</li>
+<li><code>testTemporalAutocorrelation()</code> - tests for temporal autocorrelation in the residuals</li>
+<li><code>testSpatialAutocorrelation()</code> - tests for spatial autocorrelation in the residuals. Can also be used with a generic distance function, for example to test for phylogenetic signal in the residuals</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Back to our model. We know something is going wrong. But what exactly? We can plot the simulated residuals against predictors in our model, using the <code>plotResiduals</code> function. This is a specialized DHARMa function.</p>
+<p>Plot against mean_depth.</p>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tutorial_%5Bglms_part02%5D_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>And then plot against period.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotResiduals</span>(sim_res, pufferi<span class="sc">$</span>period)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tutorial_%5Bglms_part02%5D_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>…and against year.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotResiduals</span>(sim_res, pufferi<span class="sc">$</span>year)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tutorial_%5Bglms_part02%5D_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>And then, just for kicks, against our measure of sampling effort (swept_area).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotResiduals</span>(sim_res, pufferi<span class="sc">$</span>swept_area)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tutorial_%5Bglms_part02%5D_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>For each of these, you see statistical evidence that something is wrong with your model.</p>
+<section id="generalized-linear-model-poisson-error-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="generalized-linear-model-poisson-error-distribution">Generalized Linear Model (Poisson error distribution)</h2>
+<p>Looking more closely at the data, we realize that our variable for abundance is simple count data (integer). Make a histogram:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(pufferi<span class="sc">$</span>abund, <span class="at">breaks=</span><span class="dv">100</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tutorial_%5Bglms_part02%5D_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The distribution also ranges from zero to infinity (right-skewed). So, let us try a Poisson error distribution with the default link function; this is often a good first guess for count data.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>base_model_pois <span class="ot">&lt;-</span> <span class="fu">glm</span>(abund <span class="sc">~</span> mean_depth, </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> pufferi, </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Here we are using the <em>log</em> link function, the preferred one for the Poisson distribution. Now, check your model residuals:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>sim_res <span class="ot">&lt;-</span> <span class="fu">simulateResiduals</span>(base_model_pois)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We can then plot this simulation:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sim_res)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tutorial_%5Bglms_part02%5D_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Uh, oh. You know that you’ve correctly identified a distribution that fits your data boundaries. But, clearly, there are still patterns in these residuals that should not be present. So there are other issues going on as well. Perhaps the issues are related to model misspecification. Believe it or not, despite the horrific simulated residuals, you are now one step closer to building a successful GLM.</p>
+</section>
+</section>
+<section id="overdispersion-a-common-issue-with-poisson-glms" class="level1">
+<h1>Overdispersion: a common issue with Poisson GLMs</h1>
+<p>Given that our Poisson GLM has issues, maybe a Poisson distribution was not a good assumption for the data-generating process underlying the response variable. Another error distribution –the negative binomial distribution– is a possible alternative. It satisifies our known data boundaries but has one more parameter that allows for variance to be greater than the mean (i.e.&nbsp;overdispersion). This is unlike the Poisson distribution, where mean is equal to the variance. Let us first check for such overdispersion using the <code>testDispersion()</code> function in DHARMa.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">testDispersion</span>(sim_res)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tutorial_%5Bglms_part02%5D_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    DHARMa nonparametric dispersion test via sd of residuals fitted vs.
+    simulated
+
+data:  simulationOutput
+dispersion = 161.36, p-value &lt; 2.2e-16
+alternative hypothesis: two.sided</code></pre>
+</div>
+</div>
+<p>This is a wickedly easy way to test for overdispersion. If the result is significantly greater than 1 (here, it is 161.36 with <em>p</em>&lt;0.0001), there is overdispersion. Let us then try the negative binomial distribution. Note that this is a specialized function for GLMs; you will likely never use the <code>gml.nb</code> function in your work (as it is too simple a framework for your complex data).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>mod_nb <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(abund <span class="sc">~</span> mean_depth, <span class="at">data =</span> pufferi)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_nb)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm.nb(formula = abund ~ mean_depth, data = pufferi, init.theta = 1.866869569, 
+    link = log)
+
+Coefficients:
+              Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)  6.859e+00  1.329e-01   51.63   &lt;2e-16 ***
+mean_depth  -7.388e-04  4.965e-05  -14.88   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for Negative Binomial(1.8669) family taken to be 1)
+
+    Null deviance: 316.56  on 145  degrees of freedom
+Residual deviance: 158.75  on 144  degrees of freedom
+AIC: 1757.9
+
+Number of Fisher Scoring iterations: 1
+
+              Theta:  1.867 
+          Std. Err.:  0.209 
+
+ 2 x log-likelihood:  -1751.852 </code></pre>
+</div>
+</div>
+<p>Now, you can retest for overdispersion to see is switching from Poisson to negative binomial was a good and logical move:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">testDispersion</span>(mod_nb)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tutorial_%5Bglms_part02%5D_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    DHARMa nonparametric dispersion test via sd of residuals fitted vs.
+    simulated
+
+data:  simulationOutput
+dispersion = 0.9353, p-value = 0.968
+alternative hypothesis: two.sided</code></pre>
+</div>
+</div>
+<p>This looks good. Once again, check residual structure.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>sim_res <span class="ot">&lt;-</span> <span class="fu">simulateResiduals</span>(mod_nb)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sim_res)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tutorial_%5Bglms_part02%5D_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Whoa! That looks clean. The <em>overall</em> model residuals –that is, residuals pooled across all observations– show no departures from normality, no overdispersion, and no obvious outliers.</p>
+<p>However, these checks only tell us how the model behaves on average. Because our dataset includes other variables of interest, including one related to sampling effort, we also need to inspect simulated residuals as a function of those variables to look for structured lack of fit. This can be a slightly arduous process, but it is invaluable for understanding how your model is behaving.</p>
+<p>First, plot against mean_depth.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotResiduals</span>(sim_res, pufferi<span class="sc">$</span>mean_depth)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tutorial_%5Bglms_part02%5D_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This looks good. There is no residual structure. Plot against period:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotResiduals</span>(sim_res, pufferi<span class="sc">$</span>period)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tutorial_%5Bglms_part02%5D_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>There’s a problem here. There is a clear sign that the GLM assumption of homogeneity of variance has been violated.</p>
+<p>Now, plot residuals against year.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotResiduals</span>(sim_res, pufferi<span class="sc">$</span>year)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tutorial_%5Bglms_part02%5D_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>There is another issue here. And then, just for kicks, against our measure of sampling effort (swept_area).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotResiduals</span>(sim_res, pufferi<span class="sc">$</span>swept_area)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tutorial_%5Bglms_part02%5D_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>There is a bit of structure here. So, this suggests that we may not have included in our model some important covariates like period, year, or swept_area. We will do that in the next step.</p>
+<p>First, let us deal with the sampling effort variable (<code>swept_area</code>), as it makes sense to include this in every model. For any case in which you have sampling effort (for any of the models discussed in this course), you need to include an offset. This is a <em>much better</em> solution that dividing the response variable by the sampling effort prior to analysis (please, avoid this if possible), as this can alter the response variable’s distribution to something unrecognizable (and therefore not easily approximated by a common error distribution).</p>
+<p>In this present case, we are accounting explicitly for differences in size of the sampling area. In other words, we are adjusting <code>abund</code> so that it becomes the total number of <em>L. pufferi</em> per site (or per size of site). Remember we are using the <em>log</em>-link function; this means we need to directly <em>log</em>-transform the <code>swept_area</code> variable before putting it in an <code>offset()</code> function. <strong>This is crtically important!</strong> as this tells the model function to recognize that term as a correction for the response variable. That is, this puts the effort term on the link scale. Let us do that here:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>pufferi<span class="sc">$</span>log_sa <span class="ot">&lt;-</span> <span class="fu">log</span>(pufferi<span class="sc">$</span>swept_area)  <span class="co"># log-transform sweap_area</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>mod_nb_offset <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(abund <span class="sc">~</span> mean_depth <span class="sc">+</span> <span class="fu">offset</span>(log_sa), </span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> pufferi)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Fair use of data transformation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In this course, I encourage you to avoid any sort of data transformation for the variables in your model. Transforming an offset variable is the one exception; it is required to ensure that the model recognizes that the new offset term is on the link scale.</p>
+</div>
+</div>
+<p>Now, we again simulate the residuals and plot against <code>mean_depth</code>, <code>period</code>, and <code>year</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>sim_res <span class="ot">&lt;-</span> <span class="fu">simulateResiduals</span>(mod_nb_offset)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotResiduals</span>(sim_res, pufferi<span class="sc">$</span>mean_depth)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tutorial_%5Bglms_part02%5D_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotResiduals</span>(sim_res, pufferi<span class="sc">$</span>period)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tutorial_%5Bglms_part02%5D_files/figure-html/unnamed-chunk-28-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotResiduals</span>(sim_res, pufferi<span class="sc">$</span>year)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tutorial_%5Bglms_part02%5D_files/figure-html/unnamed-chunk-28-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The problems with residuals remain. This means that this really is a case of model misspecification, so let us think about what other factors we should include. Note that the model names could possibly be improved. As you review the models, think critically about each one means. In all models, we include the offset variable.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>mod_nb_offset_01 <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(abund <span class="sc">~</span> <span class="fu">offset</span>(log_sa), </span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> pufferi)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>mod_nb_offset_02 <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(abund <span class="sc">~</span> mean_depth <span class="sc">+</span> <span class="fu">offset</span>(log_sa), </span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> pufferi)</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>mod_nb_offset_03 <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(abund <span class="sc">~</span> period <span class="sc">+</span> <span class="fu">offset</span>(log_sa), </span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> pufferi)</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>mod_nb_offset_04 <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(abund <span class="sc">~</span> year <span class="sc">+</span> <span class="fu">offset</span>(log_sa), </span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> pufferi)</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>mod_nb_offset_05 <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(abund <span class="sc">~</span></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>  mean_depth <span class="sc">+</span> period <span class="sc">+</span> <span class="fu">offset</span>(log_sa), </span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> pufferi)</span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>mod_nb_offset_06 <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(abund <span class="sc">~</span></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>  mean_depth <span class="sc">+</span> year <span class="sc">+</span> <span class="fu">offset</span>(log_sa), </span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> pufferi)</span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>mod_nb_offset_07 <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(abund <span class="sc">~</span></span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>  period <span class="sc">+</span> year <span class="sc">+</span> <span class="fu">offset</span>(log_sa), </span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> pufferi)</span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>mod_nb_offset_08 <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(abund <span class="sc">~</span></span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>  mean_depth <span class="sc">*</span> period <span class="sc">+</span> year <span class="sc">+</span> <span class="fu">offset</span>(log_sa), </span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> pufferi)</span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a>mod_nb_offset_09 <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(abund <span class="sc">~</span></span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>  mean_depth <span class="sc">*</span> year <span class="sc">+</span> period <span class="sc">+</span> <span class="fu">offset</span>(log_sa), </span>
+<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> pufferi)</span>
+<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a>mod_nb_offset_10 <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(abund <span class="sc">~</span></span>
+<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a>  mean_depth <span class="sc">+</span> year <span class="sc">*</span> period <span class="sc">+</span> <span class="fu">offset</span>(log_sa), </span>
+<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> pufferi)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Note that these models test all two-way combinations (including interactions). A sort of null hypothesis —although some would disagree philosophically– is the first model (mod_nb_offset_01), as it contains only the offset variable. Let’s calculate AIC and then sort the output in ascending order of AIC (where lowest AIC is the best-supported model).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>aic_df <span class="ot">&lt;-</span> <span class="fu">AIC</span>(</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  mod_nb_offset_01,</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  mod_nb_offset_02,</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  mod_nb_offset_03,</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  mod_nb_offset_04,</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>  mod_nb_offset_05,</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>  mod_nb_offset_06,</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>  mod_nb_offset_07,</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>  mod_nb_offset_08,</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>  mod_nb_offset_09,</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>  mod_nb_offset_10</span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>aic_df <span class="ot">&lt;-</span> aic_df <span class="sc">|&gt;</span></span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(AIC)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Let’s check those residuals of the top model. There are better ways of doing this, but let’s be simple for now.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>sim_res <span class="ot">&lt;-</span> <span class="fu">simulateResiduals</span>(mod_nb_offset_10)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sim_res)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tutorial_%5Bglms_part02%5D_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>These look great so far, but let’s check the residuals against the predictors in the model.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotResiduals</span>(sim_res, pufferi<span class="sc">$</span>mean_depth)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>qu = 0.75, log(sigma) = -2.701421 : outer Newton did not converge fully.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in newton(lsp = lsp, X = G$X, y = G$y, Eb = G$Eb, UrS = G$UrS, L = G$L,
+: Fitting terminated with step failure - check results carefully</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tutorial_%5Bglms_part02%5D_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This looks great!</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotResiduals</span>(sim_res, pufferi<span class="sc">$</span>period)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tutorial_%5Bglms_part02%5D_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>OK, we’re starting to get the picture here that we’ve done something up.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotResiduals</span>(sim_res, pufferi<span class="sc">$</span>year)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tutorial_%5Bglms_part02%5D_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This was the final check. We’ve specified the model correctly, and we’ve confirmed that there’s no residual structure.</p>
+<p>We have successfully formulated a Generalized Linear Model!</p>
+<p>sac &lt;- testSpatialAutocorrelation(sim_res, x=pufferi<span class="math inline">\(x_km, y=pufferi\)</span>y_km)</p>
+<p>END</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

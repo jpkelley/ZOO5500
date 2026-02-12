@@ -190,5 +190,8 @@
   },
   "chapters/intro2.qmd": {
     "intro2.html": "85a572a6"
+  },
+  "chapters/intro_glms.qmd": {
+    "intro_glms.html": "d8fa46ec"
   }
 }

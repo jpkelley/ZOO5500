@@ -1,0 +1,371 @@
+---
+title: "Introduction to Models"
+format: 
+  pptx:
+    slide-level: 2
+execute:
+  echo: false
+  message: false
+  warning: false
+---
+
+# **Introduction to Models**
+
+---
+
+# **From Data to Data-Generating Processes**
+
+- Data ≠ spreadsheet entries  
+- Data = outcomes of **processes**
+- Every measurement reflects:
+  - Mechanisms
+  - Constraints
+  - Randomness
+
+---
+
+# **Example: Jackalope Body Mass**
+
+Observed mass varies due to:
+
+- Body size differences  
+- Hydration state  
+- Recent feeding  
+- Metabolism  
+- Measurement error (instrument precision, posture)
+
+**Key idea:**  
+A single number reflects many interacting processes.
+
+---
+
+# **Two Core Components of Any Dataset**
+
+- **Systematic structure (Signal)**
+  - Directional influences
+  - Mechanisms
+  - Constraints
+
+- **Unmeasured variation (Noise)**
+  - Randomness
+  - Measurement limits
+  - Unmeasured drivers
+
+> Both arise from the same data-generating process.
+
+---
+
+# **Component #1: Systematic Structure (Signal)**
+
+Scientists seek:
+
+- Directional influence  
+- Mechanistic explanation  
+- Causal understanding  
+
+Examples:
+
+- Food availability → body condition  
+- Temperature → metabolic rate  
+- Predators → nest success  
+
+---
+
+# **Signal in Statistical Models**
+
+General form of a regression model:
+
+$$
+Y_i = \mu_i + \varepsilon_i
+$$
+
+Where:
+
+- $Y_i$ = observed outcome  
+- $\mu_i$ = systematic component (mean signal)  
+- $\varepsilon_i$ = deviation (noise)
+
+The model formalizes hypothesized mechanisms.
+
+---
+
+# **Signal in a GLM**
+
+Linear predictor:
+
+$$
+\eta_i = \beta_0 + \beta_1 X_{1i} + \beta_2 X_{2i}
+$$
+
+Where:
+
+- $\eta_i$ = linear predictor  
+- $\beta_0$ = intercept  
+- $\beta_j$ = effect of predictor $X_j$  
+- $i$ = observation index  
+
+This is the **structured (signal) component**.
+
+---
+
+# **Major Ecological Theories (Causal Core)**
+
+| Theory | Year(s) | Core Causal Mechanism |
+|--------|---------|-----------------------|
+| Evolution by Natural Selection | 1859 | Heritable variation causes differential survival |
+| Competitive Exclusion | 1934 | Limiting resources cause displacement |
+| Optimal Foraging | 1966 | Fitness maximization drives behavior |
+| Island Biogeography | 1967 | Isolation & area determine turnover |
+| Intermediate Disturbance | 1978 | Disturbance prevents exclusion |
+| Modern Coexistence | 1990s | Niche differences stabilize coexistence |
+| Neutral Theory | 2001 | Demographic stochasticity drives composition |
+
+---
+
+# **Associational vs. Causal Language**
+
+Causal language uses:
+
+- Causes  
+- Drives  
+- Reduces  
+- Induces  
+
+Associational language uses:
+
+- Associated with  
+- Correlated with  
+- Higher in  
+- Related to  
+
+Identifying wording is the first inference check.
+
+---
+
+# **Component #2: Unmeasured Variation (Noise)**
+
+Noise is not a nuisance.  
+It reflects additional processes.
+
+Sources:
+
+- Individual heterogeneity  
+- Environmental fluctuation  
+- Measurement error  
+- Stochasticity  
+- Unmeasured drivers  
+
+---
+
+# **Why Noise Matters**
+
+A complete model must describe:
+
+1. Mean behavior  
+2. Variability around the mean  
+
+Understanding variability = understanding mechanism.
+
+---
+
+# **Probability Distributions**
+
+A distribution specifies:
+
+- Possible values (constraints)
+- Discrete or continuous
+- Mean–variance relationship
+- Frequency of extreme values
+
+> Choosing a distribution = choosing a model of randomness.
+
+---
+
+# **Gaussian (Normal) Distribution**
+
+**Type:** Continuous  
+**Support:** $-\infty < x < \infty$
+
+Density:
+
+$$
+Y_i \sim \mathcal{N}(\mu, \sigma^2)
+$$
+
+Where:
+
+- $\mu$ = mean  
+- $\sigma^2$ = variance  
+
+**Variance independent of mean**
+
+**Ecological examples:**
+
+- Measurement error  
+- Temperature deviations  
+
+---
+
+# **Gamma Distribution**
+
+**Type:** Continuous  
+**Support:** $0 < x < \infty$
+
+$$
+Y_i \sim \text{Gamma}(\mu, k)
+$$
+
+Where:
+
+- $\mu$ = mean  
+- $k$ = shape (dispersion)
+
+Variance:
+
+$$
+\text{Var}(Y) = \frac{\mu^2}{k}
+$$
+
+Variance increases faster than mean.
+
+**Examples:**  
+Biomass, rainfall, time to event.
+
+---
+
+# **Poisson Distribution**
+
+**Type:** Discrete  
+**Support:** $x \in \{0,1,2,\dots\}$
+
+$$
+Y_i \sim \text{Poisson}(\lambda)
+$$
+
+Where:
+
+- $\lambda$ = mean count
+
+Key property:
+
+$$
+\text{Var}(Y) = \lambda
+$$
+
+Mean = variance.
+
+**Examples:**  
+Nest counts, insects per trap.
+
+---
+
+# **Bernoulli Distribution**
+
+**Type:** Discrete  
+**Support:** $x \in \{0,1\}$
+
+$$
+Y_i \sim \text{Bernoulli}(p)
+$$
+
+Where:
+
+- $p$ = probability of success
+
+Variance:
+
+$$
+\text{Var}(Y) = p(1 - p)
+$$
+
+**Examples:**  
+Nest success, germination.
+
+---
+
+# **Beta Distribution**
+
+**Type:** Continuous  
+**Support:** $0 < x < 1$
+
+$$
+Y_i \sim \text{Beta}(\alpha, \beta)
+$$
+
+Where:
+
+- $\alpha, \beta$ = shape parameters
+
+Variance depends on:
+
+- Mean  
+- Precision  
+
+**Examples:**  
+Proportion canopy cover, occupancy rate.
+
+---
+
+# **Negative Binomial Distribution**
+
+**Type:** Discrete  
+**Support:** $x \in \{0,1,2,\dots\}$
+
+$$
+Y_i \sim \text{NegBin}(\mu, k)
+$$
+
+Where:
+
+- $\mu$ = mean  
+- $k$ = dispersion parameter  
+
+Variance:
+
+$$
+\text{Var}(Y) = \mu + \frac{\mu^2}{k}
+$$
+
+Variance > mean.
+
+**Examples:**  
+Aggregated insect counts.
+
+---
+
+# **Zero-Inflated Poisson**
+
+Mixture model:
+
+$$
+Y_i =
+\begin{cases}
+0 & \text{with probability } \pi \\
+\text{Poisson}(\lambda) & \text{with probability } 1-\pi
+\end{cases}
+$$
+
+Where:
+
+- $\pi$ = structural zero probability  
+- $\lambda$ = Poisson mean  
+
+Used when excess zeros occur.
+
+**Examples:**  
+Species absent from many sites.
+
+---
+
+# **Core Insight**
+
+Every dataset contains:
+
+- Structured signal  
+- Structured variability  
+
+Distributions encode assumptions about how randomness arises.
+
+Next:  
+**Generalized Linear Models (GLMs)**  
+→ Unify signal and distribution into one framework.

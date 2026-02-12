@@ -1,0 +1,265 @@
+---
+title: "intro_glms"
+format: html
+---
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+source("class_r_scripts/load_packages.r")
+```
+
+## Separating signal from noise
+
+Our task, then, is to separate the patterns that carry meaningful information from the variation that does not. This task leads directly to the ideas of _signal_ and _noise_ and to why we use all of these silly models in the first place. So, what exactly are models?
+
+> Models are hypotheses about how the data were generated.
+
+### Comparing GLMs to vintage models (ANOVAs and *t*-tests)
+
+:::: columns
+::: {.column width="60%"}
+In this brief example, we provide some simulation code that will (hopefully) convince you that GLMs are pretty much the same kinds of models that you were exposed to in your introductory statistics courses back in the day. As you'll quickly see, however, GLMs are highly flexible and will allow you to extract the maximum amount of signal from your noisy data.
+
+We will simulate a fake dataset that has two groups (1 and 2). The values for each group follow normal distributions with a standard deviation of 1. The groups differ in their mean values, however, by one unit.
+
+```{r}
+set.seed(100) # this is a random seed that ensures example reproducibility
+nval <- 50 # Generate some fake data
+group1 <- rnorm(nval, mean=5, sd=1)
+group2 <- rnorm(nval, mean=6, sd=1)
+d <- data.frame(id=rep(c("group1", "group2"), each=nval), 
+  y=c(group1, group2))
+```
+:::
+
+::: {.column width="40%"}
+```{r, echo=FALSE}
+p <- ggplot(d, aes(x = id, y = y, fill = id)) +
+  geom_boxplot(width = 0.6, outlier.alpha = 0.5) +
+  labs(
+    x = "Group ID", 
+    y = "Response"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    axis.title = element_text(size = 16),
+    axis.text  = element_text(size = 14)
+  ) +
+  guides(fill = "none")  # hide legend if redundant
+
+p
+```
+:::
+:::: 
+
+Now, using three models (_t_-test, ANOVA, and GLM), let us test the hypothesis that these two groups differ. Remember that *t*-tests and ANOVAs are **linear models** that assume, among other things, that both the signal and the noise follow a Gaussian/Normal distribution. Note that we need to convert the ANOVA's _F_-stat to a _t_-statistic for comparability. You can see the code for this multi-model comparison in this callout box:
+
+:::{.callout-note icon=false collapse=true}
+## R code for inter-model comparison
+
+```{r}
+ttest.mod <- t.test(y ~ id, data=d) # t-test
+anova.mod <- aov(y ~ id, data=d) # ANOVA
+glm.mod <- glm(y ~ id, data=d) # GLM
+
+ttest.t <- abs(as.numeric(ttest.mod$statistic))
+anova.f <- summary(anova.mod)[[1]]$F[1]
+anova.t <- sqrt(anova.f) # t-stat = sqrt(F-stat)
+glm.t <- coefficients(summary(glm.mod))[2, 3]
+```
+Then, we compare all the test statistics (_t_-values), from which the _p_-values are derived.
+```{r, echo=FALSE}
+tvals <- c(ttest.t, anova.t, glm.t) # thus, p-values and inference are the same
+tvals
+```
+:::
+
+You can see that all of the _t_-values are exactly the same (_t_=4.119985). Fantastic! Now you can sit back and silently reconsider your desire to use a _t_-test or ANOVA (or anything similar). Let us say that we are not abandoning _t_-tests and ANOVAs; instead, we are outgrowing them. The table below shows a number of other advantages that GLMs have.  
+
+::: {.course-info tbl-colwidths="[70, 10, 10, 10]"}
+| Functionality / Capability                          | t-test | ANOVA | GLM |
+|----------------------------------------------------|:------:|:-----:|:---:|
+| Unbalanced sample                           |   ✅   |   ✅   |  ✅  |
+| Compare more than two groups                       |        |   ✅   |  ✅  |
+| Handle continuous predictors                       |        |        |  ✅  |
+| Handle non-Normal distributions                    |        |        |  ✅  |
+| Complex hierarchical random effects              |        |        |  ✅  |
+| Use link functions (log, logit, etc.)              |        |        |  ✅  |
+| Predicted values from model output         |        |        |  ✅  |
+| Nonlinear extensions   |        |        |  ✅  |
+| Under current development   |        |        |  ✅  |
+:::
+
+Hopefully, this short exercise convinces you that GLMs and their extensions (Generalized Linear --and Additive-- Mixed Models) no longer need to be viewed as *“advanced statistics”*; they can simply be used as a formal and unified language for ecological thinking. 
+
+
+### Setting the stage for GLMs
+
+Most treatments of GLMs start off examining a model with Gaussian (normally distributed) errors.  The Gaussian models has core assumptions that are likely familiar and comfortable to most of you, including:
+
+- The response variable is **continuous**
+- The residual variance is **constant** (homoscedastic)
+- The error distribution is **symmetric**
+- The outcome can take **any real value** (including negatives)
+
+In many situations, that works beautifully. If we are modeling body mass of adults (_why adults?_), temperature, or some other roughly symmetric continuous variable, the Gaussian/normal distribution is often appropriate. Simply put, the Gaussian/normal distribution is often the exception rather than the rule:
+
+> Most ecological data are not normally distributed.
+
+We regularly collect data on proportions, rates, skewed measurements, zero-heavy processes, and, perhaps most commonly, counts like:
+
+- Number of individuals observed  
+- Number of detections on a recorder  
+- Number of nests in a plot  
+- Number of disease cases
+
+Count distributions --like the Poisson distribution-- have their own features, including:
+
+- Values cannot be negative.
+- Values are discrete (not continuous)
+- They often have variance that increases with the mean
+- They are frequently right-skewed
+
+A Gaussian model ignores almost everything about how the data are generated. Therefore, in this section, we will first explore the Poisson GLM, which is designed specifically for count data. It:
+
+- Restricts predictions to non-negative values.
+- Allows variance to increase with the mean.
+
+Furthermore, using a Poisson GLM allows you to see the internal architecture of a GLM. It is a bit more difficult to see how a GLM works when using a Gaussian distribution. In a Poisson GLM, the GLM components are clearly delineated:
+
+- The **error distribution** describes the noise.
+- The **linear predictor** describes the signal.
+- The **link function** connects the expected value of the response to the linear predictor
+
+Because those parts are visibly distinct, the Poisson model makes it much easier to understand what a GLM is actually doing.
+
+---
+
+## The Poisson GLM: Model Specification
+
+For observations $i = 1, \dots, n$:
+
+### 1️⃣ Random Component (Noise)
+
+$Y_i \sim \text{Poisson}(\mu_i)$
+
+Definitions:
+
+- $Y_i$: observed count for observation $i$
+- $\mu_i$: expected (mean) count for observation $i$
+
+For a Poisson distribution:
+
+$E(Y_i) = \mu_i$
+
+$\text{Var}(Y_i) = \mu_i$
+
+This component specifies how observations vary **stochastically** around their mean.  
+It defines the allowable values (non-negative integers) and how variance scales with the mean.
+
+---
+
+### 2️⃣ Systematic Component (Signal)
+
+$\eta_i = \beta_0 + \beta_1 X_i$
+
+Definitions:
+
+- $\eta_i$ (eta): the **linear predictor**
+- $\beta_0$: intercept
+- $\beta_1$: slope parameter
+- $X_i$: predictor value for observation $i$
+
+This part represents the **structured, directional effect** of predictors.  
+It is deterministic — no randomness appears here.
+
+---
+
+### 3️⃣ Link Function (Connector)
+
+$\log(\mu_i) = \eta_i$
+
+Equivalently:
+
+$\mu_i = \exp(\eta_i)$
+
+The link function connects the linear predictor to the mean of the distribution.
+
+Why the log link?
+
+- It guarantees $\mu_i > 0$.
+- It makes effects multiplicative on the response scale.
+- It keeps linearity on a scale where it makes sense.
+
+---
+
+## Compact Form
+
+$Y_i \sim \text{Poisson}(\mu_i)$  
+$\log(\mu_i) = \beta_0 + \beta_1 X_i$
+
+---
+
+## Big Picture
+
+A GLM separates:
+
+- **Signal** → why the mean changes (linear predictor)  
+- **Noise** → how observations vary around that mean (distribution)  
+- **Link** → how the structured signal maps to biologically allowable values  
+
+That separation is the real power of the GLM framework.
+
+> Signal and noise are model-dependent.
+
+---
+
+## Check Yourself: Click to Reveal Answers
+
+::: {.callout-tip icon=false collapse=true}
+## **If mean depth is a true driver, what happens when we exclude it from the model?**
+
+**Answer:**  
+Its effect does not disappear from the world. The effect is moved into the noise (residual). It may also distort the effects of any correlated covariates (but we will discuss this more later).
+:::
+
+---
+
+::: {.callout-tip icon=false collapse=true}
+## **If residual variance drops after adding mean depth, what changed?**
+
+**Answer:**  
+We improved our model’s alignment with the data-generating process (which included mean depth). Nature did not become less noisy.
+:::
+
+---
+
+::: {.callout-tip icon=false collapse=true}
+## **Is residual variance (noise) a feature of the system/world or our model?**
+
+**Answer:**  
+This is sort of a trick question. Residual variance most proximately reflects what the model itself fails to explain; it is simply a mathematical way that we are making sense of the world. 
+:::
+
+---
+
+::: {.callout-tip icon=false collapse=true}
+## **If mean depth causally affects abundance and is omitted from the model, is that just extra noise?**
+
+**Answer:**  
+No. This means that the model has been misspecified. It does not only increase residual variance; it also creates systematic bias.
+:::
+
+---
+
+::: {.callout-tip icon=false collapse=true}
+## **When mean depth moves from residual to systematic, are we changing the ecology?**
+
+**Answer:**  
+No. The ecology stays the same. We are changing our description of it by moving the explained variation from residual (unexplained) to systematic (explained).
+:::
+
+---
+
+

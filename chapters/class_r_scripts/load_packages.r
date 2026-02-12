@@ -4,8 +4,10 @@
 packages <- c(
   "ggplot2",
   "seewave",
+  "DHARMa",
   "tuneR",
   "ggeffects",
+  "broom",
   "GGally",
   "MuMIn",
   "insight",

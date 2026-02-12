@@ -1,0 +1,62 @@
+---
+title: "glm_partial_association"
+format: html
+---
+
+## But what is the GLM doing: How a GLM works (for partial associations)
+
+For this example, we will purposefully use a poorly specified model:
+When a model includes multiple predictors, its coefficients describe **partial associations**: how variation in one predictor relates to the response *after accounting for other predictors in the model*. Although R (and other great software) estimates these quantities automatically (i.e. behind-the-scenes), it can be helpful to unpack what “controlling for” actually means. 
+
+One intuitive way to do this is through **residualization**. By successively removing the variation explained by a covariate, we can isolate any remaining structure in the data (using residuals) and then examine how that relates to the response variable. The sequence below reproduces --almost exactly-- the coefficient for a single predictor in a GLM. 
+
+First, we begin with a model good enough for a short example (even though we established that this is a poorly specified model):
+
+```{r, echo=FALSE}
+mod <- glm(abund ~ mean_depth + dens, family = poisson, data = pufferi)
+```
+
+The goal of this exercise is to estimate the partial association between `mean_depth` and `abund`. That is, we are trying to estimate the effect of `mean_depth` on `abund` after accounting for `dens`. To go through the steps, click on each of the callout boxes below to work through the process of estimating partial effects in a GLM. For the sake of clarity, I only include two covariates. Also note that, for the sake of clarity, I use a lengthy object name that _does not_ use snake_case. 
+
+::: {.callout-note icon=false}
+## **Step 1: Remove the effect of `dens` from `mean_depth`**
+
+First, regress `mean_depth` on `dens` (the two predictors, in this case) and calculate model residuals. 
+
+```{r}
+mod_DEPTH_on_DENS <- glm(mean_depth ~ dens, data = pufferi)
+depth_resid <- resid(mod_DEPTH_on_DENS)
+```
+The residuals from this model represent the component of `mean_depth` that _cannot_ be explained by `dens`. This answers the question: *How does `mean_depth` vary once `dens` has been held constant?*
+:::
+
+::: {.callout-note icon=false}
+## **Step 2: Remove the effect of `dens` from `abund`**
+
+Next, regress `abund` on `dens` and retain the residuals. 
+
+```{r}
+mod_ABUND_on_DENS <- glm(abund ~ dens, data = pufferi)
+abund_resid <- resid(mod_ABUND_on_DENS)
+```
+These residuals represent variation in `abund` that is not associated with `dens`. By now, you should see the general pattern of this residualization approach. 
+:::
+
+::: {.callout-note icon=false}
+## **Step 3: Estimate the partial association**
+
+Finally, regress the residuals of `abund` (Step 2) onto the residuals of `mean_depth` (Step 1). 
+
+```{r, echo=FALSE}
+mod_resid <- glm(abund_resid ~ depth_resid, data = pufferi)
+```
+You can run the `summary()` function to view the model output. The slope from this regression quantifies the association between `mean_depth` and `abund` after `dens` has been accounted for. This value will be very close to the coefficient for `mean_depth` in the full multivariable model:
+
+```{r, echo=FALSE}
+modbase <- glm(abund ~ mean_depth + dens, data = pufferi)
+summary(modbase)
+```
+Indeed, you see that the effect size is -3.730e-04 in both cases. So, we have successful reconstructed how GLMs can examine partial associations between predictors and outcome variables.  
+:::
+
+

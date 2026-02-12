@@ -1,0 +1,137 @@
+---
+title: "plotting_noise_gamma"
+format: html
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+source("../r_scripts/load_packages.r")
+
+set.seed(15)
+
+n <- 5000
+x <- rnorm(n, mean = 0.5, sd = 1)
+
+# Mean structure (signal) on the link scale (Gamma GLM with log link)
+eta <- 1.1 + 0.5 * x
+mu  <- exp(eta)
+
+# Gamma outcome with mean = mu (shape-rate parameterization via shape + scale)
+shape_k <- 6
+y <- rgamma(n, shape = shape_k, scale = mu / shape_k)
+
+# Multiplicative noise term (residual factor), mean ~ 1
+eps <- y / mu
+
+d_long <- tibble(
+  Observed = y,
+  Signal   = mu,
+  Noise    = eps
+) |>
+  pivot_longer(
+    cols = everything(),
+    names_to = "component",
+    values_to = "value"
+  ) |>
+  mutate(component = factor(component, levels = c("Observed", "Signal", "Noise")))
+
+# Shared axis limits (same for overlay + separate + animation)
+rd <- range(d_long$value, na.rm = TRUE)
+x_limits <- range(c(rd[1], rd[2]), na.rm = TRUE)
+
+dens_max <- d_long |>
+  group_by(component) |>
+  summarise(max_y = max(density(value)$y), .groups = "drop") |>
+  summarise(max_y = max(max_y)) |>
+  pull(max_y)
+
+y_limits <- c(0, dens_max)
+
+# Fixed palette across all plots
+pal <- c(
+  Observed = "#AFCCFF",
+  Signal   = "#99E3B0",
+  Noise    = "#FCACA6"
+)
+
+make_single_density <- function(comp_name) {
+  ggplot(
+    dplyr::filter(d_long, component == comp_name),
+    aes(x = value, fill = component)
+  ) +
+    geom_density(alpha = 0.35, linewidth = 0, color = NA) +
+    scale_fill_manual(values = pal) +
+    coord_cartesian(xlim = x_limits, ylim = y_limits, expand = FALSE) +
+    theme_minimal(base_size = 14) +
+    theme(
+      panel.grid.minor = element_blank(),
+      legend.title = element_blank()
+    ) +
+    labs(x = NULL, y = "Density")
+}
+
+# Overlay plot (Observed vs Signal vs Noise)
+p_all <- ggplot(d_long, aes(x = value, fill = component)) +
+  geom_density(alpha = 0.28, linewidth = 0, color = NA) +
+  scale_fill_manual(values = pal) +
+  coord_cartesian(xlim = x_limits, ylim = y_limits, expand = FALSE) +
+  theme_minimal(base_size = 14) +
+  theme(
+    panel.grid.minor = element_blank(),
+    legend.title = element_blank()
+  ) +
+  labs(x = NULL, y = "Density")
+
+p_observed <- make_single_density("Observed")
+p_signal   <- make_single_density("Signal")
+p_noise    <- make_single_density("Noise")
+
+p_all
+p_observed
+p_signal
+p_noise
+
+ggsave("observed_signal_noise_overlay_gamma.png", p_all,      width = 8, height = 4.5, dpi = 300)
+ggsave("observed_density_gamma.png",              p_observed, width = 8, height = 4.5, dpi = 300)
+ggsave("signal_density_gamma.png",                p_signal,   width = 8, height = 4.5, dpi = 300)
+ggsave("noise_density_gamma.png",                 p_noise,    width = 8, height = 4.5, dpi = 300)
+
+stages <- tibble(
+  stage = factor(c("Observed", "Signal", "Noise"),
+                 levels = c("Observed", "Signal", "Noise"))
+)
+
+d_anim <- d_long |>
+  tidyr::crossing(stages) |>
+  mutate(alpha_stage = if_else(as.character(component) == as.character(stage), 0.75, 0.15))
+
+p_anim <- ggplot(d_anim, aes(x = value, fill = component, alpha = alpha_stage)) +
+  geom_density(linewidth = 0, color = NA) +
+  scale_fill_manual(values = pal) +
+  coord_cartesian(xlim = x_limits, ylim = y_limits, expand = FALSE) +
+  theme_minimal(base_size = 14) +
+  theme(
+    panel.grid.minor = element_blank(),
+    legend.title = element_blank()
+  ) +
+  labs(x = NULL, y = "Density", title = "{closest_state}") +
+  guides(alpha = "none") +
+  gganimate::transition_states(stage, transition_length = 2, state_length = 3) +
+  gganimate::ease_aes("cubic-in-out")
+
+p_anim
+
+animate(
+  p_anim,
+  nframes = 150,
+  fps =20,
+  width = 1600,
+  height = 900,
+  res = 150,
+  renderer = magick_renderer()
+)
+
+anim_save("observed_signal_noise_emphasis_gamma_hires.gif", optimize = FALSE)
+
+```

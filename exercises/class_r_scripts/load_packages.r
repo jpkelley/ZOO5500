@@ -16,7 +16,7 @@ packages <- c(
   "reshape2",
   "lubridate",
   "psych",
-   "stringr",
+  "stringr",
   "tidyverse",
   "fields",
   "mgcv",

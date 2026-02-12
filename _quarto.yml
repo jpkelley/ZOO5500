@@ -39,8 +39,8 @@ book:
     - part: "Part III: Columns to Curves"
       chapters: 
         - chapters/statistical_aphorisms.qmd
-        # - chapters/intro_modeling.qmd
-        # - chapters/glm_poisson.qmd
+        - chapters/intro_modeling.qmd
+        - chapters/tutorial_[glms_part02].qmd
     - part: "Part IV: Curves to Meaning"
 
 

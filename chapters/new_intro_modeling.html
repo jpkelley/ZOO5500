@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>intro_glms</title>
+<title>Signal, Noise, and Models as Hypotheses</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -58,18 +58,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="intro_glms_files/libs/clipboard/clipboard.min.js"></script>
-<script src="intro_glms_files/libs/quarto-html/quarto.js" type="module"></script>
-<script src="intro_glms_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="intro_glms_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="intro_glms_files/libs/quarto-html/popper.min.js"></script>
-<script src="intro_glms_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="intro_glms_files/libs/quarto-html/anchor.min.js"></script>
-<link href="intro_glms_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="intro_glms_files/libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="intro_glms_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="intro_glms_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="intro_glms_files/libs/bootstrap/bootstrap-9e3ffae467580fdb927a41352e75a2e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="new_intro_modeling_files/libs/clipboard/clipboard.min.js"></script>
+<script src="new_intro_modeling_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="new_intro_modeling_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="new_intro_modeling_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="new_intro_modeling_files/libs/quarto-html/popper.min.js"></script>
+<script src="new_intro_modeling_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="new_intro_modeling_files/libs/quarto-html/anchor.min.js"></script>
+<link href="new_intro_modeling_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="new_intro_modeling_files/libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="new_intro_modeling_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="new_intro_modeling_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="new_intro_modeling_files/libs/bootstrap/bootstrap-9e3ffae467580fdb927a41352e75a2e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -111,7 +111,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">intro_glms</h1>
+<h1 class="title">Signal, Noise, and Models as Hypotheses</h1>
 </div>
 
 
@@ -128,54 +128,53 @@ window.Quarto = {
 </header>
 
 
-<section id="separating-signal-from-noise" class="level2">
-<h2 class="anchored" data-anchor-id="separating-signal-from-noise">Separating signal from noise</h2>
-<p>Our task, then, is to separate the patterns that carry meaningful information from the variation that does not. This task leads directly to the ideas of <em>signal</em> and <em>noise</em> and to why we use all of these silly models in the first place. So, what exactly are models?</p>
+<section id="separating-signal-from-noise" class="level1">
+<h1>Separating signal from noise</h1>
+<p>Our task as scientists is to learn how to separate the patterns that carry meaningful information (<em>signal</em>) from the variation that does not (<em>noise</em>). This is why we use statistical models in the first place. So what does this mean?</p>
+<p>Given that:</p>
 <blockquote class="blockquote">
-<p>Models are hypotheses about how the data were generated.</p>
+<p><strong>models are hypotheses about how the data were generated,</strong></p>
 </blockquote>
-<section id="glms-versus-anovas-and-t-tests" class="level3">
-<h3 class="anchored" data-anchor-id="glms-versus-anovas-and-t-tests">5. GLMs versus ANOVAs and <em>t</em>-tests</h3>
-<p>Then GLMs stop being <em>“advanced statistics”</em> and become:</p>
-<blockquote class="blockquote">
-<p>a formal language for ecological thinking ### Key ideas</p>
-</blockquote>
-<ul>
-<li><em>t</em>-tests and ANOVAs are <strong>linear models</strong></li>
-<li>They assume:
-<ul>
-<li>Gaussian errors</li>
-<li>identity link</li>
-</ul></li>
-<li>Group means = predictors with factor coding</li>
-</ul>
-<p><strong>Crucial reframing:</strong><br>
-&gt; We don’t abandon ANOVAs — we outgrow them.</p>
+<p>we first must keep in mind that the signal and noise being modeled are not intrinsic properties of the universe; they are properties of a <em>specified model</em>. So, it is necessary to do as much as we can to think about <em>both</em> the signal and noise when thinking about the data-generating processes that underly our measurements (and our system as a whole).</p>
+<hr>
+</section>
+<section id="comparing-glms-to-antique-models-t-tests-and-anovas" class="level1">
+<h1>Comparing GLMs to antique models (<em>t</em>-tests and ANOVAs)</h1>
+<p>Many of you were trained using <em>t</em>-tests and ANOVAs, and they likely feel familiar and comfortable (even if annoying). So it is reasonable for you to ask: <em>Why move to GLMs at all?</em> The answer is not that those older models are wrong, but that GLMs provide a broader and more flexible framework that includes these antique tests as special cases while allowing us to create models that better reflect ecological complexity.</p>
+<p>Let us examine how GLMs and some antique models perform next to each other.</p>
 <div class="columns">
 <div class="column" style="width:60%;">
-<p>In this brief example, we provide some simulation code that will (hopefully) convince you that GLMs are pretty much the same kinds of models that you were exposed to in your introductory statistics courses back in the day. As you’ll quickly see, however, GLMs are highly flexible and will allow you to extract the maximum amount of signal from your noisy data.</p>
-<p>We will simulate a fake dataset that has two groups (1 and 2). The values for each group follow normal distributions with a standard deviation of 1. The groups differ in their mean values, however, by one unit.</p>
+<p>In this brief example, we simulate a simple dataset with two groups. Each group follows a Normal distribution with standard deviation 1. The groups differ in their mean by one unit.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">100</span>) <span class="co"># this is a random seed that ensures example reproducibility</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>nval <span class="ot">&lt;-</span> <span class="dv">50</span> <span class="co"># Generate some fake data</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>group1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(nval, <span class="at">mean=</span><span class="dv">5</span>, <span class="at">sd=</span><span class="dv">1</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>group2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(nval, <span class="at">mean=</span><span class="dv">6</span>, <span class="at">sd=</span><span class="dv">1</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">id=</span><span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"group1"</span>, <span class="st">"group2"</span>), <span class="at">each=</span>nval), </span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">y=</span><span class="fu">c</span>(group1, group2))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">100</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>nval <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>group1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(nval, <span class="at">mean =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>group2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(nval, <span class="at">mean =</span> <span class="dv">6</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"group1"</span>, <span class="st">"group2"</span>), <span class="at">each =</span> nval),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">y  =</span> <span class="fu">c</span>(group1, group2)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div><div class="column" style="width:40%;">
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="intro_glms_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="new_intro_modeling_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
 </div>
-<p>Now, using three models (<em>t</em>-test, ANOVA, and GLM), let us test the hypothesis that these two groups differ. Note that we need to convert the ANOVA’s <em>F</em>-stat to a <em>t</em>-statistic for comparability.</p>
+<p>Now we test the hypothesis that the two groups differ using three models:</p>
+<ul>
+<li><em>t</em>-test</li>
+<li>ANOVA</li>
+<li>GLM</li>
+</ul>
+<p>All three are linear models under Gaussian/normal assumptions.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -189,17 +188,17 @@ window.Quarto = {
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ttest.mod <span class="ot">&lt;-</span> <span class="fu">t.test</span>(y <span class="sc">~</span> id, <span class="at">data=</span>d) <span class="co"># t-test</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>anova.mod <span class="ot">&lt;-</span> <span class="fu">aov</span>(y <span class="sc">~</span> id, <span class="at">data=</span>d) <span class="co"># ANOVA</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>glm.mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> id, <span class="at">data=</span>d) <span class="co"># GLM</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ttest.mod <span class="ot">&lt;-</span> <span class="fu">t.test</span>(y <span class="sc">~</span> id, <span class="at">data =</span> d)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>anova.mod <span class="ot">&lt;-</span> <span class="fu">aov</span>(y <span class="sc">~</span> id, <span class="at">data =</span> d)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>glm.mod   <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> id, <span class="at">data =</span> d)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>ttest.t <span class="ot">&lt;-</span> <span class="fu">abs</span>(<span class="fu">as.numeric</span>(ttest.mod<span class="sc">$</span>statistic))</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>anova.f <span class="ot">&lt;-</span> <span class="fu">summary</span>(anova.mod)[[<span class="dv">1</span>]]<span class="sc">$</span>F[<span class="dv">1</span>]</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>anova.t <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(anova.f) <span class="co"># t-stat = sqrt(F-stat)</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>glm.t <span class="ot">&lt;-</span> <span class="fu">coefficients</span>(<span class="fu">summary</span>(glm.mod))[<span class="dv">2</span>, <span class="dv">3</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Then, we compare all the test statistics.</p>
-<div class="cell">
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>anova.t <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(anova.f)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>glm.t   <span class="ot">&lt;-</span> <span class="fu">coefficients</span>(<span class="fu">summary</span>(glm.mod))[<span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>tvals <span class="ot">&lt;-</span> <span class="fu">c</span>(ttest.t, anova.t, glm.t)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>tvals</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4.119985 4.119985 4.119985</code></pre>
 </div>
@@ -207,191 +206,164 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>Whew…all of the results are exactly the same (4.119985). Fantastic! Now you can sit back and silently vow never to use a <em>t</em>-test or ANOVA (or anything similar) again. Take a moment (for five) and do that now. Seriously, take a moment (and write to your college stats instructor) and then consult the following table to understand the flexibility of GLMs.</p>
-<div class="course-info" data-tbl-colwidths="[70, 10, 10, 10]">
-<table class="caption-top table">
-<colgroup>
-<col style="width: 70%">
-<col style="width: 10%">
-<col style="width: 10%">
-<col style="width: 10%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Functionality / Capability</th>
-<th style="text-align: center;">t-test</th>
-<th style="text-align: center;">ANOVA</th>
-<th style="text-align: center;">GLM</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Unbalanced sample</td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
-</tr>
-<tr class="even">
-<td>Compare more than two groups</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
-</tr>
-<tr class="odd">
-<td>Handle continuous predictors</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">✅</td>
-</tr>
-<tr class="even">
-<td>Handle non-Normal distributions</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">✅</td>
-</tr>
-<tr class="odd">
-<td>Complex hierarchical random effects</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">✅</td>
-</tr>
-<tr class="even">
-<td>Use link functions (log, logit, etc.)</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">✅</td>
-</tr>
-<tr class="odd">
-<td>Predicted values from model output</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">✅</td>
-</tr>
-<tr class="even">
-<td>Nonlinear extensions</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">✅</td>
-</tr>
-<tr class="odd">
-<td>Under current development</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">✅</td>
-</tr>
-</tbody>
-</table>
-</div>
+<p>All three produce the exact same test statistic. The takeaway is straight-forward here: <strong><em>GLMs are not exotic</em></strong>. GLMs are a unified framework that includes <em>t</em>-tests and ANOVAs as special cases.</p>
+<hr>
 </section>
-<section id="setting-the-st" class="level3">
-<h3 class="anchored" data-anchor-id="setting-the-st">Setting the st</h3>
-<p>Most treatments of GLMs start off examining a model with Gaussian (normally distributed) errors. The Gaussian models has core assumptions that are likely familiar and comfortable to most of you, including:</p>
+<section id="why-glms-matter-in-ecology" class="level1">
+<h1>Why GLMs matter in ecology</h1>
+<p>Gaussian assumptions often work sufficiently well when:</p>
 <ul>
-<li>The response variable is <strong>continuous</strong></li>
-<li>The residual variance is <strong>constant</strong> (homoscedastic)</li>
-<li>The error distribution is <strong>symmetric</strong></li>
-<li>The outcome can take <strong>any real value</strong> (including negatives)</li>
+<li>The response variable is continuous</li>
+<li>Residual variance is constant (does not change as a function of a predictor’s values)</li>
+<li>The resonse variable can take any real value</li>
 </ul>
-<p>In many situations, that works beautifully. If we are modeling body mass of adults (<em>why adults?</em>), temperature, or some other roughly symmetric continuous variable, the Gaussian/normal distribution is often appropriate. Simply put, the Gaussian/normal distribution is often the exception rather than the rule:</p>
+<p>But, here is the main issue:</p>
 <blockquote class="blockquote">
 <p>Most ecological data are not normally distributed.</p>
 </blockquote>
-<p>We regularly collect data on proportions, rates, skewed measurements, zero-heavy processes, and, perhaps most commonly, counts like:</p>
+<p>As ecologists, we often measure:</p>
 <ul>
-<li>Number of individuals observed<br>
-</li>
-<li>Number of detections on a recorder<br>
-</li>
-<li>Number of nests in a plot<br>
-</li>
-<li>Number of disease cases</li>
+<li>Counts</li>
+<li>Proportions</li>
+<li>Rates</li>
+<li>Skewed processes</li>
+<li>Zero-heavy outcomes</li>
 </ul>
-<p>Count distributions –like the Poisson distribution– have their own features, including:</p>
+<p>As an example, consider counts (e.g.&nbsp;number of insects, number of flights, number of individuals). These data are:</p>
 <ul>
-<li>Values cannot be negative.</li>
-<li>Values are discrete (not continuous)</li>
-<li>They often have variance that increases with the mean</li>
-<li>They are frequently right-skewed</li>
+<li>Non-negative</li>
+<li>Discrete</li>
+<li>Often right-skewed</li>
 </ul>
-<p>A Gaussian model ignores almost everything about how the data are generated. Therefore, in this section, we will first explore the Poisson GLM, which is designed specifically for count data. It:</p>
-<ul>
-<li>Restricts predictions to non-negative values.</li>
-<li>Allows variance to increase with the mean.</li>
-</ul>
-<p>Furthermore, using a Poisson GLM allows you to see the internal architecture of a GLM. It is a bit more difficult to see how a GLM works when using a Gaussian distribution. In a Poisson GLM, the GLM components are clearly delineated:</p>
-<ul>
-<li>The <strong>error distribution</strong> describes the noise.</li>
-<li>The <strong>linear predictor</strong> describes the signal.</li>
-<li>The <strong>link function</strong> connects the expected value of the response to the linear predictor</li>
-</ul>
-<p>Because those parts are visibly distinct, the Poisson model makes it much easier to understand what a GLM is actually doing.</p>
+<p>A Gaussian/normal model explicitly ignores this structure. This is why we introduce the <strong>Poisson GLM</strong> in this section; it allows us to more easily see and understand how GLMs work.</p>
 <hr>
 </section>
-</section>
-<section id="the-poisson-glm-model-specification" class="level2">
-<h2 class="anchored" data-anchor-id="the-poisson-glm-model-specification">The Poisson GLM: Model Specification</h2>
-<p>For observations <span class="math inline">\(i = 1, \dots, n\)</span>:</p>
-<section id="random-component-noise" class="level3">
-<h3 class="anchored" data-anchor-id="random-component-noise">1️⃣ Random Component (Noise)</h3>
+<section id="the-poisson-glm-bringing-the-glm-into-reality" class="level1">
+<h1>The Poisson GLM: bringing the GLM into reality</h1>
+<p>We are going to start some equations. At first glance, notation such as <span class="math inline">\(Y_i\)</span>, <span class="math inline">\(\mu_i\)</span>, and <span class="math inline">\(\eta_i\)</span> may appear intimidating. This is absolutely understandable. In reality, the equations simply formalize three basic ideas:</p>
+<ol type="1">
+<li>How response values vary (noise)</li>
+<li>How predictors influence expected responses (signal)</li>
+<li>How those noise and signal are connected</li>
+</ol>
+<hr>
+<section id="random-component-noise" class="level2">
+<h2 class="anchored" data-anchor-id="random-component-noise">1️⃣ Random Component (Noise)</h2>
+<p>For the equation to make sense, we can first come up with notation for our observations (each data point):</p>
+<p><span class="math inline">\(i = 1, \dots, n\)</span></p>
 <p><span class="math inline">\(Y_i \sim \text{Poisson}(\mu_i)\)</span></p>
-<p>Definitions:</p>
+<p><strong>Definitions</strong></p>
 <ul>
-<li><span class="math inline">\(Y_i\)</span>: observed count for observation <span class="math inline">\(i\)</span></li>
-<li><span class="math inline">\(\mu_i\)</span>: expected (mean) count for observation <span class="math inline">\(i\)</span></li>
+<li><span class="math inline">\(Y_i\)</span> = observed count for observation <span class="math inline">\(i\)</span></li>
+<li><span class="math inline">\(\mu_i\)</span> = expected (mean) count for observation <span class="math inline">\(i\)</span></li>
 </ul>
 <p>For a Poisson distribution:</p>
-<p><span class="math inline">\(E(Y_i) = \mu_i\)</span></p>
-<p><span class="math inline">\(\text{Var}(Y_i) = \mu_i\)</span></p>
-<p>This component specifies how observations vary <strong>stochastically</strong> around their mean.<br>
-It defines the allowable values (non-negative integers) and how variance scales with the mean.</p>
+<p><span class="math inline">\(E(Y_i) = \mu_i\)</span> <span class="math inline">\(\text{Var}(Y_i) = \mu_i\)</span></p>
+<p>This means:</p>
+<ul>
+<li>The expected value of the count is <span class="math inline">\(\mu_i\)</span>.</li>
+<li>The variance (spread) is also <span class="math inline">\(\mu_i\)</span>.</li>
+</ul>
+<p>As the mean increases, variability increases proportionally.</p>
+<p>Writing <span class="math inline">\(Y_i \sim \text{Poisson}(\mu_i)\)</span> simply states:</p>
+<blockquote class="blockquote">
+<p>The observed count <span class="math inline">\(Y_i\)</span> is a random draw from a Poisson distribution with mean <span class="math inline">\(\mu_i\)</span>.</p>
+</blockquote>
+<p>This equation formalizes the <strong>noise structure</strong>.</p>
 <hr>
 </section>
-<section id="systematic-component-signal" class="level3">
-<h3 class="anchored" data-anchor-id="systematic-component-signal">2️⃣ Systematic Component (Signal)</h3>
+<section id="systematic-component-signal" class="level2">
+<h2 class="anchored" data-anchor-id="systematic-component-signal">2️⃣ Systematic Component (Signal)</h2>
 <p><span class="math inline">\(\eta_i = \beta_0 + \beta_1 X_i\)</span></p>
-<p>Definitions:</p>
+<p><strong>Definitions</strong></p>
 <ul>
-<li><span class="math inline">\(\eta_i\)</span> (eta): the <strong>linear predictor</strong></li>
-<li><span class="math inline">\(\beta_0\)</span>: intercept</li>
-<li><span class="math inline">\(\beta_1\)</span>: slope parameter</li>
-<li><span class="math inline">\(X_i\)</span>: predictor value for observation <span class="math inline">\(i\)</span></li>
+<li><span class="math inline">\(\eta_i\)</span> = linear predictor</li>
+<li><span class="math inline">\(\beta_0\)</span> = intercept</li>
+<li><span class="math inline">\(\beta_1\)</span> = slope parameter</li>
+<li><span class="math inline">\(X_i\)</span> = predictor value for observation <span class="math inline">\(i\)</span></li>
 </ul>
-<p>This part represents the <strong>structured, directional effect</strong> of predictors.<br>
-It is deterministic — no randomness appears here.</p>
+<p>This is simply a straight-line equation.</p>
+<p>There is no randomness here. If <span class="math inline">\(X_i\)</span> and the coefficients are known, <span class="math inline">\(\eta_i\)</span> is determined exactly.</p>
+<p>This equation formalizes the <strong>signal structure</strong>.</p>
 <hr>
 </section>
-<section id="link-function-connector" class="level3">
-<h3 class="anchored" data-anchor-id="link-function-connector">3️⃣ Link Function (Connector)</h3>
+<section id="link-function" class="level2">
+<h2 class="anchored" data-anchor-id="link-function">3️⃣ Link Function</h2>
 <p><span class="math inline">\(\log(\mu_i) = \eta_i\)</span></p>
-<p>Equivalently:</p>
+<p>Equivalently,</p>
 <p><span class="math inline">\(\mu_i = \exp(\eta_i)\)</span></p>
-<p>The link function connects the linear predictor to the mean of the distribution.</p>
-<p>Why the log link?</p>
+<p>The link function answers a simple question:</p>
+<blockquote class="blockquote">
+<p>How does the structured linear predictor determine the mean of the count distribution?</p>
+</blockquote>
+<p>The log link ensures:</p>
 <ul>
-<li>It guarantees <span class="math inline">\(\mu_i &gt; 0\)</span>.</li>
-<li>It makes effects multiplicative on the response scale.</li>
-<li>It keeps linearity on a scale where it makes sense.</li>
+<li><span class="math inline">\(\mu_i &gt; 0\)</span></li>
+<li>Effects are additive on the linear scale</li>
+<li>Effects are multiplicative on the count scale</li>
 </ul>
+<p>Writing the link explicitly prevents the model from appearing like a “black box.” Each component has a clear role.</p>
 <hr>
 </section>
 </section>
-<section id="compact-form" class="level2">
-<h2 class="anchored" data-anchor-id="compact-form">Compact Form</h2>
-<p><span class="math inline">\(Y_i \sim \text{Poisson}(\mu_i)\)</span><br>
-<span class="math inline">\(\log(\mu_i) = \beta_0 + \beta_1 X_i\)</span></p>
+<section id="models-are-hypotheses-about-the-system" class="level1">
+<h1>Models Are Hypotheses About the System</h1>
+<p>When we write:</p>
+<p><span class="math inline">\(Y_i \sim \text{Poisson}(\mu_i)\)</span></p>
+<p><span class="math inline">\(\log(\mu_i) = \beta_0 + \beta_1 X_i\)</span></p>
+<p>we are not merely describing data.</p>
+<p>We are making explicit claims about:</p>
+<ul>
+<li><strong>Mechanism</strong> — what influences the response</li>
+<li><strong>Functional form</strong> — linear? nonlinear? additive?</li>
+<li><strong>Constraints</strong> — counts? continuous? bounded?</li>
+<li><strong>Variance structure</strong> — how stochastic variation behaves</li>
+</ul>
+<p>A statistical model is a formal, mathematical hypothesis about how the system generates data.</p>
 <hr>
 </section>
-<section id="big-picture" class="level2">
-<h2 class="anchored" data-anchor-id="big-picture">Big Picture</h2>
-<p>A GLM separates:</p>
+<section id="signal-is-model-dependent" class="level1">
+<h1>Signal Is Model-Dependent</h1>
+<p>Suppose we model abundance as:</p>
+<p><span class="math inline">\(\log(\mu_i) = \beta_0 + \beta_1 \text{mean depth}_i\)</span></p>
+<p>Variation explained by mean depth is labeled <em>signal</em>. Remaining variation is labeled <em>noise</em>.</p>
+<p>But if we expand the model:</p>
+<p><span class="math inline">\(\log(\mu_i) = \beta_0 + \beta_1 \text{mean depth}_i + \beta_2 \text{substrate}_i\)</span></p>
+<p>What previously appeared as noise may now become signal.</p>
+<p>Nothing in the raw data changed. Only the hypothesis changed.</p>
+<hr>
+</section>
+<section id="residuals-are-hypothesis-conditional" class="level1">
+<h1>Residuals Are Hypothesis-Conditional</h1>
+<p>Residual variation is not “randomness in reality.”</p>
+<p>It is:</p>
+<blockquote class="blockquote">
+<p>Variation not explained under the current model specification.</p>
+</blockquote>
+<p>Change the model → change the partition between signal and noise.</p>
+<p>This is why model comparison is hypothesis comparison.</p>
+<hr>
+</section>
+<section id="why-demystification-matters" class="level1">
+<h1>Why Demystification Matters</h1>
+<p>Signal and noise do not exist independently in raw data.</p>
+<p>They emerge from:</p>
+<p><span class="math inline">\((\text{Data}) + (\text{Model Specification}) \rightarrow (\text{Partition of Variation})\)</span></p>
+<p>When you fit a model, you are deciding:</p>
 <ul>
-<li><strong>Signal</strong> → why the mean changes (linear predictor)<br>
-</li>
-<li><strong>Noise</strong> → how observations vary around that mean (distribution)<br>
-</li>
-<li><strong>Link</strong> → how the structured signal maps to biologically allowable values</li>
+<li>What is structured</li>
+<li>What is random</li>
+<li>What is measurable</li>
+<li>What is ignored</li>
 </ul>
-<p>That separation is the real power of the GLM framework.</p>
+<p>Understanding this distinction is essential before working with real ecological datasets.</p>
+<p>On the next page, we will:</p>
+<ol type="1">
+<li>Examine residual variation in an actual dataset.</li>
+<li>Ask whether unexplained variation represents noise — or missing structure.</li>
+<li>Then implement a real GLM to formalize those hypotheses.</li>
+</ol>
+<pre><code></code></pre>
 </section>
 
 </main>

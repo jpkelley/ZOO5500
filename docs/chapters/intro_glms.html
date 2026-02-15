@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>4&nbsp; Course calendar – Quantitative Analysis of (Messy) Field Data</title>
+<title>21&nbsp; intro_glms – Quantitative Analysis of (Messy) Field Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +65,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/ai_policy.html" rel="next">
-<link href="../chapters/syllabus.html" rel="prev">
+<link href="../chapters/tutorial_glms.html" rel="next">
+<link href="../chapters/intro_modeling.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -71,6 +106,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -84,7 +148,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../index.html">Course Overview</a></li><li class="breadcrumb-item"><a href="../chapters/calendar_sp26.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Course calendar</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/statistical_aphorisms.html">Part III: Columns to Curves</a></li><li class="breadcrumb-item"><a href="../chapters/intro_glms.html"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">intro_glms</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -115,13 +179,13 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Course Overview</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
@@ -142,7 +206,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/calendar_sp26.html" class="sidebar-item-text sidebar-link active">
+  <a href="../chapters/calendar_sp26.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Course calendar</span></span></a>
   </div>
 </li>
@@ -267,13 +331,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
  <span class="menu-text">Part III: Columns to Curves</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/statistical_aphorisms.html" class="sidebar-item-text sidebar-link">
@@ -288,7 +352,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/intro_glms.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/intro_glms.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">intro_glms</span></span></a>
   </div>
 </li>
@@ -309,15 +373,33 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#separating-signal-from-noise" id="toc-separating-signal-from-noise" class="nav-link active" data-scroll-target="#separating-signal-from-noise"><span class="header-section-number">21.1</span> Separating signal from noise</a>
+  <ul class="collapse">
+  <li><a href="#comparing-glms-to-vintage-models-anovas-and-t-tests" id="toc-comparing-glms-to-vintage-models-anovas-and-t-tests" class="nav-link" data-scroll-target="#comparing-glms-to-vintage-models-anovas-and-t-tests"><span class="header-section-number">21.1.1</span> Comparing GLMs to vintage models (ANOVAs and <em>t</em>-tests)</a></li>
+  <li><a href="#setting-the-stage-for-glms" id="toc-setting-the-stage-for-glms" class="nav-link" data-scroll-target="#setting-the-stage-for-glms"><span class="header-section-number">21.1.2</span> Setting the stage for GLMs</a></li>
+  </ul></li>
+  <li><a href="#the-poisson-glm-model-specification" id="toc-the-poisson-glm-model-specification" class="nav-link" data-scroll-target="#the-poisson-glm-model-specification"><span class="header-section-number">21.2</span> The Poisson GLM: Model Specification</a>
+  <ul class="collapse">
+  <li><a href="#random-component-noise" id="toc-random-component-noise" class="nav-link" data-scroll-target="#random-component-noise"><span class="header-section-number">21.2.1</span> Random Component (Noise)</a></li>
+  <li><a href="#systematic-component-signal" id="toc-systematic-component-signal" class="nav-link" data-scroll-target="#systematic-component-signal"><span class="header-section-number">21.2.2</span> Systematic Component (Signal)</a></li>
+  <li><a href="#link-function" id="toc-link-function" class="nav-link" data-scroll-target="#link-function"><span class="header-section-number">21.2.3</span> Link Function</a></li>
+  </ul></li>
+  <li><a href="#summary-the-compact-form-of-a-poisson-glm" id="toc-summary-the-compact-form-of-a-poisson-glm" class="nav-link" data-scroll-target="#summary-the-compact-form-of-a-poisson-glm"><span class="header-section-number">21.3</span> Summary: the compact form of a Poisson GLM</a></li>
+  <li><a href="#testing-yourself-thinking-about-signal-and-noise-in-a-totally-real-dataset" id="toc-testing-yourself-thinking-about-signal-and-noise-in-a-totally-real-dataset" class="nav-link" data-scroll-target="#testing-yourself-thinking-about-signal-and-noise-in-a-totally-real-dataset"><span class="header-section-number">21.4</span> Testing yourself: thinking about signal and noise in a totally real dataset</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../index.html">Course Overview</a></li><li class="breadcrumb-item"><a href="../chapters/calendar_sp26.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Course calendar</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/statistical_aphorisms.html">Part III: Columns to Curves</a></li><li class="breadcrumb-item"><a href="../chapters/intro_glms.html"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">intro_glms</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Course calendar</span></h1>
+<h1 class="title"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">intro_glms</span></h1>
 </div>
 
 
@@ -334,765 +416,415 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="calendar-overview" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="calendar-overview"><span class="header-section-number">4.1</span> Calendar overview</h2>
-<p>Use the calendar table below to see what’s coming each week; simply click a week (first column link) to jump to full details, and then expand sections to see what to do before, during, and after class. This calendar may change slightly as we progress through the term. You will receive immediate notification of any and all changes.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
+<section id="separating-signal-from-noise" class="level2" data-number="21.1">
+<h2 data-number="21.1" class="anchored" data-anchor-id="separating-signal-from-noise"><span class="header-section-number">21.1</span> Separating signal from noise</h2>
+<p>Our task as scientists is to learn how to separate the patterns that carry meaningful information (<em>signal</em>) from the variation that does not (<em>noise</em>). This is why we use all of these silly models in the first place. So, what exactly are models?</p>
+<blockquote class="blockquote">
+<p>Models are hypotheses about how the data were generated.</p>
+</blockquote>
+<section id="comparing-glms-to-vintage-models-anovas-and-t-tests" class="level3" data-number="21.1.1">
+<h3 data-number="21.1.1" class="anchored" data-anchor-id="comparing-glms-to-vintage-models-anovas-and-t-tests"><span class="header-section-number">21.1.1</span> Comparing GLMs to vintage models (ANOVAs and <em>t</em>-tests)</h3>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p>In this brief example, we provide some simulation code that will (hopefully) convince you that GLMs are pretty much the same kinds of models that you were exposed to in your introductory statistics courses back in the day. As you’ll quickly see, however, GLMs are highly flexible and will allow you to extract the maximum amount of signal from your noisy data.</p>
+<p>We will simulate a fake dataset that has two groups (1 and 2). The values for each group follow normal distributions with a standard deviation of 1. The groups differ in their mean values, however, by one unit.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">100</span>) <span class="co"># this is a random seed that ensures example reproducibility</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>nval <span class="ot">&lt;-</span> <span class="dv">50</span> <span class="co"># Generate some fake data</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>group1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(nval, <span class="at">mean=</span><span class="dv">5</span>, <span class="at">sd=</span><span class="dv">1</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>group2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(nval, <span class="at">mean=</span><span class="dv">6</span>, <span class="at">sd=</span><span class="dv">1</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">id=</span><span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"group1"</span>, <span class="st">"group2"</span>), <span class="at">each=</span>nval), </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">y=</span><span class="fu">c</span>(group1, group2))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="intro_glms_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Now, using three models (<em>t</em>-test, ANOVA, and GLM), let us test the hypothesis that these two groups differ. Remember that <em>t</em>-tests and ANOVAs are <strong>linear models</strong> that assume, among other things, that both the signal and the noise follow a Gaussian/Normal distribution. Note that we need to convert the ANOVA’s <em>F</em>-stat to a <em>t</em>-statistic for comparability. You can see the code for this multi-model comparison in this callout box:</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
-<i class="callout-icon"></i>
+<i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+<span class="screen-reader-only">Note</span>R code for inter-model comparison
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>All Milestone Assignments due by end of day on Friday.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ttest.mod <span class="ot">&lt;-</span> <span class="fu">t.test</span>(y <span class="sc">~</span> id, <span class="at">data=</span>d) <span class="co"># t-test</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>anova.mod <span class="ot">&lt;-</span> <span class="fu">aov</span>(y <span class="sc">~</span> id, <span class="at">data=</span>d) <span class="co"># ANOVA</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>glm.mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> id, <span class="at">data=</span>d) <span class="co"># GLM</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>ttest.t <span class="ot">&lt;-</span> <span class="fu">abs</span>(<span class="fu">as.numeric</span>(ttest.mod<span class="sc">$</span>statistic))</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>anova.f <span class="ot">&lt;-</span> <span class="fu">summary</span>(anova.mod)[[<span class="dv">1</span>]]<span class="sc">$</span>F[<span class="dv">1</span>]</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>anova.t <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(anova.f) <span class="co"># t-stat = sqrt(F-stat)</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>glm.t <span class="ot">&lt;-</span> <span class="fu">coefficients</span>(<span class="fu">summary</span>(glm.mod))[<span class="dv">2</span>, <span class="dv">3</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Then, we compare all the test statistics (<em>t</em>-values), from which the <em>p</em>-values are derived.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.119985 4.119985 4.119985</code></pre>
 </div>
 </div>
-<div class="course-info" data-tbl-colwidths="[14, 32, 18, 18, 10, 8]">
+</div>
+</div>
+</div>
+<p>You can see that all of the <em>t</em>-values are exactly the same (<em>t</em>=4.119985). Fantastic! Now you can sit back and silently reconsider your desire to use a <em>t</em>-test or ANOVA (or anything similar). Let us say that we are not abandoning <em>t</em>-tests and ANOVAs; instead, we are outgrowing them. The table below shows a number of other advantages that GLMs have.</p>
+<div class="course-info" data-tbl-colwidths="[70, 10, 10, 10]">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 14%">
-<col style="width: 32%">
-<col style="width: 18%">
-<col style="width: 18%">
+<col style="width: 70%">
 <col style="width: 10%">
-<col style="width: 8%">
+<col style="width: 10%">
+<col style="width: 10%">
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: right;"><strong>Week</strong></th>
-<th><strong>Topics</strong></th>
-<th><strong>In-class exercise</strong></th>
-<th><strong>Milestone assignment</strong> (due Friday)</th>
-<th><strong>Stress level</strong></th>
-<th><strong>Grade weight (%)</strong></th>
+<th>Functionality / Capability</th>
+<th style="text-align: center;">t-test</th>
+<th style="text-align: center;">ANOVA</th>
+<th style="text-align: center;">GLM</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;"><a href="#week-1"><strong>Week 1</strong><br>19-Jan-2026</a></td>
-<td>Course intro; RStudio setup; AI guardrails</td>
-<td>Project scoping discussion</td>
-<td>—</td>
-<td>Very low</td>
-<td>0</td>
+<td>Unbalanced sample</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;"><a href="#week-2"><strong>Week 2</strong><br>26-Jan-2026</a></td>
-<td>File structure; reproducible workflows; AI logs</td>
-<td>File audit walkthrough</td>
-<td>Analysis Concept Note</td>
-<td>Low</td>
-<td>5</td>
+<td>Compare more than two groups</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;"><a href="#week-3"><strong>Week 3</strong><br>02-Feb-2026</a></td>
-<td>Data exploration; measurement &amp; uncertainty</td>
-<td>Exploratory data analysis walkthrough</td>
-<td>—</td>
-<td>Very low</td>
-<td>0</td>
+<td>Handle continuous predictors</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">✅</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;"><a href="#week-4"><strong>Week 4</strong><br>09-Feb-2026</a></td>
-<td>GLMs (theory + practice)</td>
-<td>GLM exercise</td>
-<td>Data Readiness Note</td>
-<td>Low</td>
-<td>10</td>
+<td>Handle non-Normal distributions</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">✅</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;"><a href="#week-5"><strong>Week 5</strong><br>16-Feb-2026</a></td>
-<td>GLMs; AIC &amp; information theory</td>
-<td>Model comparison exercise</td>
-<td>—</td>
-<td>Low</td>
-<td>5</td>
+<td>Complex hierarchical random effects</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">✅</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;"><a href="#week-6"><strong>Week 6</strong><br>23-Feb-2026</a></td>
-<td>GLMMs; effective sample size</td>
-<td>GLMM exercise</td>
-<td>—</td>
-<td>Moderate</td>
-<td>15</td>
+<td>Use link functions (log, logit, etc.)</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">✅</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;"><a href="#week-7"><strong>Week 7</strong><br>02-Mar-2026</a></td>
-<td>GAMs</td>
-<td>GAM exercise</td>
-<td>Working Model (draft)</td>
-<td>Moderate</td>
-<td>0</td>
+<td>Predicted values from model output</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">✅</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;"><a href="#week-8"><strong>Week 8</strong><br>09-Mar-2026</a></td>
-<td>GAMMs; spatial &amp; temporal heterogeneity</td>
-<td>Model refinement exercise</td>
-<td>Working Model (final lock)</td>
-<td>Moderate</td>
-<td>15</td>
+<td>Nonlinear extensions</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">✅</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;"><a href="#week-9"><strong>Week 9</strong><br>16-Mar-2026</a></td>
-<td>Student Spring Break</td>
-<td>—</td>
-<td>—</td>
-<td>None</td>
-<td>0</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;"><a href="#week-10"><strong>Week 10</strong><br>23-Mar-2026</a></td>
-<td>Structural Causal Modeling (SCM)</td>
-<td>Causal diagram critique</td>
-<td>—</td>
-<td>Low</td>
-<td>10</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;"><a href="#week-11"><strong>Week 11</strong><br>30-Mar-2026</a></td>
-<td>Instructor Spring Break</td>
-<td>—</td>
-<td>—</td>
-<td>None</td>
-<td>0</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;"><a href="#week-12"><strong>Week 12</strong><br>06-Apr-2026</a></td>
-<td>Prediction &amp; uncertainty</td>
-<td>Prediction checks</td>
-<td>Interpretation Memo</td>
-<td>Low</td>
-<td>10</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;"><a href="#week-13"><strong>Week 13</strong><br>13-Apr-2026</a></td>
-<td>Synthesis &amp; justification</td>
-<td>Peer + AI review</td>
-<td>—</td>
-<td>Moderate</td>
-<td>0</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;"><a href="#week-14"><strong>Week 14</strong><br>20-Apr-2026</a></td>
-<td>Tables, figures, reporting standards</td>
-<td>Table/figure workshop</td>
-<td>Results Section</td>
-<td>Low</td>
-<td>10</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;"><a href="#week-15"><strong>Week 15</strong><br>27-Apr-2026</a></td>
-<td>Writing Results sections</td>
-<td>Draft clinic</td>
-<td>Full Draft</td>
-<td>Moderate</td>
-<td>15</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;"><a href="#week-16"><strong>Week 16</strong><br>04-May-2026</a></td>
-<td>Reflection &amp; closure</td>
-<td>Course wrap-up</td>
-<td>Revision Plan (not executed)</td>
-<td>None</td>
-<td>5</td>
+<td>Under current development</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">✅</td>
 </tr>
 </tbody>
 </table>
 </div>
+<p>Hopefully, this short exercise convinces you that GLMs and their extensions (Generalized Linear –and Additive– Mixed Models) no longer need to be viewed as <em>“advanced statistics”</em>; they can simply be used as a formal and unified language for ecological thinking.</p>
 </section>
-<section id="weekly-information" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="weekly-information"><span class="header-section-number">4.2</span> Weekly Information</h2>
-<p>Click to expand sections below to see expectations before, during, and after class.</p>
-<div id="week-1" class="unnumbered callout callout-style-default callout-tip no-icon callout-titled">
+<section id="setting-the-stage-for-glms" class="level3" data-number="21.1.2">
+<h3 data-number="21.1.2" class="anchored" data-anchor-id="setting-the-stage-for-glms"><span class="header-section-number">21.1.2</span> Setting the stage for GLMs</h3>
+<p>Most textbook treatments of GLMs start off examining a model with Gaussian (normally distributed) errors. The Gaussian models have core assumptions that are likely familiar and comfortable to most of you, including:</p>
+<ul>
+<li>The response variable is <strong>continuous</strong></li>
+<li>The residual variance is <strong>constant</strong> (homoscedastic)</li>
+<li>The error distribution is <strong>symmetric</strong></li>
+<li>The outcome can take <strong>any real value</strong> (including negatives)</li>
+</ul>
+<p>In many classroom situations, that works beautifully. If we are modeling body mass of adults (<em>why adults?</em>), temperature, or some other roughly symmetric continuous variable, the Gaussian/normal distribution is often appropriate. However, the Gaussian/normal distribution is often the exception rather than the rule because:</p>
+<blockquote class="blockquote">
+<p>Most ecological data are not normally distributed.</p>
+</blockquote>
+<p>Why? As ecologists, we regularly collect data on proportions, rates, skewed measurements, zero-heavy processes, and, perhaps most commonly, counts like:</p>
+<ul>
+<li>Number of individuals observed<br>
+</li>
+<li>Number of detections on a recorder<br>
+</li>
+<li>Number of nests in a plot<br>
+</li>
+<li>Number of disease cases</li>
+</ul>
+<p>Count distributions –often best approximated by a Poisson distribution– have their own features, including:</p>
+<ul>
+<li>Values cannot be negative.</li>
+<li>Values are discrete (not continuous)</li>
+<li>They often have variances that equal or increase with their mean</li>
+<li>They are frequently right-skewed</li>
+</ul>
+<p>A Gaussian model ignores almost everything about how most ecological data are generated. Therefore, in this section, we will first explore the Poisson GLM, which is designed specifically for count data. It:</p>
+<ul>
+<li>Restricts predictions to non-negative values.</li>
+<li>Allows variance to increase with the mean.</li>
+</ul>
+<p>Furthermore, using a Poisson GLM allows you to see the internal architecture of a GLM. It is a bit more difficult to see how a GLM works when using a Gaussian distribution. In a Poisson GLM, the GLM components are clearly delineated:</p>
+<ul>
+<li>The <strong>error distribution</strong> describes the noise.</li>
+<li>The <strong>linear predictor</strong> describes the signal.</li>
+<li>The <strong>link function</strong> connects the expected value of the response to the linear predictor</li>
+</ul>
+<p>Because those parts are visibly distinct, the Poisson model makes it much easier to understand what a GLM is actually doing.</p>
+<hr>
+</section>
+</section>
+<section id="the-poisson-glm-model-specification" class="level2" data-number="21.2">
+<h2 data-number="21.2" class="anchored" data-anchor-id="the-poisson-glm-model-specification"><span class="header-section-number">21.2</span> The Poisson GLM: Model Specification</h2>
+<p>At first glance, especially if you have had no formal mathematical training, the formal notation of a GLM can appear very intimidating. Symbols such as <span class="math inline">\(Y_i\)</span>, <span class="math inline">\(\mu_i\)</span>, and <span class="math inline">\(\eta_i\)</span> may give the impression that the model is mathematically difficult to the average scientist. In reality, these equations simply provide an efficient way to describe simple concepts about data and model structure. Fundamentally, a relatively small set of equations can describe:</p>
+<ul>
+<li>How observations in a dataset vary</li>
+<li>How predictors influence expected responses</li>
+<li>How effects are linked to observable data</li>
+</ul>
+<p>Writing the mathematical form of a model really does helps demystify it. At least, that will be my attempt in this course. Each component of how we mathematically formalize a GLM corresponds to one part of the data-generating process.</p>
+<p>First, we begin with our observations (our dataset). Using each observation <span class="math inline">\(i\)</span> and sample size <span class="math inline">\(n\)</span>, we define our dataset as:</p>
+<p><span class="math inline">\(i = 1, \dots, n\)</span>:</p>
+<p>We then set up the three core components of our GLM:</p>
+<hr>
+<section id="random-component-noise" class="level3" data-number="21.2.1">
+<h3 data-number="21.2.1" class="anchored" data-anchor-id="random-component-noise"><span class="header-section-number">21.2.1</span> Random Component (Noise)</h3>
+<p>The random component –the unmeasured structure of your model– is formalized as:</p>
+<p><span class="math inline">\(Y_i \sim \text{Poisson}(\mu_i)\)</span>, where:</p>
+<ul>
+<li><span class="math inline">\(Y_i\)</span>: observed count for observation <span class="math inline">\(i\)</span></li>
+<li><span class="math inline">\(\mu_i\)</span>: expected (mean) count for observation <span class="math inline">\(i\)</span></li>
+</ul>
+<p>Recall that a Poisson distribution has a mean and variance that are equal: the expected count is <span class="math inline">\(\mu_i\)</span>, and the variability around that expectation is also <span class="math inline">\(\mu_i\)</span>. This means that as the expected number of events (counts) increases, the spread of the data increases proportionally, so larger means naturally are associated with greater variability.</p>
+<p><span class="math inline">\(E(Y_i) = \mu_i\)</span> <span class="math inline">\(\text{Var}(Y_i) = \mu_i\)</span></p>
+<p><strong>Why Write This Explicitly?</strong></p>
+<p>The notation <span class="math inline">\(Y_i \sim \text{Poisson}(\mu_i)\)</span> simply states:</p>
+<blockquote class="blockquote">
+<p>The observed count <span class="math inline">\(Y_i\)</span> is a random draw from a Poisson distribution with mean <span class="math inline">\(\mu_i\)</span>.</p>
+</blockquote>
+<p>There is nothing mystical in this expression. It formalizes three important ideas:</p>
+<ol type="1">
+<li>The outcome is a count (non-negative integers only).</li>
+<li>The mean and variance are equal.</li>
+<li>Variability scales with the expected value.</li>
+</ol>
+<p>By writing the distribution explicitly, we clarify:</p>
+<ul>
+<li>What values are possible.</li>
+<li>How uncertainty behaves.</li>
+<li>How variance depends on the mean.</li>
+</ul>
+<p>The equation prevents hidden assumptions. Without it, readers might assume constant variance or continuous outcomes. The formal notation makes those assumptions transparent.</p>
+<p>These points will be reiterated below in the link function section.</p>
+<hr>
+</section>
+<section id="systematic-component-signal" class="level3" data-number="21.2.2">
+<h3 data-number="21.2.2" class="anchored" data-anchor-id="systematic-component-signal"><span class="header-section-number">21.2.2</span> Systematic Component (Signal)</h3>
+<p><span class="math inline">\(\eta_i = \beta_0 + \beta_1 X_i\)</span></p>
+<p><strong>Definitions</strong></p>
+<ul>
+<li><span class="math inline">\(\eta_i\)</span>: linear predictor</li>
+<li><span class="math inline">\(\beta_0\)</span>: intercept</li>
+<li><span class="math inline">\(\beta_1\)</span>: slope parameter</li>
+<li><span class="math inline">\(X_i\)</span>: predictor value for observation <span class="math inline">\(i\)</span></li>
+</ul>
+<p>This expression is simply a linear equation. It states:</p>
+<blockquote class="blockquote">
+<p>The structured component of the model is a straight-line function of the predictor.</p>
+</blockquote>
+<p>There is no randomness here. If <span class="math inline">\(X_i\)</span> and the coefficients are known, <span class="math inline">\(\eta_i\)</span> is determined exactly. The equation clarifies:</p>
+<ul>
+<li>How predictors are assumed to influence outcomes.</li>
+<li>That effects are additive on the linear predictor scale.</li>
+<li>That the relationship is directional and structured.</li>
+</ul>
+<p>Without writing this formally, it is easy to obscure how predictors fold into the model. The mathematical form adds clarity about what is signal and what is noise.</p>
+<hr>
+</section>
+<section id="link-function" class="level3" data-number="21.2.3">
+<h3 data-number="21.2.3" class="anchored" data-anchor-id="link-function"><span class="header-section-number">21.2.3</span> Link Function</h3>
+<p>The final component of our GLM is the link function, which allows us to answer a simple and necessary question:</p>
+<blockquote class="blockquote">
+<p>How does the linear predictor (signal) determine the mean of the response distribution?</p>
+</blockquote>
+<p>For GLMs, the mean of the response distribution directly determines the error structure because the variance is defined as some function of the mean. Let us look at its form in the case of the Poisson GLM. Recall from the previous page that, for a Poisson model:</p>
+<p><span class="math inline">\(E(Y_i) = \mu_i\)</span> <span class="math inline">\(\text{Var}(Y_i) = \mu_i\)</span></p>
+<p>:::</p>
+<p>What the heck does this mean?</p>
+<p><span class="math inline">\(E(Y_i) = \mu_i\)</span> means:</p>
+<blockquote class="blockquote">
+<p>The expected value (long-run average) of the response <span class="math inline">\(Y_i\)</span> equals <span class="math inline">\(\mu_i\)</span>.</p>
+</blockquote>
+<p>More simply:</p>
+<ul>
+<li><span class="math inline">\(Y_i\)</span> is the observed outcome for observation <span class="math inline">\(i\)</span>.</li>
+<li><span class="math inline">\(\mu_i\)</span> is the average value we would expect if we could repeat the same process many times under identical conditions.</li>
+<li><span class="math inline">\(E(Y_i)\)</span> is simply statistical language for “mean.”</li>
+</ul>
+<p>So we interpret this equation as:</p>
+<blockquote class="blockquote">
+<p>If we repeatedly generated data under the same conditions for observation <span class="math inline">\(i\)</span>, the average of those outcomes would be <span class="math inline">\(\mu_i\)</span>.</p>
+</blockquote>
+<p>That hopefully makes a bit more sense!</p>
+<p>:::</p>
+<p>Because the variance equals the mean in a Poisson model, once we determine <span class="math inline">\(\mu_i\)</span>, we automatically determine the variance as well. So what does the link function actually do?</p>
+<p>We first build a straight-line equation:</p>
+<p><span class="math inline">\(\eta_i = \beta_0 + \beta_1 X_i\)</span></p>
+<p>We then transform that linear result to obtain a valid mean:</p>
+<p><span class="math inline">\(\mu_i = \exp(\eta_i)\)</span></p>
+<p>That is all the link function is: a rule that converts the output of the linear predictor into a proper mean for the distribution. Since the variance depends on the mean, this transformation also determines how much noise we expect. In short, the following is happening:</p>
+<ul>
+<li>predictors determine <span class="math inline">\(\eta_i\)</span></li>
+<li>the link function converts <span class="math inline">\(\eta_i\)</span> into the mean <span class="math inline">\(\mu_i\)</span></li>
+<li>The mean determines the variance</li>
+</ul>
+<p>The link is simply the bridge between signal and noise.</p>
+<hr>
+</section>
+</section>
+<section id="summary-the-compact-form-of-a-poisson-glm" class="level2" data-number="21.3">
+<h2 data-number="21.3" class="anchored" data-anchor-id="summary-the-compact-form-of-a-poisson-glm"><span class="header-section-number">21.3</span> Summary: the compact form of a Poisson GLM</h2>
+<p>Let us put this all together in a single structure that could be included in a scientific paper:</p>
+<p><span class="math inline">\(Y_i \sim \text{Poisson}(\mu_i)\)</span><br>
+<span class="math inline">\(\log(\mu_i) = \beta_0 + \beta_1 X_i\)</span></p>
+<p>This compact form contains the entire model. When broken apart, it describes:</p>
+<ul>
+<li>The distribution of variability (the Poisson portion)</li>
+<li>The structured influence of predictors (the line equation)</li>
+<li>The transformation connecting structure to expectation (the <em>log</em> operator)</li>
+</ul>
+<p>The mathematical notation is far more concise than what we sometimes see in the articles’ descriptions of statistical analyses. The concise form communicates all of the components of the model in a straightforward way. The value of writing them formally is not useless abstraction; it is clarity about how our decisions are translated into strong inference.</p>
+<hr>
+</section>
+<section id="testing-yourself-thinking-about-signal-and-noise-in-a-totally-real-dataset" class="level2" data-number="21.4">
+<h2 data-number="21.4" class="anchored" data-anchor-id="testing-yourself-thinking-about-signal-and-noise-in-a-totally-real-dataset"><span class="header-section-number">21.4</span> Testing yourself: thinking about signal and noise in a totally real dataset</h2>
+<p>For this conceptual self-test, we will use a dataset that was collected from a population of <em>Lepusantilocapra pufferi</em> (puffer jackalope) starting in the mid-1970s. The data include the following variables:</p>
+<ul>
+<li><code>site</code>: where the individuals were sampled</li>
+<li><code>abund</code>: number of individuals detected at each location</li>
+<li><code>dens</code>: density of individuals at each sampling location</li>
+<li><code>mean_depth</code>: mean depth, in meters of the sampling location</li>
+<li><code>year</code>: year of the study</li>
+<li><code>period</code>: 1=before and 2= after introduction of <em>Pelicanus pufferivorus</em> (puffer-jackalope pelican)</li>
+<li><code>x_km</code>: longitude (decimal degrees) of sampling location</li>
+<li><code>y_km</code>: latitude (decimal degrees) of sampling location</li>
+<li><code>swept_area</code>: size in square meters of the sampling location (effort)</li>
+</ul>
+<p>Familiarize yourself with these data (especially <code>mean_depth</code>, <code>dens</code>, and <code>abund</code>) and then think about the following questions. Click to expand each box for the answer.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Week 1 (19-Jan-2026)</strong>
+<span class="screen-reader-only">Tip</span><strong>If mean depth is a true driver, what happens when we exclude it from the model?</strong>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Topics:</strong> Course introduction; RStudio setup; AI guardrails<br>
-<strong>Stress level:</strong> Very low<br>
-<strong>Grade weight:</strong> 0%</p>
-<section id="before-class" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="before-class">Before class</h3>
-<ul>
-<li>Absolutely nothing.</li>
-</ul>
-</section>
-<section id="in-class" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="in-class">In class</h3>
-<ul>
-<li>Course overview and expectations</li>
-<li>Review syllabus</li>
-<li>Read AI policy and documentation expectations</li>
-<li>Project scoping discussion</li>
-</ul>
-</section>
-<section id="after-class" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="after-class">After class</h3>
-<ul>
-<li>No submission due</li>
-<li>Install R and RStudio</li>
-<li>Read AI use and documentation expectations</li>
-<li>Begin gathering your dataset files</li>
-</ul>
-</section>
+<p><strong>Answer:</strong><br>
+Its effect does not disappear from the world. The effect is moved into the noise (residual). It may also distort the effects of any correlated covariates (but we will discuss this more later).</p>
 </div>
 </div>
 </div>
-<div id="week-2" class="unnumbered callout callout-style-default callout-tip no-icon callout-titled">
+<hr>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Week 2 (26-Jan-2026)</strong>
+<span class="screen-reader-only">Tip</span><strong>If residual variance drops after adding mean depth, what changed?</strong>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Topics:</strong> File structure; reproducible workflows; AI logs<br>
-<strong>Stress level:</strong> Low<br>
-<strong>Grade weight:</strong> 5%</p>
-<section id="before-class-1" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="before-class-1">Before class</h3>
-<ul>
-<li>Review example project directory structures</li>
-<li>Read guidance on reproducible workflows</li>
-</ul>
-</section>
-<section id="in-class-1" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="in-class-1">In class</h3>
-<ul>
-<li>File audit walkthrough</li>
-<li>Discussion of AI interaction logging</li>
-</ul>
-</section>
-<section id="after-class-1" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="after-class-1">After class</h3>
-<ul>
-<li><strong>Submit:</strong> Analysis Concept Note</li>
-</ul>
-</section>
+<p><strong>Answer:</strong><br>
+We improved our model’s alignment with the data-generating process (which included mean depth). Nature did not become less noisy.</p>
 </div>
 </div>
 </div>
-<div id="week-3" class="unnumbered callout callout-style-default callout-tip no-icon callout-titled">
+<hr>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Week 3 (02-Feb-2026)</strong>
+<span class="screen-reader-only">Tip</span><strong>Is residual variance (noise) a feature of the system/world or our model?</strong>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Topics:</strong> Data exploration; measurement &amp; uncertainty<br>
-<strong>Stress level:</strong> Very low<br>
-<strong>Grade weight:</strong> 5%</p>
-<section id="before-class-2" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="before-class-2">Before class</h3>
-<ul>
-<li>Skim examples of exploratory data analysis (EDA)</li>
-<li>Review notes on uncertainty and measurement error</li>
-</ul>
-</section>
-<section id="in-class-2" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="in-class-2">In class</h3>
-<ul>
-<li>Exploratory data analysis walkthrough</li>
-<li>Discussion of data limitations and noise</li>
-</ul>
-</section>
-<section id="after-class-2" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="after-class-2">After class</h3>
-<ul>
-<li>No submission due</li>
-<li>Begin informal exploration of your own data</li>
-</ul>
-</section>
+<p><strong>Answer:</strong><br>
+This is sort of a trick question. Residual variance most proximately reflects what the model itself fails to explain; it is simply a mathematical way that we are making sense of the world.</p>
 </div>
 </div>
 </div>
-<div id="week-4" class="unnumbered callout callout-style-default callout-tip no-icon callout-titled">
+<hr>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Week 4 (09-Feb-2026)</strong>
+<span class="screen-reader-only">Tip</span><strong>If mean depth causally affects abundance and is omitted from the model, is that just extra noise?</strong>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Topics:</strong> GLMs (theory + practice)<br>
-<strong>Stress level:</strong> Low<br>
-<strong>Grade weight:</strong> 10%</p>
-<section id="before-class-3" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="before-class-3">Before class</h3>
-<ul>
-<li>Read GLM conceptual overview</li>
-<li>Review examples of common link functions</li>
-</ul>
-</section>
-<section id="in-class-3" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="in-class-3">In class</h3>
-<ul>
-<li>GLM exercise</li>
-<li>Translating scientific questions into model form</li>
-</ul>
-</section>
-<section id="after-class-3" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="after-class-3">After class</h3>
-<ul>
-<li><strong>Submit:</strong> Data Readiness Note</li>
-</ul>
-</section>
+<p><strong>Answer:</strong><br>
+No.&nbsp;This means that the model has been misspecified. It does not only increase residual variance; it also creates systematic bias.</p>
 </div>
 </div>
 </div>
-<div id="week-5" class="unnumbered callout callout-style-default callout-tip no-icon callout-titled">
+<hr>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Week 5 (16-Feb-2026)</strong>
+<span class="screen-reader-only">Tip</span><strong>When mean depth moves from residual to systematic, are we changing the ecology?</strong>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Topics:</strong> GLMs; AIC &amp; information theory<br>
-<strong>Stress level:</strong> Low<br>
-<strong>Grade weight:</strong> 5%</p>
-<section id="before-class-4" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="before-class-4">Before class</h3>
-<ul>
-<li>Review information-theoretic model comparison</li>
-<li>Read example AIC workflows</li>
-</ul>
-</section>
-<section id="in-class-4" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="in-class-4">In class</h3>
-<ul>
-<li>Model comparison exercise</li>
-<li>Interpreting relative support</li>
-</ul>
-</section>
-<section id="after-class-4" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="after-class-4">After class</h3>
-<ul>
-<li>No submission due</li>
-<li>Refine candidate model sets</li>
-</ul>
-</section>
-</div>
-</div>
-</div>
-<div id="week-6" class="unnumbered callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Week 6 (23-Feb-2026)</strong>
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Topics:</strong> GLMMs; effective sample size<br>
-<strong>Stress level:</strong> Moderate<br>
-<strong>Grade weight:</strong> 15%</p>
-<section id="before-class-5" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="before-class-5">Before class</h3>
-<ul>
-<li>Read GLMM overview</li>
-<li>Review motivation for random effects</li>
-</ul>
-</section>
-<section id="in-class-5" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="in-class-5">In class</h3>
-<ul>
-<li>GLMM exercise</li>
-<li>Discussion of pseudoreplication and effective sample size</li>
-</ul>
-</section>
-<section id="after-class-5" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="after-class-5">After class</h3>
-<ul>
-<li>No submission due</li>
-<li>Begin transitioning models to mixed frameworks where appropriate</li>
-</ul>
-</section>
-</div>
-</div>
-</div>
-<div id="week-7" class="unnumbered callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Week 7 (02-Mar-2026)</strong>
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Topics:</strong> GAMs<br>
-<strong>Stress level:</strong> Moderate<br>
-<strong>Grade weight:</strong> 0%</p>
-<section id="before-class-6" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="before-class-6">Before class</h3>
-<ul>
-<li>Review motivation for smooth terms</li>
-<li>Read conceptual introduction to GAMs</li>
-</ul>
-</section>
-<section id="in-class-6" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="in-class-6">In class</h3>
-<ul>
-<li>GAM exercise</li>
-<li>Interpreting smooths vs parametric effects</li>
-</ul>
-</section>
-<section id="after-class-6" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="after-class-6">After class</h3>
-<ul>
-<li><strong>Submit:</strong> Working Model (draft)</li>
-</ul>
-</section>
-</div>
-</div>
-</div>
-<div id="week-8" class="unnumbered callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Week 8 (09-Mar-2026)</strong>
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Topics:</strong> GAMMs; spatial &amp; temporal heterogeneity<br>
-<strong>Stress level:</strong> Moderate<br>
-<strong>Grade weight:</strong> 15%</p>
-<section id="before-class-7" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="before-class-7">Before class</h3>
-<ul>
-<li>Review examples of spatial and temporal structure</li>
-<li>Read GAMM case studies</li>
-</ul>
-</section>
-<section id="in-class-7" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="in-class-7">In class</h3>
-<ul>
-<li>Model refinement exercise</li>
-<li>Diagnosing remaining structure in residuals</li>
-</ul>
-</section>
-<section id="after-class-7" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="after-class-7">After class</h3>
-<ul>
-<li><strong>Submit:</strong> Working Model (final lock)</li>
-</ul>
-</section>
-</div>
-</div>
-</div>
-<div id="week-9" class="unnumbered callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Week 9 (16-Mar-2026)</strong>
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Topics:</strong> Student Spring Break<br>
-<strong>Stress level:</strong> None<br>
-<strong>Grade weight:</strong> 0%</p>
-<section id="notes" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="notes">Notes</h3>
-<ul>
-<li>No class</li>
-<li>No assignments due</li>
-<li>Recommended: rest, catch up, or light review if needed</li>
-</ul>
-</section>
-</div>
-</div>
-</div>
-<div id="week-10" class="unnumbered callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Week 10 (23-Mar-2026)</strong>
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Topics:</strong> Structural Causal Modeling (SCM)<br>
-<strong>Stress level:</strong> Low<br>
-<strong>Grade weight:</strong> 10%</p>
-<section id="before-class-8" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="before-class-8">Before class</h3>
-<ul>
-<li>Read SCM overview and motivation</li>
-<li>Review example causal diagrams</li>
-</ul>
-</section>
-<section id="in-class-8" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="in-class-8">In class</h3>
-<ul>
-<li>Causal diagram critique</li>
-<li>Discussion of assumptions and identification</li>
-</ul>
-</section>
-<section id="after-class-8" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="after-class-8">After class</h3>
-<ul>
-<li>No submission due</li>
-<li>Consider how SCM reframes your modeling decisions</li>
-</ul>
-</section>
-</div>
-</div>
-</div>
-<div id="week-11" class="unnumbered callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Week 11 (30-Mar-2026)</strong>
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Topics:</strong> Instructor Spring Break<br>
-<strong>Stress level:</strong> None<br>
-<strong>Grade weight:</strong> 0%</p>
-<section id="notes-1" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="notes-1">Notes</h3>
-<ul>
-<li>No class</li>
-<li>No assignments due</li>
-</ul>
-</section>
-</div>
-</div>
-</div>
-<div id="week-12" class="unnumbered callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Week 12 (06-Apr-2026)</strong>
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-13" class="callout-13-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Topics:</strong> Prediction &amp; uncertainty<br>
-<strong>Stress level:</strong> Low<br>
-<strong>Grade weight:</strong> 10%</p>
-<section id="before-class-9" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="before-class-9">Before class</h3>
-<ul>
-<li>Review prediction vs inference distinctions</li>
-<li>Read examples of uncertainty communication</li>
-</ul>
-</section>
-<section id="in-class-9" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="in-class-9">In class</h3>
-<ul>
-<li>Prediction checks</li>
-<li>Evaluating extrapolation risk</li>
-</ul>
-</section>
-<section id="after-class-9" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="after-class-9">After class</h3>
-<ul>
-<li><strong>Submit:</strong> Interpretation Memo</li>
-</ul>
-</section>
-</div>
-</div>
-</div>
-<div id="week-13" class="unnumbered callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Week 13 (13-Apr-2026)</strong>
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-14" class="callout-14-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Topics:</strong> Synthesis &amp; justification<br>
-<strong>Stress level:</strong> Moderate<br>
-<strong>Grade weight:</strong> 0%</p>
-<section id="before-class-10" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="before-class-10">Before class</h3>
-<ul>
-<li>Review synthesis examples from prior studies</li>
-</ul>
-</section>
-<section id="in-class-10" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="in-class-10">In class</h3>
-<ul>
-<li>Peer + AI review</li>
-<li>Justifying analytical decisions</li>
-</ul>
-</section>
-<section id="after-class-10" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="after-class-10">After class</h3>
-<ul>
-<li>No submission due</li>
-<li>Prepare figures and tables for results</li>
-</ul>
-</section>
-</div>
-</div>
-</div>
-<div id="week-14" class="unnumbered callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Week 14 (20-Apr-2026)</strong>
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-15" class="callout-15-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Topics:</strong> Tables, figures, reporting standards<br>
-<strong>Stress level:</strong> Low<br>
-<strong>Grade weight:</strong> 10%</p>
-<section id="before-class-11" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="before-class-11">Before class</h3>
-<ul>
-<li>Review reporting guidelines</li>
-<li>Examine good and bad figure examples</li>
-</ul>
-</section>
-<section id="in-class-11" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="in-class-11">In class</h3>
-<ul>
-<li>Table/figure workshop</li>
-<li>Emphasis on clarity and restraint</li>
-</ul>
-</section>
-<section id="after-class-11" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="after-class-11">After class</h3>
-<ul>
-<li><strong>Submit:</strong> Results Section</li>
-</ul>
-</section>
-</div>
-</div>
-</div>
-<div id="week-15" class="unnumbered callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Week 15 (27-Apr-2026)</strong>
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-16" class="callout-16-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Topics:</strong> Writing Results sections<br>
-<strong>Stress level:</strong> Moderate<br>
-<strong>Grade weight:</strong> 15%</p>
-<section id="before-class-12" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="before-class-12">Before class</h3>
-<ul>
-<li>Review example Results sections</li>
-<li>Reflect on narrative flow</li>
-</ul>
-</section>
-<section id="in-class-12" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="in-class-12">In class</h3>
-<ul>
-<li>Draft clinic</li>
-<li>Focused feedback on structure and interpretation</li>
-</ul>
-</section>
-<section id="after-class-12" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="after-class-12">After class</h3>
-<ul>
-<li><strong>Submit:</strong> Full Draft</li>
-</ul>
-</section>
-</div>
-</div>
-</div>
-<div id="week-16" class="unnumbered callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Week 16 (04-May-2026)</strong>
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-17" class="callout-17-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Topics:</strong> Reflection &amp; closure<br>
-<strong>Stress level:</strong> None<br>
-<strong>Grade weight:</strong> 5%</p>
-<section id="before-class-13" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="before-class-13">Before class</h3>
-<ul>
-<li>Review feedback on full draft</li>
-</ul>
-</section>
-<section id="in-class-13" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="in-class-13">In class</h3>
-<ul>
-<li>Course wrap-up</li>
-<li>Reflection on analytical growth</li>
-</ul>
-</section>
-<section id="after-class-13" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="after-class-13">After class</h3>
-<ul>
-<li><strong>Submit:</strong> Revision Plan (not executed)</li>
-</ul>
-</section>
+<p><strong>Answer:</strong><br>
+No.&nbsp;The ecology stays the same. We are changing our description of it by moving the explained variation from residual (unexplained) to systematic (explained).</p>
 </div>
 </div>
 </div>
@@ -1503,13 +1235,13 @@ Note
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/syllabus.html" class="pagination-link" aria-label="Syllabus">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Syllabus</span></span>
+      <a href="../chapters/intro_modeling.html" class="pagination-link" aria-label="Introduction to Models">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Introduction to Models</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/ai_policy.html" class="pagination-link" aria-label="GenAI Use Guidelines">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">GenAI Use Guidelines</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/tutorial_glms.html" class="pagination-link" aria-label="Tutorial: GLMs">
+        <span class="nav-page-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Tutorial: GLMs</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

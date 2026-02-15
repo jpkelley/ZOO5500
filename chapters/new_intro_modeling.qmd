@@ -1,0 +1,287 @@
+---
+title: "Signal, Noise, and Models as Hypotheses"
+format: html
+---
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+source("class_r_scripts/load_packages.r")
+```
+
+## Separating signal from noise
+
+Our task as scientists is to learn how to separate the patterns that carry meaningful information (*signal*) from the variation that does not (*noise*). This is why we use statistical models in the first place. So what does this mean? 
+
+Given that:
+
+> **models are hypotheses about how the data were generated,**
+
+we first must keep in mind that the signal and noise being modeled are not intrinsic properties of the universe; they are properties of a *specified model*. So, it is necessary to do as much as we can to think about _both_ the signal and noise when thinking about the data-generating processes that underly our measurements (and our system as a whole). 
+
+---
+
+## Comparing GLMs to antique models (*t*-tests and ANOVAs)
+
+Many of you were trained using _t_-tests and ANOVAs, and they likely feel familiar and comfortable (even if annoying). So it is reasonable for you to ask: _Why move to GLMs at all?_ The answer is not that those older models are wrong, but that GLMs provide a broader and more flexible framework that includes these antique tests as special cases while allowing us to create models that better reflect ecological complexity. 
+
+Let us examine how GLMs and some antique models perform next to each other. 
+
+:::: columns
+::: {.column width="60%"}
+
+In this brief example, we simulate a simple dataset with two groups. Each group follows a Normal distribution with standard deviation 1. The groups differ in their mean by one unit.
+
+```{r}
+set.seed(100)
+nval <- 50
+group1 <- rnorm(nval, mean = 5, sd = 1)
+group2 <- rnorm(nval, mean = 6, sd = 1)
+
+d <- data.frame(
+  id = rep(c("group1", "group2"), each = nval),
+  y  = c(group1, group2)
+)
+```
+
+:::
+
+::: {.column width="40%"}
+
+```{r, echo=FALSE}
+p <- ggplot(d, aes(x = id, y = y, fill = id)) +
+  geom_boxplot(width = 0.6, outlier.alpha = 0.5) +
+  labs(x = "Group ID", y = "Response") +
+  theme_minimal(base_size = 14) +
+  theme(
+    axis.title = element_text(size = 16),
+    axis.text  = element_text(size = 14)
+  ) +
+  guides(fill = "none")
+
+p
+```
+
+:::
+::::
+
+Now we test the hypothesis that the two groups differ using three models:
+
+* *t*-test
+* ANOVA
+* GLM
+
+All three are linear models under Gaussian/normal assumptions.
+
+:::{.callout-note icon=false collapse=true}
+
+## R code for inter-model comparison
+
+```{r}
+ttest.mod <- t.test(y ~ id, data = d)
+anova.mod <- aov(y ~ id, data = d)
+glm.mod   <- glm(y ~ id, data = d)
+
+ttest.t <- abs(as.numeric(ttest.mod$statistic))
+anova.f <- summary(anova.mod)[[1]]$F[1]
+anova.t <- sqrt(anova.f)
+glm.t   <- coefficients(summary(glm.mod))[2, 3]
+
+tvals <- c(ttest.t, anova.t, glm.t)
+tvals
+```
+
+:::
+
+All three produce the exact same test statistic. The takeaway is straight-forward here: **_GLMs are not exotic_**. GLMs are a unified framework that includes *t*-tests and ANOVAs as special cases.
+
+---
+
+## Why GLMs matter in ecology
+
+Gaussian assumptions often work sufficiently well when:
+
+* The response variable is continuous
+* Residual variance is constant (does not change as a function of a predictor's values)
+* The resonse variable can take any real value
+
+But, here is the main issue: 
+
+> Most ecological data are not normally distributed.
+
+As ecologists, we often measure:
+
+* Counts
+* Proportions
+* Rates
+* Skewed processes
+* Zero-heavy outcomes
+
+As an example, consider counts (e.g. number of insects, number of flights, number of individuals). These data are:
+
+* Non-negative
+* Discrete
+* Often right-skewed
+
+A Gaussian/normal model explicitly ignores this structure. This is why we introduce the **Poisson GLM** in this section; it allows us to more easily see and understand how GLMs work. 
+
+---
+
+## The Poisson GLM: bringing the GLM into reality
+
+We are going to start some equations. At first glance, notation such as $Y_i$, $\mu_i$, and $\eta_i$ may appear intimidating. This is absolutely understandable. In reality, the equations simply formalize three basic ideas:
+
+1. How response values vary (noise)
+2. How predictors influence expected responses (signal)
+3. How those noise and signal are connected
+
+In the following sections, let us attempt to demystify the use of equations to describe the form of these models. 
+
+---
+
+### Random component (noise)
+
+First, let us come up with an equation that formalizes the **noise structure** of our anticipated model. For the equation to make sense, we can first come up with notation for our observations (each data point):
+
+$i = 1, \dots, n$ 
+
+The basic form of the Poisson error component is:
+
+$Y_i \sim \text{Poisson}(\mu_i)$, where
+
+* $Y_i$ = observed count for observation $i$
+* $\mu_i$ = expected (mean) count for observation $i$
+
+This simply states that:
+
+> The observed count $Y_i$ is a random draw from a Poisson distribution with mean $\mu_i$.
+
+But this equation only includes the mean value, $\mu_i$. Herein lies the beauty is this. For a Poisson distribution, recall that the main propery of the Poisson distribution is that the expected value of the count ($\mu_i$) is the same as the variance (or spread). This means that, as the mean increases, variability increases proportionally. 
+
+What about for the signal component?
+
+---
+
+### Systematic component (signal)
+
+Until this point, we have described how observations vary randomly around an expected value. Now, let us create an equation that formalizes the **signal structure** of our model. If the random component describes how our response values vary, the systematic component (the signal) describes why they differ in the first place.
+
+To formalize that structure, we need an explicit equation that links predictors to expected response values (and provides a place to estimate effect sizes from data). Here is the basic form for the systematic component:
+
+$\eta_i = \beta_0 + \beta_1 X_i$, where
+
+* $\eta_i$ = linear predictor ($\eta$ is Greek letter "eta")
+* $\beta_0$ = intercept ($\beta$ is Greek letter "beta")
+* $\beta_1$ = slope parameter
+* $X_i$ = predictor value for observation $i$
+
+This is simply a straight-line equation. There is no randomness/noise in this equation. If $X_i$ and the coefficients are known, $\eta_i$ is determined or predicted exactly.
+
+---
+
+### Link Function
+
+This final component shows how the structured part of the model determines both the mean and, indirectly, the variability of the data.
+
+$\log(\mu_i) = \eta_i$
+
+Equivalently,
+
+$\mu_i = \exp(\eta_i)$
+
+The link function answers:
+
+How does the linear predictor determine the expected value of the response?
+
+In a Poisson GLM:
+
+$E(Y_i) = \mu_i$
+$\text{Var}(Y_i) = \mu_i$
+
+Because the variance equals the mean, once $\mu_i$ is determined, the variability is determined as well.
+
+Thus:
+
+Predictors influence $\eta_i$
+
+$\eta_i$ determines $\mu_i$ (through the link)
+
+$\mu_i$ determines both the mean and the variance (through the distribution)
+
+This logic generalizes to all GLMs: the link connects structure to the mean, and the distribution connects the mean to the variance.
+
+---
+
+## Models Are Hypotheses About the System
+
+When we write the following:
+
+$Y_i \sim \text{Poisson}(\mu_i)$
+$\log(\mu_i) = \beta_0 + \beta_1 X_i$
+
+we are not simply describing our dataset. We are making explicit claims about:
+
+* **Mechanisms:** what influences the response variable
+* **Functional form:** linear or nonlinear? additive or interactive?
+* **Constraints:** data boundaries? continuous? positive?
+* **Variance structure:** how random variation behaves
+
+A statistical model like a GLM is a formal, mathematical hypothesis about how the study system generated the data that you collected and have chosen to include in your analysis.
+
+---
+
+## Signal Is Model-Dependent
+
+Suppose we model abundance as:
+
+$\log(\mu_i) = \beta_0 + \beta_1 \text{mean depth}_i$
+
+Variation explained by mean depth is labeled *signal*.
+Remaining variation is labeled *noise*.
+
+But if we expand the model:
+
+$\log(\mu_i) = \beta_0 + \beta_1 \text{mean depth}_i + \beta_2 \text{substrate}_i$
+
+What previously appeared as noise may now become signal.
+
+Nothing in the raw data changed.
+Only the hypothesis changed.
+
+---
+
+## Residuals Are Hypothesis-Conditional
+
+Residual variation is not “randomness in reality.”
+
+It is:
+
+> Variation not explained under the current model specification.
+
+Change the model → change the partition between signal and noise.
+
+This is why model comparison is hypothesis comparison.
+
+---
+
+## Why Demystification Matters
+
+Signal and noise do not exist independently in raw data.
+
+They emerge from:
+
+$(\text{Data}) + (\text{Model Specification}) \rightarrow (\text{Partition of Variation})$
+
+When you fit a model, you are deciding:
+
+* What is structured
+* What is random
+* What is measurable
+* What is ignored
+
+Understanding this distinction is essential before working with real ecological datasets.
+
+On the next page, we will:
+
+1. Examine residual variation in an actual dataset.
+2. Ask whether unexplained variation represents noise — or missing structure.
+3. Then implement a real GLM to formalize those hypotheses.
+

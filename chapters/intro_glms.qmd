@@ -11,9 +11,10 @@ source("class_r_scripts/load_packages.r")
 
 ## Separating signal from noise
 
-Our task, then, is to separate the patterns that carry meaningful information from the variation that does not. This task leads directly to the ideas of _signal_ and _noise_ and to why we use all of these silly models in the first place. So, what exactly are models?
+Our task as scientists is to learn how to separate the patterns that carry meaningful information (_signal_) from the variation that does not (_noise_). This is why we use all of these silly models in the first place. So, what exactly are models?
 
 > Models are hypotheses about how the data were generated.
+
 
 ### Comparing GLMs to vintage models (ANOVAs and *t*-tests)
 
@@ -96,32 +97,32 @@ Hopefully, this short exercise convinces you that GLMs and their extensions (Gen
 
 ### Setting the stage for GLMs
 
-Most treatments of GLMs start off examining a model with Gaussian (normally distributed) errors.  The Gaussian models has core assumptions that are likely familiar and comfortable to most of you, including:
+Most textbook treatments of GLMs start off examining a model with Gaussian (normally distributed) errors.  The Gaussian models have core assumptions that are likely familiar and comfortable to most of you, including:
 
 - The response variable is **continuous**
 - The residual variance is **constant** (homoscedastic)
 - The error distribution is **symmetric**
 - The outcome can take **any real value** (including negatives)
 
-In many situations, that works beautifully. If we are modeling body mass of adults (_why adults?_), temperature, or some other roughly symmetric continuous variable, the Gaussian/normal distribution is often appropriate. Simply put, the Gaussian/normal distribution is often the exception rather than the rule:
+In many classroom situations, that works beautifully. If we are modeling body mass of adults (_why adults?_), temperature, or some other roughly symmetric continuous variable, the Gaussian/normal distribution is often appropriate. However, the Gaussian/normal distribution is often the exception rather than the rule because:
 
 > Most ecological data are not normally distributed.
 
-We regularly collect data on proportions, rates, skewed measurements, zero-heavy processes, and, perhaps most commonly, counts like:
+Why? As ecologists, we regularly collect data on proportions, rates, skewed measurements, zero-heavy processes, and, perhaps most commonly, counts like:
 
 - Number of individuals observed  
 - Number of detections on a recorder  
 - Number of nests in a plot  
 - Number of disease cases
 
-Count distributions --like the Poisson distribution-- have their own features, including:
+Count distributions --often best approximated by a Poisson distribution-- have their own features, including:
 
 - Values cannot be negative.
 - Values are discrete (not continuous)
-- They often have variance that increases with the mean
+- They often have variances that equal or increase with their mean
 - They are frequently right-skewed
 
-A Gaussian model ignores almost everything about how the data are generated. Therefore, in this section, we will first explore the Poisson GLM, which is designed specifically for count data. It:
+A Gaussian model ignores almost everything about how most ecological data are generated. Therefore, in this section, we will first explore the Poisson GLM, which is designed specifically for count data. It:
 
 - Restricts predictions to non-negative values.
 - Allows variance to increase with the mean.
@@ -138,84 +139,170 @@ Because those parts are visibly distinct, the Poisson model makes it much easier
 
 ## The Poisson GLM: Model Specification
 
-For observations $i = 1, \dots, n$:
+At first glance, especially if you have had no formal mathematical training, the formal notation of a GLM can appear very intimidating. Symbols such as $Y_i$, $\mu_i$, and $\eta_i$ may give the impression that the model is mathematically difficult to the average scientist. In reality, these equations simply provide an efficient way to describe simple concepts about data and model structure. Fundamentally, a relatively small set of equations can describe:
 
-### 1️⃣ Random Component (Noise)
+* How observations in a dataset vary
+* How predictors influence expected responses
+* How effects are linked to observable data
 
-$Y_i \sim \text{Poisson}(\mu_i)$
+Writing the mathematical form of a model really does helps demystify it. At least, that will be my attempt in this course. Each component of how we mathematically formalize a GLM corresponds to one part of the data-generating process.
 
-Definitions:
+First, we begin with our observations (our dataset). Using each observation $i$ and sample size $n$, we define our dataset as:
+
+$i = 1, \dots, n$:
+
+We then set up the three core components of our GLM:
+
+---
+
+### Random Component (Noise)
+
+The random component --the unmeasured structure of your model-- is formalized as:
+
+$Y_i \sim \text{Poisson}(\mu_i)$, where:
 
 - $Y_i$: observed count for observation $i$
 - $\mu_i$: expected (mean) count for observation $i$
 
-For a Poisson distribution:
+Recall that a Poisson distribution has a mean and variance that are equal: the expected count is $\mu_i$, and the variability around that expectation is also $\mu_i$. This means that as the expected number of events (counts) increases, the spread of the data increases proportionally, so larger means naturally are associated with greater variability. 
 
 $E(Y_i) = \mu_i$
-
 $\text{Var}(Y_i) = \mu_i$
 
-This component specifies how observations vary **stochastically** around their mean.  
-It defines the allowable values (non-negative integers) and how variance scales with the mean.
+**Why Write This Explicitly?**
+
+The notation $Y_i \sim \text{Poisson}(\mu_i)$ simply states:
+
+> The observed count $Y_i$ is a random draw from a Poisson distribution with mean $\mu_i$.
+
+There is nothing mystical in this expression. It formalizes three important ideas:
+
+1. The outcome is a count (non-negative integers only).
+2. The mean and variance are equal.
+3. Variability scales with the expected value.
+
+By writing the distribution explicitly, we clarify:
+
+- What values are possible.
+- How uncertainty behaves.
+- How variance depends on the mean.
+
+The equation prevents hidden assumptions. Without it, readers might assume constant variance or continuous outcomes. The formal notation makes those assumptions transparent. 
+
+These points will be reiterated below in the link function section.
 
 ---
 
-### 2️⃣ Systematic Component (Signal)
+### Systematic Component (Signal)
 
 $\eta_i = \beta_0 + \beta_1 X_i$
 
-Definitions:
+**Definitions**
 
-- $\eta_i$ (eta): the **linear predictor**
+- $\eta_i$: linear predictor
 - $\beta_0$: intercept
 - $\beta_1$: slope parameter
 - $X_i$: predictor value for observation $i$
 
-This part represents the **structured, directional effect** of predictors.  
-It is deterministic — no randomness appears here.
+This expression is simply a linear equation. It states:
+
+> The structured component of the model is a straight-line function of the predictor.
+
+There is no randomness here. If $X_i$ and the coefficients are known, $\eta_i$ is determined exactly. The equation clarifies:
+
+- How predictors are assumed to influence outcomes.
+- That effects are additive on the linear predictor scale.
+- That the relationship is directional and structured.
+
+Without writing this formally, it is easy to obscure how predictors fold into the model. The mathematical form adds clarity about what is signal and what is noise.
 
 ---
 
-### 3️⃣ Link Function (Connector)
+### Link Function
 
-$\log(\mu_i) = \eta_i$
+The final component of our GLM is the link function, which allows us to answer a simple and necessary question:
 
-Equivalently:
+> How does the linear predictor (signal) determine the mean of the response distribution?
+
+For GLMs, the mean of the response distribution directly determines the error structure because the variance is defined as some function of the mean. Let us look at its form in the case of the Poisson GLM. Recall from the previous page that, for a Poisson model:
+
+$E(Y_i) = \mu_i$
+$\text{Var}(Y_i) = \mu_i$
+
+:::
+
+What the heck does this mean?
+
+$E(Y_i) = \mu_i$ means:
+
+> The expected value (long-run average) of the response $Y_i$ equals $\mu_i$.
+
+More simply:
+
+* $Y_i$ is the observed outcome for observation $i$.
+* $\mu_i$ is the average value we would expect if we could repeat the same process many times under identical conditions.
+* $E(Y_i)$ is simply statistical language for “mean.”
+
+So we interpret this equation as:
+
+> If we repeatedly generated data under the same conditions for observation $i$, the average of those outcomes would be $\mu_i$.
+
+That hopefully makes a bit more sense!
+
+:::
+
+Because the variance equals the mean in a Poisson model, once we determine $\mu_i$, we automatically determine the variance as well. So what does the link function actually do?
+
+We first build a straight-line equation:
+
+$\eta_i = \beta_0 + \beta_1 X_i$
+
+We then transform that linear result to obtain a valid mean:
 
 $\mu_i = \exp(\eta_i)$
 
-The link function connects the linear predictor to the mean of the distribution.
+That is all the link function is: a rule that converts the output of the linear predictor into a proper mean for the distribution. Since the variance depends on the mean, this transformation also determines how much noise we expect. In short, the following is happening:
 
-Why the log link?
+* predictors determine $\eta_i$
+* the link function converts $\eta_i$ into the mean $\mu_i$
+* The mean determines the variance
 
-- It guarantees $\mu_i > 0$.
-- It makes effects multiplicative on the response scale.
-- It keeps linearity on a scale where it makes sense.
+The link is simply the bridge between signal and noise.
 
 ---
 
-## Compact Form
+## Summary: the compact form of a Poisson GLM
+
+Let us put this all together in a single structure that could be included in a scientific paper:
 
 $Y_i \sim \text{Poisson}(\mu_i)$  
 $\log(\mu_i) = \beta_0 + \beta_1 X_i$
 
----
+This compact form contains the entire model. When broken apart, it describes:
 
-## Big Picture
+- The distribution of variability (the Poisson portion)
+- The structured influence of predictors (the line equation)
+- The transformation connecting structure to expectation (the _log_ operator)
 
-A GLM separates:
-
-- **Signal** → why the mean changes (linear predictor)  
-- **Noise** → how observations vary around that mean (distribution)  
-- **Link** → how the structured signal maps to biologically allowable values  
-
-That separation is the real power of the GLM framework.
-
-> Signal and noise are model-dependent.
+The mathematical notation is far more concise than what we sometimes see in the articles' descriptions of statistical analyses. The concise form communicates all of the components of the model in a straightforward way. The value of writing them formally is not useless abstraction; it is clarity about how our decisions are translated into strong inference.
 
 ---
 
-## Check Yourself: Click to Reveal Answers
+## Testing yourself: thinking about signal and noise in a totally real dataset
+
+For this conceptual self-test, we will use a dataset that was collected from a population of *Lepusantilocapra pufferi* (puffer jackalope) starting in the mid-1970s. The data include the following variables:
+
+-   `site`: where the individuals were sampled
+-   `abund`: number of individuals detected at each location
+-   `dens`: density of individuals at each sampling location
+-   `mean_depth`: mean depth, in meters of the sampling location
+-   `year`: year of the study
+-   `period`: 1=before and 2= after introduction of *Pelicanus pufferivorus* (puffer-jackalope pelican)
+-   `x_km`: longitude (decimal degrees) of sampling location
+-   `y_km`: latitude (decimal degrees) of sampling location
+-   `swept_area`: size in square meters of the sampling location (effort)
+
+Familiarize yourself with these data (especially `mean_depth`, `dens`, and `abund`) and then think about the following questions. Click to expand each box for the answer.
 
 ::: {.callout-tip icon=false collapse=true}
 ## **If mean depth is a true driver, what happens when we exclude it from the model?**
@@ -259,7 +346,3 @@ No. This means that the model has been misspecified. It does not only increase r
 **Answer:**  
 No. The ecology stays the same. We are changing our description of it by moving the explained variation from residual (unexplained) to systematic (explained).
 :::
-
----
-
-

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>21&nbsp; Tutorial: GLMs – Quantitative Analysis of (Messy) Field Data</title>
+<title>22&nbsp; Tutorial: GLMs – Quantitative Analysis of (Messy) Field Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/intro_modeling.html" rel="prev">
+<link href="../chapters/intro_glms.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -118,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/statistical_aphorisms.html">Part III: Columns to Curves</a></li><li class="breadcrumb-item"><a href="../chapters/tutorial_glms.html"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Tutorial: GLMs</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/statistical_aphorisms.html">Part III: Columns to Curves</a></li><li class="breadcrumb-item"><a href="../chapters/tutorial_glms.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Tutorial: GLMs</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -322,8 +322,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../chapters/intro_glms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">intro_glms</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../chapters/tutorial_glms.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Tutorial: GLMs</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Tutorial: GLMs</span></span></a>
   </div>
 </li>
       </ul>
@@ -342,26 +348,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">21.1</span> Introduction</a></li>
-  <li><a href="#set-up-workspace" id="toc-set-up-workspace" class="nav-link" data-scroll-target="#set-up-workspace"><span class="header-section-number">21.2</span> Set up workspace</a></li>
-  <li><a href="#generalized-linear-model-gaussian-error-distribution" id="toc-generalized-linear-model-gaussian-error-distribution" class="nav-link" data-scroll-target="#generalized-linear-model-gaussian-error-distribution"><span class="header-section-number">21.3</span> Generalized Linear Model (Gaussian error distribution)</a></li>
-  <li><a href="#checking-residuals-for-heteroscedaticity-and-violations-to-normality." id="toc-checking-residuals-for-heteroscedaticity-and-violations-to-normality." class="nav-link" data-scroll-target="#checking-residuals-for-heteroscedaticity-and-violations-to-normality."><span class="header-section-number">22</span> Checking residuals for heteroscedaticity and violations to normality.</a>
-  <ul class="collapse">
-  <li><a href="#generalized-linear-model-poisson-error-distribution" id="toc-generalized-linear-model-poisson-error-distribution" class="nav-link" data-scroll-target="#generalized-linear-model-poisson-error-distribution"><span class="header-section-number">22.1</span> Generalized Linear Model (Poisson error distribution)</a></li>
-  </ul></li>
-  <li><a href="#overdispersion-a-common-issue-with-poisson-glms" id="toc-overdispersion-a-common-issue-with-poisson-glms" class="nav-link" data-scroll-target="#overdispersion-a-common-issue-with-poisson-glms"><span class="header-section-number">23</span> Overdispersion: a common issue with Poisson GLMs</a>
-  <ul class="collapse">
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">23.1</span> </a></li>
-  </ul></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">22.1</span> Introduction</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/statistical_aphorisms.html">Part III: Columns to Curves</a></li><li class="breadcrumb-item"><a href="../chapters/tutorial_glms.html"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Tutorial: GLMs</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/statistical_aphorisms.html">Part III: Columns to Curves</a></li><li class="breadcrumb-item"><a href="../chapters/tutorial_glms.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Tutorial: GLMs</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Tutorial: GLMs</span></h1>
+<h1 class="title"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Tutorial: GLMs</span></h1>
 </div>
 
 
@@ -378,13 +374,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="introduction" class="level2" data-number="21.1">
-<h2 data-number="21.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">21.1</span> Introduction</h2>
-<p><img src="../graphics/jackalope_graphics/puffer_pelican.png" class="img-fluid"></p>
-<p>In this tutorial, we introduce Generalized Linear Models (GLMs), starting with how to construct a Poisson GLM. This example purposefully starts with a simple –and inaccurate– model to illustrate the process of building a better, more explanatory model.</p>
-<p>This should highlight the idea discussed in the video that identifying an optimal model structure often solves many of the issues with model assumptions.</p>
-<p>For this first example, we will use a dataset collected on <em>Lepusantilocapra pufferi</em> (puffer jackalope), starting in the mid-1970s. The data include the following variables:</p>
+<section id="introduction" class="level2" data-number="22.1">
+<h2 data-number="22.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">22.1</span> Introduction</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>In this tutorial, we introduce Generalized Linear Models (GLMs), starting with how to construct a Poisson GLM. Every type of GLM –and all of their extensions like GLMM and GAMMs– separates:</p>
 <ul>
+<li><strong>Signal:</strong> linear predictor (why the mean changes)<br>
+</li>
+<li><strong>Noise:</strong> distribution (how observations vary around that mean)</li>
+<li><strong>Link:</strong> how the structured signal (the mean) maps to the response variable</li>
+</ul>
+<p>This separation is the real power of the GLM framework: signal and noise are model-dependent, and what is treated as systematic structure in one formulation may be treated as variability (noise) in another. It provides flexibility to test a myriad ecological data-generating hypotheses.</p>
+</div><div class="column" style="width:50%;">
+<p><img src="../graphics/jackalope_graphics/puffer_pelican.png" class="img-fluid"></p>
+</div><p>For this first example, we will use the dataset that you were briefly introduced to in the previous section. The dataset was collected from a population of <em>Lepusantilocapra pufferi</em> (puffer jackalope) starting in the mid-1970s. As a reminder, the data include the following variables:</p><ul>
 <li><code>site</code>: where the individuals were sampled</li>
 <li><code>abund</code>: number of individuals detected at each location</li>
 <li><code>dens</code>: density of individuals at each sampling location</li>
@@ -394,17 +398,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>x_km</code>: longitude (decimal degrees) of sampling location</li>
 <li><code>y_km</code>: latitude (decimal degrees) of sampling location</li>
 <li><code>swept_area</code>: size in square meters of the sampling location (effort)</li>
-</ul>
-<p>You are tasked with examining/testing the relationship between total <em>Lepusantilocapra pufferi</em> abundance and mean depth for each time period (before/after introduction of puffer-jackalope pelican).</p>
-</section>
-<section id="set-up-workspace" class="level2" data-number="21.2">
-<h2 data-number="21.2" class="anchored" data-anchor-id="set-up-workspace"><span class="header-section-number">21.2</span> Set up workspace</h2>
+</ul><p>You are tasked with examining/testing the relationship between total <em>Lepusantilocapra pufferi</em> abundance and mean depth for each time period (before/after introduction of puffer-jackalope pelican). Note that this example purposefully starts with a simple –and inaccurate– model to illustrate the process of building a better, more explanatory model.</p><section id="set-up-workspace" class="level2" data-number="22.2">
+<h2 data-number="22.2" class="anchored" data-anchor-id="set-up-workspace"><span class="header-section-number">22.2</span> Set up workspace</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"class_r_scripts/load_packages.r"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</section>
-<section id="generalized-linear-model-gaussian-error-distribution" class="level2" data-number="21.3">
-<h2 data-number="21.3" class="anchored" data-anchor-id="generalized-linear-model-gaussian-error-distribution"><span class="header-section-number">21.3</span> Generalized Linear Model (Gaussian error distribution)</h2>
+</section><section id="generalized-linear-model-gaussian-error-distribution" class="level2" data-number="22.3">
+<h2 data-number="22.3" class="anchored" data-anchor-id="generalized-linear-model-gaussian-error-distribution"><span class="header-section-number">22.3</span> Generalized Linear Model (Gaussian error distribution)</h2>
 <p>Read in the <em>Lorax pufferi</em> dataset and examine its structure. Remember that you can also use the <code>glimpse</code> function here.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pufferi <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"class_exercise_data/lepusantilocapra_pufferi_abundance.csv"</span>)</span>
@@ -443,7 +443,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Let us develop our first GLM. There are a variety of packages and functions for GLMs and their more complicated and powerful extensions. In this course, we will try to use the packages/functions that (1) have similar model syntax (even though used in Bayesian approaches), and (2) are used in the majority of published work of the last few years.</p>
 <p>Let us run a GLM without considering the distribution of our response variable. We use the <code>mass::glm</code> function, a versatile model function for non-clustered data (i.e.&nbsp;data that has no hierarchical structure like multiple samples collected for each individual, or multiple students from multiple schools from multiple school districts).</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>base_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(abund <span class="sc">~</span> mean_depth, <span class="at">data =</span> pufferi)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>base_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="at">formula =</span> abund <span class="sc">~</span> mean_depth, <span class="at">data =</span> pufferi)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>This model structure will be very similar across all the modeling functions we discuss in the course. This is a very standard formula structure in R. This structure simply means tht abundance is modeled as a function of mean_depth. That is, the response variable (<code>abund</code>) is on the left side of the tilde (~) and the predictors are on the right side of the tilde.</p>
 <p>Let us view the summary output of this model in two ways: First, use the <code>summary</code> function to review the summary of the model object you just created (<code>base_model</code>). For many model objects in R, the <code>summary</code> function yields the same result.</p>
@@ -519,14 +519,13 @@ Number of Fisher Scoring iterations: 2</code></pre>
 </div>
 </div>
 <p>The results (from <code>summary()</code> or <code>broom::tidy</code> functions) show a significant effect of <code>mean_death</code>. As an aside, it might not be the best to use the term <em>effect,</em> as this technically implies a causal structure. But it is common usage, so we will stick to it. Just be cautious of using wording that does not match with your hypotheses and predictions.</p>
-</section>
-<section id="checking-residuals-for-heteroscedaticity-and-violations-to-normality." class="level1" data-number="22">
-<h1 data-number="22"><span class="header-section-number">22</span> Checking residuals for heteroscedaticity and violations to normality.</h1>
+</section><section id="checking-residuals-for-heteroscedaticity-and-violations-to-normality." class="level1" data-number="23">
+<h1 data-number="23"><span class="header-section-number">23</span> Checking residuals for heteroscedaticity and violations to normality.</h1>
 <p>For every final model, we need to check the structure of the residuals. In the past, this was a relatively tiresome task, which involved visual inspection of Pearson residuals. With the advent of the DHARMa package in R, this becomes much easier. A vignette for this package is exceptional and can be found [here] (<a href="https://cran.r-project.org/web/packages/DHARMa/vignettes/DHARMa.html#calculating-scaled-residuals" class="uri">https://cran.r-project.org/web/packages/DHARMa/vignettes/DHARMa.html#calculating-scaled-residuals</a>).</p>
 <p>The package does not use Pearson residuals and instead generates simulated (standardized) residuals, making it more suitable for diagnosing generalized linear models (GLMs), mixed models, and other complex models. This simulation-based approach makes this step insensitive to sample size and allows you to more easily detect overdispersion, zero-inflation, heteroscedasticity, and model misspecification.</p>
 <p>The most general function is for the simulation of residuals, <code>simulateResiduals()</code>, which is run on the fitted model.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>sim_res <span class="ot">&lt;-</span> <span class="fu">simulateResiduals</span>(base_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>sim_res <span class="ot">&lt;-</span> DHARMa<span class="sc">::</span><span class="fu">simulateResiduals</span>(base_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We can then plot this simulation:</p>
 <div class="cell">
@@ -602,8 +601,8 @@ Number of Fisher Scoring iterations: 2</code></pre>
 </div>
 </div>
 <p>For each of these, you see statistical evidence that something is wrong with your model.</p>
-<section id="generalized-linear-model-poisson-error-distribution" class="level2" data-number="22.1">
-<h2 data-number="22.1" class="anchored" data-anchor-id="generalized-linear-model-poisson-error-distribution"><span class="header-section-number">22.1</span> Generalized Linear Model (Poisson error distribution)</h2>
+<section id="generalized-linear-model-poisson-error-distribution" class="level2" data-number="23.1">
+<h2 data-number="23.1" class="anchored" data-anchor-id="generalized-linear-model-poisson-error-distribution"><span class="header-section-number">23.1</span> Generalized Linear Model (Poisson error distribution)</h2>
 <p>Looking more closely at the data, we realize that our variable for abundance is simple count data (integer). Make a histogram:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(pufferi<span class="sc">$</span>abund, <span class="at">breaks=</span><span class="dv">100</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -638,9 +637,8 @@ Number of Fisher Scoring iterations: 2</code></pre>
 </div>
 <p>Uh, oh. You know that you’ve correctly identified a distribution that fits your data boundaries. But, clearly, there are still patterns in these residuals that should not be present. So there are other issues going on as well. Perhaps the issues are related to model misspecification. Believe it or not, despite the horrific simulated residuals, you are now one step closer to building a successful GLM.</p>
 </section>
-</section>
-<section id="overdispersion-a-common-issue-with-poisson-glms" class="level1" data-number="23">
-<h1 data-number="23"><span class="header-section-number">23</span> Overdispersion: a common issue with Poisson GLMs</h1>
+</section><section id="overdispersion-a-common-issue-with-poisson-glms" class="level1" data-number="24">
+<h1 data-number="24"><span class="header-section-number">24</span> Overdispersion: a common issue with Poisson GLMs</h1>
 <p>Given that our Poisson GLM has issues, maybe a Poisson distribution was not a good assumption for the data-generating process underlying the response variable. Another error distribution –the negative binomial distribution– is a possible alternative. It satisifies our known data boundaries but has one more parameter that allows for variance to be greater than the mean (i.e.&nbsp;overdispersion). This is unlike the Poisson distribution, where mean is equal to the variance. Let us first check for such overdispersion using the <code>testDispersion()</code> function in DHARMa.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">testDispersion</span>(sim_res)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -820,8 +818,8 @@ alternative hypothesis: two.sided</code></pre>
 </div>
 </div>
 </div>
-<section id="section" class="level2" data-number="23.1">
-<h2 data-number="23.1" class="anchored" data-anchor-id="section"><span class="header-section-number">23.1</span> </h2>
+<section id="section" class="level2" data-number="24.1">
+<h2 data-number="24.1" class="anchored" data-anchor-id="section"><span class="header-section-number">24.1</span> </h2>
 <p>The problems with residuals remain. This means that this really is a case of model misspecification, so let us think about what other factors we should include. Note that the model names could possibly be improved. As you review the models, think critically about each one means. In all models, we include the offset variable.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>mod_nb_offset_01 <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(abund <span class="sc">~</span> <span class="fu">offset</span>(log_sa), </span>
@@ -925,6 +923,8 @@ alternative hypothesis: two.sided</code></pre>
 
 
 </section>
+</section>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -1330,8 +1330,8 @@ alternative hypothesis: two.sided</code></pre>
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/intro_modeling.html" class="pagination-link" aria-label="Introduction to Models">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Introduction to Models</span></span>
+      <a href="../chapters/intro_glms.html" class="pagination-link" aria-label="intro_glms">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">intro_glms</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

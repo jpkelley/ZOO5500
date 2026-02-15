@@ -8,13 +8,25 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Introduction
+
+:::: columns
+
+::: {.column width="50%"}
+In this tutorial, we introduce Generalized Linear Models (GLMs), starting with how to construct a Poisson GLM. Every type of GLM --and all of their extensions like GLMM and GAMMs-- separates:
+
+- **Signal:** linear predictor (why the mean changes)  
+- **Noise:** distribution (how observations vary around that mean)
+- **Link:** how the structured signal (the mean) maps to the response variable  
+
+This separation is the real power of the GLM framework: signal and noise are model-dependent, and what is treated as systematic structure in one formulation may be treated as variability (noise) in another. It provides flexibility to test a myriad ecological data-generating hypotheses.
+
+:::
+
+::: {.column width="50%"}
 ![](../graphics/jackalope_graphics/puffer_pelican.png)
 
-In this tutorial, we introduce Generalized Linear Models (GLMs), starting with how to construct a Poisson GLM. This example purposefully starts with a simple --and inaccurate-- model to illustrate the process of building a better, more explanatory model. 
-
-This should highlight the idea discussed in the video that identifying an optimal model structure often solves many of the issues with model assumptions.
-
-For this first example, we will use a dataset collected on *Lepusantilocapra pufferi* (puffer jackalope), starting in the mid-1970s. The data include the following variables:
+::::
+For this first example, we will use the dataset that you were briefly introduced to in the previous section. The dataset was collected from a population of *Lepusantilocapra pufferi* (puffer jackalope) starting in the mid-1970s. As a reminder, the data include the following variables:
 
 -   `site`: where the individuals were sampled
 -   `abund`: number of individuals detected at each location
@@ -26,7 +38,7 @@ For this first example, we will use a dataset collected on *Lepusantilocapra puf
 -   `y_km`: latitude (decimal degrees) of sampling location
 -   `swept_area`: size in square meters of the sampling location (effort)
 
-You are tasked with examining/testing the relationship between total *Lepusantilocapra pufferi* abundance and mean depth for each time period (before/after introduction of puffer-jackalope pelican).
+You are tasked with examining/testing the relationship between total *Lepusantilocapra pufferi* abundance and mean depth for each time period (before/after introduction of puffer-jackalope pelican). Note that this example purposefully starts with a simple --and inaccurate-- model to illustrate the process of building a better, more explanatory model.
 
 ## Set up workspace
 
@@ -64,7 +76,7 @@ Let us develop our first GLM. There are a variety of packages and functions for 
 Let us run a GLM without considering the distribution of our response variable. We use the `mass::glm` function, a versatile model function for non-clustered data (i.e. data that has no hierarchical structure like multiple samples collected for each individual, or multiple students from multiple schools from multiple school districts).
 
 ```{r}
-base_model <- glm(abund ~ mean_depth, data = pufferi)
+base_model <- glm(formula = abund ~ mean_depth, data = pufferi)
 ```
 
 This model structure will be very similar across all the modeling functions we discuss in the course. This is a very standard formula structure in R. This structure simply means tht abundance is modeled as a function of mean_depth. That is, the response variable (`abund`) is on the left side of the tilde (\~) and the predictors are on the right side of the tilde.
@@ -111,7 +123,7 @@ The package does not use Pearson residuals and instead generates simulated (stan
 The most general function is for the simulation of residuals, `simulateResiduals()`, which is run on the fitted model.
 
 ```{r}
-sim_res <- simulateResiduals(base_model)
+sim_res <- DHARMa::simulateResiduals(base_model)
 ```
 
 We can then plot this simulation:

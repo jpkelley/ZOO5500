@@ -1,5 +1,5 @@
 ---
-title: "intro_glms"
+title: "GLM Introduction"
 format: html
 ---
 

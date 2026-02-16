@@ -109,7 +109,7 @@ d <- read.csv("class_exercise_data/lepusantilocapra_pelonates_experiment.csv")
 
 This was a successful (and very simple) data ingestion. (Again, there are many ways to ingest data, so use whatever you are most comfortable with.)
 
----
+------------------------------------------------------------------------
 
 ## Applying the Data Exploration Toolkit
 
@@ -145,7 +145,7 @@ d <- d |>
 Note that the native pipe operator `|>` was used in the above `tidy` code snippit.
 
 | Feature | `|>` (`base` R) | `%>%` (`magrittr` / `tidyverse`) |
-|------------------|-------------------|-----------------------------------|
+|------------------------|------------------------|------------------------|
 | Introduced | R 4.1.0 (`base` R) | Earlier (via `**`magrittr`**`, widely adopted by tidyverse) |
 | Requires package | No | Yes (`library(magrittr)` or `library(tidyverse)`) |
 | Default recommendation | Preferred going forward | Legacy / tidyverse-centric |
@@ -187,7 +187,7 @@ summary(d)
 
 This returns information about range, median value, and sample size within groups. **Use this first to discover any major issues.**
 
-You can then graphically view aspects of your raw dataset. So, let us create a few plots using the ggplot2 package. Please refer to the `ggplot2` [**Cheat Sheet**](../chapters/class_exercise_data/data_visualization.pdf) (right click for download) for more information about this.  
+You can then graphically view aspects of your raw dataset. So, let us create a few plots using the ggplot2 package. Please refer to the `ggplot2` [**Cheat Sheet**](../chapters/class_exercise_data/data_visualization.pdf) (right click for download) for more information about this.
 
 ::: {.callout-tip collapse="true"}
 ## **A recipe for a `ggplot2` visualization**
@@ -212,7 +212,8 @@ data |>
   <optional_additional_layers>
 
 ```
-This follows the [Grammar of Graphics (GoG)](https://en.wikipedia.org/wiki/Wilkinson's_Grammar_of_Graphics) approach introduced by Leland Wilkinson in 1999. All the verbiage (e.g. _facets_, _aesthetics_, _geometry_) was then used as the basis for the first `ggplot` version by Hadley Wickham in 2007 (first book published in 2009; [now available online](https://ggplot2-book.org/)). Wilkinson's book on graphical theory is a great read and a great example of how to develop a set or irreducible guidelines for a seemingly complex system. 
+
+This follows the [Grammar of Graphics (GoG)](https://en.wikipedia.org/wiki/Wilkinson's_Grammar_of_Graphics) approach introduced by Leland Wilkinson in 1999. All the verbiage (e.g. *facets*, *aesthetics*, *geometry*) was then used as the basis for the first `ggplot` version by Hadley Wickham in 2007 (first book published in 2009; [now available online](https://ggplot2-book.org/)). Wilkinson's book on graphical theory is a great read and a great example of how to develop a set or irreducible guidelines for a seemingly complex system.
 :::
 
 ### Boxplot (Tukey-style)
@@ -229,7 +230,7 @@ d |>
 
 ### Cleveland Dot Plot
 
-This is another simple way of visualizing potential outlier. Fancy name; unfancy visualization. 
+This is another simple way of visualizing potential outlier. Fancy name; unfancy visualization.
 
 ```{r}
 #| message: false
@@ -246,7 +247,7 @@ d |>
   theme_minimal()
 ```
 
-Now, what can be said about potential outliers? In our boxplot, we see two black dots each group that seem to be outside of the normal range of those groups. These are _potential_ outliers. You should go back and examine these datapoints to see if there is anything strange about them. But be aware of how Tukey-style boxplots calculate outliers; it can be misleading if you do not understand Tukey's original approach. Let us also examine the boxplots by different *L. pelonates* densities (i.e. the jackalope density treatments):
+Now, what can be said about potential outliers? In our boxplot, we see two black dots each group that seem to be outside of the normal range of those groups. These are *potential* outliers. You should go back and examine these datapoints to see if there is anything strange about them. But be aware of how Tukey-style boxplots calculate outliers; it can be misleading if you do not understand Tukey's original approach. Let us also examine the boxplots by different *L. pelonates* densities (i.e. the jackalope density treatments):
 
 ```{r}
 d |> 
@@ -257,7 +258,6 @@ d |>
 ```
 
 The Tukey boxplot is not showing any black “outlier” dots in the groups. So, using this approach, there do not seem to be any structural outliers. You can **repeat this process** on every variable in your dataset. It is generally effective for flagging major issues (anomalous values, etc.). Most likely, however, this approach will flag values that end up being perfectly reasonable. That is more than acceptable. At the very worst, you have put your eyes on the dataset a few more times.
-
 
 ### Violin plot
 
@@ -299,6 +299,7 @@ ggplot(d, aes(x = oxygen_ppm, fill = salt_treatment)) +
        y = "density") +
   theme_minimal()
 ```
+
 For our example, this approach gives us a good idea of the relative spread of each of salt_treatment response. We can also produce the same plot, but we could split it by jackalope treatment instead. (In this case, it's a bit messy.)
 
 ```{r}
@@ -328,7 +329,7 @@ d |>
 
 ### Interaction plot (Step #3)
 
-Step #3 of our Data Exploration Toolkit is to examine our interaction structure. A simple interaction plot is useful for getting a quick, visual sense of whether the relationship between a predictor and a response might change across levels of another factor. By faceting the same boxplot across salt treatments (i.e. creating "small multiples" _sensu_ Edward Tufte), you can more easily compare both the typical oxygen levels and the spread of the data for each jackalope count within each treatment. This does _not_ test for an interaction, but it is a fairly good reality check for overall patterns --such as shifts in medians or changes in variance-- that might justify including an interaction term later on. 
+Step #3 of our Data Exploration Toolkit is to examine our interaction structure. A simple interaction plot is useful for getting a quick, visual sense of whether the relationship between a predictor and a response might change across levels of another factor. By faceting the same boxplot across salt treatments (i.e. creating "small multiples" *sensu* Edward Tufte), you can more easily compare both the typical oxygen levels and the spread of the data for each jackalope count within each treatment. This does *not* test for an interaction, but it is a fairly good reality check for overall patterns --such as shifts in medians or changes in variance-- that might justify including an interaction term later on.
 
 ```{r}
 ggplot(d, aes(x = number_jackalope, y = oxygen_ppm)) +
@@ -342,7 +343,8 @@ ggplot(d, aes(x = number_jackalope, y = oxygen_ppm)) +
 
 This is not particularly useful for detecting data anomalies, but it could be useful for helping you understand where data may be sparse (i.e. low sample sizes) or where there may be missing combinations of treatments (which can lead to lack of model convergence).
 
----
+------------------------------------------------------------------------
+
 ## Inspecting for multicollinearity (Step #4)
 
 The jackalopeologists then conducted a preliminary quantification of the climate in which *L. pelonates* was found. They used remote sensors to measure humidity, precipitation, temperature, temperature variability, and heating degree days. We don’t think we can include all the variables in our statistical model, so we want to first inspect if any of the variables are correlated (i.e. they tell us redundant information). Let’s read in these climate data and save it to an object called “climate”:
@@ -408,7 +410,7 @@ pca_results <- stats::princomp(
 
 Note that the above code does not work with pipes. This behavior happens sometimes with `tidy`.
 
-Let us now examine the results output, specifically the standard deviation values (i.e. “Comp.1”, etc.). Your first step is square the standard deviations and then use this *eigenvalue* to decide how many new components (i.e. new variables) to retain. Values >1 indicate that the new principal component accounts for more variance than the original variables; _this is the critically important part of PCA_. 
+Let us now examine the results output, specifically the standard deviation values (i.e. “Comp.1”, etc.). Your first step is square the standard deviations and then use this *eigenvalue* to decide how many new components (i.e. new variables) to retain. Values \>1 indicate that the new principal component accounts for more variance than the original variables; *this is the critically important part of PCA*.
 
 ```{r}
 pca_results$sdev ^ 2  # this squares the standard deviations
@@ -438,8 +440,5 @@ The statistical convention in most fields is to accept all rotated components th
 ```{r}
 pca_results_rotated$scores
 ```
-
-
-
 
 **End of tutorial**

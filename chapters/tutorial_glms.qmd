@@ -26,7 +26,13 @@ This separation is the real power of the GLM framework: signal and noise are mod
 ![](../graphics/jackalope_graphics/puffer_pelican.png)
 
 ::::
-For this first example, we will use the dataset that you were briefly introduced to in the previous section. The dataset was collected from a population of *Lepusantilocapra pufferi* (puffer jackalope) starting in the mid-1970s. As a reminder, the data include the following variables:
+For this first example, we will use the dataset that you were briefly introduced to in the previous section. The dataset was collected from a population of *Lepusantilocapra pufferi* (puffer jackalope) starting in the mid-1970s. 
+
+You will need the following file (simply click to save):
+
+-   [`lepusantilocapra_pufferi_abundance.csv`](../chapters/class_exercise_data/lepusantilocapra_pufferi_abundance.csv)
+
+As a reminder, the data include the following variables:
 
 -   `site`: where the individuals were sampled
 -   `abund`: number of individuals detected at each location

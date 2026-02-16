@@ -267,7 +267,13 @@ The mathematical notation is far more concise than what we sometimes see in the 
 
 ## Testing yourself: thinking about signal and noise in a totally real dataset
 
-For this conceptual self-test, we will use a dataset that was collected from a population of *Lepusantilocapra pufferi* (puffer jackalope) starting in the mid-1970s. The data include the following variables:
+For this conceptual self-test, we will use a dataset that was collected from a population of *Lepusantilocapra pufferi* (puffer jackalope) starting in the mid-1970s. 
+
+You will need the following file (simply click to save):
+
+-   [`lepusantilocapra_pufferi_abundance.csv`](../chapters/class_exercise_data/lepusantilocapra_pufferi_abundance.csv)
+
+The data include the following variables:
 
 -   `site`: where the individuals were sampled
 -   `abund`: number of individuals detected at each location

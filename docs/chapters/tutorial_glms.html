@@ -65,6 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../chapters/glm_partial_association.html" rel="next">
 <link href="../chapters/intro_glms.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -332,6 +333,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Tutorial: GLMs</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/glm_partial_association.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Tutorial: Partial Associations</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -349,6 +356,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">22.1</span> Introduction</a></li>
+  <li><a href="#set-up-workspace" id="toc-set-up-workspace" class="nav-link" data-scroll-target="#set-up-workspace"><span class="header-section-number">22.2</span> Set up workspace</a></li>
+  <li><a href="#generalized-linear-model-gaussian-error-distribution" id="toc-generalized-linear-model-gaussian-error-distribution" class="nav-link" data-scroll-target="#generalized-linear-model-gaussian-error-distribution"><span class="header-section-number">22.3</span> Generalized Linear Model (Gaussian error distribution)</a></li>
+  <li><a href="#checking-residuals-for-heteroscedaticity-and-violations-to-normality." id="toc-checking-residuals-for-heteroscedaticity-and-violations-to-normality." class="nav-link" data-scroll-target="#checking-residuals-for-heteroscedaticity-and-violations-to-normality."><span class="header-section-number">23</span> Checking residuals for heteroscedaticity and violations to normality.</a>
+  <ul class="collapse">
+  <li><a href="#generalized-linear-model-poisson-error-distribution" id="toc-generalized-linear-model-poisson-error-distribution" class="nav-link" data-scroll-target="#generalized-linear-model-poisson-error-distribution"><span class="header-section-number">23.1</span> Generalized Linear Model (Poisson error distribution)</a></li>
+  </ul></li>
+  <li><a href="#overdispersion-a-common-issue-with-poisson-glms" id="toc-overdispersion-a-common-issue-with-poisson-glms" class="nav-link" data-scroll-target="#overdispersion-a-common-issue-with-poisson-glms"><span class="header-section-number">24</span> Overdispersion: a common issue with Poisson GLMs</a>
+  <ul class="collapse">
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">24.1</span> </a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -388,9 +405,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This separation is the real power of the GLM framework: signal and noise are model-dependent, and what is treated as systematic structure in one formulation may be treated as variability (noise) in another. It provides flexibility to test a myriad ecological data-generating hypotheses.</p>
 </div><div class="column" style="width:50%;">
 <p><img src="../graphics/jackalope_graphics/puffer_pelican.png" class="img-fluid"></p>
-</div><p>For this first example, we will use the dataset that you were briefly introduced to in the previous section. The dataset was collected from a population of <em>Lepusantilocapra pufferi</em> (puffer jackalope) starting in the mid-1970s.</p><p>You will need the following file (simply click to save):</p><ul>
+</div>
+</div>
+<p>For this first example, we will use the dataset that you were briefly introduced to in the previous section. The dataset was collected from a population of <em>Lepusantilocapra pufferi</em> (puffer jackalope) starting in the mid-1970s.</p>
+<p>You will need the following file (simply click to save):</p>
+<ul>
 <li><a href="../chapters/class_exercise_data/lepusantilocapra_pufferi_abundance.csv"><code>lepusantilocapra_pufferi_abundance.csv</code></a></li>
-</ul><p>As a reminder, the data include the following variables:</p><ul>
+</ul>
+<p>As a reminder, the data include the following variables:</p>
+<ul>
 <li><code>site</code>: where the individuals were sampled</li>
 <li><code>abund</code>: number of individuals detected at each location</li>
 <li><code>dens</code>: density of individuals at each sampling location</li>
@@ -400,12 +423,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>x_km</code>: longitude (decimal degrees) of sampling location</li>
 <li><code>y_km</code>: latitude (decimal degrees) of sampling location</li>
 <li><code>swept_area</code>: size in square meters of the sampling location (effort)</li>
-</ul><p>You are tasked with examining/testing the relationship between total <em>Lepusantilocapra pufferi</em> abundance and mean depth for each time period (before/after introduction of puffer-jackalope pelican). Note that this example purposefully starts with a simple –and inaccurate– model to illustrate the process of building a better, more explanatory model.</p><section id="set-up-workspace" class="level2" data-number="22.2">
+</ul>
+<p>You are tasked with examining/testing the relationship between total <em>Lepusantilocapra pufferi</em> abundance and mean depth for each time period (before/after introduction of puffer-jackalope pelican). Note that this example purposefully starts with a simple –and inaccurate– model to illustrate the process of building a better, more explanatory model.</p>
+</section>
+<section id="set-up-workspace" class="level2" data-number="22.2">
 <h2 data-number="22.2" class="anchored" data-anchor-id="set-up-workspace"><span class="header-section-number">22.2</span> Set up workspace</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"class_r_scripts/load_packages.r"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</section><section id="generalized-linear-model-gaussian-error-distribution" class="level2" data-number="22.3">
+</section>
+<section id="generalized-linear-model-gaussian-error-distribution" class="level2" data-number="22.3">
 <h2 data-number="22.3" class="anchored" data-anchor-id="generalized-linear-model-gaussian-error-distribution"><span class="header-section-number">22.3</span> Generalized Linear Model (Gaussian error distribution)</h2>
 <p>Read in the <em>Lorax pufferi</em> dataset and examine its structure. Remember that you can also use the <code>glimpse</code> function here.</p>
 <div class="cell">
@@ -521,7 +548,8 @@ Number of Fisher Scoring iterations: 2</code></pre>
 </div>
 </div>
 <p>The results (from <code>summary()</code> or <code>broom::tidy</code> functions) show a significant effect of <code>mean_death</code>. As an aside, it might not be the best to use the term <em>effect,</em> as this technically implies a causal structure. But it is common usage, so we will stick to it. Just be cautious of using wording that does not match with your hypotheses and predictions.</p>
-</section><section id="checking-residuals-for-heteroscedaticity-and-violations-to-normality." class="level1" data-number="23">
+</section>
+<section id="checking-residuals-for-heteroscedaticity-and-violations-to-normality." class="level1" data-number="23">
 <h1 data-number="23"><span class="header-section-number">23</span> Checking residuals for heteroscedaticity and violations to normality.</h1>
 <p>For every final model, we need to check the structure of the residuals. In the past, this was a relatively tiresome task, which involved visual inspection of Pearson residuals. With the advent of the DHARMa package in R, this becomes much easier. A vignette for this package is exceptional and can be found [here] (<a href="https://cran.r-project.org/web/packages/DHARMa/vignettes/DHARMa.html#calculating-scaled-residuals" class="uri">https://cran.r-project.org/web/packages/DHARMa/vignettes/DHARMa.html#calculating-scaled-residuals</a>).</p>
 <p>The package does not use Pearson residuals and instead generates simulated (standardized) residuals, making it more suitable for diagnosing generalized linear models (GLMs), mixed models, and other complex models. This simulation-based approach makes this step insensitive to sample size and allows you to more easily detect overdispersion, zero-inflation, heteroscedasticity, and model misspecification.</p>
@@ -639,7 +667,8 @@ Number of Fisher Scoring iterations: 2</code></pre>
 </div>
 <p>Uh, oh. You know that you’ve correctly identified a distribution that fits your data boundaries. But, clearly, there are still patterns in these residuals that should not be present. So there are other issues going on as well. Perhaps the issues are related to model misspecification. Believe it or not, despite the horrific simulated residuals, you are now one step closer to building a successful GLM.</p>
 </section>
-</section><section id="overdispersion-a-common-issue-with-poisson-glms" class="level1" data-number="24">
+</section>
+<section id="overdispersion-a-common-issue-with-poisson-glms" class="level1" data-number="24">
 <h1 data-number="24"><span class="header-section-number">24</span> Overdispersion: a common issue with Poisson GLMs</h1>
 <p>Given that our Poisson GLM has issues, maybe a Poisson distribution was not a good assumption for the data-generating process underlying the response variable. Another error distribution –the negative binomial distribution– is a possible alternative. It satisifies our known data boundaries but has one more parameter that allows for variance to be greater than the mean (i.e.&nbsp;overdispersion). This is unlike the Poisson distribution, where mean is equal to the variance. Let us first check for such overdispersion using the <code>testDispersion()</code> function in DHARMa.</p>
 <div class="cell">
@@ -925,8 +954,6 @@ alternative hypothesis: two.sided</code></pre>
 
 
 </section>
-</section>
-</div>
 </section>
 
 </main> <!-- /main -->
@@ -1337,6 +1364,9 @@ alternative hypothesis: two.sided</code></pre>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../chapters/glm_partial_association.html" class="pagination-link" aria-label="Tutorial: Partial Associations">
+        <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Tutorial: Partial Associations</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

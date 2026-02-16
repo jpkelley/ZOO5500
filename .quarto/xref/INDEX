@@ -196,5 +196,8 @@
   },
   "chapters/tutorial_glms.qmd": {
     "tutorial_glms.html": "58b0ed23"
+  },
+  "chapters/glm_partial_association.qmd": {
+    "glm_partial_association.html": "3c0ae9ca"
   }
 }

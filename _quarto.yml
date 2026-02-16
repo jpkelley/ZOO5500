@@ -42,6 +42,7 @@ book:
         - chapters/intro_modeling.qmd
         - chapters/intro_glms.qmd
         - chapters/tutorial_glms.qmd
+        - chapters/glm_partial_association.qmd
     - part: "Part IV: Curves to Meaning"
 
 

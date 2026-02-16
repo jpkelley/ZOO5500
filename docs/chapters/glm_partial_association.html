@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>20&nbsp; Introduction to Models – Quantitative Analysis of (Messy) Field Data</title>
+<title>23&nbsp; Tutorial: Partial Associations – Quantitative Analysis of (Messy) Field Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +65,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/intro_glms.html" rel="next">
-<link href="../chapters/statistical_aphorisms.html" rel="prev">
+<link href="../chapters/tutorial_glms.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -113,7 +147,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/statistical_aphorisms.html">Part III: Columns to Curves</a></li><li class="breadcrumb-item"><a href="../chapters/intro_modeling.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Introduction to Models</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/statistical_aphorisms.html">Part III: Columns to Curves</a></li><li class="breadcrumb-item"><a href="../chapters/glm_partial_association.html"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Tutorial: Partial Associations</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -311,7 +345,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/intro_modeling.html" class="sidebar-item-text sidebar-link active">
+  <a href="../chapters/intro_modeling.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Introduction to Models</span></span></a>
   </div>
 </li>
@@ -329,7 +363,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/glm_partial_association.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/glm_partial_association.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Tutorial: Partial Associations</span></span></a>
   </div>
 </li>
@@ -349,31 +383,24 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#from-data-to-data-generating-processes" id="toc-from-data-to-data-generating-processes" class="nav-link active" data-scroll-target="#from-data-to-data-generating-processes"><span class="header-section-number">20.1</span> From data to data-generating processes</a></li>
-  <li><a href="#component-1-systematic-structure-signal" id="toc-component-1-systematic-structure-signal" class="nav-link" data-scroll-target="#component-1-systematic-structure-signal"><span class="header-section-number">20.2</span> Component #1: Systematic structure (signal)</a>
+  <li><a href="#how-a-glm-works-for-partial-associations" id="toc-how-a-glm-works-for-partial-associations" class="nav-link active" data-scroll-target="#how-a-glm-works-for-partial-associations"><span class="header-section-number">23.1</span> How a GLM works (for partial associations)</a></li>
+  <li><a href="#residualization" id="toc-residualization" class="nav-link" data-scroll-target="#residualization"><span class="header-section-number">23.2</span> Residualization</a></li>
+  <li><a href="#residualization-two-model-predictors" id="toc-residualization-two-model-predictors" class="nav-link" data-scroll-target="#residualization-two-model-predictors"><span class="header-section-number">23.3</span> Residualization: Two model predictors</a>
   <ul class="collapse">
-  <li><a href="#identifying-causal-language" id="toc-identifying-causal-language" class="nav-link" data-scroll-target="#identifying-causal-language"><span class="header-section-number">20.2.1</span> Identifying causal language</a></li>
+  <li><a href="#plotting-all-the-residuals" id="toc-plotting-all-the-residuals" class="nav-link" data-scroll-target="#plotting-all-the-residuals"><span class="header-section-number">23.3.1</span> Plotting all the residuals</a></li>
   </ul></li>
-  <li><a href="#component-2-unmeasured-variation-noise" id="toc-component-2-unmeasured-variation-noise" class="nav-link" data-scroll-target="#component-2-unmeasured-variation-noise"><span class="header-section-number">20.3</span> Component #2: Unmeasured Variation (Noise)</a></li>
-  <li><a href="#data-distributions" id="toc-data-distributions" class="nav-link" data-scroll-target="#data-distributions"><span class="header-section-number">20.4</span> Data Distributions</a>
-  <ul class="collapse">
-  <li><a href="#gaussian-normal-distribution" id="toc-gaussian-normal-distribution" class="nav-link" data-scroll-target="#gaussian-normal-distribution"><span class="header-section-number">20.4.1</span> Gaussian (Normal) Distribution</a></li>
-  <li><a href="#gamma-distribution" id="toc-gamma-distribution" class="nav-link" data-scroll-target="#gamma-distribution"><span class="header-section-number">20.4.2</span> Gamma Distribution</a></li>
-  <li><a href="#poisson-distribution" id="toc-poisson-distribution" class="nav-link" data-scroll-target="#poisson-distribution"><span class="header-section-number">20.4.3</span> Poisson Distribution</a></li>
-  <li><a href="#bernoulli-distribution-a-type-of-binomial-distribution" id="toc-bernoulli-distribution-a-type-of-binomial-distribution" class="nav-link" data-scroll-target="#bernoulli-distribution-a-type-of-binomial-distribution"><span class="header-section-number">20.4.4</span> Bernoulli Distribution (a type of binomial distribution)</a></li>
-  <li><a href="#beta-distribution" id="toc-beta-distribution" class="nav-link" data-scroll-target="#beta-distribution"><span class="header-section-number">20.4.5</span> Beta Distribution</a></li>
-  <li><a href="#negative-binomial-distribution" id="toc-negative-binomial-distribution" class="nav-link" data-scroll-target="#negative-binomial-distribution"><span class="header-section-number">20.4.6</span> Negative Binomial Distribution</a></li>
-  <li><a href="#zero-inflated-poisson-distribution" id="toc-zero-inflated-poisson-distribution" class="nav-link" data-scroll-target="#zero-inflated-poisson-distribution"><span class="header-section-number">20.4.7</span> Zero-Inflated Poisson Distribution</a></li>
-  </ul></li>
+  <li><a href="#residualization-two-model-predictors-1" id="toc-residualization-two-model-predictors-1" class="nav-link" data-scroll-target="#residualization-two-model-predictors-1"><span class="header-section-number">23.4</span> Residualization: Two model predictors</a></li>
+  <li><a href="#residualization-more-than-two-model-predictors" id="toc-residualization-more-than-two-model-predictors" class="nav-link" data-scroll-target="#residualization-more-than-two-model-predictors"><span class="header-section-number">23.5</span> Residualization: More than two model predictors</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">23.6</span> Summary</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/statistical_aphorisms.html">Part III: Columns to Curves</a></li><li class="breadcrumb-item"><a href="../chapters/intro_modeling.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Introduction to Models</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/statistical_aphorisms.html">Part III: Columns to Curves</a></li><li class="breadcrumb-item"><a href="../chapters/glm_partial_association.html"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Tutorial: Partial Associations</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Introduction to Models</span></h1>
+<h1 class="title"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Tutorial: Partial Associations</span></h1>
 </div>
 
 
@@ -390,663 +417,487 @@ window.Quarto = {
 </header>
 
 
-<section id="from-data-to-data-generating-processes" class="level2" data-number="20.1">
-<h2 data-number="20.1" class="anchored" data-anchor-id="from-data-to-data-generating-processes"><span class="header-section-number">20.1</span> From data to data-generating processes</h2>
+<section id="how-a-glm-works-for-partial-associations" class="level2" data-number="23.1">
+<h2 data-number="23.1" class="anchored" data-anchor-id="how-a-glm-works-for-partial-associations"><span class="header-section-number">23.1</span> How a GLM works (for partial associations)</h2>
 <div class="columns">
-<div class="column" style="width:60%;">
-<p>In this chapter, we make a necessary transition: from practical handling of data to thinking conceptually about data-generating processes. By now, you have entered your data into a spreadsheet (or some other organized data table). Now, it is time to modify this <em>“data = spreadsheet”</em> thinking and consider that <code>data</code> are outcomes of often complex <strong>processes</strong>. That is, data are not simply abstract numbers.</p>
-<p>As a thought exercise, consider a set of mass values for a jackalope. The body mass of marsh-water guzzling jackalopes (<em>Lepus antilocaprahydropicus</em>) varies because individuals differ in body size and condition. Depending on recent food capture or hydration state, mass may fluctuate within individuals over very short time scales, driven by rapid changes to a complex digestive and metabolic machinery. Additional variation also arises during measurement due to instrument precision, calibration drift, and movement or posture on the scale. In sum, there are a myriad processes leading to a simple measurement.</p>
-</div><div class="column" style="width:40%;">
-<p><img src="../graphics/jackalope_graphics/marshwater_jackalope.png" class="img-fluid"></p>
-</div>
-</div>
-<p>Every measurement reflects two central components of a system, which will be the focus of this short chapter:</p>
-<ul>
-<li><strong>Component #1: Systematic structure (signal):</strong> patterns deriving from mechanisms and constraints<br>
-</li>
-<li><strong>Component #2: Unmeasured variation (noise):</strong> variability generated by unidentified mechanisms, measurement constraints, and nmeasured stochastic processes</li>
-</ul>
+<div class="column" style="width:70%;">
+<p>A key strength of a GLM is that it can estimate the association between a predictor and an outcome while simultaneously accounting for other variables in the model; that is, it can quantify partial associations rather than just simple bivariate relationships. It helps to remember that when a model includes multiple predictors, its coefficients describe <strong>partial associations</strong>, which are defined with respect to:</p>
 <blockquote class="blockquote">
-<p>These two components are co-products of the same data-generating processes.</p>
+<p>how variation in one predictor relates to the response <em>after accounting for other predictors in the model</em></p>
 </blockquote>
-<p>Once you start thinking about data in this way, it perhaps becomes clearer that not all variation in a given dataset carries the same meaning. Some variation reflects real structure in the system that we actually care about. Some has to do with the natural limits of the data themselves. Other variation comes from randomness, measurement limits, or processes that we did not explicitly account for.</p>
+<p>Although R (and other great software) estimates these quantities automatically (i.e.&nbsp;behind-the-scenes), it can be helpful to unpack what “controlling for” actually means. This can help demystify the GLM (or even general linear regression) framework. In this brief tutorial, we strip the GLM down and explain how partial associations are calculated by the model.</p>
+</div><div class="column" style="width:30%;">
+<p><img src="../graphics/other_stylized_graphics/partial_association.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="residualization" class="level2" data-number="23.2">
+<h2 data-number="23.2" class="anchored" data-anchor-id="residualization"><span class="header-section-number">23.2</span> Residualization</h2>
+<p>One intuitive way to do this is through <strong>residualization</strong>. By successively removing the variation explained by a covariate, we can isolate any remaining structure in the data (using residuals) and then examine how that relates to the response variable. The sequence below reproduces –almost exactly– the coefficient for a single predictor in a GLM.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>A thought about ecology being a discipline of controlling noise
+<span class="screen-reader-only">Note</span><strong>Frisch–Waugh–Lovell Theorem (Residualization)</strong>
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>The order in which Signal and Noise are discussed below does not reflect my view of their relative importance. In fact, for modeling purposes, I argue that the majority of ecologists’ work –rightly so, I think– is focused on coping with noise. To convince you of this, take any scientific paper and compare the length of the sections dedicated to hypotheses and methods. We use calibrated instruments; we carefully design well-replicated and controlled experiments; we test and re-test interobserver reliability; we control for difference is detectability (or other biases). What remains after dealing with all the noise is the answer to an often simple question (hypothesis).</p>
+<p>In a multiple regression, the coefficient of a predictor <span class="math inline">\(X_i\)</span> equals the slope obtained by regressing the residuals of <span class="math inline">\(Y\)</span> (after removing all other predictors) on the residuals of <span class="math inline">\(X_i\)</span> (after removing those same predictors).</p>
 </div>
 </div>
-</div>
-<p>So, with that, let us delve into the two fundamental components of set of measurements.</p>
-<hr>
 </section>
-<section id="component-1-systematic-structure-signal" class="level2" data-number="20.2">
-<h2 data-number="20.2" class="anchored" data-anchor-id="component-1-systematic-structure-signal"><span class="header-section-number">20.2</span> Component #1: Systematic structure (signal)</h2>
-<p>When we collect data, we are not merely cataloging patterns or associations. I would argue that few scientists have been driven by the search for simple associations independent of causes. If data are outcomes of data-generating processes, then those processes must, by definition, include causes. In ecology and field biology, we routinely speak in causal language:</p>
+<section id="residualization-two-model-predictors" class="level2" data-number="23.3">
+<h2 data-number="23.3" class="anchored" data-anchor-id="residualization-two-model-predictors"><span class="header-section-number">23.3</span> Residualization: Two model predictors</h2>
+<p>First, we begin with the previously examined dataset of <em>Lepusantilocapra pufferi</em> (puffer jackalope). Again, you will need to set up with R space, including loading R packages and reading in the example dataset.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"class_r_scripts/load_packages.r"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>And you will need the following file (simply click to save):</p>
 <ul>
-<li>Food availability influences body condition</li>
-<li>Temperature affects metabolic rate</li>
-<li>Predators reduces nest success</li>
-<li>Groundwater discharge stabilizes stream temperature</li>
+<li><a href="../chapters/class_exercise_data/lepusantilocapra_pufferi_abundance.csv"><code>lepusantilocapra_pufferi_abundance.csv</code></a></li>
 </ul>
-<div class="columns">
-<div class="column" style="width:40%;">
-<p>In our work, we are observing the results of interacting forces operating in real systems. Those forces operate directionally (in time and space). Something influences something else; that something influences yet another something. And so forth. And despite the often misinterpreted adage “Correlation does not equal causation,” ecologists rarely stop at correlation. Associations are taken almost as cues to hypothesize about the mechanisms that generated them.</p>
-<p>Even when we fully describe a simple univariate distribution, we are implicitly asserting something about a set of generative processes: that events occur independently, that variability scales with the mean (in some fashion), that measurements fluctuate around a central tendency (in some fashion). In a regression model (e.g.&nbsp;GLM, GLMM), the “signal” is simply the structured component of the data-generating process — the part we attribute to directional influences of predictors. The model does not create causation; it formalizes assumptions how we hypothesize about how different putative causes may produce observable patterns. For example, a recent –and very well-written– paper (abstract at right) by our own University of Wyoming colleagues clearly demonstrates this causal mindset when describing the results on an analysis.</p>
-</div><div class="column" style="width:60%;">
-<p><img src="../graphics/other_stylized_graphics/causal_verbiage_paper.png" class="img-fluid"></p>
+<p>Read these data into R:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pufferi <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"class_exercise_data/lepusantilocapra_pufferi_abundance.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(pufferi) <span class="co"># examine data structure</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   146 obs. of  9 variables:
+ $ site      : int  1 2 3 4 5 6 7 8 9 10 ...
+ $ abund     : int  76 161 39 410 177 695 352 674 624 736 ...
+ $ dens      : num  0.00207 0.00352 0.000981 0.008039 0.005933 ...
+ $ mean_depth: int  804 808 809 848 853 960 977 982 985 986 ...
+ $ year      : int  1978 2001 2001 1979 2002 1980 1981 1979 1982 1980 ...
+ $ period    : int  1 2 2 1 2 1 1 1 1 1 ...
+ $ x_km      : num  98.8 76.8 103.8 91.5 107.1 ...
+ $ y_km      : num  -57.5 178.6 -50.1 146.4 -37.1 ...
+ $ swept_area: num  36710 45741 39775 51000 29831 ...</code></pre>
 </div>
 </div>
-<p>Furthermore, many of the primary theories in biology and ecology are inherently causally structured (as they are based on many sets of observational and experimental studies):</p>
-<div class="course-info" data-tbl-colwidths="[35, 8, 57]" data-caption="Major ecological theories and their causal cores">
-<table class="caption-top table">
-<colgroup>
-<col style="width: 35%">
-<col style="width: 8%">
-<col style="width: 56%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">theory</th>
-<th style="text-align: left;">year(s)</th>
-<th style="text-align: left;">core causal mechanism</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Evolution by Natural Selection</td>
-<td style="text-align: left;">1859</td>
-<td style="text-align: left;">Heritable variation <strong>causes</strong> differential survival and reproduction</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Competitive Exclusion Principle</td>
-<td style="text-align: left;">1934</td>
-<td style="text-align: left;">Limiting resources <strong>cause</strong> competitive displacement</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Optimal Foraging Theory</td>
-<td style="text-align: left;">1966</td>
-<td style="text-align: left;">Fitness maximization <strong>drives</strong> adaptive foraging decisions</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Island Biogeography Theory</td>
-<td style="text-align: left;">1967</td>
-<td style="text-align: left;">Isolation and area <strong>determine</strong> immigration and extinction rates</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Intermediate Disturbance Hypothesis</td>
-<td style="text-align: left;">1978</td>
-<td style="text-align: left;">Disturbance <strong>prevents</strong> competitive exclusion and <strong>maintains</strong> diversity</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Modern Coexistence Theory</td>
-<td style="text-align: left;">1990s</td>
-<td style="text-align: left;">Niche differences <strong>stabilize</strong> species coexistence</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Neutral Theory of Biodiversity</td>
-<td style="text-align: left;">2001</td>
-<td style="text-align: left;">Demographic stochasticity <strong>drives</strong> community composition</td>
-</tr>
-</tbody>
-</table>
-</div>
-<section id="identifying-causal-language" class="level3" data-number="20.2.1">
-<h3 data-number="20.2.1" class="anchored" data-anchor-id="identifying-causal-language"><span class="header-section-number">20.2.1</span> Identifying causal language</h3>
-<p>We often know causal words when we see them. When we are assessing the inferences (associational or causal) made in scientific papers, our first step is to identify if associational or causal language is being employed.</p>
-<p>For a bit of fun, read the statements below, decide if the statement makes claim about associations or causes, and then click to expand the box.</p>
-<div class="columns">
-<div class="column" style="width:48%;">
-<div class="callout callout-style-default callout-tip no-icon callout-titled" title="**Elevated temperature induces heat-shock gene expression**">
+<p>We will adopt a model good enough for a short example (even though we established that this is a poorly specified model):</p>
+<p>The goal of this exercise is to estimate the partial association between <code>mean_depth</code> and <code>abund</code>. That is, we are trying to estimate the effect of <code>mean_depth</code> on <code>abund</code> after accounting for <code>dens</code>.</p>
+<p>There are three steps for this example. To go through the steps, click on each of the callout boxes below to work through the process of estimating partial effects in a GLM. For the sake of clarity, I only include two covariates. Also note that, for the sake of clarity, I use a lengthy object name that <em>does not</em> use snake_case.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Elevated temperature induces heat-shock gene expression</strong>
+<span class="screen-reader-only">Note</span><strong>Step 1: Remove the effect of <code>dens</code> from <code>mean_depth</code></strong>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Answer:</strong> Causal<br>
-<strong>Why:</strong> The verb <em>induces</em> asserts a directional mechanism from temperature to gene expression.</p>
+<p>First, regress <code>mean_depth</code> on <code>dens</code> (the two predictors, in this case) and calculate model residuals.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mod_DEPTH_on_DENS <span class="ot">&lt;-</span> <span class="fu">glm</span>(mean_depth <span class="sc">~</span> dens, <span class="at">data =</span> pufferi)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>depth_resid <span class="ot">&lt;-</span> <span class="fu">resid</span>(mod_DEPTH_on_DENS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The residuals from this model represent the component of <code>mean_depth</code> that <em>cannot</em> be explained by <code>dens</code>. This answers the question: <em>How does <code>mean_depth</code> vary once <code>dens</code> has been held constant?</em></p>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled" title="**Foraging duration and prey density are negatively associated in seabirds**">
+<div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Foraging duration and prey density are negatively associated in seabirds</strong>
+<span class="screen-reader-only">Note</span><strong>Step 2: Remove the effect of <code>dens</code> from <code>abund</code></strong>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Answer:</strong> Associational<br>
-<strong>Why:</strong> The statement reports a relationship without asserting a mechanism or direction of effect.</p>
+<p>Next, regress <code>abund</code> on <code>dens</code> and retain the residuals.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mod_ABUND_on_DENS <span class="ot">&lt;-</span> <span class="fu">glm</span>(abund <span class="sc">~</span> dens, <span class="at">data =</span> pufferi)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>abund_resid <span class="ot">&lt;-</span> <span class="fu">resid</span>(mod_ABUND_on_DENS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>These residuals represent variation in <code>abund</code> that is not associated with <code>dens</code>. By now, you should see the general pattern of this residualization approach.</p>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled" title="**Forest fragmentation reduces nesting success**">
+<div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Forest fragmentation reduces nesting success</strong>
+<span class="screen-reader-only">Note</span><strong>Step 3: Estimate the partial association</strong>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Answer:</strong> Causal<br>
-<strong>Why:</strong> The phrase <em>reduces</em> explicitly claims that fragmentation produces a change in nesting success.</p>
+<p>Finally, regress the residuals of <code>abund</code> (Step 2) onto the residuals of <code>mean_depth</code> (Step 1).</p>
+<p>You can run the <code>summary()</code> function to view the model output. The slope from this regression quantifies the association between <code>mean_depth</code> and <code>abund</code> after <code>dens</code> has been accounted for. This value will be very close to the coefficient for <code>mean_depth</code> in the full multivariable model:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = abund ~ mean_depth + dens, data = pufferi)
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  3.858e+01  1.926e+01   2.003   0.0471 *  
+mean_depth  -3.730e-04  5.833e-03  -0.064   0.9491    
+dens         3.787e+04  1.318e+03  28.735   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 5082.682)
+
+    Null deviance: 7067483  on 145  degrees of freedom
+Residual deviance:  726824  on 143  degrees of freedom
+AIC: 1665.2
+
+Number of Fisher Scoring iterations: 2</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = abund_resid ~ depth_resid, data = pufferi)
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)  1.009e-13  5.880e+00   0.000    1.000
+depth_resid -3.730e-04  5.812e-03  -0.064    0.949
+
+(Dispersion parameter for gaussian family taken to be 5047.386)
+
+    Null deviance: 726844  on 145  degrees of freedom
+Residual deviance: 726824  on 144  degrees of freedom
+AIC: 1663.2
+
+Number of Fisher Scoring iterations: 2</code></pre>
+</div>
+</div>
+<p>Indeed, you see that the effect size is -3.730e-04 in both cases. So, we have successful reconstructed how GLMs can examine partial associations between predictors and outcome variables.</p>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled" title="**Heat-shock gene expression is associated with ambient temperature**">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Heat-shock gene expression is associated with ambient temperature</strong>
+<span class="screen-reader-only">Note</span>Repeat this logic for <code>dens</code>
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Answer:</strong> Associational<br>
-<strong>Why:</strong> The wording describes a correlation pattern without implying intervention or mechanism.</p>
+<p>You could do the same thing for <code>dens</code> and find its partial association with <code>abund</code> after controlling for <code>mean_depth</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># residual of focal, controlling for non-focal</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>mod_DENS_on_DEPTH <span class="ot">&lt;-</span> <span class="fu">glm</span>(dens <span class="sc">~</span> mean_depth, <span class="at">data =</span> pufferi)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>dens_resid <span class="ot">&lt;-</span> <span class="fu">resid</span>(mod_DENS_on_DEPTH)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># residual of effect of non-focal predictor</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>mod_ABUND_on_DEPTH <span class="ot">&lt;-</span> <span class="fu">glm</span>(abund <span class="sc">~</span> mean_depth, <span class="at">data =</span> pufferi)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>abund_resid <span class="ot">&lt;-</span> <span class="fu">resid</span>(mod_ABUND_on_DEPTH)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># overall residual effect</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>mod_resid_dens <span class="ot">&lt;-</span> <span class="fu">glm</span>(abund_resid <span class="sc">~</span> dens_resid, <span class="at">data =</span> pufferi)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled" title="**Nitrogen availability causes faster leaf expansion**">
+<section id="plotting-all-the-residuals" class="level3" data-number="23.3.1">
+<h3 data-number="23.3.1" class="anchored" data-anchor-id="plotting-all-the-residuals"><span class="header-section-number">23.3.1</span> Plotting all the residuals</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">dens_resid =</span> dens_resid,</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">abund_resid =</span> abund_resid),</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> dens_resid, <span class="at">y =</span> abund_resid)) <span class="sc">+</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"residuals of `dens`"</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"residuals of `abund`"</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"partial association: `dens` on `abund`"</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="glm_partial_association_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">depth_resid =</span> depth_resid,</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">abund_resid =</span> abund_resid),</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> depth_resid, <span class="at">y =</span> abund_resid)) <span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"residuals of `mean_depth`"</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"residuals of `abund`"</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"partial association: `mean_depth` on `abund`"</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="glm_partial_association_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Examine the summary of <code>modbase</code> to compare the coefficients for <code>mean_depth</code> and <code>dens</code> to the variation in each of these plots. You should immediately notice the one with less residual structure (more clustered around the regression line) has the larger effect size.</p>
+</section>
+</section>
+<section id="residualization-two-model-predictors-1" class="level2" data-number="23.4">
+<h2 data-number="23.4" class="anchored" data-anchor-id="residualization-two-model-predictors-1"><span class="header-section-number">23.4</span> Residualization: Two model predictors</h2>
+<p>The above example clearly illustrates how residualization works for a model with two predictors. But what about a model with &gt;2 predictors? We will simply add one of the other potential predictors (<code>period</code>) to our base model from above. Again, this is a rather nonsensical formulation:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = abund ~ mean_depth + dens, data = pufferi)
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  3.858e+01  1.926e+01   2.003   0.0471 *  
+mean_depth  -3.730e-04  5.833e-03  -0.064   0.9491    
+dens         3.787e+04  1.318e+03  28.735   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 5082.682)
+
+    Null deviance: 7067483  on 145  degrees of freedom
+Residual deviance:  726824  on 143  degrees of freedom
+AIC: 1665.2
+
+Number of Fisher Scoring iterations: 2</code></pre>
+</div>
+</div>
+<p>Let us go through the three steps again.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Nitrogen availability causes faster leaf expansion</strong>
+<span class="screen-reader-only">Note</span><strong>Step 1: Remove the effect of <code>dens</code> from <code>mean_depth</code></strong>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Answer:</strong> Causal<br>
-<strong>Why:</strong> The verb <em>causes</em> signals a direct causal claim about nitrogen’s effect on growth.</p>
+<p>First, regress <code>mean_depth</code> on <code>dens</code> (the two predictors, in this case) and calculate model residuals.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>mod_DEPTH_on_DENS <span class="ot">&lt;-</span> <span class="fu">glm</span>(mean_depth <span class="sc">~</span> dens, <span class="at">data =</span> pufferi)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>depth_resid <span class="ot">&lt;-</span> <span class="fu">resid</span>(mod_DEPTH_on_DENS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The residuals from this model represent the component of <code>mean_depth</code> that <em>cannot</em> be explained by <code>dens</code>. This answers the question: <em>How does <code>mean_depth</code> vary once <code>dens</code> has been held constant?</em></p>
 </div>
 </div>
 </div>
-</div><div class="column" style="width:4%;">
-
-</div><div class="column" style="width:48%;">
-<div class="callout callout-style-default callout-tip no-icon callout-titled" title="**Metabolic rate and activity level are associated across mammals**">
+<div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Metabolic rate and activity level are associated across mammals</strong>
+<span class="screen-reader-only">Note</span><strong>Step 2: Remove the effect of <code>dens</code> from <code>abund</code></strong>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Answer:</strong> Associational<br>
-<strong>Why:</strong> The statement summarizes a cross-species pattern without claiming direction or mechanism.</p>
+<p>Next, regress <code>abund</code> on <code>dens</code> and retain the residuals.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mod_ABUND_on_DENS <span class="ot">&lt;-</span> <span class="fu">glm</span>(abund <span class="sc">~</span> dens, <span class="at">data =</span> pufferi)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>abund_resid <span class="ot">&lt;-</span> <span class="fu">resid</span>(mod_ABUND_on_DENS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>These residuals represent variation in <code>abund</code> that is not associated with <code>dens</code>. By now, you should see the general pattern of this residualization approach.</p>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled" title="**Bird species richness is higher in forested landscapes**">
+<div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Bird species richness is higher in forested landscapes</strong>
+<span class="screen-reader-only">Note</span><strong>Step 3: Estimate the partial association</strong>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Answer:</strong> Associational<br>
-<strong>Why:</strong> This reports a pattern across landscapes but does not assert that forest cover drives richness.</p>
+<p>Finally, regress the residuals of <code>abund</code> (Step 2) onto the residuals of <code>mean_depth</code> (Step 1).</p>
+<p>You can run the <code>summary()</code> function to view the model output. The slope from this regression quantifies the association between <code>mean_depth</code> and <code>abund</code> after <code>dens</code> has been accounted for. This value will be very close to the coefficient for <code>mean_depth</code> in the full multivariable model:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = abund ~ mean_depth + dens, data = pufferi)
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  3.858e+01  1.926e+01   2.003   0.0471 *  
+mean_depth  -3.730e-04  5.833e-03  -0.064   0.9491    
+dens         3.787e+04  1.318e+03  28.735   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 5082.682)
+
+    Null deviance: 7067483  on 145  degrees of freedom
+Residual deviance:  726824  on 143  degrees of freedom
+AIC: 1665.2
+
+Number of Fisher Scoring iterations: 2</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = abund_resid ~ depth_resid, data = pufferi)
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)  1.009e-13  5.880e+00   0.000    1.000
+depth_resid -3.730e-04  5.812e-03  -0.064    0.949
+
+(Dispersion parameter for gaussian family taken to be 5047.386)
+
+    Null deviance: 726844  on 145  degrees of freedom
+Residual deviance: 726824  on 144  degrees of freedom
+AIC: 1663.2
+
+Number of Fisher Scoring iterations: 2</code></pre>
+</div>
+</div>
+<p>Indeed, you see that the effect size is -3.730e-04 in both cases. So, we have successful reconstructed how GLMs can examine partial associations between predictors and outcome variables.</p>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled" title="**Higher prey density shortens foraging trips**">
+</section>
+<section id="residualization-more-than-two-model-predictors" class="level2" data-number="23.5">
+<h2 data-number="23.5" class="anchored" data-anchor-id="residualization-more-than-two-model-predictors"><span class="header-section-number">23.5</span> Residualization: More than two model predictors</h2>
+<p>For more than two model predictors, the number of steps increases. But, arguably, the complexity does not. The logic is still the same:</p>
+<blockquote class="blockquote">
+<p>A predictor’s coefficient equals the relationship between the parts of the outcome and that predictor that remain after removing the influence of all other variables (residuals!)</p>
+</blockquote>
+<p>Here is a new model with a third predictor (<code>period</code>) added:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>mod_full <span class="ot">&lt;-</span> <span class="fu">glm</span>(abund <span class="sc">~</span> mean_depth <span class="sc">+</span> dens <span class="sc">+</span> period, <span class="at">data =</span> pufferi)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_full)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = abund ~ mean_depth + dens + period, data = pufferi)
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  5.345e+01  2.821e+01   1.895   0.0601 .  
+mean_depth  -9.281e-04  5.893e-03  -0.158   0.8751    
+dens         3.764e+04  1.359e+03  27.702   &lt;2e-16 ***
+period      -9.265e+00  1.282e+01  -0.723   0.4710    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 5099.716)
+
+    Null deviance: 7067483  on 145  degrees of freedom
+Residual deviance:  724160  on 142  degrees of freedom
+AIC: 1666.7
+
+Number of Fisher Scoring iterations: 2</code></pre>
+</div>
+</div>
+<p>Below is the way in which we would calculate –by residualization– the partial association coefficient between one predictor (<code>mean_depth</code>) and <code>abund</code> (controlling for <code>dens</code> and <code>period</code>). You can apply the same process to the other two predictors. Click on each callout box to expand.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Higher prey density shortens foraging trips</strong>
+<span class="screen-reader-only">Note</span><strong>Step 1: Remove the effect of <code>dens</code> and <code>period</code> from <code>mean_depth</code></strong>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Answer:</strong> Causal<br>
-<strong>Why:</strong> The verb <em>shortens</em> implies that prey density actively changes foraging behavior.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>mod_DEPTH_on_OTHERS <span class="ot">&lt;-</span> <span class="fu">glm</span>(mean_depth <span class="sc">~</span> dens <span class="sc">+</span> period, <span class="at">data =</span> pufferi)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>depth_resid <span class="ot">&lt;-</span> <span class="fu">resid</span>(mod_DEPTH_on_OTHERS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled" title="**Increased activity elevates metabolic rate**">
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Increased activity elevates metabolic rate</strong>
+<span class="screen-reader-only">Note</span><strong>Step 2: Remove <code>dens</code> and <code>period</code> from <code>abund</code></strong>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Answer:</strong> Causal<br>
-<strong>Why:</strong> The statement claims a physiological mechanism linking activity to metabolism.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>mod_ABUND_on_OTHERS <span class="ot">&lt;-</span> <span class="fu">glm</span>(abund <span class="sc">~</span> dens <span class="sc">+</span> period, <span class="at">data =</span> pufferi)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>abund_resid_depth <span class="ot">&lt;-</span> <span class="fu">resid</span>(mod_ABUND_on_OTHERS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled" title="**Tree growth and temperature are associated after accounting for elevation**">
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Tree growth and temperature are associated after accounting for elevation</strong>
+<span class="screen-reader-only">Note</span><strong>Step 3: Estimate the partial association</strong>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Answer:</strong> Associational<br>
-<strong>Why:</strong> Conditioning on elevation defines a conditional association without asserting causation.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<p>Importantly, the use of causal language in scientific subfield has greatly increased. Some interesting readings are: * <img src="https://www.frontiersin.org/journals/veterinary-science/articles/10.3389/fvets.2022.1004801/full.png" class="img-fluid" alt="Sargeant et al. (2022) Watch your language: An exploration of the use of causal wording in veterinary observational research"> * <img src="https://onlinelibrary.wiley.com/doi/10.1111/jan.14311" class="img-fluid" alt="Thapa et al. (2020) Being honest with causal language in writing for publication"></p>
-<hr>
-</section>
-</section>
-<section id="component-2-unmeasured-variation-noise" class="level2" data-number="20.3">
-<h2 data-number="20.3" class="anchored" data-anchor-id="component-2-unmeasured-variation-noise"><span class="header-section-number">20.3</span> Component #2: Unmeasured Variation (Noise)</h2>
-<p>The second component of any set of measurements is unmeasured variation, often called <em>noise</em>. Unfortunately, the word <em>noise</em> has morphed into a sort of statistical perjorative that we equate with annoying, irrelevant, or cumbersome. So, why is noise so important? It is important because a model of the world is incomplete if it explains only the mean of a signal but ignores how variability behaves around that mean. Explaining the average outcome is only half the story. We must also understand why observations deviate from that average (or other measure of central tendency).</p>
-<p>In other words, noise is not a nuisance obscuring an otherwise pristine biological or ecological signal. It is not static layered on top of clear understanding. At its core, <em>noise</em> refers to the myriad additional processes operating in concert with the systematic structure of the data we have chosen to model. These processes are very real, and often scientifically interesting. Noise can arise from:</p>
-<ul>
-<li>Individual variation (heterogeneity)<br>
-</li>
-<li>Environmental fluctuations<br>
-</li>
-<li>Measurement error (accuracy and precision)<br>
-</li>
-<li>Unmeasured drivers<br>
-</li>
-<li>Stochastic processes</li>
-</ul>
-<p>At first glance, this list may feel extremely unsettling. It suggests that much of the world lies beyond direct and easy measurement. But to a scientist, this diversity of variation represents opportunity. Each source of variability reflects some underlying mechanism. Each pattern of deviation welcomes new explanation.</p>
-<p>To be clear, noise is not something we subtract away after modeling the “real” part of the system. Like systematic structure, it has structure of its own. Different mechanisms generate different <em>kinds</em> of variability. Those recognizable and stereotypical patterns of variability are what we call <strong>distributions</strong>.</p>
-<hr>
-</section>
-<section id="data-distributions" class="level2" data-number="20.4">
-<h2 data-number="20.4" class="anchored" data-anchor-id="data-distributions"><span class="header-section-number">20.4</span> Data Distributions</h2>
-<p>If variability has structure, we need a precise language to describe it. In statistics, that language is the probability distribution. So, what is a distribution?</p>
-<blockquote class="blockquote">
-<p>A distribution is an explicit statement about how randomness originates in the data-generating process.</p>
-</blockquote>
-<p>A data distribution specifies:</p>
-<ul>
-<li>What values are possible (constraints)<br>
-</li>
-<li>How variability scales with the mean<br>
-</li>
-<li>Whether outcomes are discrete or continuous<br>
-</li>
-<li>Whether extreme outcomes are rare or common</li>
-</ul>
-<p>The key insight is this: when we choose a distribution, we are choosing a mechanistic description of how variability arises. That is, in the simple process of applying a distribution to a set of measurements, we are applying a mental causal model to the data, such as:</p>
-<ul>
-<li>Count data: We assume that variance generally scales with the mean<br>
-</li>
-<li>Proportion data: We acknowledge constraints on the data (bounded between 0 and 1)</li>
-</ul>
-<p>Once we begin looking at distributions as mental models, it becomes clear that different distributions imply different stories about how data were generated. The Normal distribution reflects additive variation around a central tendency. Count distributions arise when outcomes reflect the accumulation of discrete events. Other distributions emerge when values are bounded, strictly positive, or shaped by multiplicative processes (such as the Gamma distribution). We are acknowledging that the features of the dataset are caused by some process or processes.</p>
-<p>In what follows, I introduce several commonly used distributions and the types of data-generating processes they can represent. This is by no means an exhaustive list. As you read, focus less on their mathematical formulas and more on the assumptions they encode about randomness, constraints, and mechanism.</p>
-<section id="gaussian-normal-distribution" class="level3" data-number="20.4.1">
-<h3 data-number="20.4.1" class="anchored" data-anchor-id="gaussian-normal-distribution"><span class="header-section-number">20.4.1</span> Gaussian (Normal) Distribution</h3>
-<div class="columns">
-<div class="column" style="width:40%;">
+<p>For this step, we regress the residuals of <code>abund</code> (controlling for the non-focal predictors; Step 2) onto the residuals of <code>mean_depth</code> (controlling for the non-focal predictors; Step 1).</p>
 <div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="intro_modeling_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>mod_partial_depth <span class="ot">&lt;-</span> <span class="fu">glm</span>(abund_resid_depth <span class="sc">~</span> depth_resid)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_partial_depth)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = abund_resid_depth ~ depth_resid)
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)  1.046e-13  5.869e+00   0.000    1.000
+depth_resid -9.281e-04  5.852e-03  -0.159    0.874
+
+(Dispersion parameter for gaussian family taken to be 5028.886)
+
+    Null deviance: 724286  on 145  degrees of freedom
+Residual deviance: 724160  on 144  degrees of freedom
+AIC: 1662.7
+
+Number of Fisher Scoring iterations: 2</code></pre>
 </div>
 </div>
-</div>
-</div><div class="column" style="width:60%;">
-<p><strong>Type:</strong> Continuous</p>
-<p><strong>Support:</strong> <span class="math inline">\(-\infty &lt; x &lt; \infty\)</span></p>
-<p><strong>Variance/mean relationship:</strong></p>
-<ul>
-<li>Variance is constant<br>
-</li>
-<li>Does not depend on the mean</li>
-</ul>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Ecological examples
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ul>
-<li>Measurement error in body mass<br>
-</li>
-<li>Daily deviation in stream temperature from a seasonal mean</li>
-</ul>
-</div>
-</div>
+<p>The slope equals the <code>mean_depth</code> coefficient in <code>mod_full</code> (-9.281e-04).</p>
 </div>
 </div>
 </div>
 </section>
-<section id="gamma-distribution" class="level3" data-number="20.4.2">
-<h3 data-number="20.4.2" class="anchored" data-anchor-id="gamma-distribution"><span class="header-section-number">20.4.2</span> Gamma Distribution</h3>
-<div class="columns">
-<div class="column" style="width:40%;">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="intro_modeling_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:60%;">
-<p><strong>Type:</strong> Continuous</p>
-<p><strong>Support:</strong> <span class="math inline">\(0 &lt; x &lt; \infty\)</span></p>
-<p><strong>Variance/mean relationship:</strong></p>
-<ul>
-<li>Variance proportional to μ² (square of the mean)</li>
-<li>Variability increases faster than mean</li>
-</ul>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Ecological examples
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-13" class="callout-13-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ul>
-<li>Biomass accumulation<br>
-</li>
-<li>Time until an event (e.g., flowering)<br>
-</li>
-<li>Rainfall (with a slight adjustment for zero values)</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="poisson-distribution" class="level3" data-number="20.4.3">
-<h3 data-number="20.4.3" class="anchored" data-anchor-id="poisson-distribution"><span class="header-section-number">20.4.3</span> Poisson Distribution</h3>
-<div class="columns">
-<div class="column" style="width:40%;">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="intro_modeling_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:60%;">
-<p><strong>Type:</strong> Discrete</p>
-<p><strong>Support:</strong> <span class="math inline">\(x \in \{0,1,2,\dots\}\)</span> (<em>x</em> is an element of…)</p>
-<p><strong>Variance/mean relationship:</strong></p>
-<ul>
-<li>Variance equals the mean<br>
-</li>
-<li>Variability increases linearly with μ (mean)</li>
-</ul>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Ecological examples
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-14" class="callout-14-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ul>
-<li>Number of nests in a plot<br>
-</li>
-<li>Number of insects captured per trap</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="bernoulli-distribution-a-type-of-binomial-distribution" class="level3" data-number="20.4.4">
-<h3 data-number="20.4.4" class="anchored" data-anchor-id="bernoulli-distribution-a-type-of-binomial-distribution"><span class="header-section-number">20.4.4</span> Bernoulli Distribution (a type of binomial distribution)</h3>
-<div class="columns">
-<div class="column" style="width:40%;">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="intro_modeling_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:60%;">
-<p><strong>Type:</strong> Discrete</p>
-<p><strong>Support:</strong> <span class="math inline">\(x \in \{0,1\}\)</span>, where 1 = success and 0 = failure</p>
-<p><strong>Variance/mean relationship:</strong></p>
-<ul>
-<li>Variance = <span class="math inline">\(p (1-p)\)</span><br>
-</li>
-<li>Constrained by bounds 0 and n</li>
-</ul>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Ecological examples
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-15" class="callout-15-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ul>
-<li>Number of successful nests out of total attempts<br>
-</li>
-<li>Germination success out of planted seeds</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="beta-distribution" class="level3" data-number="20.4.5">
-<h3 data-number="20.4.5" class="anchored" data-anchor-id="beta-distribution"><span class="header-section-number">20.4.5</span> Beta Distribution</h3>
-<div class="columns">
-<div class="column" style="width:40%;">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="intro_modeling_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:60%;">
-<p><strong>Type:</strong> Continuous</p>
-<p><strong>Support:</strong> <span class="math inline">\(0 &lt; x &lt; 1\)</span></p>
-<p><strong>Variance/mean relationship:</strong></p>
-<ul>
-<li>Variance depends on both mean and precision<br>
-</li>
-<li>Constrained between 0 and 1 (but does not include 0 or 1)</li>
-</ul>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Ecological examples
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-16" class="callout-16-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ul>
-<li>Proportion of canopy cover<br>
-</li>
-<li>Proportion of habitat occupied<br>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="negative-binomial-distribution" class="level3" data-number="20.4.6">
-<h3 data-number="20.4.6" class="anchored" data-anchor-id="negative-binomial-distribution"><span class="header-section-number">20.4.6</span> Negative Binomial Distribution</h3>
-<div class="columns">
-<div class="column" style="width:40%;">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="intro_modeling_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:60%;">
-<p><strong>Type:</strong> Discrete</p>
-<p><strong>Support:</strong> <span class="math inline">\(x \in \{0,1,2,\dots\}\)</span> (<em>x</em> is an element of…)</p>
-<p><strong>Variance/mean relationship:</strong></p>
-<ul>
-<li>Variance = <span class="math inline">\(μ + μ²/k\)</span> (where <em>k</em> is a dispersion parameter)</li>
-<li>Variance exceeds mean</li>
-</ul>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Ecological examples
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-17" class="callout-17-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ul>
-<li>Aggregated insect counts<br>
-</li>
-<li>Overdispersed species abundance</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="zero-inflated-poisson-distribution" class="level3" data-number="20.4.7">
-<h3 data-number="20.4.7" class="anchored" data-anchor-id="zero-inflated-poisson-distribution"><span class="header-section-number">20.4.7</span> Zero-Inflated Poisson Distribution</h3>
-<div class="columns">
-<div class="column" style="width:40%;">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="intro_modeling_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:60%;">
-<p><strong>Type:</strong> Discrete</p>
-<p><strong>Support:</strong> <span class="math inline">\(x \in \{0,1,2,\dots\}\)</span> (<em>x</em> is an element of…)</p>
-<p><strong>Variance/mean relationship:</strong></p>
-<ul>
-<li>Extra zeros inflate variance<br>
-</li>
-<li>Variance greater than Poisson expectation</li>
-</ul>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Ecological examples
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-18" class="callout-18-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ul>
-<li>Species absent from many sampling sites<br>
-</li>
-<li>Traps with structural zeros</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-<p>Next, will will introduce Generalized Linear Models so can understand their distinct advantages over other, older approaches.</p>
+<section id="summary" class="level2" data-number="23.6">
+<h2 data-number="23.6" class="anchored" data-anchor-id="summary"><span class="header-section-number">23.6</span> Summary</h2>
+<p>The goal of this tutorial was to demystify the mathematics of regression so that it feels like a transparent tool rather than a black box. We showed that a partial coefficient is simply the relationship between the leftover variation in a predictor and the leftover variation in the response after accounting for other variables. It really is that simple.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -1452,14 +1303,11 @@ window.Quarto = {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/statistical_aphorisms.html" class="pagination-link" aria-label="Statistical Philosophy">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Statistical Philosophy</span></span>
+      <a href="../chapters/tutorial_glms.html" class="pagination-link" aria-label="Tutorial: GLMs">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Tutorial: GLMs</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/intro_glms.html" class="pagination-link" aria-label="GLM Introduction">
-        <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">GLM Introduction</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

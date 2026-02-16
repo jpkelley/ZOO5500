@@ -424,9 +424,10 @@ window.Quarto = {
 </blockquote>
 <section id="comparing-glms-to-vintage-models-anovas-and-t-tests" class="level3" data-number="21.1.1">
 <h3 data-number="21.1.1" class="anchored" data-anchor-id="comparing-glms-to-vintage-models-anovas-and-t-tests"><span class="header-section-number">21.1.1</span> Comparing GLMs to vintage models (ANOVAs and <em>t</em>-tests)</h3>
+<p>Let us begin this introduction to our primary modeling framework (the GLM) by comparing GLMs to some familiar statistical approaches.</p>
 <div class="columns">
 <div class="column" style="width:60%;">
-<p>In this brief example, we provide some simulation code that will (hopefully) convince you that GLMs are pretty much the same kinds of models that you were exposed to in your introductory statistics courses back in the day. As you’ll quickly see, however, GLMs are highly flexible and will allow you to extract the maximum amount of signal from your noisy data.</p>
+<p>Here, we provide some simulation code that will (hopefully) convince you that GLMs are pretty much the same kinds of models that you were exposed to in your introductory statistics courses back in the day. As you will quickly see, however, GLMs are highly flexible and will allow you to extract the maximum amount of signal from your noisy data.</p>
 <p>We will simulate a fake dataset that has two groups (1 and 2). The values for each group follow normal distributions with a standard deviation of 1. The groups differ in their mean values, however, by one unit.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">100</span>) <span class="co"># this is a random seed that ensures example reproducibility</span></span>
@@ -480,7 +481,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>You can see that all of the <em>t</em>-values are exactly the same (<em>t</em>=4.119985). Fantastic! Now you can sit back and silently reconsider your desire to use a <em>t</em>-test or ANOVA (or anything similar). Let us say that we are not abandoning <em>t</em>-tests and ANOVAs; instead, we are outgrowing them. The table below shows a number of other advantages that GLMs have.</p>
+<p>You can see that all of the <em>t</em>-values are exactly the same (<em>t</em> = 4.119985). Fantastic! Now you can sit back and silently reconsider your desire to use a <em>t</em>-test or ANOVA (or anything similar). Let us say that we are not abandoning <em>t</em>-tests and ANOVAs; instead, we are outgrowing them. The table below shows a number of other advantages that GLMs have.</p>
 <div class="course-info" data-tbl-colwidths="[70, 10, 10, 10]">
 <table class="caption-top table">
 <colgroup>
@@ -529,7 +530,7 @@ window.Quarto = {
 <td style="text-align: center;">✅</td>
 </tr>
 <tr class="even">
-<td>Use link functions (log, logit, etc.)</td>
+<td>Use link functions (<em>log</em>, <em>logit</em>, etc.)</td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;">✅</td>
@@ -580,14 +581,14 @@ window.Quarto = {
 </li>
 <li>Number of disease cases</li>
 </ul>
-<p>Count distributions –often best approximated by a Poisson distribution– have their own features, including:</p>
+<p>For example, consider counts of events. Count distributions –often best approximated by a Poisson distribution– have their own features, including:</p>
 <ul>
 <li>Values cannot be negative.</li>
 <li>Values are discrete (not continuous)</li>
 <li>They often have variances that equal or increase with their mean</li>
 <li>They are frequently right-skewed</li>
 </ul>
-<p>A Gaussian model ignores almost everything about how most ecological data are generated. Therefore, in this section, we will first explore the Poisson GLM, which is designed specifically for count data. It:</p>
+<p>A Gaussian model, on the other hand, ignores almost everything about how most ecological data are generated. Therefore, in this section, we will first explore the Poisson GLM, which is designed specifically for count data. It:</p>
 <ul>
 <li>Restricts predictions to non-negative values.</li>
 <li>Allows variance to increase with the mean.</li>
@@ -599,7 +600,52 @@ window.Quarto = {
 <li>The <strong>link function</strong> connects the expected value of the response to the linear predictor</li>
 </ul>
 <p>Because those parts are visibly distinct, the Poisson model makes it much easier to understand what a GLM is actually doing.</p>
-<hr>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>A reminder about the Greek alphabet
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Greek Symbol</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\mu\)</span></td>
+<td style="text-align: left;">mu</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\eta\)</span></td>
+<td style="text-align: left;">eta</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\beta\)</span></td>
+<td style="text-align: left;">beta</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\alpha\)</span></td>
+<td style="text-align: left;">alpha</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\theta\)</span></td>
+<td style="text-align: left;">theta</td>
+</tr>
+</tbody>
+</table>
+<p>{style=“thead tr {background-color: #DCEEFF;}”}</p>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="the-poisson-glm-model-specification" class="level2" data-number="21.2">
@@ -611,10 +657,8 @@ window.Quarto = {
 <li>How effects are linked to observable data</li>
 </ul>
 <p>Writing the mathematical form of a model really does helps demystify it. At least, that will be my attempt in this course. Each component of how we mathematically formalize a GLM corresponds to one part of the data-generating process.</p>
-<p>First, we begin with our observations (our dataset). Using each observation <span class="math inline">\(i\)</span> and sample size <span class="math inline">\(n\)</span>, we define our dataset as:</p>
-<p><span class="math inline">\(i = 1, \dots, n\)</span>:</p>
+<p>First, we begin with our observations (our dataset). Using each observation <span class="math inline">\(i\)</span> and sample size <span class="math inline">\(n\)</span>, we define our dataset as: <span class="math inline">\(i = 1, \dots, n\)</span>:</p>
 <p>We then set up the three core components of our GLM:</p>
-<hr>
 <section id="random-component-noise" class="level3" data-number="21.2.1">
 <h3 data-number="21.2.1" class="anchored" data-anchor-id="random-component-noise"><span class="header-section-number">21.2.1</span> Random Component (Noise)</h3>
 <p>The random component –the unmeasured structure of your model– is formalized as:</p>
@@ -625,7 +669,6 @@ window.Quarto = {
 </ul>
 <p>Recall that a Poisson distribution has a mean and variance that are equal: the expected count is <span class="math inline">\(\mu_i\)</span>, and the variability around that expectation is also <span class="math inline">\(\mu_i\)</span>. This means that as the expected number of events (counts) increases, the spread of the data increases proportionally, so larger means naturally are associated with greater variability.</p>
 <p><span class="math inline">\(E(Y_i) = \mu_i\)</span> <span class="math inline">\(\text{Var}(Y_i) = \mu_i\)</span></p>
-<p><strong>Why Write This Explicitly?</strong></p>
 <p>The notation <span class="math inline">\(Y_i \sim \text{Poisson}(\mu_i)\)</span> simply states:</p>
 <blockquote class="blockquote">
 <p>The observed count <span class="math inline">\(Y_i\)</span> is a random draw from a Poisson distribution with mean <span class="math inline">\(\mu_i\)</span>.</p>
@@ -638,12 +681,11 @@ window.Quarto = {
 </ol>
 <p>By writing the distribution explicitly, we clarify:</p>
 <ul>
-<li>What values are possible.</li>
-<li>How uncertainty behaves.</li>
-<li>How variance depends on the mean.</li>
+<li>What values are possible</li>
+<li>How uncertainty behaves</li>
+<li>How variance depends on the mean</li>
 </ul>
-<p>The equation prevents hidden assumptions. Without it, readers might assume constant variance or continuous outcomes. The formal notation makes those assumptions transparent.</p>
-<p>These points will be reiterated below in the link function section.</p>
+<p>The equation prevents hidden assumptions. Without it, readers might assume constant variance or continuous outcomes. The formal notation makes those assumptions transparent. So, I strongly encourage you to take some time and get comfortable writing out your models in this way. These points will be reiterated below in the link function section.</p>
 <hr>
 </section>
 <section id="systematic-component-signal" class="level3" data-number="21.2.2">
@@ -671,42 +713,18 @@ window.Quarto = {
 </section>
 <section id="link-function" class="level3" data-number="21.2.3">
 <h3 data-number="21.2.3" class="anchored" data-anchor-id="link-function"><span class="header-section-number">21.2.3</span> Link Function</h3>
-<p>The final component of our GLM is the link function, which allows us to answer a simple and necessary question:</p>
-<blockquote class="blockquote">
-<p>How does the linear predictor (signal) determine the mean of the response distribution?</p>
-</blockquote>
-<p>For GLMs, the mean of the response distribution directly determines the error structure because the variance is defined as some function of the mean. Let us look at its form in the case of the Poisson GLM. Recall from the previous page that, for a Poisson model:</p>
+<p>The final component of a GLM is the link function, and its role is more conceptual than technical. It connects the structured part of the model (the signal) to the distribution that governs randomness (the noise).</p>
+<p>In a GLM, the variance is defined as a function of the mean; this is general to any GLM. Recall that, in a Poisson model:</p>
 <p><span class="math inline">\(E(Y_i) = \mu_i\)</span> <span class="math inline">\(\text{Var}(Y_i) = \mu_i\)</span></p>
-<p>:::</p>
-<p>What the heck does this mean?</p>
-<p><span class="math inline">\(E(Y_i) = \mu_i\)</span> means:</p>
-<blockquote class="blockquote">
-<p>The expected value (long-run average) of the response <span class="math inline">\(Y_i\)</span> equals <span class="math inline">\(\mu_i\)</span>.</p>
-</blockquote>
-<p>More simply:</p>
-<ul>
-<li><span class="math inline">\(Y_i\)</span> is the observed outcome for observation <span class="math inline">\(i\)</span>.</li>
-<li><span class="math inline">\(\mu_i\)</span> is the average value we would expect if we could repeat the same process many times under identical conditions.</li>
-<li><span class="math inline">\(E(Y_i)\)</span> is simply statistical language for “mean.”</li>
-</ul>
-<p>So we interpret this equation as:</p>
-<blockquote class="blockquote">
-<p>If we repeatedly generated data under the same conditions for observation <span class="math inline">\(i\)</span>, the average of those outcomes would be <span class="math inline">\(\mu_i\)</span>.</p>
-</blockquote>
-<p>That hopefully makes a bit more sense!</p>
-<p>:::</p>
-<p>Because the variance equals the mean in a Poisson model, once we determine <span class="math inline">\(\mu_i\)</span>, we automatically determine the variance as well. So what does the link function actually do?</p>
-<p>We first build a straight-line equation:</p>
+<p>This tells us something very cool: once the mean <span class="math inline">\(\mu_i\)</span> is determined, the amount of variability is determined as well. The expected value and the noise structure are mathematically tied together. The link function is simply the bridge between signal and noise. It takes the output of the linear predictor (the signal) and converts it into the mean of the response distribution. Because the variance depends on that mean, the signal indirectly determines the scale of the noise.</p>
+<p>Put another way, we first build a straight-line equation:</p>
 <p><span class="math inline">\(\eta_i = \beta_0 + \beta_1 X_i\)</span></p>
 <p>We then transform that linear result to obtain a valid mean:</p>
 <p><span class="math inline">\(\mu_i = \exp(\eta_i)\)</span></p>
-<p>That is all the link function is: a rule that converts the output of the linear predictor into a proper mean for the distribution. Since the variance depends on the mean, this transformation also determines how much noise we expect. In short, the following is happening:</p>
-<ul>
-<li>predictors determine <span class="math inline">\(\eta_i\)</span></li>
-<li>the link function converts <span class="math inline">\(\eta_i\)</span> into the mean <span class="math inline">\(\mu_i\)</span></li>
-<li>The mean determines the variance</li>
-</ul>
-<p>The link is simply the bridge between signal and noise.</p>
+<p>That exponentiation is all the link function is:</p>
+<blockquote class="blockquote">
+<p>a rule that converts the output of the linear predictor into a proper mean for the distribution. Since the variance depends on the mean, this transformation also determines how much noise we expect.</p>
+</blockquote>
 <hr>
 </section>
 </section>
@@ -740,7 +758,7 @@ window.Quarto = {
 </ul>
 <p>Familiarize yourself with these data (especially <code>mean_depth</code>, <code>dens</code>, and <code>abund</code>) and then think about the following questions. Click to expand each box for the answer.</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -749,28 +767,10 @@ window.Quarto = {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Answer:</strong><br>
-Its effect does not disappear from the world. The effect is moved into the noise (residual). It may also distort the effects of any correlated covariates (but we will discuss this more later).</p>
-</div>
-</div>
-</div>
-<hr>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>If residual variance drops after adding mean depth, what changed?</strong>
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Answer:</strong><br>
-We improved our model’s alignment with the data-generating process (which included mean depth). Nature did not become less noisy.</p>
+Its effect does not disappear from the world. The effect is moved into the noise (residual). It may also distort the effects of any correlated covariates (but we will discuss this more later).</p>
 </div>
 </div>
 </div>
@@ -781,14 +781,14 @@ We improved our model’s alignment with the data-generating process (which incl
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Is residual variance (noise) a feature of the system/world or our model?</strong>
+<span class="screen-reader-only">Tip</span><strong>If residual variance drops after adding mean depth, what changed?</strong>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Answer:</strong><br>
-This is sort of a trick question. Residual variance most proximately reflects what the model itself fails to explain; it is simply a mathematical way that we are making sense of the world.</p>
+We improved our model’s alignment with the data-generating process (which included mean depth). Nature did not become less noisy.</p>
 </div>
 </div>
 </div>
@@ -799,14 +799,14 @@ This is sort of a trick question. Residual variance most proximately reflects wh
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>If mean depth causally affects abundance and is omitted from the model, is that just extra noise?</strong>
+<span class="screen-reader-only">Tip</span><strong>Is residual variance (noise) a feature of the system/world or our model?</strong>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Answer:</strong><br>
-No.&nbsp;This means that the model has been misspecified. It does not only increase residual variance; it also creates systematic bias.</p>
+This is sort of a trick question. Residual variance most proximately reflects what the model itself fails to explain; it is simply a mathematical way that we are making sense of the world.</p>
 </div>
 </div>
 </div>
@@ -817,11 +817,29 @@ No.&nbsp;This means that the model has been misspecified. It does not only incre
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>When mean depth moves from residual to systematic, are we changing the ecology?</strong>
+<span class="screen-reader-only">Tip</span><strong>If mean depth causally affects abundance and is omitted from the model, is that just extra noise?</strong>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Answer:</strong><br>
+No.&nbsp;This means that the model has been misspecified. It does not only increase residual variance; it also creates systematic bias.</p>
+</div>
+</div>
+</div>
+<hr>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span><strong>When mean depth moves from residual to systematic, are we changing the ecology?</strong>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Answer:</strong><br>
 No.&nbsp;The ecology stays the same. We are changing our description of it by moving the explained variation from residual (unexplained) to systematic (explained).</p>

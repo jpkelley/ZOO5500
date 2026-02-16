@@ -15,12 +15,13 @@ Our task as scientists is to learn how to separate the patterns that carry meani
 
 > Models are hypotheses about how the data were generated.
 
-
 ### Comparing GLMs to vintage models (ANOVAs and *t*-tests)
+
+Let us begin this introduction to our primary modeling framework (the GLM) by comparing GLMs to some familiar statistical approaches.
 
 :::: columns
 ::: {.column width="60%"}
-In this brief example, we provide some simulation code that will (hopefully) convince you that GLMs are pretty much the same kinds of models that you were exposed to in your introductory statistics courses back in the day. As you'll quickly see, however, GLMs are highly flexible and will allow you to extract the maximum amount of signal from your noisy data.
+Here, we provide some simulation code that will (hopefully) convince you that GLMs are pretty much the same kinds of models that you were exposed to in your introductory statistics courses back in the day. As you will quickly see, however, GLMs are highly flexible and will allow you to extract the maximum amount of signal from your noisy data.
 
 We will simulate a fake dataset that has two groups (1 and 2). The values for each group follow normal distributions with a standard deviation of 1. The groups differ in their mean values, however, by one unit.
 
@@ -76,7 +77,7 @@ tvals
 ```
 :::
 
-You can see that all of the _t_-values are exactly the same (_t_=4.119985). Fantastic! Now you can sit back and silently reconsider your desire to use a _t_-test or ANOVA (or anything similar). Let us say that we are not abandoning _t_-tests and ANOVAs; instead, we are outgrowing them. The table below shows a number of other advantages that GLMs have.  
+You can see that all of the _t_-values are exactly the same (_t_ = 4.119985). Fantastic! Now you can sit back and silently reconsider your desire to use a _t_-test or ANOVA (or anything similar). Let us say that we are not abandoning _t_-tests and ANOVAs; instead, we are outgrowing them. The table below shows a number of other advantages that GLMs have.  
 
 ::: {.course-info tbl-colwidths="[70, 10, 10, 10]"}
 | Functionality / Capability                          | t-test | ANOVA | GLM |
@@ -86,7 +87,7 @@ You can see that all of the _t_-values are exactly the same (_t_=4.119985). Fant
 | Handle continuous predictors                       |        |        |  ✅  |
 | Handle non-Normal distributions                    |        |        |  ✅  |
 | Complex hierarchical random effects              |        |        |  ✅  |
-| Use link functions (log, logit, etc.)              |        |        |  ✅  |
+| Use link functions (_log_, _logit_, etc.)              |        |        |  ✅  |
 | Predicted values from model output         |        |        |  ✅  |
 | Nonlinear extensions   |        |        |  ✅  |
 | Under current development   |        |        |  ✅  |
@@ -115,14 +116,14 @@ Why? As ecologists, we regularly collect data on proportions, rates, skewed meas
 - Number of nests in a plot  
 - Number of disease cases
 
-Count distributions --often best approximated by a Poisson distribution-- have their own features, including:
+For example, consider counts of events. Count distributions --often best approximated by a Poisson distribution-- have their own features, including:
 
 - Values cannot be negative.
 - Values are discrete (not continuous)
 - They often have variances that equal or increase with their mean
 - They are frequently right-skewed
 
-A Gaussian model ignores almost everything about how most ecological data are generated. Therefore, in this section, we will first explore the Poisson GLM, which is designed specifically for count data. It:
+A Gaussian model, on the other hand, ignores almost everything about how most ecological data are generated. Therefore, in this section, we will first explore the Poisson GLM, which is designed specifically for count data. It:
 
 - Restricts predictions to non-negative values.
 - Allows variance to increase with the mean.
@@ -135,7 +136,19 @@ Furthermore, using a Poisson GLM allows you to see the internal architecture of 
 
 Because those parts are visibly distinct, the Poisson model makes it much easier to understand what a GLM is actually doing.
 
----
+::: {.callout-tip collapse="true" icon="false"}
+## A reminder about the Greek alphabet 
+
+| Greek Symbol | Name |
+|:--|:--|
+| $\mu$ | mu |
+| $\eta$ | eta |
+| $\beta$ | beta |
+| $\alpha$ | alpha |
+| $\theta$ | theta |
+{style="thead tr {background-color: #DCEEFF;}"}
+
+:::
 
 ## The Poisson GLM: Model Specification
 
@@ -147,13 +160,9 @@ At first glance, especially if you have had no formal mathematical training, the
 
 Writing the mathematical form of a model really does helps demystify it. At least, that will be my attempt in this course. Each component of how we mathematically formalize a GLM corresponds to one part of the data-generating process.
 
-First, we begin with our observations (our dataset). Using each observation $i$ and sample size $n$, we define our dataset as:
-
-$i = 1, \dots, n$:
+First, we begin with our observations (our dataset). Using each observation $i$ and sample size $n$, we define our dataset as: $i = 1, \dots, n$:
 
 We then set up the three core components of our GLM:
-
----
 
 ### Random Component (Noise)
 
@@ -169,8 +178,6 @@ Recall that a Poisson distribution has a mean and variance that are equal: the e
 $E(Y_i) = \mu_i$
 $\text{Var}(Y_i) = \mu_i$
 
-**Why Write This Explicitly?**
-
 The notation $Y_i \sim \text{Poisson}(\mu_i)$ simply states:
 
 > The observed count $Y_i$ is a random draw from a Poisson distribution with mean $\mu_i$.
@@ -183,13 +190,11 @@ There is nothing mystical in this expression. It formalizes three important idea
 
 By writing the distribution explicitly, we clarify:
 
-- What values are possible.
-- How uncertainty behaves.
-- How variance depends on the mean.
+- What values are possible
+- How uncertainty behaves
+- How variance depends on the mean
 
-The equation prevents hidden assumptions. Without it, readers might assume constant variance or continuous outcomes. The formal notation makes those assumptions transparent. 
-
-These points will be reiterated below in the link function section.
+The equation prevents hidden assumptions. Without it, readers might assume constant variance or continuous outcomes. The formal notation makes those assumptions transparent. So, I strongly encourage you to take some time and get comfortable writing out your models in this way. These points will be reiterated below in the link function section.
 
 ---
 
@@ -220,40 +225,16 @@ Without writing this formally, it is easy to obscure how predictors fold into th
 
 ### Link Function
 
-The final component of our GLM is the link function, which allows us to answer a simple and necessary question:
+The final component of a GLM is the link function, and its role is more conceptual than technical. It connects the structured part of the model (the signal) to the distribution that governs randomness (the noise).
 
-> How does the linear predictor (signal) determine the mean of the response distribution?
-
-For GLMs, the mean of the response distribution directly determines the error structure because the variance is defined as some function of the mean. Let us look at its form in the case of the Poisson GLM. Recall from the previous page that, for a Poisson model:
+In a GLM, the variance is defined as a function of the mean; this is general to any GLM. Recall that, in a Poisson model:
 
 $E(Y_i) = \mu_i$
 $\text{Var}(Y_i) = \mu_i$
 
-:::
+This tells us something very cool: once the mean $\mu_i$ is determined, the amount of variability is determined as well. The expected value and the noise structure are mathematically tied together. The link function is simply the bridge between signal and noise. It takes the output of the linear predictor (the signal) and converts it into the mean of the response distribution. Because the variance depends on that mean, the signal indirectly determines the scale of the noise. 
 
-What the heck does this mean?
-
-$E(Y_i) = \mu_i$ means:
-
-> The expected value (long-run average) of the response $Y_i$ equals $\mu_i$.
-
-More simply:
-
-* $Y_i$ is the observed outcome for observation $i$.
-* $\mu_i$ is the average value we would expect if we could repeat the same process many times under identical conditions.
-* $E(Y_i)$ is simply statistical language for “mean.”
-
-So we interpret this equation as:
-
-> If we repeatedly generated data under the same conditions for observation $i$, the average of those outcomes would be $\mu_i$.
-
-That hopefully makes a bit more sense!
-
-:::
-
-Because the variance equals the mean in a Poisson model, once we determine $\mu_i$, we automatically determine the variance as well. So what does the link function actually do?
-
-We first build a straight-line equation:
+Put another way, we first build a straight-line equation:
 
 $\eta_i = \beta_0 + \beta_1 X_i$
 
@@ -261,13 +242,9 @@ We then transform that linear result to obtain a valid mean:
 
 $\mu_i = \exp(\eta_i)$
 
-That is all the link function is: a rule that converts the output of the linear predictor into a proper mean for the distribution. Since the variance depends on the mean, this transformation also determines how much noise we expect. In short, the following is happening:
+That exponentiation is all the link function is: 
 
-* predictors determine $\eta_i$
-* the link function converts $\eta_i$ into the mean $\mu_i$
-* The mean determines the variance
-
-The link is simply the bridge between signal and noise.
+> a rule that converts the output of the linear predictor into a proper mean for the distribution. Since the variance depends on the mean, this transformation also determines how much noise we expect. 
 
 ---
 

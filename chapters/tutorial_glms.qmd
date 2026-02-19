@@ -121,7 +121,7 @@ print(augment_glm)
 
 The results (from `summary()` or `broom::tidy` functions) show a significant effect of `mean_death`. As an aside, it might not be the best to use the term _effect,_ as this technically implies a causal structure. But it is common usage, so we will stick to it. Just be cautious of using wording that does not match with your hypotheses and predictions.
 
-# Checking residuals for heteroscedaticity and violations to normality.
+## Checking residuals for heteroscedaticity and violations to normality.
 
 For every final model, we need to check the structure of the residuals. In the past, this was a relatively tiresome task, which involved visual inspection of Pearson residuals. With the advent of the DHARMa package in R, this becomes much easier. A vignette for this package is exceptional and can be found [here] (<https://cran.r-project.org/web/packages/DHARMa/vignettes/DHARMa.html#calculating-scaled-residuals>).
 
@@ -153,12 +153,13 @@ There are other built-in functions as well, including the following (these descr
 -   `testTemporalAutocorrelation()` - tests for temporal autocorrelation in the residuals
 -   `testSpatialAutocorrelation()` - tests for spatial autocorrelation in the residuals. Can also be used with a generic distance function, for example to test for phylogenetic signal in the residuals
 
+---
 
 :::: columns
 ::: {.column width="50%"}
 Back to our model. We know something is going wrong. But what exactly? We can plot the simulated residuals against predictors in our model, using the `plotResiduals` function. This is a specialized DHARMa function.
 
-Plot against mean_depth.
+Plot against `mean_depth`.
 :::
 
 ::: {.column width="50%"}
@@ -168,13 +169,13 @@ plotResiduals(sim_res, pufferi$mean_depth)
 :::
 ::::
 
-And then plot against period.
+And then plot against `period`.
 
 ```{r}
 plotResiduals(sim_res, pufferi$period)
 ```
 
-...and against year.
+...and against `year`.
 
 ```{r}
 plotResiduals(sim_res, pufferi$year)
@@ -186,7 +187,10 @@ And then, just for kicks, against our measure of sampling effort (swept_area).
 plotResiduals(sim_res, pufferi$swept_area)
 ```
 
-For each of these, you see statistical evidence that something is wrong with your model.
+For each of these, you see statistical evidence that something is wrong with your model. Specifically, because you are examining the Residual vs. Predictor Plot (the _Signal_ component), you know there is  is something wrong with fixed effects structure, random effects structure, link function, or temporal/spatial autocorrelation. 
+
+
+Hopefully, this takes a bit of the guesswork out of your analytical workflows
 
 ## Generalized Linear Model (Poisson error distribution)
 
@@ -216,7 +220,7 @@ We can then plot this simulation:
 plot(sim_res)
 ```
 
-Uh, oh. You know that you've correctly identified a distribution that fits your data boundaries. But, clearly, there are still patterns in these residuals that should not be present. So there are other issues going on as well. Perhaps the issues are related to model misspecification. Believe it or not, despite the horrific simulated residuals, you are now one step closer to building a successful GLM.
+Uh, oh. You know that you have correctly identified a distribution that fits your data boundaries. But, clearly, there are still patterns in these residuals that should not be present. So there are other issues going on as well. Perhaps the issues are related to model misspecification. Believe it or not, despite the horrific simulated residuals, you are now one step closer to building a successful GLM.
 
 # Overdispersion: a common issue with Poisson GLMs
 
@@ -250,7 +254,7 @@ Whoa! That looks clean. The _overall_ model residuals --that is, residuals poole
 
 However, these checks only tell us how the model behaves on average. Because our dataset includes other variables of interest, including one related to sampling effort, we also need to inspect simulated residuals as a function of those variables to look for structured lack of fit. This can be a slightly arduous process, but it is invaluable for understanding how your model is behaving.
 
-First, plot against mean_depth.
+First, plot against `mean_depth`.
 
 ```{r}
 plotResiduals(sim_res, pufferi$mean_depth)
@@ -262,28 +266,26 @@ This looks good. There is no residual structure. Plot against period:
 plotResiduals(sim_res, pufferi$period)
 ```
 
-There's a problem here. There is a clear sign that the GLM assumption of homogeneity of variance has been violated.
-
-Now, plot residuals against year.
+There is a problem here. There is a clear sign that the GLM assumption of homogeneity of variance has been violated. So, try plotting residuals against year.
 
 ```{r}
 plotResiduals(sim_res, pufferi$year)
 ```
 
-There is another issue here. And then, just for kicks, against our measure of sampling effort (swept_area).
+There is another issue here. And then, just for kicks, against our measure of sampling effort (`swept_area`).
 
 ```{r}
 plotResiduals(sim_res, pufferi$swept_area)
 ```
 
-There is a bit of structure here. So, this suggests that we may not have included in our model some important covariates like period, year, or swept_area. We will do that in the next step.
+There is a bit of structure here. So, this suggests that we may not have included in our model some important covariates like `period`, `year`, or `swept_area`. We will do that in the next step.
 
-First, let us deal with the sampling effort variable (`swept_area`), as it makes sense to include this in every model. For any case in which you have sampling effort (for any of the models discussed in this course), you need to include an offset. This is a _much better_ solution that dividing the response variable by the sampling effort prior to analysis (please, avoid this if possible), as this can alter the response variable's distribution to something unrecognizable (and therefore not easily approximated by a common error distribution). 
+First, let us deal with the sampling effort variable (`swept_area`), as it makes sense to include this in every model. For any case in which you have sampling effort (for any of the models discussed in this course), you need to include an offset. This is a _much better_ solution than dividing the response variable by the sampling effort prior to analysis (please, avoid this if possible), as this can alter the response variable's distribution to something unrecognizable (and therefore not easily approximated by one of our well-known error distributions). 
 
 In this present case, we are accounting explicitly for differences in size of the sampling area. In other words, we are adjusting `abund` so that it becomes the total number of *L. pufferi* per site (or per size of site). Remember we are using the _log_-link function; this means we need to directly _log_-transform the `swept_area` variable before putting it in an `offset()` function. **This is crtically important!** as this tells the model function to recognize that term as a correction for the response variable. That is, this puts the effort term on the link scale. Let us do that here:
 
 ```{r}
-pufferi$log_sa <- log(pufferi$swept_area)  # log-transform sweap_area
+pufferi$log_sa <- log(pufferi$swept_area)  # log-transform swept_area
 mod_nb_offset <- glm.nb(abund ~ mean_depth + offset(log_sa), 
   data = pufferi)
 ```
@@ -291,23 +293,44 @@ mod_nb_offset <- glm.nb(abund ~ mean_depth + offset(log_sa),
 :::{.callout-tip}
 ## Fair use of data transformation
 
-In this course, I encourage you to avoid any sort of data transformation for the variables in your model. Transforming an offset variable is the one exception; it is required to ensure that the model recognizes that the new offset term is on the link scale.
+In this course, I encourage you to avoid any sort of data transformation for the variables in your model. Transforming an offset variable is the one exception; it is required to ensure that the model recognizes that the new offset term is on the appropriate link scale.
 
 :::
 
-
-Now, we again simulate the residuals and plot against `mean_depth`, `period`, and `year`.
+Now, we again simulate the residuals and plot against `mean_depth`, `period`, and `year`. First, simulate he residuals from the new model object:
 
 ```{r}
 sim_res <- simulateResiduals(mod_nb_offset)
-plotResiduals(sim_res, pufferi$mean_depth)
-plotResiduals(sim_res, pufferi$period)
-plotResiduals(sim_res, pufferi$year)
 ```
 
+And then plot those residuals against the three predictors of interest:
 
-## 
-The problems with residuals remain. This means that this really is a case of model misspecification, so let us think about what other factors we should include. Note that the model names could possibly be improved. As you review the models, think critically about each one means. In all models, we include the offset variable.
+:::: columns
+::: {.column width="33%"}
+
+```{r}
+plotResiduals(sim_res, 
+              pufferi$mean_depth)
+```
+:::
+
+::: {.column width="33%"}
+```{r}
+plotResiduals(sim_res, 
+              pufferi$period)
+```
+:::
+
+::: {.column width="33%"}
+```{r}
+plotResiduals(sim_res, 
+              pufferi$year)
+```
+:::
+
+::::
+
+As you can see, the problems with residuals remain. This means that this really is a case of model misspecification, so let us think about what other factors we should include based on our _a priori_ hypotheses. (Note that the model names could possibly be improved for clarity.) As you review the models, think critically about each one means. In all models, we include the offset variable.
 
 ```{r}
 mod_nb_offset_01 <- glm.nb(abund ~ offset(log_sa), 
@@ -338,7 +361,7 @@ mod_nb_offset_10 <- glm.nb(abund ~
   data = pufferi)
 ```
 
-Note that these models test all two-way combinations (including interactions). A sort of null hypothesis ---although some would disagree philosophically-- is the first model (`mod_nb_offset_01`), as it contains only the offset variable. Let us calculate AIC and then sort the output in ascending order of AIC (where lowest AIC is the best-supported model). Note that this is bonus material right now. 
+Note that these models test all two-way combinations (including interactions). A sort of null hypothesis ---although some would disagree philosophically-- is the first model (`mod_nb_offset_01`), as it contains only the offset variable. Let us calculate AIC and then sort the output in ascending order of AIC (where lowest AIC is the best-supported model). Note that this is bonus material right now intended to get you thinking about multi-model comparisons. 
 
 ```{r}
 aic_df <- AIC(
@@ -364,7 +387,7 @@ sim_res <- simulateResiduals(mod_nb_offset_10)
 plot(sim_res)
 ```
 
-These look great so far, but let's check the residuals against the predictors in the model.
+These look great so far, but let us check the residuals against the predictors in the model.
 
 ```{r}
 plotResiduals(sim_res, pufferi$mean_depth)
@@ -376,13 +399,11 @@ This looks great!
 plotResiduals(sim_res, pufferi$period)
 ```
 
-OK, we're starting to get the picture here that we've done something up.
+OK, we are starting to get the picture here that we have done some good work here. One last plot...
 
 ```{r}
 plotResiduals(sim_res, pufferi$year)
 ```
 
-This was the final check. We've specified the model correctly, and we have confirmed that there is no residual structure.
-
-We have successfully formulated a Generalized Linear Model!
+This was the final check. This all tells us that we have specified the model correctly, and we have confirmed that there is no residual structure. This means that our model has correctly modeled both the noise and signal components of our observed data very well. We have successfully created a Generalized Linear Model!
 

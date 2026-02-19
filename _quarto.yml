@@ -43,6 +43,8 @@ book:
         - chapters/intro_glms.qmd
         - chapters/tutorial_glms.qmd
         - chapters/glm_partial_association.qmd
+        - chapters/DHARMA_diagnostics.qmd
+        # - chapters/aic_information_theory.qmd
     - part: "Part IV: Curves to Meaning"
 
 

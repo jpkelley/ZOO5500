@@ -1,0 +1,61 @@
+---
+title: "DHARMa Diagnostic Decision Tree"
+format:
+  html:
+    toc: false
+---
+
+## DHARMa Model Diagnostic Guide
+
+::: {.callout-note}
+A correctly specified model must satisfy **both**:
+
+1. The probabilistic assumptions are appropriate.  
+2. The systematic structure captures the biological signal.
+:::
+
+The decision tree below helps determine which part of the model may need revision.
+
+```{mermaid}
+flowchart TD
+
+A[Start: Fit model and examine DHARMa diagnostics]
+A --> B{QQ Panel Problem?}
+
+%% --- LEFT PANEL BRANCH ---
+B -->|Yes| C{KS test significant?}
+C -->|Yes| C1[Distribution mismatch<br/>→ Try alternative family<br/>→ Check link function<br/>→ Evaluate zero inflation]
+
+C -->|No| D{Dispersion test significant?}
+D -->|Yes| D1{Global or structured dispersion?}
+D1 -->|Global| D2[Variance uniformly wrong<br/>→ Poisson → NB<br/>→ Add random effects]
+D1 -->|Structured| D3[Variance depends on predictors<br/>→ Consider location–scale model<br/>→ Model dispersion explicitly]
+
+D -->|No| E{Outlier test significant?}
+E -->|Yes| E1[Excess extreme values<br/>→ Inspect data<br/>→ Consider heavy-tailed distribution<br/>→ Add missing predictors]
+
+E -->|No| F[QQ panel acceptable]
+
+%% --- RIGHT PANEL BRANCH ---
+B -->|No| G[Proceed to Residual vs Predicted Panel]
+F --> G
+
+G --> H{Residual structure present?}
+H -->|Yes| I{What pattern appears?}
+
+I -->|Curved median| I1[Incorrect functional form<br/>→ Add spline<br/>→ Transform predictor]
+I -->|Quantile bands widen/narrow| I2[Structured variance<br/>→ Model dispersion<br/>→ Consider transformation]
+I -->|Pattern vs predictor| I3[Missing predictor or interaction<br/>→ Add term<br/>→ Test interaction]
+I -->|Clustering| I4[Missing random effects<br/>→ Add random intercepts/slopes]
+
+H -->|No| J[Model specification likely adequate]
+
+%% --- BOTH FAIL ---
+C1 --> K{Right panel also failing?}
+D2 --> K
+D3 --> K
+E1 --> K
+
+K -->|Yes| L[Model fundamentally misspecified<br/>→ Rebuild from biological reasoning<br/>→ Reconsider distribution + structure]
+K -->|No| G
+```

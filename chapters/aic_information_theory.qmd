@@ -1,0 +1,491 @@
+---
+title: "Information Theory & Multimodel Selection"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+---
+
+## What this is about
+
+Welcome to a short presentation on **information theory** and **multimodel selection**.
+
+---
+
+## What is multi-model inference
+
+
+
+## Where this philosophy comes from
+
+:::: columns
+
+::: {.column width="70%"}
+This approach has two key historical roots:
+
+- **T. C. Chamberlin (late 1800s)** — *The Method of Multiple Working Hypotheses*  
+  - The big idea: avoid getting trapped in a single “pet hypothesis.”
+
+- **John Platt (1964)** — “strong inference”  
+  - Platt revived Chamberlin’s framework and connected it to **Popper’s falsifiability** idea: scientists do not prove hypotheses; they work by **falsifying** weaker explanations.
+:::
+
+::: {.column width="30%"}
+![_T.C. Chamberlin_](../graphics/other_stylized_graphics/chamberlin.png)
+
+:::
+::::
+If you are looking for two high-impact readings (or skimmings) for graduate school, those are the two.
+
+---
+
+## The core idea: pit hypotheses against each other
+
+The basic workflow is:
+
+- You define a **set of competing hypotheses**
+- You express each hypothesis as a **statistical model**
+- You compare the models in a principled way, rather than committing to only one story too early
+
+---
+
+## A simple candidate model set (additive example)
+
+Imagine a global additive model with four predictors:
+
+- $f_1, f_2, f_3, f_4$
+
+Think of this as a **4-factor model** (ignoring the intercept for the moment).
+
+From this global model, you can create a candidate set by considering all combinations:
+
+- **3-factor models** (drop one term): 4 possibilities  
+- **2-factor models**: all 2-way combinations  
+- **1-factor models**: four simple models (each with one predictor)  
+- **0-factor model**: the **null model** (intercept-only)
+
+Each row in your model table is one possible model, representing one possible explanation (or one component of a broader explanation).
+
+---
+
+## When to use it?
+
+---
+
+## A subtle but important debate: what is a “hypothesis” here?
+
+There is a non-trivial question in practice:
+
+- Does **each model** represent a full scientific hypothesis?
+- Or do **individual predictors** represent hypotheses, and models represent combinations?
+
+This matters for interpretation, and it is worth thinking about explicitly.
+
+---
+
+## Why multimodel selection is useful
+
+Multimodel selection has three main advantages:
+
+- **Strong inference (_sensu_ Chamberlain and Platt):** you force ideas to compete, rather than defending one favorite model
+- **Parsimony:** ssearching for an explanation that captures most of the pattern **without including unnecessary complexity**
+- **Explicit model uncertainty:** you acknowledge that more than one model might be plausible instead of pretending that there is no uncertainty
+
+---
+
+## Model uncertainty is not optional
+
+We stress again here that model uncertainty _must be explicitly acknowledged_. You would not take a paper seriously if it reported estimates without standard errors or confidence intervals; that same standard applies to entire models (and model sets) as well. Multimodel inference is the same philosophy applied one level up:
+
+- not only are parameter estimates uncertain
+- **the model itself can be uncertain.**
+
+---
+
+
+::: {.callout-warning collapse=true icon=false}
+## **A dichotomous key for deciding single or multi-model approaches**
+
+| **step** | **question (with brief example)** | **If _YES_, go to** | **If _NO_, go to** |
+|------|----------------------------------------------------------------------------------------------------------------------------------|------------------------------|------------------------------|
+| 1 | Is your primary goal to estimate a clearly defined estimand? <br> *Example: the causal effect of mean_depth on fish abundance.* | 2 | 5 |
+| 2 | Was the study designed specifically to test that estimand? <br> *Example: depth manipulated experimentally across tanks.* | 3 | 5 |
+| 3 | Are covariates prespecified based on theory/design (not data-driven)? <br> *Example: temperature included a priori due to physiology.* | 4 | 5 |
+| 4 | Is structural uncertainty low (few plausible alternative structures)? <br> *Example: only one biologically defensible functional form.* | SINGLE-MODEL INFERENCE | 6 |
+| 5 | Are multiple plausible predictors/mechanisms defensible? <br> *Example: depth, density, habitat complexity, and prey supply all plausible.* | 6 | 3 |
+| 6 | Would reasonable model changes alter conclusions meaningfully? <br> *Example: depth effect changes sign across plausible models.* | MULTI-MODEL / MODEL SELECTION | 7 |
+| 7 | Is part of your goal exploratory (structure discovery)? <br> *Example: observational dataset seeking key drivers of variation.* | MULTI-MODEL / MODEL SELECTION | SINGLE-MODEL (justify clearly) |
+
+:::
+
+## When single-model thinking can make sense
+
+For tightly controlled experiments (especially those designed around a few targeted effects):
+
+- there may be relatively few plausible working hypotheses
+- some researchers fit **one model** and interpret effect sizes directly
+
+So there are “camps”:
+
+- single-model inference for controlled designs
+- model selection / multimodel inference for broader observational or complex systems
+
+Your job is to choose what best matches your system and your inferential goal.
+
+---
+
+## Precision vs accuracy: the intuition behind model selection
+
+:::: columns
+
+::: {.column width="70%"}
+Model selection is an optimization problem that balances:
+
+- **Accuracy**: closeness to the “truth” (low bias)
+- **Precision**: stability/consistency of estimates across samples (low variance)
+
+A model can be:
+
+- precise but inaccurate (tight cluster, wrong location)
+- accurate but imprecise (centered on truth, but spread out)
+- both accurate and precise (ideal)
+- neither (worst case)
+
+:::
+
+::: {.column width="30%"}
+![](../graphics/other_stylized_graphics/all_targets.png)
+:::
+
+::::
+
+
+---
+
+## Bias versus variance as model complexity increases
+
+To illustrate how we can use 
+
+
+
+As model complexity (i.e. the number of model terms) increases, two forces tend to trade off:
+
+- **Bias decreases** (models can fit the observed pattern better)
+- **Variance increases** (estimates can become unstable and less generalizable)
+
+The target is the model complexity that gives the best *balance*:
+              
+- low enough bias to be useful
+- low enough variance to be stable and generalizable
+
+This is the intuition behind information-criterion approaches like AIC.
+
+---
+
+## Connecting this to AIC in plain language
+
+AIC is essentially trying to balance:
+
+- **fit** (how well the model matches the data)
+- against **complexity** (how many parameters you used to achieve that fit)
+
+> "Is the model fit good enough to justify its complexity?
+
+So:
+
+- overly complex models often fit very well but may not generalize
+- overly simple models generalize but may miss important structure
+- AIC targets the middle ground
+
+---
+
+## Interpreting “within 2 AIC units”
+
+A common rule of thumb:
+
+- Any model within **$\Delta$AIC < 2** of the best model is often treated as **equally supported**.
+
+Sometimes this produces a narrow set of top models (clear winner or a few close competitors).  
+Other times, many models fall within that window (broad uncertainty), and then you must decide how to proceed.
+
+This was standard in the 2000s.
+
+---
+
+## What if many models are equally supported?
+
+If the AIC surface is relatively flat (lots of models have similar support):
+
+- you have high **model uncertainty**
+- there is not one obvious “best” explanation
+- this is exactly where model averaging can become useful
+
+---
+
+## Random effects: the order of operations for mixed models
+
+For most ecological data sets you are working with, random effects likely a necessity. 
+
+A practical workflow:
+
+1. Start with a **global model**:
+   - include all fixed effects and interactions you care about
+   - include random effects you think are important **a priori** (design-based reasoning)
+
+2. Find the **optimal random-effects structure**:
+   - random intercepts, random slopes, nested structures, etc.
+   - usually you choose a single best-supported random structure first
+
+3. Then select the **fixed-effects structure**:
+   - compare candidate fixed-effect models
+   - keep the random-effects structure **constant** across that fixed-effects comparison
+
+---
+
+## REML vs ML in this workflow
+
+The conventional approach:
+
+- When comparing **random-effects structures**, use **REML**  
+  (restricted maximum likelihood)
+
+- When comparing **fixed-effects structures**, use **ML**  
+  (maximum likelihood; REML can bias fixed-effect comparisons)
+
+- After selecting the final fixed-effects model, refit that model with **REML** if your inference goal uses the mixed-model fit.
+
+Different packages implement this with different arguments, but the logic is the same.
+
+---
+
+## Two broad model selection approaches
+
+There are two common approaches :
+
+- **Stepwise selection** (forward and backward)
+- **Information-criterion approaches** (AIC, AIC~c~, BIC, etc.)
+
+Below, the mthe emphasis is on **AIC** and **AIC~c~**
+
+---
+
+## Stepwise selection
+
+Historically, stepwise was popular because large model sets were computationally expensive to run and compare against each other. That reason mostly no longer applies. Given that you will still encounter practitioners who continue using this approach, it helps to understand its continuing role in ecological inference. Stepwise selection starts from polar opposite model structures:
+
+- an intercept-only model (forward stepwise selection)
+- a global model (backward elimination)
+
+Then the researcher or algorithm adds (for forward selection) or removes (for backward elimination) the predictors in a sequence of decisions that are nominally objective but, in reality, a bit subjective.
+
+Let us consider both of these in a bit more detail below.
+
+### Forward stepwise selection
+
+As its name suggests, forward stepwise selection involves the following primary steps:
+
+- start with an intercept-only model (no predictors)
+- add predictors one at a time
+- retain additions based on _p_-values
+
+Unfortunately, model results can change depending on the order you add variables. This is a major problem and not something you want in an inferential procedure.
+
+::: {.callout-warning collapse=false}
+## Avoid forward stepwise selection
+:::
+
+### Backward elimination (the “less bad” version)
+
+Backward elimination:
+
+- start with the global model
+- remove the predictor with the highest p-value
+- refit the model
+- repeat until all remaining p-values are below a threshold (often 0.05)
+
+This can converge quickly, but it can still deviate from what an information-criterion approach would choose.
+
+## Practical limitations of stepwise in mixed models
+
+Many common stepwise tools in R:
+
+- do not work well (or at all) for **GLMMs**, **GAMs**, **GAMMs**
+- can mishandle interaction hierarchy (dropping main effects before higher-order terms)
+- can turn model selection into a fragile, automated routine
+
+::: {.callout-warning collapse=false}
+**So, what to do?**
+In general, do not use stepwise for GLMMs. It can cause more harm than good. If you do anything stepwise, backward elimination is the _least bad_ option.
+
+:::
+
+---
+
+## AIC multimodel selection: what you do instead
+
+
+> "...where AIC stands for **an information theoretic criterion**..." (Akaike 1974)
+
+
+
+The information-theory workflow:
+
+- Build a **meaningful candidate set** of ecologically plausible models *before* you run the comparison.
+- Compare them using an information criterion (here: AIC).
+- If multiple models are plausible, carry forward that uncertainty (often via model averaging).
+
+This matches the Chamberlin–Platt “multiple working hypotheses” approach.
+
+---
+
+## What AIC is, conceptually
+
+AIC is based on:
+
+- the model’s **log-likelihood** (fit)
+- penalized by the **number of parameters** (complexity)
+
+So you are rewarded for explaining the data well, but penalized for using too many parameters to do it.
+
+---
+
+::: {.callout-note collapse=false icon=false}
+## AIC versus AIC~_c_~
+
+AIC~_c_~ is AIC corrected for small sample sizes.
+
+Rule of thumb:
+
+- When $\frac{n}{K} < 40$, AICc is strongly recommended.
+- AIC~_c_~ converges to AIC as sample size increases.
+
+A practical habit:
+
+- Using AIC~_c_~ by default is often safe, because it behaves like AIC when $n$ is large.
+
+---
+
+## Quasi-AIC for overdispersed data
+
+If your model is overdispersed (common with counts):
+
+- you may need an adjustment like **QAIC**
+- this is essentially another correction to reflect dispersion
+
+---
+
+## What counts as a “parameter” in different model types
+
+A critical piece of AIC is $K$, the number of parameters.
+
+[EXPLAIN WHAT A PARAMETER IS CONCEPTUALLY]
+
+[PUT IN CALLOUT BOXn ]
+Examples:
+
+- For a basic GLM:
+  - $K$ includes the intercept and fixed-effect coefficients
+
+- For a GLMM:
+  - $K$ includes fixed effects *and* random-effects structure components
+  - random intercept and random slope terms count as parameters
+  - if random intercept and slope are correlated, the covariance term contributes to $K$
+  - dispersion parameters (e.g., negative binomial) also contribute
+
+- For GAMs:
+  - smooth terms contribute via their **effective degrees of freedom (EDF)**
+
+A concrete example mentioned:
+
+- response ~ predictor + (predictor | group)
+- $K$ includes:
+  - intercept (1)
+  - predictor fixed effect (1)
+  - random intercept term (1)
+  - random slope term (1)
+  - covariance between them (1)
+- total $K = 5$
+
+---
+
+## AIC model selection tables
+
+In practice, model selection tables typically include:
+
+- Model parameterization (relevant terms)
+- _K_, number of model parameters
+- AIC (or AIC~_c_~)
+- $\Delta$AIC: difference from the best model (best model has 0)
+- AIC weights: relative probability a model is best (weights sum to 1)
+- Cumulative weights (sometimes), which help to define a _confidence set_ (e.g., < 0.95)
+- Evidence ratios: how much more supported one model is than another
+
+Models within the _confidence set_ are often the ones carried forward into model averaging (if needed).
+
+---
+
+## Rules of thumb you will see in ecology
+
+Common conventions:
+
+- If one model contains **> 0.90** of the total weight:
+  - model averaging is usually unnecessary
+
+- Interpretation of $\Delta$AIC:
+  - $\Delta$AIC < 2: models often treated as equally supported
+  - 2 to 7: weak support
+  - > 7: unlikely / unsupported
+
+---
+
+## Why AIC approaches are attractive
+
+Advantages highlighted here:
+
+- more objective than stepwise approaches
+- very easy to implement
+- yields interpretable evidence (weights) grounded in information theory
+- independent of assessment order
+- can explicitly incorporate model uncertainty via model averaging
+
+---
+
+## Model averaging: the basic idea
+
+If multiple models are plausible:
+
+- you can average parameter estimates across models
+- weighting each model’s parameter estimate by its **AIC or AIC~_c_~ weight**
+
+Intuition:
+
+- a model with weight 0.50 contributes about half the “influence” to the averaged estimate
+- a model with weight 0.25 contributes about 25% of the "influence" to the averaged estimate
+- the final estimate is a weighted combination across the supported set
+
+---
+
+## Practical guidelines: a summary
+
+- **Use the same observations across all models:** This is critically important. First, remove NAs before running the candidate model set. If you do not, different models will silently use different subsets of rows, depending on which variables it is working on for a given models; this breaks comparability within the candidate model set.
+
+- **Keep the _same response variable_ across the compared models:** You can compare distributions and/or link functions if the data are the same. Bu _do not_ change the response variable.
+
+- **Do not do AIC selection and then switch back to _p-values_ for “strong inference”:** After model selection, base your interpretation on effect sizes and uncertainty estimates.
+
+- **Validate the final model:** The best-supported model is still only as good as the data and assumptions that generated it (aka "Garbage In / Garbage Out")
+
+- **You may not need AIC-based multi-model selection at all for tightly controlled designs with a very small candidate set:** Consider whether the multimodel inference framework is really necessary.
+
+- **Very large candidate sets can be computationally heavy:** With ever-improving processors, this is likely a non-issue
+
+
+
+## Bibliography for this section
+
+Akaike, H. (1974), A new look at the statistical model identification. _IEEE Transactions on Automatic Control_, 19 (6): 716–723, 
+
+
+
+

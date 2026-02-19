@@ -11,6 +11,7 @@ packages <- c(
   "GGally",
   "MuMIn",
   "insight",
+  "glmmTMB",
   "rio",
   "Matrix",
   "dplyr",

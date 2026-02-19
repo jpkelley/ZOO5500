@@ -1,0 +1,150 @@
+---
+title: "DHARMA diagnostics"
+format: html
+---
+
+
+## Interpreting DHARMa residual diagnostic plots 
+
+::: {.callout-note}
+A correctly specified model must ensure that **both**:
+
+* The probabilistic assumptions (of the random Noise) are appropriate.  
+* The systematic structure captures the ecological Signal.
+
+:::
+
+The `DHARMa` package is is powerful tool for assessing both of these components. Once you understand what `DHARMa`'s residual plots are indicating, the process of diagnosing issues with your model specification becomes less complicated. The plot of the simulated residuals in DHARMa has two panels, one for each of these two components: 
+
+![](../graphics/other_stylized_graphics/DHARMA_resid_labels.png)
+
+Let us break this down to see what specific parts of a model each panel says something about:
+
+### Left panel: QQ Plot **(Noise)**
+
+The left panel evaluates whether the chosen error distribution of the model is correct. This panel allows you to answer the question: _If this model were the true data-generating process, would residuals be uniformly distributed?_
+
+::: {.course-info tbl-colwidths="[20, 80]"}
+| Component | What it means |
+|----------------------------|---------------|
+| Error distribution choice | Wrong family (Poisson, Gaussian, Gamma, etc.) |
+| Link function | Incorrect transformation between mean and linear predictor |
+| Dispersion parameter | Overdispersion or underdispersion not handled correctly |
+| Zero-inflation | Excess zeros not modeled |
+| Tail behavior | Heavy tails or skew not captured |
+| Global variance structure | Variance magnitude inconsistent with assumed model |
+| Excess extreme values | More outliers than expected under assumed distribution |
+::: 
+
+### Right panel: Residuals versus predicted **(Signal)**
+
+The right panel evaluates whether the *systematic structure*, or the **signal,** of the model is adequate.
+
+::: {.course-info tbl-colwidths="[20, 80]"}
+| Component | What it means |
+|----------------------------|---------------|
+| Fixed effects | Incorrect or missing predictor(s) |
+| Functional form | Relationship should be nonlinear |
+| Interactions | Slope depends on another variable |
+| Random effects structure | Missing grouping terms or random slopes |
+| Link function | Mean structure not properly linked to response |
+| Predictor-dependent variance | Heteroskedasticity not modeled |
+| Autocorrelation | Spatial/temporal dependence not accounted for |
+:::
+
+## Improving your model: a decision-making framework
+
+For warning flags in your `DHARMa` residual plots, consider following these guidelines:
+
+### Left panel: QQ Plot **(Noise)**
+| **Warning / Pattern**                                                                   | **What It Indicates (Conceptually)**                               | **What Type of Problem Is This?**               | **Questions to Ask**                                                            | **Possible Actions**                                                                                          |
+| ----------------------------------------------------------------------------------- | -------------------------------------------------------------- | ------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| KS test significant                                                             | Model cannot plausibly generate observed residual distribution | Distributional misspecification             | Is the chosen family appropriate? Is the link correct? Are zeros excessive? | Try alternative family; reconsider link; evaluate zero-inflation                                          |
+| Dispersion test significant                                                     | Variance magnitude inconsistent with model assumptions         | Global dispersion problem                   | Is variance uniformly too large/small across observations?                  | For counts: Poisson → Negative Binomial; add random effects; use quasi-likelihood                         |
+| Dispersion test significant + structured residual spread visible in right panel | Variance changes systematically with predictors                | Structured (predictor-dependent) dispersion | Does variance increase with mean or a predictor?                            | Use location–scale model (e.g., `gaulss()` in mgcv); model dispersion explicitly; consider transformation |
+| Outlier test significant                                                        | More extreme values than expected under assumed distribution   | Heavy tails or unmodeled heterogeneity      | Are extremes biological? Data errors? Rare events?                          | Check data integrity; consider heavier-tailed distribution; add missing predictors                        |
+| Systematic curvature in QQ line                                                     | Shape mismatch between assumed and actual error distribution   | Tail or skew mismatch                       | Are upper/lower quantiles deviating more strongly?                          | Try alternative family; check transformation; reassess link                 |
+
+### Right panel: Residuals versus predicted **(Signal)**
+
+| **Warning / Pattern**                             | **What It Indicates (Conceptually)**           | **What Type of Problem Is This?**            | **Questions to Ask**                                     | **Possible Actions**                                                    |
+| --------------------------------------------- | ------------------------------------------ | ---------------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------------- |
+| Combined quantile test significant        | Residuals depend on fitted values          | Mean structure misspecified              | Did I miss nonlinearity? Interaction? Grouping?      | Add spline; test interaction; add fixed or random effects           |
+| Curved median line                            | Incorrect functional form                  | Fixed effect structure problem           | Is biology nonlinear?                                | Add smooth term; transform predictor                                |
+| Diverging quantile bands                      | Residual variance changes with predictions | Structured variance (heteroskedasticity) | Does spread increase with mean or predictor?         | Consider location–scale model; model dispersion; transform response |
+| Pattern relative to a specific predictor      | Omitted or mis-specified effect            | Missing predictor or wrong specification | Does residual trend mirror ecological expectation?   | Add predictor; allow nonlinear term                                 |
+| Vertical clustering of residuals              | Unmodeled grouping or dependence           | Random effects structure problem         | Are observations clustered (site, time, individual)? | Add random intercepts; consider random slopes                       |
+| Systematic pattern at extremes of predictions | Link function mismatch                     | Link misspecification                    | Is the mean–variance relationship appropriate?       | Try alternative link                                                |
+
+
+## DHARMa Model Diagnostic Decision Tree
+
+If you would rather have a decision tree to help diagnose issues with your model, here is a three step guide. Click on each step for questions related to thes diagnosis.
+
+::: {.callout-tip icon=false collapse=true}
+## **Step 01: Does the QQ panel (left panel) show problems?**
+
+- **Is the KS test significant?**
+  - The assumed error distribution may be wrong.
+    - Did you choose the correct family?
+    - Is the link appropriate?
+    - Are zeros excessive?
+  - **Action:** Try alternative family, link, or zero-inflation.
+
+- **Is the dispersion test significant?**
+  - Variance magnitude is inconsistent.
+    - Is dispersion uniformly inflated?
+      - **Action:** Use NB instead of Poisson; add random effects.
+    - Does variance change with predictors?
+      - **Action:** Consider location–scale model (e.g., `gaulss()`); model dispersion explicitly.
+
+- **Is the outlier test significant?**
+  - More extreme values than expected.
+    - Data error?
+    - Rare but real biological extremes?
+  - **Action:** Inspect data; consider heavier-tailed distribution; add missing predictors.
+
+If **no** major issues here, proceed to Step 2.
+:::
+
+::: {.callout-tip icon=false collapse=true}
+### **Step 02: Does the Residual vs Predicted (right) panel show structure?**
+
+- **Is the combined quantile test significant?**
+  - Residuals depend on fitted values.
+    - Missing nonlinearity?
+    - Missing interaction?
+    - Missing predictor?
+  - **Action:** Add spline terms, interactions, or predictors.
+
+- **Is the median curve curved?**
+  - Functional form incorrect.
+  - **Action:** Add nonlinear term or transform predictor.
+
+- **Do quantile bands widen or narrow?**
+  - Structured variance (heteroskedasticity).
+  - **Action:** Model dispersion (location–scale); consider transformation.
+
+- **Is there clustering of residuals?**
+  - Missing random effects.
+  - **Action:** Add random intercepts or slopes.
+
+:::
+
+
+::: {.callout-tip icon=false collapse=true}
+## **Step 03: Are BOTH panels failing?**
+
+- The model may be fundamentally misspecified.
+  - Wrong family **and** wrong structure.
+  - Oversimplified ecological mechanism.
+- **Action:** Rebuild model from biological reasoning:
+  - Reconsider response distribution.
+  - Reconsider functional relationships.
+  - Reconsider dependence structure.
+
+:::
+
+
+
+

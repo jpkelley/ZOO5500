@@ -199,5 +199,11 @@
   },
   "chapters/glm_partial_association.qmd": {
     "glm_partial_association.html": "3c0ae9ca"
+  },
+  "chapters/aic_information_theory.qmd": {
+    "aic_information_theory.html": "807f6545"
+  },
+  "chapters/DHARMA_diagnostics.qmd": {
+    "DHARMA_diagnostics.html": "79322ccb"
   }
 }

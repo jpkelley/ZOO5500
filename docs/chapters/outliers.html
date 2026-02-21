@@ -374,6 +374,24 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">DHARMA diagnostics</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/glmms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">GLMM Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/tutorial_glmms_part01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Tutorial: GLMMs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/glmm_epilogue.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">GLMM epilogue</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -507,7 +525,22 @@ window.Quarto = {
 <li>Points beyond <span class="math inline">\(3 \times \text{IQR}\)</span> sometimes flagged as <em>extreme</em> outliers</li>
 </ul>
 <p>These cutoffs are <strong>conventional and not inferential</strong>. They provide a rule of thumb; they <strong><em>do not</em></strong> provide a statistical test. (You should see a theme: use outlier tests to flag values for extra scrutiny.)</p>
-<p>::: {callout-note collapse=true icon=false} ## Tukey-style boxplots and non-normal data: do not worry! Tukey-style boxplot whiskers are nonparametric; that is, they rely on quantiles (IQR), which are <em>order statistics</em>, and not distributional assumptions. Because outlier flagging at the lower bound is based on ranks, departures from normality are acceptable. :::</p>
+<div class="callout callout-style-default callout-note no-icon callout-empty-content callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Tukey-style boxplots and non-normal data: do not worry! Tukey-style boxplot whiskers are nonparametric; that is, they rely on quantiles (IQR), which are <em>order statistics</em>, and not distributional assumptions. Because outlier flagging at the lower bound is based on ranks, departures from normality are acceptable.
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+</div>
 </section>
 <div class="columns">
 <div class="column" style="width:40%;">
@@ -583,15 +616,15 @@ D^2 = (x - \mu)^T \Sigma^{-1} (x - \mu)
 \]</span></p>
 <p>Think of it this way:</p>
 <ul>
-<li><strong><span class="math inline">\(x\)</span></strong> = the values for one observation (e.g., oxygen and temperature at one site)<br>
+<li><span class="math inline">\(x\)</span> = the values for one observation (e.g., oxygen and temperature at one site)<br>
 </li>
-<li><strong><span class="math inline">\(\mu\)</span></strong> = the average values across all observations<br>
+<li><span class="math inline">\(\mu\)</span> = the average values across all observations<br>
 </li>
-<li><strong><span class="math inline">\((x - \mu)\)</span></strong> = how far that observation is from the “typical” point<br>
+<li><span class="math inline">\((x - \mu)\)</span> = how far that observation is from the “typical” point<br>
 </li>
-<li><strong><span class="math inline">\(\Sigma^{-1}\)</span></strong> = a correction that accounts for different units <em>and</em> correlations between variables<br>
+<li><span class="math inline">\(\Sigma^{-1}\)</span> = a correction that accounts for different units <em>and</em> correlations between variables<br>
 </li>
-<li><strong><span class="math inline">\(D^2\)</span></strong> = a single number summarizing how extreme the observation is <em>given the relationships in the data</em></li>
+<li><span class="math inline">\(D^2\)</span> = a single number summarizing how extreme the observation is <em>given the relationships in the data</em></li>
 </ul>
 <p>A point can look reasonable on its own but still have a large Mahalanobis distance if it <strong>breaks the usual relationship between variables</strong>.</p>
 <p>That’s why Mahalanobis distance is useful for finding <strong>multivariate (conditional) outliers</strong>, not just extreme values.</p>

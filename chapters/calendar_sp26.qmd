@@ -21,8 +21,8 @@ All Milestone Assignments due by end of day on Friday.
 | [**Week 2**<br>26-Jan-2026](#week-2) | File structure; reproducible workflows; AI logs | File audit walkthrough | Analysis Concept Note | Low | 5 |
 | [**Week 3**<br>02-Feb-2026](#week-3) | Data exploration; measurement & uncertainty | Exploratory data analysis walkthrough | — | Very low | 0 |
 | [**Week 4**<br>09-Feb-2026](#week-4) | GLMs (theory + practice) | GLM exercise | Data Readiness Note | Low | 10 |
-| [**Week 5**<br>16-Feb-2026](#week-5) | GLMs; AIC & information theory | Model comparison exercise | — | Low | 5 |
-| [**Week 6**<br>23-Feb-2026](#week-6) | GLMMs; effective sample size | GLMM exercise | — | Moderate | 15 |
+| [**Week 5**<br>16-Feb-2026](#week-5) | GLMs | Model comparison exercise | — | Low | 5 |
+| [**Week 6**<br>23-Feb-2026](#week-6) | GLMMs | GLMM exercise | — | Moderate | 15 |
 | [**Week 7**<br>02-Mar-2026](#week-7) | GAMs | GAM exercise | Working Model (draft) | Moderate | 0 |
 | [**Week 8**<br>09-Mar-2026](#week-8) | GAMMs; spatial & temporal heterogeneity | Model refinement exercise | Working Model (final lock) | Moderate | 15 |
 | [**Week 9**<br>16-Mar-2026](#week-9) | Student Spring Break | — | — | None | 0 |
@@ -34,6 +34,9 @@ All Milestone Assignments due by end of day on Friday.
 | [**Week 15**<br>27-Apr-2026](#week-15) | Writing Results sections | Draft clinic | Full Draft | Moderate | 15 |
 | [**Week 16**<br>04-May-2026](#week-16) | Reflection & closure | Course wrap-up | Revision Plan (not executed) | None | 5 |
 :::
+
+## Calendar edit history
+Removed AIC model selection from Week 05.
 
 ## Weekly Information
 

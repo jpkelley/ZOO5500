@@ -167,72 +167,18 @@ ggplot(data.frame(depth_resid = depth_resid,
 
 Examine the summary of `modbase` to compare the coefficients for `mean_depth` and `dens` to the variation in each of these plots. You should immediately notice the one with less residual structure (more clustered around the regression line) has the larger effect size.
 
-
-## Residualization: Two model predictors
-
-The above example clearly illustrates how residualization works for a model with two predictors. But what about a model with >2 predictors? We will simply add one of the other potential predictors (`period`) to our base model from above. Again, this is a rather nonsensical formulation:
-
-```{r, echo=FALSE}
-modbase <- glm(abund ~ mean_depth + dens, data = pufferi)
-summary(modbase)
-```
-
-Let us go through the three steps again.
-
-::: {.callout-note icon=false collapse=true}
-## **Step 1: Remove the effect of `dens` from `mean_depth`**
-
-First, regress `mean_depth` on `dens` (the two predictors, in this case) and calculate model residuals. 
-
-```{r}
-mod_DEPTH_on_DENS <- glm(mean_depth ~ dens, data = pufferi)
-depth_resid <- resid(mod_DEPTH_on_DENS)
-```
-The residuals from this model represent the component of `mean_depth` that _cannot_ be explained by `dens`. This answers the question: *How does `mean_depth` vary once `dens` has been held constant?*
-:::
-
-::: {.callout-note icon=false collapse=true}
-## **Step 2: Remove the effect of `dens` from `abund`**
-
-Next, regress `abund` on `dens` and retain the residuals. 
-
-```{r}
-mod_ABUND_on_DENS <- glm(abund ~ dens, data = pufferi)
-abund_resid <- resid(mod_ABUND_on_DENS)
-```
-These residuals represent variation in `abund` that is not associated with `dens`. By now, you should see the general pattern of this residualization approach. 
-:::
-
-::: {.callout-note icon=false collapse=true}
-## **Step 3: Estimate the partial association**
-
-Finally, regress the residuals of `abund` (Step 2) onto the residuals of `mean_depth` (Step 1). 
-
-```{r, echo=FALSE}
-mod_resid <- glm(abund_resid ~ depth_resid, data = pufferi)
-```
-You can run the `summary()` function to view the model output. The slope from this regression quantifies the association between `mean_depth` and `abund` after `dens` has been accounted for. This value will be very close to the coefficient for `mean_depth` in the full multivariable model:
-
-```{r, echo=FALSE}
-summary(modbase)
-summary(mod_resid)
-
-```
-Indeed, you see that the effect size is -3.730e-04 in both cases. So, we have successful reconstructed how GLMs can examine partial associations between predictors and outcome variables.  
-:::
-
 ## Residualization: More than two model predictors
 
-For more than two model predictors, the number of steps increases. But, arguably, the complexity does not. The logic is still the same: 
-
-> A predictor’s coefficient equals the relationship between the parts of the outcome and that predictor that remain after removing the influence of all other variables (residuals!)
-
-Here is a new model with a third predictor (`period`) added:
+The above example clearly illustrates how residualization works for a model with two predictors. But what about a model with >2 predictors? We will simply add one of the other potential predictors (`period`) to our base model from above. Again, this is a rather nonsensical formulation:
 
 ```{r}
 mod_full <- glm(abund ~ mean_depth + dens + period, data = pufferi)
 summary(mod_full)
 ```
+
+For more than two model predictors, the number of steps increases. But, arguably, the complexity does not. The logic is still the same: 
+
+> A predictor’s coefficient equals the relationship between the parts of the outcome and that predictor that remain after removing the influence of all other variables (residuals!)
 
 Below is the way in which we would calculate --by residualization-- the partial association coefficient between one predictor (`mean_depth`) and `abund`  (controlling for `dens` and `period`). You can apply the same process to the other two predictors. Click on each callout box to expand.
 

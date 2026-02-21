@@ -1,432 +1,200 @@
 ---
-title: "Introduction to Generalized Linear Mixed Models (GLMMs)"
+title: "GLMM Introduction"
 format: html
 ---
 
-## Why Generalized Linear Mixed Models (GLMMs)?
+## Ecology is non-normal and structured
 
-This should be very clear: 
+So far, in this course, we have focused on non-normal data and how GLMs have been designed to handle counts, proportions, and zero-inflated data. But this inherent non-normality of ecology is only one feature with which we must content. As messy as it seems, ecology is also highly structured:
+
+* **Spatial structure:** Nearby individuals resemble each other
+* **Temporal structure:** Month or years share environmental conditions.
+* **Relatedness structure:** Family members or congeners resemble each other.
+
+These clustering processes generate correlation and violate the assumption of independence that exists for many statistical models. 
+
+
+## Extending to a mixed-effects modeling framework
+
+In this section, we extend the GLM frameworks to mixed-effects models, which allow us to quantify how much variation is associated with structured sources such as:
+
+* Hierarchical data
+* Unbalanced designs
+* Violations of independence
+
+:::: columns
+::: {.column width="70%"}
+In the course of our examples, we will show how mixed-effects models can ingest and leverage hierarchical data. In terms of dealing with unbalanced designs, mixed-effects models offer another critical advantage: dealing with unbalanced (or uneven) samples sizes. After all, real datasets often include:
+
+* different numbers of individuals per site  
+* different numbers of time points per individual  
+* missing observations  
+
+Generalized Linear Mixed Models are robust to unevenness of sample size. To state it clearly: **_Equal sample sizes are not required._**
+Mixed models use likelihood-based estimation, which handles unequal replication naturally. Balance is supposedly more convenient, but it by any means necessary. Note that this statement only addresses unequal --not sparse-- sample sizes. 
+:::
+
+::: {.column width="30%"}
+
+![](../graphics/other_stylized_graphics/unbalanced_sample_sizes.png)
+
+:::
+::::
+
+The last one -- non-independence-- is perhaps the most serious danger to good inference in ecology. As we mentioned, most ecological data are clustered in space or time, and/or have some biological relationships. Measurements on individuals are repeated. Organisms share environments. You get the picture. If you treat such observations as independent, you are practically ensuring that the models you create do not reflect ecological reality.
+
+By now, the following should be very clear: 
 
 > Generalized linear mixed models are built for real ecological data.
 
-## Common ecological examples
-
-
-- **Spatial effects**: Nearby individuals resemble each other  
-- **Year effects**: Cohorts share unmeasured environmental conditions  
-- **Relatedness effects**: Family members resemble each other  
-
-These are clustering mechanisms that generate patterns of correlation. Ecology is structured. Environments vary spatially. Climate varies temporally. Genetics varies across lineages. Mixed models give us a formal way to quantify how much variation is associated with these structured processes.
-
-- Non-normal data  
-- Unbalanced designs  
-- Hierarchical structure  
-- Violations of independence
-
-This last one is the most serious. In ecology, most data are clustered in space or time, and/or have some biological relationships. Measurements on individuals are repeated. Organisms share environments. If you treat such observations as independent, you are reflecting ecological reality instead of blindly ignoring it.
-
----
-
 ## Non-independence: the central problem
 
-The independence assumption in most statistical models states:
+The independence assumption in most statistical models states that:
 
 > Each observation provides unique information.
 
-In real ecological systems, however, this is rarely true. If one $Y$ value is influenced by another observation (even if indirectly), the assumption of independence is violated. Some examples of data violating this critical assumption include:
+In real ecological systems, however, this is rarely true. If one $Y$ value is influenced by another observation (even if indirectly), the assumption of independence is violated. We can divide all cases of non-independence into two broad categories: 
 
-- multiple measurements from the same individual  
-- multiple individuals from the same site (if multiple sites are also studied)  
-- repeated measures of the same sampling unit over time  
-- spatial or temporal clustering (i.e. closely related points)
+* **Design-based dependence:** this is non-independence caused by the structure of your sampling design (known before analysis)
+* **Model-based dependence:**  this is non-independence caused from your statistical model (e.g. assumptions, structure, or misspecification), often revealed after model fitting
 
-Ignoring these ecological realities produces what ecologists call _pseudoreplication_ (coined by [Hurlburt (1984)](./files/Hurlbert_1984.pdf)), or: 
+Let us go through these in turn.
 
-> "...the use of inferential statistics to test for treatment effects with data from experiments where either treatments are not replicated (though samples may be) or replicates are not statistically independent.”
+### Design-based dependence _(what known in advance)_
 
+Design-based dependence is defined as dependence that is explicitly integrated (by _you_) into your study design and can include design choices (again, by _you_) such as:
 
-Pseudoreplication can lead to a severely over-inflated confidence in one's results. When the independence assumption is not met, your model thinks you have more information in your signal than you really do. Why is this? Recall that the 
+- blocking effects  
+- split-plot designs 
+- repeated measures (e.g. multiple samples from one individual at one time or across a time series)
+- nested sampling (e.g. multiple individuals within multiple plots within multiple sites)
 
+If you deliberately structured your sampling hierarchically (e.g. many plots within each of many sites), then you have already acknowledged the possibility that entities closer in time or space are more related to each other. Your model must reflect that same structure but do so in an explicitly statistical way. Ignoring such structure  counteracts the strengths of a purposeful design. So, please avoid this. In other words, if a grouping labels is in your design (i.e. _block_, _plot_), it likely belongs somewhere in your model as a grouping variable.
 
-Standard errors shrink relative to the effect size, which increases the test statistic (recall
+Individuals, sites, or time points produce related data (similar behaviors of an individual across contexts, similar site conditions, etc.). Though we may have a technically well-replicated study design, ignoring such ecological realities produces what ecologists call _pseudoreplication_ (coined by [Hurlburt (1984)](./files/Hurlbert_1984.pdf)), or: 
 
-and, subsequently, _p_-values look more impressive (i.e. they are lower). This problem is far from being insignificant or trivial; it directly affects inference.
+> _"...the use of inferential statistics to test for treatment effects with data from experiments where either treatments are not replicated (though samples may be) or replicates are not statistically independent.”_
 
-Rather than being vague about all of this, let us divide all cases of non-independence into two constituent parts.
+Pseudoreplication can lead to a severely over-inflated confidence in one's results. When the independence assumption is not met, your model thinks you have more information in your signal (relative to the noise) than you really do. So, when the signal-to-noise ratio is falsely elevated, the effect size is also over-inflated. This problem is far from being insignificant or trivial; it directly affects inference.
 
-### [1] Design-based dependence (known in advance)
+Of course, not all dependence comes from hierarchical structure (like measurements nested in individuals). Sometimes the main parameters in a model are just flat wrong. 
 
-This is defined as dependence that is explicitly (by _you_) integrated into your study design and can include design choices (again, by _you_) such as:
+### Model-based dependence (that emerges after fitting)
 
-- Blocking effects  
-- Split-plot designs  
-- Repeated measures  
-- Nested sampling (e.g. multiple units for each of many individuals) 
+Model-based dependence is defined as dependence that is generated (by your assumptions during your model building). As discussed in previous sections, this can include when:
 
-If you deliberately structured your sampling hierarchically, then you have already acknowledged the existence of ecological clustering. The model must reflect that same structure statistically. Ignoring it after designing it carefully makes no logical sense. So, please avoid this. In other words, if a grouping labels is in your design (i.e. _block_, _plot_), it likely belongs somewhere in your model as a grouping variable.
+* there is unanticipated/unrealized spatial autocorrelation  
+* there is unanticipated/unrealized temporal autocorrelation  
+* nonlinear effects are assumed to be linear (a very common problem)  
+* you choose incorrect or unrealistic error structure (data boundaries cause huge issues)  
+* you omit ecologically important covariates  
 
-### [2] Model-based dependence (that emerges after fitting)
-
-Dependence can also appear when:
-
-- unanticipated/unrealized spatial autocorrelation exists  
-- unanticipated/unrealized temporal autocorrelation exists  
-
-Not all dependence comes from hierarchy. Sometimes the model is simply wrong.
-
-- nonlinear effects are forced to be linear  
-- incorrect or unrealistic error structure is chosen  
-- important (ecologically relevant) covariates are omitted  
-
-If the systematic component of the model is misspecified, patterns leak into the residuals. Those patterns can look like correlation among observations. Before adding random effects blindly, always ask whether the fixed-effects structure or error distribution is appropriate.
-
----
-
-Good. I will lean into your voice: direct, structured, a little philosophical, but grounded in mechanism and inference.
-
----
+If the systematic (Signal) component of the model is misspecified, the Signal patterns be appear in the residual structure (Noise). Those patterns can look like correlation among observations. Before adding random effects blindly, always ask yourself whether or not the fixed-effects or error distribution is appropriate.
 
 ## Scale as the source of non-independence
 
-Ecological data are not flat. They are layered across space, stretched across time, and organized across biological levels. If we ignore that structure, we do not just violate an assumption. We erase mechanism.
+As we all know, ecological data are not flat and unidimensional. They are layered across space, stretched across time, and organized across biological/ecological levels. If we ignore that interesting structure, we do not simply violate some formal assumptions. Instead, we actively erase the mechanisms of the data-generating process.
 
-This is the major insight discussed by Simon Levin (1992) in *“The Problem of Pattern and Scale in Ecology”* in which he argues that ecological --and perhaps all biological-- patterns only make sense relative to the scale at which they are studied. Data-generating processes operating at one scale can generate structure at another. Therefore, if we observe data without acknowledging or respecting the importance of scale, we obscure its signal and inflate its noise.
+Data multidimensionality is the major insight discussed by Simon Levin (1992) in *“The Problem of Pattern and Scale in Ecology”* in which he argues that ecological --and perhaps all biological-- patterns only make sense relative to the scale at which they are studied. Data-generating processes operating at one scale can generate structure at another. Therefore, if we observe data without acknowledging or respecting the importance of scale, we obscure its signal and inflate its noise. 
 
-Non-independence is often just scale revealing itself.
+Shared structure increases the likelihood of common influence, which can create both similarity and correlation. That correlation should not be considered a nuisance, as it is information about how an ecological system is organized. For example: 
 
-Observations that are close in **space** share climate, soil, disturbance, predators.
-Observations that are close in **time** share weather, phenology, resource pulses.
-Observations within the same **biological unit** share physiology, genetics, behavior.
+* Observations that are proximate in **space** may share a common climate, soil, disturbance regimes, and/orpredators
+* Observations that are close in **time** may share weather, phenology, resource pulses, or predators
+* Observations within the same **biological unit** (i.e. they are more closely related) may share morphology, physiology, or behavior
 
-Shared structure induces shared influence, which induces similarity, which, in turn, induces correlation. That correlation is not a nuisance. It is information about how the system is organized. 
+If multiple measurements are made at a site, a species, or within an individual, they may share unmeasured variation. This is the essence of non-independence.
 
-If multiple measurements share a site, a year, a species, or an individual, they share unmeasured context. That context creates hierarchical structure. Hierarchical structure creates non-independence.
+## Detecting non-independence: How?
 
-GLMMs do not “correct” this non-independence; they explicitly formalize it.
-
-Instead of forcing all unexplained variation into a single residual error term, mixed models partition variance across scales. Random effects correspond to ecological levels. They represent structured variation, not statistical decoration.
-
-The good news is this: 
-
-> Once you reason clearly about spatial, temporal, and organizational scale, the random-effects structure usually writes itself.
-
-Specifying a GLMM is therefore not primarily a statistical choice; it is a decision about how the ecological system is organized.
-
-
----
-
-## Detecting non-independence
-
-If your design contains grouping (and therefore non-independent data points), you do not need to _detect_ it, _per se_. You already know that your data are structured. However, you are an unsure if there is structure due to unmeasured associations, you can do the following: 
+If your design contains grouping (and therefore non-independent data points), you do not need to detect it, _per se_. You already know that your data are structured. However, you are an unsure if there is structure due to unmeasured associations, you can do the following: 
 
 ### Before modeling
-- Plot response by grouping factor(s)
-- Look for systematic variation among groups
 
-If some individuals or sites are consistently high or low, dependence is likely. This visual step is powerful. If individuals cluster in different vertical bands when plotted, you are seeing random intercept variation. If slopes differ visually, you may need random slopes.
+* Plot response by grouping factor(s)
+* For continuous predictors (e.g., time), plot relationship with the response variable within groups
+
+If some individuals or sites consistently exhibit high or low values (generally non-overlapping distributions), **non-independence is very likely.** This visual assessment step is powerful. If individuals cluster in different vertical bands when plotted, you are seeing random intercept variation. If slopes differ visually, you may need to account for random variation in slopes.
 
 ### After modeling (tools like the `DHARMa` package)
-- Examine residual plots
-- Check QQ plots  
-- Test for spatial or temporal autocorrelation
 
-Residual patterns reveal hidden structure. If residuals are correlated within groups, the model is incomplete. The residuals should look like noise; there should be no patterns (structure).
+* Examine residual plots (including quantile-quantile plots)  
+* Test for spatial or temporal autocorrelation
 
----
+As you know by now, examination of these residual patterns can reveal hidden structure of your model. If residuals are correlated within groups, the model is incomplete. The residuals should look like random noise; there should be no patterns (structure).
 
-## First steps when data points do not look independent
+So, what are the components of a mixed-effects model?
 
-1. Think more about the biological/ecological structure
-2. Identify clusters
-3. Specify random effects
-4. Add hierarchical levels
 
-This is not a mechanical step. It is conceptual. You are asking: 
+## Components of a mixed-effects model
 
-> What groups share unmeasured variation? 
+You now know that a Generalized Linear Model (GLM) contains only fixed effects. A mixed-effects model, on the other hand, contains both _fixed_ and _random_ effects. That is the entire difference. Let us clearly differentiate between these two types of effects:
 
-Those groups define your random effects.
+::: {.callout-warning icon=false collapse=true}
+## **Fixed effects**
+Fixed effects are predictors that you _really_ care about for your eventual interpretation and strong inference. These can be factors whose levels are experimentally determined or whose interest lies in the specific effects of each level, such as effects of covariates, differences among treatments and interactions. Specifically, you are focusing on:
 
----
+* effect sizes (e.g. slope, odds-ratio, etc.)
+* direct interpretation (in relation to the response variable)
 
-## What is a mixed model?
+**Example:** Consider an experiment examining temperature-dependent differences in jumping height male and female jackalopes. For the response variable (`jumping height`), the two fixed effects are:
 
-You now know that a Generalized Linear Model (GLM) contains only fixed effects. A mixed-effects model, on the other hand, contains both _fixed_ and _random_ effects. 
+* temperature
+* sex  
 
-That is the entire difference. Formally, when you use a mixed-effects models, you are modeling both the mean structure and the variance structure due to grouping. Fixed effects explain systematic change in the mean. Random effects explain structured variance among groups. Let us clearly differentiate between these two types of effects:
+These are the variables for which you want direct interpretation. In other words, fixed effects answer your specific biological questions. _Does temperature alone increase jumping height? Does sex alone influence jumping heights? Do temperature and sex interact to influence jumping height?_
+:::
 
-### Fixed Effects
+::: {.callout-warning icon=false collapse=true}
+## **Random effects**
 
-In short, these are predictors you _really_ care about for your eventual interpretation and strong inference. Specifically, you are focusing on the following:
+Whereas fixed effects allow you to estimate the effect size of a group (e.g. the difference in means between sites), random effects account for variation in your dataset (e.g. due to group-specific variation among sites). That is, you are not estimating their effect sizes for interpretation. Instead, you are modeling their variance. Examples of random effects include:
 
-- Effect sizes (e.g. slope, odds-ratio, etc.)
-- Interpretation (in relation to the response variable)
+* site  
+* year  
+* individual
+* genotype
 
-For example, consider an experiment examining temperature-dependent differences in jumping height male and female jackalopes. For the response variable (`jumping height`), the two fixed effects are:
+At their core, random effects help improve the ecological realism and external generalizability of your statistical models. Specifically, they help by:
 
-- temperature
-- sex  
+* Correcing standard errors  
+* Reducing pseudoreplication
+* Stabilizing inference
+* Improving generalizability to other groups/systems
 
-These are the variables for which you want direct interpretation. In other words, fixed effects answer your specific biological questions.  That is, they test are the parts of your model that explicitly address your central hypotheses: Does temperature alone increase jumping height? Does sex alone influence jumping heights? Do temperature and sex interact to influence jumping height?
+**Why is it called "random effect"?** “Random” does not mean _random_ sampling. It means we are considering that group-specific differences are drawn from a random distribution. 
 
-### Random Effects
-
-Whereas fixed effects do ___, random effect account for variation. That is, you are not estimating their effect sizes for interpretation. Instead, you are modeling their variance.
-
-Random effects represent:
-
-- Grouping variables  
-- Sampled levels from a larger population  
-
-Examples include:
-
-- site  
-- year  
-- individual  
-- nest  
-
-::: callout-tip
-** Why is it called "random effect"?
-
-“Random” does not mean random sampling. It variance among levels.
-
-Random effects shift focus from specific levels to the distribution of levels. You are not estimating the effect of Site 3. You are estimating how much sites vary overall.
 :::
 
 ---
 
-## Why Random Effects Help
+## Examples of fixed and random effects
 
-They:
-
-- Correct standard errors  
-- Reduce pseudoreplication  
-- Stabilize inference  
-- Improve generalizability  
-
-They allow you to make statements beyond the specific sampled groups.
-
-By explicitly modeling cluster-level variance, you avoid attributing group-level differences to individual-level predictors. This improves both biological realism and statistical honesty.
-
----
-
-## Examples 
-
-In the callout boxes below are several examples of simple models that have both fixed and random effects:
+Here are two examples of fixed and random-effects structure in different datasets (click to expand):
 
 ::: {.callout-note collapse=true icon=false}
+## **Example 1: Impact of temperature on vegetation growth in Wyoming Jackalope habitat**
 
-## **Example 01: Impact of temperature on vegetation growth**
+**Study system:** You are studying the effect of temperature on vegetation growth in the area where you study jackalopes. You collect data for many years. You are primarily interesting in making inference about the general effects of temperature. You are not interested in estimating the effect of each specific year. The variable `year` captures unmeasured variation in rainfall, herbivory, and other sources of disturbance. These elements differ from year to year and inject variability into the data.
 
-Suppose you measure vegetation growth across years. Your central interest lies in the influence of temperature (your primary) about:
+**Fixed effect:** `temperature`
 
-- Specific year differences → random effect  
-
-Why?
-
-Because year captures unmeasured variation:
-
-- Rainfall  
-- Herbivory  
-- Disturbance  
-
-You want inference about temperature across years.
-
-That is a mixed model logic.
-
-Year acts as a nuisance source of structured variability. Including it as a random effect removes its confounding influence without forcing you to interpret each year separately.
-
----
-
-## Example 2: Feeding Rates in Robins
-
-You measure feeding rates at 20 nests. Each nest contains multiple nestlings. You care about:
-
-- Offspring age  
-- Parent sex  
-
-You do not care about:
-
-- Specific nest identity  
-- Specific nestling identity  
-
-So you include:
-
-- Nest as a random effect  
-- Nestling nested within nest  
-
-This accounts for hierarchical structure.
-
-Feeding observations from the same nest are more similar than feeding observations across nests. Ignoring this would inflate sample size artificially.
-
----
-
-## Unbalanced Designs
-
-Real data are messy.
-
-- Different numbers of individuals per site  
-- Different numbers of time points per individual  
-- Missing observations  
-
-GLMMs are robust to this. Equal sample sizes are not required. Mixed models use likelihood-based estimation, which handles unequal replication naturally. Balance is convenient, not necessary. 
-
-Note that this only addresses unequal --not sparse--  sample sizes. 
-
----
-
-## Software
-
-Primary tools:
-
-- `glmmTMB`
-- `brms`
-
-These allow:
-
-- Random intercepts  
-- Random slopes  
-- Nested effects  
-- Crossed effects  
-
-We will mostly use `glmmTMB` but will provide `brms` equivalents at times.
-
-These packages extend GLMs while maintaining flexibility in distributions and link functions. They are computationally efficient and well maintained.
-
----
-
-## Workflow for GLMMs
-
-There are two components:
-
-1. Fixed effects  
-2. Random effects  
-
-### Step 1: Specify Global Model
-
-- Include all plausible fixed effects and interactions  
-- Include maximal reasonable random structure  
-
-Start with a biologically defensible model, not a minimal one.
-
----
-
-### Step 2: Optimize Random Structure
-
-- Keep fixed effects constant  
-- Compare random structures  
-- Use REML for selection  
-
-Select best random component.
-
-This isolates variance structure decisions from mean structure decisions.
-
----
-
-### Step 3: Optimize Fixed Structure
-
-- Fix chosen random structure  
-- Switch to ML  
-- Use AIC to compare fixed effects  
-
-This preserves valid likelihood comparisons.
-
-Separating these steps prevents biased model comparison.
-
----
-
-## Random Intercepts
-
-Groups differ in baseline level.
-
-Each group has its own intercept.
-
-Graphically:
-
-Parallel lines with different vertical positions.
-
-This means groups start at different average values but respond similarly to predictors.
-
----
-
-## Random Slopes
-
-Groups differ in response strength.
-
-Slopes vary across groups.
-
-Graphically:
-
-Lines differ in both intercept and slope.
-
-This captures biological heterogeneity in responsiveness. For example, some sites may be more temperature-sensitive than others.
-
----
-
-## Should You remove random effects that explain no variance?
-
-This is a perennial question. 
-Two perspectives:
-
-### Option A: Leave it in
-
-- If design dictates the random effects structure, keep it  
-- If variance estimate is near zero, it does no harm to retain
-
-### Option B: Remove and justify
-
-- Statistically compare with and without random effect
-- Defend/justify your decision  
-
-
-::: {.callout-tip collapse=true}
-## Practical note: removal of random effect
-
-From a design perspective, it is often safer to retain structure that was motivated by your knowledge of ecology/biology. Therefore, I strongly suggest removing random effects (or levels within a hierarchical random effet) if and only if your model fails to converge.
+**Random effect:** `year` 
 
 :::
 
+::: {.callout-note collapse=true icon=false}
+## **Example 2: Nestling feeding rates in arctic jackalopes**
+
+**Study system:** Your primary question is whether variation in parental feeding rate is associated with nestling age and parental sex. You measure feeding rates at 20 nests. Each nest contains multiple nestlings, and you track the identity and age of each nestling. You also record feeding behavior of both parents. 
+
+**Fixed effect:** `nestling_age` and `parental_sex`. 
+
+**Random effect:** `nestling_id` nested within `nest`, which is further nested within `mother-father pair`. To account for this structure, you include nest as a random effect and nestling nested within nest as a random effect. Observations from the same nest are more similar to one another than to observations from different nests. Likewise, repeated observations of the same nestling are not independent.
+
+:::
 
 ---
-
-## How many levels are required?
-
-There is no universal minimum.
-
-Common claims:
-
-- Minimum 4  
-- Minimum 5  
-- Minimum 6  
-- Minimum 14  
-
-These disagreements signal either (a) lack of scientific consensus, or, worse (b) uncertainty about how the models work. The real answer:
-
-> There is no strict minimum. 
-
-If you incorporate grouping terms with fewer levels, the model approaches that of a standard GLM. Certainly, such a model may be unnecessarily complex, but the inclusion of the random effects cannot harm the analysis. Even small variance components accounted for by the random effects can improve inference. As we have seen in this course many times:
-
-> The question is about ecological/biological necessity and not about _arbitrary_ thresholds.
-
-So, when you hear an assertion that one should not include a random effect if there are less than five levels (e.g. number of individuals, number of sites), do not worry about it. You can read 
-
-* [Gomes, D.G.E. (2022)](https://peerj.com/articles/12794/)
-
----
-
-## Final Takeaways
-
-- Independence violations are _common_ in ecology.  
-- Hierarchical structure is _biological reality_.  
-- Mixed models explicitly model that structure.  
-- Random effects account for grouping variance.  
-- Fixed effects estimate biological effects of interest.  
-- There is no rigid minimum-number-of-grouping-levels rule.  
-
-GLMMs are not advanced for the sake of being advanced.
-
-They are the correct tool when ecology produces clustered data.
-
 
 ## Bibliography for this section
 

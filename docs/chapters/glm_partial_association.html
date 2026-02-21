@@ -374,6 +374,24 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">DHARMA diagnostics</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/glmms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">GLMM Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/tutorial_glmms_part01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Tutorial: GLMMs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/glmm_epilogue.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">GLMM epilogue</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -396,9 +414,8 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#plotting-all-the-residuals" id="toc-plotting-all-the-residuals" class="nav-link" data-scroll-target="#plotting-all-the-residuals"><span class="header-section-number">23.3.1</span> Plotting all the residuals</a></li>
   </ul></li>
-  <li><a href="#residualization-two-model-predictors-1" id="toc-residualization-two-model-predictors-1" class="nav-link" data-scroll-target="#residualization-two-model-predictors-1"><span class="header-section-number">23.4</span> Residualization: Two model predictors</a></li>
-  <li><a href="#residualization-more-than-two-model-predictors" id="toc-residualization-more-than-two-model-predictors" class="nav-link" data-scroll-target="#residualization-more-than-two-model-predictors"><span class="header-section-number">23.5</span> Residualization: More than two model predictors</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">23.6</span> Summary</a></li>
+  <li><a href="#residualization-more-than-two-model-predictors" id="toc-residualization-more-than-two-model-predictors" class="nav-link" data-scroll-target="#residualization-more-than-two-model-predictors"><span class="header-section-number">23.4</span> Residualization: More than two model predictors</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">23.5</span> Summary</a></li>
   </ul>
 </nav>
     </div>
@@ -659,145 +676,12 @@ Number of Fisher Scoring iterations: 2</code></pre>
 <p>Examine the summary of <code>modbase</code> to compare the coefficients for <code>mean_depth</code> and <code>dens</code> to the variation in each of these plots. You should immediately notice the one with less residual structure (more clustered around the regression line) has the larger effect size.</p>
 </section>
 </section>
-<section id="residualization-two-model-predictors-1" class="level2" data-number="23.4">
-<h2 data-number="23.4" class="anchored" data-anchor-id="residualization-two-model-predictors-1"><span class="header-section-number">23.4</span> Residualization: Two model predictors</h2>
+<section id="residualization-more-than-two-model-predictors" class="level2" data-number="23.4">
+<h2 data-number="23.4" class="anchored" data-anchor-id="residualization-more-than-two-model-predictors"><span class="header-section-number">23.4</span> Residualization: More than two model predictors</h2>
 <p>The above example clearly illustrates how residualization works for a model with two predictors. But what about a model with &gt;2 predictors? We will simply add one of the other potential predictors (<code>period</code>) to our base model from above. Again, this is a rather nonsensical formulation:</p>
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-glm(formula = abund ~ mean_depth + dens, data = pufferi)
-
-Coefficients:
-              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  3.858e+01  1.926e+01   2.003   0.0471 *  
-mean_depth  -3.730e-04  5.833e-03  -0.064   0.9491    
-dens         3.787e+04  1.318e+03  28.735   &lt;2e-16 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-(Dispersion parameter for gaussian family taken to be 5082.682)
-
-    Null deviance: 7067483  on 145  degrees of freedom
-Residual deviance:  726824  on 143  degrees of freedom
-AIC: 1665.2
-
-Number of Fisher Scoring iterations: 2</code></pre>
-</div>
-</div>
-<p>Let us go through the three steps again.</p>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span><strong>Step 1: Remove the effect of <code>dens</code> from <code>mean_depth</code></strong>
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>First, regress <code>mean_depth</code> on <code>dens</code> (the two predictors, in this case) and calculate model residuals.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>mod_DEPTH_on_DENS <span class="ot">&lt;-</span> <span class="fu">glm</span>(mean_depth <span class="sc">~</span> dens, <span class="at">data =</span> pufferi)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>depth_resid <span class="ot">&lt;-</span> <span class="fu">resid</span>(mod_DEPTH_on_DENS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>The residuals from this model represent the component of <code>mean_depth</code> that <em>cannot</em> be explained by <code>dens</code>. This answers the question: <em>How does <code>mean_depth</code> vary once <code>dens</code> has been held constant?</em></p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span><strong>Step 2: Remove the effect of <code>dens</code> from <code>abund</code></strong>
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Next, regress <code>abund</code> on <code>dens</code> and retain the residuals.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mod_ABUND_on_DENS <span class="ot">&lt;-</span> <span class="fu">glm</span>(abund <span class="sc">~</span> dens, <span class="at">data =</span> pufferi)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>abund_resid <span class="ot">&lt;-</span> <span class="fu">resid</span>(mod_ABUND_on_DENS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>These residuals represent variation in <code>abund</code> that is not associated with <code>dens</code>. By now, you should see the general pattern of this residualization approach.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span><strong>Step 3: Estimate the partial association</strong>
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Finally, regress the residuals of <code>abund</code> (Step 2) onto the residuals of <code>mean_depth</code> (Step 1).</p>
-<p>You can run the <code>summary()</code> function to view the model output. The slope from this regression quantifies the association between <code>mean_depth</code> and <code>abund</code> after <code>dens</code> has been accounted for. This value will be very close to the coefficient for <code>mean_depth</code> in the full multivariable model:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-glm(formula = abund ~ mean_depth + dens, data = pufferi)
-
-Coefficients:
-              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  3.858e+01  1.926e+01   2.003   0.0471 *  
-mean_depth  -3.730e-04  5.833e-03  -0.064   0.9491    
-dens         3.787e+04  1.318e+03  28.735   &lt;2e-16 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-(Dispersion parameter for gaussian family taken to be 5082.682)
-
-    Null deviance: 7067483  on 145  degrees of freedom
-Residual deviance:  726824  on 143  degrees of freedom
-AIC: 1665.2
-
-Number of Fisher Scoring iterations: 2</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-glm(formula = abund_resid ~ depth_resid, data = pufferi)
-
-Coefficients:
-              Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept)  1.009e-13  5.880e+00   0.000    1.000
-depth_resid -3.730e-04  5.812e-03  -0.064    0.949
-
-(Dispersion parameter for gaussian family taken to be 5047.386)
-
-    Null deviance: 726844  on 145  degrees of freedom
-Residual deviance: 726824  on 144  degrees of freedom
-AIC: 1663.2
-
-Number of Fisher Scoring iterations: 2</code></pre>
-</div>
-</div>
-<p>Indeed, you see that the effect size is -3.730e-04 in both cases. So, we have successful reconstructed how GLMs can examine partial associations between predictors and outcome variables.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="residualization-more-than-two-model-predictors" class="level2" data-number="23.5">
-<h2 data-number="23.5" class="anchored" data-anchor-id="residualization-more-than-two-model-predictors"><span class="header-section-number">23.5</span> Residualization: More than two model predictors</h2>
-<p>For more than two model predictors, the number of steps increases. But, arguably, the complexity does not. The logic is still the same:</p>
-<blockquote class="blockquote">
-<p>A predictor’s coefficient equals the relationship between the parts of the outcome and that predictor that remain after removing the influence of all other variables (residuals!)</p>
-</blockquote>
-<p>Here is a new model with a third predictor (<code>period</code>) added:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>mod_full <span class="ot">&lt;-</span> <span class="fu">glm</span>(abund <span class="sc">~</span> mean_depth <span class="sc">+</span> dens <span class="sc">+</span> period, <span class="at">data =</span> pufferi)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_full)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>mod_full <span class="ot">&lt;-</span> <span class="fu">glm</span>(abund <span class="sc">~</span> mean_depth <span class="sc">+</span> dens <span class="sc">+</span> period, <span class="at">data =</span> pufferi)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_full)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -821,9 +705,13 @@ AIC: 1666.7
 Number of Fisher Scoring iterations: 2</code></pre>
 </div>
 </div>
+<p>For more than two model predictors, the number of steps increases. But, arguably, the complexity does not. The logic is still the same:</p>
+<blockquote class="blockquote">
+<p>A predictor’s coefficient equals the relationship between the parts of the outcome and that predictor that remain after removing the influence of all other variables (residuals!)</p>
+</blockquote>
 <p>Below is the way in which we would calculate –by residualization– the partial association coefficient between one predictor (<code>mean_depth</code>) and <code>abund</code> (controlling for <code>dens</code> and <code>period</code>). You can apply the same process to the other two predictors. Click on each callout box to expand.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -832,17 +720,17 @@ Number of Fisher Scoring iterations: 2</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>mod_DEPTH_on_OTHERS <span class="ot">&lt;-</span> <span class="fu">glm</span>(mean_depth <span class="sc">~</span> dens <span class="sc">+</span> period, <span class="at">data =</span> pufferi)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>depth_resid <span class="ot">&lt;-</span> <span class="fu">resid</span>(mod_DEPTH_on_OTHERS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mod_DEPTH_on_OTHERS <span class="ot">&lt;-</span> <span class="fu">glm</span>(mean_depth <span class="sc">~</span> dens <span class="sc">+</span> period, <span class="at">data =</span> pufferi)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>depth_resid <span class="ot">&lt;-</span> <span class="fu">resid</span>(mod_DEPTH_on_OTHERS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -851,17 +739,17 @@ Number of Fisher Scoring iterations: 2</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>mod_ABUND_on_OTHERS <span class="ot">&lt;-</span> <span class="fu">glm</span>(abund <span class="sc">~</span> dens <span class="sc">+</span> period, <span class="at">data =</span> pufferi)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>abund_resid_depth <span class="ot">&lt;-</span> <span class="fu">resid</span>(mod_ABUND_on_OTHERS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>mod_ABUND_on_OTHERS <span class="ot">&lt;-</span> <span class="fu">glm</span>(abund <span class="sc">~</span> dens <span class="sc">+</span> period, <span class="at">data =</span> pufferi)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>abund_resid_depth <span class="ot">&lt;-</span> <span class="fu">resid</span>(mod_ABUND_on_OTHERS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -870,12 +758,12 @@ Number of Fisher Scoring iterations: 2</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>For this step, we regress the residuals of <code>abund</code> (controlling for the non-focal predictors; Step 2) onto the residuals of <code>mean_depth</code> (controlling for the non-focal predictors; Step 1).</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>mod_partial_depth <span class="ot">&lt;-</span> <span class="fu">glm</span>(abund_resid_depth <span class="sc">~</span> depth_resid)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_partial_depth)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mod_partial_depth <span class="ot">&lt;-</span> <span class="fu">glm</span>(abund_resid_depth <span class="sc">~</span> depth_resid)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_partial_depth)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -900,8 +788,8 @@ Number of Fisher Scoring iterations: 2</code></pre>
 </div>
 </div>
 </section>
-<section id="summary" class="level2" data-number="23.6">
-<h2 data-number="23.6" class="anchored" data-anchor-id="summary"><span class="header-section-number">23.6</span> Summary</h2>
+<section id="summary" class="level2" data-number="23.5">
+<h2 data-number="23.5" class="anchored" data-anchor-id="summary"><span class="header-section-number">23.5</span> Summary</h2>
 <p>The goal of this tutorial was to demystify the mathematics of regression so that it feels like a transparent tool rather than a black box. We showed that a partial coefficient is simply the relationship between the leftover variation in a predictor and the leftover variation in the response after accounting for other variables. It really is that simple.</p>
 
 

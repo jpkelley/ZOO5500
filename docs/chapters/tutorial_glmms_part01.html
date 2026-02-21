@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>26&nbsp; Tutorial: GLMMs – Quantitative Analysis of (Messy) Field Data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/glmm_epilogue.html" rel="next">
+<link href="../chapters/glmms.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-f2c6d6e2b784ddc5de38779acc06f37d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/statistical_aphorisms.html">Part III: Columns to Curves</a></li><li class="breadcrumb-item"><a href="../chapters/tutorial_glmms_part01.html"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Tutorial: GLMMs</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../graphics/jackalope_graphics/analytical_jackalope.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="../graphics/jackalope_graphics/analytical_jackalope.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Quantitative Analysis of (Messy) Field Data</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Course Overview</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Information</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/course_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Syllabus</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/calendar_sp26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Course calendar</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/ai_policy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">GenAI Use Guidelines</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/preparing_yourself.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Preparing Yourself</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/assignment_grades.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Assignments &amp; Grades</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/project_scoping.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Project Scoping</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Part ∅: AI preparation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/ai_prompting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">AI Prompting for Analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/using_jackalope_gpt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Using JackalopeGPT</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Part I: Reproducible Analyses</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/reproducible_workflow_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Reproducible Analyses</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/nature_of_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Nature of Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/metadata_low_friction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Metadata</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/naming_conventions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Conventions and Style</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Part II: Chaos to Columns</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/data_exploration_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data Exploration</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/data_exploration_toolkit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data Exploration Toolkit</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/outliers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Tool 1: Outliers</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/tutorial_data_exploration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Tutorial: Data Exploration</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part III: Columns to Curves</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/statistical_aphorisms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Statistical Philosophy</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/intro_modeling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Introduction to Models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/intro_glms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">GLM Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/tutorial_glms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Tutorial: GLMs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/glm_partial_association.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Tutorial: Partial Associations</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/DHARMA_diagnostics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">DHARMA diagnostics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/glmms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">GLMM Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/tutorial_glmms_part01.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Tutorial: GLMMs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/glmm_epilogue.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">GLMM epilogue</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Part IV: Curves to Meaning</span></span>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">26.1</span> Introduction</a></li>
+  <li><a href="#workspace-set-up" id="toc-workspace-set-up" class="nav-link" data-scroll-target="#workspace-set-up"><span class="header-section-number">26.2</span> Workspace set-up</a></li>
+  <li><a href="#the-example-dataset-the-wyoming-jackalope-lepusantilocapra-wyomingensis" id="toc-the-example-dataset-the-wyoming-jackalope-lepusantilocapra-wyomingensis" class="nav-link" data-scroll-target="#the-example-dataset-the-wyoming-jackalope-lepusantilocapra-wyomingensis"><span class="header-section-number">26.3</span> The example dataset: The Wyoming Jackalope (<em>Lepusantilocapra wyomingensis</em>)</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/statistical_aphorisms.html">Part III: Columns to Curves</a></li><li class="breadcrumb-item"><a href="../chapters/tutorial_glmms_part01.html"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Tutorial: GLMMs</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Tutorial: GLMMs</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level2" data-number="26.1">
+<h2 data-number="26.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">26.1</span> Introduction</h2>
+<p>In this tutorial, we will build a Generalized Linear Mixed Model (GLMM) using the <code>glmmTMB</code> package. This also could be done easily within the <code>mgcv</code> package as well (using the <code>gam()</code> or <code>gamm</code> functions), but we will start with <code>glmmTMB</code> for the sake of clarity; the <code>glmmTMB</code> formulation remains the standard seen in the ecological literature. An extremely powerful alternative is the <code>brms</code> package (Bayesian regression modeling using Stan); this package can also fit GLMs, GLMMs, GAMs, GAMMs for estimating causal models. The <code>brms</code> package will be discussed during the Structural Causal Modeling section of the course.</p>
+<p>These packages extend GLMs while maintaining flexibility in distributions and link functions. They are all computationally efficient and well maintained.</p>
+<p>We will demonstrate how GLMMs can improve GLMs by first building another GLM (as if you were a naive researcher); this is obviously not the approach that a seasoned analyst would take. Note again that we will start with a horribly misspecified Generalized Linear Model (GLM), just as in the GLM Tutorial.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Skim the GLM
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You already have experience with fitting a GLM from the previous section. If you are comfortable with GLMs, you may quickly work through the first part (by running the code and skimming the text below).</p>
+</div>
+</div>
+</section>
+<section id="workspace-set-up" class="level2" data-number="26.2">
+<h2 data-number="26.2" class="anchored" data-anchor-id="workspace-set-up"><span class="header-section-number">26.2</span> Workspace set-up</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"class_r_scripts/load_packages.r"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="the-example-dataset-the-wyoming-jackalope-lepusantilocapra-wyomingensis" class="level2" data-number="26.3">
+<h2 data-number="26.3" class="anchored" data-anchor-id="the-example-dataset-the-wyoming-jackalope-lepusantilocapra-wyomingensis"><span class="header-section-number">26.3</span> The example dataset: The Wyoming Jackalope (<em>Lepusantilocapra wyomingensis</em>)</h2>
+<p>For this example, you will need the following file (simply click to save):</p>
+<ul>
+<li><a href="../chapters/class_exercise_data/lepusantilocapra_wyomingensis_dataset.csv"><code>lepusantilocapra_wyomingensis_dataset.csv</code></a></li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Jackalope seem to be everywhere. Recently, during a survey of 31 forested study plots (1 square kilometer each) here in Wyoming, scientists discovered a cryptic species of jackalope. Because it is endemic to Wyoming, they named it the Wyoming Lorax (<em>Lepusantilocapra wyomingensis</em>). The researchers quantified their abundance (counts per survey and multiple surveys per plot), community diversity (all jackalope species in the plots), and also measured several habitat features, including percentage ground vegetation, percentage herb layer, and percent leaf litter. Anyway, these scientists thought the scientific community would not believe their discovery, so they gave the dataset to the cryptid ecologists of ZOO/ECOL-5500. So, let us begin by importing this dataset. Then, we can save it to an object called “wyoming” and then examine the structure of the data:</p>
+</div><div class="column" style="width:50%;">
+<p><img src="../graphics/jackalope_graphics/wyoming_jackalope.png" class="img-fluid"></p>
+</div><div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>wyoming <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"class_exercise_data/lepusantilocapra_wyomingensis_dataset.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(wyoming)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   173 obs. of  10 variables:
+ $ plot_id       : int  1 1 1 1 1 1 1 2 2 2 ...
+ $ forest_age    : chr  "5years" "5years" "5years" "5years" ...
+ $ x             : int  120123 120051 120006 119927 119855 119788 119742 146232 146188 146158 ...
+ $ y             : int  183465 183558 183512 183563 183559 183546 183501 102777 102818 102891 ...
+ $ abundance     : int  34 43 48 35 45 92 94 61 79 55 ...
+ $ shannon_hlog10: num  1.05 1.13 1 0.87 0.94 1.01 1.2 0.38 0.71 0.82 ...
+ $ ground_veg    : num  0.01 0.01 0.01 0.01 0.03 0.27 0.15 0.15 0.59 0.35 ...
+ $ herb_layer    : num  0.27 0.45 0.63 0.49 0.32 0.73 0.68 0.2 0.39 0.38 ...
+ $ leaf_litter   : num  0 0 0 0 0 0 0 0.63 0.06 0.49 ...
+ $ rain_in       : int  2 0 2 2 0 1 1 4 3 1 ...</code></pre>
+</div>
+</div><p>You see several variables and plot information:</p><ul>
+<li><code>plot_id</code>: values 1-31 for each unique plot</li>
+<li><code>forest_age</code>: categorical variable describing the age, in years, of each plot</li>
+<li><code>tree_species</code>: species of dominant tree in each survey</li>
+<li><code>x</code> and <code>y</code>: spatial coordinates in UTM (specific projection not important) of each measured survey</li>
+<li><code>abundance</code>: of <em>Lepusantilocapra wyomingensis</em> in each survey</li>
+<li><code>shannon_hlog10</code>: Shannon diversity index of the jackalope community in each survey</li>
+<li><code>ground_veg</code>: Proportion of each survey area covered in ground vegetation</li>
+<li><code>herb_layer</code>: Proportion of each survey area covered in herbs</li>
+<li><code>leaf_litter</code>: Proportion of each survey area covered in leaf litter only (no vegetation)</li>
+<li><code>rain_in</code>: round total precipitation (in inches…because that’s what their inexpensive rain gauge collected)</li>
+</ul><p>For the sake of brevity, let us assume that these data have already been cleaned and inspected for multicollinearity and outliers. That is, we will not eliminate/modidy/exorcise any data at this point. We will do some additional model validation tests (to check on the influence of outliers, etc.) after out initial analysis.</p><section id="fitting-gaussian-glms" class="level2" data-number="26.4">
+<h2 data-number="26.4" class="anchored" data-anchor-id="fitting-gaussian-glms"><span class="header-section-number">26.4</span> Fitting Gaussian GLM(s)</h2>
+<p>We first want to test the impact of multiple predictors on the response variable (number of parasites). We have several hypotheses to test. Following the “one model = one hypothesis” approach of Burnham and Anderson (2002), these hypotheses can easily be verbalized in a way that reflects how we test them with GLMs. That is, we think about a few of the variables and hypothesize that the number of jackalopes is impacted by:</p>
+<ul>
+<li>ground_veg + herb_layer + leaf_litter</li>
+<li>ground_veg + herb_layer</li>
+<li>ground_veg + leaf_litter</li>
+<li>herb_layer + leaf_litter</li>
+<li>ground_veg</li>
+<li>herb_layer</li>
+<li>leaf_litter</li>
+<li>(none of these variable…this is our <em>null</em> hypothesis)</li>
+</ul>
+<p>These can then be translated into the form of a GLM. Below serves as a quick reminder of how we write these GLMs. You should be become familiar with this general form of the models, where “~” (tilde) can be verbalized as <em>“…is a function of…”</em>. The main predictors are then put after this tilde. Then, we need to specify the dataset that the function should read from. OK, let us create a few models:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mod_01 <span class="ot">&lt;-</span> <span class="fu">glm</span>(abundance <span class="sc">~</span> ground_veg <span class="sc">+</span> herb_layer <span class="sc">+</span> leaf_litter, <span class="at">data=</span>wyoming)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>mod_02 <span class="ot">&lt;-</span> <span class="fu">glm</span>(abundance <span class="sc">~</span> ground_veg <span class="sc">+</span> herb_layer, <span class="at">data=</span>wyoming)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>mod_03 <span class="ot">&lt;-</span> <span class="fu">glm</span>(abundance <span class="sc">~</span> ground_veg <span class="sc">+</span> leaf_litter, <span class="at">data=</span>wyoming)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>mod_04 <span class="ot">&lt;-</span> <span class="fu">glm</span>(abundance <span class="sc">~</span> herb_layer <span class="sc">+</span> leaf_litter, <span class="at">data=</span>wyoming)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>mod_05 <span class="ot">&lt;-</span> <span class="fu">glm</span>(abundance <span class="sc">~</span> ground_veg, <span class="at">data=</span>wyoming)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>mod_06 <span class="ot">&lt;-</span> <span class="fu">glm</span>(abundance <span class="sc">~</span> herb_layer, <span class="at">data=</span>wyoming)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>mod_07 <span class="ot">&lt;-</span> <span class="fu">glm</span>(abundance <span class="sc">~</span> leaf_litter, <span class="at">data=</span>wyoming)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>mod_08 <span class="ot">&lt;-</span> <span class="fu">glm</span>(abundance <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data=</span>wyoming)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Again, we are using these GLMs to test eight competing (i.e.&nbsp;multiple working) hypotheses.</p>
+<section id="interpretation-of-the-glm-results" class="level3" data-number="26.4.1">
+<h3 data-number="26.4.1" class="anchored" data-anchor-id="interpretation-of-the-glm-results"><span class="header-section-number">26.4.1</span> Interpretation of the GLM results</h3>
+<p>Let us look at the first model in this candidate model set.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_01)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = abundance ~ ground_veg + herb_layer + leaf_litter, 
+    data = wyoming)
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   78.046      7.614  10.250  &lt; 2e-16 ***
+ground_veg    68.559     16.684   4.109 6.18e-05 ***
+herb_layer     8.163     15.113   0.540   0.5898    
+leaf_litter  -47.168     25.784  -1.829   0.0691 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 2763.813)
+
+    Null deviance: 515594  on 172  degrees of freedom
+Residual deviance: 467084  on 169  degrees of freedom
+AIC: 1867.8
+
+Number of Fisher Scoring iterations: 2</code></pre>
+</div>
+</div>
+<p>Remember that When you run the <code>summary()</code> (or <code>broom::tidy</code>) function on a model object, you will see output that will be fairly consistent across GLMs, GLMMs, GAMs, GAMMs, and many other model types. As a reminder, the main part of the model output is the coefficients table; this tells you the results of your model. You should expect to see scientific notation (e.g.&nbsp;5.655e-2 = 0.05655). The way to read this is like an equation for a line (since this is a linear model):</p>
+<p><span class="math display">\[
+\text{Abundance} = 78.046
++ 68.559\,(\text{ground veg})
++ 8.163\,(\text{herb layer})
+- 47.168\,(\text{leaf litter})
+\]</span>, where you would enter numerical values of <code>ground_veg</code>, <code>herb_layer</code>, and <code>leaf_litter</code> into the equation. So, this output is telling you that <code>ground_veg</code> has a significant (<em>p</em> = 6.18e-05) positive impact ($= 68.559; this is the slope value of the line) on <code>abundance</code>. No other factor shows a significant effect. But, as you will see, this was but a single hypothesis (<code>ground_veg</code>, <code>herb_layer</code>, and <code>leaf_litter</code>) that we tested. We need to know if it is better supported by the data than other hypotheses.</p>
+</section>
+<section id="information-theoretic-multi-model-comparison" class="level3" data-number="26.4.2">
+<h3 data-number="26.4.2" class="anchored" data-anchor-id="information-theoretic-multi-model-comparison"><span class="header-section-number">26.4.2</span> Information-theoretic multi-model comparison</h3>
+<p>For this, we use <strong>a</strong>n <strong>i</strong>nformation <strong>c</strong>riterion (AIC) to rank competing models based on their relative support from the data. We will explain this <em>ad nauseum</em> in a later section, but it is sufficient for now to say that AIC provides a metric for finding a model (or models) that best balance fit and complexity. We must be explicit about what AIC is and is not used for:</p>
+<ul>
+<li><strong>What it is <em>not</em> used for:</strong> “To identify the model that best fits the data”</li>
+<li><strong>What it is used for:</strong> “To identify the model that captures the ecological signal without overfitting the noise”</li>
+</ul>
+<p>In the AIC framework, our task is to let hypotheses (models) <em>compete</em> against each other given each model’s balance between signal and noise. Higher values of AIC indicate more uncertainty (and more expected information loss). The absolute value of AIC does not matter. So, for this exercise, we are looking for the model with the lowest AIC value (lowest information loss relative to a theoretical reference).</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span><strong>AIC: What’s in a name?</strong>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Though it is now referred to as the Akaike Information Criterion, the original AIC was named –by Akaike himself in a 1974 paper– was “an information criterion.”</p>
+</div>
+</div>
+<p>Let us calculate AIC values for each model that we created:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>aic_list <span class="ot">&lt;-</span> <span class="fu">AIC</span>(mod_01, mod_02, mod_03, mod_04, mod_05, mod_06, mod_07, mod_08)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># sort by ascending AIC (lowest AIC in top row)</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>aic_list <span class="sc">%&gt;%</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(AIC)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       df      AIC
+mod_03  4 1866.120
+mod_05  3 1867.415
+mod_01  5 1867.821
+mod_02  4 1869.213
+mod_08  2 1878.915
+mod_07  3 1880.300
+mod_06  3 1880.914
+mod_04  4 1882.297</code></pre>
+</div>
+</div>
+<p>The third model (<code>mod_03</code>) has the the lowest AIC value and therefore our best-supported model among those considered in the model set. <em>Again, we will discuss the mechanics and some of the conventional approaches to AIC-based model selection later.</em></p>
+<p>We have now successfully created a GLM for this dataset. But, as you know, we still have some checks to do…</p>
+</section>
+<section id="checking-your-glm-residuals" class="level3" data-number="26.4.3">
+<h3 data-number="26.4.3" class="anchored" data-anchor-id="checking-your-glm-residuals"><span class="header-section-number">26.4.3</span> Checking your GLM residuals</h3>
+<p>You now know why the structure of your model residuals is important. Let us check our best-supported model (<code>mod_03</code>) to see how the residuals are behaving. Again, use the <code>DHARMa</code> package’s functionality.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>simresid <span class="ot">&lt;-</span> <span class="fu">simulateResiduals</span>(<span class="at">fittedModel =</span> mod_03)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(simresid)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tutorial_glmms_part01_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Focus on the left plot (the quantile-quantile plot of residuals). Remember that the “KS test” (Kolmogorov-Smirnov test) is a test of normality of the model residuals. Here, it shows that the residuals deviate significantly from a normal distribution; this will be something to fix. It also tests for outliers in the data. The results here suggest that there are no statistical outliers. From the plot at right (the Signal portion of the residual diagnostic), we see that the median quantile of the data also shows residual structure.</p>
+<p>So, we now need to try to fix several aspects of our model to ensure that our imposed structure is fitting the data well. Sometimes, this is a difficult and laborious task.</p>
+</section>
+</section><section id="fitting-poisson-glms" class="level2" data-number="26.5">
+<h2 data-number="26.5" class="anchored" data-anchor-id="fitting-poisson-glms"><span class="header-section-number">26.5</span> Fitting Poisson GLM(s)</h2>
+<p>As a first step, let us step back and think critically about some fundamental features of our dataset. Among several things we could assess, we can first examine our response variable: <code>abundance</code>. We have abundance of <em>L. wyomingensis</em>, a metric that should follow a Poisson distribution (positive skew, and &gt;0). But we did not specify this in our original GLMs. What we did was run a set of GLMs that assumed that abundance followed Gaussian/normal distribution. What were we thinking?!?</p>
+<p>Regardless of what the model residuals show, our priority is to ensure that our data are correctly bounded. So, let us try a Poisson distribution. We do this by specifying an argument in the <code>glm()</code> function for family. Unfortunately, because of our oversight, we need to refit all of our original models (and immediately forget that our best model from our misspecfied attempt was <code>mod_03</code>, as that will likely change). Run the following:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>mod_01 <span class="ot">&lt;-</span> <span class="fu">glm</span>(abundance <span class="sc">~</span> ground_veg <span class="sc">+</span> herb_layer <span class="sc">+</span> leaf_litter, <span class="at">family=</span>poisson, <span class="at">data=</span>wyoming)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>mod_02 <span class="ot">&lt;-</span> <span class="fu">glm</span>(abundance <span class="sc">~</span> ground_veg <span class="sc">+</span> herb_layer, <span class="at">family=</span>poisson, <span class="at">data=</span>wyoming)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>mod_03 <span class="ot">&lt;-</span> <span class="fu">glm</span>(abundance <span class="sc">~</span> ground_veg <span class="sc">+</span> leaf_litter, <span class="at">family=</span>poisson, <span class="at">data=</span>wyoming)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>mod_04 <span class="ot">&lt;-</span> <span class="fu">glm</span>(abundance <span class="sc">~</span> herb_layer <span class="sc">+</span> leaf_litter, <span class="at">family=</span>poisson, <span class="at">data=</span>wyoming)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>mod_05 <span class="ot">&lt;-</span> <span class="fu">glm</span>(abundance <span class="sc">~</span> ground_veg, <span class="at">family=</span>poisson, <span class="at">data=</span>wyoming)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>mod_06 <span class="ot">&lt;-</span> <span class="fu">glm</span>(abundance <span class="sc">~</span> herb_layer, <span class="at">family=</span>poisson, <span class="at">data=</span>wyoming)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>mod_07 <span class="ot">&lt;-</span> <span class="fu">glm</span>(abundance <span class="sc">~</span> leaf_litter, <span class="at">family=</span>poisson, <span class="at">data=</span>wyoming)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>mod_08 <span class="ot">&lt;-</span> <span class="fu">glm</span>(abundance <span class="sc">~</span> <span class="dv">1</span>, <span class="at">family=</span>poisson, <span class="at">data=</span>wyoming)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We again compare models using an AIC framework:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>aic_list <span class="ot">&lt;-</span> <span class="fu">AIC</span>(mod_01, mod_02, mod_03, mod_04, mod_05, mod_06, mod_07, mod_08)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(aic_list, <span class="st">"AIC"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       df      AIC
+mod_01  4 5492.914
+mod_02  3 5583.607
+mod_03  3 5501.932
+mod_04  3 5963.739
+mod_05  2 5588.330
+mod_06  2 5981.654
+mod_07  2 5961.821
+mod_08  1 5979.687</code></pre>
+</div>
+</div>
+<p>Whoa. Now, <code>mod_01</code> (our most complex model) is the best-supported model, as it has the lowest AIC value. This represents a large inferential change from the Gaussian GLM above. Let us look at this best-supported model:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_01)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = abundance ~ ground_veg + herb_layer + leaf_litter, 
+    family = poisson, data = wyoming)
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)  4.36815    0.01559 280.239  &lt; 2e-16 ***
+ground_veg   0.67966    0.03066  22.166  &lt; 2e-16 ***
+herb_layer   0.09970    0.03000   3.324 0.000889 ***
+leaf_litter -0.50050    0.05348  -9.359  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 4899.7  on 172  degrees of freedom
+Residual deviance: 4406.9  on 169  degrees of freedom
+AIC: 5492.9
+
+Number of Fisher Scoring iterations: 5</code></pre>
+</div>
+</div>
+<p>And check its residuals…</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>simresid <span class="ot">&lt;-</span> <span class="fu">simulateResiduals</span>(<span class="at">fittedModel =</span> mod_01)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(simresid)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tutorial_glmms_part01_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Yowzers. Everything about the model (the Noise and Signal components) seems to be poorly fit. Ouch. The <code>DHARMa</code> package’s residual plots continue to detect structure in the model residuals, and it has now detected other problems (e.g.outliers based on our imposed distribution). I chose this example to demonstrate how even the best model in a set of models might not be a good model. There may be other factors we failed to account for that are throwing the model into utter disarray.</p>
+<p>We may need to adjust our chosen distribution for our response variable. Or maybe there is some non-independence that is fundamental to our data structure that we need to account for. Before reading on, refer to the <a href="https://jpkelley.github.io/ZOO5500/chapters/DHARMA_diagnostics.html"><em>DHARMa Diagnostics</em> page</a> for information about diagnosing the origin of these warnings.</p>
+<p>You may have noticed from looking at the original dataset that we excluded some predictors. Think about a few potentially important data components that should have been included in our model-building and hypothesis testing in the above GLMs. Let us then remedy these omissions while we also attempt to solve our issues of non-independence. For that, we turn to Generalized Linear Mixed Models (GLMMs).</p>
+</section><section id="how-to-create-a-generalized-linear-mixed-model-glmm" class="level2" data-number="26.6">
+<h2 data-number="26.6" class="anchored" data-anchor-id="how-to-create-a-generalized-linear-mixed-model-glmm"><span class="header-section-number">26.6</span> How to create a Generalized Linear Mixed Model (GLMM)</h2>
+<p>For most ecological datasets, it is generally good to always assume the presence of some non-independence and act accordingly. So, let us think about and properly specify our model and not cherry-pick what we think to be important variables.</p>
+<p>As there are two components of a mixed-effects model (the fixed and random components), we need a set of steps to guide us through the process of determing the fixed and random structures. There are three primary steps (click on the clalout boxes below to expand):</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span><strong>Step #1: Specify your global model</strong>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A <em>global</em> model is essentially a model that includes the following:</p>
+<ul>
+<li>all plausible fixed effects and interactions</li>
+<li>a maximally reasonable random structure</li>
+</ul>
+<p>The secret to this step is to formulate a complex yet biologically/ecologically defensible model.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span><strong>Step #2: Optimize the random-effects structure</strong>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>To determine the optimal random-effects structure, do the following:</p>
+<ul>
+<li>keep the fixed-effects structure of the global model constant<br>
+</li>
+<li>compare different plausible random-effects structures (using REstricted Maximum Likelihood, or REML, for selection)<br>
+</li>
+<li>select the <em>best</em> random-effects structure and lock it in (i.e.&nbsp;this will be the random-effects structure retained for all model comparisons in Step #3)</li>
+</ul>
+<p>Warning! <em>Do not</em> be tempted to use an intercept-only fixed-effects structure when optimizing the random-effects component. The random effects are not independent of the systematic structure of your model.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span><strong>Step 03: Optimize the fixed-effects structure</strong>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>With your random effects locked, you now move on to compared models with different fixed-effects structures. For this, do the following:</p>
+<ul>
+<li>fit all models with Maximum Likelihood (not REstricted Maximum Likelihood)<br>
+</li>
+<li>calculate AIC metrics for each model</li>
+<li>compare AIC among the candidate model set and select best-supported models</li>
+</ul>
+</div>
+</div>
+</div>
+<p>We can put these steps into practice by extending the GLM we just fitted.</p>
+<section id="fitting-glmms" class="level3" data-number="26.6.1">
+<h3 data-number="26.6.1" class="anchored" data-anchor-id="fitting-glmms"><span class="header-section-number">26.6.1</span> Fitting GLMM(s)</h3>
+<p>In the GLM formulation above, we applied our expert knowledge of our response variable (<code>abundance</code>) and specified a Poisson distribution. But, unfortunately, doing so seemed to negatively impact the model residuals. However, we <em>know</em> that the data boundaries (&gt;0) likely reflect the data-generating processes that we are examining. Therefore, we keep the error distribution of the original GLM. There must be another component of the model that is mis-specified. Again, refer to the <a href="https://jpkelley.github.io/ZOO5500/chapters/DHARMA_diagnostics.html"><em>DHARMa Diagnostics</em> page</a> for information about diagnosing the origin of these warnings.</p>
+<p>Let us then consider how we collected our data. First, we know that we repeatedly sampled each plot (range = 3-7 samples). <em>A priori</em>, we expect that within-plot samples will be more similar that between-plot samples. This violates the assumption of non-independence, so we know that need to explicitly include this structural element in our model. We therefore include <code>plot</code> as a random effect (a grouping/clustering variable). To do so, we convert it from a character string to a factor, so that the function that we use later will recognize it as such.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>wyoming<span class="sc">$</span>plot_id <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(wyoming<span class="sc">$</span>plot_id) <span class="co"># convert "plot" to factor</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Or, in tidy R:</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>wyoming <span class="ot">&lt;-</span> wyoming <span class="sc">|&gt;</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">plot_id =</span> <span class="fu">as.factor</span>(plot_id))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We then refit our model as as <code>glmmTMB</code> (GLMM). We have made a few important changes to our model:</p>
+<ul>
+<li>Our first action is to incorporate <code>plot_id</code> as a random effect. Note the form of the random effect (in parentheses). This is a random intercept structure (the slope is the same for all <code>plot_id</code> levels).</li>
+<li>We have added the one predictor in our dataset that we omitted in the GLMs (<code>rain_in</code>).</li>
+</ul>
+<p>Note that we have not included models that include any two-way interactions. These models could easily be included in the candidate model set below.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Before running the GLMMs below, examine the structure of these models very closely to see how this candidate model set has been structured. Pay close attention to how the number of models increased when we added predictors.</p>
+</div>
+</div>
+</section>
+<section id="step-1-specify-your-global-model-1" class="level3" data-number="26.6.2">
+<h3 data-number="26.6.2" class="anchored" data-anchor-id="step-1-specify-your-global-model-1"><span class="header-section-number">26.6.2</span> Step #1: Specify your global model</h3>
+<p>Let us then identify the best random effects structure of the model. As discussed above, we start with our global model. The global model is the model with the most complex fixed-effects and random-effects structures. In this case, we have a model with four predictors and two crossed (or non-nested) random effects.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>global <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(abundance <span class="sc">~</span> ground_veg <span class="sc">+</span> herb_layer <span class="sc">+</span> leaf_litter <span class="sc">+</span> rain_in <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> plot_id) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> forest_age), <span class="at">family=</span>poisson, <span class="at">data=</span>wyoming, <span class="at">REML=</span><span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="step-2-optimizing-the-random-effects-structure" class="level3" data-number="26.6.3">
+<h3 data-number="26.6.3" class="anchored" data-anchor-id="step-2-optimizing-the-random-effects-structure"><span class="header-section-number">26.6.3</span> Step #2: Optimizing the random effects structure</h3>
+<p>Remember that, for comparison of models with the same fixed effects but different random effects, we use REstricted Maximum Likelihood (REML) by setting <code>REML = TRUE</code> in the <code>glmmTMB</code> model (see below). Why do we use REML? Because regular Maximum Likelihood is biased for estimation of standard errors of random effects. Let us begin the global model as well as models that have different structures of the random effects (while keeping all fixed effects the same).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>global <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(abundance <span class="sc">~</span> ground_veg <span class="sc">+</span> herb_layer <span class="sc">+</span> leaf_litter <span class="sc">+</span> rain_in <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> plot_id) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> forest_age), <span class="at">family=</span>poisson, <span class="at">data=</span>wyoming, <span class="at">REML=</span><span class="cn">TRUE</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>global_01 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(abundance <span class="sc">~</span> ground_veg <span class="sc">+</span> herb_layer <span class="sc">+</span> leaf_litter <span class="sc">+</span> rain_in <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> forest_age), <span class="at">family=</span>poisson, <span class="at">data=</span>wyoming, <span class="at">REML=</span><span class="cn">TRUE</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>global_02 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(abundance <span class="sc">~</span> ground_veg <span class="sc">+</span> herb_layer <span class="sc">+</span> leaf_litter <span class="sc">+</span> rain_in <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> plot_id), <span class="at">family=</span>poisson, <span class="at">data=</span>wyoming, <span class="at">REML=</span><span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Then, we compare these models via AIC.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(global, global_01, global_02)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          df      AIC
+global     7 2452.782
+global_01  6 5137.385
+global_02  6 2451.736</code></pre>
+</div>
+</div>
+<p>We see something interesting here. The grouping factor <code>forest_age</code> does not improve model performance at all when we compare the AIC of models with and without it. The grouping factor <code>plot_id</code> improves model performance greatly. Therefore, we select <code>plot_id</code> as the random-effects structure for all models.</p>
+<p>This process could also be done with models containing different combinations of random slopes and intercepts. The world is your jackalope oyster.</p>
+<hr>
+</section>
+<section id="step-3-optimize-the-fixed-effects-structure" class="level3" data-number="26.6.4">
+<h3 data-number="26.6.4" class="anchored" data-anchor-id="step-3-optimize-the-fixed-effects-structure"><span class="header-section-number">26.6.4</span> Step 3: Optimize the fixed-effects structure</h3>
+<p>Now that we have optimized the random effects structure, we can test different fixed-effects structures against each other. Again, we are fitting what are called additive models only; these models contain no interactions between predictors.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>mod_01 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(abundance <span class="sc">~</span> ground_veg <span class="sc">+</span> herb_layer <span class="sc">+</span> leaf_litter <span class="sc">+</span> rain_in <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> plot_id), <span class="at">family=</span>poisson, <span class="at">data=</span>wyoming)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>mod_02 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(abundance <span class="sc">~</span> ground_veg <span class="sc">+</span> herb_layer <span class="sc">+</span> leaf_litter <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> plot_id), <span class="at">family=</span>poisson, <span class="at">data=</span>wyoming)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>mod_03 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(abundance <span class="sc">~</span> ground_veg <span class="sc">+</span> herb_layer <span class="sc">+</span> rain_in <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> plot_id), <span class="at">family=</span>poisson, <span class="at">data=</span>wyoming)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>mod_04 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(abundance <span class="sc">~</span> ground_veg <span class="sc">+</span> rain_in <span class="sc">+</span> leaf_litter <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> plot_id), <span class="at">family=</span>poisson, <span class="at">data=</span>wyoming)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>mod_05 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(abundance <span class="sc">~</span> herb_layer <span class="sc">+</span> rain_in <span class="sc">+</span> leaf_litter <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> plot_id), <span class="at">family=</span>poisson, <span class="at">data=</span>wyoming)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>mod_06 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(abundance <span class="sc">~</span> ground_veg <span class="sc">+</span> herb_layer <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> plot_id), <span class="at">family=</span>poisson, <span class="at">data=</span>wyoming)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>mod_07 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(abundance <span class="sc">~</span> ground_veg <span class="sc">+</span> leaf_litter <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> plot_id), <span class="at">family=</span>poisson, <span class="at">data=</span>wyoming)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>mod_08 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(abundance <span class="sc">~</span> herb_layer <span class="sc">+</span> leaf_litter <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> plot_id), <span class="at">family=</span>poisson, <span class="at">data=</span>wyoming)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>mod_09 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(abundance <span class="sc">~</span> herb_layer <span class="sc">+</span> rain_in <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> plot_id), <span class="at">family=</span>poisson, <span class="at">data=</span>wyoming)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>mod_10 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(abundance <span class="sc">~</span> leaf_litter <span class="sc">+</span> rain_in <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> plot_id), <span class="at">family=</span>poisson, <span class="at">data=</span>wyoming)</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>mod_11 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(abundance <span class="sc">~</span> ground_veg <span class="sc">+</span> rain_in <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> plot_id), <span class="at">family=</span>poisson, <span class="at">data=</span>wyoming)</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>mod_12 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(abundance <span class="sc">~</span> ground_veg <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> plot_id), <span class="at">family=</span>poisson, <span class="at">data=</span>wyoming)</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>mod_13 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(abundance <span class="sc">~</span> herb_layer <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> plot_id), <span class="at">family=</span>poisson, <span class="at">data=</span>wyoming)</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>mod_14 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(abundance <span class="sc">~</span> leaf_litter <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> plot_id), <span class="at">family=</span>poisson, <span class="at">data=</span>wyoming)</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>mod_15 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(abundance <span class="sc">~</span> rain_in <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> plot_id), <span class="at">family=</span>poisson, <span class="at">data=</span>wyoming)</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>mod_16 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(abundance <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> plot_id), <span class="at">family=</span>poisson, <span class="at">data=</span>wyoming)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>For this large model set, we then calculate AIC for each model. You can run the code below, but the results are not shown below (for brevity’s sake).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>aic.df <span class="ot">&lt;-</span> <span class="fu">AIC</span>(mod_01, mod_02, mod_03, mod_04, mod_05, mod_06, mod_07,</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  mod_08, mod_09, mod_10, mod_11, mod_12, mod_13, mod_14, mod_15,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  mod_16</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>aic.df <span class="ot">&lt;-</span> aic.df <span class="sc">|&gt;</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(AIC)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>aic.df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Let us then examine the top model (the model with the lowest AIC value); remember, we are not yet using any formal AIC-based model selection and averaging methods. <code>mod_02</code> seems to have the best fit, based on AIC values.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>simresid <span class="ot">&lt;-</span> <span class="fu">simulateResiduals</span>(<span class="at">fittedModel =</span> mod_02)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(simresid)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tutorial_glmms_part01_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Indeed, the residual structure of the <code>mod_02</code>’s Noise and Signal look much improved, even though one of the quantile lines on the right-hand plot remains problemation. But we are very close to being able to draw inference from the model.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span><strong>Thought prompt: How could you improve the residual structure?</strong>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>From your knowledge of the <code>DHARMa</code> residuals, what part of the model – Signal or Noise– should you focus on, given the residual structure?</p>
+</div>
+</div>
+<p>Let us assume we can go ahead and interpret a bit. The main results (and final model) show that the best-supported hypothesis/model is the one in which <em>L. wyomingensis</em> abundance is influenced by all of the tested covariates. Ground vegetation, herb layer percentage, and rainfall influence abundance positively, whereas the precentage of leaf litter has a negative impact of abundance. Futhermore, ground vegetation and leaf litter interact to positively influence abundance.</p>
+<p>Congratulations, you have now run a Generalized Linear Mixed Model! You are now ready to publish your first scientific article on jackalope.</p>
+</section>
+</section><section id="bibliography-for-this-section" class="level2" data-number="26.7">
+<h2 data-number="26.7" class="anchored" data-anchor-id="bibliography-for-this-section"><span class="header-section-number">26.7</span> Bibliography for this section</h2>
+<p>Burnham, K.P. and Anderson, D.R. (2002) <a href="https://link.springer.com/book/10.1007/b97636"><em>Model Selection and Inference: A Practical Information-Theoretic Approach.</em></a> 2nd Edition, Springer-Verlag, New York.</p>
+
+
+</section>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/glmms.html" class="pagination-link" aria-label="GLMM Introduction">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">GLMM Introduction</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/glmm_epilogue.html" class="pagination-link" aria-label="GLMM epilogue">
+        <span class="nav-page-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">GLMM epilogue</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

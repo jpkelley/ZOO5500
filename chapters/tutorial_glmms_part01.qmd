@@ -6,22 +6,46 @@ editor_options:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message=FALSE)
+knitr::opts_chunk$set(warning = FALSE, message=FALSE)
 ```
 
 ## Introduction
-In this tutorial, we will build a Generalized Linear Mixed Model (GLMM) using the `glmmTMB` package. We will demonstrate how GLMMs can improve GLMs by first building a GLM (as if you were a naive researcher); this is obviously not the approach that a seasoned analyst would take.
+In this tutorial, we will build a Generalized Linear Mixed Model (GLMM) using the `glmmTMB` package. This also could be done easily within the `mgcv` package as well (using the `gam()` or `gamm` functions), but we will start with `glmmTMB` for the sake of clarity; the `glmmTMB` formulation remains the standard seen in the ecological literature. An extremely powerful alternative is the `brms` package (Bayesian regression modeling using Stan); this package can also fit GLMs, GLMMs, GAMs, GAMMs for estimating causal models. The `brms` package will be discussed during the Structural Causal Modeling section of the course.
+
+These packages extend GLMs while maintaining flexibility in distributions and link functions. They are all computationally efficient and well maintained.
+
+We will demonstrate how GLMMs can improve GLMs by first building another GLM (as if you were a naive researcher); this is obviously not the approach that a seasoned analyst would take. Note again that we will start with a horribly misspecified Generalized Linear Model (GLM), just as in the GLM Tutorial. 
+
+::: callout-note
+## Skim the GLM
+You already have experience with fitting a GLM from the previous section. If you are comfortable with GLMs, you may quickly work through the first part (by running the code and skimming the text below).
+:::
 
 ## Workspace set-up
 
-```{r}
+```{r, warning=FALSE, message=FALSE}
 source("class_r_scripts/load_packages.r")
 
 ```
 
 ## The example dataset: The Wyoming Jackalope (*Lepusantilocapra wyomingensis*)
 
+For this example, you will need the following file (simply click to save):
+
+-   [`lepusantilocapra_wyomingensis_dataset.csv`](../chapters/class_exercise_data/lepusantilocapra_wyomingensis_dataset.csv)
+
+:::: columns
+
+::: {.column width="50%"}
+
 Jackalope seem to be everywhere. Recently, during a survey of 31 forested study plots (1 square kilometer each) here in Wyoming, scientists discovered a cryptic species of jackalope. Because it is endemic to Wyoming, they named it the Wyoming Lorax (*Lepusantilocapra wyomingensis*). The researchers quantified their abundance (counts per survey and multiple surveys per plot), community diversity (all jackalope species in the plots), and also measured several habitat features, including percentage ground vegetation, percentage herb layer, and percent leaf litter. Anyway, these scientists thought the scientific community would not believe their discovery, so they gave the dataset to the cryptid ecologists of ZOO/ECOL-5500. So, let us begin by importing this dataset. Then, we can save it to an object called "wyoming" and then examine the structure of the data:
+
+:::
+
+::: {.column width="50%"}
+
+![](../graphics/jackalope_graphics/wyoming_jackalope.png)
+:::
 
 ```{r}
 wyoming <- import("class_exercise_data/lepusantilocapra_wyomingensis_dataset.csv")
@@ -40,17 +64,13 @@ You see several variables and plot information:
 * `leaf_litter`: Proportion of each survey area covered in leaf litter only (no vegetation)
 * `rain_in`: round total precipitation (in inches...because that's what their inexpensive rain gauge collected)
 
-For the sake of brevity, let us assume that these data have already been cleaned and inspected for multicollinearity and outliers. That is, we will not eliminate any data at this point. Remember also that we will do some additional model validation tests (to check on the influence of outliers, etc.) after out initial analysis.
+For the sake of brevity, let us assume that these data have already been cleaned and inspected for multicollinearity and outliers. That is, we will not eliminate/modidy/exorcise any data at this point. We will do some additional model validation tests (to check on the influence of outliers, etc.) after out initial analysis.
 
-## A preliminary analysis using a GLM
+## Fitting Gaussian GLM(s)
 
-### Start with a misspecified Generalized Linear Model (GLM)
+We first want to test the impact of multiple predictors on the response variable (number of parasites). We have several hypotheses to test. Following the "one model = one hypothesis" approach of Burnham and Anderson (2002), these hypotheses can easily be verbalized in a way that reflects how we test them with GLMs. That is, we think about a few of the variables and hypothesize that the number of jackalopes is impacted by:
 
-As before, we first describe the model for testing the impact of certain predictors on the response variable (number of parasites).
-
-We have several hypotheses to test. These hypotheses can easily be verbalized in a way that reflects how we might test them with GLMs, which we have already seen before. That is, we think about a few of the variables and hypothesize that the number of jackalopes is impacted by:
-
-* ground_veg + herb_layer +leaf_litter
+* ground_veg + herb_layer + leaf_litter
 * ground_veg + herb_layer
 * ground_veg + leaf_litter
 * herb_layer + leaf_litter
@@ -72,7 +92,11 @@ mod_07 <- glm(abundance ~ leaf_litter, data=wyoming)
 mod_08 <- glm(abundance ~ 1, data=wyoming)
 ```
 
-You have used GLMs to test eight competing (i.e. multiple working) hypotheses. Let us look at the the first model you ran.
+Again, we are using these GLMs to test eight competing (i.e. multiple working) hypotheses. 
+
+### Interpretation of the GLM results
+
+Let us look at the first model in this candidate model set.
 
 ```{r}
 summary(mod_01)
@@ -85,12 +109,26 @@ $$
 + 68.559\,(\text{ground veg})
 + 8.163\,(\text{herb layer})
 - 47.168\,(\text{leaf litter})
-$$
+$$,
+where you would enter numerical values of `ground_veg`, `herb_layer`, and `leaf_litter` into the equation. So, this output is telling you that `ground_veg` has a significant (_p_ = 6.18e-05) positive impact ($\beta = 68.559; this is the slope value of the line) on `abundance`. No other factor shows a significant effect. But, as you will see, this was but a single hypothesis (`ground_veg`, `herb_layer`, and `leaf_litter`) that we tested. We need to know if it is better supported by the data than other hypotheses. 
 
+### Information-theoretic multi-model comparison
 
-abundance = 78.046 + ground_veg * 68.559 + herb_layer * 8.163 + leaf_litter * -47.168,
+For this, we use **a**n **i**nformation **c**riterion (AIC) to rank competing models based on their relative support from the data. We will explain this _ad nauseum_ in a later section, but it is sufficient for now to say that AIC provides a metric for finding a model (or models) that best balance fit and complexity. We must be explicit about what AIC is and is not used for:
 
-where you put the relevant values of ground_veg, herb_layer, and leaf_litter into the equation. So, as a reminder, this output is telling you that ground_veg has a significant (`p` = 6.18e-05) positive impact ($\beta = 68.559; this is the slope value of the line) on abundance. No other factor shows a significant effect. But, as you will see, this was but a single hypothesis (ground_veg, herb_layer, and leaf_litter) that we tested. We need to know if it is better supported by the data than other hypotheses. For this, we use information criterion (AIC) as a measure of explanatory power. AIC is an information statistic; therefore, higher values of AIC indicate more uncertainty (and less information); the absolute value of AIC does not matter. So, for this exercise, we are looking for the model with the lowest AIC value. Let's calculate AIC values for each model that we created.
+* **What it is _not_ used for:** "To identify the model that best fits the data"
+* **What it is used for:** "To identify the model that captures the ecological signal without overfitting the noise"
+
+In the AIC framework, our task is to let hypotheses (models) _compete_ against each other given each model's balance between signal and noise. Higher values of AIC indicate more uncertainty (and more expected information loss). The absolute value of AIC does not matter. So, for this exercise, we are looking for the model with the lowest AIC value (lowest information loss relative to a theoretical reference). 
+
+::: callout-note
+## **AIC: What's in a name?**
+
+Though it is now referred to as the Akaike Information Criterion, the original AIC was named --by Akaike himself in a 1974 paper-- was "an information criterion."
+
+:::
+
+Let us calculate AIC values for each model that we created:
 
 ```{r}
 aic_list <- AIC(mod_01, mod_02, mod_03, mod_04, mod_05, mod_06, mod_07, mod_08)
@@ -101,24 +139,29 @@ aic_list %>%
 
 ```
 
-The third model (`mod_03`) has the the lowest AIC value and therefore our best-supported model among those considered in the model set. We will discuss conventional approaches to AIC-based model selection later.
+The third model (`mod_03`) has the the lowest AIC value and therefore our best-supported model among those considered in the model set. _Again, we will discuss the mechanics and some of the conventional approaches to AIC-based model selection later._
 
 We have now successfully created a GLM for this dataset. But, as you know, we still have some checks to do... 
 
-### Checking your model residuals
+### Checking your GLM residuals
 
-You now know why the structure of your model residuals is important. Let us check our best-supported model (`mod_03`) to see how the residuals are behaving. Again, use the DHARMa package's functionality.
+You now know why the structure of your model residuals is important. Let us check our best-supported model (`mod_03`) to see how the residuals are behaving. Again, use the `DHARMa` package's functionality.
 
 ```{r}
 simresid <- simulateResiduals(fittedModel = mod_03)
-
 plot(simresid)
 
 ```
 
-Focus on the left plot (the QQ Plot of residuals)? The "KS test" (Kolmogorov-Smirnov test) is a test of normality of residuals. Here, it says the residuals deviate significantly from a normal distribution. This will be something to fix. It also tests for outliers in the data (at the bottom). The results here suggests that there are no statistical outliers. From the plot at right, we see that the median quantile of the data also shows residual structure.
+Focus on the left plot (the quantile-quantile plot of residuals). Remember that the "KS test" (Kolmogorov-Smirnov test) is a test of normality of the model residuals. Here, it shows that the residuals deviate significantly from a normal distribution; this will be something to fix. It also tests for outliers in the data. The results here suggest that there are no statistical outliers. From the plot at right (the Signal portion of the residual diagnostic), we see that the median quantile of the data also shows residual structure.
 
-So, we now need to try to fix this non-normality of residuals. Sometimes, this is a difficult prospect. Let's think critically about what we did. We have abundance of *L. wyomingensis*, a metric that should follow a Poisson distribution (positive skew, and >0). But we didn't specify anything about that in our GLM. What we did was run a set of GLMs that assumed that abundance followed a normal (or Gaussian) distribution. What were we thinking?!? Regardless of what the model residuals show, we need to get our data boundaries correct. So, let's try a Poisson distribution. We do this by specifying an argument in the glm() function for family. Unfortunately, because of our oversight, we need to refit all of our original models (and immediately forgot that our best model was mod_07, as that might change). Let's do this:
+So, we now need to try to fix several aspects of our model to ensure that our imposed structure is fitting the data well. Sometimes, this is a difficult and laborious task. 
+
+## Fitting Poisson GLM(s)
+
+As a first step, let us step back and think critically about some fundamental features of our dataset. Among several things we could assess, we can first examine our response variable: `abundance`. We have abundance of *L. wyomingensis*, a metric that should follow a Poisson distribution (positive skew, and >0). But we did not specify this in our original GLMs. What we did was run a set of GLMs that assumed that abundance followed Gaussian/normal distribution. What were we thinking?!? 
+
+Regardless of what the model residuals show, our priority is to ensure that our data are correctly bounded. So, let us try a Poisson distribution. We do this by specifying an argument in the `glm()` function for family. Unfortunately, because of our oversight, we need to refit all of our original models (and immediately forget that our best model from our misspecfied attempt was `mod_03`, as that will likely change). Run the following:
 
 ```{r}
 mod_01 <- glm(abundance ~ ground_veg + herb_layer + leaf_litter, family=poisson, data=wyoming)
@@ -132,12 +175,14 @@ mod_08 <- glm(abundance ~ 1, family=poisson, data=wyoming)
 
 ```
 
-OK, we are now comfortable that we got our data boundaries correct. Let's compare models using AIC:
+We again compare models using an AIC framework:
 
 ```{r}
-AIC(mod_01, mod_02, mod_03, mod_04, mod_05, mod_06, mod_07, mod_08)
+aic_list <- AIC(mod_01, mod_02, mod_03, mod_04, mod_05, mod_06, mod_07, mod_08)
+arrange(aic_list, "AIC")
+
 ```
-Whoa. This was a big change. Now, mod_01 (our most complex model) is the best-supported model, as it has the lowest AIC value. Let's look at this model:
+Whoa. Now, `mod_01` (our most complex model) is the best-supported model, as it has the lowest AIC value. This represents a large inferential change from the Gaussian GLM above. Let us look at this best-supported model:
 
 ```{r}
 summary(mod_01)
@@ -149,25 +194,59 @@ simresid <- simulateResiduals(fittedModel = mod_01)
 plot(simresid)
 ```
 
-Uh, oh. Everything about the model seems to be poorly fit. Ouch. The DHARMa package continues to detect non-normal residuals, and it has now detected other problems (e.g.outliers based on our imposed distribution). I chose this example to demonstrate how even the best model in a set of models might not be a good model. There may be other factors we failed to account for that are throwing the model into disarray. We may need to adjust our chosen distribution for our response variable. Or maybe there's some non-independence that is fundamental to our data structure that we need to account for. 
+Yowzers. Everything about the model (the Noise and Signal components) seems to be poorly fit. Ouch. The `DHARMa` package's residual plots continue to detect structure in the model residuals, and it has now detected other problems (e.g.outliers based on our imposed distribution). I chose this example to demonstrate how even the best model in a set of models might not be a good model. There may be other factors we failed to account for that are throwing the model into utter disarray. 
 
-## Stop and Think.
-You may have noticed from looking at the original dataset that we excluded some predictors. Think about a few potentially important data components that we should have included in our model-building and hypothesis testing in the above GLMs. Let's then remedy these omissions while we also attempt to solve our issues of non-independence.
+We may need to adjust our chosen distribution for our response variable. Or maybe there is some non-independence that is fundamental to our data structure that we need to account for. Before reading on, refer to the [_DHARMa Diagnostics_ page](https://jpkelley.github.io/ZOO5500/chapters/DHARMA_diagnostics.html) for information about diagnosing the origin of these warnings.
 
-# How to formulate a Generalized Linear Mixed Model (GLMM)
+You may have noticed from looking at the original dataset that we excluded some predictors. Think about a few potentially important data components that should have been included in our model-building and hypothesis testing in the above GLMs. Let us then remedy these omissions while we also attempt to solve our issues of non-independence. For that, we turn to Generalized Linear Mixed Models (GLMMs).
 
-Let's always assume that our data have some pseudoreplication (non-independence) and act accordingly. And let's specify our predictors properly (and not cherry-pick what we think to be important variables).
+## How to create a Generalized Linear Mixed Model (GLMM)
 
-## Rethinking the structure of our model
+For most ecological datasets, it is generally good to always assume the presence of some non-independence and act accordingly. So, let us think about and properly specify our model and not cherry-pick what we think to be important variables. 
 
-We have thought critically about our response variable (abundance) and have specified a Poisson distribution. This seemed to mess up the model residuals, but we know we have the data boundaries (>0) correct. Therefore, another component of the model must be mis-specified.  So, let's think about how we collected our data. Our first thought is to figure out how much we sampled at each plot.
+As there are two components of a mixed-effects model (the fixed and random components), we need a set of steps to guide us through the process of determing the fixed and random structures. There are three primary steps (click on the clalout boxes below to expand):
 
-```{r}
-wyoming |> 
-  count(plot_id)
-```
+::: {.callout-tip icon=false collapse=true}
+## **Step #1: Specify your global model**
 
-There is variation in the number of times we surveyed each plot. This violates the assumption of non-independence, so we need to do something about it. Let's include "plot" as a random effect (a clustering variable). First, we convert it from a character string to a factor, so that the function we'll use will recognize it. 
+A _global_ model is essentially a model that includes the following:
+
+* all plausible fixed effects and interactions
+* a maximally reasonable random structure  
+
+The secret to this step is to formulate a complex yet biologically/ecologically defensible model.
+:::
+
+::: {.callout-tip icon=false collapse=true}
+## **Step #2: Optimize the random-effects structure**
+
+To determine the optimal random-effects structure, do the following:
+
+* keep the fixed-effects structure of the global model constant  
+* compare different plausible random-effects structures (using REstricted Maximum Likelihood, or REML, for selection)  
+* select the _best_ random-effects structure and lock it in (i.e. this will be the random-effects structure retained for all model comparisons in Step #3)
+
+Warning! _Do not_ be tempted to use an intercept-only fixed-effects structure when optimizing the random-effects component. The random effects are not independent of the systematic structure of your model. 
+:::
+
+::: {.callout-tip icon=false collapse=true}
+## **Step 03: Optimize the fixed-effects structure**
+
+With your random effects locked, you now move on to compared models with different fixed-effects structures. For this, do the following:
+
+* fit all models with Maximum Likelihood (not REstricted Maximum Likelihood)  
+* calculate AIC metrics for each model
+* compare AIC among the candidate model set and select best-supported models
+:::
+
+We can put these steps into practice by extending the GLM we just fitted.
+
+
+### Fitting GLMM(s)
+
+In the GLM formulation above, we applied our expert knowledge of our response variable (`abundance`) and specified a Poisson distribution. But, unfortunately, doing so seemed to negatively impact the model residuals. However, we _know_ that the data boundaries (>0) likely reflect the data-generating processes that we are examining. Therefore, we keep the error distribution of the original GLM. There must be another component of the model that is mis-specified. Again, refer to the [_DHARMa Diagnostics_ page](https://jpkelley.github.io/ZOO5500/chapters/DHARMA_diagnostics.html) for information about diagnosing the origin of these warnings. 
+
+Let us then consider how we collected our data. First, we know that we repeatedly sampled each plot (range = 3-7 samples). _A priori_, we expect that within-plot samples will be more similar that between-plot samples. This violates the assumption of non-independence, so we know that need to explicitly include this structural element in our model. We therefore include `plot` as a random effect (a grouping/clustering variable). To do so, we convert it from a character string to a factor, so that the function that we use later will recognize it as such.
 
 ```{r}
 wyoming$plot_id <- as.factor(wyoming$plot_id) # convert "plot" to factor
@@ -176,80 +255,102 @@ wyoming$plot_id <- as.factor(wyoming$plot_id) # convert "plot" to factor
 wyoming <- wyoming |>
   mutate(plot_id = as.factor(plot_id))
 ```
-We then refit our GLM as a Generalized Linear Mixed Model (GLMM) using the glmmTMB package with the following specification. Note the form of the random effect (in parentheses). Note also that we have added the one predictor in our dataset that we omitted in the GLMs (```rain_in```). And we have now included models that include two-way interactions of all term combinations. Note that, for simplicity, we have omitted models with two and three two-way interactions. But these could easily be included.
+
+We then refit our model as as `glmmTMB` (GLMM). We have made a few important changes to our model: 
+
+* Our first action is to incorporate `plot_id` as a random effect. Note the form of the random effect (in parentheses). This is a random intercept structure (the slope is the same for all `plot_id` levels).
+* We have added the one predictor in our dataset that we omitted in the GLMs (`rain_in`). 
+
+Note that we have not included models that include any two-way interactions. These models could easily be included in the candidate model set below.
+
+::: callout-tip
+Before running the GLMMs below, examine the structure of these models very closely to see how this candidate model set has been structured. Pay close attention to how the number of models increased when we added predictors.
+:::
+
+### Step #1: Specify your global model
+
+Let us then identify the best random effects structure of the model. As discussed above, we start with our global model. The global model is the model with the most complex fixed-effects and random-effects structures. In this case, we have a model with four predictors and two crossed (or non-nested) random effects.
+
+```{r}
+global <- glmmTMB(abundance ~ ground_veg + herb_layer + leaf_litter + rain_in + (1 | plot_id) + (1 | forest_age), family=poisson, data=wyoming, REML=TRUE)
+```
+
+### Step #2: Optimizing the random effects structure
+
+Remember that, for comparison of models with the same fixed effects but different random effects, we use REstricted Maximum Likelihood (REML) by setting `REML = TRUE` in the `glmmTMB` model (see below). Why do we use REML? Because regular Maximum Likelihood is biased for estimation of standard errors of random effects. Let us begin the global model as well as models that have different structures of the random effects (while keeping all fixed effects the same).
+
+```{r}
+global <- glmmTMB(abundance ~ ground_veg + herb_layer + leaf_litter + rain_in + (1 | plot_id) + (1 | forest_age), family=poisson, data=wyoming, REML=TRUE)
+global_01 <- glmmTMB(abundance ~ ground_veg + herb_layer + leaf_litter + rain_in + (1 | forest_age), family=poisson, data=wyoming, REML=TRUE)
+global_02 <- glmmTMB(abundance ~ ground_veg + herb_layer + leaf_litter + rain_in + (1 | plot_id), family=poisson, data=wyoming, REML=TRUE)
+
+```
+Then, we compare these models via AIC. 
+
+```{r}
+AIC(global, global_01, global_02)
+```
+
+We see something interesting here. The grouping factor `forest_age` does not improve model performance at all when we compare the AIC of models with and without it. The grouping factor `plot_id` improves model performance greatly. Therefore, we select `plot_id` as the random-effects structure for all models. 
+
+This process could also be done with models containing different combinations of random slopes and intercepts. The world is your jackalope oyster.
+
+---
+
+### Step 3: Optimize the fixed-effects structure
+
+Now that we have optimized the random effects structure, we can test different fixed-effects structures against each other. Again, we are fitting what are called additive models only; these models contain no interactions between predictors.
 
 ```{r}
 mod_01 <- glmmTMB(abundance ~ ground_veg + herb_layer + leaf_litter + rain_in + (1 | plot_id), family=poisson, data=wyoming)
-mod_02 <- glmmTMB(abundance ~ ground_veg*leaf_litter + herb_layer + rain_in + (1 | plot_id), family=poisson, data=wyoming)
-mod_03 <- glmmTMB(abundance ~ ground_veg*herb_layer + leaf_litter + rain_in + (1 | plot_id), family=poisson, data=wyoming)
-mod_04 <- glmmTMB(abundance ~ ground_veg*rain_in + leaf_litter + herb_layer + (1 | plot_id), family=poisson, data=wyoming)
-mod_05 <- glmmTMB(abundance ~ ground_veg + herb_layer*leaf_litter + rain_in + (1 | plot_id), family=poisson, data=wyoming)
-mod_06 <- glmmTMB(abundance ~ ground_veg + herb_layer*rain_in + leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
-mod_07 <- glmmTMB(abundance ~ ground_veg + herb_layer + leaf_litter*rain_in + (1 | plot_id), family=poisson, data=wyoming)
-mod_08 <- glmmTMB(abundance ~ ground_veg + herb_layer + leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
-mod_09 <- glmmTMB(abundance ~ ground_veg*herb_layer + leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
-mod_10 <- glmmTMB(abundance ~ ground_veg + herb_layer*leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
-mod_11 <- glmmTMB(abundance ~ ground_veg*leaf_litter + herb_layer + (1 | plot_id), family=poisson, data=wyoming)
-mod_12 <- glmmTMB(abundance ~ ground_veg + herb_layer + rain_in + (1 | plot_id), family=poisson, data=wyoming)
-mod_13 <- glmmTMB(abundance ~ ground_veg*herb_layer + rain_in + (1 | plot_id), family=poisson, data=wyoming)
-mod_14 <- glmmTMB(abundance ~ ground_veg + herb_layer*rain_in + (1 | plot_id), family=poisson, data=wyoming)
-mod_15 <- glmmTMB(abundance ~ ground_veg*rain_in + herb_layer + (1 | plot_id), family=poisson, data=wyoming)
-mod_16 <- glmmTMB(abundance ~ ground_veg + rain_in + leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
-mod_17 <- glmmTMB(abundance ~ ground_veg*rain_in + leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
-mod_18 <- glmmTMB(abundance ~ ground_veg + rain_in*leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
-mod_19 <- glmmTMB(abundance ~ ground_veg*leaf_litter + rain_in + (1 | plot_id), family=poisson, data=wyoming)
-mod_20 <- glmmTMB(abundance ~ rain_in + rain_in + leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
-mod_21 <- glmmTMB(abundance ~ rain_in*rain_in + leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
-mod_22 <- glmmTMB(abundance ~ rain_in + rain_in*leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
-mod_23 <- glmmTMB(abundance ~ rain_in*leaf_litter + rain_in + (1 | plot_id), family=poisson, data=wyoming)
-mod_24 <- glmmTMB(abundance ~ ground_veg + herb_layer + (1 | plot_id), family=poisson, data=wyoming)
-mod_25 <- glmmTMB(abundance ~ ground_veg + leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
-mod_26 <- glmmTMB(abundance ~ herb_layer + leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
-mod_27 <- glmmTMB(abundance ~ herb_layer + rain_in + (1 | plot_id), family=poisson, data=wyoming)
-mod_28 <- glmmTMB(abundance ~ leaf_litter + rain_in + (1 | plot_id), family=poisson, data=wyoming)
-mod_29 <- glmmTMB(abundance ~ ground_veg + rain_in + (1 | plot_id), family=poisson, data=wyoming)
-mod_30 <- glmmTMB(abundance ~ ground_veg*herb_layer + (1 | plot_id), family=poisson, data=wyoming)
-mod_31 <- glmmTMB(abundance ~ ground_veg*leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
-mod_32 <- glmmTMB(abundance ~ herb_layer*leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
-mod_33 <- glmmTMB(abundance ~ herb_layer*rain_in + (1 | plot_id), family=poisson, data=wyoming)
-mod_34 <- glmmTMB(abundance ~ leaf_litter*rain_in + (1 | plot_id), family=poisson, data=wyoming)
-mod_35 <- glmmTMB(abundance ~ ground_veg*rain_in + (1 | plot_id), family=poisson, data=wyoming)
-mod_36 <- glmmTMB(abundance ~ ground_veg + (1 | plot_id), family=poisson, data=wyoming)
-mod_37 <- glmmTMB(abundance ~ herb_layer + (1 | plot_id), family=poisson, data=wyoming)
-mod_38 <- glmmTMB(abundance ~ leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
-mod_39 <- glmmTMB(abundance ~ rain_in + (1 | plot_id), family=poisson, data=wyoming)
-mod_40 <- glmmTMB(abundance ~ 1 + (1 | plot_id), family=poisson, data=wyoming)
-```
-These were fit with Maximum Likelihood. 
-
-```{r}
-mod_a <- glmmTMB(abundance ~ 1 + (1 | plot_id), family=poisson, data=wyoming)
-mod_b <- glmmTMB(abundance ~ 1 + (x | plot_id), family=poisson, data=wyoming)
+mod_02 <- glmmTMB(abundance ~ ground_veg + herb_layer + leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
+mod_03 <- glmmTMB(abundance ~ ground_veg + herb_layer + rain_in + (1 | plot_id), family=poisson, data=wyoming)
+mod_04 <- glmmTMB(abundance ~ ground_veg + rain_in + leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
+mod_05 <- glmmTMB(abundance ~ herb_layer + rain_in + leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
+mod_06 <- glmmTMB(abundance ~ ground_veg + herb_layer + (1 | plot_id), family=poisson, data=wyoming)
+mod_07 <- glmmTMB(abundance ~ ground_veg + leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
+mod_08 <- glmmTMB(abundance ~ herb_layer + leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
+mod_09 <- glmmTMB(abundance ~ herb_layer + rain_in + (1 | plot_id), family=poisson, data=wyoming)
+mod_10 <- glmmTMB(abundance ~ leaf_litter + rain_in + (1 | plot_id), family=poisson, data=wyoming)
+mod_11 <- glmmTMB(abundance ~ ground_veg + rain_in + (1 | plot_id), family=poisson, data=wyoming)
+mod_12 <- glmmTMB(abundance ~ ground_veg + (1 | plot_id), family=poisson, data=wyoming)
+mod_13 <- glmmTMB(abundance ~ herb_layer + (1 | plot_id), family=poisson, data=wyoming)
+mod_14 <- glmmTMB(abundance ~ leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
+mod_15 <- glmmTMB(abundance ~ rain_in + (1 | plot_id), family=poisson, data=wyoming)
+mod_16 <- glmmTMB(abundance ~ 1 + (1 | plot_id), family=poisson, data=wyoming)
 ```
 
-
+For this large model set, we then calculate AIC for each model. You can run the code below, but the results are not shown below (for brevity's sake).
 
 ```{r}
+#| output: false
 aic.df <- AIC(mod_01, mod_02, mod_03, mod_04, mod_05, mod_06, mod_07,
   mod_08, mod_09, mod_10, mod_11, mod_12, mod_13, mod_14, mod_15,
-  mod_16, mod_17, mod_18, mod_19, mod_20, mod_21, mod_22, mod_23,
-  mod_24, mod_25, mod_26, mod_27, mod_28, mod_29, mod_30, mod_31,
-  mod_32,mod_33, mod_34, mod_35, mod_36,
-  mod_37, mod_38, mod_39, mod_40
-)
+  mod_16
+  )
 aic.df <- aic.df |>
   arrange(AIC)
 aic.df
 ```
-Let's then examine the top model; remember, we are not yet using any formal AIC-based model selection and averaging methods. ```mod_02``` seems to have the best fit, based on AIC values.
+Let us then examine the top model (the model with the lowest AIC value); remember, we are not yet using any formal AIC-based model selection and averaging methods. `mod_02` seems to have the best fit, based on AIC values.
 
 ```{r}
 simresid <- simulateResiduals(fittedModel = mod_02)
 plot(simresid)
 ```
 
-Indeed, most residual structure looks improved, and we can begin to make inference and predict from your model. The main results (and final model) show that the best-supported hypothesis is one where *L. wyomingensis* abundance is impacted by all through vegetation variables. Ground vegetation and herb layer percentage impact abundance positively, whereas the precentage of lead litter has a negative impact of abundance.
+Indeed, the residual structure of the `mod_02`'s Noise and Signal look much improved, even though one of the quantile lines on the right-hand plot remains problemation. But we are very close to being able to draw inference from the model. 
 
-Congratulations, you've now run a Generalized Linear Mixed Model! You're now ready to publish your first scientific article on Lorax.
+::: callout-warning
+## **Thought prompt: How could you improve the residual structure?**
 
-The End...for now.
+From your knowledge of the `DHARMa` residuals, what part of the model -- Signal or Noise-- should you focus on, given the residual structure?
+:::
+
+Let us assume we can go ahead and interpret a bit. The main results (and final model) show that the best-supported hypothesis/model is the one in which *L. wyomingensis* abundance is influenced by all of the tested covariates. Ground vegetation, herb layer percentage, and rainfall influence abundance positively, whereas the precentage of leaf litter has a negative impact of abundance. Futhermore, ground vegetation and leaf litter interact to positively influence abundance.
+
+Congratulations, you have now run a Generalized Linear Mixed Model! You are now ready to publish your first scientific article on jackalope.
+
+## Bibliography for this section
+
+Burnham, K.P. and Anderson, D.R. (2002) [_Model Selection and Inference: A Practical Information-Theoretic Approach._](https://link.springer.com/book/10.1007/b97636) 2nd Edition, Springer-Verlag, New York. 

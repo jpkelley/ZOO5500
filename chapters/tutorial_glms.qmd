@@ -407,3 +407,4 @@ plotResiduals(sim_res, pufferi$year)
 
 This was the final check. This all tells us that we have specified the model correctly, and we have confirmed that there is no residual structure. This means that our model has correctly modeled both the noise and signal components of our observed data very well. We have successfully created a Generalized Linear Model!
 
+

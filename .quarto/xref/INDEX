@@ -205,5 +205,14 @@
   },
   "chapters/DHARMA_diagnostics.qmd": {
     "DHARMA_diagnostics.html": "79322ccb"
+  },
+  "chapters/glmms.qmd": {
+    "glmms.html": "491457f8"
+  },
+  "chapters/tutorial_glmms_part01.qmd": {
+    "tutorial_glmms_part01.html": "3a414194"
+  },
+  "chapters/glmm_epilogue.qmd": {
+    "glmm_epilogue.html": "80cce47c"
   }
 }

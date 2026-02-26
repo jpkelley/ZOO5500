@@ -65,7 +65,7 @@ m_ris <- glmmTMB(
 :::
 
 ::: {.column width="40%"}
-![](../graphics/other_stylized_graphics/ri_only_graphic.png)
+![](../graphics/other_stylized_graphics/ri_rs_graphic.png)
 
 :::
 

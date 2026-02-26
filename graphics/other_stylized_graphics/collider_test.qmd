@@ -1,0 +1,75 @@
+---
+title: "collider_test"
+format: html
+---
+
+```{r}
+# Reproducible collider-bias demo: additive vs synergistic common effect
+# A -> W <- B, with A and B independent causes of W
+
+set.seed(123)
+
+n <- 200000
+A <- rnorm(n)
+B <- rnorm(n)
+eps <- rnorm(n, sd = 0.5)
+
+# Case 1: Additive common effect
+W_add <- A + B + eps
+
+# Case 2: Synergistic common effect (positive interaction)
+gamma <- 1.2
+W_syn <- A + B + gamma * (A * B) + eps
+
+# Helper: report unconditional vs conditional association of A and B
+summarize_case <- function(W, label, q = 0.90) {
+  keep <- W >= quantile(W, q)  # condition on "high W" (top 10%)
+  data.frame(
+    case = label,
+    q = q,
+    cor_unconditional = cor(A, B),
+    cor_cond_highW = cor(A[keep], B[keep]),
+    n_cond = sum(keep)
+  )
+}
+
+out <- rbind(
+  summarize_case(W_add, "additive"),
+  summarize_case(W_syn, "synergistic")
+)
+
+```
+
+```{r}
+# Visualize the induced relationship among the "high W" subset
+# (You should see: additive -> mostly negative trend; synergistic -> curved / sign-changing pattern)
+
+library(ggplot2)
+
+
+plot_highW <- function(W, label, q = 0.90, m = 8000) {
+  keep <- which(W >= quantile(W, q))
+  idx <- sample(keep, min(m, length(keep)))
+  df <- data.frame(A = A[idx], B = B[idx])
+
+  ggplot(df, aes(A, B)) +
+    geom_point(alpha = 0.15, size = 1) +
+    geom_smooth(method = "lm", se = FALSE) +
+    geom_smooth(method = "loess", se = FALSE) +
+    labs(
+      title = paste0(label, " (conditioning on W in top ", (1 - q) * 100, "%)"),
+      subtitle = "Linear fit + LOESS: synergy often produces nonlinearity / direction changes",
+      x = "A",
+      y = "B"
+    )
+}
+
+
+plot_highW(W_add, "Additive collider: W = A + B + noise", q = 0.90)
+
+plot_highW(W_syn, "Synergistic collider: W = A + B + gamma*A*B + noise", q = 0.90)
+```
+
+
+
+

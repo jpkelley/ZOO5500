@@ -7,16 +7,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 ## Introduction
 
-For this first example, we will use the dataset that you were briefly introduced to in the previous section. The dataset was collected from a population of *Lepusantilocapra pufferi* (puffer jackalope) starting in the mid-1970s. 
-
-## Set up workspace
-
-```{r message=FALSE, warning=FALSE}
-source("class_r_scripts/load_packages.r")
-```
-
 In this tutorial, we introduce how to model different datasets using Generalized Additive Models (GAMs). Later on, we will address how to add a random effect into these models (turning these into Generalized Additive Mixed Models, or GAMMs). 
-
 
 ## Example #1: Building a basic GAM
 
@@ -102,7 +93,7 @@ Very close indeed. But let us now see if we can improve this model (even in a sm
 
 ```{r}
 mod_gam<- gam(dens2 ~
-  s(mean_depth) + year * period, family=Gamma(link="log"),
+  s(mean_depth, bs="cr", k=10) + year * period, family=Gamma(link="log"),
   data = pufferi)
 ```
 This output looks a bit different. You now have two components to the model output: one for the parametric (linear) terms and one for the semiparametric (smoothed, or non-linear terms). We will discuss how to interpret the semiparametric effects in class. 

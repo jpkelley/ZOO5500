@@ -1,0 +1,19 @@
+---
+title: "gam_table"
+format: html
+---
+
+## Choosing a GAM Framework
+
+
+::: {.course-info tbl-colwidths="[70, 30]"}
+| condition | R package::function |
+|------------|--------------------------------|
+| Default starting point | `mgcv::gam()` |
+| Large dataset | `mgcv::bam()` |
+| Need full Bayesian posterior inference | `brms` |
+| Need AR(1) residual correlation not handled by smooths | `mgcv::gamm()` |
+| Need complex distributional modeling (beyond mean structure) | `gamlss` or `brms` |
+| Heavy crossed random effects with simpler smooths | `gamm4` |
+
+:::

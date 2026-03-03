@@ -36,7 +36,7 @@ book:
         - chapters/data_exploration_toolkit.qmd
         - chapters/outliers.qmd
         - chapters/tutorial_data_exploration.qmd
-    - part: "Part III: Columns to Curves"
+    - part: "Part III: Columns to Lines"
       chapters: 
         - chapters/statistical_aphorisms.qmd
         - chapters/intro_modeling.qmd
@@ -48,7 +48,10 @@ book:
         - chapters/glmms.qmd
         - chapters/tutorial_glmms_part01.qmd
         - chapters/glmm_epilogue.qmd
-    - part: "Part IV: Curves to Meaning"
+    - part: "Part IV: Columns to Curves" 
+      chapters: 
+        - chapters/tutorial_[gams].qmd
+    - part: "Part V: Curves to Meaning"
 
 
 format:

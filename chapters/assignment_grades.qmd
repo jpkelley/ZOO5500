@@ -78,6 +78,7 @@ A document showing that you used JackalopeGPT to include the final Evaluation Ta
 ### “Good” looks like
 
 A submission of high quality will demonstrate:
+
 -   that you have a clear idea about (and can explain) what each variable means and whether it is trustworthy
 -   that you recognize your responsibility to document your metadata in a way that can be understood by future users
 -   that you purposefully applied basic approaches of Exploratory Data Analysis (and have not used this as a simple plot dump)
@@ -86,7 +87,7 @@ A submission of high quality will demonstrate:
 
 :::
 
-::: {.callout-note title="**Working Model — Draft (Week 7)**" icon="false" collapse="true"}
+::: {.callout-note title="**Working Model: Draft (Week 7)**" icon="false" collapse="true"}
 **Purpose:**\
 Put a real model on the table. This is a draft: imperfect is fine, but it must be runnable and defensible.
 
@@ -114,7 +115,7 @@ Put a real model on the table. This is a draft: imperfect is fine, but it must b
 -   Honest diagnostics and a clear plan to improve
 :::
 
-::: {.callout-note title="**Working Model — Final Lock (Week 8)**" icon="false" collapse="true"}
+::: {.callout-note title="**Working Model: Final Lock (Week 8)**" icon="false" collapse="true"}
 **Purpose:**\
 Freeze the core model so the rest of the semester can focus on prediction, interpretation, and reporting instead of endless tinkering.
 

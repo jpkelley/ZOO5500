@@ -1,0 +1,105 @@
+---
+title: "From Individual Equations to Matrix Form"
+format:
+  revealjs:
+    slide-number: true
+    incremental: true
+---
+
+
+
+## Step 3: Write the Model for Each Observation
+
+We are fitting a simple linear regression:
+
+\[
+y = \beta_0 + \beta_1 x
+\]
+
+---
+
+### For each data point:
+
+When \( x = 1 \):
+
+\[
+y_1 = \beta_0 \cdot 1 + \beta_1 \cdot 1
+\]
+
+When \( x = 2 \):
+
+\[
+y_2 = \beta_0 \cdot 1 + \beta_1 \cdot 2
+\]
+
+When \( x = 3 \):
+
+\[
+y_3 = \beta_0 \cdot 1 + \beta_1 \cdot 3
+\]
+
+---
+
+## Step 4: Stack into Matrix Form
+
+We can stack these equations:
+
+\[
+\begin{bmatrix}
+3 \\
+5 \\
+7
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 & 1 \\
+1 & 2 \\
+1 & 3
+\end{bmatrix}
+\begin{bmatrix}
+\beta_0 \\
+\beta_1
+\end{bmatrix}
+\]
+
+---
+
+## What Just Happened?
+
+We rewrote:
+
+Three separate equations  
+
+as  
+
+One matrix equation:
+
+\[
+\mathbf{y} = \mathbf{X}\boldsymbol{\beta}
+\]
+
+---
+
+## The Design Matrix Columns
+
+The columns of the design matrix are basis functions:
+
+- First column → \( b_0(x) = 1 \)
+- Second column → \( b_1(x) = x \)
+
+---
+
+## Why This Matters
+
+Linear regression is just:
+
+> A weighted sum of basis functions.
+
+\[
+y = \beta_0 b_0(x) + \beta_1 b_1(x)
+\]
+
+This idea extends directly to GAMs —  
+we simply add more (smoother) basis functions.
+
+\

@@ -1,0 +1,145 @@
+---
+title: "Untitled"
+format: html
+---
+
+```{r}
+# ------------------------------------------------------------
+# Updated 3-panel visualization:
+# p1 = raw data
+# p2 = basis contributions (colored) + their SUM (smooth-only, red)
+# p3 = raw data + full fitted mean (black) with contributions shown as
+#      intercept + cumulative partial sums (faint gray) on the SAME response scale
+# ------------------------------------------------------------
+
+library(mgcv)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(patchwork)
+
+set.seed(42)
+
+# 1) Simulate irregular data (NO sin/cos)
+n <- 220
+x <- sort(runif(n, 0, 10))
+
+f_true <- function(x) {
+  0.25 * x - 0.02 * x^2 +
+    ifelse(x > 2.5,  1.0 * (x - 2.5), 0) +
+    ifelse(x > 6.0, -1.4 * (x - 6.0), 0) +
+    1.8 * exp(-0.5 * ((x - 8.3)/0.55)^2) -
+    1.6 * exp(-0.5 * ((x - 4.8)/0.70)^2)
+}
+
+y <- f_true(x) + rnorm(n, sd = 0.7)
+dat <- data.frame(x, y)
+
+# 2) Fit GAM
+m <- gam(y ~ s(x, bs = "cr", k = 8),
+         data = dat,
+         method = "REML")
+
+# 3) Grid + lpmatrix
+xgrid <- data.frame(x = seq(min(dat$x), max(dat$x), length.out = 400))
+Xp <- predict(m, newdata = xgrid, type = "lpmatrix")
+
+# Smooth columns
+ind <- m$smooth[[1]]$first.para:m$smooth[[1]]$last.para
+B <- Xp[, ind, drop = FALSE]
+b <- coef(m)[ind]
+
+# Intercept
+b0 <- coef(m)[1]
+
+# Basis contributions matrix: beta_k * b_k(x)
+Cmat <- sweep(B, 2, b, `*`)  # n_grid x n_basis
+
+# Smooth-only sum (no intercept): sum_k beta_k * b_k(x)
+smooth_only <- rowSums(Cmat)
+smooth_df <- data.frame(x = xgrid$x, smooth_only = smooth_only)
+
+# Full fitted mean on response scale: intercept + smooth_only
+fit_full <- b0 + smooth_only
+fit_df <- data.frame(x = xgrid$x, fit_full = fit_full, intercept = b0)
+
+# Long format contributions for plotting
+contrib_df <- as.data.frame(Cmat)
+contrib_df$x <- xgrid$x
+
+contrib_long <- contrib_df %>%
+  pivot_longer(-x, names_to = "component", values_to = "contrib") %>%
+  mutate(component = factor(component, levels = unique(component)))
+
+# Cumulative partial fits on response scale: intercept + cumsum(contributions)
+partial_mat <- apply(Cmat, 1, cumsum)   # n_basis x n_grid
+partial_mat <- t(partial_mat) + b0      # n_grid x n_basis, on response scale
+
+partial_df <- as.data.frame(partial_mat)
+partial_df$x <- xgrid$x
+
+partial_long <- partial_df %>%
+  pivot_longer(-x, names_to = "step", values_to = "partial_fit")
+
+# ------------------------------------------------------------
+# p1: Raw data
+# ------------------------------------------------------------
+p1 <- ggplot(dat, aes(x, y)) +
+  geom_point(alpha = 0.65, color = "steelblue") +
+  theme_minimal() +
+  labs(title = "1) Raw data",
+       x = "x", y = "y")
+
+# ------------------------------------------------------------
+# p2: Basis contributions + their sum (smooth-only)
+# ------------------------------------------------------------
+p2 <- ggplot() +
+  geom_line(data = contrib_long,
+            aes(x, contrib, color = component, group = component),
+            linewidth = 1, alpha = 0.95) +
+  geom_line(data = smooth_df,
+            aes(x, smooth_only),
+            linewidth = 1.6, color = "firebrick") +
+  theme_minimal() +
+  scale_color_viridis_d(end = 0.95) +
+  theme(legend.position = "none") +
+  labs(title = "2) Basis contributions add up to the smooth",
+       subtitle = "Colored = β_k · b_k(x); Red = sum of colored lines (smooth-only, no intercept)",
+       x = "x", y = "Contribution / smooth-only")
+
+# ------------------------------------------------------------
+# p3: Raw data + full fitted mean + (optional) partial-build gray lines
+# ------------------------------------------------------------
+# ------------------------------------------------------------
+# p3: Raw data + fitted curve + faint basis contributions
+# ------------------------------------------------------------
+
+# ------------------------------------------------------------
+# p3: Contributions + their simple sum (smooth-only)
+# ------------------------------------------------------------
+
+p3 <- ggplot() +
+  
+  # subtle colored contribution curves
+  geom_line(data = contrib_long,
+            aes(x, contrib, color = component, group = component),
+            linewidth = 1,
+            alpha = 0.20) +
+  
+  # simple sum of contributions (smooth-only)
+  geom_line(data = smooth_df,
+            aes(x, smooth_only),
+            linewidth = 1.8,
+            color = "firebrick") +
+  
+  theme_minimal() +
+  scale_color_viridis_d(end = 0.95) +
+  theme(legend.position = "none") +
+  
+  labs(title = "Basis contributions and their sum",
+       subtitle = "Faint colored lines = β_k · b_k(x); Red = sum of those lines (smooth-only)",
+       x = "x",
+       y = "Smooth term value")
+
+
+```

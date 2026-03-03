@@ -214,5 +214,8 @@
   },
   "chapters/glmm_epilogue.qmd": {
     "glmm_epilogue.html": "80cce47c"
+  },
+  "chapters/tutorial_gams.qmd": {
+    "tutorial_gams.html": "e44bdb16"
   }
 }

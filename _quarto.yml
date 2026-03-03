@@ -50,7 +50,7 @@ book:
         - chapters/glmm_epilogue.qmd
     - part: "Part IV: Columns to Curves" 
       chapters: 
-        - chapters/tutorial_[gams].qmd
+        - chapters/tutorial_gams.qmd
     - part: "Part V: Curves to Meaning"
 
 

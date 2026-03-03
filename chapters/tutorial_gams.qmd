@@ -95,6 +95,7 @@ To convince you that it's doing the same thing, check out the summary of `mod_ga
 
 ```{r}
 summary(mod_gamma2)
+
 summary(mod_gam)
 ```
 Very close indeed. But let us now see if we can improve this model (even in a small way). We are going to add a smoother to our one continuous variable, `mean_depth` and then refit the model.

@@ -1,0 +1,61 @@
+---
+title: "bnlearn"
+format: html
+editor_options: 
+  chunk_output_type: inline
+---
+
+
+
+
+```{r}
+
+library(bnlearn)
+
+
+# Nodes in your DAG
+nodes <- c(
+  "distance_to_edge",
+  "canopy_cover",
+  "temperature",
+  "predator_presence",   # your playback indicator can use this same node name
+  "flock_size",
+  "provisioning",
+  "fledgling_age",
+  "fledgling_sex"
+)
+
+# Adjacency matrix: rows = cause, cols = effect
+adj <- matrix(0, nrow = length(nodes), ncol = length(nodes),
+              dimnames = list(nodes, nodes))
+
+# Your stated direct effects (arrows)
+adj["distance_to_edge", "temperature"]        <- 1
+adj["distance_to_edge", "canopy_cover"]       <- 1
+adj["canopy_cover",     "temperature"]        <- 1
+adj["canopy_cover",     "provisioning"]       <- 1
+adj["canopy_cover",     "flock_size"]         <- 1
+adj["canopy_cover",     "predator_presence"]  <- 1
+adj["predator_presence","flock_size"]         <- 1
+adj["flock_size",       "provisioning"]       <- 1
+adj["fledgling_age",    "provisioning"]       <- 1
+adj["fledgling_sex",    "provisioning"]       <- 1
+adj["temperature",      "provisioning"]       <- 1
+
+adj
+
+nodes <- colnames(adj)
+allpairs <- expand.grid(from = nodes, to = nodes, stringsAsFactors = FALSE)
+allpairs <- subset(allpairs, from != to)
+
+blacklist <- subset(allpairs, adj[from, to] == 0)[, c("from","to")]
+whitelist <- subset(allpairs, adj[from, to] == 1)[, c("from","to")]  # use only if you truly mean "must include"
+
+# 3) Learn candidate structures (use multiple algorithms as “candidates”)
+g_hc  <- hc(df[, nodes], blacklist = blacklist, whitelist = whitelist, score = "bic")
+g_tabu<- tabu(df[, nodes], blacklist = blacklist, whitelist = whitelist, score = "bic")
+g_mmhc<- mmhc(df[, nodes], blacklist = blacklist, whitelist = whitelist, score = "bic")
+
+# 4) Show the candidate DAGs students should examine
+lapply(list(HC=g_hc, TABU=g_tabu, MMHC=g_mmhc), arcs)
+

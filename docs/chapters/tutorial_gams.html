@@ -403,11 +403,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#what-about-those-knots-k-and-the-risk-of-overfitting" id="toc-what-about-those-knots-k-and-the-risk-of-overfitting" class="nav-link" data-scroll-target="#what-about-those-knots-k-and-the-risk-of-overfitting"><span class="header-section-number">28.5.1</span> What about those knots (k) and the risk of overfitting?</a></li>
   </ul></li>
-  <li><a href="#example-2-rainfall-at-a-long-term-jackalope-study-site" id="toc-example-2-rainfall-at-a-long-term-jackalope-study-site" class="nav-link" data-scroll-target="#example-2-rainfall-at-a-long-term-jackalope-study-site"><span class="header-section-number">28.6</span> Example #2: Rainfall at a long term jackalope study site</a>
+  <li><a href="#example-2-rainfall-at-a-long-term-jackalope-study-site" id="toc-example-2-rainfall-at-a-long-term-jackalope-study-site" class="nav-link" data-scroll-target="#example-2-rainfall-at-a-long-term-jackalope-study-site"><span class="header-section-number">28.6</span> Example #2: Rainfall at a long term jackalope study site</a></li>
+  <li><a href="#a-simple-univariate-gam" id="toc-a-simple-univariate-gam" class="nav-link" data-scroll-target="#a-simple-univariate-gam"><span class="header-section-number">28.7</span> A simple univariate GAM</a>
   <ul class="collapse">
-  <li><a href="#modeling-rainfall-as-a-function-of-day-of-year" id="toc-modeling-rainfall-as-a-function-of-day-of-year" class="nav-link" data-scroll-target="#modeling-rainfall-as-a-function-of-day-of-year"><span class="header-section-number">28.6.1</span> Modeling rainfall as a function of day of year</a></li>
-  <li><a href="#modeling-rainfall-as-a-function-of-day-of-year-1" id="toc-modeling-rainfall-as-a-function-of-day-of-year-1" class="nav-link" data-scroll-target="#modeling-rainfall-as-a-function-of-day-of-year-1"><span class="header-section-number">28.6.2</span> Modeling rainfall as a function of day of year</a></li>
+  <li><a href="#an-additive-gam" id="toc-an-additive-gam" class="nav-link" data-scroll-target="#an-additive-gam"><span class="header-section-number">28.7.1</span> An additive GAM</a></li>
+  <li><a href="#modeling-an-interation-with-gams" id="toc-modeling-an-interation-with-gams" class="nav-link" data-scroll-target="#modeling-an-interation-with-gams"><span class="header-section-number">28.7.2</span> Modeling an interation with GAMs</a></li>
   </ul></li>
+  <li><a href="#what-next" id="toc-what-next" class="nav-link" data-scroll-target="#what-next"><span class="header-section-number">28.8</span> What next?</a></li>
   </ul>
 </nav>
     </div>
@@ -507,13 +509,32 @@ NA/NaN function evaluation</code></pre>
 <h2 data-number="28.5" class="anchored" data-anchor-id="fitting-a-gam"><span class="header-section-number">28.5</span> Fitting a GAM</h2>
 <p>First, let’s convert our <code>glmmTMB</code> model to a model formula that can be used in the <code>mgcv::gam</code> function. Actually, there is nothing really to convert, as it looks identical.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mod_gam<span class="ot">&lt;-</span> <span class="fu">gam</span>(dens2 <span class="sc">~</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mod_gam <span class="ot">&lt;-</span> <span class="fu">gam</span>(dens2 <span class="sc">~</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  mean_depth <span class="sc">+</span> year <span class="sc">*</span> period, <span class="at">family=</span><span class="fu">Gamma</span>(<span class="at">link=</span><span class="st">"log"</span>),</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> pufferi)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<p>For this one also, simulate the residuals of this model using the <code>DHARMa</code> package.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">simulateResiduals</span>(mod_gam)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Registered S3 methods overwritten by 'mgcViz':
+  method       from  
+  +.gg         GGally
+  simulate.gam gratia</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(res)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tutorial_gams_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The basic residual structure also looks very good. Of course, we would also need to examine residual structure as functions of the other covariates.</p>
 <p>To convince you that it’s doing the same thing, check out the summary of <code>mod_gam</code> and <code>mod_gamma2</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_gamma2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_gamma2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> Family: Gamma  ( log )
 Formula:          dens2 ~ mean_depth + year * period
@@ -535,7 +556,7 @@ year:period -2.181e-01  1.477e-01  -1.477   0.1397
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_gam)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_gam)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Family: Gamma 
@@ -559,23 +580,65 @@ R-sq.(adj) =   0.37   Deviance explained = 65.9%
 GCV = 0.60621  Scale est. = 0.50838   n = 146</code></pre>
 </div>
 </div>
-<p>Very close indeed. But let us now see if we can improve this model (even in a small way). We are going to add a smoother to our one continuous variable, <code>mean_depth</code> and then refit the model.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>mod_gam<span class="ot">&lt;-</span> <span class="fu">gam</span>(dens2 <span class="sc">~</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">s</span>(mean_depth, <span class="at">bs=</span><span class="st">"cr"</span>, <span class="at">k=</span><span class="dv">10</span>) <span class="sc">+</span> year <span class="sc">*</span> period, <span class="at">family=</span><span class="fu">Gamma</span>(<span class="at">link=</span><span class="st">"log"</span>),</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> pufferi)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Very close indeed. But let us now see if we can improve this model (even in a small way). We are going to add a smoother, <code>s()</code> with a cubic spline basis function, to our one continuous variable, <code>mean_depth</code> and then refit the model.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<p>This output looks a bit different. You now have two components to the model output: one for the parametric (linear) terms and one for the semiparametric (smoothed, or non-linear terms). We will discuss how to interpret the semiparametric effects in class.</p>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>What is the default basis function used by the <code>s()</code> smoother?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As noted in the <code>?mgcv::smooth.terms</code> help documentation, the default basis function is a thin plate regression splines (<code>bs="tp"</code>). Technically, they do not have knots, but they control the points of “wiggle” in another way.</p>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mod_gam<span class="ot">&lt;-</span> <span class="fu">gam</span>(dens2 <span class="sc">~</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">s</span>(mean_depth, <span class="at">bs=</span><span class="st">"cr"</span>, <span class="at">k=</span><span class="dv">10</span>) <span class="sc">+</span> year <span class="sc">*</span> period, <span class="at">family=</span><span class="fu">Gamma</span>(<span class="at">link=</span><span class="st">"log"</span>),</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> pufferi)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>As noted in the <code>?mgcv::smooth.terms</code> help documentation, <em>“cubic spline basis defined by a modest sized set of knots spread evenly through the covariate values”</em>.</p>
+<p>Summarize this model!</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_gam)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Family: Gamma 
+Link function: log 
+
+Formula:
+dens2 ~ s(mean_depth, bs = "cr", k = 10) + year * period
+
+Parametric coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept) -530.8409   336.4092  -1.578    0.117
+year           0.2686     0.1684   1.595    0.113
+period       394.8998   315.5240   1.252    0.213
+year:period   -0.1983     0.1577  -1.257    0.211
+
+Approximate significance of smooth terms:
+                edf Ref.df     F p-value    
+s(mean_depth) 1.891  2.345 182.5  &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+R-sq.(adj) =  0.408   Deviance explained = 66.7%
+GCV = 0.59929  Scale est. = 0.5208    n = 146</code></pre>
+</div>
+</div>
+<p>This output looks a bit different. You now have two components to the model output: one for the parametric (linear) coefficient and one for the semiparametric (smoothed, or non-linear terms). The former (parametric coefficients) is identical to the output of the linear models that you have seen previously in GLM and GLMMs. The bottom section (“Approximate signficance of smooth terms”) shows the strength of the smoothed terms (and interactions, if applicable). We will discuss how to interpret the semiparametric effects in class.</p>
 <p>For the sake of a quick comparison (i.e.&nbsp;not what you really should do for a manuscript), we can examine the AICs of these models.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(mod_gamma2, mod_gam)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(mod_gamma2, mod_gam)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                 df      AIC
 mod_gamma2 6.000000 1241.018
 mod_gam    6.891014 1239.017</code></pre>
 </div>
 </div>
-<p>Clearly, inclusion of the non-linear term has improved our model fit. Not dramatically so, but you get the point.</p>
+<p>As a reminder, the model with the lowest AIC has less <em>information loss</em> and is therefore a better-supported model. Inclusion of the non-linear term has improved our model fit. Not dramatically so, but you get the point.</p>
 <section id="what-about-those-knots-k-and-the-risk-of-overfitting" class="level3" data-number="28.5.1">
 <h3 data-number="28.5.1" class="anchored" data-anchor-id="what-about-those-knots-k-and-the-risk-of-overfitting"><span class="header-section-number">28.5.1</span> What about those knots (k) and the risk of overfitting?</h3>
 <p>As you recall from the introductory material, smoothed terms base their “smoothiness” or “curviness” on the number of segments (knots) that the line is split into. The more knots means that the relationship is more curvy. The various GAM functions and packages use slightly different methods for finding a smooth that does not overfit the data. But let’s look at this ourselves in the next example!</p>
@@ -589,7 +652,7 @@ mod_gam    6.891014 1239.017</code></pre>
 </ul>
 <p>This dataset contains daily rainfall data across 83 years on Barro Colorado Island, the home of the endemic liana jackalope (<em>Lepusantilocapra cryptophiloliana</em>). We want to understand recent temporal patterns (among and within years) in daily rainfall. So, let us read in the data and then, because we are interested in recent years only–reduce its size a bit (by limiting to the year range of 2008-2011). We will also go ahead and ensure the dates are in the right format and use these to calculate a a derived variable for data difference (relative to the first date in new, filtered dataset).</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>rain <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"class_exercise_data/rainfall_daily.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>rain <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"class_exercise_data/rainfall_daily.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 16258 Columns: 5
 ── Column specification ────────────────────────────────────────────────────────
@@ -601,167 +664,241 @@ date (1): date
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>rain <span class="ot">&lt;-</span> rain <span class="sc">|&gt;</span> <span class="fu">filter</span>(year <span class="sc">&gt;</span> <span class="dv">1990</span>)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>rain <span class="ot">&lt;-</span> rain <span class="sc">|&gt;</span> </span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">date2 =</span> <span class="fu">ymd</span>(date),  <span class="co"># Convert date to Date format using lubridate's ymd</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">yearday2 =</span> yearday <span class="sc">+</span> <span class="dv">1</span>,  <span class="co"># Increment yearday by 1</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">days_diff =</span> <span class="fu">as.numeric</span>(date2 <span class="sc">-</span> <span class="fu">min</span>(date2, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="co"># Diff from min date</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>rain <span class="ot">&lt;-</span> rain <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">&gt;</span> <span class="dv">1990</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>rain <span class="ot">&lt;-</span> rain <span class="sc">%&gt;%</span> </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">date2 =</span> <span class="fu">ymd</span>(date),  <span class="co"># Convert date to Date format using lubridate's ymd</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">yearday2 =</span> yearday <span class="sc">+</span> <span class="dv">1</span>,  <span class="co"># Increment yearday by 1</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">days_diff =</span> <span class="fu">as.numeric</span>(date2 <span class="sc">-</span> <span class="fu">min</span>(date2, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="co"># Diff from min date</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Let us plot these data!</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot rainfall with shading for certain year ranges</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>rain_sorted <span class="ot">&lt;-</span> rain <span class="sc">|&gt;</span> <span class="fu">arrange</span>(yearday2)</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Line plot for pooled data across all years</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(rain_sorted, <span class="fu">aes</span>(<span class="at">x =</span> yearday, <span class="at">y =</span> rainfall_mm)) <span class="sc">+</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"darkblue"</span>, <span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span>  </span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Pooled, All Years"</span>, <span class="at">x =</span> <span class="st">"Day of Year"</span>, <span class="at">y =</span> <span class="st">"Rainfall (mm)"</span>) <span class="sc">+</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot rainfall with shading for certain year ranges</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>rain_sorted <span class="ot">&lt;-</span> rain <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(yearday2)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Line plot for pooled data across all years</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(rain_sorted, <span class="fu">aes</span>(<span class="at">x =</span> yearday, <span class="at">y =</span> rainfall_mm)) <span class="sc">+</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"darkblue"</span>, <span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span>  </span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Pooled, All Years"</span>, <span class="at">x =</span> <span class="st">"Day of Year"</span>, <span class="at">y =</span> <span class="st">"Rainfall (mm)"</span>) <span class="sc">+</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="tutorial_gams_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="tutorial_gams_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>The first thing we notice is that there is a distinct dry season in the first part of the calendar year. Then, after about 100 days or so (corresponding to sometime in April), the rainy season begins.</p>
-<section id="modeling-rainfall-as-a-function-of-day-of-year" class="level3" data-number="28.6.1">
-<h3 data-number="28.6.1" class="anchored" data-anchor-id="modeling-rainfall-as-a-function-of-day-of-year"><span class="header-section-number">28.6.1</span> Modeling rainfall as a function of day of year</h3>
+</section>
+<section id="a-simple-univariate-gam" class="level2" data-number="28.7">
+<h2 data-number="28.7" class="anchored" data-anchor-id="a-simple-univariate-gam"><span class="header-section-number">28.7</span> A simple univariate GAM</h2>
 <p>We then move into modeling rainfall. First, we need to understand the boundaries of our response variable:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(rain<span class="sc">$</span>rainfall_mm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(rain<span class="sc">$</span>rainfall_mm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]   0 188</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(rain<span class="sc">$</span>rainfall_mm, <span class="dv">50</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(rain<span class="sc">$</span>rainfall_mm, <span class="dv">50</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="tutorial_gams_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="tutorial_gams_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>The distribution includes 0 values and has a long right tail. A Gamma will work very well here, but Gamma distributions cannot include 0 values. So, we can do a tricky little adjustment by adding a small value to all 0 values:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>rain <span class="ot">&lt;-</span> rain <span class="sc">%&gt;%</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rainfall_mm =</span> <span class="fu">if_else</span>(rainfall_mm <span class="sc">==</span> <span class="dv">0</span>,</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                               <span class="fl">0.00001</span>,</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>                               rainfall_mm))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>rain <span class="ot">&lt;-</span> rain <span class="sc">%&gt;%</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rainfall_mm =</span> <span class="fu">if_else</span>(rainfall_mm <span class="sc">==</span> <span class="dv">0</span>,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>                               <span class="fl">0.00001</span>,</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>                               rainfall_mm))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Now, we can fit GAMs with <code>rainfall_mm</code> as the response variable and a smoother of <code>yearday</code>. We will specify a Gamma error distribution with a <em>log</em> link function. But let us not stop there. Let us run several versions of these GAMs each with a different number of knots (3-20).</p>
+<p>This is trick is commonly used to allow data to be modeled using a Gamma distribution (as well as for other distributions like the beta distribution). You need need to ensure that you are not adding much noise to the system. You have a couple of options that you should think carefully about:</p>
+<ul>
+<li>You could add the very small value to <em>all</em> datapoints and then shift the final estimates downward by that amount.</li>
+<li>You could add that amount to all zero values (a good approach if there are only a few zero values).</li>
+</ul>
+<p>Now that our data meet the requirements of the Gamma distributions, we can fit Gamma GAMs with <code>rainfall_mm</code> as the response variable and a smoother of <code>yearday</code>. We will specify a Gamma error distribution with a <em>log</em> link function. But let us not stop there. Let us run several versions of these GAMs each with a different number of knots (3-20).</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">gam</span>(rainfall_mm <span class="sc">~</span> <span class="fu">s</span>(yearday, <span class="at">k=</span><span class="dv">3</span>, <span class="at">bs=</span><span class="st">"cc"</span>), <span class="at">family=</span><span class="fu">Gamma</span>(<span class="at">link=</span><span class="st">"log"</span>), <span class="at">data=</span>rain)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">gam</span>(rainfall_mm <span class="sc">~</span> <span class="fu">s</span>(yearday, <span class="at">k=</span><span class="dv">3</span>, <span class="at">bs=</span><span class="st">"cc"</span>), <span class="at">family=</span><span class="fu">Gamma</span>(<span class="at">link=</span><span class="st">"log"</span>), <span class="at">data=</span>rain)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in smooth.construct.cc.smooth.spec(object, dk$data, dk$knots): basis dimension, k, increased to minimum possible</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>mod4 <span class="ot">&lt;-</span> <span class="fu">gam</span>(rainfall_mm <span class="sc">~</span> <span class="fu">s</span>(yearday, <span class="at">k=</span><span class="dv">4</span>, <span class="at">bs=</span><span class="st">"cc"</span>), <span class="at">family=</span><span class="fu">Gamma</span>(<span class="at">link=</span><span class="st">"log"</span>), <span class="at">data=</span>rain)</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>mod5 <span class="ot">&lt;-</span> <span class="fu">gam</span>(rainfall_mm <span class="sc">~</span> <span class="fu">s</span>(yearday, <span class="at">k=</span><span class="dv">5</span>, <span class="at">bs=</span><span class="st">"cc"</span>), <span class="at">family=</span><span class="fu">Gamma</span>(<span class="at">link=</span><span class="st">"log"</span>), <span class="at">data=</span>rain)</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>mod6 <span class="ot">&lt;-</span> <span class="fu">gam</span>(rainfall_mm <span class="sc">~</span> <span class="fu">s</span>(yearday, <span class="at">k=</span><span class="dv">6</span>, <span class="at">bs=</span><span class="st">"cc"</span>), <span class="at">family=</span><span class="fu">Gamma</span>(<span class="at">link=</span><span class="st">"log"</span>), <span class="at">data=</span>rain)</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>mod8 <span class="ot">&lt;-</span> <span class="fu">gam</span>(rainfall_mm <span class="sc">~</span> <span class="fu">s</span>(yearday, <span class="at">k=</span><span class="dv">8</span>, <span class="at">bs=</span><span class="st">"cc"</span>), <span class="at">family=</span><span class="fu">Gamma</span>(<span class="at">link=</span><span class="st">"log"</span>), <span class="at">data=</span>rain)</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>mod10 <span class="ot">&lt;-</span> <span class="fu">gam</span>(rainfall_mm <span class="sc">~</span> <span class="fu">s</span>(yearday, <span class="at">k=</span><span class="dv">10</span>, <span class="at">bs=</span><span class="st">"cc"</span>), <span class="at">family=</span><span class="fu">Gamma</span>(<span class="at">link=</span><span class="st">"log"</span>), <span class="at">data=</span>rain)</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>mod15 <span class="ot">&lt;-</span> <span class="fu">gam</span>(rainfall_mm <span class="sc">~</span> <span class="fu">s</span>(yearday, <span class="at">k=</span><span class="dv">15</span>, <span class="at">bs=</span><span class="st">"cc"</span>), <span class="at">family=</span><span class="fu">Gamma</span>(<span class="at">link=</span><span class="st">"log"</span>), <span class="at">data=</span>rain)</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>mod20 <span class="ot">&lt;-</span> <span class="fu">gam</span>(rainfall_mm <span class="sc">~</span> <span class="fu">s</span>(yearday, <span class="at">k=</span><span class="dv">20</span>, <span class="at">bs=</span><span class="st">"cc"</span>), <span class="at">family=</span><span class="fu">Gamma</span>(<span class="at">link=</span><span class="st">"log"</span>), <span class="at">data=</span>rain)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>mod4 <span class="ot">&lt;-</span> <span class="fu">gam</span>(rainfall_mm <span class="sc">~</span> <span class="fu">s</span>(yearday, <span class="at">k=</span><span class="dv">4</span>, <span class="at">bs=</span><span class="st">"cc"</span>), <span class="at">family=</span><span class="fu">Gamma</span>(<span class="at">link=</span><span class="st">"log"</span>), <span class="at">data=</span>rain)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>mod5 <span class="ot">&lt;-</span> <span class="fu">gam</span>(rainfall_mm <span class="sc">~</span> <span class="fu">s</span>(yearday, <span class="at">k=</span><span class="dv">5</span>, <span class="at">bs=</span><span class="st">"cc"</span>), <span class="at">family=</span><span class="fu">Gamma</span>(<span class="at">link=</span><span class="st">"log"</span>), <span class="at">data=</span>rain)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>mod6 <span class="ot">&lt;-</span> <span class="fu">gam</span>(rainfall_mm <span class="sc">~</span> <span class="fu">s</span>(yearday, <span class="at">k=</span><span class="dv">6</span>, <span class="at">bs=</span><span class="st">"cc"</span>), <span class="at">family=</span><span class="fu">Gamma</span>(<span class="at">link=</span><span class="st">"log"</span>), <span class="at">data=</span>rain)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>mod8 <span class="ot">&lt;-</span> <span class="fu">gam</span>(rainfall_mm <span class="sc">~</span> <span class="fu">s</span>(yearday, <span class="at">k=</span><span class="dv">8</span>, <span class="at">bs=</span><span class="st">"cc"</span>), <span class="at">family=</span><span class="fu">Gamma</span>(<span class="at">link=</span><span class="st">"log"</span>), <span class="at">data=</span>rain)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>mod10 <span class="ot">&lt;-</span> <span class="fu">gam</span>(rainfall_mm <span class="sc">~</span> <span class="fu">s</span>(yearday, <span class="at">k=</span><span class="dv">10</span>, <span class="at">bs=</span><span class="st">"cc"</span>), <span class="at">family=</span><span class="fu">Gamma</span>(<span class="at">link=</span><span class="st">"log"</span>), <span class="at">data=</span>rain)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>mod15 <span class="ot">&lt;-</span> <span class="fu">gam</span>(rainfall_mm <span class="sc">~</span> <span class="fu">s</span>(yearday, <span class="at">k=</span><span class="dv">15</span>, <span class="at">bs=</span><span class="st">"cc"</span>), <span class="at">family=</span><span class="fu">Gamma</span>(<span class="at">link=</span><span class="st">"log"</span>), <span class="at">data=</span>rain)</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>mod20 <span class="ot">&lt;-</span> <span class="fu">gam</span>(rainfall_mm <span class="sc">~</span> <span class="fu">s</span>(yearday, <span class="at">k=</span><span class="dv">20</span>, <span class="at">bs=</span><span class="st">"cc"</span>), <span class="at">family=</span><span class="fu">Gamma</span>(<span class="at">link=</span><span class="st">"log"</span>), <span class="at">data=</span>rain)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Then, we can compare using AIC.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(mod3, mod4, mod5, mod6, mod8, mod10, mod15, mod20)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>aic_list <span class="ot">&lt;-</span> <span class="fu">AIC</span>(mod3, mod4, mod5, mod6, mod8, mod10, mod15, mod20)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># sorted by ascending AIC </span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>aic_list <span class="sc">%&gt;%</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(AIC)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            df      AIC
-mod3  3.578037 24547.87
-mod4  3.578037 24547.87
-mod5  4.289481 24538.82
-mod6  5.886517 24494.01
 mod8  7.414299 24478.39
 mod10 7.747918 24481.01
 mod15 8.097447 24482.88
-mod20 8.231357 24483.50</code></pre>
+mod20 8.231357 24483.50
+mod6  5.886517 24494.01
+mod5  4.289481 24538.82
+mod3  3.578037 24547.87
+mod4  3.578037 24547.87</code></pre>
 </div>
 </div>
-<p>What do we see?</p>
+<p>This works the same as before. The model with the lowest AIC (<code>mod8</code>) has the least <em>information loss</em>. But, first, we can examine what each of these smoothed relationships looks like. Here, we will use just base R and <code>ggplot2</code>, as other approaches either include additional packages (e.g.&nbsp;<code>gratia</code> or <code>patchwork</code>) or require many more lines of code. Base R for the win, I say.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">3</span>), <span class="at">mar=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod3, <span class="at">shade=</span>T)</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod4, <span class="at">shade=</span>T)</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod5, <span class="at">shade=</span>T)</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod6, <span class="at">shade=</span>T)</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod8, <span class="at">shade=</span>T)</span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod10, <span class="at">shade=</span>T)</span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod15, <span class="at">shade=</span>T)</span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod20, <span class="at">shade=</span>T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">3</span>), <span class="at">mar=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod3, <span class="at">shade=</span>T)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod4, <span class="at">shade=</span>T)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod5, <span class="at">shade=</span>T)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod6, <span class="at">shade=</span>T)</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod8, <span class="at">shade=</span>T)</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod10, <span class="at">shade=</span>T)</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod15, <span class="at">shade=</span>T)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod20, <span class="at">shade=</span>T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="tutorial_gams_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="tutorial_gams_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Some would say that this is a classic example of the dangers of overfitting, which GAMs may have a tendency to do or smaller sample sizes. Sometimes, the overfitting may be useful (for finding potential environmental thresholds). But, generally, this example highlights the balance between <em>wiggliness</em> and fit. You will find that many practitioners conservatively choose five knots just to be safe; there is currently no statistical justification for this choice.</p>
-</section>
-<section id="modeling-rainfall-as-a-function-of-day-of-year-1" class="level3" data-number="28.6.2">
-<h3 data-number="28.6.2" class="anchored" data-anchor-id="modeling-rainfall-as-a-function-of-day-of-year-1"><span class="header-section-number">28.6.2</span> Modeling rainfall as a function of day of year</h3>
-<p>Now, let us add complexity. We shall add a term of <code>year</code> so that we can separate the long-term trends in rainfall (across years) from the within-year variation.</p>
-<p>We therefore fit the model with two main effect, <code>yearday</code> and <code>year</code>. For yearday, we want out final predicted output to recognize the seamlessness in our data, namely that the day of the year <em>after</em> the 365th day is the 1st day. Therefore, we specify a cyclic cubic regression spline using the appropriate basis function<code>bs = "cc"</code>. We set a large maximum number of knots (n=10) for illustration purposes only.</p>
+<p>Remember that the y-axis is on the link scale. The x-axis is on the scale of your predictor, <code>mean_depth</code>. Some would say that this multi-plot graphic shows a classic example of the dangers of overfitting, which GAMs may have a tendency to do for smaller sample sizes. Sometimes, the overfitting may be useful (for finding potential environmental thresholds). But, generally, this example highlights the balance between <em>wiggliness</em> and fit. You will find that many practitioners conservatively choose five knots just to be safe; there is currently no statistical justification for this choice, but it seems to <em>work out well</em> for most models.</p>
+<section id="an-additive-gam" class="level3" data-number="28.7.1">
+<h3 data-number="28.7.1" class="anchored" data-anchor-id="an-additive-gam"><span class="header-section-number">28.7.1</span> An additive GAM</h3>
+<p>Now, let us add complexity to our model. We shall add a term of <code>year</code> so that we can separate the long-term trends in rainfall (across years) from the within-year variation.</p>
+<p>We therefore fit the model with two main effects, <code>yearday</code> and <code>year</code>. For <code>yearday</code>, we want our final predicted output to recognize the temporal seamlessness, namely that the day of the year <em>after</em> the 365th day is the 1st day. Therefore, we specify a cyclic cubic regression spline using the appropriate basis function<code>bs = "cc"</code>. We set a large maximum number of knots (n=10) for illustration purposes only; this could be optimized.</p>
+<p>This is an additive effect model (no covariate interactions):</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>rain_mod_01 <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  rainfall_mm <span class="sc">~</span> </span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">s</span>(yearday, <span class="at">bs =</span> <span class="st">"cc"</span>, <span class="at">k =</span> <span class="dv">10</span>) <span class="sc">+</span>      <span class="co"># average seasonal curve</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">s</span>(year, <span class="at">k=</span><span class="dv">10</span>),                     <span class="co"># long-term trend</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">Gamma</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> rain,</span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>rain_add <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  rainfall_mm <span class="sc">~</span> </span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">s</span>(yearday, <span class="at">bs =</span> <span class="st">"cc"</span>, <span class="at">k =</span> <span class="dv">10</span>) <span class="sc">+</span>      <span class="co"># average seasonal curve</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">s</span>(year, <span class="at">k=</span><span class="dv">10</span>),                     <span class="co"># long-term trend</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">Gamma</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> rain,</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>We can then either look at the <code>summary</code> or plot the conditional effects of the model terms.</p>
+<p>We can then either look at the <code>summary</code> or plot the conditional effects of the model terms. Note that plotting can be done with several tools (<code>gratia</code>, <code>tidygam</code>); we will not use these tools in this example.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>rain_mod <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  rainfall_mm <span class="sc">~</span> </span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">s</span>(yearday, <span class="at">bs =</span> <span class="st">"cc"</span>, <span class="at">k =</span> <span class="dv">10</span>) <span class="sc">+</span>      <span class="co"># average seasonal curve</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">s</span>(year, <span class="at">k=</span><span class="dv">10</span>) <span class="sc">+</span>                     <span class="co"># long-term trend</span></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ti</span>(yearday, year, </span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">bs =</span> <span class="fu">c</span>(<span class="st">"cc"</span>, <span class="st">"tp"</span>), </span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">k =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">10</span>)),                    <span class="co"># year-specific seasonal deviations</span></span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">Gamma</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> rain,</span>
-<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
-<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rain_mod)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rain_add)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Family: Gamma 
 Link function: log 
 
 Formula:
-rainfall_mm ~ s(yearday, bs = "cc", k = 10) + s(year, k = 10) + 
-    ti(yearday, year, bs = c("cc", "tp"), k = c(10, 10))
+rainfall_mm ~ s(yearday, bs = "cc", k = 10) + s(year, k = 10)
 
 Parametric coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  2.72286    0.02177     125   &lt;2e-16 ***
+(Intercept)  2.72886    0.02189   124.7   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Approximate significance of smooth terms:
-                   edf Ref.df      F p-value    
-s(yearday)       6.029  8.000 11.285 &lt; 2e-16 ***
-s(year)          1.010  1.019 12.339 0.00043 ***
-ti(yearday,year) 6.652 72.000  0.198 0.00498 ** 
+             edf Ref.df     F  p-value    
+s(yearday) 6.070  8.000 11.15  &lt; 2e-16 ***
+s(year)    1.018  1.035 11.49 0.000664 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-R-sq.(adj) =  0.0224   Deviance explained = 2.13%
--REML =  12193  Scale est. = 1.6405    n = 3472</code></pre>
+R-sq.(adj) =  0.0188   Deviance explained = 1.73%
+-REML =  12195  Scale est. = 1.6638    n = 3472</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rain_add)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tutorial_gams_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
-
-
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tutorial_gams_files/figure-html/unnamed-chunk-20-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The smooth for yearday is highly significant and has an effective degrees of freedom (e.d.f.) of about 6, indicating a nonlinear seasonal pattern in rainfall across the year. The smooth for year has an e.d.f. very close to 1; this means that the model is estimating a roughly linear long-term temporal trend; this is also statistically significant.</p>
+<p>Now, how would be interpret the overall explanatory power of this model. For GAMs, use the deviance explained rather than the R-squared value. In this case, the overall explanatory power of the model is low: it explains only about 1.73% of the deviance in rainfall. This suggests that although rainfall shows detectable seasonal structure and a slight long-term trend, most variation is driven by short-term weather events or other factors not included in the model. Pretty cool, right?</p>
 </section>
+<section id="modeling-an-interation-with-gams" class="level3" data-number="28.7.2">
+<h3 data-number="28.7.2" class="anchored" data-anchor-id="modeling-an-interation-with-gams"><span class="header-section-number">28.7.2</span> Modeling an interation with GAMs</h3>
+<p>Let us add further complexity by exploring the possible interaction between <code>year</code> and <code>yearday</code>. After all, long-term changes in rainfall –however small– could change some element(s) of climatic forcing and change within-year patterns.</p>
+<p>For this, we add a tensor product interaction (<code>ti()</code>) smooth. As the name suggests, it allows for the specification of interaction models analogous to classical GLM/ANOVA. Look carefully at how the basis functions and number of knots (of each term) can be independently specified in the <code>ti()</code> term. The ability to do this maximizes the flexibility of these models.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>rain_int <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  rainfall_mm <span class="sc">~</span> </span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">s</span>(yearday, <span class="at">bs =</span> <span class="st">"cc"</span>, <span class="at">k =</span> <span class="dv">6</span>) <span class="sc">+</span>      <span class="co"># average seasonal curve</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">s</span>(year, <span class="at">k=</span><span class="dv">6</span>) <span class="sc">+</span>                     <span class="co"># long-term trend</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ti</span>(yearday, year, </span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">bs =</span> <span class="fu">c</span>(<span class="st">"cc"</span>, <span class="st">"tp"</span>), </span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">k =</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">6</span>)),                    <span class="co"># year-specific seasonal deviations</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">Gamma</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> rain,</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Note in the model above, you can also change the <code>s()</code> to <code>ti()</code> for all smoothed terms as an equivalent model; this sometimes can help you keep track of the terms that are contributing to the interaction.</p>
+<p>And we can summarize the model output:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rain_int)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Family: Gamma 
+Link function: log 
+
+Formula:
+rainfall_mm ~ s(yearday, bs = "cc", k = 6) + s(year, k = 6) + 
+    ti(yearday, year, bs = c("cc", "tp"), k = c(6, 6))
+
+Parametric coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  2.73229    0.02184   125.1   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Approximate significance of smooth terms:
+                    edf Ref.df      F p-value    
+s(yearday)       3.8243  4.000 18.461 &lt; 2e-16 ***
+s(year)          1.0195  1.039  9.840 0.00162 ** 
+ti(yearday,year) 0.5289 20.000  0.035 0.22407    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+R-sq.(adj) =  0.0168   Deviance explained = 1.48%
+-REML =  12198  Scale est. = 1.6561    n = 3472</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>() <span class="co"># this just clears the graphics window</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>null device 
+          1 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vis.gam</span>(rain_int, <span class="at">view=</span><span class="fu">c</span>(<span class="st">"yearday"</span>, <span class="st">"year"</span>), <span class="at">theta=</span><span class="dv">215</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Explained deviance has not changed, so we continue to see that most of the variation in rainfall is due to short-term processes. For the smoothed continuous terms: Rainfall continues to show a significant seasonal pattern across the year and a small linear trend across years, indicating that rainfall varies systematically within the annual cycle and slightly through time. Concerning the interaction: The interaction between <code>year</code> and <code>yearday</code> is not significant, suggesting the seasonal rainfall pattern has remained relatively consistent across years.</p>
+<p>Congratulations, you have successfully built GAMs that test for additive and interaction effects!</p>
+</section>
+</section>
+<section id="what-next" class="level2" data-number="28.8">
+<h2 data-number="28.8" class="anchored" data-anchor-id="what-next"><span class="header-section-number">28.8</span> What next?</h2>
+<p>Now, you may experiment with different basis functions and knots on continuous variables in your own datasets.</p>
+
+
 </section>
 
 </main> <!-- /main -->

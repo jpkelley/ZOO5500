@@ -1,6 +1,8 @@
 ---
 title: "Tutorial: GAMs"
 format: html
+editor_options: 
+  chunk_output_type: console
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -78,37 +80,59 @@ We have solved our main issue! But can this model be improved?
 First, let's convert our `glmmTMB` model to a model formula that can be used in the `mgcv::gam` function. Actually, there is nothing really to convert, as it looks identical.
 
 ```{r}
-mod_gam<- gam(dens2 ~
+mod_gam <- gam(dens2 ~
   mean_depth + year * period, family=Gamma(link="log"),
   data = pufferi)
 ```
+
+For this one also, simulate the residuals of this model using the `DHARMa` package.
+
+```{r}
+res <- simulateResiduals(mod_gam)
+plot(res)
+```
+The basic residual structure also looks very good. Of course, we would also need to examine residual structure as functions of the other covariates. 
+
 To convince you that it's doing the same thing, check out the summary of `mod_gam` and `mod_gamma2`.
 
 ```{r}
 summary(mod_gamma2)
-
 summary(mod_gam)
 ```
-Very close indeed. But let us now see if we can improve this model (even in a small way). We are going to add a smoother to our one continuous variable, `mean_depth` and then refit the model.
+Very close indeed. But let us now see if we can improve this model (even in a small way). We are going to add a smoother, `s()` with a cubic spline basis function, to our one continuous variable, `mean_depth` and then refit the model. 
+
+::: callout-tip
+## What is the default basis function used by the `s()` smoother?
+
+As noted in the `?mgcv::smooth.terms` help documentation, the default basis function is a thin plate regression splines (`bs="tp"`). Technically, they do not have knots, but they control the points of "wiggle" in another way. 
+
+:::
 
 ```{r}
 mod_gam<- gam(dens2 ~
   s(mean_depth, bs="cr", k=10) + year * period, family=Gamma(link="log"),
   data = pufferi)
 ```
-This output looks a bit different. You now have two components to the model output: one for the parametric (linear) terms and one for the semiparametric (smoothed, or non-linear terms). We will discuss how to interpret the semiparametric effects in class. 
+
+As noted in the `?mgcv::smooth.terms` help documentation, _"cubic spline basis defined by a modest sized set of knots spread evenly through the covariate values"_. 
+
+Summarize this model!
+
+```{r}
+summary(mod_gam)
+```
+This output looks a bit different. You now have two components to the model output: one for the parametric (linear) coefficient and one for the semiparametric (smoothed, or non-linear terms). The former (parametric coefficients) is identical to the output of the linear models that you have seen previously in GLM and GLMMs. The bottom section ("Approximate signficance of smooth terms") shows the strength of the smoothed terms (and interactions, if applicable). We will discuss how to interpret the semiparametric effects in class. 
 
 For the sake of a quick comparison (i.e. not what you really should do for a manuscript), we can examine the AICs of these models. 
 ```{r}
 AIC(mod_gamma2, mod_gam)
 ```
 
-Clearly, inclusion of the non-linear term has improved our model fit. Not dramatically so, but you get the point. 
+As a reminder, the model with the lowest AIC has less _information loss_ and is therefore a better-supported model. Inclusion of the non-linear term has improved our model fit. Not dramatically so, but you get the point. 
 
 ### What about those knots (k) and the risk of overfitting?
 
 As you recall from the introductory material, smoothed terms base their "smoothiness" or "curviness" on the number of segments (knots) that the line is split into. The more knots means that the relationship is more curvy. The various GAM functions and packages use slightly different methods for finding a smooth that does not overfit the data. But let's look at this ourselves in the next example!
-
 
 ## Example #2: Rainfall at a long term jackalope study site
 
@@ -121,9 +145,9 @@ This dataset contains daily rainfall data across 83 years on Barro Colorado Isla
 ```{r}
 rain <- read_csv("class_exercise_data/rainfall_daily.csv")
 
-rain <- rain |> filter(year > 1990)
+rain <- rain %>% filter(year > 1990)
 
-rain <- rain |> 
+rain <- rain %>% 
   mutate(
     date2 = ymd(date),  # Convert date to Date format using lubridate's ymd
     yearday2 = yearday + 1,  # Increment yearday by 1
@@ -133,7 +157,7 @@ rain <- rain |>
 Let us plot these data!
 ```{r}
 # Plot rainfall with shading for certain year ranges
-rain_sorted <- rain |> arrange(yearday2)
+rain_sorted <- rain %>% arrange(yearday2)
 
 # Line plot for pooled data across all years
 ggplot(rain_sorted, aes(x = yearday, y = rainfall_mm)) +
@@ -144,7 +168,7 @@ ggplot(rain_sorted, aes(x = yearday, y = rainfall_mm)) +
 
 The first thing we notice is that there is a distinct dry season in the first part of the calendar year. Then, after about 100 days or so (corresponding to sometime in April), the rainy season begins. 
 
-### Modeling rainfall as a function of day of year
+## A simple univariate GAM
 
 We then move into modeling rainfall. First, we need to understand the boundaries of our response variable:
 
@@ -163,7 +187,12 @@ rain <- rain %>%
 
 ```
 
-Now, we can fit GAMs with `rainfall_mm` as the response variable and a smoother of `yearday`. We will specify a Gamma error distribution with a _log_ link function. But let us not stop there. Let us run several versions of these GAMs each with a different number of knots (3-20). 
+This is trick is commonly used to allow data to be modeled using a Gamma distribution (as well as for other distributions like the beta distribution). You need need to ensure that you are not adding much noise to the system. You have a couple of options that you should think carefully about: 
+
+* You could add the very small value to _all_ datapoints and then shift the final estimates downward by that amount. 
+* You could add that amount to all zero values (a good approach if there are only a few zero values).
+
+Now that our data meet the requirements of the Gamma distributions, we can fit Gamma GAMs with `rainfall_mm` as the response variable and a smoother of `yearday`. We will specify a Gamma error distribution with a _log_ link function. But let us not stop there. Let us run several versions of these GAMs each with a different number of knots (3-20). 
 
 ```{r}
 mod3 <- gam(rainfall_mm ~ s(yearday, k=3, bs="cc"), family=Gamma(link="log"), data=rain)
@@ -179,13 +208,18 @@ mod20 <- gam(rainfall_mm ~ s(yearday, k=20, bs="cc"), family=Gamma(link="log"), 
 Then, we can compare using AIC.
 
 ```{r}
-AIC(mod3, mod4, mod5, mod6, mod8, mod10, mod15, mod20)
+aic_list <- AIC(mod3, mod4, mod5, mod6, mod8, mod10, mod15, mod20)
+
+# sorted by ascending AIC 
+aic_list %>%
+  arrange(AIC)
+
 ```
 
-What do we see?
+This works the same as before. The model with the lowest AIC (`mod8`) has the least _information loss_. But, first, we can examine what each of these smoothed relationships looks like. Here, we will use just base R and `ggplot2`, as other approaches either include additional packages (e.g. `gratia` or `patchwork`) or require many more lines of code. Base R for the win, I say.
 
 ```{r}
-par(mfrow=c(3, 3), mar=c(1,1,1,1))
+par(mfrow=c(3, 3), mar=c(2,2,2,2))
 plot(mod3, shade=T)
 plot(mod4, shade=T)
 plot(mod5, shade=T)
@@ -196,16 +230,18 @@ plot(mod15, shade=T)
 plot(mod20, shade=T)
 ```
 
-Some would say that this is a classic example of the dangers of overfitting, which GAMs may have a tendency to do or smaller sample sizes. Sometimes, the overfitting may be useful (for finding potential environmental thresholds). But, generally, this example highlights the balance between _wiggliness_ and fit. You will find that many practitioners conservatively choose five knots just to be safe; there is currently no statistical justification for this choice.
+Remember that the y-axis is on the link scale. The x-axis is on the scale of your predictor, `mean_depth`. Some would say that this multi-plot graphic shows a classic example of the dangers of overfitting, which GAMs may have a tendency to do for smaller sample sizes. Sometimes, the overfitting may be useful (for finding potential environmental thresholds). But, generally, this example highlights the balance between _wiggliness_ and fit. You will find that many practitioners conservatively choose five knots just to be safe; there is currently no statistical justification for this choice, but it seems to _work out well_ for most models.
 
-### Modeling rainfall as a function of day of year
+### An additive GAM 
 
-Now, let us add complexity. We shall add a term of `year` so that we can separate the long-term trends in rainfall (across years) from the within-year variation. 
+Now, let us add complexity to our model. We shall add a term of `year` so that we can separate the long-term trends in rainfall (across years) from the within-year variation. 
 
-We therefore fit the model with two main effect, `yearday` and `year`. For yearday, we want out final predicted output to recognize the seamlessness in our data, namely that the day of the year _after_ the 365th day is the 1st day. Therefore, we specify a cyclic cubic regression spline using the appropriate basis function`bs = "cc"`. We set a large maximum number of knots (n=10) for illustration purposes only.
+We therefore fit the model with two main effects, `yearday` and `year`. For `yearday`, we want our final predicted output to recognize the temporal seamlessness, namely that the day of the year _after_ the 365th day is the 1st day. Therefore, we specify a cyclic cubic regression spline using the appropriate basis function`bs = "cc"`. We set a large maximum number of knots (n=10) for illustration purposes only; this could be optimized.
+
+This is an additive effect model (no covariate interactions):
 
 ```{r}
-rain_mod_01 <- gam(
+rain_add <- gam(
   rainfall_mm ~ 
     s(yearday, bs = "cc", k = 10) +      # average seasonal curve
     s(year, k=10),                     # long-term trend
@@ -215,22 +251,53 @@ rain_mod_01 <- gam(
 )
 
 ```
-We can then either look at the `summary` or plot the conditional effects of the model terms. 
+We can then either look at the `summary` or plot the conditional effects of the model terms. Note that plotting can be done with several tools (`gratia`, `tidygam`); we will not use these tools in this example.
 
 ```{r}
-rain_mod <- gam(
+summary(rain_add)
+plot(rain_add)
+
+```
+The smooth for yearday is highly significant and has an effective degrees of freedom (e.d.f.) of about 6, indicating a nonlinear seasonal pattern in rainfall across the year. The smooth for year has an e.d.f. very close to 1; this means that the model is estimating a roughly linear long-term temporal trend; this is also statistically significant.
+
+Now, how would be interpret the overall explanatory power of this model. For GAMs, use the deviance explained rather than the R-squared value. In this case, the overall explanatory power of the model is low: it explains only about 1.73% of the deviance in rainfall. This suggests that although rainfall shows detectable seasonal structure and a slight long-term trend, most variation is driven by short-term weather events or other factors not included in the model. Pretty cool, right?
+
+### Modeling an interation with GAMs
+
+Let us add further complexity by exploring the possible interaction between `year` and `yearday`. After all, long-term changes in rainfall --however small-- could change some element(s) of climatic forcing and change within-year patterns.
+
+For this, we add a tensor product interaction (`ti()`) smooth. As the name suggests, it allows for the specification of interaction models analogous to classical GLM/ANOVA.  Look carefully at how the basis functions and number of knots (of each term) can be independently specified in the `ti()` term. The ability to do this maximizes the flexibility of these models.
+
+```{r}
+rain_int <- gam(
   rainfall_mm ~ 
-    s(yearday, bs = "cc", k = 10) +      # average seasonal curve
-    s(year, k=10) +                     # long-term trend
+    s(yearday, bs = "cc", k = 6) +      # average seasonal curve
+    s(year, k=6) +                     # long-term trend
     ti(yearday, year, 
        bs = c("cc", "tp"), 
-       k = c(10, 10)),                    # year-specific seasonal deviations
+       k = c(6, 6)),                    # year-specific seasonal deviations
   family = Gamma(link = "log"),
   data = rain,
   method = "REML"
 )
-
-summary(rain_mod)
-
 ```
 
+Note in the model above, you can also change the `s()` to `ti()` for all smoothed terms as an equivalent model; this sometimes can help you keep track of the terms that are contributing to the interaction.
+
+And we can summarize the model output:
+
+```{r}
+
+summary(rain_int)
+
+dev.off() # this just clears the graphics window
+vis.gam(rain_int, view=c("yearday", "year"), theta=215)
+
+```
+Explained deviance has not changed, so we continue to see that most of the variation in rainfall is due to short-term processes. For the smoothed continuous terms: Rainfall continues to show a significant seasonal pattern across the year and a small linear trend across years, indicating that rainfall varies systematically within the annual cycle and slightly through time. Concerning the interaction: The interaction between `year` and `yearday` is not significant, suggesting the seasonal rainfall pattern has remained relatively consistent across years.
+
+Congratulations, you have successfully built GAMs that test for additive and interaction effects!
+
+## What next?
+
+Now, you may experiment with different basis functions and knots on continuous variables in your own datasets. 

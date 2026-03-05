@@ -3,6 +3,7 @@
 # Package names
 packages <- c(
   "ggplot2",
+  "tidygam",
   "seewave",
   "DHARMa",
   "tuneR",
@@ -24,7 +25,8 @@ packages <- c(
   "fields",
   "mgcv",
   "MASS",
-  "readr")
+  "readr",
+  "gratia")
 
 # Install packages not yet installed
 installed_packages <- packages %in% rownames(installed.packages())

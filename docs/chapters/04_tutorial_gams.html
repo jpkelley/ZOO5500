@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>28&nbsp; Tutorial: GAMs – Quantitative Analysis of (Messy) Field Data</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/05_01_why_scms.html" rel="next">
+<link href="../chapters/03_glmm_epilogue.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-832e3d7b6b94ddcc90a000f8fabe51a9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/04_tutorial_gams.html">Part IV: Columns to Curves</a></li><li class="breadcrumb-item"><a href="../chapters/04_tutorial_gams.html"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Tutorial: GAMs</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../graphics/jackalope_graphics/analytical_jackalope.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="../graphics/jackalope_graphics/analytical_jackalope.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Quantitative Analysis of (Messy) Field Data</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Course Overview</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Information</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/int_course_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/int_syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Syllabus</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/int_calendar_sp26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Course calendar</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/int_ai_policy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">GenAI Use Guidelines</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/int_preparing_yourself.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Preparing Yourself</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/int_assignment_grades.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Assignments &amp; Grades</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/int_project_scoping.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Project Scoping</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Part ∅: AI preparation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/00_ai_prompting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">AI Prompting for Analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/00_using_jackalope_gpt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Using JackalopeGPT</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Part I: Reproducible Analyses</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01_reproducible_workflow_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Reproducible Analyses</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01_nature_of_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Nature of Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01_metadata_low_friction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Metadata</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01_naming_conventions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Conventions and Style</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Part II: Chaos to Columns</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02_data_exploration_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data Exploration</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02_data_exploration_toolkit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data Exploration Toolkit</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02_outliers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Tool 1: Outliers</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02_tutorial_data_exploration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Tutorial: Data Exploration</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Part III: Columns to Lines</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_statistical_aphorisms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Statistical Philosophy</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_intro_modeling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Introduction to Models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_intro_glms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">GLM Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_tutorial_glms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Tutorial: GLMs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_glm_partial_association.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Tutorial: Partial Associations</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_DHARMA_diagnostics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">DHARMA diagnostics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_glmms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">GLMM Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_tutorial_glmms_part01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Tutorial: GLMMs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_glmm_epilogue.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">GLMM epilogue</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part IV: Columns to Curves</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04_tutorial_gams.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Tutorial: GAMs</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">Part V: Curves to Meaning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05_01_why_scms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Why SCMs?</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">28.1</span> Introduction</a></li>
+  <li><a href="#example-1-building-a-basic-gam" id="toc-example-1-building-a-basic-gam" class="nav-link" data-scroll-target="#example-1-building-a-basic-gam"><span class="header-section-number">28.2</span> Example #1: Building a basic GAM</a></li>
+  <li><a href="#set-up-workspace" id="toc-set-up-workspace" class="nav-link" data-scroll-target="#set-up-workspace"><span class="header-section-number">28.3</span> Set up workspace</a></li>
+  <li><a href="#a-linear-model-of-jackalope-density" id="toc-a-linear-model-of-jackalope-density" class="nav-link" data-scroll-target="#a-linear-model-of-jackalope-density"><span class="header-section-number">28.4</span> A linear model of jackalope density</a></li>
+  <li><a href="#fitting-a-gam" id="toc-fitting-a-gam" class="nav-link" data-scroll-target="#fitting-a-gam"><span class="header-section-number">28.5</span> Fitting a GAM</a>
+  <ul class="collapse">
+  <li><a href="#what-about-those-knots-k-and-the-risk-of-overfitting" id="toc-what-about-those-knots-k-and-the-risk-of-overfitting" class="nav-link" data-scroll-target="#what-about-those-knots-k-and-the-risk-of-overfitting"><span class="header-section-number">28.5.1</span> What about those knots (k) and the risk of overfitting?</a></li>
+  </ul></li>
+  <li><a href="#example-2-rainfall-at-a-long-term-jackalope-study-site" id="toc-example-2-rainfall-at-a-long-term-jackalope-study-site" class="nav-link" data-scroll-target="#example-2-rainfall-at-a-long-term-jackalope-study-site"><span class="header-section-number">28.6</span> Example #2: Rainfall at a long term jackalope study site</a></li>
+  <li><a href="#a-simple-univariate-gam" id="toc-a-simple-univariate-gam" class="nav-link" data-scroll-target="#a-simple-univariate-gam"><span class="header-section-number">28.7</span> A simple univariate GAM</a>
+  <ul class="collapse">
+  <li><a href="#an-additive-gam" id="toc-an-additive-gam" class="nav-link" data-scroll-target="#an-additive-gam"><span class="header-section-number">28.7.1</span> An additive GAM</a></li>
+  <li><a href="#modeling-an-interation-with-gams" id="toc-modeling-an-interation-with-gams" class="nav-link" data-scroll-target="#modeling-an-interation-with-gams"><span class="header-section-number">28.7.2</span> Modeling an interation with GAMs</a></li>
+  </ul></li>
+  <li><a href="#what-next" id="toc-what-next" class="nav-link" data-scroll-target="#what-next"><span class="header-section-number">28.8</span> What next?</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/04_tutorial_gams.html">Part IV: Columns to Curves</a></li><li class="breadcrumb-item"><a href="../chapters/04_tutorial_gams.html"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Tutorial: GAMs</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Tutorial: GAMs</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level2" data-number="28.1">
+<h2 data-number="28.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">28.1</span> Introduction</h2>
+<p>In this tutorial, we introduce how to model different datasets using Generalized Additive Models (GAMs). Later on, we will address how to add a random effect into these models (turning these into Generalized Additive Mixed Models, or GAMMs).</p>
+</section>
+<section id="example-1-building-a-basic-gam" class="level2" data-number="28.2">
+<h2 data-number="28.2" class="anchored" data-anchor-id="example-1-building-a-basic-gam"><span class="header-section-number">28.2</span> Example #1: Building a basic GAM</h2>
+<p>For this example, we will revisit a familiar dataset: a population of <em>Lepusantilocapra pufferi</em> (puffer jackalope) starting in the mid-1970s. You will need the following file (simply click to save):</p>
+<ul>
+<li><a href="../chapters/class_exercise_data/lepusantilocapra_pufferi_abundance.csv"><code>lepusantilocapra_pufferi_abundance.csv</code></a></li>
+</ul>
+<p>As a reminder, the data include the following variables:</p>
+<ul>
+<li><code>site</code>: where the individuals were sampled</li>
+<li><code>abund</code>: number of individuals detected at each location</li>
+<li><code>dens</code>: density of individuals (per square meter) at each sampling location</li>
+<li><code>mean_depth</code>: mean depth, in meters of the sampling location</li>
+<li><code>year</code>: year of the study</li>
+<li><code>period</code>: 1=before and 2= after introduction of <em>Pelicanus pufferivorus</em> (puffer-jackalope pelican)</li>
+<li><code>x_km</code>: longitude (decimal degrees) of sampling location</li>
+<li><code>y_km</code>: latitude (decimal degrees) of sampling location</li>
+<li><code>swept_area</code>: size in square meters of the sampling location (effort)</li>
+</ul>
+<p>Though we examined the relationship between total <em>Lepusantilocapra pufferi</em> abundance and mean depth for each time period (before/after introduction of puffer-jackalope pelicans), we will now improve our modeling process. Here, we will simplify our model and use density (<code>dens</code>) as our response variable (to account for variation in area searched, rather than using an offset).</p>
+</section>
+<section id="set-up-workspace" class="level2" data-number="28.3">
+<h2 data-number="28.3" class="anchored" data-anchor-id="set-up-workspace"><span class="header-section-number">28.3</span> Set up workspace</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"class_r_scripts/load_packages.r"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Then read in the dataset.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pufferi <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"class_exercise_data/lepusantilocapra_pufferi_abundance.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="a-linear-model-of-jackalope-density" class="level2" data-number="28.4">
+<h2 data-number="28.4" class="anchored" data-anchor-id="a-linear-model-of-jackalope-density"><span class="header-section-number">28.4</span> A linear model of jackalope density</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mod_gamma <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(dens <span class="sc">~</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  mean_depth <span class="sc">+</span> year <span class="sc">*</span> period, <span class="at">family=</span><span class="fu">Gamma</span>(<span class="at">link=</span><span class="st">"log"</span>),</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> pufferi)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in (function (start, objective, gradient = NULL, hessian = NULL, :
+NA/NaN function evaluation</code></pre>
+</div>
+</div>
+<p>What happened here do you think? Look at the <code>dens</code> variable. Seriously, stop and think about the original dataset and remember that <code>dens</code> is a metric derived by <code>abund</code> divided by <code>swept_area</code>. The values for <code>abund</code> is very small relative to the large <code>swept_area</code> square meters.</p>
+<p>Let us try to solve this problem by converting the <code>swept_area</code> values into hectares (10000 square meters) and see if the linear model converges:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convert swept_area to hectares</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>pufferi<span class="sc">$</span>dens2 <span class="ot">&lt;-</span> pufferi<span class="sc">$</span>abund <span class="sc">/</span> (pufferi<span class="sc">$</span>swept_area<span class="sc">/</span><span class="dv">10000</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>mod_gamma2<span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(dens2 <span class="sc">~</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  mean_depth <span class="sc">+</span> year <span class="sc">*</span> period, <span class="at">family=</span><span class="fu">Gamma</span>(<span class="at">link=</span><span class="st">"log"</span>),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> pufferi)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>So, the fact that the model onverged and did not throw other warning messages is promising. So, what happened? The original model was having issues (and throwing an NaN error) because one of the Gamma parameters could not easily be estimated due to the very small positive values in the original <code>dens</code> variable.</p>
+<p>Let us go ahead and simulate the residuals of this model using the <code>DHARMa</code> package (our usual approach).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">simulateResiduals</span>(mod_gamma2)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(res)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_tutorial_gams_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We have solved our main issue! But can this model be improved?</p>
+</section>
+<section id="fitting-a-gam" class="level2" data-number="28.5">
+<h2 data-number="28.5" class="anchored" data-anchor-id="fitting-a-gam"><span class="header-section-number">28.5</span> Fitting a GAM</h2>
+<p>First, let’s convert our <code>glmmTMB</code> model to a model formula that can be used in the <code>mgcv::gam</code> function. Actually, there is nothing really to convert, as it looks identical.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mod_gam <span class="ot">&lt;-</span> <span class="fu">gam</span>(dens2 <span class="sc">~</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  mean_depth <span class="sc">+</span> year <span class="sc">*</span> period, <span class="at">family=</span><span class="fu">Gamma</span>(<span class="at">link=</span><span class="st">"log"</span>),</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> pufferi)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>For this one also, simulate the residuals of this model using the <code>DHARMa</code> package.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">simulateResiduals</span>(mod_gam)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Registered S3 methods overwritten by 'mgcViz':
+  method       from  
+  +.gg         GGally
+  simulate.gam gratia</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(res)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_tutorial_gams_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The basic residual structure also looks very good. Of course, we would also need to examine residual structure as functions of the other covariates.</p>
+<p>To convince you that it’s doing the same thing, check out the summary of <code>mod_gam</code> and <code>mod_gamma2</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_gamma2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Family: Gamma  ( log )
+Formula:          dens2 ~ mean_depth + year * period
+Data: pufferi
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   1241.0    1258.9    -614.5    1229.0       140 
+
+
+Dispersion estimate for Gamma family (sigma^2): 0.521 
+
+Conditional model:
+              Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept) -5.560e+02  3.237e+02  -1.717   0.0859 .  
+mean_depth  -1.038e-03  5.168e-05 -20.091   &lt;2e-16 ***
+year         2.823e-01  1.621e-01   1.741   0.0817 .  
+period       4.348e+02  2.954e+02   1.472   0.1410    
+year:period -2.181e-01  1.477e-01  -1.477   0.1397    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_gam)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Family: Gamma 
+Link function: log 
+
+Formula:
+dens2 ~ mean_depth + year * period
+
+Parametric coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -5.560e+02  3.317e+02  -1.676   0.0960 .  
+mean_depth  -1.038e-03  4.955e-05 -20.952   &lt;2e-16 ***
+year         2.823e-01  1.660e-01   1.700   0.0913 .  
+period       4.348e+02  3.109e+02   1.398   0.1642    
+year:period -2.181e-01  1.554e-01  -1.403   0.1627    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+
+R-sq.(adj) =   0.37   Deviance explained = 65.9%
+GCV = 0.60621  Scale est. = 0.50838   n = 146</code></pre>
+</div>
+</div>
+<p>Very close indeed. But let us now see if we can improve this model (even in a small way). We are going to add a smoother, <code>s()</code> with a cubic spline basis function, to our one continuous variable, <code>mean_depth</code> and then refit the model.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>What is the default basis function used by the <code>s()</code> smoother?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As noted in the <code>?mgcv::smooth.terms</code> help documentation, the default basis function is a thin plate regression splines (<code>bs="tp"</code>). Technically, they do not have knots, but they control the points of “wiggle” in another way.</p>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mod_gam<span class="ot">&lt;-</span> <span class="fu">gam</span>(dens2 <span class="sc">~</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">s</span>(mean_depth, <span class="at">bs=</span><span class="st">"cr"</span>, <span class="at">k=</span><span class="dv">10</span>) <span class="sc">+</span> year <span class="sc">*</span> period, <span class="at">family=</span><span class="fu">Gamma</span>(<span class="at">link=</span><span class="st">"log"</span>),</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> pufferi)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>As noted in the <code>?mgcv::smooth.terms</code> help documentation, <em>“cubic spline basis defined by a modest sized set of knots spread evenly through the covariate values”</em>.</p>
+<p>Summarize this model!</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_gam)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Family: Gamma 
+Link function: log 
+
+Formula:
+dens2 ~ s(mean_depth, bs = "cr", k = 10) + year * period
+
+Parametric coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept) -530.8409   336.4092  -1.578    0.117
+year           0.2686     0.1684   1.595    0.113
+period       394.8998   315.5240   1.252    0.213
+year:period   -0.1983     0.1577  -1.257    0.211
+
+Approximate significance of smooth terms:
+                edf Ref.df     F p-value    
+s(mean_depth) 1.891  2.345 182.5  &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+R-sq.(adj) =  0.408   Deviance explained = 66.7%
+GCV = 0.59929  Scale est. = 0.5208    n = 146</code></pre>
+</div>
+</div>
+<p>This output looks a bit different. You now have two components to the model output: one for the parametric (linear) coefficient and one for the semiparametric (smoothed, or non-linear terms). The former (parametric coefficients) is identical to the output of the linear models that you have seen previously in GLM and GLMMs. The bottom section (“Approximate signficance of smooth terms”) shows the strength of the smoothed terms (and interactions, if applicable). We will discuss how to interpret the semiparametric effects in class.</p>
+<p>For the sake of a quick comparison (i.e.&nbsp;not what you really should do for a manuscript), we can examine the AICs of these models.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(mod_gamma2, mod_gam)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 df      AIC
+mod_gamma2 6.000000 1241.018
+mod_gam    6.891014 1239.017</code></pre>
+</div>
+</div>
+<p>As a reminder, the model with the lowest AIC has less <em>information loss</em> and is therefore a better-supported model. Inclusion of the non-linear term has improved our model fit. Not dramatically so, but you get the point.</p>
+<section id="what-about-those-knots-k-and-the-risk-of-overfitting" class="level3" data-number="28.5.1">
+<h3 data-number="28.5.1" class="anchored" data-anchor-id="what-about-those-knots-k-and-the-risk-of-overfitting"><span class="header-section-number">28.5.1</span> What about those knots (k) and the risk of overfitting?</h3>
+<p>As you recall from the introductory material, smoothed terms base their “smoothiness” or “curviness” on the number of segments (knots) that the line is split into. The more knots means that the relationship is more curvy. The various GAM functions and packages use slightly different methods for finding a smooth that does not overfit the data. But let’s look at this ourselves in the next example!</p>
+</section>
+</section>
+<section id="example-2-rainfall-at-a-long-term-jackalope-study-site" class="level2" data-number="28.6">
+<h2 data-number="28.6" class="anchored" data-anchor-id="example-2-rainfall-at-a-long-term-jackalope-study-site"><span class="header-section-number">28.6</span> Example #2: Rainfall at a long term jackalope study site</h2>
+<p>To do this, let us look at some weather data! This is another dataset you will need to access (simply click to save):</p>
+<ul>
+<li><a href="../chapters/class_exercise_data/rainfall_daily.csv"><code>rainfall_daily.csv</code></a></li>
+</ul>
+<p>This dataset contains daily rainfall data across 83 years on Barro Colorado Island, the home of the endemic liana jackalope (<em>Lepusantilocapra cryptophiloliana</em>). We want to understand recent temporal patterns (among and within years) in daily rainfall. So, let us read in the data and then, because we are interested in recent years only–reduce its size a bit (by limiting to the year range of 2008-2011). We will also go ahead and ensure the dates are in the right format and use these to calculate a a derived variable for data difference (relative to the first date in new, filtered dataset).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>rain <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"class_exercise_data/rainfall_daily.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 16258 Columns: 5
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (1): station
+dbl  (3): rainfall_mm, year, yearday
+date (1): date
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>rain <span class="ot">&lt;-</span> rain <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">&gt;</span> <span class="dv">1990</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>rain <span class="ot">&lt;-</span> rain <span class="sc">%&gt;%</span> </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">date2 =</span> <span class="fu">ymd</span>(date),  <span class="co"># Convert date to Date format using lubridate's ymd</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">yearday2 =</span> yearday <span class="sc">+</span> <span class="dv">1</span>,  <span class="co"># Increment yearday by 1</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">days_diff =</span> <span class="fu">as.numeric</span>(date2 <span class="sc">-</span> <span class="fu">min</span>(date2, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="co"># Diff from min date</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Let us plot these data!</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot rainfall with shading for certain year ranges</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>rain_sorted <span class="ot">&lt;-</span> rain <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(yearday2)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Line plot for pooled data across all years</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(rain_sorted, <span class="fu">aes</span>(<span class="at">x =</span> yearday, <span class="at">y =</span> rainfall_mm)) <span class="sc">+</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"darkblue"</span>, <span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span>  </span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Pooled, All Years"</span>, <span class="at">x =</span> <span class="st">"Day of Year"</span>, <span class="at">y =</span> <span class="st">"Rainfall (mm)"</span>) <span class="sc">+</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_tutorial_gams_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The first thing we notice is that there is a distinct dry season in the first part of the calendar year. Then, after about 100 days or so (corresponding to sometime in April), the rainy season begins.</p>
+</section>
+<section id="a-simple-univariate-gam" class="level2" data-number="28.7">
+<h2 data-number="28.7" class="anchored" data-anchor-id="a-simple-univariate-gam"><span class="header-section-number">28.7</span> A simple univariate GAM</h2>
+<p>We then move into modeling rainfall. First, we need to understand the boundaries of our response variable:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(rain<span class="sc">$</span>rainfall_mm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]   0 188</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(rain<span class="sc">$</span>rainfall_mm, <span class="dv">50</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_tutorial_gams_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The distribution includes 0 values and has a long right tail. A Gamma will work very well here, but Gamma distributions cannot include 0 values. So, we can do a tricky little adjustment by adding a small value to all 0 values:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>rain <span class="ot">&lt;-</span> rain <span class="sc">%&gt;%</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rainfall_mm =</span> <span class="fu">if_else</span>(rainfall_mm <span class="sc">==</span> <span class="dv">0</span>,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>                               <span class="fl">0.00001</span>,</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>                               rainfall_mm))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This is trick is commonly used to allow data to be modeled using a Gamma distribution (as well as for other distributions like the beta distribution). You need need to ensure that you are not adding much noise to the system. You have a couple of options that you should think carefully about:</p>
+<ul>
+<li>You could add the very small value to <em>all</em> datapoints and then shift the final estimates downward by that amount.</li>
+<li>You could add that amount to all zero values (a good approach if there are only a few zero values).</li>
+</ul>
+<p>Now that our data meet the requirements of the Gamma distributions, we can fit Gamma GAMs with <code>rainfall_mm</code> as the response variable and a smoother of <code>yearday</code>. We will specify a Gamma error distribution with a <em>log</em> link function. But let us not stop there. Let us run several versions of these GAMs each with a different number of knots (3-20).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>mod0 <span class="ot">&lt;-</span> <span class="fu">gam</span>(rainfall_mm <span class="sc">~</span> <span class="fu">s</span>(yearday, <span class="at">bs=</span><span class="st">"cc"</span>), <span class="at">family=</span><span class="fu">Gamma</span>(<span class="at">link=</span><span class="st">"log"</span>), <span class="at">data=</span>rain)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">gam</span>(rainfall_mm <span class="sc">~</span> <span class="fu">s</span>(yearday, <span class="at">k=</span><span class="dv">3</span>, <span class="at">bs=</span><span class="st">"cc"</span>), <span class="at">family=</span><span class="fu">Gamma</span>(<span class="at">link=</span><span class="st">"log"</span>), <span class="at">data=</span>rain)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in smooth.construct.cc.smooth.spec(object, dk$data, dk$knots): basis dimension, k, increased to minimum possible</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>mod4 <span class="ot">&lt;-</span> <span class="fu">gam</span>(rainfall_mm <span class="sc">~</span> <span class="fu">s</span>(yearday, <span class="at">k=</span><span class="dv">4</span>, <span class="at">bs=</span><span class="st">"cc"</span>), <span class="at">family=</span><span class="fu">Gamma</span>(<span class="at">link=</span><span class="st">"log"</span>), <span class="at">data=</span>rain)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>mod5 <span class="ot">&lt;-</span> <span class="fu">gam</span>(rainfall_mm <span class="sc">~</span> <span class="fu">s</span>(yearday, <span class="at">k=</span><span class="dv">5</span>, <span class="at">bs=</span><span class="st">"cc"</span>), <span class="at">family=</span><span class="fu">Gamma</span>(<span class="at">link=</span><span class="st">"log"</span>), <span class="at">data=</span>rain)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>mod6 <span class="ot">&lt;-</span> <span class="fu">gam</span>(rainfall_mm <span class="sc">~</span> <span class="fu">s</span>(yearday, <span class="at">k=</span><span class="dv">6</span>, <span class="at">bs=</span><span class="st">"cc"</span>), <span class="at">family=</span><span class="fu">Gamma</span>(<span class="at">link=</span><span class="st">"log"</span>), <span class="at">data=</span>rain)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>mod8 <span class="ot">&lt;-</span> <span class="fu">gam</span>(rainfall_mm <span class="sc">~</span> <span class="fu">s</span>(yearday, <span class="at">k=</span><span class="dv">8</span>, <span class="at">bs=</span><span class="st">"cc"</span>), <span class="at">family=</span><span class="fu">Gamma</span>(<span class="at">link=</span><span class="st">"log"</span>), <span class="at">data=</span>rain)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>mod10 <span class="ot">&lt;-</span> <span class="fu">gam</span>(rainfall_mm <span class="sc">~</span> <span class="fu">s</span>(yearday, <span class="at">k=</span><span class="dv">10</span>, <span class="at">bs=</span><span class="st">"cc"</span>), <span class="at">family=</span><span class="fu">Gamma</span>(<span class="at">link=</span><span class="st">"log"</span>), <span class="at">data=</span>rain)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>mod15 <span class="ot">&lt;-</span> <span class="fu">gam</span>(rainfall_mm <span class="sc">~</span> <span class="fu">s</span>(yearday, <span class="at">k=</span><span class="dv">15</span>, <span class="at">bs=</span><span class="st">"cc"</span>), <span class="at">family=</span><span class="fu">Gamma</span>(<span class="at">link=</span><span class="st">"log"</span>), <span class="at">data=</span>rain)</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>mod20 <span class="ot">&lt;-</span> <span class="fu">gam</span>(rainfall_mm <span class="sc">~</span> <span class="fu">s</span>(yearday, <span class="at">k=</span><span class="dv">20</span>, <span class="at">bs=</span><span class="st">"cc"</span>), <span class="at">family=</span><span class="fu">Gamma</span>(<span class="at">link=</span><span class="st">"log"</span>), <span class="at">data=</span>rain)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Then, we can compare using AIC.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>aic_list <span class="ot">&lt;-</span> <span class="fu">AIC</span>(mod3, mod4, mod5, mod6, mod8, mod10, mod15, mod20)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># sorted by ascending AIC </span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>aic_list <span class="sc">%&gt;%</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(AIC)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            df      AIC
+mod8  7.414299 24478.39
+mod10 7.747918 24481.01
+mod15 8.097447 24482.88
+mod20 8.231357 24483.50
+mod6  5.886517 24494.01
+mod5  4.289481 24538.82
+mod3  3.578037 24547.87
+mod4  3.578037 24547.87</code></pre>
+</div>
+</div>
+<p>This works the same as before. The model with the lowest AIC (<code>mod8</code>) has the least <em>information loss</em>. But, first, we can examine what each of these smoothed relationships looks like. Here, we will use just base R and <code>ggplot2</code>, as other approaches either include additional packages (e.g.&nbsp;<code>gratia</code> or <code>patchwork</code>) or require many more lines of code. Base R for the win, I say.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">3</span>), <span class="at">mar=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod3, <span class="at">shade=</span>T)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod4, <span class="at">shade=</span>T)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod5, <span class="at">shade=</span>T)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod6, <span class="at">shade=</span>T)</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod8, <span class="at">shade=</span>T)</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod10, <span class="at">shade=</span>T)</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod15, <span class="at">shade=</span>T)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod20, <span class="at">shade=</span>T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_tutorial_gams_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Remember that the y-axis is on the link scale. The x-axis is on the scale of your predictor, <code>mean_depth</code>. Some would say that this multi-plot graphic shows a classic example of the dangers of overfitting, which GAMs may have a tendency to do for smaller sample sizes. Sometimes, the overfitting may be useful (for finding potential environmental thresholds). But, generally, this example highlights the balance between <em>wiggliness</em> and fit. You will find that many practitioners conservatively choose five knots just to be safe; there is currently no statistical justification for this choice, but it seems to <em>work out well</em> for most models.</p>
+<section id="an-additive-gam" class="level3" data-number="28.7.1">
+<h3 data-number="28.7.1" class="anchored" data-anchor-id="an-additive-gam"><span class="header-section-number">28.7.1</span> An additive GAM</h3>
+<p>Now, let us add complexity to our model. We shall add a term of <code>year</code> so that we can separate the long-term trends in rainfall (across years) from the within-year variation.</p>
+<p>We therefore fit the model with two main effects, <code>yearday</code> and <code>year</code>. For <code>yearday</code>, we want our final predicted output to recognize the temporal seamlessness, namely that the day of the year <em>after</em> the 365th day is the 1st day. Therefore, we specify a cyclic cubic regression spline using the appropriate basis function<code>bs = "cc"</code>. We set a large maximum number of knots (n=10) for illustration purposes only; this could be optimized.</p>
+<p>This is an additive effect model (no covariate interactions):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>rain_add <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  rainfall_mm <span class="sc">~</span> </span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">s</span>(yearday, <span class="at">bs =</span> <span class="st">"cc"</span>, <span class="at">k =</span> <span class="dv">10</span>) <span class="sc">+</span>      <span class="co"># average seasonal curve</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">s</span>(year, <span class="at">bs=</span><span class="st">"tp"</span>, <span class="at">k=</span><span class="dv">10</span>),                     <span class="co"># long-term trend</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">Gamma</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> rain,</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="co"># pushing year to linear component</span></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>rain_add2 <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>  rainfall_mm <span class="sc">~</span> </span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">s</span>(yearday, <span class="at">bs =</span> <span class="st">"cc"</span>, <span class="at">k =</span> <span class="dv">10</span>) <span class="sc">+</span>      <span class="co"># average seasonal curve</span></span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>    year,               <span class="co"># long-term trend</span></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">Gamma</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> rain,</span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We can then either look at the <code>summary</code> or plot the conditional effects of the model terms. Note that plotting can be done with several tools (<code>gratia</code>, <code>tidygam</code>); we will not use these tools in this example.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rain_add)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Family: Gamma 
+Link function: log 
+
+Formula:
+rainfall_mm ~ s(yearday, bs = "cc", k = 10) + s(year, bs = "tp", 
+    k = 10)
+
+Parametric coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  2.72886    0.02189   124.7   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Approximate significance of smooth terms:
+             edf Ref.df     F  p-value    
+s(yearday) 6.070  8.000 11.15  &lt; 2e-16 ***
+s(year)    1.018  1.035 11.49 0.000664 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+R-sq.(adj) =  0.0188   Deviance explained = 1.73%
+-REML =  12195  Scale est. = 1.6638    n = 3472</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rain_add)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_tutorial_gams_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_tutorial_gams_files/figure-html/unnamed-chunk-20-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The smooth for yearday is highly significant and has an effective degrees of freedom (e.d.f.) of about 6, indicating a nonlinear seasonal pattern in rainfall across the year. The smooth for year has an e.d.f. very close to 1; this means that the model is estimating a roughly linear long-term temporal trend; this is also statistically significant.</p>
+<p>Now, how would be interpret the overall explanatory power of this model. For GAMs, use the deviance explained rather than the R-squared value. In this case, the overall explanatory power of the model is low: it explains only about 1.73% of the deviance in rainfall. This suggests that although rainfall shows detectable seasonal structure and a slight long-term trend, most variation is driven by short-term weather events or other factors not included in the model. Pretty cool, right?</p>
+</section>
+<section id="modeling-an-interation-with-gams" class="level3" data-number="28.7.2">
+<h3 data-number="28.7.2" class="anchored" data-anchor-id="modeling-an-interation-with-gams"><span class="header-section-number">28.7.2</span> Modeling an interation with GAMs</h3>
+<p>Let us add further complexity by exploring the possible interaction between <code>year</code> and <code>yearday</code>. After all, long-term changes in rainfall –however small– could change some element(s) of climatic forcing and change within-year patterns.</p>
+<p>For this, we add a tensor product interaction (<code>ti()</code>) smooth. As the name suggests, it allows for the specification of interaction models analogous to classical GLM/ANOVA. Look carefully at how the basis functions and number of knots (of each term) can be independently specified in the <code>ti()</code> term. The ability to do this maximizes the flexibility of these models.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>rain_int <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  rainfall_mm <span class="sc">~</span> </span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ti</span>(yearday, <span class="at">bs =</span> <span class="st">"cc"</span>, <span class="at">k =</span> <span class="dv">10</span>) <span class="sc">+</span>      <span class="co"># average seasonal curve</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ti</span>(year, <span class="at">k=</span><span class="dv">6</span>) <span class="sc">+</span>                     <span class="co"># long-term trend</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ti</span>(yearday, year, </span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">bs =</span> <span class="fu">c</span>(<span class="st">"cc"</span>, <span class="st">"tp"</span>), </span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">k =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">6</span>)),                    <span class="co"># year-specific seasonal deviations</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">Gamma</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> rain,</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Note in the model above, you can also change the <code>s()</code> to <code>ti()</code> for all smoothed terms as an equivalent model; this sometimes can help you keep track of the terms that are contributing to the interaction.</p>
+<p>And we can summarize the model output:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rain_int)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Family: Gamma 
+Link function: log 
+
+Formula:
+rainfall_mm ~ ti(yearday, bs = "cc", k = 10) + ti(year, k = 6) + 
+    ti(yearday, year, bs = c("cc", "tp"), k = c(10, 6))
+
+Parametric coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  2.72842    0.02188   124.7   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Approximate significance of smooth terms:
+                    edf Ref.df      F  p-value    
+ti(yearday)      6.0654  8.000 11.119  &lt; 2e-16 ***
+ti(year)         1.0155  1.031 11.620 0.000622 ***
+ti(yearday,year) 0.9843 40.000  0.034 0.192721    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+R-sq.(adj) =  0.019   Deviance explained = 1.78%
+-REML =  12194  Scale est. = 1.6605    n = 3472</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>() <span class="co"># this just clears the graphics window</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>null device 
+          1 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vis.gam</span>(rain_int, <span class="at">view=</span><span class="fu">c</span>(<span class="st">"yearday"</span>, <span class="st">"year"</span>), <span class="at">theta=</span><span class="dv">215</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Explained deviance has not changed, so we continue to see that most of the variation in rainfall is due to short-term processes. For the smoothed continuous terms: Rainfall continues to show a significant seasonal pattern across the year and a small linear trend across years, indicating that rainfall varies systematically within the annual cycle and slightly through time. Concerning the interaction: The interaction between <code>year</code> and <code>yearday</code> is not significant, suggesting the seasonal rainfall pattern has remained relatively consistent across years.</p>
+<p>Congratulations, you have successfully built GAMs that test for additive and interaction effects!</p>
+</section>
+</section>
+<section id="what-next" class="level2" data-number="28.8">
+<h2 data-number="28.8" class="anchored" data-anchor-id="what-next"><span class="header-section-number">28.8</span> What next?</h2>
+<p>Now, you may experiment with different basis functions and knots on continuous variables in your own datasets.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/03_glmm_epilogue.html" class="pagination-link" aria-label="GLMM epilogue">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">GLMM epilogue</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/05_01_why_scms.html" class="pagination-link" aria-label="Why SCMs?">
+        <span class="nav-page-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Why SCMs?</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -11,3 +11,6 @@ _cache/
 # OS junk
 .DS_Store
 Thumbs.db
+
+/.quarto/
+**/*.quarto_ipynb

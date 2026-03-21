@@ -47,6 +47,9 @@ Jackalope seem to be everywhere. Recently, during a survey of 31 forested study 
 ![](../graphics/jackalope_graphics/wyoming_jackalope.png)
 :::
 
+::::
+
+
 ```{r}
 wyoming <- import("class_exercise_data/lepusantilocapra_wyomingensis_dataset.csv")
 str(wyoming)

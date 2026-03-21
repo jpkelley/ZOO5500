@@ -1,11 +1,7 @@
 # Quarto / RStudio generated
 *_files/
 _site/
-.quarto/
 _cache/
-
-# Rendered outputs
-*.html
 
 # R stuff
 .Rhistory
@@ -15,5 +11,3 @@ _cache/
 # OS junk
 .DS_Store
 Thumbs.db
-/.quarto/
-**/*.quarto_ipynb

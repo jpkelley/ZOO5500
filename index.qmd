@@ -16,9 +16,11 @@ numbered: true
 | **Communication** | Slack (private link sent to your email) |
 :::
 
+
 ## Quicklinks {.unnumbered}
 
-[**Course Calendar**](https://jpkelley.github.io/ZOO5500/chapters/int_calendar_sp26.html){target="_blank" rel="noopener"}
+[**Course Calendar**](/chapters/int_calendar_sp26.html){target="_blank" rel="noopener"}
+
 
 :::: columns
 

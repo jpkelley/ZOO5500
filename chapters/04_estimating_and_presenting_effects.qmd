@@ -1,0 +1,218 @@
+---
+title: "Fitting SCMs, Estimating Effects, and Presenting Results"
+format:
+  html:
+    mermaid:
+      theme: forest
+---
+
+# Choosing Statistical Models
+
+SCM theory does not constrain the statistical form of structural equations. Appropriate models depend on the data type.
+
+- Arrows represent hypothesized causal relationships
+- Parent nodes belong in the structural equation of the child node
+- Not all nodes belong in every model
+
+Common ecological choices include:
+
+* GLMs
+* GLMMs
+* GAMs
+* GAMMs
+* hierarchical Bayesian models
+
+Different nodes may require different model families.
+
+## 5.1 Model selection within submodels
+
+Model selection can be conducted within each structural equation without altering the causal structure.
+
+Typical choices include:
+
+* random effect structure
+* functional form (linear vs nonlinear)
+* inclusion of smooth terms
+
+Model comparison methods may include:
+
+* AIC
+* cross validation
+* posterior predictive checks
+
+These choices affect statistical representation but not the underlying causal assumptions.
+
+# Temporal and Spatial Structure
+
+Ecological data often exhibit temporal and spatial dependence.
+
+These should be incorporated into structural equations using appropriate statistical methods.
+
+Examples include:
+
+* temporal autocorrelation (AR structures)
+* spatial random effects
+* Gaussian processes
+
+These terms represent **statistical dependence** rather than causal relationships and therefore do not appear as arrows in the DAG.
+
+## 6.1 Incorporating time lags into an SCM
+
+One important distinction is that **temporal autocorrelation in residuals** is not the same thing as a **causal lag** in the ecological system. If a past state of one variable directly influences a later state of the same variable or another variable, that lagged relationship should appear explicitly in the SCM.
+
+For example, suppose that rainfall at time *t − 1* influences insect abundance at time *t*, and insect abundance at time *t* influences nestling provisioning at time *t*. In addition, provisioning may also show temporal persistence from one time step to the next. In that case, the lagged variables should be represented as distinct nodes in the DAG.
+
+A simple time-indexed SCM might be represented as follows:
+
+```{mermaid}
+flowchart LR
+    R1[Rainfall t-1] --> I2[Insect abundance t]
+    I1[Insect abundance t-1] --> I2
+    I2 --> P2[Provisioning t]
+    P1[Provisioning t-1] --> P2
+    C2[Canopy cover t] --> I2
+    C2 --> P2
+```
+
+This graph communicates several important points:
+
+* **Rainfall at an earlier time step** can influence current insect abundance.
+* **State dependence** can be represented by arrows such as `Insect abundance t-1 → Insect abundance t`.
+* **Behavioral persistence** can be represented by arrows such as `Provisioning t-1 → Provisioning t`.
+* Variables measured at the same time step, such as canopy cover at time *t*, can influence current ecological states and outcomes.
+
+The key idea is that once time is made explicit, the DAG remains acyclic because arrows only move **forward in time**.
+
+### Structural equations with lags
+
+The corresponding structural equations might be written as:
+
+`InsectAbundance_t = f(Rainfall_{t-1}, InsectAbundance_{t-1}, CanopyCover_t) + ε_{1t}`
+
+`Provisioning_t = f(InsectAbundance_t, Provisioning_{t-1}, CanopyCover_t) + ε_{2t}`
+
+This formulation makes the lagged causal assumptions explicit. It also clarifies which variables belong in each submodel.
+
+### Lags versus residual autocorrelation (temporal or spatial)
+
+A useful rule is:
+
+* If the earlier value of a variable is part of the **causal mechanism**, include it as a **lagged parent node** in the DAG.
+* If dependence remains after the causal structure has been specified, model that remaining dependence in the **error structure** using AR terms or other correlation structures.
+
+In practice, ecological time-series models often require **both**:
+
+1. explicit lagged causal pathways in the DAG, and
+2. residual autocorrelation structures in the fitted submodels.
+
+The same logic applies to spatial systems. If spatial position or neighborhood state is hypothesized to causally affect a variable, that influence should appear in the DAG. If residual spatial dependence remains after causal specification, it should be handled in the statistical error structure rather than interpreted as a causal arrow.
+
+## 6.2 Adding residual autocorrelation in fitted submodels
+
+Once the structural equations implied by the DAG have been specified, remaining temporal or spatial dependence can be modeled directly in the **error structure of each submodel**. This allows the causal structure to remain intact while accounting for statistical dependence in the data.
+
+In practice, this is implemented using correlation structures in the statistical model. The exact approach depends on the modeling framework being used.
+
+### Example: AR(1) temporal autocorrelation
+
+Suppose the structural equation for provisioning is
+
+`Provisioning_t = f(InsectAbundance_t, Provisioning_{t-1}, CanopyCover_t) + ε_t`
+
+Even after including the causal lag `Provisioning_{t-1}`, residual temporal dependence may remain. A common approach is to model the disturbances as an **AR(1) process**.
+
+In R, this can be implemented in several ways.
+
+#### Using `mgcv` (GAM/GAMM)
+
+```r
+library(mgcv)
+
+model <- gamm(
+  provisioning ~ s(insect_abundance) + canopy_cover,
+  random = list(territory = ~1),
+  correlation = corAR1(form = ~ time | territory),
+  data = d
+)
+```
+
+This approach is common when fitting **GAMMs** that represent nonlinear structural equations in an SCM.
+
+#### Using Bayesian models (`brms`)
+
+```r
+library(brms)
+
+model <- brm(
+  provisioning ~ insect_abundance + canopy_cover + (1 | territory),
+  autocor = cor_ar(~ time | territory, p = 1),
+  family = poisson(),
+  data = d
+)
+```
+
+### Conceptual interpretation
+
+In all of these examples:
+
+* the **fixed effects** correspond to the **parents of the node in the DAG**
+* the **random effects** represent hierarchical grouping processes
+* the **autocorrelation structure** models residual dependence that remains after the causal structure has been specified
+
+This separation preserves the central SCM principle: **causal structure belongs in the structural equation, while remaining statistical dependence belongs in the error structure.**
+
+# Estimating Direct and Indirect Effects
+
+For nonlinear models, direct and indirect effects are typically estimated using **counterfactual simulation** rather than coefficient products.
+
+General workflow:
+
+1. Fit each structural equation
+2. Predict outcomes under different exposure values
+3. Allow mediators to vary for total effects
+4. Hold mediators fixed to isolate direct effects
+
+The difference between these predictions represents indirect effects.
+
+Packages such as `marginaleffects`, `mediation`, and `gfoRmula` can implement these analyses.
+
+# Continuous Effect Decomposition
+
+In ecological applications, it is often informative to visualize causal contributions across the exposure gradient.
+
+Recommended visualizations include:
+
+* total effect curves
+* direct effect curves
+* indirect effect contributions
+
+These curves can reveal thresholds, nonlinear mediation, and effect modification.
+
+# Presenting Results
+
+Effective SCM analyses typically include:
+
+1. The causal DAG
+2. Structural equations corresponding to the DAG
+3. Effect plots showing causal contributions
+4. Model diagnostics for each submodel
+
+
+How to write about building SCMs:
+
+“Based on a prespecified causal DAG, we fit regression models corresponding to the minimal set of structural equations required to estimate our target causal estimands.” 
+
+
+
+These components allow readers to evaluate both the causal assumptions and statistical implementation.
+
+# Advantages of the SCM Framework
+
+The SCM approach offers several advantages for ecological research:
+
+* explicit representation of causal assumptions
+* reduced model complexity by restricting predictors to parent variables
+* separation of causal structure from statistical modeling
+* interpretable decomposition of causal pathways
+
+By integrating ecological theory with statistical modeling, SCMs help move ecological inference beyond purely associational analyses toward mechanistic explanations of ecological processes.

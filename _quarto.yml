@@ -1,0 +1,74 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "Quantitative Analysis of (Messy) Field Data"
+  subtitle: "University of Wyoming -- ZOO-5500 (CRN 13415) | ECOL-5500 (CRN 13417)"
+  sidebar:
+    logo: graphics/jackalope_graphics/analytical_jackalope.png
+    collapse-level: 1
+  chapters:
+    - part: "Course Overview"
+      chapters:   
+        - index.qmd
+        - chapters/int_course_intro.qmd
+        - chapters/int_syllabus.qmd
+        - chapters/int_calendar_sp26.qmd
+        - chapters/int_ai_policy.qmd  
+        - chapters/int_preparing_yourself.qmd
+        - chapters/int_assignment_grades.qmd
+        - chapters/int_project_scoping.qmd
+    # --- MAIN BODY ---
+    - part: "Part ∅: AI preparation"
+      chapters:   
+        - chapters/00_ai_prompting.qmd
+        - chapters/00_using_jackalope_gpt.qmd
+    - part: "Part I: Reproducible Analyses"
+      chapters: 
+        - chapters/01_reproducible_workflow_intro.qmd
+        - chapters/01_nature_of_data.qmd
+        - chapters/01_metadata_low_friction.qmd
+        - chapters/01_naming_conventions.qmd
+    - part: "Part II: Chaos to Columns"
+      chapters:
+        - chapters/02_data_exploration_intro.qmd
+        - chapters/02_data_exploration_toolkit.qmd
+        - chapters/02_outliers.qmd
+        - chapters/02_tutorial_data_exploration.qmd
+    - part: "Part III: Columns to Lines"
+      chapters: 
+        - chapters/03_statistical_aphorisms.qmd
+        - chapters/03_intro_modeling.qmd
+        - chapters/03_intro_glms.qmd
+        - chapters/03_tutorial_glms.qmd
+        - chapters/03_glm_partial_association.qmd
+        - chapters/03_DHARMA_diagnostics.qmd
+        # - chapters/aic_information_theory.qmd
+        - chapters/03_glmms.qmd
+        - chapters/03_tutorial_glmms_part01.qmd
+        - chapters/03_glmm_epilogue.qmd
+    - part: "Part IV: Columns to Curves" 
+      chapters: 
+        - chapters/04_tutorial_gams.qmd
+    - part: "Part V: Curves to Meaning"
+      chapters:
+        - chapters/05_01_why_scms.qmd
+        #- chapters/05_02_building_dags.qmd
+        #- chapters/05_03_estimand_adjustment_model.qmd
+        #- chapters/05_04_estimating_and_presenting_effects.qmd
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+    toc: true
+    number-sections: true
+    number-depth: 3
+    css: styles.css
+    code-copy: true
+    
+website:
+  favicon: graphics/favicon/favicon.ico
+
+editor: source

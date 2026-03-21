@@ -1,0 +1,210 @@
+---
+title: "GLMM Introduction"
+format: html
+---
+
+## Ecology is non-normal and structured
+
+So far, in this course, we have focused on non-normal data and how GLMs have been designed to handle counts, proportions, and zero-inflated data. But this inherent non-normality of ecology is only one feature with which we must content. As messy as it seems, ecology is also highly structured:
+
+* **Spatial structure:** Nearby individuals resemble each other
+* **Temporal structure:** Month or years share environmental conditions.
+* **Relatedness structure:** Family members or congeners resemble each other.
+
+These clustering processes generate correlation and violate the assumption of independence that exists for many statistical models. 
+
+
+## Extending to a mixed-effects modeling framework
+
+In this section, we extend the GLM frameworks to mixed-effects models, which allow us to quantify how much variation is associated with structured sources such as:
+
+* Hierarchical data
+* Unbalanced designs
+* Violations of independence
+
+:::: columns
+::: {.column width="70%"}
+In the course of our examples, we will show how mixed-effects models can ingest and leverage hierarchical data. In terms of dealing with unbalanced designs, mixed-effects models offer another critical advantage: dealing with unbalanced (or uneven) samples sizes. After all, real datasets often include:
+
+* different numbers of individuals per site  
+* different numbers of time points per individual  
+* missing observations  
+
+Generalized Linear Mixed Models are robust to unevenness of sample size. To state it clearly: **_Equal sample sizes are not required._**
+Mixed models use likelihood-based estimation, which handles unequal replication naturally. Balance is supposedly more convenient, but it by any means necessary. Note that this statement only addresses unequal --not sparse-- sample sizes. 
+:::
+
+::: {.column width="30%"}
+
+![](../graphics/other_stylized_graphics/unbalanced_sample_sizes.png)
+
+:::
+::::
+
+The last one -- non-independence-- is perhaps the most serious danger to good inference in ecology. As we mentioned, most ecological data are clustered in space or time, and/or have some biological relationships. Measurements on individuals are repeated. Organisms share environments. You get the picture. If you treat such observations as independent, you are practically ensuring that the models you create do not reflect ecological reality.
+
+By now, the following should be very clear: 
+
+> Generalized linear mixed models are built for real ecological data.
+
+## Non-independence: the central problem
+
+The independence assumption in most statistical models states that:
+
+> Each observation provides unique information.
+
+In real ecological systems, however, this is rarely true. If one $Y$ value is influenced by another observation (even if indirectly), the assumption of independence is violated. We can divide all cases of non-independence into two broad categories: 
+
+* **Design-based dependence:** this is non-independence caused by the structure of your sampling design (known before analysis)
+* **Model-based dependence:**  this is non-independence caused from your statistical model (e.g. assumptions, structure, or misspecification), often revealed after model fitting
+
+Let us go through these in turn.
+
+### Design-based dependence _(what known in advance)_
+
+Design-based dependence is defined as dependence that is explicitly integrated (by _you_) into your study design and can include design choices (again, by _you_) such as:
+
+- blocking effects  
+- split-plot designs 
+- repeated measures (e.g. multiple samples from one individual at one time or across a time series)
+- nested sampling (e.g. multiple individuals within multiple plots within multiple sites)
+
+If you deliberately structured your sampling hierarchically (e.g. many plots within each of many sites), then you have already acknowledged the possibility that entities closer in time or space are more related to each other. Your model must reflect that same structure but do so in an explicitly statistical way. Ignoring such structure  counteracts the strengths of a purposeful design. So, please avoid this. In other words, if a grouping labels is in your design (i.e. _block_, _plot_), it likely belongs somewhere in your model as a grouping variable.
+
+Individuals, sites, or time points produce related data (similar behaviors of an individual across contexts, similar site conditions, etc.). Though we may have a technically well-replicated study design, ignoring such ecological realities produces what ecologists call _pseudoreplication_ (coined by [Hurlburt (1984)](./files/Hurlbert_1984.pdf)), or: 
+
+> _"...the use of inferential statistics to test for treatment effects with data from experiments where either treatments are not replicated (though samples may be) or replicates are not statistically independent.”_
+
+Pseudoreplication can lead to a severely over-inflated confidence in one's results. When the independence assumption is not met, your model thinks you have more information in your signal (relative to the noise) than you really do. So, when the signal-to-noise ratio is falsely elevated, the effect size is also over-inflated. This problem is far from being insignificant or trivial; it directly affects inference.
+
+Of course, not all dependence comes from hierarchical structure (like measurements nested in individuals). Sometimes the main parameters in a model are just flat wrong. 
+
+### Model-based dependence (that emerges after fitting)
+
+Model-based dependence is defined as dependence that is generated (by your assumptions during your model building). As discussed in previous sections, this can include when:
+
+* there is unanticipated/unrealized spatial autocorrelation  
+* there is unanticipated/unrealized temporal autocorrelation  
+* nonlinear effects are assumed to be linear (a very common problem)  
+* you choose incorrect or unrealistic error structure (data boundaries cause huge issues)  
+* you omit ecologically important covariates  
+
+If the systematic (Signal) component of the model is misspecified, the Signal patterns be appear in the residual structure (Noise). Those patterns can look like correlation among observations. Before adding random effects blindly, always ask yourself whether or not the fixed-effects or error distribution is appropriate.
+
+## Scale as the source of non-independence
+
+As we all know, ecological data are not flat and unidimensional. They are layered across space, stretched across time, and organized across biological/ecological levels. If we ignore that interesting structure, we do not simply violate some formal assumptions. Instead, we actively erase the mechanisms of the data-generating process.
+
+Data multidimensionality is the major insight discussed by Simon Levin (1992) in [*“The Problem of Pattern and Scale in Ecology”*](./files/Levin_1992) in which he argues that ecological --and perhaps all biological-- patterns only make sense relative to the scale at which they are studied. Data-generating processes operating at one scale can generate structure at another. Therefore, if we observe data without acknowledging or respecting the importance of scale, we obscure its signal and inflate its noise. 
+
+Shared structure increases the likelihood of common influence, which can create both similarity and correlation. That correlation should not be considered a nuisance, as it is information about how an ecological system is organized. For example: 
+
+* Observations that are proximate in **space** may share a common climate, soil, disturbance regimes, and/orpredators
+* Observations that are close in **time** may share weather, phenology, resource pulses, or predators
+* Observations within the same **biological unit** (i.e. they are more closely related) may share morphology, physiology, or behavior
+
+If multiple measurements are made at a site, a species, or within an individual, they may share unmeasured variation. This is the essence of non-independence.
+
+## Detecting non-independence: How?
+
+If your design contains grouping (and therefore non-independent data points), you do not need to detect it, _per se_. You already know that your data are structured. However, you are an unsure if there is structure due to unmeasured associations, you can do the following: 
+
+### Before modeling
+
+* Plot response by grouping factor(s)
+* For continuous predictors (e.g., time), plot relationship with the response variable within groups
+
+If some individuals or sites consistently exhibit high or low values (generally non-overlapping distributions), **non-independence is very likely.** This visual assessment step is powerful. If individuals cluster in different vertical bands when plotted, you are seeing random intercept variation. If slopes differ visually, you may need to account for random variation in slopes.
+
+### After modeling (tools like the `DHARMa` package)
+
+* Examine residual plots (including quantile-quantile plots)  
+* Test for spatial or temporal autocorrelation
+
+As you know by now, examination of these residual patterns can reveal hidden structure of your model. If residuals are correlated within groups, the model is incomplete. The residuals should look like random noise; there should be no patterns (structure).
+
+So, what are the components of a mixed-effects model?
+
+
+## Components of a mixed-effects model
+
+You now know that a Generalized Linear Model (GLM) contains only fixed effects. A mixed-effects model, on the other hand, contains both _fixed_ and _random_ effects. That is the entire difference. Let us clearly differentiate between these two types of effects:
+
+::: {.callout-warning icon=false collapse=true}
+## **Fixed effects**
+Fixed effects are predictors that you _really_ care about for your eventual interpretation and strong inference. These can be factors whose levels are experimentally determined or whose interest lies in the specific effects of each level, such as effects of covariates, differences among treatments and interactions. Specifically, you are focusing on:
+
+* effect sizes (e.g. slope, odds-ratio, etc.)
+* direct interpretation (in relation to the response variable)
+
+**Example:** Consider an experiment examining temperature-dependent differences in jumping height male and female jackalopes. For the response variable (`jumping height`), the two fixed effects are:
+
+* temperature
+* sex  
+
+These are the variables for which you want direct interpretation. In other words, fixed effects answer your specific biological questions. _Does temperature alone increase jumping height? Does sex alone influence jumping heights? Do temperature and sex interact to influence jumping height?_
+:::
+
+::: {.callout-warning icon=false collapse=true}
+## **Random effects**
+
+Whereas fixed effects allow you to estimate the effect size of a group (e.g. the difference in means between sites), random effects account for variation in your dataset (e.g. due to group-specific variation among sites). That is, you are not estimating their effect sizes for interpretation. Instead, you are modeling their variance. Examples of random effects include:
+
+* site  
+* year  
+* individual
+* genotype
+
+At their core, random effects help improve the ecological realism and external generalizability of your statistical models. Specifically, they help by:
+
+* Correcing standard errors  
+* Reducing pseudoreplication
+* Stabilizing inference
+* Improving generalizability to other groups/systems
+
+**Why is it called "random effect"?** “Random” does not mean _random_ sampling. It means we are considering that group-specific differences are drawn from a random distribution. 
+
+:::
+
+---
+
+## Examples of fixed and random effects
+
+Here are two examples of fixed and random-effects structure in different datasets (click to expand):
+
+::: {.callout-note collapse=true icon=false}
+## **Example 1: Impact of temperature on vegetation growth in Wyoming Jackalope habitat**
+
+**Study system:** You are studying the effect of temperature on vegetation growth in the area where you study jackalopes. You collect data for many years. You are primarily interesting in making inference about the general effects of temperature. You are not interested in estimating the effect of each specific year. The variable `year` captures unmeasured variation in rainfall, herbivory, and other sources of disturbance. These elements differ from year to year and inject variability into the data.
+
+**Fixed effect:** `temperature`
+
+**Random effect:** `year` 
+
+:::
+
+::: {.callout-note collapse=true icon=false}
+## **Example 2: Nestling feeding rates in arctic jackalopes**
+
+**Study system:** Your primary question is whether variation in parental feeding rate is associated with nestling age and parental sex. You measure feeding rates at 20 nests. Each nest contains multiple nestlings, and you track the identity and age of each nestling. You also record feeding behavior of both parents. 
+
+**Fixed effect:** `nestling_age` and `parental_sex`. 
+
+**Random effect:** `nestling_id` nested within `nest`, which is further nested within `mother-father pair`. To account for this structure, you include nest as a random effect and nestling nested within nest as a random effect. Observations from the same nest are more similar to one another than to observations from different nests. Likewise, repeated observations of the same nestling are not independent.
+
+:::
+
+---
+
+## Bibliography for this section
+
+_Cited:_
+Hurlbert, S. H. (1984). Pseudoreplication and the design of ecological field experiments. _Ecological Monographs_, 54(2), 187–211.
+
+_Other useful references:_
+
+Austin, P. C., & Leckie, G. (2018). The effect of number of clusters and cluster size on statistical power and Type I error rates when testing random effects variance components in multilevel linear and logistic regression models. _Journal of Statistical Computation and Simulation_, 88(16), 3151–3163. https://doi.org/10.1080/00949655.2018.1504945
+
+Clarke, P. (2008). When can group level clustering be ignored? Multilevel models versus single-level models with sparse data. _Journal of Epidemiology & Community Health_, 62(8), 752–758. https://doi.org/10.1136/jech.2007.060798
+
+Gelman, A., & Hill, J. (2007). _Data analysis using regression and multilevel/hierarchical models._ Cambridge University Press.

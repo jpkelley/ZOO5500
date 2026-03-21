@@ -1,0 +1,19 @@
+# Quarto / RStudio generated
+*_files/
+_site/
+.quarto/
+_cache/
+
+# Rendered outputs
+*.html
+
+# R stuff
+.Rhistory
+.RData
+.Rproj.user/
+
+# OS junk
+.DS_Store
+Thumbs.db
+/.quarto/
+**/*.quarto_ipynb

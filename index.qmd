@@ -1,0 +1,95 @@
+---
+title: "Information"
+numbered: true
+---
+
+## Essential Course Information {.unnumbered}
+
+::: course-info
+| Instructor | Patrick Kelley |
+|---------------------|---------------------------------------------------|
+| **Email** | jkelle24\@uwyo.edu |
+| **Schedule** | Tu / Th, 11:00–12:15 MT |
+| **Dates** | 20-Jan-2026 to 08-May-2026 |
+| **Meeting Type** | synchronous remote |
+| **Location** | [Join via Zoom](https://uwyo.zoom.us/j/99162811558?pwd=bqQfpeVAW4Gwrs6qF40zlyKJYq1GCM.1){target="_blank"} |
+| **Communication** | Slack (private link sent to your email) |
+:::
+
+## Quicklinks {.unnumbered}
+
+[**Course Calendar**](jpkelley.github.io/ZOO5500/chapters/int_calendar_sp26.html)
+
+:::: columns
+
+::: {.column width="30%"}
+
+::: {.callout-note icon=false collapse=true}
+## **Class collaboration tools**
+
+[Collaborative Statistics References](https://docs.google.com/document/d/1abc9-8_gHdmGDlnbElgdKHY7udbbKJ33KH7Cckb9Vyg/edit?usp=sharing)
+:::
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="30%"}
+
+::: {.callout-warning icon=false collapse=true}
+## **Workflow templates**
+
+[YAML Metadata Template (general)](templates/metadata_template.yaml)
+:::
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="30%"}
+
+::: {.callout-tip icon=false collapse=true}
+## **Assignment templates**
+
+[Analysis Concept Note](templates/01_template.qmd)
+:::
+
+:::
+
+::::
+
+
+---
+
+This course was created using Quarto (via R Studio) using custom CSS and HTML. 
+
+
+::: {.callout-caution icon=false collapse="true"}
+## **AI usage transparency** {.unnumbered}
+
+In the construction of this website, GenAI (via ChatGPT) was used in the following ways:
+
+* **Generating graphics of cryptid jackalope species.** This was part of an exercise in prompt engineering—specifically, learning how to design minimalist prompts that produce consistent visual themes across all outputs.
+
+* **Converting the Canvas-based course site into Quarto markdown.** This included restructuring content, standardizing headers, and translating existing materials into a reproducible, version-controlled format (for hosting on GitHub).
+
+* **Assistive learning of custom CSS**, in parallel with consulting online CSS documentation and manuals (i.e., as a tutor and debugger, not a design authority).
+
+* **Reformatting and updating existing tables**, including updating of revised dates, assignments, and course logistics.
+
+* **Error-checking and troubleshooting markdown and Quarto code.** This was necessary during site builds.
+
+* **Improving organization across course components.** This included suggestions for cross-referencing related pages and identifying places where additional examples or clarifications would improve learning outcomes.
+
+* **Evaluating pedagogical alignment.** This involved getting feedback on readability, cognitive load, and whether learning objectives were being met by the material being presented.
+
+* **Editorial support** to ensure that tone and level of explanatory detail was appropriate for graduate students. This included tightening some language and reducing informational redundancy across pages.
+
+GenAI was used as an assistive tool throughout; it was not used as a content authority, decision-maker, or substitute for subject-matter expertise. All instructional choices, interpretations, and final edits remain the responsibility of the instructor (in accordance with [AI Use Policy](../chapters/int_ai_policy.qmd)).
+:::
+
+

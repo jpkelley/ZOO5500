@@ -1,0 +1,249 @@
+---
+title: "From Estimand to Adjustment to Model"
+format:
+  html:
+    mermaid:
+      theme: forest
+---
+
+```{mermaid}
+flowchart LR
+  E[Estimand] --> A[Adjustment Set]
+  A --> M[Model]
+  M --> R[Effect Estimate]
+
+  classDef estimand fill:#DCEFF9,color:#1F4E79;
+  classDef adjustment fill:#E6A89A,color:#000000;
+  classDef model fill:#7FBFA6,color:#000000;
+  classDef result fill:#F0C987,color:#000000;
+
+  class E estimand;
+  class A adjustment;
+  class M model;
+  class R result;
+```
+
+## What questions can be asked
+
+* What is the total effect of X on Y?
+* What are the direct and indirect pathways?
+* What must I adjust for (i.e. what covariates should be included)?
+* What should I NOT adjust for (i.e. what covariates should I exclude)?
+* What is the functional form?
+* What are the counterfactual predictions?
+
+## What information can be included
+
+* Does the effect vary by scale or context (include as an effect modifier)?
+* Can external data be used?
+
+
+
+
+::: {.callout-warning}
+## Do not skip steps
+You must define the estimand before choosing variables, and choose variables before fitting a model.
+:::
+
+# Step 1: Identify the Estimand
+
+Once a DAG has been specified, the next step is determining which causal quantities can be estimated from the data.
+
+Common estimands include:
+
+## Total Effect
+
+The total causal effect of exposure $X$ on outcome $Y$.
+
+## Direct Effect
+
+The portion of the effect not transmitted through mediators.
+
+* Indirect Effect
+
+The portion of the effect transmitted through mediators.
+
+SCMs help translate broad hypotheses into precise causal questions.
+
+For example:
+
+"Predator abundance affects nesting success"
+
+can be refined into:
+
+* What is the total effect of predator abundance on nesting success?
+* Is the effect mediated by parental behavior?
+* Does the effect vary with environmental conditions?
+
+Each question corresponds to a distinct causal estimand.
+
+
+
+## From Causal Questions to Predictions
+
+### 1. Total effect
+
+**Question:**  
+What is the total effect of predator abundance on nesting success?
+
+**Prediction:**  
+> Higher predator abundance will lead to **lower nesting success**.
+
+---
+
+### 2. Mediation
+
+**Question:**  
+Is the effect mediated by parental behavior?
+
+**Predictions (directional):**
+
+> Higher predator abundance will lead to **reduced parental provisioning** (or increased vigilance).
+
+> Reduced provisioning will lead to **lower nesting success**.
+
+> Therefore, predator abundance will reduce nesting success **partly through its effect on parental behavior**.
+
+> After accounting for parental behavior, the **remaining (direct) effect** of predator abundance on nesting success will be **smaller in magnitude**.
+
+---
+
+### 3. Effect modification
+
+**Question:**  
+Does the effect vary with environmental conditions?
+
+**Prediction:**  
+> The negative effect of predator abundance on nesting success will be **stronger under certain environmental conditions** (e.g., low canopy cover or high rainfall).
+
+---
+
+### Key idea
+
+> Mediation predictions must follow the **direction of each causal link**, not just the overall association.
+
+
+
+
+
+# Step 2: Determine the Adjustment Set
+
+The DAG determines which variables must be conditioned upon to estimate each effect.
+
+Adjustment sets should be identified using graphical criteria such as the **backdoor criterion**.
+
+A valid adjustment set blocks all non-causal paths between exposure and outcome.
+
+Important rules:
+
+* Do not condition on mediators when estimating total effects
+* Do not condition on colliders
+
+Software such as DAGitty can be used to identify minimal adjustment sets.
+
+::: {.callout-tip}
+## Key principle
+The adjustment set follows from the estimand. Different estimands can require different adjustment strategies.
+:::
+
+# Step 3: Build the Model
+
+Each endogenous variable in the DAG is described by a structural equation.
+
+## Parent–Child Rule
+
+Rule #2: Each endogenous variable has its own equation and its own disturbance term.
+
+
+If $X \rightarrow Y$ in the DAG, then $X$ belongs in the structural equation for $Y$.
+
+$$
+X_j = f_j(\mathrm{PA}_j, U_j)
+$$
+
+where:
+
+- $X_j$ is node $j$
+- $\mathrm{PA}_j$ is the set of parent variables of $X_j$ in the DAG
+- $U_j$ is the disturbance term for that node
+
+Equivalently, if
+
+$$
+X \rightarrow Y
+$$
+
+in the DAG, then
+
+$$
+X \in \mathrm{PA}_Y
+$$
+
+and therefore $X$ belongs in the structural equation for $Y$.
+
+## Using Multiple Datasets in a Single Causal Model (SCM)
+
+### Core Idea
+
+You **do not need to measure every variable in one dataset** to use a causal model.
+
+> **A DAG defines the causal system — datasets just inform different parts of it.**
+
+## How this works
+
+In a structural causal model, each variable (node) is described by its own equation based on its **parent variables**.
+
+That means you can:
+
+* Estimate different parts of the DAG using **different datasets**
+* Combine them into a **single causal system**
+
+This approach has many such names:
+
+* _modular causal modeling_
+* _evidence synthesis_
+* _data fusion_ (within the concept of _transportability_, _sensu_ Judea Pearl)
+
+## Ecology Example
+
+You might have:
+
+* Dataset A:  
+  **Fruit traits $\rightarrow$ frugivory behavior**
+
+* Dataset B:  
+  **Frugivory behavior $\rightarrow$ seed dispersal**
+
+* Dataset C:  
+  **Seed dispersal $\rightarrow$ recruitment**
+
+Instead of forcing everything into one model, you:
+
+1. Fit each relationship separately
+2. Link them using the DAG
+3. Combine them to estimate total and indirect effects
+
+If you think this approach sounds too good to be true, then you are partly correct. As with any part of any workflow in ecological analysis, our logic requires certain assumptions.
+
+## Key Assumptions for this Modular Approach to SCMs
+
+::: {.callout-note}
+## Same biological process
+All datasets must represent the **same causal process** or one that is transportable across systems.
+:::
+
+::: {.callout-note}
+## Compatible variable definitions
+Variables must be defined in ways that are conceptually comparable across datasets.
+:::
+
+::: {.callout-note}
+## Compatible causal structure
+The DAG must apply across the datasets being linked.
+:::
+
+## What this means for practice
+
+At this point, modeling is not the challenge — choosing the correct model is.
+
+The model is a direct translation of the estimand and adjustment set: nothing more, nothing less.

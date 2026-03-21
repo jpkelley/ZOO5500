@@ -19,8 +19,7 @@ numbered: true
 
 ## Quicklinks {.unnumbered}
 
-[**Course Calendar**](/ZOO5500/chapters/int_calendar_sp26.html){target="_blank" rel="noopener"}
-
+[**Course Calendar**](https://jpkelley.github.io/ZOO5500/chapters/int_calendar_sp26.html){rel="external" target="_blank"}
 
 :::: columns
 

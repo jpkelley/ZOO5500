@@ -1,5 +1,5 @@
 ---
-title: "Building and Refining DAGs"
+title: "DAG Construction"
 format:
   html:
     mermaid:
@@ -8,16 +8,34 @@ format:
 
 ## Introduction
 
-In this section, we meet the Directed Acyclic Graph (DAG), the first step of constructing an operational Structural Causal Model. Though this step seems like a simple drawing exercise, this step, if done correctly, can be quite challenging. 
-
+In this section, we explore the Directed Acyclic Graph (DAG), the first step of constructing an operational Structural Causal Model. Though this step seems like a simple drawing exercise, this step often becomes one of the most illuminating parts of the SCM process. If done thoroughly and carefully, building the DAG forces you to explicitly state assumptions that you did not realize were critical to your questions. 
 
 ## General architecture of a Directed Acyclic Graph (DAG)
 
 A Directed Acyclic Graph represents all plausible causal relationships in the system. In essence, it encapsulates we know about our study system. This DAG will form the basis for your entire set of questions about your system.
 
-As with any formalized network, Directed Acyclic Graphs are comprised of nodes (the boxes or circles) connected by edges (lines). In DAGs, edges have directionality (an arrow pointing from $X$ to $Y$ reflects our assumption that $X$ directly causes $Y$). 
+::: {.callout-tip icon=false collapse=false}
+## **Important DAG terminology**
 
-[INSERT IMAGE OF NODE HERE]
+* **node**: a variable in the system (measured or _not_).  
+* **edge**: a directed link (unidirectional arrow) representing a causal relationship between two nodes
+* **exposure**: the variable whose effect you want to estimate (your treatment or independent variable)
+* **outcome**: the variable you are trying to explain (the response or dependent variable) 
+* **confounder**: a common cause of both exposure and outcome (can bias the estimate if not accounted for)  
+* **mediator**: a variable through which the exposure affects an outcome 
+* **collider**: a common effect of two variables (adjusting for it can induce spurious associations)
+* **path**: any sequence of connected arrows between two variables
+* **backdoor path**: a non-causal path that can introduce bias if not included in the model
+* **adjustment set**: the set of variables included in the model (blocking alternative causal pathways and allowing you to recover a causal effect)
+
+:::
+
+The most important aspect of Directed Acyclic Graphs is that they are comprised of nodes (the boxes or circles) connected by edges (lines). In DAGs, edges have directionality (an arrow pointing from $X$ to $Y$ reflects our assumption that $X$ directly causes $Y$). 
+
+:::: {.columns}
+
+::: {.column width="63%"}
+As an example, consider the DAG picture here. It shows conceptual knowledge about what factors affect nest survival. Vegetation cover can influence both predator abundance and survival, while predators affect survival both directly and by influencing how well nests are concealed. In other words, part of the predator effect may work through how hidden the nests are (a behaviorally mediated effect).
 
 Edges in the DAG should be motivated by:
 
@@ -33,10 +51,41 @@ Typical node categories include:
 * **behavioral responses** (e.g. foraging rate, vigilance)  
 * **demographic outcomes** (e.g. survival, reproductive success)  
 * **measurement processes** (e.g. detection probability, observer effort)
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="35%"}
+```{mermaid}
+graph TD
+
+C[Vegetation cover]:::node
+X[Predator abundance]:::node
+M[Nest concealment]:::node
+Y[Nest survival]:::node
+
+C --> X
+C --> Y
+X --> M
+M --> Y
+X --> Y
+
+classDef node fill:#d9d9d9,color:#000,stroke-width:0px;
+
+```
+
+:::
+
+::::
 
 Any good DAG should represent **causal assumptions**, _not_ statistical correlations. If there is good ecological justification for a causal link between two variables, you should include it in the model (even if a relationship between two variables has never been tested). Unlike non-causal approaches, a useful DAG emphasizes conceptual completeness over statistical parsimony. In other words, it is better to include more knowledge in a DAG than try to simplify it. So, how do we efficiently construct a DAG that has strong causal assumptions?
 
 ## Constructing a DAG for your study system
+
+::: {.callout-tip icon=false}
+## **Rule #1: Build one DAG for the system -- not one DAG per question/prediction.**
+:::
 
 The goal of this section is to construct a _single global Directed Acyclic Graph (DAG)_ that represents the causal structure of your study system. I use the term “global” by analogy to multimodel inference (i.e. use of AIC to select the best-supported model) where a global model includes all plausible predictors. In this causal case, a global DAG includes all plausible causal relationships in the system and acknowledges that there can be many outcome/response variables and that variables can play different roles (colliders, mediators, confounders) along multiple causal pathways. A global DAG:
 
@@ -45,94 +94,83 @@ The goal of this section is to construct a _single global Directed Acyclic Graph
 * integrates **theory, empirical knowledge, and natural history**
 * is designed to support **many possible causal questions**
 
-In other words, the goal of a DAG is not to build a single model; its goal is to thoroughly represent your student system. Once constructed, a global DAG allows you to:
+In other words, the goal of DAG construction is not to build a single model; its goal is to thoroughly represent your study system. Once constructed, a global DAG allows you to:
 
-* logically and transparently ask multiple exposure–outcome questions 
+* logically and transparently ask multiple exposure–outcome questions without changing your assumptions about how the world works (what kitchen-sink models and AIC fundamentally do)
 * identify confounders, mediators, and colliders
 * determine valid adjustment sets (i.e. what covariates should be included in a statistical model)
 * convert causal assumptions into statistical models that test predictions  
 
-::: {.callout-tip icon=false}
-## **Rule #1: Build one DAG for the system -- not one DAG per question/prediction.**
-:::
-
 ::: {.callout-important}
-
 ## How big should a global DAG be? 
 
 You could easily imagine an ever-expanding (and reductionist) DAG. Certainly, global DAGs can be very large. For purposes of causal identification and modeling for a focal study, a large DAG is not necessary. As you will discover as you gain more experience with this approach, covariates more than two edges away rarely play any important role in answering your set of questions. Therefore, you can construct a DAG that has 1-2 linked covariates away from any dependent variable (called an exposure in the causal world). 
 
 :::
 
-
-
-
-Here is the recommended workflow for constructing a global DAG:
-
-1. Construct a global DAG based on all relevant knowledge
-2. Identify the focal exposure and outcome
-3. Retain variables within two causal edges of those nodes
-4. Use this reduced DAG for causal identification and modeling
-
-This strategy pushes you to remain grounded in both theory and your own expert knowledge while preventing unnecessary complexity.
-
-
 ## A practical workflow for building a DAG
 
 Building a DAG for a study system typically involves the following steps:
 
-**Step 1:** Start with the **study system**, not a statistical model  
-**Step 2:** List your core **exposure–outcome questions** (based on your hypotheses/predictions)  
-**Step 3:** Draw simple **causal links** (e.g., $X \rightarrow Y$)  
-**Step 4:** Add **confounders** (common causes of exposure and outcome)  
-**Step 5:** Add **mediators** (mechanisms linking exposure to outcome)  
-**Step 6:** Merge everything into a single **global DAG**  
-**Step 7:** Include important **latent (unmeasured) variables** when necessary  
-**Step 8:** Refine the DAG based on **theory, literature, and natural history**  
-**Step 9:** Use the DAG to identify what can be **asked and estimated**
+* **Step 1:** Start with the study system, not a statistical model  
+* **Step 2:** List your core exposure–outcome questions (based on your hypotheses/predictions)  
+* **Step 3:** Draw simple causal links (e.g., $X \rightarrow Y$)  
+* **Step 4:** Add confounders (common causes of exposure and outcome)  
+* **Step 5:** Add mediators (mechanisms linking exposure to outcome)  
+* **Step 6:** Merge everything into a single global DAG  
+* **Step 7:** Include important latent (unmeasured) variables when necessary
+* **Step 8:** Refine the DAG based on theory, literature, and natural history  
+* **Step 9:** Use the DAG to identify what can be asked and estimated
 
-### Step 1: Start with the system, not the model
+Let us detail these nine steps.
 
-You have already begun this process; it is the hardest of all the steps. Begin by thinking about the ecological system you are studying, not the regression or other model that you plan to fit. Specifically, focus on three questions:
+---
 
-* What are the major processes in this system? (predator-prey, pollination, intrapair communication)
-* What variables are likely to influence one another? (temperature and metabolic rate)
-* What outcomes do I care about explaining? (any response variable: fitness, probability of recruitment)
+### Step 1: Start with the system, not a statistical model
+
+This step is the hardest of all the steps. Begin by thinking about the ecological system you are studying. Do not think about the regression or other model that you plan to fit. Do not think about whether you should log-transform a variable or not. At this point, you should focus on three questions only:
+
+* What are the major processes in this system? (e.g. predator-prey, pollination, intrapair communication)
+* What variables are likely to influence one another? (e.g. temperature and metabolic rate)
+* What outcomes do I care about explaining? (e.g. any response variable: fitness, probability of recruitment)
 
 Again, at this first stage, your goal is to ignore anything related to statistical models. Do not worry about coefficients, significance, or functional form of a model.
 
----
-
 ### Step 2: List your core exposure–outcome questions
 
-Next, your task is to write down the main causal questions you want the DAG to support. For example:
+Next, your task is to write down the main causal questions you want the DAG to support. For example, let us consider the direct causal links I thought about _before_ constructing the DAG above:
 
-- What is the effect of $X$ on $Y$?
-- What is the effect of $A$ on $B$?
-- What is the effect of $Z$ on $W$?
+* What is the effect of $vegetation\_cover$ on $nesting\_survival$?
+* What is the effect of $vegetation\_cover$ on $predator\_abundance$?
+* What is the effect of $predator\_abundance$ on $nest\_concealment$?
+* What is the effect of $predator\_abundance$ on $nesting\_survival$?
+* What is the effect of $nest\_concealment$ on $nesting\_survival$?
 
 These questions help identify the main parts of the system that must appear in the DAG.
 
----
 ### Step 3: Start with one simple causal link
 
-Your next step is to make your initial causal claim about each of your exposure-outcome questions explicit. For example, if your question is:
+Your next step is to make an explicit causal claim about each of the exposure-outcome questions listed in Step 2. For example, if your question is:
 
-> _What is the effect of an exposure ($X$) on an outcome ($Y$)?_
+> _What is the effect of $vegetation\_cover$ (the exposure) on $predator\_abundance$ (the outcome)?_
 
 you would draw the simplest causal chain possible, which is: 
 
 ```{mermaid}
 flowchart LR
-  X --> Y
+  vegetation_cover[Vegetation cover]:::exp --> predator_abundance[Predator abundance]:::out
+
+classDef exp fill:#bcd4f6,color:#000,stroke-width:0px;
+classDef out fill:#bfe3c0,color:#000,stroke-width:0px;
 ```
 
-Even though this looks simple and almost trivial, be certain that this simple arrow is well justified. Every arrow you draw should be scientifically defensible based on some combination of theory, data, or observation. 
+Even though this looks simple and almost trivial, be certain that each exposure-outcome is well justified. Every arrow you draw should be scientifically defensible based on some combination of theory, data, or observation. 
+
 ---
 
 ### Step 4: Add common causes (confounders)
 
-Next, ask whether there are variables that plausibly influence both the exposure and the outcome. Recall that these are called _confounders_, and they are often among the most important variables to identify  For each candidate confounder, ask these two questions:
+Next, ask whether there are variables that plausibly influence both the exposure and the outcome. Recall that these are called _confounders_, and they are often among the most important variables to idntify  For each candidate confounder, ask these two questions:
 
 * Is there evidence (literature, pilot data, or natural history) that it affects $X$ (the exposure/treatment)?
 * Is there evidence that it affects $Y$ (the response/outcome)?
@@ -176,68 +214,59 @@ Mediators should represent **real ecological/biological pathways**, not just add
 
 ### Step 6: Merge overlapping pieces into one global DAG
 
-list of exposure–outcome pairs
+While going through Steps 1-5, you will quickly notice that the same variables and pathways appear repeatedly. This is a sign that you are capturing shared structure in the system rather than constructing isolated hypotheses. (You can, of course, streamline this process in the future by starting with upstream --or exogenous-- variables and working your way towards to the outcome variable.) Your goal now is to integrate these overlapping pieces into a single global DAG. Remember:
 
-As you do this, you will begin to notice that the same variables and pathways appear repeatedly. This is a sign that you are capturing shared structure in the system rather than constructing isolated hypotheses.
+> You should build one DAG for your study system. Do **not** construct one DAG per question!
 
-At this point, your goal is to integrate these overlapping pieces into a single global DAG.
+When constructing your merged DAG, focus on the following:
 
-> Build one DAG for the system — not one DAG per question.
-
-When merging, focus on:
-
-- retaining variables that appear across multiple questions  
-- preserving pathways that are supported by evidence  
-- avoiding duplication of nodes that represent the same process  
+* retaining all variables that appear across multiple questions  
+* preserving pathways that are supported by evidence
+* avoiding duplication of nodes that represent the same process  
 
 The global DAG should include:
 
-- key variables in the system  
-- major causal pathways  
-- shared confounders and mediators  
-- latent variables where necessary  
+* key variables in the system  
+* major causal pathways  
+* shared confounders and mediators  
+* latent variables where necessary (see Step 7)
 
-Importantly, each edge in this integrated graph should still be defensible based on theory, literature, pilot data, or natural history.
+Importantly, each edge in this integrated, global DAG should still be defensible based on theory, literature, pilot data, or natural history. Not to worry: Step 8 is essentially a quality control check. Just keep moving forward through the process.
 
 ---
 
 ### Step 7: Represent the ecological process (latent variables and scale)
 
-At this stage, you should pause and ask whether your DAG represents the **ecological process**, or merely the variables you happened to measure. Hopefully, this line of questioning would come during the project planning phase, where you would be able to pre-emptively address two common issues that arise in ecological studies:
+At this stage, your goal is to ask whether your DAG represents the your best knowledge of the **ecological process**, or if it only represents the variables you chose to measure. Hopefully, these lines of questioning would come during the project planning phase, where you would be able to pre-emptively address two common issues that arise in ecological studies:
 
 * **latent (unmeasured) variables**
 * **scale and measurement**
 
-### What are _latent_ variables?
+#### _Latent (unmeasured) variables?_
 
-What if we know that other factors matter—from prior literature, natural history knowledge, or previous studies—but we did not measure them in our own study? Sometimes a variable was not measured because it was logistically difficult to quantify, because there was not sufficient funding, or because its importance only became clear after the study was designed. **This situation is extremely common in ecology.** 
+What if we know that other factors matter—from prior literature, natural history knowledge, or previous studies—but we did not measure them in our own study? Sometimes a variable is not measured because it is logistically difficult to quantify, because there was insufficient funding, or because the variable's importance became clear only after the study was designed. **This situation is extremely common in ecology.** 
 
-Even when such variables are unmeasured, they can still play an important role in the causal system. Exclusion of a variable from your dataset does not remove it from the causal system. As such, it should be represented in the DAG as unmeasured or _latent_ variables (from Latin _latere_ meaning to "lie hidden"). A **latent variable** is simply a variable that:
+Even when such variables are unmeasured, they can still play important roles in the causal system (and your DAG representation of it). Exclusion of such a variable from your dataset does not remove it from the causal system. As such, it should be represented in the DAG as unmeasured or _latent_ variables (from Latin _latere_ meaning to "lie hidden"). A latent variable is simply a variable that:
 
 * exists in the causal system  
 * influences other variables  
-* was **not measured** in your dataset  
+* was not measured in your dataset  
 
 Examples can really include any variable, as long as it was not directly quantified in your study.
 
-### Why include latent variables?
-
-There are three primary advantages of explicitly including latent variables:
+_Why include latent variables?_ Why exactly do I need to consider an unmeasured variable? This is where kitchen-sink modeling approaches can falter glamorously, as there is no explicit way to include such variables in the kinds of "garbage can regression" commonly used in ecology. In Structural Causal Models, this is possible and ideal.There are three primary advantages of explicitly including latent variables:
 
 * They can help make your causal assumptions explicit  
-* They prevent incorrect adjustment decisions  
-* They help identify unmeasured confounding  
+* They prevent incorrect adjustment decisions (they can help you identify what kinds of effect you are really estimating)
+* They help identify unmeasured confounding (and determine if an effect is actually identifiable) 
+
+#### _Scale_
+
+We know that different ecological processes are scale-dependent, so your "best knowledge" must also include information about the temporal and spatial scale at which you observed the system. Ecological processes often operate at scales different from the data we collect.; of course, the scales of measurement and process ideally would be matched, but the important thing at this point is to ensure that your DAG reflects all of the data-generating processes in your system. 
+
+Your next step is to ask: **Am I representing variables at the correct biological scale?**
 
 
----
-
-#### Scale and measurement
-
-Next, ask:
-
-* Am I representing variables at the correct biological scale?
-
-Ecological processes often operate at scales different from the data we collect.
 
 For example:
 
@@ -250,53 +279,47 @@ In these cases, it can be useful to distinguish between:
 - the **underlying biological variable** (often latent)  
 - the **measured proxy** (what appears in your dataset)
 
----
 
 #### Example
 
+Let us consider the following example, where $territory_quality$ is an unmeasured or _latent_ variable. In contrast, $canopy_cover$ is directly observed variable. 
+
 ```{mermaid}
 flowchart LR
-  U[Territory quality (latent)] --> X[Canopy cover (measured)]
+  U[Territory quality] --> X[Canopy cover]
   U --> Y[Nesting success]
   X --> Y
+  
 ```
 
 ---
 
 ### Step 8: Refine the DAG
 
-Now you have a draft DAG. Your goal in this step is to take a big step back and begin a careful review and refinement. Once again, you ask some familiar questions:
+Now you have a very solid draft DAG. Your goal in this next step is to take a big step back and carefully review and refine. This serves as a quality-control check on the causal assumptions that we have made in the previous steps. Once again, you ask some familiar questions:
 
 * Is every edge (arrow) clearly justified (via paper, pilot data, or observation)?
 * Are there any important pathways missing based on a priori knowledge?
 * Should some variables be represented as unmeasured (latent) rather than observed?
 * Does this DAG represent the system as it actually operates (compared to a preferred hypothesis)?
 
-Though this step is laborious, careful and transparent refinement is where the DAG becomes more than a back-of-the-napkin sketch; rather, it becomes a scientifically defensible representation of your study system. (Keep your napkin sketch, though, as you might need it again one day.)
+Though this step is laborious and seemingly a bit tedious, the formal step of careful and transparent refinement is where the DAG becomes more than a back-of-the-napkin sketch; that is, it becomes a scientifically defensible representation of your study system. (Keep your napkin sketch, though, as you might need it again one day.)
 
 ---
 
 ### Step 9: Use the DAG to see what questions are possible
 
-This is one of the most fascinating and fun parts of DAG-construction. A well-constructed global DAG does more than simply represent your original hypotheses/questions. A good DAG allows you to systematically evaluate what questions can be supported by the causal structure you have. Because you have painstakingly worked to justify every edge, you can now ask a number of really probing -yet flexible-- questions such as:
+This is one of the most fascinating and fun parts of DAG construction. A well-constructed global DAG does more than simply represent the causal assumptions underlying your original hypotheses/questions. A good DAG allows you to systematically evaluate what questions can be supported by the causal structure you have. Because you have painstakingly worked to justify every edge in these previous steps, you can now ask narrow your focus onto a number of probing -yet flexible-- questions such as:
 
 * Which exposure–outcome relationships are supported by plausible pathways?
 * Which variables play multiple roles across different questions?
 * Which effects are identifiable or unidentifiable given the causal structure?
 * What new questions emerge from the causal structure?
 
+Remember that you are formalizing the causal assumptions of your study system. This can be done at any time --before, during, or after a study--, though it is idea to do _before_ you begin your study. But, as we all know from experience, our knowledge of the processes involved in our system grow as we study it (hopefully). We conduct more experiments, we make more observations, we read new and old published papers, we speak with colleagues. Therefore, we should absolutely expect that the DAG will evolve over time. If we can a DAG updated with new information, we can identify where past studies have fallen short, what present studies are constrained to estimate, and what future studies should prioritize.
 
-### Key idea
-
-> On this page, the goal is not to estimate an effect.  
-> The goal is to build a biologically realistic causal map of the system.
-
-On the next page, we will focus on a **single exposure–outcome pair**, define the estimand, determine the adjustment set, and translate the DAG into a model.
-
-## Include latent (unmeasured) variables when necessary
-
-
-
+## Up next!
+So, remember that a DAG is just one part of a Structural Causal Model. The other critical component is the set of actual structural equations.On the next page, we will focus on a **single exposure–outcome pair**, define the estimand, determine the adjustment set, and translate the DAG into a model. 
 
 ---
 
@@ -304,11 +327,23 @@ On the next page, we will focus on a **single exposure–outcome pair**, define 
 
 The last effect type in our causal framework is the _effect modifier_. An **effect modifier** is a variable that makes the effect of $X$ on $Y$ depend on another variable $Z$. In practice, this is what we mean by an **interaction**. It really is that simple. For example, predator abundance may reduce nesting success, but the strength of that effect may depend on vegetation structure. In a DAG, this is represented simply as both $X$ and $Z$ causing $Y$:
 
+:::
+
 ```{mermaid}
 flowchart LR
-  X --> Y
-  Z --> Y
+
+X[Predator abundance]:::exp_dark --> Y[Nest survival]:::out
+Z[Vegetation structure]:::exp_light --> Y
+
+classDef exp_dark fill:#9fbfe8,color:#000,stroke-width:0px;
+classDef exp_light fill:#d6e6fb,color:#000,stroke-width:0px;
+classDef out fill:#bfe3c0,color:#000,stroke-width:0px;
 ```
+
+What does this show? Both predator abundance and vegetation structure affect nest survival. Effect modification arises when the effect of predator abundance on survival depends on vegetation structure (an interaction). The DAG itself does not change, though! The interaction appears in the model for 
+$Y$, but it does not appear in the graph itself. 
+
+:::
 
 Wait! I mentioned an interaction. So, where is the interaction in this DAG? Remember that a DAG shows **what causes** $Y.$ It does not tell you whether those effects combine additively or interactively. Instead, the interaction appears in the equation for the model:
 
@@ -318,7 +353,7 @@ $$
 
 Here, the $X \times Z$ term means that the effect of $X$ on $Y$ changes depending on $Z$.
 
-So, remember that a DAG is just one part of a Structural Causal Model. The other critical component is the set of actual structural equations.
+
 
 
 

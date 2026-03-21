@@ -146,6 +146,90 @@ Software such as DAGitty can be used to identify minimal adjustment sets.
 The adjustment set follows from the estimand. Different estimands can require different adjustment strategies.
 :::
 
+::::: {.columns}
+
+::: {.column width="32%"}
+::: {.dag-box}
+```{mermaid}
+graph TD
+
+C[Vegetation cover]:::node
+X[Predator abundance]:::node
+M[Nest concealment]:::node
+Y[Nest survival]:::node
+
+C --> X
+C --> Y
+X --> M
+M --> Y
+X --> Y
+
+classDef node fill:#d9d9d9,color:#000,stroke-width:0px;
+
+```
+:::
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="32%"}
+::: {.dag-box}
+```{mermaid}
+graph TD
+
+C[Confounder B]:::conf
+X[Exposure]:::exp
+M[Mediator]:::med
+Y[Outcome]:::out
+
+C --> X
+C --> Y
+X --> M
+M --> Y
+X --> Y
+
+classDef conf fill:#f2b6b6,color:#000,stroke-width:0px;
+classDef exp fill:#bcd4f6,color:#000,stroke-width:0px;
+classDef med fill:#f7d6a3,color:#000,stroke-width:0px;
+classDef out fill:#bfe3c0,color:#000,stroke-width:0px;
+```
+
+:::
+:::
+
+::: {.column width="2%"}
+:::
+
+:::  {.column width="32%"}
+::: {.dag-box}
+```{mermaid}
+graph TD
+
+C[Confounder B]:::conf
+X[Confounder A]:::conf
+M[Exposure]:::exp
+Y[Outcome]:::out
+
+C --> X
+C --> Y
+X --> M
+M --> Y
+X --> Y
+
+classDef conf fill:#f2b6b6,color:#000,stroke-width:0px;
+classDef exp fill:#bcd4f6,color:#000,stroke-width:0px;
+classDef med fill:#f7d6a3,color:#000,stroke-width:0px;
+classDef out fill:#bfe3c0,color:#000,stroke-width:0px;
+```
+:::
+:::
+
+:::::
+
+
+
+
 # Step 3: Build the Model
 
 Each endogenous variable in the DAG is described by a structural equation.

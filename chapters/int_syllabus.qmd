@@ -26,7 +26,7 @@ To ensure your success in this course, the following are required: - You must ha
 This course is graded as Pass or Fail (technically "Satisfactory" or "Unsatisfactory"). To pass the course you need to do the following:
 
 -   Participate at least 80% of the class meetings. Simply inform me of your absences (for health reasons, field research, etc.), and then do what you can to catch up with the work.
--   Turn in all assignments on their due dates (see [Course Calendar](../chapters/int_calendar_sp26.qmd)) and receive a Green Light on all assignment submissions by the end of term (see [Assignments & Grading](../chapters/int_assignment_grades.qmd)).  This is especially critical until Spring Break, after which there will be more flexibility in your schedule. 
+-   Turn in all assignments on their due dates (see [Course Calendar](../chapters/int_calendar_sp26.qmd){target="_blank" rel="noopener"}) and receive a Green Light on all assignment submissions by the end of term (see [Assignments & Grading](../chapters/int_assignment_grades.qmd)).  This is especially critical until Spring Break, after which there will be more flexibility in your schedule. 
 
 
 ## Attendance/Participation Policy

@@ -443,6 +443,21 @@ window.Quarto = {
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">26.1</span> Introduction</a></li>
   <li><a href="#workspace-set-up" id="toc-workspace-set-up" class="nav-link" data-scroll-target="#workspace-set-up"><span class="header-section-number">26.2</span> Workspace set-up</a></li>
   <li><a href="#the-example-dataset-the-wyoming-jackalope-lepusantilocapra-wyomingensis" id="toc-the-example-dataset-the-wyoming-jackalope-lepusantilocapra-wyomingensis" class="nav-link" data-scroll-target="#the-example-dataset-the-wyoming-jackalope-lepusantilocapra-wyomingensis"><span class="header-section-number">26.3</span> The example dataset: The Wyoming Jackalope (<em>Lepusantilocapra wyomingensis</em>)</a></li>
+  <li><a href="#fitting-gaussian-glms" id="toc-fitting-gaussian-glms" class="nav-link" data-scroll-target="#fitting-gaussian-glms"><span class="header-section-number">26.4</span> Fitting Gaussian GLM(s)</a>
+  <ul class="collapse">
+  <li><a href="#interpretation-of-the-glm-results" id="toc-interpretation-of-the-glm-results" class="nav-link" data-scroll-target="#interpretation-of-the-glm-results"><span class="header-section-number">26.4.1</span> Interpretation of the GLM results</a></li>
+  <li><a href="#information-theoretic-multi-model-comparison" id="toc-information-theoretic-multi-model-comparison" class="nav-link" data-scroll-target="#information-theoretic-multi-model-comparison"><span class="header-section-number">26.4.2</span> Information-theoretic multi-model comparison</a></li>
+  <li><a href="#checking-your-glm-residuals" id="toc-checking-your-glm-residuals" class="nav-link" data-scroll-target="#checking-your-glm-residuals"><span class="header-section-number">26.4.3</span> Checking your GLM residuals</a></li>
+  </ul></li>
+  <li><a href="#fitting-poisson-glms" id="toc-fitting-poisson-glms" class="nav-link" data-scroll-target="#fitting-poisson-glms"><span class="header-section-number">26.5</span> Fitting Poisson GLM(s)</a></li>
+  <li><a href="#how-to-create-a-generalized-linear-mixed-model-glmm" id="toc-how-to-create-a-generalized-linear-mixed-model-glmm" class="nav-link" data-scroll-target="#how-to-create-a-generalized-linear-mixed-model-glmm"><span class="header-section-number">26.6</span> How to create a Generalized Linear Mixed Model (GLMM)</a>
+  <ul class="collapse">
+  <li><a href="#fitting-glmms" id="toc-fitting-glmms" class="nav-link" data-scroll-target="#fitting-glmms"><span class="header-section-number">26.6.1</span> Fitting GLMM(s)</a></li>
+  <li><a href="#step-1-specify-your-global-model-1" id="toc-step-1-specify-your-global-model-1" class="nav-link" data-scroll-target="#step-1-specify-your-global-model-1"><span class="header-section-number">26.6.2</span> Step #1: Specify your global model</a></li>
+  <li><a href="#step-2-optimizing-the-random-effects-structure" id="toc-step-2-optimizing-the-random-effects-structure" class="nav-link" data-scroll-target="#step-2-optimizing-the-random-effects-structure"><span class="header-section-number">26.6.3</span> Step #2: Optimizing the random effects structure</a></li>
+  <li><a href="#step-3-optimize-the-fixed-effects-structure" id="toc-step-3-optimize-the-fixed-effects-structure" class="nav-link" data-scroll-target="#step-3-optimize-the-fixed-effects-structure"><span class="header-section-number">26.6.4</span> Step 3: Optimize the fixed-effects structure</a></li>
+  </ul></li>
+  <li><a href="#bibliography-for-this-section" id="toc-bibliography-for-this-section" class="nav-link" data-scroll-target="#bibliography-for-this-section"><span class="header-section-number">26.7</span> Bibliography for this section</a></li>
   </ul>
 </nav>
     </div>
@@ -504,7 +519,9 @@ window.Quarto = {
 <p>Jackalope seem to be everywhere. Recently, during a survey of 31 forested study plots (1 square kilometer each) here in Wyoming, scientists discovered a cryptic species of jackalope. Because it is endemic to Wyoming, they named it the Wyoming Lorax (<em>Lepusantilocapra wyomingensis</em>). The researchers quantified their abundance (counts per survey and multiple surveys per plot), community diversity (all jackalope species in the plots), and also measured several habitat features, including percentage ground vegetation, percentage herb layer, and percent leaf litter. Anyway, these scientists thought the scientific community would not believe their discovery, so they gave the dataset to the cryptid ecologists of ZOO/ECOL-5500. So, let us begin by importing this dataset. Then, we can save it to an object called “wyoming” and then examine the structure of the data:</p>
 </div><div class="column" style="width:50%;">
 <p><img src="../graphics/jackalope_graphics/wyoming_jackalope.png" class="img-fluid"></p>
-</div><div class="cell">
+</div>
+</div>
+<div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>wyoming <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"class_exercise_data/lepusantilocapra_wyomingensis_dataset.csv"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(wyoming)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -520,7 +537,9 @@ window.Quarto = {
  $ leaf_litter   : num  0 0 0 0 0 0 0 0.63 0.06 0.49 ...
  $ rain_in       : int  2 0 2 2 0 1 1 4 3 1 ...</code></pre>
 </div>
-</div><p>You see several variables and plot information:</p><ul>
+</div>
+<p>You see several variables and plot information:</p>
+<ul>
 <li><code>plot_id</code>: values 1-31 for each unique plot</li>
 <li><code>forest_age</code>: categorical variable describing the age, in years, of each plot</li>
 <li><code>tree_species</code>: species of dominant tree in each survey</li>
@@ -531,7 +550,10 @@ window.Quarto = {
 <li><code>herb_layer</code>: Proportion of each survey area covered in herbs</li>
 <li><code>leaf_litter</code>: Proportion of each survey area covered in leaf litter only (no vegetation)</li>
 <li><code>rain_in</code>: round total precipitation (in inches…because that’s what their inexpensive rain gauge collected)</li>
-</ul><p>For the sake of brevity, let us assume that these data have already been cleaned and inspected for multicollinearity and outliers. That is, we will not eliminate/modidy/exorcise any data at this point. We will do some additional model validation tests (to check on the influence of outliers, etc.) after out initial analysis.</p><section id="fitting-gaussian-glms" class="level2" data-number="26.4">
+</ul>
+<p>For the sake of brevity, let us assume that these data have already been cleaned and inspected for multicollinearity and outliers. That is, we will not eliminate/modidy/exorcise any data at this point. We will do some additional model validation tests (to check on the influence of outliers, etc.) after out initial analysis.</p>
+</section>
+<section id="fitting-gaussian-glms" class="level2" data-number="26.4">
 <h2 data-number="26.4" class="anchored" data-anchor-id="fitting-gaussian-glms"><span class="header-section-number">26.4</span> Fitting Gaussian GLM(s)</h2>
 <p>We first want to test the impact of multiple predictors on the response variable (number of parasites). We have several hypotheses to test. Following the “one model = one hypothesis” approach of Burnham and Anderson (2002), these hypotheses can easily be verbalized in a way that reflects how we test them with GLMs. That is, we think about a few of the variables and hypothesize that the number of jackalopes is impacted by:</p>
 <ul>
@@ -654,7 +676,8 @@ mod_04  4 1882.297</code></pre>
 <p>Focus on the left plot (the quantile-quantile plot of residuals). Remember that the “KS test” (Kolmogorov-Smirnov test) is a test of normality of the model residuals. Here, it shows that the residuals deviate significantly from a normal distribution; this will be something to fix. It also tests for outliers in the data. The results here suggest that there are no statistical outliers. From the plot at right (the Signal portion of the residual diagnostic), we see that the median quantile of the data also shows residual structure.</p>
 <p>So, we now need to try to fix several aspects of our model to ensure that our imposed structure is fitting the data well. Sometimes, this is a difficult and laborious task.</p>
 </section>
-</section><section id="fitting-poisson-glms" class="level2" data-number="26.5">
+</section>
+<section id="fitting-poisson-glms" class="level2" data-number="26.5">
 <h2 data-number="26.5" class="anchored" data-anchor-id="fitting-poisson-glms"><span class="header-section-number">26.5</span> Fitting Poisson GLM(s)</h2>
 <p>As a first step, let us step back and think critically about some fundamental features of our dataset. Among several things we could assess, we can first examine our response variable: <code>abundance</code>. We have abundance of <em>L. wyomingensis</em>, a metric that should follow a Poisson distribution (positive skew, and &gt;0). But we did not specify this in our original GLMs. What we did was run a set of GLMs that assumed that abundance followed Gaussian/normal distribution. What were we thinking?!?</p>
 <p>Regardless of what the model residuals show, our priority is to ensure that our data are correctly bounded. So, let us try a Poisson distribution. We do this by specifying an argument in the <code>glm()</code> function for family. Unfortunately, because of our oversight, we need to refit all of our original models (and immediately forget that our best model from our misspecfied attempt was <code>mod_03</code>, as that will likely change). Run the following:</p>
@@ -726,7 +749,8 @@ Number of Fisher Scoring iterations: 5</code></pre>
 <p>Yowzers. Everything about the model (the Noise and Signal components) seems to be poorly fit. Ouch. The <code>DHARMa</code> package’s residual plots continue to detect structure in the model residuals, and it has now detected other problems (e.g.outliers based on our imposed distribution). I chose this example to demonstrate how even the best model in a set of models might not be a good model. There may be other factors we failed to account for that are throwing the model into utter disarray.</p>
 <p>We may need to adjust our chosen distribution for our response variable. Or maybe there is some non-independence that is fundamental to our data structure that we need to account for. Before reading on, refer to the <a href="https://jpkelley.github.io/ZOO5500/chapters/DHARMA_diagnostics.html"><em>DHARMa Diagnostics</em> page</a> for information about diagnosing the origin of these warnings.</p>
 <p>You may have noticed from looking at the original dataset that we excluded some predictors. Think about a few potentially important data components that should have been included in our model-building and hypothesis testing in the above GLMs. Let us then remedy these omissions while we also attempt to solve our issues of non-independence. For that, we turn to Generalized Linear Mixed Models (GLMMs).</p>
-</section><section id="how-to-create-a-generalized-linear-mixed-model-glmm" class="level2" data-number="26.6">
+</section>
+<section id="how-to-create-a-generalized-linear-mixed-model-glmm" class="level2" data-number="26.6">
 <h2 data-number="26.6" class="anchored" data-anchor-id="how-to-create-a-generalized-linear-mixed-model-glmm"><span class="header-section-number">26.6</span> How to create a Generalized Linear Mixed Model (GLMM)</h2>
 <p>For most ecological datasets, it is generally good to always assume the presence of some non-independence and act accordingly. So, let us think about and properly specify our model and not cherry-pick what we think to be important variables.</p>
 <p>As there are two components of a mixed-effects model (the fixed and random components), we need a set of steps to guide us through the process of determing the fixed and random structures. There are three primary steps (click on the clalout boxes below to expand):</p>
@@ -918,13 +942,12 @@ global_02  6 2451.736</code></pre>
 <p>Let us assume we can go ahead and interpret a bit. The main results (and final model) show that the best-supported hypothesis/model is the one in which <em>L. wyomingensis</em> abundance is influenced by all of the tested covariates. Ground vegetation, herb layer percentage, and rainfall influence abundance positively, whereas the precentage of leaf litter has a negative impact of abundance. Futhermore, ground vegetation and leaf litter interact to positively influence abundance.</p>
 <p>Congratulations, you have now run a Generalized Linear Mixed Model! You are now ready to publish your first scientific article on jackalope.</p>
 </section>
-</section><section id="bibliography-for-this-section" class="level2" data-number="26.7">
+</section>
+<section id="bibliography-for-this-section" class="level2" data-number="26.7">
 <h2 data-number="26.7" class="anchored" data-anchor-id="bibliography-for-this-section"><span class="header-section-number">26.7</span> Bibliography for this section</h2>
 <p>Burnham, K.P. and Anderson, D.R. (2002) <a href="https://link.springer.com/book/10.1007/b97636"><em>Model Selection and Inference: A Practical Information-Theoretic Approach.</em></a> 2nd Edition, Springer-Verlag, New York.</p>
 
 
-</section>
-</div>
 </section>
 
 </main> <!-- /main -->

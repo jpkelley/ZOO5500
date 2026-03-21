@@ -5,6 +5,7 @@ format:
     mermaid:
       theme: forest
 ---
+
 :::: {.columns}
 ::: {.column width="65%"}
 ## Setting the stage for Structural Causal Models (SCMs)
@@ -180,7 +181,7 @@ Think about a _global model_ that you have seen. Think about how many predictors
 Rather than putting the emphasis on more data (as kitchen-sink models do), SCMs instead emphasize well-supported ecological knowledge and causal assumptions (which most ecologists do most of the time anyway!). 
 
 
-## Next up!
+## Up next!
 
 In sum, SCMs have three components: 
 
@@ -192,5 +193,5 @@ In the following sections, we will address each of these components in turn, beg
 
 ## References for this section
 
-* [Download link](https://onlinelibrary.wiley.com/doi/epdf/10.1111/brv.70029) Franks D.W., Ruxton G.D., and T.N. Sherratt. 2025. Ecology needs a causal overhaul. _Biological Reviews_. https://doi.org/10.1111/brv.70029
+* [Download link](https://onlinelibrary.wiley.com/doi/epdf/10.1111/brv.70029){target="_blank" rel="noopener"} Franks D.W., Ruxton G.D., and T.N. Sherratt. 2025. Ecology needs a causal overhaul. _Biological Reviews_. https://doi.org/10.1111/brv.70029
 * Pearl, J. (2009). _Causality: Models, reasoning, and inference_ (2nd ed.). Cambridge University

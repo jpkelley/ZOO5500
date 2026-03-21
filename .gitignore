@@ -7,3 +7,9 @@
 **/*.quarto_ipynb
 
 .Rproj.user/
+
+*_files/
+.quarto/
+_site/
+_cache/
+*.html

@@ -54,7 +54,7 @@ book:
     - part: "Part V: Curves to Meaning"
       chapters:
         - chapters/05_01_why_scms.qmd
-        #- chapters/05_02_building_dags.qmd
+        - chapters/05_02_building_dags.qmd
         #- chapters/05_03_estimand_adjustment_model.qmd
         #- chapters/05_04_estimating_and_presenting_effects.qmd
 format:

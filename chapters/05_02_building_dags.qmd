@@ -120,9 +120,10 @@ Building a DAG for a study system typically involves the following steps:
 * **Step 6:** Merge everything into a single global DAG  
 * **Step 7:** Include important latent (unmeasured) variables when necessary
 * **Step 8:** Refine the DAG based on theory, literature, and natural history  
-* **Step 9:** Use the DAG to identify what can be asked and estimated
+* **Step 9:** Add effect modification (interactions) to your structural equations
+* **Step 10:** Use the DAG to identify what can be asked and estimated
 
-Let us detail these nine steps.
+Let us detail these 10 steps.
 
 ---
 
@@ -170,7 +171,7 @@ Even though this looks simple and almost trivial, be certain that each exposure-
 
 ### Step 4: Add common causes (confounders)
 
-Next, ask whether there are variables that plausibly influence both the exposure and the outcome. Recall that these are called _confounders_, and they are often among the most important variables to idntify  For each candidate confounder, ask these two questions:
+Next, ask whether there are any variables that could plausibly influence _both_ the exposure and the outcome. Recall that these are called _confounders_, and they are often among the most important variables to idntify  For each candidate confounder, ask these two questions:
 
 * Is there evidence (literature, pilot data, or natural history) that it affects $X$ (the exposure/treatment)?
 * Is there evidence that it affects $Y$ (the response/outcome)?
@@ -179,9 +180,11 @@ Only when both are justified should it be included as a confounder. Add this con
 
 ```{mermaid}
 flowchart LR
-  C --> X
-  C --> Y
+  C["C (confounder)"]:::node --> X["X (exposure)"]:::node
+  C --> Y["Y (outcome)"]:::node
   X --> Y
+
+  classDef node fill:#9fbfe8,color:#000,stroke-width:0px;
 ```
 
 At this stage, it is fine to include as many confounders as you want, but each edge (and its directionality) should still be grounded in solid scientific evidence.
@@ -190,11 +193,11 @@ At this stage, it is fine to include as many confounders as you want, but each e
 
 ### Step 5: Add mechanisms (mediators)
 
-This is where the utility of DAGs really shines. The next step is to ask whether the effect of $X$ on $Y$ operates through intermediate variables. These variable are called _mediators_ and represent ecological  mechanisms. Note that, for the same causal question ("does $X$ affect $Y$?"), a confounder cannot represent an ecological mechanism. The question that you are asking is this:
+This is where the utility of DAGs really shines. The next step is to ask whether the effect of $X$ on $Y$ operates through intermediate variables. These variables are called _mediators_ and represent ecological mechanisms. Note that, for the same causal question ("does $X$ affect $Y$?"), a confounder cannot represent an ecological mechanism because it is upstream of the exposure $X$. The question that you are asking is this:
 
 * _Through what variables does $X$ affect $Y$?_
 
-For each candidate mediator, ask:
+For each candidate mediator, $X$, ask:
 
 * Is there evidence that $X$ influences this variable?
 * Is there evidence that this variable influences $Y$?
@@ -203,14 +206,16 @@ If evidence supports both of these edges, then you can add the mediator (M) to t
 
 ```{mermaid}
 flowchart LR
-  C --> X
-  C --> Y
-  X --> M
+  C["C (confounder)"]:::node --> X["X (exposure)"]:::node
+  C --> Y["Y (outcome)"]:::node
+  X --> M["M (mediator)"]:::node
   M --> Y
   X --> Y
+
+  classDef node fill:#9fbfe8,color:#000,stroke-width:0px;
 ```
 
-Mediators should represent **real ecological/biological pathways**, not just additional statistical covariates.
+Remember that mediators should represent real ecological/biological pathways and not just additional statistical covariates. If you ignore that, you will be in the kitchen sink again.
 
 ### Step 6: Merge overlapping pieces into one global DAG
 
@@ -224,29 +229,31 @@ When constructing your merged DAG, focus on the following:
 * preserving pathways that are supported by evidence
 * avoiding duplication of nodes that represent the same process  
 
-The global DAG should include:
+In the end, your draft global DAG should include:
 
-* key variables in the system  
-* major causal pathways  
-* shared confounders and mediators  
-* latent variables where necessary (see Step 7)
+* all major variables in your system  
+* all major causal pathways  
+* all shared confounders and mediators  
+* any latent variables, where necessary (see Step 7)
 
-Importantly, each edge in this integrated, global DAG should still be defensible based on theory, literature, pilot data, or natural history. Not to worry: Step 8 is essentially a quality control check. Just keep moving forward through the process.
+Importantly, each edge in this integrated, global DAG should still be defensible based on theory, literature, pilot data, or natural history. Not to worry if you forget something at this step, as Step 8 is essentially a quality control check. Just keep moving forward through the process.
 
 ---
 
-### Step 7: Represent the ecological process (latent variables and scale)
+### Step 7: Represent underlying processes (latent variables and scale)
 
-At this stage, your goal is to ask whether your DAG represents the your best knowledge of the **ecological process**, or if it only represents the variables you chose to measure. Hopefully, these lines of questioning would come during the project planning phase, where you would be able to pre-emptively address two common issues that arise in ecological studies:
+At this stage, your goal is to ask whether your DAG represents your best knowledge of the ecological process under study, or if it only represents the variables you chose to measure out of convenience. Hopefully, these lines of questioning occurred during the project planning phase, where you could pre-emptively address two common issues that arise in ecological studies:
 
 * **latent (unmeasured) variables**
 * **scale and measurement**
 
-#### _Latent (unmeasured) variables?_
+Of course, sometimes it is nearly impossible to anticipate all relevant ecological processes when you have not yet learned about a study system. Let us delve into both of this issues:
+
+#### _Latent (unmeasured) variables_
 
 What if we know that other factors matter—from prior literature, natural history knowledge, or previous studies—but we did not measure them in our own study? Sometimes a variable is not measured because it is logistically difficult to quantify, because there was insufficient funding, or because the variable's importance became clear only after the study was designed. **This situation is extremely common in ecology.** 
 
-Even when such variables are unmeasured, they can still play important roles in the causal system (and your DAG representation of it). Exclusion of such a variable from your dataset does not remove it from the causal system. As such, it should be represented in the DAG as unmeasured or _latent_ variables (from Latin _latere_ meaning to "lie hidden"). A latent variable is simply a variable that:
+Even when such variables are unmeasured, they can still play vital roles in the causal system (and your DAG representation of it). Exclusion of such a variable from your dataset does not remove it from the causal system. As such, it should be represented in the DAG as unmeasured or _latent_ variables (from Latin _latere_ meaning to "lie hidden"). A latent variable is simply a variable that:
 
 * exists in the causal system  
 * influences other variables  
@@ -254,43 +261,80 @@ Even when such variables are unmeasured, they can still play important roles in 
 
 Examples can really include any variable, as long as it was not directly quantified in your study.
 
-_Why include latent variables?_ Why exactly do I need to consider an unmeasured variable? This is where kitchen-sink modeling approaches can falter glamorously, as there is no explicit way to include such variables in the kinds of "garbage can regression" commonly used in ecology. In Structural Causal Models, this is possible and ideal.There are three primary advantages of explicitly including latent variables:
+::: {.callout-note icon=false collape=true}
+_Why include latent variables?_ Why exactly do I need to consider an unmeasured variable? This is where kitchen-sink modeling approaches can falter glamorously, as there is no explicit way to include such variables in the kinds of "garbage can regression" commonly used in ecology. In Structural Causal Models, this is possible and ideal. There are three primary advantages of explicitly including latent variables:
 
-* They can help make your causal assumptions explicit  
-* They prevent incorrect adjustment decisions (they can help you identify what kinds of effect you are really estimating)
-* They help identify unmeasured confounding (and determine if an effect is actually identifiable) 
+* they can help make your causal assumptions explicit  
+* they prevent incorrect adjustment decisions (they can help you identify what kinds of effect you are really estimating)
+* they help identify unmeasured confounding (and determine if an effect is actually identifiable)
+
+:::
+
+::: {.callout-warning icon=true collapse=false}
+## **Summary: Drawing only what you measured is a common mistake!**
+
+A very common mistake is to include only the measured variables in your dataset. This means that you are implicitly assuming that unmeasured variables do not matter. Entire books could be written on that assumption.
+
+In reality, there are a myriad important processes (e.g., habitat quality, predation risk) that are purposely ignored. While unmeasured, they can still act as causal confounders. Structural Causal Models address this by allowing **latent variables** in the DAG.
+
+:::
+
 
 #### _Scale_
 
-We know that different ecological processes are scale-dependent, so your "best knowledge" must also include information about the temporal and spatial scale at which you observed the system. Ecological processes often operate at scales different from the data we collect.; of course, the scales of measurement and process ideally would be matched, but the important thing at this point is to ensure that your DAG reflects all of the data-generating processes in your system. 
+We know that different ecological processes are scale-dependent, so your "best knowledge" of your study system must also include information about the temporal and spatial scale at which you observed the system. That is certainly a tall order because, in ecology, those two scales often do not have the same dimensions. Ideally, process scale and measurement scale align, but, in practice, they often do not. The goal is to represent the data-generating structure as faithfully as possible and be transparent about your decisions.
 
-Your next step is to ask: **Am I representing variables at the correct biological scale?**
+So what does this mean? This means that your “best knowledge” must include not only the ecological processes in your study system, but it must also include:
 
+* **the spatial and temporal scale at which you think those processes actually operate**
+* **the spatial and temporal scale at which your variables were measured**
 
+So, how do we represent scale in a DAG? Recall that, in a causal graph, nodes represent variables (i.e. measured or unmeasured --or latent-- quantities). Scale is not a direct measurement that can _cause_ something else. Because every variable is observed, inferred, or conceptualized at a particular spatial and temporal scale, _scale_ should be embedded in the definition/measurement at the node-level. **Scale itself (e.g. a categorical variable for "large scale" or "small scale") should not appear as its own node in a DAG.**  
 
-For example:
+Practically, the integration of different scales involves using multiple nodes rather than one vague node. There are two primary scenarios you will likely need to deal with when it comes to defining scale in your DAG.
 
-- territory quality (latent, spatial process) vs canopy cover (measured proxy)  
-- predator pressure vs observed detections  
-- resource availability vs point measurements  
-
-In these cases, it can be useful to distinguish between:
-
-- the **underlying biological variable** (often latent)  
-- the **measured proxy** (what appears in your dataset)
-
-
-#### Example
-
-Let us consider the following example, where $territory_quality$ is an unmeasured or _latent_ variable. In contrast, $canopy_cover$ is directly observed variable. 
+The first is when the *same variable* (e.g. precipitation) is measured at multiple scales (e.g., total _daily precipitation_ versus total _monthly precipitation_). In this case, your should include them as two separate nodes with a defined relationship. What would that relationship be? First, think about how the variables measured at each scale are connected to each other. In this case, _monthly precipitation_ is an aggregated quantity derived from _daily precipitation_ measurement. Each is assumed to have direct effects on _nesting success_. Furthermore, _daily precipitation_ can also affect _nesting success_ via an indirect pathway through _monthly precipitation_. Therefore:
 
 ```{mermaid}
 flowchart LR
-  U[Territory quality] --> X[Canopy cover]
-  U --> Y[Nesting success]
-  X --> Y
-  
+  D[Daily precipitation]:::node --> M[Monthly precipitation]:::node
+  D --> Y[Nesting success]:::node
+  M --> Y
+
+  classDef node fill:#9fbfe8,color:#000,stroke-width:0px;
 ```
+
+The second scenario is when the quantity that you measure is not the process itself. Rather, it is alocal proxy for a broader-scale, unmeasured cause. Consider a system where $territory\_quality$ is an unmeasured (*latent*) variable operating at a broader scale, while $canopy\_cover$ is a directly observed, local measurement. Here is the DAG:
+
+```{mermaid}
+flowchart LR
+  U[Territory quality]:::node --> X[Canopy cover]:::node
+  U --> Y[Nesting success]:::node
+  X --> Y
+
+  classDef node fill:#9fbfe8,color:#000,stroke-width:0px;
+```
+
+The variable _canopy cover_ is very localized --measured within five meters of the nest-- and is driven by _territory quality_. If both are causally relevant, they should appear in the DAG as two separate nodes. 
+
+
+::: {.callout-note icon=true}
+## **Side note: Why does territory quality point to canopy cover?**
+In practice, we often use what are called proxy or indicator measurements to describe some larger-level conceptual metric. In this example, we are measuring canopy cover (at multiple subplots, etc.) and perhaps combing this with other variables like humidity or insecet abundance to estimate territory quality. This can make it tempting to reverse the edge direction in the DAG.
+
+However, we now know that a DAG represents the underlying causal structure structure of our study system; it should not represent measurement order. In our example, territory quality reflects underlying unmeasured (latent) processes such as soil, disturbance, topography, or other territory-specific variables that together generate measured variables like canopy cover.
+
+So, remember: **Measurement order is not causal order.**
+
+:::
+
+Again, in this DAG, scale is not a separate node. Instead, it is embedded in how variables are defined:
+
+* **Territory quality**: broader-scale latent condition  
+* **Canopy cover**: local measured proxy  
+* **Nesting success**: focal outcome  
+
+For both of the above scenarios, we represent scale by using separate nodes defined at different scales. 
 
 ---
 
@@ -303,31 +347,115 @@ Now you have a very solid draft DAG. Your goal in this next step is to take a bi
 * Should some variables be represented as unmeasured (latent) rather than observed?
 * Does this DAG represent the system as it actually operates (compared to a preferred hypothesis)?
 
-Though this step is laborious and seemingly a bit tedious, the formal step of careful and transparent refinement is where the DAG becomes more than a back-of-the-napkin sketch; that is, it becomes a scientifically defensible representation of your study system. (Keep your napkin sketch, though, as you might need it again one day.)
+Though this step is laborious and seemingly a bit tedious, the formal step of careful and transparent refinement is where the DAG becomes more than a back-of-the-napkin sketch; that is, it becomes a scientifically defensible representation of your study system. (Keep your napkin sketch, though, as you might need it again one day.) Below is an example of a refined DAG created by a graduate student studying a community of frugivorous jackalope species (represented by _i_) and the fruits on which they forage (represented as a _j_).
 
----
+::: {.callout-note icon=true collapse=true}
+## How to read the colors on this DAG (click here to expand)
 
-### Step 9: Use the DAG to see what questions are possible
+The colors in this diagram reflect different roles that variables play in the system:
 
-This is one of the most fascinating and fun parts of DAG construction. A well-constructed global DAG does more than simply represent the causal assumptions underlying your original hypotheses/questions. A good DAG allows you to systematically evaluate what questions can be supported by the causal structure you have. Because you have painstakingly worked to justify every edge in these previous steps, you can now ask narrow your focus onto a number of probing -yet flexible-- questions such as:
+- <span style="color:#2e7d32;"><strong>Dark green:</strong></span> **Outcome variable**  
+  The focal response we are trying to explain (e.g., frugivory).
 
-* Which exposure–outcome relationships are supported by plausible pathways?
-* Which variables play multiple roles across different questions?
-* Which effects are identifiable or unidentifiable given the causal structure?
-* What new questions emerge from the causal structure?
+- <span style="color:#9fbfe8;"><strong>Blue:</strong></span> **Drivers (modulators)**  
+  Broad ecological variables that influence the magnitude or likelihood of processes in the system.
 
-Remember that you are formalizing the causal assumptions of your study system. This can be done at any time --before, during, or after a study--, though it is idea to do _before_ you begin your study. But, as we all know from experience, our knowledge of the processes involved in our system grow as we study it (hopefully). We conduct more experiments, we make more observations, we read new and old published papers, we speak with colleagues. Therefore, we should absolutely expect that the DAG will evolve over time. If we can a DAG updated with new information, we can identify where past studies have fallen short, what present studies are constrained to estimate, and what future studies should prioritize.
+- <span style="color:#cfe8cf;"><strong>Light green:</strong></span> **Opportunity constraints**  
+  Processes that must occur for the interaction to be possible (e.g., spatiotemporal overlap, encounter).
 
-## Up next!
-So, remember that a DAG is just one part of a Structural Causal Model. The other critical component is the set of actual structural equations.On the next page, we will focus on a **single exposure–outcome pair**, define the estimand, determine the adjustment set, and translate the DAG into a model. 
+- <span style="color:#f6b26b;"><strong>Orange:</strong></span> **Feasibility constraints**  
+  Biological or physical limits that determine whether an interaction can proceed once an opportunity exists (e.g., trait matching, detectability).
 
----
-
-## Effect modification
-
-The last effect type in our causal framework is the _effect modifier_. An **effect modifier** is a variable that makes the effect of $X$ on $Y$ depend on another variable $Z$. In practice, this is what we mean by an **interaction**. It really is that simple. For example, predator abundance may reduce nesting success, but the strength of that effect may depend on vegetation structure. In a DAG, this is represented simply as both $X$ and $Z$ causing $Y$:
-
+Importantly, these colors are used for interpretation and visualization only. The causal structure is defined by the arrows, not by the color of the nodes.
 :::
+
+```{mermaid}
+%%{init: {'themeVariables': { 'fontSize': '24px' }}}%%
+flowchart LR
+
+WeatherMicroclimate["Weather / Microclimate"]:::driver
+
+subgraph Plant_System["Plant System"]
+direction TB
+VegetationStructure["Vegetation Structure"]:::driver
+FruitAbundance["Fruit Abundance j"]:::driver
+PeakMaturity["Peak Maturity j"]:::driver
+NutritionalContent["Nutritional Content j"]:::driver
+TraitMatching["Trait Matching"]:::feas
+StructuralConstraints["Structural Constraints"]:::feas
+end
+
+SpatiotemporalOverlap["Spatiotemporal Overlap ij"]:::opp
+Encounter["Encounter ij"]:::opp
+
+subgraph Frugivore_System["Frugivore System"]
+direction TB
+FrugivoreAbundance["Frugivore Abundance i"]:::driver
+BreedingCycle["Breeding Cycle i"]:::driver
+ForagingStrategy["Foraging Strategy i"]:::driver
+CompetitorAbundance["Competing Frugivore Abundance"]:::driver
+DetectabilityLimits["Detectability Limits"]:::feas
+end
+
+Frugivory["Frugivory ij"]:::out
+
+%% Weather / microclimate effects
+WeatherMicroclimate --> VegetationStructure
+WeatherMicroclimate --> FruitAbundance
+WeatherMicroclimate --> PeakMaturity
+WeatherMicroclimate --> FrugivoreAbundance
+WeatherMicroclimate --> BreedingCycle
+
+%% Plant-side structure and phenology
+VegetationStructure --> FruitAbundance
+VegetationStructure --> ForagingStrategy
+VegetationStructure --> SpatiotemporalOverlap
+
+PeakMaturity --> FruitAbundance
+PeakMaturity --> NutritionalContent
+PeakMaturity --> SpatiotemporalOverlap
+
+%% Frugivore-side drivers of overlap
+FrugivoreAbundance --> SpatiotemporalOverlap
+BreedingCycle --> SpatiotemporalOverlap
+ForagingStrategy --> SpatiotemporalOverlap
+CompetitorAbundance --> FrugivoreAbundance
+CompetitorAbundance --> SpatiotemporalOverlap
+
+%% Opportunity chain
+SpatiotemporalOverlap --> Encounter
+Encounter --> Frugivory
+
+%% Modulators of frugivory
+FruitAbundance --> Frugivory
+NutritionalContent --> Frugivory
+FrugivoreAbundance --> Frugivory
+ForagingStrategy --> Frugivory
+CompetitorAbundance --> Frugivory
+
+%% Feasibility constraints
+DetectabilityLimits --> Encounter
+TraitMatching --> Frugivory
+StructuralConstraints --> Frugivory
+
+%% Styling
+classDef out fill:#2e7d32,color:#fff,stroke-width:0px;
+classDef driver fill:#9fbfe8,color:#000,stroke-width:0px;
+classDef opp fill:#cfe8cf,color:#000,stroke-width:0px;
+classDef feas fill:#f6b26b,color:#000,stroke-width:0px;
+
+style Plant_System fill:#f7f7f7,stroke:#999,stroke-width:1px
+style Frugivore_System fill:#f7f7f7,stroke:#999,stroke-width:1px
+```
+
+At this stage, a large DAG represents a defensible hypothesis about what causes what in your study system. The DAG now represents a huge amount of knowledge packed into a relatively small graph. The next step is to consider how those causes combine, including whether the effect of one variable depends on the level of another. 
+
+---
+
+
+## Step 9: Add effect modification (interactions)
+
+The last effect type in our causal framework is the _effect modifier_. An **effect modifier** is a variable that makes the effect of $X$ on $Y$ depend on another variable $Z$. In practice, this is what we mean by an **interaction** (a term familier to you from GLMs and GLMMs). Conceptually, it really is that simple. For example, predator abundance may reduce nesting success, but the strength of that effect may depend on vegetation structure. In a DAG, this is represented simply as both $predator_abundance$ and $vegetation_structure$ causing $nesting success$:
 
 ```{mermaid}
 flowchart LR
@@ -340,20 +468,30 @@ classDef exp_light fill:#d6e6fb,color:#000,stroke-width:0px;
 classDef out fill:#bfe3c0,color:#000,stroke-width:0px;
 ```
 
-What does this show? Both predator abundance and vegetation structure affect nest survival. Effect modification arises when the effect of predator abundance on survival depends on vegetation structure (an interaction). The DAG itself does not change, though! The interaction appears in the model for 
-$Y$, but it does not appear in the graph itself. 
+What does this show? Both predator abundance and vegetation structure affect nest survival. Effect modification arises when the effect of predator abundance on survival depends on vegetation structure (an interaction). The DAG itself does not change. Effect modification does not introduce new causal relationships—it only changes how existing causes combine in the model for $Y$.
 
-:::
-
-Wait! I mentioned an interaction. So, where is the interaction in this DAG? Remember that a DAG shows **what causes** $Y.$ It does not tell you whether those effects combine additively or interactively. Instead, the interaction appears in the equation for the model:
+This raises an important question: where does the interaction appear, if not in the DAG? Remember that a DAG shows which variables are causes of $Y$. The DAG **does not** specify how those causes combine, whether additively or interactively. Instead, the interaction appears in the structural equation for the model:
 
 $$
 Y \sim X + Z + X \times Z
 $$
 
-Here, the $X \times Z$ term means that the effect of $X$ on $Y$ changes depending on $Z$.
+Here, the $predator\_abundance \times vegetation\_structure$ term means that the effect of $predator\_abundance$ on $vegetation\_structure$ changes depending on $nesting\_success$. 
 
+So, after building your DAG, carefully document what variables will go into your structural models, including interactions and random effects. 
 
+### Step 10: Use the DAG to see what questions are possible
 
+This is one of the most fascinating and fun parts of DAG construction. A well-constructed global DAG does more than simply represent the causal assumptions underlying your original hypotheses/questions. A good DAG allows you to systematically evaluate what questions can be supported by the causal structure you have. Because you have painstakingly worked to justify every edge in these previous steps, you can now ask narrow your focus onto a number of probing -yet flexible-- questions such as:
 
+* Which exposure–outcome relationships are supported by plausible pathways?
+* Which variables play multiple roles across different questions?
+* Which effects are identifiable or unidentifiable given the causal structure?
+* What new questions emerge from the causal structure?
 
+Remember that you are formalizing the causal assumptions of your study system. This can be done at any time --before, during, or after a study--, though it is idea to do _before_ you begin your study. But, as we all know from experience, our knowledge of the processes involved in our system grow as we study it (hopefully). We conduct more experiments, we make more observations, we read new and old published papers, we speak with colleagues. Therefore, we should absolutely expect that the DAG will evolve over time. If we can a DAG updated with new information, we can identify where past studies have fallen short, what present studies are constrained to estimate, and what future studies should prioritize.
+
+---
+
+## Up next!
+So, remember that a DAG is just one part of a Structural Causal Model. The other critical component is the set of actual structural equations.On the next page, we will focus on a single exposure–outcome pair, define the estimand, determine the correct adjustment set, and translate the DAG into a statistical model (using tools familiar to you). 

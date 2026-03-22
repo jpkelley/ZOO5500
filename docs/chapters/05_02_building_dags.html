@@ -1,0 +1,1481 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>30&nbsp; DAG Construction – Quantitative Analysis of (Messy) Field Data</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/05_01_why_scms.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-832e3d7b6b94ddcc90a000f8fabe51a9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<meta name="mermaid-theme" content="forest">
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/05_01_why_scms.html">Part V: Curves to Meaning</a></li><li class="breadcrumb-item"><a href="../chapters/05_02_building_dags.html"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">DAG Construction</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../graphics/jackalope_graphics/analytical_jackalope.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="../graphics/jackalope_graphics/analytical_jackalope.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Quantitative Analysis of (Messy) Field Data</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Course Overview</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Information</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/int_course_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/int_syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Syllabus</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/int_calendar_sp26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Course calendar</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/int_ai_policy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">GenAI Use Guidelines</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/int_preparing_yourself.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Preparing Yourself</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/int_assignment_grades.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Assignments &amp; Grades</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/int_project_scoping.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Project Scoping</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Part ∅: AI preparation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/00_ai_prompting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">AI Prompting for Analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/00_using_jackalope_gpt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Using JackalopeGPT</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Part I: Reproducible Analyses</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01_reproducible_workflow_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Reproducible Analyses</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01_nature_of_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Nature of Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01_metadata_low_friction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Metadata</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01_naming_conventions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Conventions and Style</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Part II: Chaos to Columns</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02_data_exploration_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data Exploration</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02_data_exploration_toolkit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data Exploration Toolkit</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02_outliers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Tool 1: Outliers</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02_tutorial_data_exploration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Tutorial: Data Exploration</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Part III: Columns to Lines</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_statistical_aphorisms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Statistical Philosophy</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_intro_modeling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Introduction to Models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_intro_glms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">GLM Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_tutorial_glms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Tutorial: GLMs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_glm_partial_association.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Tutorial: Partial Associations</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_DHARMA_diagnostics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">DHARMA diagnostics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_glmms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">GLMM Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_tutorial_glmms_part01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Tutorial: GLMMs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_glmm_epilogue.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">GLMM epilogue</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Part IV: Columns to Curves</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04_tutorial_gams.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Tutorial: GAMs</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part V: Curves to Meaning</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05_01_why_scms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Why SCMs?</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05_02_building_dags.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">DAG Construction</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">30.1</span> Introduction</a></li>
+  <li><a href="#general-architecture-of-a-directed-acyclic-graph-dag" id="toc-general-architecture-of-a-directed-acyclic-graph-dag" class="nav-link" data-scroll-target="#general-architecture-of-a-directed-acyclic-graph-dag"><span class="header-section-number">30.2</span> General architecture of a Directed Acyclic Graph (DAG)</a></li>
+  <li><a href="#constructing-a-dag-for-your-study-system" id="toc-constructing-a-dag-for-your-study-system" class="nav-link" data-scroll-target="#constructing-a-dag-for-your-study-system"><span class="header-section-number">30.3</span> Constructing a DAG for your study system</a></li>
+  <li><a href="#a-practical-workflow-for-building-a-dag" id="toc-a-practical-workflow-for-building-a-dag" class="nav-link" data-scroll-target="#a-practical-workflow-for-building-a-dag"><span class="header-section-number">30.4</span> A practical workflow for building a DAG</a>
+  <ul class="collapse">
+  <li><a href="#step-1-start-with-the-system-not-a-statistical-model" id="toc-step-1-start-with-the-system-not-a-statistical-model" class="nav-link" data-scroll-target="#step-1-start-with-the-system-not-a-statistical-model"><span class="header-section-number">30.4.1</span> Step 1: Start with the system, not a statistical model</a></li>
+  <li><a href="#step-2-list-your-core-exposureoutcome-questions" id="toc-step-2-list-your-core-exposureoutcome-questions" class="nav-link" data-scroll-target="#step-2-list-your-core-exposureoutcome-questions"><span class="header-section-number">30.4.2</span> Step 2: List your core exposure–outcome questions</a></li>
+  <li><a href="#step-3-start-with-one-simple-causal-link" id="toc-step-3-start-with-one-simple-causal-link" class="nav-link" data-scroll-target="#step-3-start-with-one-simple-causal-link"><span class="header-section-number">30.4.3</span> Step 3: Start with one simple causal link</a></li>
+  <li><a href="#step-4-add-common-causes-confounders" id="toc-step-4-add-common-causes-confounders" class="nav-link" data-scroll-target="#step-4-add-common-causes-confounders"><span class="header-section-number">30.4.4</span> Step 4: Add common causes (confounders)</a></li>
+  <li><a href="#step-5-add-mechanisms-mediators" id="toc-step-5-add-mechanisms-mediators" class="nav-link" data-scroll-target="#step-5-add-mechanisms-mediators"><span class="header-section-number">30.4.5</span> Step 5: Add mechanisms (mediators)</a></li>
+  <li><a href="#step-6-merge-overlapping-pieces-into-one-global-dag" id="toc-step-6-merge-overlapping-pieces-into-one-global-dag" class="nav-link" data-scroll-target="#step-6-merge-overlapping-pieces-into-one-global-dag"><span class="header-section-number">30.4.6</span> Step 6: Merge overlapping pieces into one global DAG</a></li>
+  <li><a href="#step-7-represent-underlying-processes-latent-variables-and-scale" id="toc-step-7-represent-underlying-processes-latent-variables-and-scale" class="nav-link" data-scroll-target="#step-7-represent-underlying-processes-latent-variables-and-scale"><span class="header-section-number">30.4.7</span> Step 7: Represent underlying processes (latent variables and scale)</a></li>
+  <li><a href="#step-8-refine-the-dag" id="toc-step-8-refine-the-dag" class="nav-link" data-scroll-target="#step-8-refine-the-dag"><span class="header-section-number">30.4.8</span> Step 8: Refine the DAG</a></li>
+  </ul></li>
+  <li><a href="#step-9-add-effect-modification-interactions" id="toc-step-9-add-effect-modification-interactions" class="nav-link" data-scroll-target="#step-9-add-effect-modification-interactions"><span class="header-section-number">30.5</span> Step 9: Add effect modification (interactions)</a>
+  <ul class="collapse">
+  <li><a href="#step-10-use-the-dag-to-see-what-questions-are-possible" id="toc-step-10-use-the-dag-to-see-what-questions-are-possible" class="nav-link" data-scroll-target="#step-10-use-the-dag-to-see-what-questions-are-possible"><span class="header-section-number">30.5.1</span> Step 10: Use the DAG to see what questions are possible</a></li>
+  </ul></li>
+  <li><a href="#up-next" id="toc-up-next" class="nav-link" data-scroll-target="#up-next"><span class="header-section-number">30.6</span> Up next!</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/05_01_why_scms.html">Part V: Curves to Meaning</a></li><li class="breadcrumb-item"><a href="../chapters/05_02_building_dags.html"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">DAG Construction</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">DAG Construction</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level2" data-number="30.1">
+<h2 data-number="30.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">30.1</span> Introduction</h2>
+<p>In this section, we explore the Directed Acyclic Graph (DAG), the first step of constructing an operational Structural Causal Model. Though this step seems like a simple drawing exercise, this step often becomes one of the most illuminating parts of the SCM process. If done thoroughly and carefully, building the DAG forces you to explicitly state assumptions that you did not realize were critical to your questions.</p>
+</section>
+<section id="general-architecture-of-a-directed-acyclic-graph-dag" class="level2" data-number="30.2">
+<h2 data-number="30.2" class="anchored" data-anchor-id="general-architecture-of-a-directed-acyclic-graph-dag"><span class="header-section-number">30.2</span> General architecture of a Directed Acyclic Graph (DAG)</h2>
+<p>A Directed Acyclic Graph represents all plausible causal relationships in the system. In essence, it encapsulates we know about our study system. This DAG will form the basis for your entire set of questions about your system.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span><strong>Important DAG terminology</strong>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>node</strong>: a variable in the system (measured or <em>not</em>).<br>
+</li>
+<li><strong>edge</strong>: a directed link (unidirectional arrow) representing a causal relationship between two nodes</li>
+<li><strong>exposure</strong>: the variable whose effect you want to estimate (your treatment or independent variable)</li>
+<li><strong>outcome</strong>: the variable you are trying to explain (the response or dependent variable)</li>
+<li><strong>confounder</strong>: a common cause of both exposure and outcome (can bias the estimate if not accounted for)<br>
+</li>
+<li><strong>mediator</strong>: a variable through which the exposure affects an outcome</li>
+<li><strong>collider</strong>: a common effect of two variables (adjusting for it can induce spurious associations)</li>
+<li><strong>path</strong>: any sequence of connected arrows between two variables</li>
+<li><strong>backdoor path</strong>: a non-causal path that can introduce bias if not included in the model</li>
+<li><strong>adjustment set</strong>: the set of variables included in the model (blocking alternative causal pathways and allowing you to recover a causal effect)</li>
+</ul>
+</div>
+</div>
+</div>
+<p>The most important aspect of Directed Acyclic Graphs is that they are comprised of nodes (the boxes or circles) connected by edges (lines). In DAGs, edges have directionality (an arrow pointing from <span class="math inline">\(X\)</span> to <span class="math inline">\(Y\)</span> reflects our assumption that <span class="math inline">\(X\)</span> directly causes <span class="math inline">\(Y\)</span>).</p>
+<div class="columns">
+<div class="column" style="width:63%;">
+<p>As an example, consider the DAG picture here. It shows conceptual knowledge about what factors affect nest survival. Vegetation cover can influence both predator abundance and survival, while predators affect survival both directly and by influencing how well nests are concealed. In other words, part of the predator effect may work through how hidden the nests are (a behaviorally mediated effect).</p>
+<p>Edges in the DAG should be motivated by:</p>
+<ul>
+<li><strong>ecological theory</strong> (e.g.&nbsp;predator abundance → prey survival)<br>
+</li>
+<li><strong>empirical literature</strong> (e.g.&nbsp;temperature → metabolic rate)<br>
+</li>
+<li><strong>natural history observations</strong> (e.g.&nbsp;insects emerge after rainfall)<br>
+</li>
+<li><strong>experimental design</strong> (e.g.&nbsp;food supplementation → nestling growth)</li>
+</ul>
+<p>Typical node categories include:</p>
+<ul>
+<li><strong>environmental drivers</strong> (e.g.&nbsp;rainfall, temperature)<br>
+</li>
+<li><strong>organismal traits</strong> (e.g.&nbsp;body size, metabolic rate)<br>
+</li>
+<li><strong>behavioral responses</strong> (e.g.&nbsp;foraging rate, vigilance)<br>
+</li>
+<li><strong>demographic outcomes</strong> (e.g.&nbsp;survival, reproductive success)<br>
+</li>
+<li><strong>measurement processes</strong> (e.g.&nbsp;detection probability, observer effort)</li>
+</ul>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:35%;">
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph TD
+
+C[Vegetation cover]:::node
+X[Predator abundance]:::node
+M[Nest concealment]:::node
+Y[Nest survival]:::node
+
+C --&gt; X
+C --&gt; Y
+X --&gt; M
+M --&gt; Y
+X --&gt; Y
+
+classDef node fill:#d9d9d9,color:#000,stroke-width:0px;
+
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Any good DAG should represent <strong>causal assumptions</strong>, <em>not</em> statistical correlations. If there is good ecological justification for a causal link between two variables, you should include it in the model (even if a relationship between two variables has never been tested). Unlike non-causal approaches, a useful DAG emphasizes conceptual completeness over statistical parsimony. In other words, it is better to include more knowledge in a DAG than try to simplify it. So, how do we efficiently construct a DAG that has strong causal assumptions?</p>
+</section>
+<section id="constructing-a-dag-for-your-study-system" class="level2" data-number="30.3">
+<h2 data-number="30.3" class="anchored" data-anchor-id="constructing-a-dag-for-your-study-system"><span class="header-section-number">30.3</span> Constructing a DAG for your study system</h2>
+<div class="callout callout-style-default callout-tip no-icon callout-empty-content callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span><strong>Rule #1: Build one DAG for the system – not one DAG per question/prediction.</strong>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+<p>The goal of this section is to construct a <em>single global Directed Acyclic Graph (DAG)</em> that represents the causal structure of your study system. I use the term “global” by analogy to multimodel inference (i.e.&nbsp;use of AIC to select the best-supported model) where a global model includes all plausible predictors. In this causal case, a global DAG includes all plausible causal relationships in the system and acknowledges that there can be many outcome/response variables and that variables can play different roles (colliders, mediators, confounders) along multiple causal pathways. A global DAG:</p>
+<ul>
+<li>includes all <strong>relevant variables</strong> (measured and unmeasured)</li>
+<li>represents all <strong>plausible causal relationships</strong></li>
+<li>integrates <strong>theory, empirical knowledge, and natural history</strong></li>
+<li>is designed to support <strong>many possible causal questions</strong></li>
+</ul>
+<p>In other words, the goal of DAG construction is not to build a single model; its goal is to thoroughly represent your study system. Once constructed, a global DAG allows you to:</p>
+<ul>
+<li>logically and transparently ask multiple exposure–outcome questions without changing your assumptions about how the world works (what kitchen-sink models and AIC fundamentally do)</li>
+<li>identify confounders, mediators, and colliders</li>
+<li>determine valid adjustment sets (i.e.&nbsp;what covariates should be included in a statistical model)</li>
+<li>convert causal assumptions into statistical models that test predictions</li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>How big should a global DAG be?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You could easily imagine an ever-expanding (and reductionist) DAG. Certainly, global DAGs can be very large. For purposes of causal identification and modeling for a focal study, a large DAG is not necessary. As you will discover as you gain more experience with this approach, covariates more than two edges away rarely play any important role in answering your set of questions. Therefore, you can construct a DAG that has 1-2 linked covariates away from any dependent variable (called an exposure in the causal world).</p>
+</div>
+</div>
+</section>
+<section id="a-practical-workflow-for-building-a-dag" class="level2" data-number="30.4">
+<h2 data-number="30.4" class="anchored" data-anchor-id="a-practical-workflow-for-building-a-dag"><span class="header-section-number">30.4</span> A practical workflow for building a DAG</h2>
+<p>Building a DAG for a study system typically involves the following steps:</p>
+<ul>
+<li><strong>Step 1:</strong> Start with the study system, not a statistical model<br>
+</li>
+<li><strong>Step 2:</strong> List your core exposure–outcome questions (based on your hypotheses/predictions)<br>
+</li>
+<li><strong>Step 3:</strong> Draw simple causal links (e.g., <span class="math inline">\(X \rightarrow Y\)</span>)<br>
+</li>
+<li><strong>Step 4:</strong> Add confounders (common causes of exposure and outcome)<br>
+</li>
+<li><strong>Step 5:</strong> Add mediators (mechanisms linking exposure to outcome)<br>
+</li>
+<li><strong>Step 6:</strong> Merge everything into a single global DAG<br>
+</li>
+<li><strong>Step 7:</strong> Include important latent (unmeasured) variables when necessary</li>
+<li><strong>Step 8:</strong> Refine the DAG based on theory, literature, and natural history<br>
+</li>
+<li><strong>Step 9:</strong> Add effect modification (interactions) to your structural equations</li>
+<li><strong>Step 10:</strong> Use the DAG to identify what can be asked and estimated</li>
+</ul>
+<p>Let us detail these 10 steps.</p>
+<hr>
+<section id="step-1-start-with-the-system-not-a-statistical-model" class="level3" data-number="30.4.1">
+<h3 data-number="30.4.1" class="anchored" data-anchor-id="step-1-start-with-the-system-not-a-statistical-model"><span class="header-section-number">30.4.1</span> Step 1: Start with the system, not a statistical model</h3>
+<p>This step is the hardest of all the steps. Begin by thinking about the ecological system you are studying. Do not think about the regression or other model that you plan to fit. Do not think about whether you should log-transform a variable or not. At this point, you should focus on three questions only:</p>
+<ul>
+<li>What are the major processes in this system? (e.g.&nbsp;predator-prey, pollination, intrapair communication)</li>
+<li>What variables are likely to influence one another? (e.g.&nbsp;temperature and metabolic rate)</li>
+<li>What outcomes do I care about explaining? (e.g.&nbsp;any response variable: fitness, probability of recruitment)</li>
+</ul>
+<p>Again, at this first stage, your goal is to ignore anything related to statistical models. Do not worry about coefficients, significance, or functional form of a model.</p>
+</section>
+<section id="step-2-list-your-core-exposureoutcome-questions" class="level3" data-number="30.4.2">
+<h3 data-number="30.4.2" class="anchored" data-anchor-id="step-2-list-your-core-exposureoutcome-questions"><span class="header-section-number">30.4.2</span> Step 2: List your core exposure–outcome questions</h3>
+<p>Next, your task is to write down the main causal questions you want the DAG to support. For example, let us consider the direct causal links I thought about <em>before</em> constructing the DAG above:</p>
+<ul>
+<li>What is the effect of <span class="math inline">\(vegetation\_cover\)</span> on <span class="math inline">\(nesting\_survival\)</span>?</li>
+<li>What is the effect of <span class="math inline">\(vegetation\_cover\)</span> on <span class="math inline">\(predator\_abundance\)</span>?</li>
+<li>What is the effect of <span class="math inline">\(predator\_abundance\)</span> on <span class="math inline">\(nest\_concealment\)</span>?</li>
+<li>What is the effect of <span class="math inline">\(predator\_abundance\)</span> on <span class="math inline">\(nesting\_survival\)</span>?</li>
+<li>What is the effect of <span class="math inline">\(nest\_concealment\)</span> on <span class="math inline">\(nesting\_survival\)</span>?</li>
+</ul>
+<p>These questions help identify the main parts of the system that must appear in the DAG.</p>
+</section>
+<section id="step-3-start-with-one-simple-causal-link" class="level3" data-number="30.4.3">
+<h3 data-number="30.4.3" class="anchored" data-anchor-id="step-3-start-with-one-simple-causal-link"><span class="header-section-number">30.4.3</span> Step 3: Start with one simple causal link</h3>
+<p>Your next step is to make an explicit causal claim about each of the exposure-outcome questions listed in Step 2. For example, if your question is:</p>
+<blockquote class="blockquote">
+<p><em>What is the effect of <span class="math inline">\(vegetation\_cover\)</span> (the exposure) on <span class="math inline">\(predator\_abundance\)</span> (the outcome)?</em></p>
+</blockquote>
+<p>you would draw the simplest causal chain possible, which is:</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  vegetation_cover[Vegetation cover]:::exp --&gt; predator_abundance[Predator abundance]:::out
+
+classDef exp fill:#bcd4f6,color:#000,stroke-width:0px;
+classDef out fill:#bfe3c0,color:#000,stroke-width:0px;
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Even though this looks simple and almost trivial, be certain that each exposure-outcome is well justified. Every arrow you draw should be scientifically defensible based on some combination of theory, data, or observation.</p>
+<hr>
+</section>
+<section id="step-4-add-common-causes-confounders" class="level3" data-number="30.4.4">
+<h3 data-number="30.4.4" class="anchored" data-anchor-id="step-4-add-common-causes-confounders"><span class="header-section-number">30.4.4</span> Step 4: Add common causes (confounders)</h3>
+<p>Next, ask whether there are any variables that could plausibly influence <em>both</em> the exposure and the outcome. Recall that these are called <em>confounders</em>, and they are often among the most important variables to idntify For each candidate confounder, ask these two questions:</p>
+<ul>
+<li>Is there evidence (literature, pilot data, or natural history) that it affects <span class="math inline">\(X\)</span> (the exposure/treatment)?</li>
+<li>Is there evidence that it affects <span class="math inline">\(Y\)</span> (the response/outcome)?</li>
+</ul>
+<p>Only when both are justified should it be included as a confounder. Add this confounder variable (C) and the appropriate edges to your DAG:</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  C["C (confounder)"]:::node --&gt; X["X (exposure)"]:::node
+  C --&gt; Y["Y (outcome)"]:::node
+  X --&gt; Y
+
+  classDef node fill:#9fbfe8,color:#000,stroke-width:0px;
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>At this stage, it is fine to include as many confounders as you want, but each edge (and its directionality) should still be grounded in solid scientific evidence.</p>
+<hr>
+</section>
+<section id="step-5-add-mechanisms-mediators" class="level3" data-number="30.4.5">
+<h3 data-number="30.4.5" class="anchored" data-anchor-id="step-5-add-mechanisms-mediators"><span class="header-section-number">30.4.5</span> Step 5: Add mechanisms (mediators)</h3>
+<p>This is where the utility of DAGs really shines. The next step is to ask whether the effect of <span class="math inline">\(X\)</span> on <span class="math inline">\(Y\)</span> operates through intermediate variables. These variables are called <em>mediators</em> and represent ecological mechanisms. Note that, for the same causal question (“does <span class="math inline">\(X\)</span> affect <span class="math inline">\(Y\)</span>?”), a confounder cannot represent an ecological mechanism because it is upstream of the exposure <span class="math inline">\(X\)</span>. The question that you are asking is this:</p>
+<ul>
+<li><em>Through what variables does <span class="math inline">\(X\)</span> affect <span class="math inline">\(Y\)</span>?</em></li>
+</ul>
+<p>For each candidate mediator, <span class="math inline">\(X\)</span>, ask:</p>
+<ul>
+<li>Is there evidence that <span class="math inline">\(X\)</span> influences this variable?</li>
+<li>Is there evidence that this variable influences <span class="math inline">\(Y\)</span>?</li>
+</ul>
+<p>If evidence supports both of these edges, then you can add the mediator (M) to the DAG:</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  C["C (confounder)"]:::node --&gt; X["X (exposure)"]:::node
+  C --&gt; Y["Y (outcome)"]:::node
+  X --&gt; M["M (mediator)"]:::node
+  M --&gt; Y
+  X --&gt; Y
+
+  classDef node fill:#9fbfe8,color:#000,stroke-width:0px;
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Remember that mediators should represent real ecological/biological pathways and not just additional statistical covariates. If you ignore that, you will be in the kitchen sink again.</p>
+</section>
+<section id="step-6-merge-overlapping-pieces-into-one-global-dag" class="level3" data-number="30.4.6">
+<h3 data-number="30.4.6" class="anchored" data-anchor-id="step-6-merge-overlapping-pieces-into-one-global-dag"><span class="header-section-number">30.4.6</span> Step 6: Merge overlapping pieces into one global DAG</h3>
+<p>While going through Steps 1-5, you will quickly notice that the same variables and pathways appear repeatedly. This is a sign that you are capturing shared structure in the system rather than constructing isolated hypotheses. (You can, of course, streamline this process in the future by starting with upstream –or exogenous– variables and working your way towards to the outcome variable.) Your goal now is to integrate these overlapping pieces into a single global DAG. Remember:</p>
+<blockquote class="blockquote">
+<p>You should build one DAG for your study system. Do <strong>not</strong> construct one DAG per question!</p>
+</blockquote>
+<p>When constructing your merged DAG, focus on the following:</p>
+<ul>
+<li>retaining all variables that appear across multiple questions<br>
+</li>
+<li>preserving pathways that are supported by evidence</li>
+<li>avoiding duplication of nodes that represent the same process</li>
+</ul>
+<p>In the end, your draft global DAG should include:</p>
+<ul>
+<li>all major variables in your system<br>
+</li>
+<li>all major causal pathways<br>
+</li>
+<li>all shared confounders and mediators<br>
+</li>
+<li>any latent variables, where necessary (see Step 7)</li>
+</ul>
+<p>Importantly, each edge in this integrated, global DAG should still be defensible based on theory, literature, pilot data, or natural history. Not to worry if you forget something at this step, as Step 8 is essentially a quality control check. Just keep moving forward through the process.</p>
+<hr>
+</section>
+<section id="step-7-represent-underlying-processes-latent-variables-and-scale" class="level3" data-number="30.4.7">
+<h3 data-number="30.4.7" class="anchored" data-anchor-id="step-7-represent-underlying-processes-latent-variables-and-scale"><span class="header-section-number">30.4.7</span> Step 7: Represent underlying processes (latent variables and scale)</h3>
+<p>At this stage, your goal is to ask whether your DAG represents your best knowledge of the ecological process under study, or if it only represents the variables you chose to measure out of convenience. Hopefully, these lines of questioning occurred during the project planning phase, where you could pre-emptively address two common issues that arise in ecological studies:</p>
+<ul>
+<li><strong>latent (unmeasured) variables</strong></li>
+<li><strong>scale and measurement</strong></li>
+</ul>
+<p>Of course, sometimes it is nearly impossible to anticipate all relevant ecological processes when you have not yet learned about a study system. Let us delve into both of this issues:</p>
+<section id="latent-unmeasured-variables" class="level4">
+<h4 class="anchored" data-anchor-id="latent-unmeasured-variables"><em>Latent (unmeasured) variables</em></h4>
+<p>What if we know that other factors matter—from prior literature, natural history knowledge, or previous studies—but we did not measure them in our own study? Sometimes a variable is not measured because it is logistically difficult to quantify, because there was insufficient funding, or because the variable’s importance became clear only after the study was designed. <strong>This situation is extremely common in ecology.</strong></p>
+<p>Even when such variables are unmeasured, they can still play vital roles in the causal system (and your DAG representation of it). Exclusion of such a variable from your dataset does not remove it from the causal system. As such, it should be represented in the DAG as unmeasured or <em>latent</em> variables (from Latin <em>latere</em> meaning to “lie hidden”). A latent variable is simply a variable that:</p>
+<ul>
+<li>exists in the causal system<br>
+</li>
+<li>influences other variables<br>
+</li>
+<li>was not measured in your dataset</li>
+</ul>
+<p>Examples can really include any variable, as long as it was not directly quantified in your study.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled" data-collape="true">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Why include latent variables?</em> Why exactly do I need to consider an unmeasured variable? This is where kitchen-sink modeling approaches can falter glamorously, as there is no explicit way to include such variables in the kinds of “garbage can regression” commonly used in ecology. In Structural Causal Models, this is possible and ideal. There are three primary advantages of explicitly including latent variables:</p>
+<ul>
+<li>they can help make your causal assumptions explicit<br>
+</li>
+<li>they prevent incorrect adjustment decisions (they can help you identify what kinds of effect you are really estimating)</li>
+<li>they help identify unmeasured confounding (and determine if an effect is actually identifiable)</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span><strong>Summary: Drawing only what you measured is a common mistake!</strong>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>A very common mistake is to include only the measured variables in your dataset. This means that you are implicitly assuming that unmeasured variables do not matter. Entire books could be written on that assumption.</p>
+<p>In reality, there are a myriad important processes (e.g., habitat quality, predation risk) that are purposely ignored. While unmeasured, they can still act as causal confounders. Structural Causal Models address this by allowing <strong>latent variables</strong> in the DAG.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="scale" class="level4">
+<h4 class="anchored" data-anchor-id="scale"><em>Scale</em></h4>
+<p>We know that different ecological processes are scale-dependent, so your “best knowledge” of your study system must also include information about the temporal and spatial scale at which you observed the system. That is certainly a tall order because, in ecology, those two scales often do not have the same dimensions. Ideally, process scale and measurement scale align, but, in practice, they often do not. The goal is to represent the data-generating structure as faithfully as possible and be transparent about your decisions.</p>
+<p>So what does this mean? This means that your “best knowledge” must include not only the ecological processes in your study system, but it must also include:</p>
+<ul>
+<li><strong>the spatial and temporal scale at which you think those processes actually operate</strong></li>
+<li><strong>the spatial and temporal scale at which your variables were measured</strong></li>
+</ul>
+<p>So, how do we represent scale in a DAG? Recall that, in a causal graph, nodes represent variables (i.e.&nbsp;measured or unmeasured –or latent– quantities). Scale is not a direct measurement that can <em>cause</em> something else. Because every variable is observed, inferred, or conceptualized at a particular spatial and temporal scale, <em>scale</em> should be embedded in the definition/measurement at the node-level. <strong>Scale itself (e.g.&nbsp;a categorical variable for “large scale” or “small scale”) should not appear as its own node in a DAG.</strong></p>
+<p>Practically, the integration of different scales involves using multiple nodes rather than one vague node. There are two primary scenarios you will likely need to deal with when it comes to defining scale in your DAG.</p>
+<p>The first is when the <em>same variable</em> (e.g.&nbsp;precipitation) is measured at multiple scales (e.g., total <em>daily precipitation</em> versus total <em>monthly precipitation</em>). In this case, your should include them as two separate nodes with a defined relationship. What would that relationship be? First, think about how the variables measured at each scale are connected to each other. In this case, <em>monthly precipitation</em> is an aggregated quantity derived from <em>daily precipitation</em> measurement. Each is assumed to have direct effects on <em>nesting success</em>. Furthermore, <em>daily precipitation</em> can also affect <em>nesting success</em> via an indirect pathway through <em>monthly precipitation</em>. Therefore:</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  D[Daily precipitation]:::node --&gt; M[Monthly precipitation]:::node
+  D --&gt; Y[Nesting success]:::node
+  M --&gt; Y
+
+  classDef node fill:#9fbfe8,color:#000,stroke-width:0px;
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>The second scenario is when the quantity that you measure is not the process itself. Rather, it is alocal proxy for a broader-scale, unmeasured cause. Consider a system where <span class="math inline">\(territory\_quality\)</span> is an unmeasured (<em>latent</em>) variable operating at a broader scale, while <span class="math inline">\(canopy\_cover\)</span> is a directly observed, local measurement. Here is the DAG:</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  U[Territory quality]:::node --&gt; X[Canopy cover]:::node
+  U --&gt; Y[Nesting success]:::node
+  X --&gt; Y
+
+  classDef node fill:#9fbfe8,color:#000,stroke-width:0px;
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>The variable <em>canopy cover</em> is very localized –measured within five meters of the nest– and is driven by <em>territory quality</em>. If both are causally relevant, they should appear in the DAG as two separate nodes.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span><strong>Side note: Why does territory quality point to canopy cover?</strong>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In practice, we often use what are called proxy or indicator measurements to describe some larger-level conceptual metric. In this example, we are measuring canopy cover (at multiple subplots, etc.) and perhaps combing this with other variables like humidity or insecet abundance to estimate territory quality. This can make it tempting to reverse the edge direction in the DAG.</p>
+<p>However, we now know that a DAG represents the underlying causal structure structure of our study system; it should not represent measurement order. In our example, territory quality reflects underlying unmeasured (latent) processes such as soil, disturbance, topography, or other territory-specific variables that together generate measured variables like canopy cover.</p>
+<p>So, remember: <strong>Measurement order is not causal order.</strong></p>
+</div>
+</div>
+<p>Again, in this DAG, scale is not a separate node. Instead, it is embedded in how variables are defined:</p>
+<ul>
+<li><strong>Territory quality</strong>: broader-scale latent condition<br>
+</li>
+<li><strong>Canopy cover</strong>: local measured proxy<br>
+</li>
+<li><strong>Nesting success</strong>: focal outcome</li>
+</ul>
+<p>For both of the above scenarios, we represent scale by using separate nodes defined at different scales.</p>
+<hr>
+</section>
+</section>
+<section id="step-8-refine-the-dag" class="level3" data-number="30.4.8">
+<h3 data-number="30.4.8" class="anchored" data-anchor-id="step-8-refine-the-dag"><span class="header-section-number">30.4.8</span> Step 8: Refine the DAG</h3>
+<p>Now you have a very solid draft DAG. Your goal in this next step is to take a big step back and carefully review and refine. This serves as a quality-control check on the causal assumptions that we have made in the previous steps. Once again, you ask some familiar questions:</p>
+<ul>
+<li>Is every edge (arrow) clearly justified (via paper, pilot data, or observation)?</li>
+<li>Are there any important pathways missing based on a priori knowledge?</li>
+<li>Should some variables be represented as unmeasured (latent) rather than observed?</li>
+<li>Does this DAG represent the system as it actually operates (compared to a preferred hypothesis)?</li>
+</ul>
+<p>Though this step is laborious and seemingly a bit tedious, the formal step of careful and transparent refinement is where the DAG becomes more than a back-of-the-napkin sketch; that is, it becomes a scientifically defensible representation of your study system. (Keep your napkin sketch, though, as you might need it again one day.) Below is an example of a refined DAG created by a graduate student studying a community of frugivorous jackalope species (represented by <em>i</em>) and the fruits on which they forage (represented as a <em>j</em>).</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>How to read the colors on this DAG (click here to expand)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The colors in this diagram reflect different roles that variables play in the system:</p>
+<ul>
+<li><p><span style="color:#2e7d32;"><strong>Dark green:</strong></span> <strong>Outcome variable</strong><br>
+The focal response we are trying to explain (e.g., frugivory).</p></li>
+<li><p><span style="color:#9fbfe8;"><strong>Blue:</strong></span> <strong>Drivers (modulators)</strong><br>
+Broad ecological variables that influence the magnitude or likelihood of processes in the system.</p></li>
+<li><p><span style="color:#cfe8cf;"><strong>Light green:</strong></span> <strong>Opportunity constraints</strong><br>
+Processes that must occur for the interaction to be possible (e.g., spatiotemporal overlap, encounter).</p></li>
+<li><p><span style="color:#f6b26b;"><strong>Orange:</strong></span> <strong>Feasibility constraints</strong><br>
+Biological or physical limits that determine whether an interaction can proceed once an opportunity exists (e.g., trait matching, detectability).</p></li>
+</ul>
+<p>Importantly, these colors are used for interpretation and visualization only. The causal structure is defined by the arrows, not by the color of the nodes.</p>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">%%{init: {'themeVariables': { 'fontSize': '24px' }}}%%
+flowchart LR
+
+WeatherMicroclimate["Weather / Microclimate"]:::driver
+
+subgraph Plant_System["Plant System"]
+direction TB
+VegetationStructure["Vegetation Structure"]:::driver
+FruitAbundance["Fruit Abundance j"]:::driver
+PeakMaturity["Peak Maturity j"]:::driver
+NutritionalContent["Nutritional Content j"]:::driver
+TraitMatching["Trait Matching"]:::feas
+StructuralConstraints["Structural Constraints"]:::feas
+end
+
+SpatiotemporalOverlap["Spatiotemporal Overlap ij"]:::opp
+Encounter["Encounter ij"]:::opp
+
+subgraph Frugivore_System["Frugivore System"]
+direction TB
+FrugivoreAbundance["Frugivore Abundance i"]:::driver
+BreedingCycle["Breeding Cycle i"]:::driver
+ForagingStrategy["Foraging Strategy i"]:::driver
+CompetitorAbundance["Competing Frugivore Abundance"]:::driver
+DetectabilityLimits["Detectability Limits"]:::feas
+end
+
+Frugivory["Frugivory ij"]:::out
+
+%% Weather / microclimate effects
+WeatherMicroclimate --&gt; VegetationStructure
+WeatherMicroclimate --&gt; FruitAbundance
+WeatherMicroclimate --&gt; PeakMaturity
+WeatherMicroclimate --&gt; FrugivoreAbundance
+WeatherMicroclimate --&gt; BreedingCycle
+
+%% Plant-side structure and phenology
+VegetationStructure --&gt; FruitAbundance
+VegetationStructure --&gt; ForagingStrategy
+VegetationStructure --&gt; SpatiotemporalOverlap
+
+PeakMaturity --&gt; FruitAbundance
+PeakMaturity --&gt; NutritionalContent
+PeakMaturity --&gt; SpatiotemporalOverlap
+
+%% Frugivore-side drivers of overlap
+FrugivoreAbundance --&gt; SpatiotemporalOverlap
+BreedingCycle --&gt; SpatiotemporalOverlap
+ForagingStrategy --&gt; SpatiotemporalOverlap
+CompetitorAbundance --&gt; FrugivoreAbundance
+CompetitorAbundance --&gt; SpatiotemporalOverlap
+
+%% Opportunity chain
+SpatiotemporalOverlap --&gt; Encounter
+Encounter --&gt; Frugivory
+
+%% Modulators of frugivory
+FruitAbundance --&gt; Frugivory
+NutritionalContent --&gt; Frugivory
+FrugivoreAbundance --&gt; Frugivory
+ForagingStrategy --&gt; Frugivory
+CompetitorAbundance --&gt; Frugivory
+
+%% Feasibility constraints
+DetectabilityLimits --&gt; Encounter
+TraitMatching --&gt; Frugivory
+StructuralConstraints --&gt; Frugivory
+
+%% Styling
+classDef out fill:#2e7d32,color:#fff,stroke-width:0px;
+classDef driver fill:#9fbfe8,color:#000,stroke-width:0px;
+classDef opp fill:#cfe8cf,color:#000,stroke-width:0px;
+classDef feas fill:#f6b26b,color:#000,stroke-width:0px;
+
+style Plant_System fill:#f7f7f7,stroke:#999,stroke-width:1px
+style Frugivore_System fill:#f7f7f7,stroke:#999,stroke-width:1px
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>At this stage, a large DAG represents a defensible hypothesis about what causes what in your study system. The DAG now represents a huge amount of knowledge packed into a relatively small graph. The next step is to consider how those causes combine, including whether the effect of one variable depends on the level of another.</p>
+<hr>
+</section>
+</section>
+<section id="step-9-add-effect-modification-interactions" class="level2" data-number="30.5">
+<h2 data-number="30.5" class="anchored" data-anchor-id="step-9-add-effect-modification-interactions"><span class="header-section-number">30.5</span> Step 9: Add effect modification (interactions)</h2>
+<p>The last effect type in our causal framework is the <em>effect modifier</em>. An <strong>effect modifier</strong> is a variable that makes the effect of <span class="math inline">\(X\)</span> on <span class="math inline">\(Y\)</span> depend on another variable <span class="math inline">\(Z\)</span>. In practice, this is what we mean by an <strong>interaction</strong> (a term familier to you from GLMs and GLMMs). Conceptually, it really is that simple. For example, predator abundance may reduce nesting success, but the strength of that effect may depend on vegetation structure. In a DAG, this is represented simply as both <span class="math inline">\(predator_abundance\)</span> and <span class="math inline">\(vegetation_structure\)</span> causing <span class="math inline">\(nesting success\)</span>:</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+
+X[Predator abundance]:::exp_dark --&gt; Y[Nest survival]:::out
+Z[Vegetation structure]:::exp_light --&gt; Y
+
+classDef exp_dark fill:#9fbfe8,color:#000,stroke-width:0px;
+classDef exp_light fill:#d6e6fb,color:#000,stroke-width:0px;
+classDef out fill:#bfe3c0,color:#000,stroke-width:0px;
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>What does this show? Both predator abundance and vegetation structure affect nest survival. Effect modification arises when the effect of predator abundance on survival depends on vegetation structure (an interaction). The DAG itself does not change. Effect modification does not introduce new causal relationships—it only changes how existing causes combine in the model for <span class="math inline">\(Y\)</span>.</p>
+<p>This raises an important question: where does the interaction appear, if not in the DAG? Remember that a DAG shows which variables are causes of <span class="math inline">\(Y\)</span>. The DAG <strong>does not</strong> specify how those causes combine, whether additively or interactively. Instead, the interaction appears in the structural equation for the model:</p>
+<p><span class="math display">\[
+Y \sim X + Z + X \times Z
+\]</span></p>
+<p>Here, the <span class="math inline">\(predator\_abundance \times vegetation\_structure\)</span> term means that the effect of <span class="math inline">\(predator\_abundance\)</span> on <span class="math inline">\(vegetation\_structure\)</span> changes depending on <span class="math inline">\(nesting\_success\)</span>.</p>
+<p>So, after building your DAG, carefully document what variables will go into your structural models, including interactions and random effects.</p>
+<section id="step-10-use-the-dag-to-see-what-questions-are-possible" class="level3" data-number="30.5.1">
+<h3 data-number="30.5.1" class="anchored" data-anchor-id="step-10-use-the-dag-to-see-what-questions-are-possible"><span class="header-section-number">30.5.1</span> Step 10: Use the DAG to see what questions are possible</h3>
+<p>This is one of the most fascinating and fun parts of DAG construction. A well-constructed global DAG does more than simply represent the causal assumptions underlying your original hypotheses/questions. A good DAG allows you to systematically evaluate what questions can be supported by the causal structure you have. Because you have painstakingly worked to justify every edge in these previous steps, you can now ask narrow your focus onto a number of probing -yet flexible– questions such as:</p>
+<ul>
+<li>Which exposure–outcome relationships are supported by plausible pathways?</li>
+<li>Which variables play multiple roles across different questions?</li>
+<li>Which effects are identifiable or unidentifiable given the causal structure?</li>
+<li>What new questions emerge from the causal structure?</li>
+</ul>
+<p>Remember that you are formalizing the causal assumptions of your study system. This can be done at any time –before, during, or after a study–, though it is idea to do <em>before</em> you begin your study. But, as we all know from experience, our knowledge of the processes involved in our system grow as we study it (hopefully). We conduct more experiments, we make more observations, we read new and old published papers, we speak with colleagues. Therefore, we should absolutely expect that the DAG will evolve over time. If we can a DAG updated with new information, we can identify where past studies have fallen short, what present studies are constrained to estimate, and what future studies should prioritize.</p>
+<hr>
+</section>
+</section>
+<section id="up-next" class="level2" data-number="30.6">
+<h2 data-number="30.6" class="anchored" data-anchor-id="up-next"><span class="header-section-number">30.6</span> Up next!</h2>
+<p>So, remember that a DAG is just one part of a Structural Causal Model. The other critical component is the set of actual structural equations.On the next page, we will focus on a single exposure–outcome pair, define the estimand, determine the correct adjustment set, and translate the DAG into a statistical model (using tools familiar to you).</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/05_01_why_scms.html" class="pagination-link" aria-label="Why SCMs?">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Why SCMs?</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

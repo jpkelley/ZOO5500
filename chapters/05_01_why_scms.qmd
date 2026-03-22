@@ -6,6 +6,11 @@ format:
       theme: forest
 ---
 
+:::{.callout-tip collapse=false icon=true}
+## **Strongly recommended reading:**
+[Download link](https://onlinelibrary.wiley.com/doi/epdf/10.1111/brv.70029){target="_blank" rel="noopener"} Franks D.W., Ruxton G.D., and T.N. Sherratt. 2025. Ecology needs a causal overhaul. _Biological Reviews_. https://doi.org/10.1111/brv.70029
+:::
+
 :::: {.columns}
 ::: {.column width="65%"}
 ## Setting the stage for Structural Causal Models (SCMs)

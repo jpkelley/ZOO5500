@@ -399,6 +399,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">DAG Construction</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05_02b_KS_to_DAGs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">From kitchen-sink to SCM</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -415,7 +421,7 @@ window.Quarto = {
   <li><a href="#what-are-structural-causal-models-scms-in-ecology-specifically" id="toc-what-are-structural-causal-models-scms-in-ecology-specifically" class="nav-link" data-scroll-target="#what-are-structural-causal-models-scms-in-ecology-specifically"><span class="header-section-number">29.3</span> What are Structural Causal Models (SCMs) <em>(in ecology, specifically)</em>?</a></li>
   <li><a href="#verbiage-of-descriptive-associational-and-causal-hypotheses" id="toc-verbiage-of-descriptive-associational-and-causal-hypotheses" class="nav-link" data-scroll-target="#verbiage-of-descriptive-associational-and-causal-hypotheses"><span class="header-section-number">29.4</span> Verbiage of descriptive, associational, and causal hypotheses</a></li>
   <li><a href="#misconception-scms-require-huge-datasets" id="toc-misconception-scms-require-huge-datasets" class="nav-link" data-scroll-target="#misconception-scms-require-huge-datasets"><span class="header-section-number">29.5</span> Misconception: SCMs require huge datasets</a></li>
-  <li><a href="#up-next" id="toc-up-next" class="nav-link" data-scroll-target="#up-next"><span class="header-section-number">29.6</span> Up next!</a></li>
+  <li><a href="#summary-and-up-next" id="toc-summary-and-up-next" class="nav-link" data-scroll-target="#summary-and-up-next"><span class="header-section-number">29.6</span> Summary and up next!</a></li>
   <li><a href="#references-for-this-section" id="toc-references-for-this-section" class="nav-link" data-scroll-target="#references-for-this-section"><span class="header-section-number">29.7</span> References for this section</a></li>
   </ul>
 </nav>
@@ -483,7 +489,7 @@ window.Quarto = {
 {predator\_abundance}_{i} +
 {rainfall}_{i} +
 {flock\_size}_{i}
-\]</span> where <em>i</em> indexes specific observations. This may seem (or actually be) a perfectly reasonable predictive ecological model. After all, this kind of structure is what most of us have been taught. But the central problem –and one that has massive implications for strong inference as well as the direction of future research– is how ecologists interpret such models.</p>
+\]</span> where <em>i</em> indexes specific observations. This may seem (or actually be) a perfectly reasonable predictive ecological model. This kind of miodel structure is what we refer to as a “kitchen-sink model” (since we throw everything into the model) or the “garbage can regression” (because…well…that’s obvious); this approach is what most of us have been taught. But the central problem –and one that has massive implications for strong inference as well as the direction of future research– is not the statistical model itself. It is how ecologists interpret such models.</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -689,6 +695,12 @@ window.Quarto = {
 </section>
 <section id="what-are-structural-causal-models-scms-in-ecology-specifically" class="level2" data-number="29.3">
 <h2 data-number="29.3" class="anchored" data-anchor-id="what-are-structural-causal-models-scms-in-ecology-specifically"><span class="header-section-number">29.3</span> What are Structural Causal Models (SCMs) <em>(in ecology, specifically)</em>?</h2>
+<blockquote class="blockquote">
+<p><em>“Nothing in biology makes sense except in the light of evolution.”</em> (Theodosius Dobzhansky)</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><em>“Nothing in ecology makes sense except in the light of causation.”</em> (this course)</p>
+</blockquote>
 <p>Ecological systems are inherently complex. They involve causal relationships among mutiple environmental drivers, physiology, morphological traits, behaviors, and demographic outcomes. Traditional statistical models in ecology often emphasize association or prediction, which can obscure causal interpretation when mediators, confounders, or colliders are inadvertently included or omitted.</p>
 <p>Structural Causal Models (SCMs) provide a unified framework for integrating ecological knowledge with statistical analysis. Without SCMs, even the most well-intentioned ecological expertise is effectively obscured by statistical treatment. Specifically, SCMs combine three core components:</p>
 <ul>
@@ -727,10 +739,8 @@ window.Quarto = {
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong><em>Verbs:</em></strong><br>
-<em>describe</em>, <em>characterize</em>, <em>document</em>, <em>quantify</em>, <em>summarize</em>, <em>report</em>, <em>measure</em>, <em>compare</em>, <em>catalog</em></p>
-<p><strong><em>Nouns:</em></strong><br>
-<em>pattern</em>, <em>distribution</em>, <em>trend</em>, <em>rate</em>, <em>frequency</em>, <em>abundance</em>, <em>composition</em>, <em>diversity</em>, <em>structure</em>, <em>variation</em></p>
+<p><strong><em>Verbs:</em></strong> <em>describe</em>, <em>characterize</em>, <em>document</em>, <em>quantify</em>, <em>summarize</em>, <em>report</em>, <em>measure</em>, <em>compare</em>, <em>catalog</em></p>
+<p><strong><em>Nouns:</em></strong> <em>pattern</em>, <em>distribution</em>, <em>trend</em>, <em>rate</em>, <em>frequency</em>, <em>abundance</em>, <em>composition</em>, <em>diversity</em>, <em>structure</em>, <em>variation</em></p>
 </div>
 </div>
 </div>
@@ -746,10 +756,8 @@ window.Quarto = {
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong><em>Verbs:</em></strong><br>
-<em>correlate</em>, <em>predict</em>, <em>associate</em>, <em>relate</em>, <em>forecast</em>, <em>explain variation in</em>, <em>covary with</em>, <em>model</em>, <em>estimate</em></p>
-<p><strong><em>Nouns:</em></strong><br>
-<em>correlation</em>, <em>association</em>, <em>relationship</em>, <em>covariance</em>, <em>linkage</em>, <em>dependence</em>, <em>prediction</em>, <em>forecast</em>, <em>model</em>, <em>estimate</em></p>
+<p><strong><em>Verbs:</em></strong> <em>correlate</em>, <em>predict</em>, <em>associate</em>, <em>relate</em>, <em>forecast</em>, <em>explain variation in</em>, <em>covary with</em>, <em>model</em>, <em>estimate</em></p>
+<p><strong><em>Nouns:</em></strong> <em>correlation</em>, <em>association</em>, <em>relationship</em>, <em>covariance</em>, <em>linkage</em>, <em>dependence</em>, <em>prediction</em>, <em>forecast</em>, <em>model</em>, <em>estimate</em></p>
 </div>
 </div>
 </div>
@@ -765,10 +773,8 @@ window.Quarto = {
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong><em>Verbs:</em></strong><br>
-<em>affect</em>, <em>influence</em>, <em>cause</em>, <em>determine</em>, <em>alter</em>, <em>drive</em>, <em>generate</em>, <em>produce</em>, <em>lead to</em></p>
-<p><strong><em>Nouns:</em></strong><br>
-<em>effect</em>, <em>impact</em>, <em>influence</em>, <em>mechanism</em>, <em>process</em>, <em>pathway</em>, <em>driver</em>, <em>cause</em>, <em>consequence</em>, <em>outcome</em></p>
+<p><strong><em>Verbs:</em></strong> <em>affect</em>, <em>influence</em>, <em>cause</em>, <em>determine</em>, <em>alter</em>, <em>drive</em>, <em>generate</em>, <em>produce</em>, <em>lead to</em></p>
+<p><strong><em>Nouns:</em></strong> <em>effect</em>, <em>impact</em>, <em>influence</em>, <em>mechanism</em>, <em>process</em>, <em>pathway</em>, <em>driver</em>, <em>cause</em>, <em>consequence</em>, <em>outcome</em></p>
 </div>
 </div>
 </div>
@@ -779,8 +785,8 @@ window.Quarto = {
 <p>Think about a <em>global model</em> that you have seen. Think about how many predictors you have seen in this model. Kitchen-sink models like this include a large number of predictors that are forced into a single equation. This inclusion increases the number of model parameters and increases the probability of have multi-collinearity. In stark contrast, SCMs split the system apart into <strong>multiple smaller submodels</strong> that reflect specific questions. Each one of these submodels includes only the <strong>parent variables</strong> specified by the DAG (we will discuss this in the next sections). In many cases, this may mean that you only need 1-3 predictors in a model to estimate an effect. Thus, building a DAG-based causal models usually means that you are working with far simpler and more stable models that yield stable estimates even with small to modest sample sizes.</p>
 <p>Rather than putting the emphasis on more data (as kitchen-sink models do), SCMs instead emphasize well-supported ecological knowledge and causal assumptions (which most ecologists do most of the time anyway!).</p>
 </section>
-<section id="up-next" class="level2" data-number="29.6">
-<h2 data-number="29.6" class="anchored" data-anchor-id="up-next"><span class="header-section-number">29.6</span> Up next!</h2>
+<section id="summary-and-up-next" class="level2" data-number="29.6">
+<h2 data-number="29.6" class="anchored" data-anchor-id="summary-and-up-next"><span class="header-section-number">29.6</span> Summary and up next!</h2>
 <p>In sum, SCMs have three components:</p>
 <ul>
 <li><strong>Directed acyclic graphs (DAGs),</strong> which describe how ecologists think a study system is causally structured (<em>this</em> affects <em>that</em>, <em>ad nauseum</em>)</li>

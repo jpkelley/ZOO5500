@@ -25,10 +25,10 @@ flowchart LR
 
 ## What questions can be asked
 
-* What is the total effect of X on Y?
-* What are the direct and indirect pathways?
-* What must I adjust for (i.e. what covariates should be included)?
-* What should I NOT adjust for (i.e. what covariates should I exclude)?
+* What is the total effect of $X$ on $Y$?
+* What are the direct and indirect pathways of $X$ on $Y$?
+* To find effects (if present), what variable must I adjust for (i.e. what covariates should be included)?
+* To find effects (if present),What should I NOT adjust for (i.e. what covariates should I exclude)?
 * What is the functional form?
 * What are the counterfactual predictions?
 
@@ -229,6 +229,28 @@ classDef out fill:#bfe3c0,color:#000,stroke-width:0px;
 
 
 
+`
+```{mermaid}
+graph TD
+
+C[Vegetation cover]:::conf
+X[Predator abundance]:::exp
+M[Nest concealment]:::med
+Y[Nest survival]:::out
+
+C --> X
+C --> Y
+X --> M
+M --> Y
+X --> Y
+
+classDef conf fill:#f2b6b6,color:#000,stroke-width:0px;
+classDef exp fill:#bcd4f6,color:#000,stroke-width:0px;
+classDef med fill:#f7d6a3,color:#000,stroke-width:0px;
+classDef out fill:#bfe3c0,color:#000,stroke-width:0px;
+```
+
+
 
 # Step 3: Build the Model
 
@@ -265,22 +287,17 @@ $$
 
 and therefore $X$ belongs in the structural equation for $Y$.
 
+
+
+
 ## Using Multiple Datasets in a Single Causal Model (SCM)
 
-### Core Idea
-
-You **do not need to measure every variable in one dataset** to use a causal model.
-
-> **A DAG defines the causal system — datasets just inform different parts of it.**
-
-## How this works
-
-In a structural causal model, each variable (node) is described by its own equation based on its **parent variables**.
-
-That means you can:
+In a structural causal model, each variable (node) is described by its own equation based on its **parent variables**. That means you can:
 
 * Estimate different parts of the DAG using **different datasets**
 * Combine them into a **single causal system**
+
+You **do not need to measure every variable in one dataset** to use a causal model.
 
 This approach has many such names:
 
@@ -288,19 +305,15 @@ This approach has many such names:
 * _evidence synthesis_
 * _data fusion_ (within the concept of _transportability_, _sensu_ Judea Pearl)
 
-## Ecology Example
+Let us consider an example. Suppose that you have three datasets of those frugivorous jackalopes; one dataset is your own, and the other two you received from colleagues who conducted and published their research many years ago just after the isolated jackalope community was discovered: 
 
-You might have:
+* Dataset A (yours): **Fruit traits $\rightarrow$ frugivory behavior**
+* Dataset B (first colleague): **Frugivory behavior $\rightarrow$ seed dispersal**
+* Dataset C (second colleague): **Seed dispersal $\rightarrow$ recruitment**
 
-* Dataset A:  
-  **Fruit traits $\rightarrow$ frugivory behavior**
+[Explain what a non-causal analysis might do. Analyze Dataset A and then simply discuss the results in the context of the results of the Dataset B and C datasets (from published analyses).]
 
-* Dataset B:  
-  **Frugivory behavior $\rightarrow$ seed dispersal**
-
-* Dataset C:  
-  **Seed dispersal $\rightarrow$ recruitment**
-
+With an SCM framework, you have the opportunity to explicitly analyze. 
 Instead of forcing everything into one model, you:
 
 1. Fit each relationship separately

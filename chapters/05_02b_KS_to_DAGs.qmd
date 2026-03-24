@@ -1,0 +1,259 @@
+---
+title: "From kitchen-sink to SCM"
+format:
+  html:
+    toc: true
+    number-sections: true
+    theme: default
+    mermaid:
+      theme: forest
+execute:
+  echo: false
+---
+
+## Eight-step workflow
+
+Adopting even the most rudimentary version of a Structural Causal Model can be daunting for those of us who were taught the classical kitchen-sink-AIC-will-save-us approach. As a consequence, most of us have datasets that were designed to be analyzed in this way. So, sometimes, we feel stuck and wondering how to move forward.
+
+This is a visual guide describing what is minimally required to upgrade from a kitchen-sink model toward a more defensible Structural Causal Model (SCM). The goal is absolutely not to make everything complicated. The goal is to prevent telling the wrong story with a dataset that you have worked so hard to collect. The eight steps apply to a single estimand and can (and should) be repeated for every desired estimand in your dataset.
+
+### Step 1: Lock your estimand
+
+::: {.callout-important appearance="simple" icon=false}
+::: {.columns}
+::: {.column width="40%"}
+```{mermaid}
+flowchart TD
+  classDef exposure fill:#CFE8FF,color:#111,stroke-width:0px;
+  classDef mediator fill:#FFD8A8,color:#111,stroke-width:0px;
+  classDef outcome fill:#B6E3A8,color:#111,stroke-width:0px;
+
+  X[Exposure X]:::exposure
+  M[Mediator M]:::mediator
+  Y[Outcome Y]:::outcome
+
+  X -->|direct path| Y
+  X -->|indirect path| M
+  M -->|mediated path| Y
+```
+:::
+::: {.column width="60%"}
+Before any other steps, write a single sentence to ask the following questions:
+
+- **Total effect:** What happens to $Y$ if I manipulate $X$ (e.g. as in an experiment)?
+- **Direct effect:** What is the effect of $X$ on $Y$ not through $M$?
+
+These questions help you determine what belongs in the adjustment set (i.e. what you can logically include in your model) and what does not. If you do not lock the estimand first, you will almost certainly mix total and direct-effect logic. And that's not good!
+:::
+:::
+:::
+
+### Step 2: End with "because..."
+
+::: {.callout-note appearance="simple" icon=false}
+::: {.columns}
+::: {.column width="30%"}
+```{mermaid}
+flowchart TD
+  classDef observed fill:#CFE8FF,color:#111,stroke-width:0px;
+  classDef mechanism fill:#FFD8A8,color:#111,stroke-width:0px;
+  classDef outcome fill:#B6E3A8,color:#111,stroke-width:0px;
+
+  X[Measured variable X]:::observed
+  H[Missing mechanism]:::mechanism
+  Y[Outcome Y]:::outcome
+
+  X -.->|"because...?"| H
+  H -->|actual process| Y
+```
+:::
+::: {.column width="70%"}
+For every edge (arrow) you want to draw, force yourself to complete the following sentence:
+
+> "$X$ affects $Y$ because ..."
+
+And then wait until you answer...If the sentence can easily be completedby inserting another ecological/biological process, then that process must have its own node. This is often an extremely efficient way to discover missing mechanisms.
+:::
+:::
+:::
+
+### Step 3: Check your proxy variables
+
+::: {.callout-note appearance="simple" icon=false}
+::: {.columns}
+::: {.column width="60%"}
+```{mermaid}
+flowchart TD
+  classDef latent fill:#FFD8A8,color:#111,stroke-width:0px;
+  classDef proxy fill:#CFE8FF,color:#111,stroke-width:0px;
+  classDef outcome fill:#B6E3A8,color:#111,stroke-width:0px;
+
+  Z[Latent construct Z]:::latent
+  X[Observed proxy X]:::proxy
+  Y[Outcome Y]:::outcome
+
+  Z -->|measured as| X
+  Z -->|causal path| Y
+```
+:::
+::: {.column width="40%"}
+For this step, you ask yourself the following about each variable: 
+
+> "What is this value actually measuring? 
+
+A proxy is not automatically a cause, though it may sometimes be. Often, the way to improve your DAG is to create a latent variable that causes both the proxy (as it should) and the outcome. Hint: If you must use the phrase “$A$ is a proxy for $B$,” there is a large change that a node is missing from the DAG.
+:::
+:::
+:::
+
+### Step 4: Collapse compositional variables
+
+::: {.callout-note appearance="simple" icon=false}
+::: {.columns}
+::: {.column width="60%"}
+```{mermaid}
+flowchart TD
+  classDef latent fill:#FFD8A8,color:#111,stroke-width:0px;
+  classDef measured fill:#CFE8FF,color:#111,stroke-width:0px;
+  classDef outcome fill:#B6E3A8,color:#111,stroke-width:0px;
+
+  C[Underlying composition]:::latent
+  A[Part A]:::measured
+  B[Part B]:::measured
+  D[Part D]:::measured
+  Y[Outcome Y]:::outcome
+
+  C -->|measured as| A
+  C -->|measured as| B
+  C -->|measured as| D
+  C -->|overall effect| Y
+```
+:::
+::: {.column width="40%"}
+If several variables are different representations of the same underlying process, treat them as measurements of a shared node rather than as independent causes. This is very useful when variables are mutually constrained such as proportions of a whole. In this case, as one turns the dial on one metric (e.g. % grass), its mutually exclusive plant type ("shrubs") would decrease. Treating them as a shared node (e.g. ground composition) prevents impossible interpretations of coefficients and makes causal inference must easier.
+:::
+:::
+:::
+
+### Step 5: Ask yourself what causes both $X$ and $Y$
+
+::: {.callout-warning appearance="simple" icon=false}
+::: {.columns}
+::: {.column width="45%"}
+```{mermaid}
+flowchart TD
+  classDef conf fill:#FFD8A8,color:#111,stroke-width:0px;
+  classDef exposure fill:#CFE8FF,color:#111,stroke-width:0px;
+  classDef outcome fill:#B6E3A8,color:#111,stroke-width:0px;
+
+  C[Shared cause C]:::conf
+  X[Exposure X]:::exposure
+  Y[Outcome Y]:::outcome
+
+  C -->|backdoor path| X
+  C -->|backdoor path| Y
+  X -->|target effect| Y
+```
+:::
+::: {.column width="55%"}
+This is a major way to help your DAG. The basic question is oddly simple:
+
+> "What factor could cause both $X$ and $Y$?"
+
+Such variables are called confounders, and they can be directly measured or not. Common examples include broad environmental context (precipitation, temperature, etc.), sampling context, or historical conditions. If you do not ask this question explicitly (and get a good answer from yourself), you will often mistake association caused by confounders as evidence of causation.
+:::
+:::
+:::
+
+### Step 6: Add a latent variable (or two) on purpose
+
+::: {.callout-tip appearance="simple" icon=false}
+::: {.columns}
+::: {.column width="60%"}
+```{mermaid}
+flowchart TD
+  classDef latent fill:#FFD8A8,color:#111,stroke-width:0px;
+  classDef observed fill:#CFE8FF,color:#111,stroke-width:0px;
+  classDef outcome fill:#B6E3A8,color:#111,stroke-width:0px;
+
+  U[Latent context U]:::latent
+  X[Measured variable X]:::observed
+  Y[Outcome Y]:::outcome
+
+  U -->|unmeasured influence| X
+  U -->|unmeasured influence| Y
+  X -->|target effect| Y
+```
+:::
+::: {.column width="40%"}
+This is an oddly useful (and lazy) piece of advice that seems to hold true: 
+
+> If your DAG feels too "clean", it probably is. 
+
+You can add at least one latent node when you suspect omitted structure but cannot yet measure it directly. This does not solve major issues with the DAG. But what this exercise does is force you to give an honest interpretation of the places in your DAG are weak given what you want to say about causation.
+:::
+:::
+:::
+
+### Step 7: Explicitly (and carefully) separate process from observation
+
+::: {.callout-note appearance="simple" icon=false}
+::: {.columns}
+::: {.column width="60%"}
+```{mermaid}
+flowchart TD
+  classDef process fill:#FFD8A8,color:#111,stroke-width:0px;
+  classDef observed fill:#CFE8FF,color:#111,stroke-width:0px;
+  classDef outcome fill:#B6E3A8,color:#111,stroke-width:0px;
+
+  S[True state]:::process
+  E[Observation effort]:::observed
+  D[Detectability]:::process
+  O[Observed outcome]:::outcome
+
+  S -->|generates| O
+  E -->|shapes| D
+  D -->|filters observation| O
+```
+:::
+::: {.column width="40%"}
+As many of you who conduct surveys know, there are many apparent ecological endpoints in your dataset that are not purely states; rather, they are _observed_ states. Examples include counts, detections, and indices (Shannon-Weiner diversity index) that combine a myriad ecological process with a distinct measurement or aggregation process.
+
+For this step, you can ask whether your response variable is the _thing_ itself that you wanted to learn about or if it is an observation of the _thing._ This simple question helps prevent you from treating factors like effort or detectability as if they were all the same kind of causal node.
+:::
+:::
+:::
+
+### Step 8: Lock the parent set before choosing model form
+
+::: {.callout-important appearance="simple" icon=false}
+::: {.columns}
+::: {.column width="60%"}
+```{mermaid}
+flowchart TD
+  classDef conf fill:#FFD8A8,color:#111,stroke-width:0px;
+  classDef exposure fill:#CFE8FF,color:#111,stroke-width:0px;
+  classDef mediator fill:#F9E79F,color:#111,stroke-width:0px;
+  classDef outcome fill:#B6E3A8,color:#111,stroke-width:0px;
+
+  C[Confounder C]:::conf
+  X[Exposure X]:::exposure
+  M[Mediator M]:::mediator
+  Y[Outcome Y]:::outcome
+
+  C -->|adjust for| X
+  C -->|adjust for| Y
+  X -->|do estimate| M
+  M -->|do not adjust for total effect| Y
+  X -->|total or direct path| Y
+```
+:::
+::: {.column width="40%"}
+Once the DAG is drawn, the parent adjustment set (i.e. the terms you plan on putting into the model) should be locked by the causal logic implied by the DAG structure. Try your best not to finalize the DAG structure by changing nodes and edges for the sake of convenience. You should include confounders that block alternative causal pths (backdoor paths), and you should definitely _not_ include mediators as covariates when estimating a total effect.
+
+Only after the DAG structure is finalized should you choose the form of the statistical model: GLM, GLMM, GAM, link function, smoothness, error family, and so forth. 
+:::
+:::
+:::
+
+That's it for the Eight Steps! Hopefully, this was helpful in making the transition from kitchen-sink models to causal ones.

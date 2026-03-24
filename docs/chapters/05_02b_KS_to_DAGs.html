@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>11&nbsp; Reproducible Analyses – Quantitative Analysis of (Messy) Field Data</title>
+<title>31&nbsp; From kitchen-sink to SCM – Quantitative Analysis of (Messy) Field Data</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -33,8 +33,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/01_nature_of_data.html" rel="next">
-<link href="../chapters/00_using_jackalope_gpt.html" rel="prev">
+<link href="../chapters/05_02_building_dags.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -72,7 +71,40 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<meta name="mermaid-theme" content="forest">
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -86,7 +118,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/01_reproducible_workflow_intro.html">Part I: Reproducible Analyses</a></li><li class="breadcrumb-item"><a href="../chapters/01_reproducible_workflow_intro.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Reproducible Analyses</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/05_01_why_scms.html">Part V: Curves to Meaning</a></li><li class="breadcrumb-item"><a href="../chapters/05_02b_KS_to_DAGs.html"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">From kitchen-sink to SCM</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -199,16 +231,16 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
  <span class="menu-text">Part I: Reproducible Analyses</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/01_reproducible_workflow_intro.html" class="sidebar-item-text sidebar-link active">
+  <a href="../chapters/01_reproducible_workflow_intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Reproducible Analyses</span></span></a>
   </div>
 </li>
@@ -351,13 +383,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
  <span class="menu-text">Part V: Curves to Meaning</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/05_01_why_scms.html" class="sidebar-item-text sidebar-link">
@@ -372,7 +404,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/05_02b_KS_to_DAGs.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/05_02b_KS_to_DAGs.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">From kitchen-sink to SCM</span></span></a>
   </div>
 </li>
@@ -388,22 +420,26 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#why-start-with-reproducible-analysis-workflows" id="toc-why-start-with-reproducible-analysis-workflows" class="nav-link active" data-scroll-target="#why-start-with-reproducible-analysis-workflows"><span class="header-section-number">11.1</span> Why start with reproducible analysis workflows?</a></li>
-  <li><a href="#analytical-workflow" id="toc-analytical-workflow" class="nav-link" data-scroll-target="#analytical-workflow"><span class="header-section-number">11.2</span> Analytical Workflow</a></li>
-  <li><a href="#what-is-a-reproducible-analytical-workflow" id="toc-what-is-a-reproducible-analytical-workflow" class="nav-link" data-scroll-target="#what-is-a-reproducible-analytical-workflow"><span class="header-section-number">11.3</span> What is a reproducible analytical workflow?</a></li>
-  <li><a href="#why-workflows-matter-scientifically" id="toc-why-workflows-matter-scientifically" class="nav-link" data-scroll-target="#why-workflows-matter-scientifically"><span class="header-section-number">11.5</span> Why workflows matter scientifically</a></li>
-  <li><a href="#how-part-i-reproducible-analyses-is-organized" id="toc-how-part-i-reproducible-analyses-is-organized" class="nav-link" data-scroll-target="#how-part-i-reproducible-analyses-is-organized"><span class="header-section-number">11.6</span> How <strong>Part I: Reproducible Analyses</strong> is organized</a></li>
-  <li><a href="#a-guiding-principle" id="toc-a-guiding-principle" class="nav-link" data-scroll-target="#a-guiding-principle"><span class="header-section-number">11.7</span> A guiding principle</a></li>
-  <li><a href="#a-parting-note" id="toc-a-parting-note" class="nav-link" data-scroll-target="#a-parting-note"><span class="header-section-number">11.8</span> A parting note</a></li>
+  <li><a href="#eight-step-workflow" id="toc-eight-step-workflow" class="nav-link active" data-scroll-target="#eight-step-workflow"><span class="header-section-number">31.1</span> Eight-step workflow</a>
+  <ul class="collapse">
+  <li><a href="#step-1-lock-your-estimand" id="toc-step-1-lock-your-estimand" class="nav-link" data-scroll-target="#step-1-lock-your-estimand"><span class="header-section-number">31.1.1</span> Step 1: Lock your estimand</a></li>
+  <li><a href="#step-2-end-with-because" id="toc-step-2-end-with-because" class="nav-link" data-scroll-target="#step-2-end-with-because"><span class="header-section-number">31.1.2</span> Step 2: End with “because…”</a></li>
+  <li><a href="#step-3-check-your-proxy-variables" id="toc-step-3-check-your-proxy-variables" class="nav-link" data-scroll-target="#step-3-check-your-proxy-variables"><span class="header-section-number">31.1.3</span> Step 3: Check your proxy variables</a></li>
+  <li><a href="#step-4-collapse-compositional-variables" id="toc-step-4-collapse-compositional-variables" class="nav-link" data-scroll-target="#step-4-collapse-compositional-variables"><span class="header-section-number">31.1.4</span> Step 4: Collapse compositional variables</a></li>
+  <li><a href="#step-5-ask-yourself-what-causes-both-x-and-y" id="toc-step-5-ask-yourself-what-causes-both-x-and-y" class="nav-link" data-scroll-target="#step-5-ask-yourself-what-causes-both-x-and-y"><span class="header-section-number">31.1.5</span> Step 5: Ask yourself what causes both <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span></a></li>
+  <li><a href="#step-6-add-a-latent-variable-or-two-on-purpose" id="toc-step-6-add-a-latent-variable-or-two-on-purpose" class="nav-link" data-scroll-target="#step-6-add-a-latent-variable-or-two-on-purpose"><span class="header-section-number">31.1.6</span> Step 6: Add a latent variable (or two) on purpose</a></li>
+  <li><a href="#step-7-explicitly-and-carefully-separate-process-from-observation" id="toc-step-7-explicitly-and-carefully-separate-process-from-observation" class="nav-link" data-scroll-target="#step-7-explicitly-and-carefully-separate-process-from-observation"><span class="header-section-number">31.1.7</span> Step 7: Explicitly (and carefully) separate process from observation</a></li>
+  <li><a href="#step-8-lock-the-parent-set-before-choosing-model-form" id="toc-step-8-lock-the-parent-set-before-choosing-model-form" class="nav-link" data-scroll-target="#step-8-lock-the-parent-set-before-choosing-model-form"><span class="header-section-number">31.1.8</span> Step 8: Lock the parent set before choosing model form</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/01_reproducible_workflow_intro.html">Part I: Reproducible Analyses</a></li><li class="breadcrumb-item"><a href="../chapters/01_reproducible_workflow_intro.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Reproducible Analyses</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/05_01_why_scms.html">Part V: Curves to Meaning</a></li><li class="breadcrumb-item"><a href="../chapters/05_02b_KS_to_DAGs.html"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">From kitchen-sink to SCM</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Reproducible Analyses</span></h1>
+<h1 class="title"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">From kitchen-sink to SCM</span></h1>
 </div>
 
 
@@ -420,117 +456,370 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="why-start-with-reproducible-analysis-workflows" class="level2" data-number="11.1">
-<h2 data-number="11.1" class="anchored" data-anchor-id="why-start-with-reproducible-analysis-workflows"><span class="header-section-number">11.1</span> Why start with reproducible analysis workflows?</h2>
-<p>Although ZOO/ECOL-5500 focuses on quantitative analysis and modeling, those tools are only as reliable as the infrastructure that supports them. Establishing a clear, reproducible workflow creates a solid foundation that can scale appropriately as new data arrive –whether that means new sensor downloads, ongoing field observations, or ever-expanding datasets– without requiring you to constantly restructure, reinvent, or debug your analysis.</p>
-<p>This chapter provides the broad <strong>conceptual map</strong> for the rest of Part I. Subsequent chapters focus on individual components of this workflow.</p>
-<hr>
-</section>
-<section id="analytical-workflow" class="level2" data-number="11.2">
-<h2 data-number="11.2" class="anchored" data-anchor-id="analytical-workflow"><span class="header-section-number">11.2</span> Analytical Workflow</h2>
-<p>A statistical philosophy only works if it is supported by a deliberate, reproducible analytical workflow. This workflow description is doing a lot of work, so let us be very clear about the meaning.</p>
-<blockquote class="blockquote">
-<p><em><strong>Analytical workflow:</strong> The data and computational infrastructure that translates raw observations into scientifically defensible results and inferences.</em></p>
-</blockquote>
-<p>A workflow include everything about how datasets are stored, cleaned, explored, modeled, and reported. Importantly, it also includes how decisions are documented and how analyses can be reproduced by someone else (including your future, more frenetic self).</p>
-<p>Designing a good analytical workflow is hardly a casual endeavor. In fact, it should be a target of formal and toughtful analysis itself, answering questions like:</p>
-<ul>
-<li>Is your workflow efficient in terms of your valuable time?</li>
-<li>Is your workflow efficient in terms of your computational infrastucture and abilities?</li>
-<li>Is your workflow clear, or does it create confusion and induce mission/scope creep?</li>
-<li>Does your workflow allow you to stop and restart without losing your place?</li>
-</ul>
-<p>A good workflow constrains your behavior in productive ways. It limits wandering, enforces transparency, and makes progress visible. That is, <strong><em>there is no single correct workflow.</em></strong> As Rudyard Kipling wrote (<em>In the Neolithic Age</em>):</p>
-<blockquote class="blockquote">
-<p><em>Here’s my wisdom for your use, as I learned it when the moose And the reindeer roamed where Paris roars to-night: “There are nine and sixty ways of constructing tribal lays, And—every—single—one—of—them—is—right!</em></p>
-</blockquote>
-<p>There are many ways of constructing something useful and meaningful, and every single one of them can be right. What matters is that your workflow is intentional, scientifically defensible, and aligned with your scientific goals. So, I encourage you to start formalizing a philosophical workflow that reduces bias, controls scope, and supports efficient thinking. Then stick to it until you learn something better. That moment will come, and when it does, simply update your philosophy through slow iteration rather than abandoning it.</p>
-<hr>
-</section>
-<section id="what-is-a-reproducible-analytical-workflow" class="level2" data-number="11.3">
-<h2 data-number="11.3" class="anchored" data-anchor-id="what-is-a-reproducible-analytical-workflow"><span class="header-section-number">11.3</span> What is a reproducible analytical workflow?</h2>
-<p>A common misconception—especially early in graduate training—is that <strong>reproducibility means sharing files and code</strong> on GitHub, Dryad, or similar repositories. Those components are necessary, but they is not sufficient.</p>
-<p>A reproducible analytical workflow is a structured system that explicitly and completely describes how scientific results are generated. Such a workflow:</p>
-<ul>
-<li>starts with observations of the world, not the computer</li>
-<li>treats measurement as a translation (or signal-transduction) process</li>
-<li>clearly and explicitly documents where data come from</li>
-<li>separates data, metadata, processing, and inference</li>
-<li>records inputs → transformations → outputs at each step (this is key!)</li>
-<li>makes explicit where assumptions or biases are introduced</li>
-<li>allows another person (or you, six months later) to reconstruct the results</li>
-</ul>
-<p>Together, these features ensure that analyses can be understood, repeated, extended, and scaled as new data arrive.</p>
-<hr>
-</section>
+<section id="eight-step-workflow" class="level2" data-number="31.1">
+<h2 data-number="31.1" class="anchored" data-anchor-id="eight-step-workflow"><span class="header-section-number">31.1</span> Eight-step workflow</h2>
+<p>Adopting even the most rudimentary version of a Structural Causal Model can be daunting for those of us who were taught the classical kitchen-sink-AIC-will-save-us approach. As a consequence, most of us have datasets that were designed to be analyzed in this way. So, sometimes, we feel stuck and wondering how to move forward.</p>
+<p>This is a visual guide describing what is minimally required to upgrade from a kitchen-sink model toward a more defensible Structural Causal Model (SCM). The goal is absolutely not to make everything complicated. The goal is to prevent telling the wrong story with a dataset that you have worked so hard to collect. The eight steps apply to a single estimand and can (and should) be repeated for every desired estimand in your dataset.</p>
+<section id="step-1-lock-your-estimand" class="level3" data-number="31.1.1">
+<h3 data-number="31.1.1" class="anchored" data-anchor-id="step-1-lock-your-estimand"><span class="header-section-number">31.1.1</span> Step 1: Lock your estimand</h3>
+<div class="callout callout-style-simple callout-important no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <div class="columns">
-<div class="column" style="width:47%;">
-<section id="the-reproducible-analytical-workflow-as-a-causal-system" class="level2" data-number="11.4">
-<h2 data-number="11.4" class="anchored" data-anchor-id="the-reproducible-analytical-workflow-as-a-causal-system"><span class="header-section-number">11.4</span> The reproducible analytical workflow as a causal system</h2>
-<p>The reproducible analytical workflow can be understood as a causal system in which each step produces downstream consequences: measurement choices shape the raw data, data processing constrains what can be modeled, and modeling assumptions determine what can be inferred. Thinking causally about the workflow makes it clear that results do not simply <strong>“come from the data,”</strong> but from a chain of decisions that can be traced, tested, and reproduced. Generally, this pipeline looks like this:</p>
-<blockquote class="blockquote">
-<p><strong>World → Data → Models → Inference → Interpretation</strong></p>
-</blockquote>
-<p>More explicitly, as seen in the diagram at right, we have the following general steps:</p>
-<ol type="1">
-<li><strong>World / phenomena:</strong> Processes exist whether or not we observe them (or like them!)</li>
-<li><strong>Measurement &amp; observation:</strong> Instruments and observers translate phenomena into recorded values.</li>
-<li><strong>Raw data + metadata:</strong> Raw data must have metadata as context.</li>
-<li><strong>Processing &amp; derivation:</strong> Filtering, organizing, feature extraction, etc.</li>
-<li><strong>Models &amp; inference rules:</strong> Assumptions can be documented and coded explicitly.</li>
-<li><strong>Interpretation:</strong> Human judgment (which is usually not reproducible, unless codified).</li>
-</ol>
-</section>
-</div><div class="column" style="width:3%;">
+<div class="column" style="width:40%;">
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+  classDef exposure fill:#CFE8FF,color:#111,stroke-width:0px;
+  classDef mediator fill:#FFD8A8,color:#111,stroke-width:0px;
+  classDef outcome fill:#B6E3A8,color:#111,stroke-width:0px;
 
-</div><div class="column" style="width:50%;">
-<p><img src="../graphics/workflow_diagram/analytical_workflow_01.png" class="img-fluid"></p>
+  X[Exposure X]:::exposure
+  M[Mediator M]:::mediator
+  Y[Outcome Y]:::outcome
+
+  X --&gt;|direct path| Y
+  X --&gt;|indirect path| M
+  M --&gt;|mediated path| Y
+</pre>
+</div>
+<p></p></figure><p></p>
 </div>
 </div>
-<p>Everything up to (and including) production of figures and tables <strong>can and should be reproducible</strong>. That is, (1) you should be able to rerun an entire analysis and produce tables and figures (and fill in values in a Results section) with a simple click of a button, and (2) another user should be able to reproduce all steps in your analysis pipeline, even with minimal code. Framing the workflow as a casual path makes obvious how each result is causally linked to specific inputs, transformations, and assumptions.</p>
-<hr>
-<section id="why-workflows-matter-scientifically" class="level2" data-number="11.5">
-<h2 data-number="11.5" class="anchored" data-anchor-id="why-workflows-matter-scientifically"><span class="header-section-number">11.5</span> Why workflows matter scientifically</h2>
-<p>Reproducibility in a scientific workflow is not primarily about convenience, though it often becomes convenient over time. A convenient –but non-reproducible– workflow focuses on rerunning an analysis quickly, often relying on memory, manual steps, and undocumented choices. That approach may work in the short term, but it does not scale and rarely holds up weeks, months, or years later. A reproducible workflow, by contrast, is designed so that every result can be traced back to its origins, including the data, code, assumptions, and decisions that produced it.</p>
-<p>At a broader scale, reproducible workflows allow us to:</p>
+</div>
+</div><div class="column" style="width:60%;">
+<p>Before any other steps, write a single sentence to ask the following questions:</p>
 <ul>
-<li>diagnose errors</li>
-<li>understand sensitivity to assumptions</li>
-<li>reuse data responsibly</li>
-<li>build on previous work without re-guessing decisions</li>
-<li>reduce long-term computational and cognitive overhead</li>
+<li><strong>Total effect:</strong> What happens to <span class="math inline">\(Y\)</span> if I manipulate <span class="math inline">\(X\)</span> (e.g.&nbsp;as in an experiment)?</li>
+<li><strong>Direct effect:</strong> What is the effect of <span class="math inline">\(X\)</span> on <span class="math inline">\(Y\)</span> not through <span class="math inline">\(M\)</span>?</li>
 </ul>
-<p>In short:</p>
-<ul>
-<li><strong>Convenience:</strong> <em>“Can I run this analysis again?”</em></li>
-<li><strong>Reproducibility:</strong> <em>“Can I clearly show how these results were produced?”</em></li>
-</ul>
-<hr>
+<p>These questions help you determine what belongs in the adjustment set (i.e.&nbsp;what you can logically include in your model) and what does not. If you do not lock the estimand first, you will almost certainly mix total and direct-effect logic. And that’s not good!</p>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
-<section id="how-part-i-reproducible-analyses-is-organized" class="level2" data-number="11.6">
-<h2 data-number="11.6" class="anchored" data-anchor-id="how-part-i-reproducible-analyses-is-organized"><span class="header-section-number">11.6</span> How <strong>Part I: Reproducible Analyses</strong> is organized</h2>
-<p>This Part follows the workflow in stages:</p>
-<ol type="1">
-<li><strong>Nature of data:</strong> What data are, how measurement works, and what <em>raw data</em> means.</li>
-<li><strong>Metadata (low friction):</strong> How to document context without drowning in formatting standards.</li>
-<li><strong>Reproducible workflows:</strong> Why multiple step-by-step scripts are not enough; the need for explicit input–output mapping.</li>
-<li><strong>Inference and interpretation:</strong> Where assumptions enter and where reproducibility ends.</li>
-</ol>
-<p>Each chapter is responsible for a <strong>specific region of the workflow</strong>.</p>
-<hr>
-</section>
-<section id="a-guiding-principle" class="level2" data-number="11.7">
-<h2 data-number="11.7" class="anchored" data-anchor-id="a-guiding-principle"><span class="header-section-number">11.7</span> A guiding principle</h2>
+<section id="step-2-end-with-because" class="level3" data-number="31.1.2">
+<h3 data-number="31.1.2" class="anchored" data-anchor-id="step-2-end-with-because"><span class="header-section-number">31.1.2</span> Step 2: End with “because…”</h3>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div class="columns">
+<div class="column" style="width:30%;">
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+  classDef observed fill:#CFE8FF,color:#111,stroke-width:0px;
+  classDef mechanism fill:#FFD8A8,color:#111,stroke-width:0px;
+  classDef outcome fill:#B6E3A8,color:#111,stroke-width:0px;
+
+  X[Measured variable X]:::observed
+  H[Missing mechanism]:::mechanism
+  Y[Outcome Y]:::outcome
+
+  X -.-&gt;|"because...?"| H
+  H --&gt;|actual process| Y
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:70%;">
+<p>For every edge (arrow) you want to draw, force yourself to complete the following sentence:</p>
 <blockquote class="blockquote">
-<p><strong>If you cannot say what a result depends on, it is not reproducible.</strong></p>
+<p>“<span class="math inline">\(X\)</span> affects <span class="math inline">\(Y\)</span> because …”</p>
 </blockquote>
-<p>Keep this sentence in mind as you move forward. The next chapter starts where all workflows begin: with the <strong>nature of data themselves</strong>.</p>
+<p>And then wait until you answer…If the sentence can easily be completedby inserting another ecological/biological process, then that process must have its own node. This is often an extremely efficient way to discover missing mechanisms.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
-<section id="a-parting-note" class="level2" data-number="11.8">
-<h2 data-number="11.8" class="anchored" data-anchor-id="a-parting-note"><span class="header-section-number">11.8</span> A parting note</h2>
-<p>In the next section, I take a step back and offer a set of statistical aphorisms that can help us remain vigilane about workflow weaknesses, leaky assumptions, incorrect modeling approach, or cryptic biases.</p>
+<section id="step-3-check-your-proxy-variables" class="level3" data-number="31.1.3">
+<h3 data-number="31.1.3" class="anchored" data-anchor-id="step-3-check-your-proxy-variables"><span class="header-section-number">31.1.3</span> Step 3: Check your proxy variables</h3>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+  classDef latent fill:#FFD8A8,color:#111,stroke-width:0px;
+  classDef proxy fill:#CFE8FF,color:#111,stroke-width:0px;
+  classDef outcome fill:#B6E3A8,color:#111,stroke-width:0px;
+
+  Z[Latent construct Z]:::latent
+  X[Observed proxy X]:::proxy
+  Y[Outcome Y]:::outcome
+
+  Z --&gt;|measured as| X
+  Z --&gt;|causal path| Y
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:40%;">
+<p>For this step, you ask yourself the following about each variable:</p>
+<blockquote class="blockquote">
+<p>“What is this value actually measuring?</p>
+</blockquote>
+<p>A proxy is not automatically a cause, though it may sometimes be. Often, the way to improve your DAG is to create a latent variable that causes both the proxy (as it should) and the outcome. Hint: If you must use the phrase “<span class="math inline">\(A\)</span> is a proxy for <span class="math inline">\(B\)</span>,” there is a large change that a node is missing from the DAG.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-4-collapse-compositional-variables" class="level3" data-number="31.1.4">
+<h3 data-number="31.1.4" class="anchored" data-anchor-id="step-4-collapse-compositional-variables"><span class="header-section-number">31.1.4</span> Step 4: Collapse compositional variables</h3>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+  classDef latent fill:#FFD8A8,color:#111,stroke-width:0px;
+  classDef measured fill:#CFE8FF,color:#111,stroke-width:0px;
+  classDef outcome fill:#B6E3A8,color:#111,stroke-width:0px;
+
+  C[Underlying composition]:::latent
+  A[Part A]:::measured
+  B[Part B]:::measured
+  D[Part D]:::measured
+  Y[Outcome Y]:::outcome
+
+  C --&gt;|measured as| A
+  C --&gt;|measured as| B
+  C --&gt;|measured as| D
+  C --&gt;|overall effect| Y
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:40%;">
+<p>If several variables are different representations of the same underlying process, treat them as measurements of a shared node rather than as independent causes. This is very useful when variables are mutually constrained such as proportions of a whole. In this case, as one turns the dial on one metric (e.g.&nbsp;% grass), its mutually exclusive plant type (“shrubs”) would decrease. Treating them as a shared node (e.g.&nbsp;ground composition) prevents impossible interpretations of coefficients and makes causal inference must easier.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-5-ask-yourself-what-causes-both-x-and-y" class="level3" data-number="31.1.5">
+<h3 data-number="31.1.5" class="anchored" data-anchor-id="step-5-ask-yourself-what-causes-both-x-and-y"><span class="header-section-number">31.1.5</span> Step 5: Ask yourself what causes both <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span></h3>
+<div class="callout callout-style-simple callout-warning no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+  classDef conf fill:#FFD8A8,color:#111,stroke-width:0px;
+  classDef exposure fill:#CFE8FF,color:#111,stroke-width:0px;
+  classDef outcome fill:#B6E3A8,color:#111,stroke-width:0px;
+
+  C[Shared cause C]:::conf
+  X[Exposure X]:::exposure
+  Y[Outcome Y]:::outcome
+
+  C --&gt;|backdoor path| X
+  C --&gt;|backdoor path| Y
+  X --&gt;|target effect| Y
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:55%;">
+<p>This is a major way to help your DAG. The basic question is oddly simple:</p>
+<blockquote class="blockquote">
+<p>“What factor could cause both <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>?”</p>
+</blockquote>
+<p>Such variables are called confounders, and they can be directly measured or not. Common examples include broad environmental context (precipitation, temperature, etc.), sampling context, or historical conditions. If you do not ask this question explicitly (and get a good answer from yourself), you will often mistake association caused by confounders as evidence of causation.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-6-add-a-latent-variable-or-two-on-purpose" class="level3" data-number="31.1.6">
+<h3 data-number="31.1.6" class="anchored" data-anchor-id="step-6-add-a-latent-variable-or-two-on-purpose"><span class="header-section-number">31.1.6</span> Step 6: Add a latent variable (or two) on purpose</h3>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+  classDef latent fill:#FFD8A8,color:#111,stroke-width:0px;
+  classDef observed fill:#CFE8FF,color:#111,stroke-width:0px;
+  classDef outcome fill:#B6E3A8,color:#111,stroke-width:0px;
+
+  U[Latent context U]:::latent
+  X[Measured variable X]:::observed
+  Y[Outcome Y]:::outcome
+
+  U --&gt;|unmeasured influence| X
+  U --&gt;|unmeasured influence| Y
+  X --&gt;|target effect| Y
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:40%;">
+<p>This is an oddly useful (and lazy) piece of advice that seems to hold true:</p>
+<blockquote class="blockquote">
+<p>If your DAG feels too “clean”, it probably is.</p>
+</blockquote>
+<p>You can add at least one latent node when you suspect omitted structure but cannot yet measure it directly. This does not solve major issues with the DAG. But what this exercise does is force you to give an honest interpretation of the places in your DAG are weak given what you want to say about causation.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-7-explicitly-and-carefully-separate-process-from-observation" class="level3" data-number="31.1.7">
+<h3 data-number="31.1.7" class="anchored" data-anchor-id="step-7-explicitly-and-carefully-separate-process-from-observation"><span class="header-section-number">31.1.7</span> Step 7: Explicitly (and carefully) separate process from observation</h3>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+  classDef process fill:#FFD8A8,color:#111,stroke-width:0px;
+  classDef observed fill:#CFE8FF,color:#111,stroke-width:0px;
+  classDef outcome fill:#B6E3A8,color:#111,stroke-width:0px;
+
+  S[True state]:::process
+  E[Observation effort]:::observed
+  D[Detectability]:::process
+  O[Observed outcome]:::outcome
+
+  S --&gt;|generates| O
+  E --&gt;|shapes| D
+  D --&gt;|filters observation| O
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:40%;">
+<p>As many of you who conduct surveys know, there are many apparent ecological endpoints in your dataset that are not purely states; rather, they are <em>observed</em> states. Examples include counts, detections, and indices (Shannon-Weiner diversity index) that combine a myriad ecological process with a distinct measurement or aggregation process.</p>
+<p>For this step, you can ask whether your response variable is the <em>thing</em> itself that you wanted to learn about or if it is an observation of the <em>thing.</em> This simple question helps prevent you from treating factors like effort or detectability as if they were all the same kind of causal node.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-8-lock-the-parent-set-before-choosing-model-form" class="level3" data-number="31.1.8">
+<h3 data-number="31.1.8" class="anchored" data-anchor-id="step-8-lock-the-parent-set-before-choosing-model-form"><span class="header-section-number">31.1.8</span> Step 8: Lock the parent set before choosing model form</h3>
+<div class="callout callout-style-simple callout-important no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+  classDef conf fill:#FFD8A8,color:#111,stroke-width:0px;
+  classDef exposure fill:#CFE8FF,color:#111,stroke-width:0px;
+  classDef mediator fill:#F9E79F,color:#111,stroke-width:0px;
+  classDef outcome fill:#B6E3A8,color:#111,stroke-width:0px;
+
+  C[Confounder C]:::conf
+  X[Exposure X]:::exposure
+  M[Mediator M]:::mediator
+  Y[Outcome Y]:::outcome
+
+  C --&gt;|adjust for| X
+  C --&gt;|adjust for| Y
+  X --&gt;|do estimate| M
+  M --&gt;|do not adjust for total effect| Y
+  X --&gt;|total or direct path| Y
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:40%;">
+<p>Once the DAG is drawn, the parent adjustment set (i.e.&nbsp;the terms you plan on putting into the model) should be locked by the causal logic implied by the DAG structure. Try your best not to finalize the DAG structure by changing nodes and edges for the sake of convenience. You should include confounders that block alternative causal pths (backdoor paths), and you should definitely <em>not</em> include mediators as covariates when estimating a total effect.</p>
+<p>Only after the DAG structure is finalized should you choose the form of the statistical model: GLM, GLMM, GAM, link function, smoothness, error family, and so forth.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>That’s it for the Eight Steps! Hopefully, this was helpful in making the transition from kitchen-sink models to causal ones.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -936,14 +1225,11 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/00_using_jackalope_gpt.html" class="pagination-link" aria-label="Using JackalopeGPT">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Using JackalopeGPT</span></span>
+      <a href="../chapters/05_02_building_dags.html" class="pagination-link" aria-label="DAG Construction">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">DAG Construction</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/01_nature_of_data.html" class="pagination-link" aria-label="The Nature of Data">
-        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Nature of Data</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

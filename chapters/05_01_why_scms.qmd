@@ -42,7 +42,7 @@ $$
 {rainfall}_{i} + 
 {flock\_size}_{i}
 $$
-where _i_ indexes specific observations. This may seem (or actually be) a perfectly reasonable predictive ecological model. After all, this kind of structure is what most of us have been taught. But the central problem --and one that has massive implications for strong inference as well as the direction of future research-- is how ecologists interpret such models. 
+where _i_ indexes specific observations. This may seem (or actually be) a perfectly reasonable predictive ecological model. This kind of miodel structure is what we refer to as a "kitchen-sink model" (since we throw everything into the model) or the "garbage can regression" (because...well...that's obvious); this approach is what most of us have been taught. But the central problem --and one that has massive implications for strong inference as well as the direction of future research-- is not the statistical model itself. It is how ecologists interpret such models. 
 
 ::: {.callout-tip collapse=false icon=false}
 ## **What many ecologists think this model is doing**
@@ -119,6 +119,10 @@ Hopefully, this stresses the need to overhaul our general approach to the study 
 
 ## What are Structural Causal Models (SCMs) _(in ecology, specifically)_?
 
+> _"Nothing in biology makes sense except in the light of evolution."_ (Theodosius Dobzhansky)
+
+> _"Nothing in ecology makes sense except in the light of causation."_ (this course)
+
 Ecological systems are inherently complex. They involve causal relationships among mutiple environmental drivers, physiology, morphological traits, behaviors, and demographic outcomes. Traditional statistical models in ecology often emphasize association or prediction, which can obscure causal interpretation when mediators, confounders, or colliders are inadvertently included or omitted.
 
 Structural Causal Models (SCMs) provide a unified framework for integrating ecological knowledge with statistical analysis. Without SCMs, even the most well-intentioned ecological expertise is effectively obscured by statistical treatment. Specifically, SCMs combine three core components:
@@ -149,31 +153,25 @@ Each hypothesis type tends to use a characteristic verbiage. Learning how to rec
 ::: {.callout-warning icon=false collapse=true}
 ## **Descriptive Hypotheses**
 
-***Verbs:***  
-*describe*, *characterize*, *document*, *quantify*, *summarize*, *report*, *measure*, *compare*, *catalog*
+***Verbs:*** *describe*, *characterize*, *document*, *quantify*, *summarize*, *report*, *measure*, *compare*, *catalog*
 
-***Nouns:***  
-*pattern*, *distribution*, *trend*, *rate*, *frequency*, *abundance*, *composition*, *diversity*, *structure*, *variation*
+***Nouns:*** *pattern*, *distribution*, *trend*, *rate*, *frequency*, *abundance*, *composition*, *diversity*, *structure*, *variation*
 :::
 
 ::: {.callout-note icon=false collapse=true}
 ## **Associational / Predictive Hypotheses**
 
-***Verbs:***  
-*correlate*, *predict*, *associate*, *relate*, *forecast*, *explain variation in*, *covary with*, *model*, *estimate*
+***Verbs:*** *correlate*, *predict*, *associate*, *relate*, *forecast*, *explain variation in*, *covary with*, *model*, *estimate*
 
-***Nouns:***  
-*correlation*, *association*, *relationship*, *covariance*, *linkage*, *dependence*, *prediction*, *forecast*, *model*, *estimate*
+***Nouns:*** *correlation*, *association*, *relationship*, *covariance*, *linkage*, *dependence*, *prediction*, *forecast*, *model*, *estimate*
 :::
 
 ::: {.callout-tip icon=false collapse=true}
 ## **Causal Hypotheses**
 
-***Verbs:***  
-*affect*, *influence*, *cause*, *determine*, *alter*, *drive*, *generate*, *produce*, *lead to*
+***Verbs:*** *affect*, *influence*, *cause*, *determine*, *alter*, *drive*, *generate*, *produce*, *lead to*
 
-***Nouns:***  
-*effect*, *impact*, *influence*, *mechanism*, *process*, *pathway*, *driver*, *cause*, *consequence*, *outcome*
+***Nouns:*** *effect*, *impact*, *influence*, *mechanism*, *process*, *pathway*, *driver*, *cause*, *consequence*, *outcome*
 :::
 
 
@@ -186,7 +184,7 @@ Think about a _global model_ that you have seen. Think about how many predictors
 Rather than putting the emphasis on more data (as kitchen-sink models do), SCMs instead emphasize well-supported ecological knowledge and causal assumptions (which most ecologists do most of the time anyway!). 
 
 
-## Up next!
+## Summary and up next!
 
 In sum, SCMs have three components: 
 

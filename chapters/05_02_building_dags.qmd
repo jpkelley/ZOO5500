@@ -84,7 +84,7 @@ Any good DAG should represent **causal assumptions**, _not_ statistical correlat
 ## Constructing a DAG for your study system
 
 ::: {.callout-tip icon=false}
-## **Rule #1: Build one DAG for the system -- not one DAG per question/prediction.**
+## **Rule: Build one DAG for the system -- not one DAG per question/prediction.**
 :::
 
 The goal of this section is to construct a _single global Directed Acyclic Graph (DAG)_ that represents the causal structure of your study system. I use the term “global” by analogy to multimodel inference (i.e. use of AIC to select the best-supported model) where a global model includes all plausible predictors. In this causal case, a global DAG includes all plausible causal relationships in the system and acknowledges that there can be many outcome/response variables and that variables can play different roles (colliders, mediators, confounders) along multiple causal pathways. A global DAG:

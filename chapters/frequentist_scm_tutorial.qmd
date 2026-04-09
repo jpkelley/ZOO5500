@@ -4,13 +4,6 @@ format:
   html:
     toc: true
     toc-depth: 3
-    code-fold: false
-editor_options:
-  chunk_output_type: console
-execute:
-  warning: false
-  message: false
-  echo: true
 ---
 
 ## Introduction
@@ -69,16 +62,32 @@ These are not nested. Each observer can appear at multiple sites, and each site 
 
 ## Constructing a causal Directed Acyclic Graph (DAG) of our system
 
-```mermaid
+```{mermaid}
 flowchart LR
-    C[Confounder C] --> X[Exposure X]
-    C --> M1[Mediator M1]
-    C --> Y[Outcome Y]
+
+    C[C]
+    X[X]
+    M1[M1]
+    M2[M2]
+    Y[Y]
+
+    %% Edges
+    C --> X
+    C --> M1
+    C --> Y
     X --> M1
-    X --> M2[Mediator M2]
+
     X --> Y
     M1 --> M2
+        X --> M2
     M2 --> Y
+
+    %% Styles (fully editable)
+    style C fill:#FACECE,stroke:none,color:#000000,font-size:16px
+    style X fill:#D6EAF8,stroke:none,color:#000000,font-size:16px
+    style M1 fill:#FDEBD0,stroke:none,color:#000000,font-size:16px
+    style M2 fill:#FDEBD0,stroke:none,color:#000000,font-size:16px
+    style Y fill:#D5F5E3,stroke:none,color:#000000,font-size:16px
 ```
 
 Recall that we use the DAGs to guide our study design and our analysis. A well-defined DAG tells us what questions are appropriate given the causal assumptions of our DAG. Generally, this causal DAG implies the following:
@@ -257,6 +266,7 @@ This formalizes the set of casual assumptions of your system. The next step is t
 ```{r}
 dag_txt
 adjustmentSets(dag_txt, exposure = "X", outcome = "Y")
+
 ```
 
 For this DAG, `dagitty` should identify `C` as the minimal sufficient adjustment set for the total effect of `X` on `Y`. This is exactly what we expect for a minimal model for this generally canonical causal DAG. That is, for this the total-effect model, the model should:
@@ -324,8 +334,6 @@ mod_total_gaussian_crossed <- gam(
 
 Then, we compare using AIC. 
 
-
-
 ```{r}
 aic_total_tbl <- tibble(
   model = c(
@@ -354,13 +362,13 @@ mod_total_gaussian_site <- gam(
   Y ~ X + C + s(site, bs = "re"),
   data = dat,
   family = gaussian(),
-  method = "REML"
+  method = "ML"
 )
 mod_total_scat_site <- gam(
   Y ~ X + C + s(site, bs = "re") ,
   data = dat,
   family = scat(),
-  method = "REML"
+  method = "ML"
 )
 ```
 
@@ -412,6 +420,7 @@ Now, for GAMs, checking the residual structure is a bit tricky. We must manually
 # simulate from model
 sim <- simulate(mod_total, nsim = 1000)
 
+
 # create DHARMa object manually
 res <- createDHARMa(
   simulatedResponse = sim,
@@ -424,6 +433,83 @@ plot(res)
 ```
 
 So, it not perfect and still has some structural issues. But we are close!
+
+```{r}
+m_linear <- gam(
+  Y ~ X + C + s(site, bs = "re"),
+  data = dat,
+  family = scat(),
+  method = "REML"
+)
+
+m_x <- gam(
+  Y ~ s(X) + C + s(site, bs = "re"),
+  data = dat,
+  family = scat(),
+  method = "REML"
+)
+
+
+m_c <- gam(
+  Y ~ X + s(C) + s(site, bs = "re"),
+  data = dat,
+  family = scat(),
+  method = "REML"
+)
+
+m_b <- gam(
+  Y ~ s(X) + s(C) + s(site, bs = "re"),
+  data = dat,
+  family = scat(),
+  method = "REML"
+)
+
+
+```
+
+Check the AIC.
+
+
+```{r}
+aic_total_tbl <- tibble(
+  model = c(
+    "all linear",
+    "smoothed X",
+    "smoothed C",
+    "smoothed both"
+
+  ),
+  AIC = c(
+    AIC(m_linear),
+    AIC(m_x),
+    AIC(m_c),
+    AIC(m_b)
+  )
+) |>
+  arrange(AIC) |>
+  mutate(delta_AIC = AIC - min(AIC))
+
+aic_total_tbl
+```
+
+Simulate residuals
+
+```{r}
+# simulate from model
+sim <- simulate(m_b, nsim = 1000)
+
+
+# create DHARMa object manually
+res <- createDHARMa(
+  simulatedResponse = sim,
+  observedResponse = dat$Y,
+  fittedPredictedResponse = predict(m_b, type = "response")
+)
+
+plot(res)
+
+```
+
 
 ## Next Up!
 

@@ -409,6 +409,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">From kitchen-sink to SCM</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/frequentist_scm_gam_glmm_tutorial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">SCM: Total Effects</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -557,6 +563,71 @@ classDef node fill:#d9d9d9,color:#000,stroke-width:0px;
 </div>
 </div>
 </div>
+</div>
+<p>It is helpful to have an idea of what kinds of roles each node. Here is a useful breakdown of causal roles for different types of nodes:</p>
+<div class="course-info">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 20%">
+<col style="width: 19%">
+<col style="width: 35%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Role</th>
+<th>Key question</th>
+<th>What it is</th>
+<th>Include / Include in model?</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Driver</strong></td>
+<td>What generates variation?</td>
+<td>Broad upstream cause</td>
+<td>Yes, when they are confounders of the focal relationship</td>
+<td>Climate, traits</td>
+</tr>
+<tr class="even">
+<td><strong>System setup</strong></td>
+<td>What does the system look like at the start?</td>
+<td>Initial conditions or state</td>
+<td>Usually; they define context and may confound relationships</td>
+<td>Density, habitat, distance</td>
+</tr>
+<tr class="odd">
+<td><strong>Mechanism</strong></td>
+<td>What processes modify the system?</td>
+<td>Specific pathways (mediators)</td>
+<td>Yes, only when estimating direct effects</td>
+<td>Predation, dispersal, mutualists</td>
+</tr>
+<tr class="even">
+<td><strong>Outcome</strong></td>
+<td>What are we trying to explain?</td>
+<td>Response variable</td>
+<td>No, this is the variable being explained</td>
+<td>Recruitment, survival</td>
+</tr>
+<tr class="odd">
+<td><strong>Measurement</strong></td>
+<td>How is it observed?</td>
+<td>Observation/detection process</td>
+<td>Sometimes include, when correcting for detection or measurement bias</td>
+<td>Detection probability, counts</td>
+</tr>
+<tr class="even">
+<td><strong>Selection / design</strong></td>
+<td>Why do we observe these data?</td>
+<td>Sampling process</td>
+<td>Sometimes, because conditioning can induce bias</td>
+<td>Plot placement, effort</td>
+</tr>
+</tbody>
+</table>
 </div>
 <p>Any good DAG should represent <strong>causal assumptions</strong>, <em>not</em> statistical correlations. If there is good ecological justification for a causal link between two variables, you should include it in the model (even if a relationship between two variables has never been tested). Unlike non-causal approaches, a useful DAG emphasizes conceptual completeness over statistical parsimony. In other words, it is better to include more knowledge in a DAG than try to simplify it. So, how do we efficiently construct a DAG that has strong causal assumptions?</p>
 </section>

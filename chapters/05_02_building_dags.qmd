@@ -79,6 +79,21 @@ classDef node fill:#d9d9d9,color:#000,stroke-width:0px;
 
 ::::
 
+It is helpful to have an idea of what kinds of roles each node. Here is a useful breakdown of causal roles for different types of nodes:
+
+::: {.course-info}
+| Role | Key question | What it is | Include / Include in model? | Example |
+|------|-------------|------------|----------------------|---------|
+| **Driver** | What generates variation? | Broad upstream cause | Yes, when they are confounders of the focal relationship | Climate, traits |
+| **System setup** | What does the system look like at the start? | Initial conditions or state | Usually; they define context and may confound relationships | Density, habitat, distance |
+| **Mechanism** | What processes modify the system? | Specific pathways (mediators) | Yes, only when estimating direct effects | Predation, dispersal, mutualists |
+| **Outcome** | What are we trying to explain? | Response variable | No, this is the variable being explained | Recruitment, survival |
+| **Measurement** | How is it observed? | Observation/detection process | Sometimes include, when correcting for detection or measurement bias | Detection probability, counts |
+| **Selection / design** | Why do we observe these data? | Sampling process | Sometimes, because conditioning can induce bias | Plot placement, effort |
+:::
+
+
+
 Any good DAG should represent **causal assumptions**, _not_ statistical correlations. If there is good ecological justification for a causal link between two variables, you should include it in the model (even if a relationship between two variables has never been tested). Unlike non-causal approaches, a useful DAG emphasizes conceptual completeness over statistical parsimony. In other words, it is better to include more knowledge in a DAG than try to simplify it. So, how do we efficiently construct a DAG that has strong causal assumptions?
 
 ## Constructing a DAG for your study system

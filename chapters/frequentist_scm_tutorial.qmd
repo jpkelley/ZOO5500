@@ -4,6 +4,8 @@ format:
   html:
     toc: true
     toc-depth: 3
+    mermaid:
+      theme: forest
 ---
 
 ## Introduction
@@ -63,6 +65,7 @@ These are not nested. Each observer can appear at multiple sites, and each site 
 ## Constructing a causal Directed Acyclic Graph (DAG) of our system
 
 ```{mermaid}
+
 flowchart LR
 
     C[C]
@@ -79,7 +82,7 @@ flowchart LR
 
     X --> Y
     M1 --> M2
-        X --> M2
+    X --> M2
     M2 --> Y
 
     %% Styles (fully editable)

@@ -2,7 +2,7 @@
 title: "Information"
 numbered: true
 ---
-
+ 
 ## Essential Course Information {.unnumbered}
 
 ::: course-info

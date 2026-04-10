@@ -1,9 +1,6 @@
 project:
   type: book
   output-dir: docs
-  render:
-    - "*.qmd"
-    - "chapters/*.qmd"
 
 book:
   title: "Quantitative Analysis of (Messy) Field Data"

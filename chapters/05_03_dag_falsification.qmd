@@ -1,5 +1,5 @@
 ---
-title: "DaAG falsification"
+title: "DAG falsification"
 format:
   html:
     mermaid:

@@ -2,10 +2,9 @@
 title: "SCM: Total Effects"
 format:
   html:
-    toc: true
-    toc-depth: 3
     mermaid:
       theme: forest
+      
 ---
 
 ## Introduction
@@ -241,9 +240,21 @@ p_m2_y <- ggplot(dat, aes(M2, Y)) +
   geom_smooth(method = "gam", formula = y ~ s(x, k = 10)) +
   labs(title = "Simulated nonlinear relation: M2 -> Y")
 
-p_x_m1
-p_m2_y
 ```
+
+::: columns
+::: column
+```{r}
+print(p_x_m1)
+```
+:::
+
+::: column
+```{r}
+print(p_m2_y)
+```
+:::
+:::
 
 
 ## Step 1: Encode the DAG and recover the appropriate adjustment set using `dagitty` in R

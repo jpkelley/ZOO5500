@@ -750,22 +750,30 @@ $ Y    &lt;dbl&gt; 4.0011511, -0.9691240, -5.4194487, 4.5770825, 1.3178349, -7.1
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>p_m2_y <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(M2, Y)) <span class="sc">+</span></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.08</span>) <span class="sc">+</span></span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"gam"</span>, <span class="at">formula =</span> y <span class="sc">~</span> <span class="fu">s</span>(x, <span class="at">k =</span> <span class="dv">10</span>)) <span class="sc">+</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Simulated nonlinear relation: M2 -&gt; Y"</span>)</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>p_x_m1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Simulated nonlinear relation: M2 -&gt; Y"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="columns">
+<div class="column">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p_x_m1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="frequentist_scm_tutorial_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="frequentist_scm_tutorial_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>p_m2_y</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div><div class="column">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p_m2_y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="frequentist_scm_tutorial_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="frequentist_scm_tutorial_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -775,20 +783,20 @@ $ Y    &lt;dbl&gt; 4.0011511, -0.9691240, -5.4194487, 4.5770825, 1.3178349, -7.1
 <p>Recall that the adjustment set for the total effect should be derived from the DAG; it should not come from guesswork or intuition. We have explored how to use the online user interface for <a href="https://dagitty.net/dags.html"><code>dagitty</code></a>, but this can also be automated to some degree directly in R. Examine the following code and see how the DAG can be input into R using a specific syntax that can be manually prepared or copied from the right-hand code box in the <code>dagitty</code> user interface.</p>
 <p>First, save your DAG as an object (named something like <code>dag_txt</code>):</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>dag_txt <span class="ot">&lt;-</span> <span class="fu">dagitty</span>(<span class="st">"dag {</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="st">  C -&gt; X</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="st">  C -&gt; M1</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="st">  C -&gt; Y</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="st">  X -&gt; M1</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="st">  X -&gt; M2</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="st">  X -&gt; Y</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="st">  M1 -&gt; M2</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="st">  M2 -&gt; Y</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="st">}"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>dag_txt <span class="ot">&lt;-</span> <span class="fu">dagitty</span>(<span class="st">"dag {</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="st">  C -&gt; X</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="st">  C -&gt; M1</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="st">  C -&gt; Y</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="st">  X -&gt; M1</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="st">  X -&gt; M2</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="st">  X -&gt; Y</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="st">  M1 -&gt; M2</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="st">  M2 -&gt; Y</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="st">}"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>This formalizes the set of casual assumptions of your system. The next step is to specify the exposure and outcome variables that are specific to your question. In this case, your question asks about the total-effect of <code>X</code> on <code>Y</code>. So, set your exposure and outcome appropriately in the <code>adjustmentSets</code> function:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>dag_txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>dag_txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>dag {
 C
@@ -806,7 +814,7 @@ X -&gt; M2
 X -&gt; Y
 }</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">adjustmentSets</span>(dag_txt, <span class="at">exposure =</span> <span class="st">"X"</span>, <span class="at">outcome =</span> <span class="st">"Y"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">adjustmentSets</span>(dag_txt, <span class="at">exposure =</span> <span class="st">"X"</span>, <span class="at">outcome =</span> <span class="st">"Y"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{ C }</code></pre>
 </div>
@@ -840,55 +848,55 @@ X -&gt; Y
 <h3 data-number="32.7.2" class="anchored" data-anchor-id="candidate-total-effect-models"><span class="header-section-number">32.7.2</span> Candidate total-effect models</h3>
 <p>First, focus on the random effect structure</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># no random effect</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>mod_total_gaussian_none <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> X <span class="sc">+</span> C,</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>mod_total_gaussian_site <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> X <span class="sc">+</span> C <span class="sc">+</span> <span class="fu">s</span>(site, <span class="at">bs =</span> <span class="st">"re"</span>),</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>mod_total_gaussian_obs <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> X <span class="sc">+</span> C <span class="sc">+</span> <span class="fu">s</span>(obs, <span class="at">bs =</span> <span class="st">"re"</span>),</span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>mod_total_gaussian_crossed <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> X <span class="sc">+</span> C <span class="sc">+</span> <span class="fu">s</span>(site, <span class="at">bs =</span> <span class="st">"re"</span>) <span class="sc">+</span> <span class="fu">s</span>(obs, <span class="at">bs =</span> <span class="st">"re"</span>),</span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
-<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
-<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># no random effect</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>mod_total_gaussian_none <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> X <span class="sc">+</span> C,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>mod_total_gaussian_site <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> X <span class="sc">+</span> C <span class="sc">+</span> <span class="fu">s</span>(site, <span class="at">bs =</span> <span class="st">"re"</span>),</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>mod_total_gaussian_obs <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> X <span class="sc">+</span> C <span class="sc">+</span> <span class="fu">s</span>(obs, <span class="at">bs =</span> <span class="st">"re"</span>),</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>mod_total_gaussian_crossed <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> X <span class="sc">+</span> C <span class="sc">+</span> <span class="fu">s</span>(site, <span class="at">bs =</span> <span class="st">"re"</span>) <span class="sc">+</span> <span class="fu">s</span>(obs, <span class="at">bs =</span> <span class="st">"re"</span>),</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Then, we compare using AIC.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>aic_total_tbl <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> <span class="fu">c</span>(</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Gaussian, no random effects"</span>,</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Gaussian, site random effect"</span>,</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Gaussian, observer random effect"</span>,</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Gaussian, crossed site + observer random effects"</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">AIC =</span> <span class="fu">c</span>(</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">AIC</span>(mod_total_gaussian_none),</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">AIC</span>(mod_total_gaussian_site),</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">AIC</span>(mod_total_gaussian_obs),</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">AIC</span>(mod_total_gaussian_crossed)</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(AIC) <span class="sc">|&gt;</span></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">delta_AIC =</span> AIC <span class="sc">-</span> <span class="fu">min</span>(AIC))</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>aic_total_tbl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>aic_total_tbl <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> <span class="fu">c</span>(</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Gaussian, no random effects"</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Gaussian, site random effect"</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Gaussian, observer random effect"</span>,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Gaussian, crossed site + observer random effects"</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">AIC =</span> <span class="fu">c</span>(</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">AIC</span>(mod_total_gaussian_none),</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">AIC</span>(mod_total_gaussian_site),</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">AIC</span>(mod_total_gaussian_obs),</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">AIC</span>(mod_total_gaussian_crossed)</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(AIC) <span class="sc">|&gt;</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">delta_AIC =</span> AIC <span class="sc">-</span> <span class="fu">min</span>(AIC))</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>aic_total_tbl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 3
   model                                              AIC delta_AIC
@@ -901,36 +909,36 @@ X -&gt; Y
 </div>
 <p>Here, you can see that you have a choice. Does the more complex random effect structure reflect your study design more, or not? For now, let us assume that the “Gaussian, site random effect” model has the preferred random effects structure. We can now examine the functional form using <code>method = "ML"</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>mod_total_gaussian_site <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> X <span class="sc">+</span> C <span class="sc">+</span> <span class="fu">s</span>(site, <span class="at">bs =</span> <span class="st">"re"</span>),</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"ML"</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>mod_total_scat_site <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> X <span class="sc">+</span> C <span class="sc">+</span> <span class="fu">s</span>(site, <span class="at">bs =</span> <span class="st">"re"</span>) ,</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">scat</span>(),</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"ML"</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>mod_total_gaussian_site <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> X <span class="sc">+</span> C <span class="sc">+</span> <span class="fu">s</span>(site, <span class="at">bs =</span> <span class="st">"re"</span>),</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"ML"</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>mod_total_scat_site <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> X <span class="sc">+</span> C <span class="sc">+</span> <span class="fu">s</span>(site, <span class="at">bs =</span> <span class="st">"re"</span>) ,</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">scat</span>(),</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"ML"</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Let us again compare using AIC, this time focusing only on the two models for which we wanted to compare the functional form (specifically, the error distribution)</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>aic_total_tbl <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> <span class="fu">c</span>(</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Gaussian, site random effect"</span>,</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Scaled-t, site random effect"</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">AIC =</span> <span class="fu">c</span>(</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">AIC</span>(mod_total_gaussian_site),</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">AIC</span>(mod_total_scat_site)</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(AIC) <span class="sc">|&gt;</span></span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">delta_AIC =</span> AIC <span class="sc">-</span> <span class="fu">min</span>(AIC))</span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>aic_total_tbl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>aic_total_tbl <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> <span class="fu">c</span>(</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Gaussian, site random effect"</span>,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Scaled-t, site random effect"</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">AIC =</span> <span class="fu">c</span>(</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">AIC</span>(mod_total_gaussian_site),</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">AIC</span>(mod_total_scat_site)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(AIC) <span class="sc">|&gt;</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">delta_AIC =</span> AIC <span class="sc">-</span> <span class="fu">min</span>(AIC))</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>aic_total_tbl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 3
   model                          AIC delta_AIC
@@ -949,14 +957,14 @@ X -&gt; Y
 <section id="get-the-final-model" class="level3" data-number="32.7.3">
 <h3 data-number="32.7.3" class="anchored" data-anchor-id="get-the-final-model"><span class="header-section-number">32.7.3</span> Get the final model</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>mod_total <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> X <span class="sc">+</span> C <span class="sc">+</span> <span class="fu">s</span>(site, <span class="at">bs =</span> <span class="st">"re"</span>),</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">scat</span>(),</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_total)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>mod_total <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> X <span class="sc">+</span> C <span class="sc">+</span> <span class="fu">s</span>(site, <span class="at">bs =</span> <span class="st">"re"</span>),</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">scat</span>(),</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_total)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Family: Scaled t(3.243,2.345) 
@@ -982,89 +990,89 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 R-sq.(adj) =  0.571   Deviance explained = 42.9%
 -REML = 523.37  Scale est. = 1         n = 200</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod_total, <span class="at">all.terms=</span>T, <span class="at">pages=</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod_total, <span class="at">all.terms=</span>T, <span class="at">pages=</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="frequentist_scm_tutorial_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="frequentist_scm_tutorial_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Now, for GAMs, checking the residual structure is a bit tricky. We must manually construct the residuals in <code>DHARMa</code> using a simulation. Here is how we do it.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate from model</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>sim <span class="ot">&lt;-</span> <span class="fu">simulate</span>(mod_total, <span class="at">nsim =</span> <span class="dv">1000</span>)</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co"># create DHARMa object manually</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">createDHARMa</span>(</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">simulatedResponse =</span> sim,</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">observedResponse =</span> dat<span class="sc">$</span>Y,</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">fittedPredictedResponse =</span> <span class="fu">predict</span>(mod_total, <span class="at">type =</span> <span class="st">"response"</span>)</span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(res)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate from model</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>sim <span class="ot">&lt;-</span> <span class="fu">simulate</span>(mod_total, <span class="at">nsim =</span> <span class="dv">1000</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co"># create DHARMa object manually</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">createDHARMa</span>(</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">simulatedResponse =</span> sim,</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">observedResponse =</span> dat<span class="sc">$</span>Y,</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">fittedPredictedResponse =</span> <span class="fu">predict</span>(mod_total, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(res)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="frequentist_scm_tutorial_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="frequentist_scm_tutorial_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>So, it not perfect and still has some structural issues. But we are close!</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>m_linear <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> X <span class="sc">+</span> C <span class="sc">+</span> <span class="fu">s</span>(site, <span class="at">bs =</span> <span class="st">"re"</span>),</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">scat</span>(),</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>m_x <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> <span class="fu">s</span>(X) <span class="sc">+</span> C <span class="sc">+</span> <span class="fu">s</span>(site, <span class="at">bs =</span> <span class="st">"re"</span>),</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">scat</span>(),</span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>m_c <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> X <span class="sc">+</span> <span class="fu">s</span>(C) <span class="sc">+</span> <span class="fu">s</span>(site, <span class="at">bs =</span> <span class="st">"re"</span>),</span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">scat</span>(),</span>
-<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
-<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>m_b <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
-<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> <span class="fu">s</span>(X) <span class="sc">+</span> <span class="fu">s</span>(C) <span class="sc">+</span> <span class="fu">s</span>(site, <span class="at">bs =</span> <span class="st">"re"</span>),</span>
-<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
-<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">scat</span>(),</span>
-<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
-<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>m_linear <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> X <span class="sc">+</span> C <span class="sc">+</span> <span class="fu">s</span>(site, <span class="at">bs =</span> <span class="st">"re"</span>),</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">scat</span>(),</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>m_x <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> <span class="fu">s</span>(X) <span class="sc">+</span> C <span class="sc">+</span> <span class="fu">s</span>(site, <span class="at">bs =</span> <span class="st">"re"</span>),</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">scat</span>(),</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>m_c <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> X <span class="sc">+</span> <span class="fu">s</span>(C) <span class="sc">+</span> <span class="fu">s</span>(site, <span class="at">bs =</span> <span class="st">"re"</span>),</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">scat</span>(),</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>m_b <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> <span class="fu">s</span>(X) <span class="sc">+</span> <span class="fu">s</span>(C) <span class="sc">+</span> <span class="fu">s</span>(site, <span class="at">bs =</span> <span class="st">"re"</span>),</span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">scat</span>(),</span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Check the AIC.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>aic_total_tbl <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> <span class="fu">c</span>(</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"all linear"</span>,</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"smoothed X"</span>,</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"smoothed C"</span>,</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"smoothed both"</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">AIC =</span> <span class="fu">c</span>(</span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">AIC</span>(m_linear),</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">AIC</span>(m_x),</span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">AIC</span>(m_c),</span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">AIC</span>(m_b)</span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(AIC) <span class="sc">|&gt;</span></span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">delta_AIC =</span> AIC <span class="sc">-</span> <span class="fu">min</span>(AIC))</span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>aic_total_tbl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>aic_total_tbl <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> <span class="fu">c</span>(</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"all linear"</span>,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"smoothed X"</span>,</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"smoothed C"</span>,</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"smoothed both"</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">AIC =</span> <span class="fu">c</span>(</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">AIC</span>(m_linear),</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">AIC</span>(m_x),</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">AIC</span>(m_c),</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">AIC</span>(m_b)</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(AIC) <span class="sc">|&gt;</span></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">delta_AIC =</span> AIC <span class="sc">-</span> <span class="fu">min</span>(AIC))</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>aic_total_tbl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 3
   model           AIC delta_AIC
@@ -1077,22 +1085,22 @@ R-sq.(adj) =  0.571   Deviance explained = 42.9%
 </div>
 <p>Simulate residuals</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate from model</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>sim <span class="ot">&lt;-</span> <span class="fu">simulate</span>(m_b, <span class="at">nsim =</span> <span class="dv">1000</span>)</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co"># create DHARMa object manually</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">createDHARMa</span>(</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">simulatedResponse =</span> sim,</span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">observedResponse =</span> dat<span class="sc">$</span>Y,</span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">fittedPredictedResponse =</span> <span class="fu">predict</span>(m_b, <span class="at">type =</span> <span class="st">"response"</span>)</span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(res)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate from model</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>sim <span class="ot">&lt;-</span> <span class="fu">simulate</span>(m_b, <span class="at">nsim =</span> <span class="dv">1000</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co"># create DHARMa object manually</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">createDHARMa</span>(</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">simulatedResponse =</span> sim,</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">observedResponse =</span> dat<span class="sc">$</span>Y,</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">fittedPredictedResponse =</span> <span class="fu">predict</span>(m_b, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(res)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="frequentist_scm_tutorial_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="frequentist_scm_tutorial_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>

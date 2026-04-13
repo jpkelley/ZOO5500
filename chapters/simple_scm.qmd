@@ -1,10 +1,10 @@
+
 ---
 title: "SCM: Total Effects"
 format:
   html:
     mermaid:
       theme: forest
-      
 ---
 
 ## Introduction
@@ -15,13 +15,13 @@ This tutorial shows how to estimate **total**, **direct**, and **indirect** effe
 2. uses `dagitty` to define the adjustment set for the total effect
 3. simulates data from a known SCM with both linear and nonlinear edges
 4. includes two crossed random effects (`site` and `observer`)
-5. estimates direct and indirect effects by `g-computation`, not by multiplying coefficients
+5. estimates direct and indirect effects by `g-computation`, not by multiplying coefficients (next section)
 
 Again, note that the first workflow you will be exposed to is entirely frequentist (something with which you are already familiar). 
 
 * `mgcv::gam()` for structural equations,
 * AIC for pathway model (i.e. sub-model) comparison where appropriate
-* bootstrap resampling for uncertainty in `g-computation`
+* bootstrap resampling for uncertainty in `g-computation` (next section)
 
 This section introduces a few key ideas using simple math. Do not worry. We will walk through the process step by step. We will cover the total effect, the direct effect (controlling for both mediators and confounders), and the indirect effect. Although causal decomposition (e.g., via g-computation) allows us to separate direct and indirect effects, we begin with the total effect and then, in the next tutorial, will cover formal causal decomposition. This is typically the first model you fit when addressing a broad causal question, before examining specific pathways or mediation. 
 
@@ -448,6 +448,13 @@ plot(res)
 
 So, it not perfect and still has some structural issues. But we are close!
 
+Remember that we originally wanted to examine the functional form of these relationships. Specifically, we wanted to test if there were any nonlinear relationships. Therefore, we could take one of two approaches:
+
+* fit smoothers (within a GAM) to both terms simultaneously and let the smoothers do their work
+* fit multiple models each with different combinations of smoothers
+
+To see how this is all done, let us do the long way (second option above) first. 
+
 ```{r}
 m_linear <- gam(
   Y ~ X + C + s(site, bs = "re"),
@@ -506,6 +513,15 @@ aic_total_tbl <- tibble(
 aic_total_tbl
 ```
 
+But, now, let use see what a simultaneous approach (fitting both terms as smoothers) yielded:
+
+```{r}
+summary(m_b)
+
+```
+Here, both smoothers are nonlinear. Even if one of the smoothers indicated an estimated degree of freedom (`edf`) of 1, retained the term in the model as-is would not hurt. 
+
+
 Simulate residuals
 
 ```{r}
@@ -527,7 +543,7 @@ plot(res)
 
 ## Next Up!
 
-In the next section, we will conduct a formal causal decomposition!
+In the next section, we will conduct a formal causal decomposition! 
 
 
 

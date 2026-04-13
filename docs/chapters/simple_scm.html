@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.36">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -75,7 +75,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-832e3d7b6b94ddcc90a000f8fabe51a9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -153,7 +153,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/05_01_why_scms.html">Part V: Curves to Meaning</a></li><li class="breadcrumb-item"><a href="../chapters/frequentist_scm_tutorial.html"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">SCM: Total Effects</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/05_01_why_scms.html">Part V: Curves to Meaning</a></li><li class="breadcrumb-item"><a href="../chapters/simple_scm.html"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">SCM: Total Effects</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -445,7 +445,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/frequentist_scm_tutorial.html" class="sidebar-item-text sidebar-link active">
+  <a href="../chapters/simple_scm.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">SCM: Total Effects</span></span></a>
   </div>
 </li>
@@ -483,7 +483,7 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/05_01_why_scms.html">Part V: Curves to Meaning</a></li><li class="breadcrumb-item"><a href="../chapters/frequentist_scm_tutorial.html"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">SCM: Total Effects</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/05_01_why_scms.html">Part V: Curves to Meaning</a></li><li class="breadcrumb-item"><a href="../chapters/simple_scm.html"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">SCM: Total Effects</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">SCM: Total Effects</span></h1>
 </div>
@@ -510,13 +510,13 @@ window.Quarto = {
 <li>uses <code>dagitty</code> to define the adjustment set for the total effect</li>
 <li>simulates data from a known SCM with both linear and nonlinear edges</li>
 <li>includes two crossed random effects (<code>site</code> and <code>observer</code>)</li>
-<li>estimates direct and indirect effects by <code>g-computation</code>, not by multiplying coefficients</li>
+<li>estimates direct and indirect effects by <code>g-computation</code>, not by multiplying coefficients (next section)</li>
 </ol>
 <p>Again, note that the first workflow you will be exposed to is entirely frequentist (something with which you are already familiar).</p>
 <ul>
 <li><code>mgcv::gam()</code> for structural equations,</li>
 <li>AIC for pathway model (i.e.&nbsp;sub-model) comparison where appropriate</li>
-<li>bootstrap resampling for uncertainty in <code>g-computation</code></li>
+<li>bootstrap resampling for uncertainty in <code>g-computation</code> (next section)</li>
 </ul>
 <p>This section introduces a few key ideas using simple math. Do not worry. We will walk through the process step by step. We will cover the total effect, the direct effect (controlling for both mediators and confounders), and the indirect effect. Although causal decomposition (e.g., via g-computation) allows us to separate direct and indirect effects, we begin with the total effect and then, in the next tutorial, will cover formal causal decomposition. This is typically the first model you fit when addressing a broad causal question, before examining specific pathways or mediation.</p>
 <div class="callout callout-style-default callout-warning callout-titled">
@@ -759,7 +759,7 @@ $ Y    &lt;dbl&gt; 4.0011511, -0.9691240, -5.4194487, 4.5770825, 1.3178349, -7.1
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="frequentist_scm_tutorial_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="simple_scm_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -770,7 +770,7 @@ $ Y    &lt;dbl&gt; 4.0011511, -0.9691240, -5.4194487, 4.5770825, 1.3178349, -7.1
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="frequentist_scm_tutorial_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="simple_scm_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -994,7 +994,7 @@ R-sq.(adj) =  0.571   Deviance explained = 42.9%
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="frequentist_scm_tutorial_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="simple_scm_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1016,12 +1016,18 @@ R-sq.(adj) =  0.571   Deviance explained = 42.9%
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="frequentist_scm_tutorial_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="simple_scm_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>So, it not perfect and still has some structural issues. But we are close!</p>
+<p>Remember that we originally wanted to examine the functional form of these relationships. Specifically, we wanted to test if there were any nonlinear relationships. Therefore, we could take one of two approaches:</p>
+<ul>
+<li>fit smoothers (within a GAM) to both terms simultaneously and let the smoothers do their work</li>
+<li>fit multiple models each with different combinations of smoothers</li>
+</ul>
+<p>To see how this is all done, let us do the long way (second option above) first.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>m_linear <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> X <span class="sc">+</span> C <span class="sc">+</span> <span class="fu">s</span>(site, <span class="at">bs =</span> <span class="st">"re"</span>),</span>
@@ -1083,24 +1089,54 @@ R-sq.(adj) =  0.571   Deviance explained = 42.9%
 4 all linear    1050.      83.5</code></pre>
 </div>
 </div>
+<p>But, now, let use see what a simultaneous approach (fitting both terms as smoothers) yielded:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_b)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Family: Scaled t(3.277,1.865) 
+Link function: identity 
+
+Formula:
+Y ~ s(X) + s(C) + s(site, bs = "re")
+
+Parametric coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)  -2.6148     0.5522  -4.735 2.19e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Approximate significance of smooth terms:
+          edf Ref.df Chi.sq p-value    
+s(X)    3.938  4.892 204.07  &lt;2e-16 ***
+s(C)    5.225  6.382 158.02  &lt;2e-16 ***
+s(site) 2.730  3.000  31.89  &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+R-sq.(adj) =  0.727   Deviance explained = 56.9%
+-REML = 486.29  Scale est. = 1         n = 200</code></pre>
+</div>
+</div>
+<p>Here, both smoothers are nonlinear. Even if one of the smoothers indicated an estimated degree of freedom (<code>edf</code>) of 1, retained the term in the model as-is would not hurt.</p>
 <p>Simulate residuals</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate from model</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>sim <span class="ot">&lt;-</span> <span class="fu">simulate</span>(m_b, <span class="at">nsim =</span> <span class="dv">1000</span>)</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co"># create DHARMa object manually</span></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">createDHARMa</span>(</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">simulatedResponse =</span> sim,</span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">observedResponse =</span> dat<span class="sc">$</span>Y,</span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">fittedPredictedResponse =</span> <span class="fu">predict</span>(m_b, <span class="at">type =</span> <span class="st">"response"</span>)</span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(res)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate from model</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>sim <span class="ot">&lt;-</span> <span class="fu">simulate</span>(m_b, <span class="at">nsim =</span> <span class="dv">1000</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co"># create DHARMa object manually</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">createDHARMa</span>(</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">simulatedResponse =</span> sim,</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">observedResponse =</span> dat<span class="sc">$</span>Y,</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">fittedPredictedResponse =</span> <span class="fu">predict</span>(m_b, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(res)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="frequentist_scm_tutorial_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="simple_scm_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>

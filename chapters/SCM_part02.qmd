@@ -500,7 +500,9 @@ summary(mod_m2)
 
 At this point, the `M2` submodel is finalized. As stated previously, we will only model one more node in this tutorial, but I will put this into an expandable box to keep this page from exploding in length. Click on the box below to expand this model approach for outcome `Y`. 
 
+
 ::: {.callout-tip collapse=true icon=false}
+
 ## Finalizing the submodel for `Y`
 
 Under the DAG, the parent set for `Y` is `{C, X, M2}`. So the structural equation for `Y` must be based on those three parents. We now repeat the same sequence as we did for outcome `M2`. 
@@ -1138,6 +1140,7 @@ boot_decomp <- function(idx, data, x0, x1) {
 Now, we can run the bootstrap.
 
 ```{r}
+
 suppressWarnings(plan(multisession))
 
 set.seed(99)

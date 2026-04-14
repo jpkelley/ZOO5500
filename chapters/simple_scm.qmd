@@ -423,7 +423,7 @@ mod_total <- gam(
 )
 
 summary(mod_total)
-plot(mod_total, all.terms=T, pages=1)
+print(plot(mod_total, all.terms=T, pages=1))
 
 ```
 
@@ -441,7 +441,7 @@ res <- createDHARMa(
   fittedPredictedResponse = predict(mod_total, type = "response")
 )
 
-plot(res)
+print(plot(res))
 
 ```
 
@@ -535,7 +535,7 @@ res <- createDHARMa(
   fittedPredictedResponse = predict(m_b, type = "response")
 )
 
-plot(res)
+print(plot(res))
 
 ```
 

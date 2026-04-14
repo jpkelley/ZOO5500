@@ -127,6 +127,7 @@ First, make sure that the following packages are loaded or added to your `load_p
 #| warning: false
 
 library(tidyverse)
+library(ggplot2)
 library(mgcv)
 library(dagitty)
 library(igraph)
@@ -244,7 +245,7 @@ p_m2_y <- ggplot(dat, aes(M2, Y)) +
 ::: columns
 ::: column
 ```{r}
-p_x_m1
+print(p_x_m1)
 ```
 :::
 

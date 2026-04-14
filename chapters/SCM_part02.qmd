@@ -820,35 +820,16 @@ For the sake of brevity, this tutorial emphasizes the logic of causal decomposit
 After Steps 3-5 have been completed for each endogenous node in our causal DAG, the final submodels can be written as a system of structural equations. In this example, the fitted submodels are:
 
 $$
-X_i \sim \operatorname{Gaussian}(\mu_{X,i}, \sigma_X^2)
-$$
-
-$$
-\mu_{X,i} = f_X(C_i) + b^{(X)}_{\mathrm{site}[i]} + b^{(X)}_{\mathrm{obs}[i]}
-$$
-
-$$
-M_{1,i} \sim \operatorname{Gaussian}(\mu_{M1,i}, \sigma_{M1}^2)
-$$
-
-$$
-\mu_{M1,i} = f_{M1,1}(X_i) + f_{M1,2}(C_i) + b^{(M1)}_{\mathrm{site}[i]} + b^{(M1)}_{\mathrm{obs}[i]}
-$$
-
-$$
-M_{2,i} \sim \operatorname{Gaussian}(\mu_{M2,i}, \sigma_{M2}^2)
-$$
-
-$$
-\mu_{M2,i} = f_{M2,1}(X_i) + f_{M2,2}(M_{1,i}) + b^{(M2)}_{\mathrm{site}[i]} + b^{(M2)}_{\mathrm{obs}[i]}
-$$
-
-$$
-Y_i \sim \operatorname{scaled\text{-}t}(\mu_{Y,i}, \sigma_Y, \nu)
-$$
-
-$$
-\mu_{Y,i} = f_{Y,1}(X_i) + f_{Y,2}(M_{2,i}) + f_{Y,3}(C_i) + b^{(Y)}_{\mathrm{site}[i]} + b^{(Y)}_{\mathrm{obs}[i]}
+\begin{aligned}
+X_i &\sim \mathrm{Gaussian}(\mu_{X,i}, \sigma_X^2) \\
+\mu_{X,i} &= f_X(C_i) + b^{(X)}_{\mathrm{site}[i]} + b^{(X)}_{\mathrm{obs}[i]} \\
+M_{1,i} &\sim \mathrm{Gaussian}(\mu_{M1,i}, \sigma_{M1}^2) \\
+\mu_{M1,i} &= f_{M1,1}(X_i) + f_{M1,2}(C_i) + b^{(M1)}_{\mathrm{site}[i]} + b^{(M1)}_{\mathrm{obs}[i]} \\
+M_{2,i} &\sim \mathrm{Gaussian}(\mu_{M2,i}, \sigma_{M2}^2) \\
+\mu_{M2,i} &= f_{M2,1}(X_i) + f_{M2,2}(M_{1,i}) + b^{(M2)}_{\mathrm{site}[i]} + b^{(M2)}_{\mathrm{obs}[i]} \\
+Y_i &\sim \text{scaled-}t(\mu_{Y,i}, \sigma_Y, \nu) \\
+\mu_{Y,i} &= f_{Y,1}(X_i) + f_{Y,2}(M_{2,i}) + f_{Y,3}(C_i) + b^{(Y)}_{\mathrm{site}[i]} + b^{(Y)}_{\mathrm{obs}[i]}
+\end{aligned}
 $$
 
 These equations also show the order in which the submodels fit together for simulation or g-computation. This is critically important, as a downstream model depends on the output of an upstream model: 

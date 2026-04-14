@@ -1,4 +1,3 @@
-
 ---
 title: "SCM: Total Effects"
 format:

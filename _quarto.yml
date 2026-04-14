@@ -57,7 +57,7 @@ book:
         - chapters/05_02_building_dags.qmd
         - chapters/05_02b_KS_to_DAGs.qmd
         - chapters/simple_scm.qmd
-        #- chapters/05_04_estimand_adjustment_model.qmd
+        - chapters/SCM_part02.qmd
         #- chapters/05_05_estimating_and_presenting_effects.qmd
 format:
   html:

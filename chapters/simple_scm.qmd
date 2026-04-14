@@ -245,7 +245,11 @@ p_m2_y <- ggplot(dat, aes(M2, Y)) +
 ::: columns
 ::: column
 ```{r}
-print(p_x_m1)
+p <- ggplot(mtcars, aes(wt, mpg)) + geom_point()
+p
+
+#p_x_m1
+
 ```
 :::
 

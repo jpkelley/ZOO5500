@@ -502,11 +502,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>You are free to organize your R Project folder in whatever way works best for you, as this course imposes very little file-structure overhead. One simple option is to create a subfolder such as <code>data/class_exercise_data</code> (using the <code>dir.create("data/class_exercise_data")</code> command to hold any example files used in class. If you need a refresher on project setup and organization, refer back to the <a href="https://jpkelley.github.io/ZOO5500/"><strong>Preparing Yourself</strong></a> section from Week 1.</p>
 <p>First, load the required packages by sourcing the file below. There a number of ways to do this (I have noticed several ways that different labs at UW do this, and that is more than acceptable). For your convenience, I have provided the following file (click to save; you may need to add the <code>.r</code> extension manually):</p>
 <ul>
-<li><a href="../chapters/class_r_scripts/load_packages.r"><code>load_packages.r</code></a></li>
+<li><a href="class_r_scripts/load_packages.r"><code>load_packages.r</code></a></li>
 </ul>
 <p>Place this file into a folder called <code>class_r_scripts</code> (just a recommendation!).</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"class_r_scripts/load_packages.r"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"chapters/class_r_scripts/load_packages.r"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>You should include this sourcing step at the beginning of all independent R scripts. The exception is if and when you use a formal reproducible analysis workflow packages (e.g.&nbsp;the <code>targets</code> package) or you need Quarto, which requires that you load packages and their dependencies in another way. This will require removing the <code>source</code> function below.</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -546,13 +546,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>To do these exercises on your own, you will need the following files (simply click to save):</p>
 <ul>
-<li><a href="../chapters/class_exercise_data/lepusantilocapra_pelonates_experiment.csv"><code>lepusantilocapra_pelonates_experiment.csv</code></a></li>
-<li><a href="../chapters/class_exercise_data/lepusantilocapra_climate_data.csv"><code>lepusantilocapra_climate_data.csv</code></a></li>
+<li><a href="chapters/class_exercise_data/lepusantilocapra_pelonates_experiment.csv"><code>lepusantilocapra_pelonates_experiment.csv</code></a></li>
+<li><a href="chapters/class_exercise_data/lepusantilocapra_climate_data.csv"><code>lepusantilocapra_climate_data.csv</code></a></li>
 </ul>
 <p>Place the data files into your <code>class_exercise_data</code> folder.</p>
 <p>Let us read in these data and save it to an object called <code>d</code> (for “data”). Yes, according to best practices for naming, this could have a more informative name. Because this is (a) a singular dataset for a simple analysis, and (b) a simple class example, we will use a shorthand to prevent some extra keystrokes. But just know this is technically <em>very bad practice</em>. Also, for the sake of streamlining this example, this file has no associated metadata (this will be shown later when we get to the modeling phase). Already, we are flawed programmers. Let us move forward and try to forget these incidents.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"class_exercise_data/lepusantilocapra_pelonates_experiment.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"chapters/class_exercise_data/lepusantilocapra_pelonates_experiment.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>This was a successful (and very simple) data ingestion. (Again, there are many ways to ingest data, so use whatever you are most comfortable with.)</p>
 <hr>
@@ -724,7 +724,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>This returns information about range, median value, and sample size within groups. <strong>Use this first to discover any major issues.</strong></p>
-<p>You can then graphically view aspects of your raw dataset. So, let us create a few plots using the ggplot2 package. Please refer to the <code>ggplot2</code> <a href="../chapters/class_exercise_data/data_visualization.pdf"><strong>Cheat Sheet</strong></a> (right click for download) for more information about this.</p>
+<p>You can then graphically view aspects of your raw dataset. So, let us create a few plots using the ggplot2 package. Please refer to the <code>ggplot2</code> <a href="chapters/class_exercise_data/data_visualization.pdf"><strong>Cheat Sheet</strong></a> (right click for download) for more information about this.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -737,7 +737,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Use the <code>ggplot2</code> <a href="../chapters/class_exercise_data/data_visualization.pdf"><strong>Cheat Sheet</strong></a> (right click for download) and find the appropriately useful arguments to replace the angle bracketed (<code>&lt; &gt;</code>) sections (that is, remove the angle brackets in your final code).</p>
+<p>Use the <code>ggplot2</code> <a href="chapters/class_exercise_data/data_visualization.pdf"><strong>Cheat Sheet</strong></a> (right click for download) and find the appropriately useful arguments to replace the angle bracketed (<code>&lt; &gt;</code>) sections (that is, remove the angle brackets in your final code).</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
@@ -770,7 +770,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02_tutorial_data_exploration_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="02_tutorial_data_exploration_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -792,7 +792,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02_tutorial_data_exploration_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="02_tutorial_data_exploration_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -807,7 +807,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02_tutorial_data_exploration_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="02_tutorial_data_exploration_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -827,7 +827,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02_tutorial_data_exploration_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="02_tutorial_data_exploration_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -847,7 +847,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02_tutorial_data_exploration_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="02_tutorial_data_exploration_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -866,7 +866,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02_tutorial_data_exploration_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="02_tutorial_data_exploration_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -882,7 +882,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02_tutorial_data_exploration_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="02_tutorial_data_exploration_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -905,7 +905,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02_tutorial_data_exploration_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="02_tutorial_data_exploration_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -925,7 +925,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02_tutorial_data_exploration_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="02_tutorial_data_exploration_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -938,7 +938,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="18.7" class="anchored" data-anchor-id="inspecting-for-multicollinearity-step-4"><span class="header-section-number">18.7</span> Inspecting for multicollinearity (Step #4)</h2>
 <p>The jackalopeologists then conducted a preliminary quantification of the climate in which <em>L. pelonates</em> was found. They used remote sensors to measure humidity, precipitation, temperature, temperature variability, and heating degree days. We don’t think we can include all the variables in our statistical model, so we want to first inspect if any of the variables are correlated (i.e.&nbsp;they tell us redundant information). Let’s read in these climate data and save it to an object called “climate”:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>climate <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"class_exercise_data/lepusantilocapra_climate_data.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>climate <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"chapters/class_exercise_data/lepusantilocapra_climate_data.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>And then look at the structure of the data:</p>
 <div class="cell">
@@ -964,7 +964,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02_tutorial_data_exploration_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="02_tutorial_data_exploration_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1043,7 +1043,7 @@ Cumulative Var 0.489 0.828</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02_tutorial_data_exploration_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="02_tutorial_data_exploration_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>

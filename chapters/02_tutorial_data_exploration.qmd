@@ -29,7 +29,7 @@ You are free to organize your R Project folder in whatever way works best for yo
 
 First, load the required packages by sourcing the file below. There a number of ways to do this (I have noticed several ways that different labs at UW do this, and that is more than acceptable). For your convenience, I have provided the following file (click to save; you may need to add the `.r` extension manually):
 
--   [`load_packages.r`](../chapters/class_r_scripts/load_packages.r)
+-   [`load_packages.r`](class_r_scripts/load_packages.r)
 
 Place this file into a folder called `class_r_scripts` (just a recommendation!).
 
@@ -58,7 +58,7 @@ library(GGally)  # extends ggplot2 but is not tidyverse
 ```{r}
 #| eval: false
 
-source("class_r_scripts/load_packages.r")
+source("chapters/class_r_scripts/load_packages.r")
 ```
 
 You should include this sourcing step at the beginning of all independent R scripts. The exception is if and when you use a formal reproducible analysis workflow packages (e.g. the `targets` package) or you need Quarto, which requires that you load packages and their dependencies in another way. This will require removing the `source` function below.
@@ -96,15 +96,15 @@ To test whether jackalope density and salt availability had causal effects on di
 
 To do these exercises on your own, you will need the following files (simply click to save):
 
--   [`lepusantilocapra_pelonates_experiment.csv`](../chapters/class_exercise_data/lepusantilocapra_pelonates_experiment.csv)
--   [`lepusantilocapra_climate_data.csv`](../chapters/class_exercise_data/lepusantilocapra_climate_data.csv)
+-   [`lepusantilocapra_pelonates_experiment.csv`](chapters/class_exercise_data/lepusantilocapra_pelonates_experiment.csv)
+-   [`lepusantilocapra_climate_data.csv`](chapters/class_exercise_data/lepusantilocapra_climate_data.csv)
 
 Place the data files into your `class_exercise_data` folder.
 
 Let us read in these data and save it to an object called `d` (for “data”). Yes, according to best practices for naming, this could have a more informative name. Because this is (a) a singular dataset for a simple analysis, and (b) a simple class example, we will use a shorthand to prevent some extra keystrokes. But just know this is technically *very bad practice*. Also, for the sake of streamlining this example, this file has no associated metadata (this will be shown later when we get to the modeling phase). Already, we are flawed programmers. Let us move forward and try to forget these incidents.
 
 ```{r}
-d <- read.csv("class_exercise_data/lepusantilocapra_pelonates_experiment.csv")
+d <- read.csv("chapters/class_exercise_data/lepusantilocapra_pelonates_experiment.csv")
 ```
 
 This was a successful (and very simple) data ingestion. (Again, there are many ways to ingest data, so use whatever you are most comfortable with.)
@@ -187,12 +187,12 @@ summary(d)
 
 This returns information about range, median value, and sample size within groups. **Use this first to discover any major issues.**
 
-You can then graphically view aspects of your raw dataset. So, let us create a few plots using the ggplot2 package. Please refer to the `ggplot2` [**Cheat Sheet**](../chapters/class_exercise_data/data_visualization.pdf) (right click for download) for more information about this.
+You can then graphically view aspects of your raw dataset. So, let us create a few plots using the ggplot2 package. Please refer to the `ggplot2` [**Cheat Sheet**](chapters/class_exercise_data/data_visualization.pdf) (right click for download) for more information about this.
 
 ::: {.callout-tip collapse="true"}
 ## **A recipe for a `ggplot2` visualization**
 
-Use the `ggplot2` [**Cheat Sheet**](../chapters/class_exercise_data/data_visualization.pdf) (right click for download) and find the appropriately useful arguments to replace the angle bracketed (`< >`) sections (that is, remove the angle brackets in your final code).
+Use the `ggplot2` [**Cheat Sheet**](chapters/class_exercise_data/data_visualization.pdf) (right click for download) and find the appropriately useful arguments to replace the angle bracketed (`< >`) sections (that is, remove the angle brackets in your final code).
 
 ```{r}
 #| eval: false
@@ -350,7 +350,7 @@ This is not particularly useful for detecting data anomalies, but it could be us
 The jackalopeologists then conducted a preliminary quantification of the climate in which *L. pelonates* was found. They used remote sensors to measure humidity, precipitation, temperature, temperature variability, and heating degree days. We don’t think we can include all the variables in our statistical model, so we want to first inspect if any of the variables are correlated (i.e. they tell us redundant information). Let’s read in these climate data and save it to an object called “climate”:
 
 ```{r}
-climate <- import("class_exercise_data/lepusantilocapra_climate_data.csv")
+climate <- import("chapters/class_exercise_data/lepusantilocapra_climate_data.csv")
 ```
 
 And then look at the structure of the data:

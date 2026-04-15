@@ -1,7 +1,17 @@
 ---
 title: "Tutorial: Partial Associations"
 format: html
+execute:
+  echo: true
+  warning: false
+  message: false
+  error: false
+editor: visual
+editor_options: 
+  chunk_output_type: console
 ---
+
+
 
 ## How a GLM works (for partial associations)
 
@@ -39,8 +49,8 @@ In a multiple regression, the coefficient of a predictor $X_i$ equals the slope 
 
 First, we begin with the previously examined dataset of *Lepusantilocapra pufferi* (puffer jackalope). Again, you will need to set up with R space, including loading R packages and reading in the example dataset. 
 
-```{r message=FALSE, warning=FALSE}
-source("class_r_scripts/load_packages.r")
+```{r}
+source("chapters/class_r_scripts/load_packages.r")
 
 ```
 
@@ -50,8 +60,8 @@ And you will need the following file (simply click to save):
 
 Read these data into R:
 
-```{r message=FALSE, warning=FALSE}
-pufferi <- read.csv("class_exercise_data/lepusantilocapra_pufferi_abundance.csv")
+```{r}
+pufferi <- read.csv("chapters/class_exercise_data/lepusantilocapra_pufferi_abundance.csv")
 str(pufferi) # examine data structure
 ```
 
@@ -133,7 +143,7 @@ mod_resid_dens <- glm(abund_resid ~ dens_resid, data = pufferi)
 
 ::: {.column width="50%"}
 
-```{r, warning=FALSE}
+```{r}
 ggplot(data.frame(dens_resid = dens_resid,
                   abund_resid = abund_resid),
        aes(x = dens_resid, y = abund_resid)) +
@@ -149,7 +159,7 @@ ggplot(data.frame(dens_resid = dens_resid,
 
 ::: {.column width="50%"}
 
-```{r, warning=FALSE}
+```{r}
 ggplot(data.frame(depth_resid = depth_resid,
                   abund_resid = abund_resid),
        aes(x = depth_resid, y = abund_resid)) +

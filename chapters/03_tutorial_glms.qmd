@@ -1,11 +1,15 @@
 ---
 title: "Tutorial: GLMs"
 format: html
+execute:
+  echo: true
+  warning: false
+  message: false
+  error: false
+editor: visual
+editor_options: 
+  chunk_output_type: console
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 ## Introduction
 
@@ -49,8 +53,8 @@ You are tasked with examining/testing the relationship between total *Lepusantil
 
 ## Set up workspace
 
-```{r message=FALSE, warning=FALSE}
-source("class_r_scripts/load_packages.r")
+```{r}
+source("chapters/class_r_scripts/load_packages.r")
 ```
 
 ## Generalized Linear Model (Gaussian error distribution)
@@ -58,7 +62,7 @@ source("class_r_scripts/load_packages.r")
 Read in the *Lorax pufferi* dataset and examine its structure. Remember that you can also use the `glimpse` function here.
 
 ```{r}
-pufferi <- read.csv("class_exercise_data/lepusantilocapra_pufferi_abundance.csv")
+pufferi <- read.csv("chapters/class_exercise_data/lepusantilocapra_pufferi_abundance.csv")
 str(pufferi) # examine data structure
 ```
 

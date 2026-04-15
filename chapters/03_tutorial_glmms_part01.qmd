@@ -1,11 +1,19 @@
 ---
 title: "Tutorial: GLMMs"
-output: html_document
+format:
+  html: default
+execute:
+  echo: true
+  warning: false
+  message: false
+  error: false
+editor: visual
 editor_options: 
   chunk_output_type: console
 ---
 
-```{r setup, include=FALSE}
+
+```{r}
 knitr::opts_chunk$set(warning = FALSE, message=FALSE)
 ```
 
@@ -23,8 +31,8 @@ You already have experience with fitting a GLM from the previous section. If you
 
 ## Workspace set-up
 
-```{r, warning=FALSE, message=FALSE}
-source("class_r_scripts/load_packages.r")
+```{r}
+source("chapters/class_r_scripts/load_packages.r")
 
 ```
 
@@ -53,7 +61,7 @@ Jackalope seem to be everywhere. Recently, during a survey of 31 forested study 
 ```{r}
 #| echo: false
 #| results: 'hide'
-wyoming <- import("class_exercise_data/lepusantilocapra_wyomingensis_dataset.csv")
+wyoming <- import("chapters/class_exercise_data/lepusantilocapra_wyomingensis_dataset.csv")
 str(wyoming)
 ```
 You see several variables and plot information:

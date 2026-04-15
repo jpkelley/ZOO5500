@@ -504,14 +504,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="set-up-workspace" class="level2" data-number="22.2">
 <h2 data-number="22.2" class="anchored" data-anchor-id="set-up-workspace"><span class="header-section-number">22.2</span> Set up workspace</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"class_r_scripts/load_packages.r"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"chapters/class_r_scripts/load_packages.r"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="generalized-linear-model-gaussian-error-distribution" class="level2" data-number="22.3">
 <h2 data-number="22.3" class="anchored" data-anchor-id="generalized-linear-model-gaussian-error-distribution"><span class="header-section-number">22.3</span> Generalized Linear Model (Gaussian error distribution)</h2>
 <p>Read in the <em>Lorax pufferi</em> dataset and examine its structure. Remember that you can also use the <code>glimpse</code> function here.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pufferi <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"class_exercise_data/lepusantilocapra_pufferi_abundance.csv"</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pufferi <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"chapters/class_exercise_data/lepusantilocapra_pufferi_abundance.csv"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(pufferi) <span class="co"># examine data structure</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   146 obs. of  9 variables:
@@ -1002,13 +1002,6 @@ alternative hypothesis: two.sided</code></pre>
 <p>These look great so far, but let us check the residuals against the predictors in the model.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotResiduals</span>(sim_res, pufferi<span class="sc">$</span>mean_depth)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>qu = 0.75, log(sigma) = -2.701421 : outer Newton did not converge fully.</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in newton(lsp = lsp, X = G$X, y = G$y, Eb = G$Eb, UrS = G$UrS, L = G$L,
-: Fitting terminated with step failure - check results carefully</code></pre>
-</div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1019,7 +1012,7 @@ alternative hypothesis: two.sided</code></pre>
 </div>
 <p>This looks great!</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotResiduals</span>(sim_res, pufferi<span class="sc">$</span>period)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotResiduals</span>(sim_res, pufferi<span class="sc">$</span>period)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1030,7 +1023,7 @@ alternative hypothesis: two.sided</code></pre>
 </div>
 <p>OK, we are starting to get the picture here that we have done some good work here. One last plot…</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotResiduals</span>(sim_res, pufferi<span class="sc">$</span>year)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotResiduals</span>(sim_res, pufferi<span class="sc">$</span>year)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">

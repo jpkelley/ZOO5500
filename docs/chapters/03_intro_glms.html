@@ -502,6 +502,9 @@ window.Quarto = {
 </header>
 
 
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"chapters/class_r_scripts/load_packages.r"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <section id="separating-signal-from-noise" class="level2" data-number="21.1">
 <h2 data-number="21.1" class="anchored" data-anchor-id="separating-signal-from-noise"><span class="header-section-number">21.1</span> Separating signal from noise</h2>
 <p>Our task as scientists is to learn how to separate the patterns that carry meaningful information (<em>signal</em>) from the variation that does not (<em>noise</em>). This is why we use all of these silly models in the first place. So, what exactly are models?</p>
@@ -516,15 +519,29 @@ window.Quarto = {
 <p>Here, we provide some simulation code that will (hopefully) convince you that GLMs are pretty much the same kinds of models that you were exposed to in your introductory statistics courses back in the day. As you will quickly see, however, GLMs are highly flexible and will allow you to extract the maximum amount of signal from your noisy data.</p>
 <p>We will simulate a fake dataset that has two groups (1 and 2). The values for each group follow normal distributions with a standard deviation of 1. The groups differ in their mean values, however, by one unit.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">100</span>) <span class="co"># this is a random seed that ensures example reproducibility</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>nval <span class="ot">&lt;-</span> <span class="dv">50</span> <span class="co"># Generate some fake data</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>group1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(nval, <span class="at">mean=</span><span class="dv">5</span>, <span class="at">sd=</span><span class="dv">1</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>group2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(nval, <span class="at">mean=</span><span class="dv">6</span>, <span class="at">sd=</span><span class="dv">1</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">id=</span><span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"group1"</span>, <span class="st">"group2"</span>), <span class="at">each=</span>nval), </span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">y=</span><span class="fu">c</span>(group1, group2))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">100</span>) <span class="co"># this is a random seed that ensures example reproducibility</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>nval <span class="ot">&lt;-</span> <span class="dv">50</span> <span class="co"># Generate some fake data</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>group1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(nval, <span class="at">mean=</span><span class="dv">5</span>, <span class="at">sd=</span><span class="dv">1</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>group2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(nval, <span class="at">mean=</span><span class="dv">6</span>, <span class="at">sd=</span><span class="dv">1</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">id=</span><span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"group1"</span>, <span class="st">"group2"</span>), <span class="at">each=</span>nval), </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">y=</span><span class="fu">c</span>(group1, group2))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div><div class="column" style="width:40%;">
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> id, <span class="at">y =</span> y, <span class="at">fill =</span> id)) <span class="sc">+</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.6</span>, <span class="at">outlier.alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Group ID"</span>, </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Response"</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>),</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text  =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="st">"none"</span>)  <span class="co"># hide legend if redundant</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -549,17 +566,19 @@ window.Quarto = {
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ttest.mod <span class="ot">&lt;-</span> <span class="fu">t.test</span>(y <span class="sc">~</span> id, <span class="at">data=</span>d) <span class="co"># t-test</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>anova.mod <span class="ot">&lt;-</span> <span class="fu">aov</span>(y <span class="sc">~</span> id, <span class="at">data=</span>d) <span class="co"># ANOVA</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>glm.mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> id, <span class="at">data=</span>d) <span class="co"># GLM</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>ttest.t <span class="ot">&lt;-</span> <span class="fu">abs</span>(<span class="fu">as.numeric</span>(ttest.mod<span class="sc">$</span>statistic))</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>anova.f <span class="ot">&lt;-</span> <span class="fu">summary</span>(anova.mod)[[<span class="dv">1</span>]]<span class="sc">$</span>F[<span class="dv">1</span>]</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>anova.t <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(anova.f) <span class="co"># t-stat = sqrt(F-stat)</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>glm.t <span class="ot">&lt;-</span> <span class="fu">coefficients</span>(<span class="fu">summary</span>(glm.mod))[<span class="dv">2</span>, <span class="dv">3</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ttest.mod <span class="ot">&lt;-</span> <span class="fu">t.test</span>(y <span class="sc">~</span> id, <span class="at">data=</span>d) <span class="co"># t-test</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>anova.mod <span class="ot">&lt;-</span> <span class="fu">aov</span>(y <span class="sc">~</span> id, <span class="at">data=</span>d) <span class="co"># ANOVA</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>glm.mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> id, <span class="at">data=</span>d) <span class="co"># GLM</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>ttest.t <span class="ot">&lt;-</span> <span class="fu">abs</span>(<span class="fu">as.numeric</span>(ttest.mod<span class="sc">$</span>statistic))</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>anova.f <span class="ot">&lt;-</span> <span class="fu">summary</span>(anova.mod)[[<span class="dv">1</span>]]<span class="sc">$</span>F[<span class="dv">1</span>]</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>anova.t <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(anova.f) <span class="co"># t-stat = sqrt(F-stat)</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>glm.t <span class="ot">&lt;-</span> <span class="fu">coefficients</span>(<span class="fu">summary</span>(glm.mod))[<span class="dv">2</span>, <span class="dv">3</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Then, we compare all the test statistics (<em>t</em>-values), from which the <em>p</em>-values are derived.</p>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>tvals <span class="ot">&lt;-</span> <span class="fu">c</span>(ttest.t, anova.t, glm.t) <span class="co"># thus, p-values and inference are the same</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>tvals</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4.119985 4.119985 4.119985</code></pre>
 </div>

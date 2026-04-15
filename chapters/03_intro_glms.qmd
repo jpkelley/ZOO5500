@@ -1,12 +1,21 @@
 ---
 title: "GLM Introduction"
-format: html
+format:
+  html: default
+execute:
+  echo: true
+  warning: false
+  message: false
+  error: false
+editor: visual
+editor_options: 
+  chunk_output_type: console
 ---
 
 
 
-```{r, message=FALSE, warning=FALSE, echo=FALSE}
-source("class_r_scripts/load_packages.r")
+```{r}
+source("chapters/class_r_scripts/load_packages.r")
 ```
 
 ## Separating signal from noise
@@ -36,7 +45,7 @@ d <- data.frame(id=rep(c("group1", "group2"), each=nval),
 :::
 
 ::: {.column width="40%"}
-```{r, echo=FALSE}
+```{r}
 p <- ggplot(d, aes(x = id, y = y, fill = id)) +
   geom_boxplot(width = 0.6, outlier.alpha = 0.5) +
   labs(
@@ -71,7 +80,8 @@ anova.t <- sqrt(anova.f) # t-stat = sqrt(F-stat)
 glm.t <- coefficients(summary(glm.mod))[2, 3]
 ```
 Then, we compare all the test statistics (_t_-values), from which the _p_-values are derived.
-```{r, echo=FALSE}
+
+```{r}
 tvals <- c(ttest.t, anova.t, glm.t) # thus, p-values and inference are the same
 tvals
 ```

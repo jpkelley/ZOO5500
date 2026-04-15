@@ -1,10 +1,17 @@
 ---
 title: "Tutorial: GAMs"
 format: html
+execute:
+  echo: true
+  warning: false
+  message: false
+  error: false
+editor: visual
 editor_options: 
   chunk_output_type: console
 ---
-```{r setup, include=FALSE}
+
+```{r}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 ## Introduction
@@ -32,14 +39,14 @@ As a reminder, the data include the following variables:
 Though we examined the relationship between total *Lepusantilocapra pufferi* abundance and mean depth for each time period (before/after introduction of puffer-jackalope pelicans), we will now improve our modeling process. Here, we will simplify our model and use density (`dens`) as our response variable (to account for variation in area searched, rather than using an offset). 
 
 ## Set up workspace
-```{r message=FALSE, warning=FALSE}
-source("class_r_scripts/load_packages.r")
+```{r}
+source("chapters/class_r_scripts/load_packages.r")
 ```
 
 Then read in the dataset.
 
 ```{r}
-pufferi <- read.csv("class_exercise_data/lepusantilocapra_pufferi_abundance.csv")
+pufferi <- read.csv("chapters/class_exercise_data/lepusantilocapra_pufferi_abundance.csv")
 
 ```
 
@@ -143,7 +150,7 @@ To do this, let us look at some weather data! This is another dataset you will n
 This dataset contains daily rainfall data across 83 years on Barro Colorado Island, the home of the endemic liana jackalope (_Lepusantilocapra cryptophiloliana_). We want to understand recent temporal patterns (among and within years) in daily rainfall. So, let us read in the data and then, because we are interested in recent years only--reduce its size a bit (by limiting to the year range of 2008-2011). We will also go ahead and ensure the dates are in the right format and use these to calculate a a derived variable for data difference (relative to the first date in new, filtered dataset).
 
 ```{r}
-rain <- read_csv("class_exercise_data/rainfall_daily.csv")
+rain <- read_csv("chapters/class_exercise_data/rainfall_daily.csv")
 
 rain <- rain %>% filter(year > 1990)
 

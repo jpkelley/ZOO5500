@@ -831,9 +831,7 @@ Y_i &\sim \text{scaled-}t(\mu_{Y,i}, \sigma_Y, \nu) \\
 \mu_{Y,i} &= f_{Y,1}(X_i) + f_{Y,2}(M_{2,i}) + f_{Y,3}(C_i) + b^{(Y)}_{\mathrm{site}[i]} + b^{(Y)}_{\mathrm{obs}[i]}
 \end{aligned}
 $$
-
-::: callout-note
-## How to read this structural model (line by line); do not be afraid!
+*How to read this structural model (line by line); do not be afraid!*
 
 This node-by-node structural causal model is built such that:
 
@@ -862,9 +860,6 @@ Expressions like $f_{M1,1}(X_i)$, $f_{M1,2}(C_i)$ use “,1”, “,2”, etc. t
 
 General rule:
 > $f_{\text{node},k}(\cdot)$ = the $k$-th function contributing to that node’s mean, usually corresponding to one parent in the DAG
-
-:::
-
 
 These equations also show the order in which the submodels fit together for simulation or g-computation. This is critically important, as a downstream model depends on the output of an upstream model: 
 

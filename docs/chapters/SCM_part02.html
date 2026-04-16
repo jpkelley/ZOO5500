@@ -1352,17 +1352,7 @@ M_{2,i} &amp;\sim \mathrm{Gaussian}(\mu_{M2,i}, \sigma_{M2}^2) \\
 Y_i &amp;\sim \text{scaled-}t(\mu_{Y,i}, \sigma_Y, \nu) \\
 \mu_{Y,i} &amp;= f_{Y,1}(X_i) + f_{Y,2}(M_{2,i}) + f_{Y,3}(C_i) + b^{(Y)}_{\mathrm{site}[i]} + b^{(Y)}_{\mathrm{obs}[i]}
 \end{aligned}
-\]</span></p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>How to read this structural model (line by line); do not be afraid!
-</div>
-</div>
-<div class="callout-body-container callout-body">
+\]</span> <em>How to read this structural model (line by line); do not be afraid!</em></p>
 <p>This node-by-node structural causal model is built such that:</p>
 <ul>
 <li>each equation represents one node in the DAG</li>
@@ -1389,8 +1379,6 @@ Y_i &amp;\sim \text{scaled-}t(\mu_{Y,i}, \sigma_Y, \nu) \\
 <li><span class="math inline">\(f_{M1,2}(C_i)\)</span>: effect of <span class="math inline">\(C\)</span> on <span class="math inline">\(M_1\)</span></li>
 </ul>
 <p>General rule: &gt; <span class="math inline">\(f_{\text{node},k}(\cdot)\)</span> = the <span class="math inline">\(k\)</span>-th function contributing to that node’s mean, usually corresponding to one parent in the DAG</p>
-</div>
-</div>
 <p>These equations also show the order in which the submodels fit together for simulation or g-computation. This is critically important, as a downstream model depends on the output of an upstream model:</p>
 <ol type="1">
 <li>model <code>X</code> from <code>C</code></li>
@@ -1521,7 +1509,7 @@ Y_i &amp;\sim \text{scaled-}t(\mu_{Y,i}, \sigma_Y, \nu) \\
 <span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1530,7 +1518,7 @@ Y_i &amp;\sim \text{scaled-}t(\mu_{Y,i}, \sigma_Y, \nu) \\
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>All the “hat” means is that it is a predicted value from a model!</p>
 </div>

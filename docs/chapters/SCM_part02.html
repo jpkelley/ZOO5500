@@ -1353,15 +1353,17 @@ Y_i &amp;\sim \text{scaled-}t(\mu_{Y,i}, \sigma_Y, \nu) \\
 \mu_{Y,i} &amp;= f_{Y,1}(X_i) + f_{Y,2}(M_{2,i}) + f_{Y,3}(C_i) + b^{(Y)}_{\mathrm{site}[i]} + b^{(Y)}_{\mathrm{obs}[i]}
 \end{aligned}
 \]</span></p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
-<i class="callout-icon"></i>
+<i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 <span class="screen-reader-only">Note</span>How to read this structural model (line by line); do not be afraid!
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>This node-by-node structural causal model is built such that:</p>
 <ul>
@@ -1389,6 +1391,7 @@ Y_i &amp;\sim \text{scaled-}t(\mu_{Y,i}, \sigma_Y, \nu) \\
 <li><span class="math inline">\(f_{M1,2}(C_i)\)</span>: effect of <span class="math inline">\(C\)</span> on <span class="math inline">\(M_1\)</span></li>
 </ul>
 <p>General rule: &gt; <span class="math inline">\(f_{\text{node},k}(\cdot)\)</span> = the <span class="math inline">\(k\)</span>-th function contributing to that node’s mean, usually corresponding to one parent in the DAG</p>
+</div>
 </div>
 </div>
 <p>These equations also show the order in which the submodels fit together for simulation or g-computation. This is critically important, as a downstream model depends on the output of an upstream model:</p>

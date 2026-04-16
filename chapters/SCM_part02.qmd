@@ -832,7 +832,7 @@ Y_i &\sim \text{scaled-}t(\mu_{Y,i}, \sigma_Y, \nu) \\
 \end{aligned}
 $$
 
-::: callout-note
+::: {.callout-note collapse=true icon=false}
 ## How to read this structural model (line by line); do not be afraid!
 
 This node-by-node structural causal model is built such that:

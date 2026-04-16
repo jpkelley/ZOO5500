@@ -245,14 +245,14 @@ p_m2_y <- ggplot(dat, aes(M2, Y)) +
 ::: columns
 ::: column
 ```{r}
-p_x_m1
+print(p_x_m1)
 
 ```
 :::
 
 ::: column
 ```{r}
-p_m2_y
+print(p_m2_y)
 ```
 :::
 :::

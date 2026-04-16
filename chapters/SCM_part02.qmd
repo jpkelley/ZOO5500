@@ -831,6 +831,7 @@ Y_i &\sim \text{scaled-}t(\mu_{Y,i}, \sigma_Y, \nu) \\
 \mu_{Y,i} &= f_{Y,1}(X_i) + f_{Y,2}(M_{2,i}) + f_{Y,3}(C_i) + b^{(Y)}_{\mathrm{site}[i]} + b^{(Y)}_{\mathrm{obs}[i]}
 \end{aligned}
 $$
+
 *How to read this structural model (line by line); do not be afraid!*
 
 This node-by-node structural causal model is built such that:

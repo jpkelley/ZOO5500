@@ -3,9 +3,6 @@ project:
   output-dir: docs
   execute-dir: project
 
-website:
-  site-url: https://jpkelley.github.io/ZOO5500/
-
 book:
   title: "Quantitative Analysis of (Messy) Field Data"
   subtitle: "University of Wyoming -- ZOO-5500 (CRN 13415) | ECOL-5500 (CRN 13417)"

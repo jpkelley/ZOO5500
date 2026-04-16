@@ -832,6 +832,40 @@ Y_i &\sim \text{scaled-}t(\mu_{Y,i}, \sigma_Y, \nu) \\
 \end{aligned}
 $$
 
+::: callout-note
+## How to read this structural model (line by line); do not be afraid!
+
+This node-by-node structural causal model is built such that:
+
+* each equation represents one node in the DAG
+* each mean model includes *only* that node’s parents
+
+Together, these encode the full causal structure needed for decomposition (total, direct, indirect effects). Each variable is modeled in two steps:
+
+1. **Distribution line**: how the observed value varies around its mean (usually Gaussian, but scaled-$t$ for $Y$)  
+2. **Mean model**: what predicts that mean (its causal parents)
+
+The general structure of each model contains the following:
+
+* $i$: observation (data point)
+* $\sim$: “is distributed as”
+* $\mu$: expected (predicted) value
+* $f(\cdot)$: fitted function (linear or nonlinear)
+* $b_{\mathrm{site}[i]}, b_{\mathrm{obs}[i]}$: random effects for site and observer
+
+*What do subscripts like “,1” mean?*
+
+Expressions like $f_{M1,1}(X_i)$, $f_{M1,2}(C_i)$ use “,1”, “,2”, etc. to label different functional components. They do *not* imply indexing (as we have seen before). They simply distinguish *separate effects within the same equation*. Therefore, we can interpret these components:
+
+* $f_{M1,1}(X_i)$: effect of $X$ on $M_1$
+* $f_{M1,2}(C_i)$: effect of $C$ on $M_1$
+
+General rule:
+> $f_{\text{node},k}(\cdot)$ = the $k$-th function contributing to that node’s mean, usually corresponding to one parent in the DAG
+
+:::
+
+
 These equations also show the order in which the submodels fit together for simulation or g-computation. This is critically important, as a downstream model depends on the output of an upstream model: 
 
 1. model `X` from `C`

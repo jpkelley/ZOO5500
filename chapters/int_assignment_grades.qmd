@@ -174,6 +174,9 @@ Practice disciplined interpretation and uncertainty-aware reasoning. This is whe
 :::
 
 ::: {.callout-note title="**Results Section (Week 14)**" icon="false" collapse="true"}
+
+**NOTE: This assignment was removed, as everyone in the class was at different stages of their analysis.**
+
 **Purpose:**\
 Draft the Results section you would submit in a real paper or report: concise, structured, and supported by tables and figures.
 
@@ -202,6 +205,10 @@ Draft the Results section you would submit in a real paper or report: concise, s
 :::
 
 ::: {.callout-note title="**Full Draft (Week 15)**" icon="false" collapse="true"}
+
+
+**NOTE: This assignment was removed, as everyone in the class was at different stages of their analysis. One-on-one meetings with each student took the place of this assignment.**
+
 **Purpose:**\
 Assemble a complete, coherent draft that reads like a real scientific product. Structure and flow matter here.
 
@@ -228,32 +235,9 @@ Assemble a complete, coherent draft that reads like a real scientific product. S
 
 ::: {.callout-note title="**Revision Plan (Not Executed) (Week 16)**" icon="false" collapse="true"}
 **Purpose:**\
-Demonstrate that you can revise strategically. You will not execute revisions; you will propose them.
+This final deliverable for ZOO/ECOL-5500 replaces the original, separate assignments on interpretation, results, full draft, and revision planning. Because everyone's projects are at vastly different stages, the goal is not to produce a perfect paper or even a complete methods or results section. The goal is for you to demonstrate that you can connect a research question, causal assumptions, model structure, results, and interpretation into one coherent analysis. Remember that this is a final synthesis of what you have learned about your study system during this course; it is not a giant everything-you-have-ever-done document. Include only what helps me understand (ahem...reminds me of) the question, model, results, and interpretation.
 
-### What to include
-
--   Top five revision priorities
-    -   Ranked, with a sentence explaining why each matters
--   What you would change (specific)
-    -   “Rewrite paragraph X to clarify Y”\
-    -   “Replace Figure 2 with a plot that shows Z”
--   What evidence you would need
-    -   Additional checks, plots, sensitivity analyses, etc.
--   If you had 10 more hours
-    -   What would you do first?
--   If you had 40 more hours
-    -   What would you do that you cannot do now?
-
-### Submission format
-
--   1 page (PDF) or short Quarto page
--   In your Quarto-formatted (.qmd) submission, please include the final Evaluation Table (i.e. rubric-tested) output from JackalopeGPT. 
-
-### “Good” looks like
-
--   Specific, actionable revisions
--   Clearly prioritized and realistic
--   Demonstrates mature judgment about improving inference and communication
+**Instructions:** [**Click here for the complete (and exhaustive) set of instructions.**](https://jpkelley.github.io/ZOO5500/chapters/final_report_overview.html) Please note that this is severe over-detail of the assignment. But some folks have asked about it!
 :::
 
 ------------------------------------------------------------------------
@@ -281,7 +265,7 @@ For this course, please use Quarto.
 
 ::::: columns
 ::: {.column width="70%"}
-Numerical grades are downright loathsome. For all assignments, I use the Traffic Signal Grading Scale:
+Numerical grades are downright loathsome. For all assignments except the Final Report, I use the Traffic Signal Grading Scale:
 
 | Grade  | Simple meaning   | Scientific judgement                       |
 |--------|------------------|--------------------------------------------|

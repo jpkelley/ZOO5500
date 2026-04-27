@@ -28,15 +28,16 @@ All Milestone Assignments due by end of day on Friday.
 | [**Week 9**<br>16-Mar-2026](#week-9) | Student Spring Break | — | — | None | 0 |
 | [**Week 10**<br>23-Mar-2026](#week-10) | Structural Causal Modeling (SCM) | Causal diagram critique | — | Low | 10 |
 | [**Week 11**<br>30-Mar-2026](#week-11) | Instructor Spring Break | — | — | None | 0 |
-| [**Week 12**<br>06-Apr-2026](#week-12) | Prediction & uncertainty | Prediction checks | Interpretation Memo | Low | 10 |
-| [**Week 13**<br>13-Apr-2026](#week-13) | Synthesis & justification | Peer + AI review | — | Moderate | 0 |
-| [**Week 14**<br>20-Apr-2026](#week-14) | Tables, figures, reporting standards | Table/figure workshop | Results Section | Low | 10 |
-| [**Week 15**<br>27-Apr-2026](#week-15) | Writing Results sections | Draft clinic | Full Draft | Moderate | 15 |
-| [**Week 16**<br>04-May-2026](#week-16) | Reflection & closure | Course wrap-up | Revision Plan (not executed) | None | 5 |
+| [**Week 12**<br>06-Apr-2026](#week-12) | Prediction & uncertainty (SCMs) | Prediction checks | Interpretation Memo | Low | 10 |
+| [**Week 13**<br>13-Apr-2026](#week-13) | Synthesis & justification (SCMs) | Peer + AI review | -— | Moderate | 0 |
+| [**Week 14**<br>20-Apr-2026](#week-14) | One-on-one meetings | Final project check-in | -- | Low | 10 |
+| [**Week 15**<br>27-Apr-2026](#week-15) | Writing Results sections | Draft clinic | -- | Moderate | 0 |
+| [**Week 16**<br>04-May-2026](#week-16) | Reflection & closure | Course wrap-up | Final report | Moderate | 20 |
 :::
 
 ## Calendar edit history
 Removed AIC model selection from Week 05.
+Changed Weeks 14-16 to consolidate all weekly assignments into a final report.
 
 ## Weekly Information
 
@@ -322,43 +323,32 @@ Click to expand sections below to see expectations before, during, and after cla
 ::: {#week-14 .callout-tip .unnumbered icon="false" collapse="true"}
 ### **Week 14 (20-Apr-2026)**
 
-**Topics:** Tables, figures, reporting standards\
-**Stress level:** Low\
+**Topics:** One-on-one meetings
+**Stress level:** Low
 **Grade weight:** 10%
 
-### Before class {.unnumbered}
+### Notes {.unnumbered}
 
--   Review reporting guidelines
--   Examine good and bad figure examples
+-   No class
+-   Meet with Dr. Kelley
+-   No assignments due
 
-### In class {.unnumbered}
-
--   Table/figure workshop
--   Emphasis on clarity and restraint
-
-### After class {.unnumbered}
-
--   **Submit:** Results Section
 :::
 
 ::: {#week-15 .callout-tip .unnumbered icon="false" collapse="true"}
 ### **Week 15 (27-Apr-2026)**
 
 **Topics:** Writing Results sections\
-**Stress level:** Moderate\
-**Grade weight:** 15%
-
-### Before class {.unnumbered}
-
--   Review example Results sections
--   Reflect on narrative flow
+**Stress level:** Moderate
+**Grade weight:** 0%
 
 ### In class {.unnumbered}
 
--   Draft clinic
--   Focused feedback on structure and interpretation
+-   Final Report overview
 
-### After class {.unnumbered}
+### Notes {.unnumbered}
+
+-   No assignments due
 
 -   **Submit:** Full Draft
 :::
@@ -367,12 +357,8 @@ Click to expand sections below to see expectations before, during, and after cla
 ### **Week 16 (04-May-2026)**
 
 **Topics:** Reflection & closure\
-**Stress level:** None\
-**Grade weight:** 5%
-
-### Before class {.unnumbered}
-
--   Review feedback on full draft
+**Stress level:** Moderate
+**Grade weight:** 20%
 
 ### In class {.unnumbered}
 
@@ -381,5 +367,5 @@ Click to expand sections below to see expectations before, during, and after cla
 
 ### After class {.unnumbered}
 
--   **Submit:** Revision Plan (not executed)
+-   **Submit:** Final report (due via email: 08-May-2026)
 :::

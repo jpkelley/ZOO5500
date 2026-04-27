@@ -233,7 +233,7 @@ Assemble a complete, coherent draft that reads like a real scientific product. S
 -   No missing major components
 :::
 
-::: {.callout-note title="**Revision Plan (Not Executed) (Week 16)**" icon="false" collapse="true"}
+::: {.callout-note title="**Final Report (Week 16)**" icon="false" collapse="true"}
 **Purpose:**\
 This final deliverable for ZOO/ECOL-5500 replaces the original, separate assignments on interpretation, results, full draft, and revision planning. Because everyone's projects are at vastly different stages, the goal is not to produce a perfect paper or even a complete methods or results section. The goal is for you to demonstrate that you can connect a research question, causal assumptions, model structure, results, and interpretation into one coherent analysis. Remember that this is a final synthesis of what you have learned about your study system during this course; it is not a giant everything-you-have-ever-done document. Include only what helps me understand (ahem...reminds me of) the question, model, results, and interpretation.
 

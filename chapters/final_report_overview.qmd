@@ -308,6 +308,10 @@ If you would like to see a full list of verbs and verb phrases that are appropri
 
 ## **Suggested verbiage for your inferential goals (a long table)**
 
+🟢 GREEN: Employ comfortably! 
+🟡 YELLOW: Be cautious.
+🔴 RED: Avoid like the plague.
+
 | **Verb / Phrase**      | **Descriptive** | **Associational / Predictive** | **Total Effect** | **Direct Effect** | **Indirect Effect** | **Experimental Effect** |
 | ---------------------- | --------------- | ------------------------------ | ---------------- | ----------------- | ------------------- | ----------------------- |
 | causes                 | 🔴              | 🔴                             | 🟡               | 🟡                | 🟡                  | 🟢                      |

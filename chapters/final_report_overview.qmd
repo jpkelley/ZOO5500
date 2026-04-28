@@ -54,8 +54,8 @@ In your final report, you should include the components in the following table (
 
 | component | what high-quality looks like |
 |----------|---------------------|
-| **1. Revised research question and estimand(s)** | The research question is specific and matches the model; each estimand is clearly defined (e.g., total, direct, or indirect effect) and tied directly to a given question. |
-| **2. Causal assumptions and justification** | Key assumptions are stated explicitly (e.g., no unmeasured confounding) and justified using ecological knowledge, study design, or prior work (whatever your expertise tells you). |
+|**Revised research question and estimand(s)** | The research question is specific and matches the model; each estimand is clearly defined (e.g., total, direct, or indirect effect) and tied directly to a given question. |
+|**2. Causal assumptions and justification** | Key assumptions are stated explicitly (e.g., no unmeasured confounding) and justified using ecological knowledge, study design, or prior work (whatever your expertise tells you). |
 | **3. Core causal diagram or assumption figure** | The diagram is simple, readable, and defensible; it includes only relevant variables and clearly shows assumed causal structure (not design-specific features like random effects). |
 | **4. Statistical model(s) for each estimand** | Each model --GLMM, GAMM, etc.-- corresponds directly to a specific estimand and follows logically from the diagram (e.g., appropriate adjustment set); no unnecessary variables are included. |
 | **5. Results in tabular form** | Results are presented clearly with estimates and uncertainty (e.g., intervals), without selective reporting or omission of key variables. |
@@ -301,6 +301,54 @@ Use the tables in the boxes below to translate vague scientific wording into pre
 | **"No causal effect"** | "The estimated effect is near zero, with uncertainty spanning both positive and negative values." |
 
 :::
+
+If you would like to see a full list of verbs and verb phrases that are appropriate for communicating different types of analysis. (Please let me know if there are other words or phrases that could be added here.)
+
+::: {.callout-tip collapse=true icon=false}
+
+## **Suggested verbiage for your inferential goals (a long table)**
+
+| **Verb / Phrase**      | **Descriptive** | **Associational / Predictive** | **Total Effect** | **Direct Effect** | **Indirect Effect** | **Experimental Effect** |
+| ---------------------- | --------------- | ------------------------------ | ---------------- | ----------------- | ------------------- | ----------------------- |
+| causes                 | 🔴              | 🔴                             | 🟡               | 🟡                | 🟡                  | 🟢                      |
+| leads to               | 🔴              | 🟡                             | 🟡               | 🟡                | 🟡                  | 🟢                      |
+| produces               | 🔴              | 🟡                             | 🟡               | 🟡                | 🟡                  | 🟢                      |
+| results in             | 🔴              | 🟡                             | 🟡               | 🟡                | 🟡                  | 🟢                      |
+| induces                | 🔴              | 🔴                             | 🟡               | 🟡                | 🟡                  | 🟢                      |
+| generates              | 🔴              | 🟡                             | 🟡               | 🟡                | 🟡                  | 🟢                      |
+| affects                | 🔴              | 🟡                             | 🟢               | 🟡                | 🟡                  | 🟡                      |
+| changes                | 🔴              | 🟡                             | 🟢               | 🟡                | 🟡                  | 🟡                      |
+| increases / decreases  | 🔴              | 🟡                             | 🟢               | 🟡                | 🟡                  | 🟡                      |
+| shifts / alters        | 🔴              | 🟡                             | 🟢               | 🟡                | 🟡                  | 🟡                      |
+| has a causal effect on | 🔴              | 🔴                             | 🟢               | 🟡                | 🟡                  | 🟢                      |
+| directly affects       | 🔴              | 🔴                             | 🔴               | 🟢                | 🔴                  | 🟡                      |
+| has a direct effect on | 🔴              | 🔴                             | 🔴               | 🟢                | 🔴                  | 🟡                      |
+| independently affects  | 🔴              | 🔴                             | 🔴               | 🟢                | 🔴                  | 🟡                      |
+| indirectly affects     | 🔴              | 🔴                             | 🔴               | 🔴                | 🟢                  | 🟡                      |
+| affects through        | 🔴              | 🔴                             | 🔴               | 🔴                | 🟢                  | 🟡                      |
+| operates via           | 🔴              | 🔴                             | 🔴               | 🔴                | 🟢                  | 🟡                      |
+| is mediated by         | 🔴              | 🔴                             | 🔴               | 🔴                | 🟢                  | 🟡                      |
+| influences             | 🟡              | 🟡                             | 🟡               | 🟡                | 🟡                  | 🟡                      |
+| impacts                | 🟡              | 🟡                             | 🟡               | 🟡                | 🟡                  | 🟡                      |
+| contributes to         | 🟡              | 🟢                             | 🟡               | 🟡                | 🟡                  | 🟡                      |
+| drives                 | 🔴              | 🟡                             | 🔴               | 🔴                | 🔴                  | 🟡                      |
+| determines             | 🔴              | 🔴                             | 🔴               | 🔴                | 🔴                  | 🟡                      |
+| controls               | 🔴              | 🔴                             | 🔴               | 🔴                | 🔴                  | 🔴                      |
+| is associated with     | 🟡              | 🟢                             | 🔴               | 🔴                | 🔴                  | 🔴                      |
+| is correlated with     | 🟡              | 🟢                             | 🔴               | 🔴                | 🔴                  | 🔴                      |
+| covaries with          | 🟡              | 🟢                             | 🔴               | 🔴                | 🔴                  | 🔴                      |
+| is linked to           | 🟡              | 🟢                             | 🔴               | 🔴                | 🔴                  | 🔴                      |
+| is related to          | 🟡              | 🟢                             | 🔴               | 🔴                | 🔴                  | 🔴                      |
+| predicts               | 🔴              | 🟢                             | 🔴               | 🔴                | 🔴                  | 🔴                      |
+| is predictive of       | 🔴              | 🟢                             | 🔴               | 🔴                | 🔴                  | 🔴                      |
+| is a predictor of      | 🔴              | 🟢                             | 🔴               | 🔴                | 🔴                  | 🔴                      |
+| tracks                 | 🟡              | 🟢                             | 🔴               | 🔴                | 🔴                  | 🔴                      |
+| co-occurs with         | 🟢              | 🟢                             | 🔴               | 🔴                | 🔴                  | 🔴                      |
+| explains               | 🟢              | 🟢                             | 🔴               | 🔴                | 🔴                  | 🔴                      |
+
+
+:::
+
 
 ### 8. Short final reflection or revision note
 

@@ -59,6 +59,7 @@ book:
         - chapters/05_02b_KS_to_DAGs.qmd
         - chapters/simple_scm.qmd
         - chapters/SCM_part02.qmd
+        - chapters/brms_SCM.qmd
     - part: "Final Report"
       chapters:
         - chapters/final_report_overview.qmd

@@ -1,0 +1,601 @@
+.draw,method,effect,estimate
+1,GAM bootstrap,Total effect,6.637741096458205
+1,GAM bootstrap,Controlled direct effect,2.317792824988261
+1,GAM bootstrap,Indirect effect,4.3199482714699435
+2,GAM bootstrap,Total effect,5.433119210239946
+2,GAM bootstrap,Controlled direct effect,2.0529456093950755
+2,GAM bootstrap,Indirect effect,3.3801736008448704
+3,GAM bootstrap,Total effect,6.064220553494362
+3,GAM bootstrap,Controlled direct effect,1.7104606903137518
+3,GAM bootstrap,Indirect effect,4.35375986318061
+4,GAM bootstrap,Total effect,4.935587892346241
+4,GAM bootstrap,Controlled direct effect,2.235998453403502
+4,GAM bootstrap,Indirect effect,2.6995894389427395
+5,GAM bootstrap,Total effect,6.2123069001216855
+5,GAM bootstrap,Controlled direct effect,2.0721565769851744
+5,GAM bootstrap,Indirect effect,4.1401503231365115
+6,GAM bootstrap,Total effect,6.595330549099192
+6,GAM bootstrap,Controlled direct effect,1.9689827695248177
+6,GAM bootstrap,Indirect effect,4.626347779574374
+7,GAM bootstrap,Total effect,7.593049332523403
+7,GAM bootstrap,Controlled direct effect,2.897768576402839
+7,GAM bootstrap,Indirect effect,4.695280756120564
+8,GAM bootstrap,Total effect,5.024036258048072
+8,GAM bootstrap,Controlled direct effect,2.4165979807415026
+8,GAM bootstrap,Indirect effect,2.60743827730657
+9,GAM bootstrap,Total effect,6.018835454676793
+9,GAM bootstrap,Controlled direct effect,2.3389114235015818
+9,GAM bootstrap,Indirect effect,3.6799240311752115
+10,GAM bootstrap,Total effect,6.012125907008399
+10,GAM bootstrap,Controlled direct effect,2.499131427012177
+10,GAM bootstrap,Indirect effect,3.5129944799962223
+11,GAM bootstrap,Total effect,4.935961935970224
+11,GAM bootstrap,Controlled direct effect,1.9701101995086852
+11,GAM bootstrap,Indirect effect,2.9658517364615387
+12,GAM bootstrap,Total effect,5.805712959820781
+12,GAM bootstrap,Controlled direct effect,1.5715921099835843
+12,GAM bootstrap,Indirect effect,4.234120849837197
+13,GAM bootstrap,Total effect,6.67242162267835
+13,GAM bootstrap,Controlled direct effect,1.966912228239103
+13,GAM bootstrap,Indirect effect,4.705509394439247
+14,GAM bootstrap,Total effect,5.949035090880119
+14,GAM bootstrap,Controlled direct effect,2.004179275052347
+14,GAM bootstrap,Indirect effect,3.944855815827772
+15,GAM bootstrap,Total effect,6.091177888457281
+15,GAM bootstrap,Controlled direct effect,1.8141116948708746
+15,GAM bootstrap,Indirect effect,4.277066193586407
+16,GAM bootstrap,Total effect,6.178050298777943
+16,GAM bootstrap,Controlled direct effect,2.209444768383685
+16,GAM bootstrap,Indirect effect,3.9686055303942576
+17,GAM bootstrap,Total effect,5.883501433297861
+17,GAM bootstrap,Controlled direct effect,2.369742626981229
+17,GAM bootstrap,Indirect effect,3.5137588063166314
+18,GAM bootstrap,Total effect,5.8538663670042075
+18,GAM bootstrap,Controlled direct effect,1.5251341963765177
+18,GAM bootstrap,Indirect effect,4.32873217062769
+19,GAM bootstrap,Total effect,4.406380781541185
+19,GAM bootstrap,Controlled direct effect,1.7814344546720786
+19,GAM bootstrap,Indirect effect,2.6249463268691064
+20,GAM bootstrap,Total effect,6.285591072532692
+20,GAM bootstrap,Controlled direct effect,1.9218375149699072
+20,GAM bootstrap,Indirect effect,4.363753557562784
+21,GAM bootstrap,Total effect,5.76580917243499
+21,GAM bootstrap,Controlled direct effect,1.8960546293730731
+21,GAM bootstrap,Indirect effect,3.8697545430619167
+22,GAM bootstrap,Total effect,6.18503615414685
+22,GAM bootstrap,Controlled direct effect,1.4281189366874671
+22,GAM bootstrap,Indirect effect,4.7569172174593835
+23,GAM bootstrap,Total effect,5.754270247835277
+23,GAM bootstrap,Controlled direct effect,2.02491725687426
+23,GAM bootstrap,Indirect effect,3.729352990961017
+24,GAM bootstrap,Total effect,4.35625484312819
+24,GAM bootstrap,Controlled direct effect,2.2472353158853484
+24,GAM bootstrap,Indirect effect,2.109019527242842
+25,GAM bootstrap,Total effect,6.613502235326021
+25,GAM bootstrap,Controlled direct effect,2.025159490658607
+25,GAM bootstrap,Indirect effect,4.588342744667415
+26,GAM bootstrap,Total effect,7.112850104278446
+26,GAM bootstrap,Controlled direct effect,2.035121908835466
+26,GAM bootstrap,Indirect effect,5.07772819544298
+27,GAM bootstrap,Total effect,5.381735363621738
+27,GAM bootstrap,Controlled direct effect,2.2282455625188957
+27,GAM bootstrap,Indirect effect,3.1534898011028423
+28,GAM bootstrap,Total effect,6.068506383387032
+28,GAM bootstrap,Controlled direct effect,3.195121840985977
+28,GAM bootstrap,Indirect effect,2.8733845424010545
+29,GAM bootstrap,Total effect,6.358474546931834
+29,GAM bootstrap,Controlled direct effect,2.2966735434933483
+29,GAM bootstrap,Indirect effect,4.061801003438486
+30,GAM bootstrap,Total effect,5.940324806137235
+30,GAM bootstrap,Controlled direct effect,1.7998179805694003
+30,GAM bootstrap,Indirect effect,4.140506825567835
+31,GAM bootstrap,Total effect,5.503176926792294
+31,GAM bootstrap,Controlled direct effect,2.0216719901071474
+31,GAM bootstrap,Indirect effect,3.481504936685147
+32,GAM bootstrap,Total effect,6.020381201206155
+32,GAM bootstrap,Controlled direct effect,2.2138447408357074
+32,GAM bootstrap,Indirect effect,3.806536460370448
+33,GAM bootstrap,Total effect,6.0360652597293845
+33,GAM bootstrap,Controlled direct effect,2.1894418982152075
+33,GAM bootstrap,Indirect effect,3.846623361514177
+34,GAM bootstrap,Total effect,5.833830959625896
+34,GAM bootstrap,Controlled direct effect,2.169323599623205
+34,GAM bootstrap,Indirect effect,3.6645073600026907
+35,GAM bootstrap,Total effect,6.120643604898966
+35,GAM bootstrap,Controlled direct effect,2.415617458107606
+35,GAM bootstrap,Indirect effect,3.7050261467913597
+36,GAM bootstrap,Total effect,6.117386834765843
+36,GAM bootstrap,Controlled direct effect,2.0214549080663815
+36,GAM bootstrap,Indirect effect,4.095931926699461
+37,GAM bootstrap,Total effect,5.309703656170129
+37,GAM bootstrap,Controlled direct effect,1.4424291143148724
+37,GAM bootstrap,Indirect effect,3.8672745418552563
+38,GAM bootstrap,Total effect,6.279623365541958
+38,GAM bootstrap,Controlled direct effect,2.421342698630552
+38,GAM bootstrap,Indirect effect,3.8582806669114063
+39,GAM bootstrap,Total effect,6.121295138038844
+39,GAM bootstrap,Controlled direct effect,2.115415942168211
+39,GAM bootstrap,Indirect effect,4.005879195870634
+40,GAM bootstrap,Total effect,7.531483259405647
+40,GAM bootstrap,Controlled direct effect,2.1364135724734528
+40,GAM bootstrap,Indirect effect,5.395069686932194
+41,GAM bootstrap,Total effect,6.648352924113708
+41,GAM bootstrap,Controlled direct effect,1.8867150589615749
+41,GAM bootstrap,Indirect effect,4.761637865152133
+42,GAM bootstrap,Total effect,6.383732780418352
+42,GAM bootstrap,Controlled direct effect,2.092508812394029
+42,GAM bootstrap,Indirect effect,4.291223968024323
+43,GAM bootstrap,Total effect,5.93837019477362
+43,GAM bootstrap,Controlled direct effect,1.7934595535670996
+43,GAM bootstrap,Indirect effect,4.14491064120652
+44,GAM bootstrap,Total effect,5.618787154035557
+44,GAM bootstrap,Controlled direct effect,2.2514687322878313
+44,GAM bootstrap,Indirect effect,3.3673184217477257
+45,GAM bootstrap,Total effect,6.325972585522964
+45,GAM bootstrap,Controlled direct effect,2.3323586034370916
+45,GAM bootstrap,Indirect effect,3.993613982085872
+46,GAM bootstrap,Total effect,5.681168870158176
+46,GAM bootstrap,Controlled direct effect,2.0085468714031216
+46,GAM bootstrap,Indirect effect,3.6726219987550546
+47,GAM bootstrap,Total effect,5.242634494534059
+47,GAM bootstrap,Controlled direct effect,1.8291614765275839
+47,GAM bootstrap,Indirect effect,3.413473018006475
+48,GAM bootstrap,Total effect,6.3709156970959295
+48,GAM bootstrap,Controlled direct effect,2.1695072710293206
+48,GAM bootstrap,Indirect effect,4.2014084260666085
+49,GAM bootstrap,Total effect,5.04541888487023
+49,GAM bootstrap,Controlled direct effect,2.0676352770788498
+49,GAM bootstrap,Indirect effect,2.9777836077913804
+50,GAM bootstrap,Total effect,4.971027940230601
+50,GAM bootstrap,Controlled direct effect,1.6174470336125584
+50,GAM bootstrap,Indirect effect,3.353580906618043
+51,GAM bootstrap,Total effect,5.33059126984398
+51,GAM bootstrap,Controlled direct effect,1.894751875936183
+51,GAM bootstrap,Indirect effect,3.435839393907797
+52,GAM bootstrap,Total effect,5.548122973733074
+52,GAM bootstrap,Controlled direct effect,2.0589101291931358
+52,GAM bootstrap,Indirect effect,3.489212844539938
+53,GAM bootstrap,Total effect,5.5439014642828965
+53,GAM bootstrap,Controlled direct effect,2.114384878904175
+53,GAM bootstrap,Indirect effect,3.4295165853787215
+54,GAM bootstrap,Total effect,4.793875490583451
+54,GAM bootstrap,Controlled direct effect,2.0951385325084866
+54,GAM bootstrap,Indirect effect,2.6987369580749645
+55,GAM bootstrap,Total effect,5.703998739861354
+55,GAM bootstrap,Controlled direct effect,1.8665135267156634
+55,GAM bootstrap,Indirect effect,3.8374852131456905
+56,GAM bootstrap,Total effect,5.300462220025196
+56,GAM bootstrap,Controlled direct effect,1.9661176766561885
+56,GAM bootstrap,Indirect effect,3.3343445433690073
+57,GAM bootstrap,Total effect,6.518881902134284
+57,GAM bootstrap,Controlled direct effect,2.4269197546329675
+57,GAM bootstrap,Indirect effect,4.091962147501317
+58,GAM bootstrap,Total effect,5.033288421149228
+58,GAM bootstrap,Controlled direct effect,1.90263893812681
+58,GAM bootstrap,Indirect effect,3.130649483022418
+59,GAM bootstrap,Total effect,6.407458503549621
+59,GAM bootstrap,Controlled direct effect,1.9797964896054983
+59,GAM bootstrap,Indirect effect,4.427662013944122
+60,GAM bootstrap,Total effect,6.108045242685125
+60,GAM bootstrap,Controlled direct effect,2.4322586140445956
+60,GAM bootstrap,Indirect effect,3.6757866286405294
+61,GAM bootstrap,Total effect,6.2195251943130785
+61,GAM bootstrap,Controlled direct effect,2.3236262656503945
+61,GAM bootstrap,Indirect effect,3.895898928662684
+62,GAM bootstrap,Total effect,6.873111370066152
+62,GAM bootstrap,Controlled direct effect,2.018690845546013
+62,GAM bootstrap,Indirect effect,4.854420524520139
+63,GAM bootstrap,Total effect,5.745897343737913
+63,GAM bootstrap,Controlled direct effect,1.7706373160735867
+63,GAM bootstrap,Indirect effect,3.9752600276643264
+64,GAM bootstrap,Total effect,5.888078445114406
+64,GAM bootstrap,Controlled direct effect,2.027895418667995
+64,GAM bootstrap,Indirect effect,3.860183026446411
+65,GAM bootstrap,Total effect,6.678280291586615
+65,GAM bootstrap,Controlled direct effect,2.500119657461755
+65,GAM bootstrap,Indirect effect,4.17816063412486
+66,GAM bootstrap,Total effect,6.002969486198105
+66,GAM bootstrap,Controlled direct effect,1.8705761705591621
+66,GAM bootstrap,Indirect effect,4.132393315638943
+67,GAM bootstrap,Total effect,5.023457586304052
+67,GAM bootstrap,Controlled direct effect,2.28308463312874
+67,GAM bootstrap,Indirect effect,2.740372953175312
+68,GAM bootstrap,Total effect,6.695671706289336
+68,GAM bootstrap,Controlled direct effect,2.2230326962993106
+68,GAM bootstrap,Indirect effect,4.472639009990026
+69,GAM bootstrap,Total effect,7.513278023170528
+69,GAM bootstrap,Controlled direct effect,1.773483677650928
+69,GAM bootstrap,Indirect effect,5.7397943455196
+70,GAM bootstrap,Total effect,6.000607008094492
+70,GAM bootstrap,Controlled direct effect,1.8768917598216088
+70,GAM bootstrap,Indirect effect,4.123715248272883
+71,GAM bootstrap,Total effect,6.653820013215587
+71,GAM bootstrap,Controlled direct effect,2.007644810105915
+71,GAM bootstrap,Indirect effect,4.646175203109673
+72,GAM bootstrap,Total effect,5.214320659425197
+72,GAM bootstrap,Controlled direct effect,2.119753580736518
+72,GAM bootstrap,Indirect effect,3.0945670786886788
+73,GAM bootstrap,Total effect,5.400626664522358
+73,GAM bootstrap,Controlled direct effect,2.043701702027904
+73,GAM bootstrap,Indirect effect,3.356924962494454
+74,GAM bootstrap,Total effect,6.0460397034232365
+74,GAM bootstrap,Controlled direct effect,2.047470019145328
+74,GAM bootstrap,Indirect effect,3.9985696842779084
+75,GAM bootstrap,Total effect,6.898682061712561
+75,GAM bootstrap,Controlled direct effect,2.0640310373581356
+75,GAM bootstrap,Indirect effect,4.834651024354425
+76,GAM bootstrap,Total effect,6.000039861128645
+76,GAM bootstrap,Controlled direct effect,2.012673780740324
+76,GAM bootstrap,Indirect effect,3.987366080388321
+77,GAM bootstrap,Total effect,5.180067853495591
+77,GAM bootstrap,Controlled direct effect,1.502482396768949
+77,GAM bootstrap,Indirect effect,3.677585456726642
+78,GAM bootstrap,Total effect,7.0857413327910646
+78,GAM bootstrap,Controlled direct effect,2.4376165533259817
+78,GAM bootstrap,Indirect effect,4.648124779465083
+79,GAM bootstrap,Total effect,7.450247930187107
+79,GAM bootstrap,Controlled direct effect,1.828767357623767
+79,GAM bootstrap,Indirect effect,5.62148057256334
+80,GAM bootstrap,Total effect,6.63207975049276
+80,GAM bootstrap,Controlled direct effect,1.9988215476275668
+80,GAM bootstrap,Indirect effect,4.633258202865194
+81,GAM bootstrap,Total effect,7.288846530542847
+81,GAM bootstrap,Controlled direct effect,3.0785903396754586
+81,GAM bootstrap,Indirect effect,4.210256190867389
+82,GAM bootstrap,Total effect,6.861363895635087
+82,GAM bootstrap,Controlled direct effect,2.086933942886242
+82,GAM bootstrap,Indirect effect,4.774429952748845
+83,GAM bootstrap,Total effect,5.304161967406746
+83,GAM bootstrap,Controlled direct effect,1.99434177110739
+83,GAM bootstrap,Indirect effect,3.3098201962993565
+84,GAM bootstrap,Total effect,7.954559721552764
+84,GAM bootstrap,Controlled direct effect,2.3165800041919127
+84,GAM bootstrap,Indirect effect,5.637979717360851
+85,GAM bootstrap,Total effect,5.529635681130789
+85,GAM bootstrap,Controlled direct effect,2.0866746792953323
+85,GAM bootstrap,Indirect effect,3.4429610018354566
+86,GAM bootstrap,Total effect,5.484421545814907
+86,GAM bootstrap,Controlled direct effect,1.763587375104252
+86,GAM bootstrap,Indirect effect,3.7208341707106554
+87,GAM bootstrap,Total effect,6.8059715375474585
+87,GAM bootstrap,Controlled direct effect,1.781822531508272
+87,GAM bootstrap,Indirect effect,5.0241490060391865
+88,GAM bootstrap,Total effect,6.441820673150309
+88,GAM bootstrap,Controlled direct effect,1.9207006952416088
+88,GAM bootstrap,Indirect effect,4.5211199779087
+89,GAM bootstrap,Total effect,5.6925907373101285
+89,GAM bootstrap,Controlled direct effect,2.2962342206209447
+89,GAM bootstrap,Indirect effect,3.396356516689184
+90,GAM bootstrap,Total effect,5.564059169351637
+90,GAM bootstrap,Controlled direct effect,1.8692437848417929
+90,GAM bootstrap,Indirect effect,3.694815384509844
+91,GAM bootstrap,Total effect,6.5890084864680745
+91,GAM bootstrap,Controlled direct effect,2.022038368362777
+91,GAM bootstrap,Indirect effect,4.5669701181052975
+92,GAM bootstrap,Total effect,6.123107309993461
+92,GAM bootstrap,Controlled direct effect,2.267251206789295
+92,GAM bootstrap,Indirect effect,3.8558561032041663
+93,GAM bootstrap,Total effect,5.023311443487903
+93,GAM bootstrap,Controlled direct effect,1.766752156077319
+93,GAM bootstrap,Indirect effect,3.256559287410584
+94,GAM bootstrap,Total effect,5.745890839366277
+94,GAM bootstrap,Controlled direct effect,2.7180007047946786
+94,GAM bootstrap,Indirect effect,3.0278901345715985
+95,GAM bootstrap,Total effect,5.120107426674947
+95,GAM bootstrap,Controlled direct effect,1.5578371909200115
+95,GAM bootstrap,Indirect effect,3.5622702357549354
+96,GAM bootstrap,Total effect,6.290849625162915
+96,GAM bootstrap,Controlled direct effect,2.2412763169191705
+96,GAM bootstrap,Indirect effect,4.049573308243744
+97,GAM bootstrap,Total effect,6.612000901334247
+97,GAM bootstrap,Controlled direct effect,2.1396808063954635
+97,GAM bootstrap,Indirect effect,4.472320094938784
+98,GAM bootstrap,Total effect,6.011356833401278
+98,GAM bootstrap,Controlled direct effect,2.2385387932720024
+98,GAM bootstrap,Indirect effect,3.7728180401292755
+99,GAM bootstrap,Total effect,6.311682100757054
+99,GAM bootstrap,Controlled direct effect,2.0864915845167546
+99,GAM bootstrap,Indirect effect,4.225190516240299
+100,GAM bootstrap,Total effect,6.009726066142549
+100,GAM bootstrap,Controlled direct effect,2.030963735409553
+100,GAM bootstrap,Indirect effect,3.978762330732996
+101,GAM bootstrap,Total effect,6.761793674343565
+101,GAM bootstrap,Controlled direct effect,1.7978099383143347
+101,GAM bootstrap,Indirect effect,4.96398373602923
+102,GAM bootstrap,Total effect,5.911867132275862
+102,GAM bootstrap,Controlled direct effect,1.8018492657322729
+102,GAM bootstrap,Indirect effect,4.11001786654359
+103,GAM bootstrap,Total effect,5.6285263127461604
+103,GAM bootstrap,Controlled direct effect,2.315610488302763
+103,GAM bootstrap,Indirect effect,3.3129158244433974
+104,GAM bootstrap,Total effect,5.6605787267029974
+104,GAM bootstrap,Controlled direct effect,2.2218571002447307
+104,GAM bootstrap,Indirect effect,3.4387216264582667
+105,GAM bootstrap,Total effect,6.55573908372773
+105,GAM bootstrap,Controlled direct effect,2.434375888864998
+105,GAM bootstrap,Indirect effect,4.121363194862732
+106,GAM bootstrap,Total effect,7.8520858012009
+106,GAM bootstrap,Controlled direct effect,2.3425837905874713
+106,GAM bootstrap,Indirect effect,5.509502010613429
+107,GAM bootstrap,Total effect,7.2182566060868325
+107,GAM bootstrap,Controlled direct effect,1.7144937083812373
+107,GAM bootstrap,Indirect effect,5.503762897705595
+108,GAM bootstrap,Total effect,7.162971665532833
+108,GAM bootstrap,Controlled direct effect,1.3984238304269594
+108,GAM bootstrap,Indirect effect,5.764547835105874
+109,GAM bootstrap,Total effect,7.2514833660431375
+109,GAM bootstrap,Controlled direct effect,2.157302903327515
+109,GAM bootstrap,Indirect effect,5.094180462715622
+110,GAM bootstrap,Total effect,5.851848520414906
+110,GAM bootstrap,Controlled direct effect,2.5200166724384263
+110,GAM bootstrap,Indirect effect,3.33183184797648
+111,GAM bootstrap,Total effect,5.157401715945241
+111,GAM bootstrap,Controlled direct effect,1.926735683565242
+111,GAM bootstrap,Indirect effect,3.230666032379999
+112,GAM bootstrap,Total effect,6.614886449291977
+112,GAM bootstrap,Controlled direct effect,1.6181589014417335
+112,GAM bootstrap,Indirect effect,4.996727547850243
+113,GAM bootstrap,Total effect,6.792297396538107
+113,GAM bootstrap,Controlled direct effect,2.0687560521020325
+113,GAM bootstrap,Indirect effect,4.723541344436074
+114,GAM bootstrap,Total effect,5.80071825295459
+114,GAM bootstrap,Controlled direct effect,2.378598052686283
+114,GAM bootstrap,Indirect effect,3.4221202002683073
+115,GAM bootstrap,Total effect,5.90518266351712
+115,GAM bootstrap,Controlled direct effect,2.1050454979334403
+115,GAM bootstrap,Indirect effect,3.80013716558368
+116,GAM bootstrap,Total effect,5.682764317876272
+116,GAM bootstrap,Controlled direct effect,1.8722311318748086
+116,GAM bootstrap,Indirect effect,3.810533186001463
+117,GAM bootstrap,Total effect,6.315657102690448
+117,GAM bootstrap,Controlled direct effect,1.9443143005372177
+117,GAM bootstrap,Indirect effect,4.37134280215323
+118,GAM bootstrap,Total effect,4.909001793065376
+118,GAM bootstrap,Controlled direct effect,1.974233457504175
+118,GAM bootstrap,Indirect effect,2.934768335561201
+119,GAM bootstrap,Total effect,6.087007820477208
+119,GAM bootstrap,Controlled direct effect,1.721970089852571
+119,GAM bootstrap,Indirect effect,4.365037730624637
+120,GAM bootstrap,Total effect,5.789168360444553
+120,GAM bootstrap,Controlled direct effect,2.419652002575036
+120,GAM bootstrap,Indirect effect,3.3695163578695175
+121,GAM bootstrap,Total effect,5.833286510511669
+121,GAM bootstrap,Controlled direct effect,1.721917349719321
+121,GAM bootstrap,Indirect effect,4.111369160792348
+122,GAM bootstrap,Total effect,5.954571902750904
+122,GAM bootstrap,Controlled direct effect,2.24057814624038
+122,GAM bootstrap,Indirect effect,3.713993756510524
+123,GAM bootstrap,Total effect,4.939906181312054
+123,GAM bootstrap,Controlled direct effect,1.8141846347868593
+123,GAM bootstrap,Indirect effect,3.1257215465251944
+124,GAM bootstrap,Total effect,5.718879199582942
+124,GAM bootstrap,Controlled direct effect,1.5102907092058055
+124,GAM bootstrap,Indirect effect,4.208588490377137
+125,GAM bootstrap,Total effect,6.923543884055423
+125,GAM bootstrap,Controlled direct effect,2.164384004791073
+125,GAM bootstrap,Indirect effect,4.759159879264351
+126,GAM bootstrap,Total effect,5.522916932841348
+126,GAM bootstrap,Controlled direct effect,2.1122359744696486
+126,GAM bootstrap,Indirect effect,3.410680958371699
+127,GAM bootstrap,Total effect,5.728811497026937
+127,GAM bootstrap,Controlled direct effect,2.154164144804767
+127,GAM bootstrap,Indirect effect,3.5746473522221702
+128,GAM bootstrap,Total effect,6.0824829238775955
+128,GAM bootstrap,Controlled direct effect,2.1406228356165506
+128,GAM bootstrap,Indirect effect,3.941860088261045
+129,GAM bootstrap,Total effect,6.841782734107195
+129,GAM bootstrap,Controlled direct effect,2.242041073315577
+129,GAM bootstrap,Indirect effect,4.599741660791618
+130,GAM bootstrap,Total effect,5.814748762849214
+130,GAM bootstrap,Controlled direct effect,1.759492431377125
+130,GAM bootstrap,Indirect effect,4.055256331472089
+131,GAM bootstrap,Total effect,5.974812299713376
+131,GAM bootstrap,Controlled direct effect,2.191900170443329
+131,GAM bootstrap,Indirect effect,3.7829121292700467
+132,GAM bootstrap,Total effect,5.975671547564439
+132,GAM bootstrap,Controlled direct effect,1.9951308836642592
+132,GAM bootstrap,Indirect effect,3.98054066390018
+133,GAM bootstrap,Total effect,5.200914091881679
+133,GAM bootstrap,Controlled direct effect,2.2592860458153616
+133,GAM bootstrap,Indirect effect,2.9416280460663176
+134,GAM bootstrap,Total effect,7.3031796959350634
+134,GAM bootstrap,Controlled direct effect,2.1519680490237327
+134,GAM bootstrap,Indirect effect,5.151211646911331
+135,GAM bootstrap,Total effect,6.914484316219063
+135,GAM bootstrap,Controlled direct effect,1.933904423103138
+135,GAM bootstrap,Indirect effect,4.980579893115925
+136,GAM bootstrap,Total effect,5.6272564086169385
+136,GAM bootstrap,Controlled direct effect,1.95198703275579
+136,GAM bootstrap,Indirect effect,3.6752693758611485
+137,GAM bootstrap,Total effect,6.552924833205971
+137,GAM bootstrap,Controlled direct effect,2.2219492767854367
+137,GAM bootstrap,Indirect effect,4.330975556420534
+138,GAM bootstrap,Total effect,6.275345959592267
+138,GAM bootstrap,Controlled direct effect,2.310237831328512
+138,GAM bootstrap,Indirect effect,3.9651081282637546
+139,GAM bootstrap,Total effect,6.166758011865382
+139,GAM bootstrap,Controlled direct effect,2.0994281667208883
+139,GAM bootstrap,Indirect effect,4.067329845144494
+140,GAM bootstrap,Total effect,7.17753697819953
+140,GAM bootstrap,Controlled direct effect,1.8567617548267852
+140,GAM bootstrap,Indirect effect,5.3207752233727454
+141,GAM bootstrap,Total effect,6.576568685078056
+141,GAM bootstrap,Controlled direct effect,2.1652300053923415
+141,GAM bootstrap,Indirect effect,4.411338679685715
+142,GAM bootstrap,Total effect,5.886370338561017
+142,GAM bootstrap,Controlled direct effect,2.038534738345471
+142,GAM bootstrap,Indirect effect,3.847835600215546
+143,GAM bootstrap,Total effect,6.741178202488171
+143,GAM bootstrap,Controlled direct effect,2.275144723102584
+143,GAM bootstrap,Indirect effect,4.466033479385587
+144,GAM bootstrap,Total effect,5.837217597439799
+144,GAM bootstrap,Controlled direct effect,2.1121662414546756
+144,GAM bootstrap,Indirect effect,3.7250513559851233
+145,GAM bootstrap,Total effect,5.551150791097171
+145,GAM bootstrap,Controlled direct effect,1.7123045568488657
+145,GAM bootstrap,Indirect effect,3.838846234248305
+146,GAM bootstrap,Total effect,7.092540095636677
+146,GAM bootstrap,Controlled direct effect,2.1152016737799384
+146,GAM bootstrap,Indirect effect,4.9773384218567385
+147,GAM bootstrap,Total effect,5.2457300880183
+147,GAM bootstrap,Controlled direct effect,2.094294733723496
+147,GAM bootstrap,Indirect effect,3.1514353542948044
+148,GAM bootstrap,Total effect,6.114458123657711
+148,GAM bootstrap,Controlled direct effect,2.1631175300237
+148,GAM bootstrap,Indirect effect,3.9513405936340105
+149,GAM bootstrap,Total effect,5.8314920989861045
+149,GAM bootstrap,Controlled direct effect,2.238454616514955
+149,GAM bootstrap,Indirect effect,3.5930374824711495
+150,GAM bootstrap,Total effect,5.2280079227171425
+150,GAM bootstrap,Controlled direct effect,2.5170344242970155
+150,GAM bootstrap,Indirect effect,2.710973498420127
+151,GAM bootstrap,Total effect,6.816257547253126
+151,GAM bootstrap,Controlled direct effect,1.9845495755733609
+151,GAM bootstrap,Indirect effect,4.831707971679765
+152,GAM bootstrap,Total effect,6.254175874090809
+152,GAM bootstrap,Controlled direct effect,2.0722535480994395
+152,GAM bootstrap,Indirect effect,4.181922325991369
+153,GAM bootstrap,Total effect,5.08047895217718
+153,GAM bootstrap,Controlled direct effect,2.3031792121166452
+153,GAM bootstrap,Indirect effect,2.777299740060535
+154,GAM bootstrap,Total effect,5.795748525805719
+154,GAM bootstrap,Controlled direct effect,2.2686876476241395
+154,GAM bootstrap,Indirect effect,3.527060878181579
+155,GAM bootstrap,Total effect,5.646936401688891
+155,GAM bootstrap,Controlled direct effect,2.1868599149989807
+155,GAM bootstrap,Indirect effect,3.4600764866899105
+156,GAM bootstrap,Total effect,6.616549674844962
+156,GAM bootstrap,Controlled direct effect,2.249393964575972
+156,GAM bootstrap,Indirect effect,4.367155710268991
+157,GAM bootstrap,Total effect,5.052864953797536
+157,GAM bootstrap,Controlled direct effect,1.801777353113502
+157,GAM bootstrap,Indirect effect,3.2510876006840337
+158,GAM bootstrap,Total effect,5.594638473257791
+158,GAM bootstrap,Controlled direct effect,1.8508899318418321
+158,GAM bootstrap,Indirect effect,3.743748541415959
+159,GAM bootstrap,Total effect,6.241945889609998
+159,GAM bootstrap,Controlled direct effect,2.1033020620058047
+159,GAM bootstrap,Indirect effect,4.138643827604193
+160,GAM bootstrap,Total effect,6.218511103887076
+160,GAM bootstrap,Controlled direct effect,2.1098670519331475
+160,GAM bootstrap,Indirect effect,4.108644051953929
+161,GAM bootstrap,Total effect,4.813340926593787
+161,GAM bootstrap,Controlled direct effect,2.2075061351777787
+161,GAM bootstrap,Indirect effect,2.605834791416008
+162,GAM bootstrap,Total effect,6.753479296933711
+162,GAM bootstrap,Controlled direct effect,1.9942065108837954
+162,GAM bootstrap,Indirect effect,4.759272786049916
+163,GAM bootstrap,Total effect,6.10999286626755
+163,GAM bootstrap,Controlled direct effect,2.2997943437014037
+163,GAM bootstrap,Indirect effect,3.8101985225661466
+164,GAM bootstrap,Total effect,5.985571343757477
+164,GAM bootstrap,Controlled direct effect,1.805246723441098
+164,GAM bootstrap,Indirect effect,4.180324620316378
+165,GAM bootstrap,Total effect,5.537427515967566
+165,GAM bootstrap,Controlled direct effect,2.316874008352815
+165,GAM bootstrap,Indirect effect,3.2205535076147505
+166,GAM bootstrap,Total effect,5.177308203010169
+166,GAM bootstrap,Controlled direct effect,2.184671289617696
+166,GAM bootstrap,Indirect effect,2.992636913392473
+167,GAM bootstrap,Total effect,6.394743651767194
+167,GAM bootstrap,Controlled direct effect,2.425181324677509
+167,GAM bootstrap,Indirect effect,3.969562327089685
+168,GAM bootstrap,Total effect,5.805373696009402
+168,GAM bootstrap,Controlled direct effect,1.843291190368253
+168,GAM bootstrap,Indirect effect,3.9620825056411486
+169,GAM bootstrap,Total effect,5.649143714303596
+169,GAM bootstrap,Controlled direct effect,1.832441679819906
+169,GAM bootstrap,Indirect effect,3.8167020344836904
+170,GAM bootstrap,Total effect,6.027104967555778
+170,GAM bootstrap,Controlled direct effect,2.238901298941861
+170,GAM bootstrap,Indirect effect,3.7882036686139173
+171,GAM bootstrap,Total effect,5.758564776442981
+171,GAM bootstrap,Controlled direct effect,2.3642576049877952
+171,GAM bootstrap,Indirect effect,3.3943071714551856
+172,GAM bootstrap,Total effect,6.425981720078614
+172,GAM bootstrap,Controlled direct effect,1.7407445079776873
+172,GAM bootstrap,Indirect effect,4.685237212100926
+173,GAM bootstrap,Total effect,5.361713338937067
+173,GAM bootstrap,Controlled direct effect,2.0743428916254665
+173,GAM bootstrap,Indirect effect,3.2873704473116003
+174,GAM bootstrap,Total effect,5.9867658234876355
+174,GAM bootstrap,Controlled direct effect,2.1589798390224244
+174,GAM bootstrap,Indirect effect,3.827785984465211
+175,GAM bootstrap,Total effect,6.483389723139072
+175,GAM bootstrap,Controlled direct effect,2.025949311168896
+175,GAM bootstrap,Indirect effect,4.457440411970175
+176,GAM bootstrap,Total effect,5.767142989829132
+176,GAM bootstrap,Controlled direct effect,2.30291074640868
+176,GAM bootstrap,Indirect effect,3.464232243420452
+177,GAM bootstrap,Total effect,7.070249626259229
+177,GAM bootstrap,Controlled direct effect,2.2343352716528373
+177,GAM bootstrap,Indirect effect,4.835914354606391
+178,GAM bootstrap,Total effect,6.532498596723174
+178,GAM bootstrap,Controlled direct effect,1.9593948703432127
+178,GAM bootstrap,Indirect effect,4.573103726379962
+179,GAM bootstrap,Total effect,6.215309624751187
+179,GAM bootstrap,Controlled direct effect,1.9456929313647722
+179,GAM bootstrap,Indirect effect,4.269616693386415
+180,GAM bootstrap,Total effect,5.171468170790756
+180,GAM bootstrap,Controlled direct effect,2.044448303146595
+180,GAM bootstrap,Indirect effect,3.1270198676441607
+181,GAM bootstrap,Total effect,5.45795898540049
+181,GAM bootstrap,Controlled direct effect,1.9915071891555527
+181,GAM bootstrap,Indirect effect,3.466451796244937
+182,GAM bootstrap,Total effect,6.365429906546273
+182,GAM bootstrap,Controlled direct effect,2.1462923355808328
+182,GAM bootstrap,Indirect effect,4.21913757096544
+183,GAM bootstrap,Total effect,6.934628454538774
+183,GAM bootstrap,Controlled direct effect,2.1837540882030786
+183,GAM bootstrap,Indirect effect,4.750874366335696
+184,GAM bootstrap,Total effect,5.529305202277924
+184,GAM bootstrap,Controlled direct effect,2.238198640745602
+184,GAM bootstrap,Indirect effect,3.291106561532322
+185,GAM bootstrap,Total effect,5.513193788315913
+185,GAM bootstrap,Controlled direct effect,2.30968194574974
+185,GAM bootstrap,Indirect effect,3.203511842566173
+186,GAM bootstrap,Total effect,5.123145482562901
+186,GAM bootstrap,Controlled direct effect,2.26876522349324
+186,GAM bootstrap,Indirect effect,2.8543802590696608
+187,GAM bootstrap,Total effect,4.67916594227807
+187,GAM bootstrap,Controlled direct effect,2.0308849488845757
+187,GAM bootstrap,Indirect effect,2.6482809933934943
+188,GAM bootstrap,Total effect,4.874673942285205
+188,GAM bootstrap,Controlled direct effect,1.972153179553064
+188,GAM bootstrap,Indirect effect,2.902520762732141
+189,GAM bootstrap,Total effect,7.79894673457214
+189,GAM bootstrap,Controlled direct effect,3.6164822584660383
+189,GAM bootstrap,Indirect effect,4.182464476106102
+190,GAM bootstrap,Total effect,6.809967858325836
+190,GAM bootstrap,Controlled direct effect,2.06637897455777
+190,GAM bootstrap,Indirect effect,4.743588883768066
+191,GAM bootstrap,Total effect,5.413795609230913
+191,GAM bootstrap,Controlled direct effect,2.132291690092039
+191,GAM bootstrap,Indirect effect,3.281503919138874
+192,GAM bootstrap,Total effect,5.232469867384654
+192,GAM bootstrap,Controlled direct effect,1.6222070413842773
+192,GAM bootstrap,Indirect effect,3.6102628260003766
+193,GAM bootstrap,Total effect,5.898819482519904
+193,GAM bootstrap,Controlled direct effect,2.0747334888563196
+193,GAM bootstrap,Indirect effect,3.824085993663584
+194,GAM bootstrap,Total effect,5.7302513138041
+194,GAM bootstrap,Controlled direct effect,2.0655959242108564
+194,GAM bootstrap,Indirect effect,3.6646553895932437
+195,GAM bootstrap,Total effect,5.943878895296384
+195,GAM bootstrap,Controlled direct effect,2.264913090730461
+195,GAM bootstrap,Indirect effect,3.6789658045659235
+196,GAM bootstrap,Total effect,5.6472351338003435
+196,GAM bootstrap,Controlled direct effect,2.288385891238161
+196,GAM bootstrap,Indirect effect,3.3588492425621825
+197,GAM bootstrap,Total effect,5.930158133315838
+197,GAM bootstrap,Controlled direct effect,1.873336218710743
+197,GAM bootstrap,Indirect effect,4.056821914605095
+198,GAM bootstrap,Total effect,6.378939019271755
+198,GAM bootstrap,Controlled direct effect,2.277938967038412
+198,GAM bootstrap,Indirect effect,4.101000052233343
+199,GAM bootstrap,Total effect,5.68105818000044
+199,GAM bootstrap,Controlled direct effect,2.4267491956026794
+199,GAM bootstrap,Indirect effect,3.25430898439776
+200,GAM bootstrap,Total effect,5.190647368123698
+200,GAM bootstrap,Controlled direct effect,1.9513223063013956
+200,GAM bootstrap,Indirect effect,3.2393250618223024

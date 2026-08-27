@@ -1,0 +1,43 @@
+---
+title: "DAG falsification"
+format:
+  html:
+    mermaid:
+      theme: forest
+---
+
+
+```{mermaid}
+flowchart LR
+
+  T[Treatment:<br/>current neighbor / current stranger / former neighbor]
+  P[Phase:<br/>playback vs post-stimulus]
+
+  U[Latent pair state:<br/>bond strength, territory value,<br/>breeding state, baseline aggressiveness]
+  I1[Perceived intruder threat / recognition<br/>at t-1]
+  I2[Perceived intruder threat / recognition<br/>at t]
+
+  R1[Response intensity at t-1<br/>(song + proximity)]
+  R2[Response intensity at t<br/>(song + proximity)]
+
+  T --> I1
+  T --> I2
+
+  P --> I1
+  P --> I2
+
+  U --> I1
+  U --> I2
+
+  I1 --> R1
+  I2 --> R2
+
+  R1 --> R2
+  I1 --> I2
+
+  classDef latent fill:#FCE5CD,stroke:#A66A00,stroke-width:1.5px,color:#000;
+  classDef obs fill:#D9EAF7,stroke:#3A6EA5,stroke-width:1.5px,color:#000;
+
+  class U,I1,I2 latent;
+  class T,P,R1,R2 obs;
+```

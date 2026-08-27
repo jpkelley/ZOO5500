@@ -2,11 +2,6 @@ project:
   type: book
   output-dir: docs
   execute-dir: project
-  render:
-    - index.qmd
-    - chapters/
-    - exercises/
-    - "!archive-source/"
 
 book:
   title: "Quantitative Analysis of (Messy) Field Data"

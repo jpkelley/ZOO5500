@@ -1,0 +1,2334 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>33&nbsp; SCM: Direct/Indirect Effects – Quantitative Analysis of (Messy) Field Data</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/brms_SCM.html" rel="next">
+<link href="../chapters/simple_scm.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-832e3d7b6b94ddcc90a000f8fabe51a9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/05_01_why_scms.html">Part V: Curves to Meaning</a></li><li class="breadcrumb-item"><a href="../chapters/SCM_part02.html"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">SCM: Direct/Indirect Effects</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../graphics/jackalope_graphics/analytical_jackalope.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="../graphics/jackalope_graphics/analytical_jackalope.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Quantitative Analysis of (Messy) Field Data</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Course Overview</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Information</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/int_course_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/int_syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Syllabus</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/int_calendar_sp26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Course calendar</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/int_ai_policy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">GenAI Use Guidelines</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/int_preparing_yourself.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Preparing Yourself</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/int_assignment_grades.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Assignments &amp; Grades</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/int_project_scoping.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Project Scoping</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Part ∅: AI preparation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/00_ai_prompting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">AI Prompting for Analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/00_using_jackalope_gpt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Using JackalopeGPT</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Part I: Reproducible Analyses</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01_reproducible_workflow_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Reproducible Analyses</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01_nature_of_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Nature of Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01_metadata_low_friction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Metadata</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01_naming_conventions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Conventions and Style</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Part II: Chaos to Columns</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02_data_exploration_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data Exploration</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02_data_exploration_toolkit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data Exploration Toolkit</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02_outliers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Tool 1: Outliers</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02_tutorial_data_exploration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Tutorial: Data Exploration</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Part III: Columns to Lines</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_statistical_aphorisms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Statistical Philosophy</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_intro_modeling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Introduction to Models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_intro_glms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">GLM Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_tutorial_glms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Tutorial: GLMs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_glm_partial_association.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Tutorial: Partial Associations</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_DHARMA_diagnostics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">DHARMA diagnostics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_glmms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">GLMM Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_tutorial_glmms_part01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Tutorial: GLMMs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_glmm_epilogue.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">GLMM epilogue</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Part IV: Columns to Curves</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04_tutorial_gams.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Tutorial: GAMs</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part V: Curves to Meaning</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05_01_why_scms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Why SCMs?</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05_02_building_dags.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">DAG Construction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05_02b_KS_to_DAGs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">From kitchen-sink to SCM</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/simple_scm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">SCM: Total Effects</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/SCM_part02.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">SCM: Direct/Indirect Effects</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/brms_SCM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">SCM: Bayesian</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text">Final Report</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/final_report_overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Final Report: Overview</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#workspace-set-up" id="toc-workspace-set-up" class="nav-link active" data-scroll-target="#workspace-set-up"><span class="header-section-number">33.1</span> Workspace set-up</a></li>
+  <li><a href="#introduction-to-causal-decomposition" id="toc-introduction-to-causal-decomposition" class="nav-link" data-scroll-target="#introduction-to-causal-decomposition"><span class="header-section-number">33.2</span> Introduction to causal decomposition</a></li>
+  <li><a href="#the-formal-scm-approach-how-to-get-it-done" id="toc-the-formal-scm-approach-how-to-get-it-done" class="nav-link" data-scroll-target="#the-formal-scm-approach-how-to-get-it-done"><span class="header-section-number">33.3</span> The formal SCM approach: How to get it done!</a></li>
+  <li><a href="#step-1-use-the-dag-to-break-the-effect-into-its-different-pathways" id="toc-step-1-use-the-dag-to-break-the-effect-into-its-different-pathways" class="nav-link" data-scroll-target="#step-1-use-the-dag-to-break-the-effect-into-its-different-pathways"><span class="header-section-number">33.4</span> Step 1: Use the DAG to break the effect into its different pathways</a></li>
+  <li><a href="#step-2-create-node-specific-models-that-include-only-its-parents-as-covariates" id="toc-step-2-create-node-specific-models-that-include-only-its-parents-as-covariates" class="nav-link" data-scroll-target="#step-2-create-node-specific-models-that-include-only-its-parents-as-covariates"><span class="header-section-number">33.5</span> Step 2: Create node-specific models that include only its parents as covariates</a></li>
+  <li><a href="#steps-3-5-finalize-one-submodel-at-a-time-error-functional-form-and-random-effects" id="toc-steps-3-5-finalize-one-submodel-at-a-time-error-functional-form-and-random-effects" class="nav-link" data-scroll-target="#steps-3-5-finalize-one-submodel-at-a-time-error-functional-form-and-random-effects"><span class="header-section-number">33.6</span> Steps 3-5: Finalize one submodel at a time (error, functional form, and random effects)</a></li>
+  <li><a href="#finalizing-the-submodel-for-m2" id="toc-finalizing-the-submodel-for-m2" class="nav-link" data-scroll-target="#finalizing-the-submodel-for-m2"><span class="header-section-number">33.7</span> Finalizing the submodel for <code>M2</code></a>
+  <ul class="collapse">
+  <li><a href="#step-3-compare-plausible-error-distributions-for-m2" id="toc-step-3-compare-plausible-error-distributions-for-m2" class="nav-link" data-scroll-target="#step-3-compare-plausible-error-distributions-for-m2"><span class="header-section-number">33.7.1</span> Step 3: Compare plausible error distributions for <code>M2</code></a></li>
+  <li><a href="#step-4.-compare-functional-forms-for-m2" id="toc-step-4.-compare-functional-forms-for-m2" class="nav-link" data-scroll-target="#step-4.-compare-functional-forms-for-m2"><span class="header-section-number">33.7.2</span> Step 4. Compare functional forms for <code>M2</code></a></li>
+  <li><a href="#step-5.-compare-repeated-structure-terms-for-m2" id="toc-step-5.-compare-repeated-structure-terms-for-m2" class="nav-link" data-scroll-target="#step-5.-compare-repeated-structure-terms-for-m2"><span class="header-section-number">33.7.3</span> Step 5. Compare repeated-structure terms for <code>M2</code></a></li>
+  </ul></li>
+  <li><a href="#step-6-add-appropriate-correlation-structure-for-temporal-or-spatial-autocorrelation-if-needed" id="toc-step-6-add-appropriate-correlation-structure-for-temporal-or-spatial-autocorrelation-if-needed" class="nav-link" data-scroll-target="#step-6-add-appropriate-correlation-structure-for-temporal-or-spatial-autocorrelation-if-needed"><span class="header-section-number">33.8</span> Step 6: Add appropriate correlation structure for temporal or spatial autocorrelation (if needed)</a></li>
+  <li><a href="#step-7-simulate-outcomes-using-counterfactual-approaches." id="toc-step-7-simulate-outcomes-using-counterfactual-approaches." class="nav-link" data-scroll-target="#step-7-simulate-outcomes-using-counterfactual-approaches."><span class="header-section-number">33.9</span> Step 7: Simulate outcomes (using counterfactual approaches).</a>
+  <ul class="collapse">
+  <li><a href="#substep-7a-build-g-computation-from-the-set-of-fitted-structural-equations" id="toc-substep-7a-build-g-computation-from-the-set-of-fitted-structural-equations" class="nav-link" data-scroll-target="#substep-7a-build-g-computation-from-the-set-of-fitted-structural-equations"><span class="header-section-number">33.9.1</span> Substep 7a: Build <code>g-computation</code> from the set of fitted structural equations</a></li>
+  </ul></li>
+  <li><a href="#substep-7b-define-the-reference-baseline-prediction-settings" id="toc-substep-7b-define-the-reference-baseline-prediction-settings" class="nav-link" data-scroll-target="#substep-7b-define-the-reference-baseline-prediction-settings"><span class="header-section-number">33.10</span> Substep 7b: Define the reference (baseline) prediction settings</a>
+  <ul class="collapse">
+  <li><a href="#substep-7c-specify-the-interventions" id="toc-substep-7c-specify-the-interventions" class="nav-link" data-scroll-target="#substep-7c-specify-the-interventions"><span class="header-section-number">33.10.1</span> Substep 7c: Specify the intervention(s)</a></li>
+  <li><a href="#substep-7d-predict-outcomes-under-each-intervention-to-obtain-the-total-effect" id="toc-substep-7d-predict-outcomes-under-each-intervention-to-obtain-the-total-effect" class="nav-link" data-scroll-target="#substep-7d-predict-outcomes-under-each-intervention-to-obtain-the-total-effect"><span class="header-section-number">33.10.2</span> Substep 7d: Predict outcomes under each intervention to obtain the <em>total effect</em></a></li>
+  <li><a href="#substep-7e-compute-the-controlled-direct-effect-by-fixing-mediators" id="toc-substep-7e-compute-the-controlled-direct-effect-by-fixing-mediators" class="nav-link" data-scroll-target="#substep-7e-compute-the-controlled-direct-effect-by-fixing-mediators"><span class="header-section-number">33.10.3</span> Substep 7e: Compute the <em>controlled direct effect</em> by fixing mediator(s)</a></li>
+  </ul></li>
+  <li><a href="#substep-7f-decompose-the-total-effect-into-direct-and-indirect-components" id="toc-substep-7f-decompose-the-total-effect-into-direct-and-indirect-components" class="nav-link" data-scroll-target="#substep-7f-decompose-the-total-effect-into-direct-and-indirect-components"><span class="header-section-number">33.11</span> Substep 7f: Decompose the <em>total effect</em> into <em>direct</em> and <em>indirect</em> components</a></li>
+  <li><a href="#substep-7g-quantify-uncertainty-e.g.-via-bootstrap" id="toc-substep-7g-quantify-uncertainty-e.g.-via-bootstrap" class="nav-link" data-scroll-target="#substep-7g-quantify-uncertainty-e.g.-via-bootstrap"><span class="header-section-number">33.12</span> Substep 7g: Quantify uncertainty (e.g., via bootstrap)</a></li>
+  <li><a href="#step-8-visualize-the-decomposition" id="toc-step-8-visualize-the-decomposition" class="nav-link" data-scroll-target="#step-8-visualize-the-decomposition"><span class="header-section-number">33.13</span> Step 8: Visualize the decomposition</a></li>
+  <li><a href="#step-9-interpreting-the-results" id="toc-step-9-interpreting-the-results" class="nav-link" data-scroll-target="#step-9-interpreting-the-results"><span class="header-section-number">33.14</span> Step 9: Interpreting the results</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">33.15</span> Conclusion</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/05_01_why_scms.html">Part V: Curves to Meaning</a></li><li class="breadcrumb-item"><a href="../chapters/SCM_part02.html"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">SCM: Direct/Indirect Effects</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">SCM: Direct/Indirect Effects</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="workspace-set-up" class="level2" data-number="33.1">
+<h2 data-number="33.1" class="anchored" data-anchor-id="workspace-set-up"><span class="header-section-number">33.1</span> Workspace set-up</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mgcv)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dagitty)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(igraph)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(furrr)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(future)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gratia)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DHARMa)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="introduction-to-causal-decomposition" class="level2" data-number="33.2">
+<h2 data-number="33.2" class="anchored" data-anchor-id="introduction-to-causal-decomposition"><span class="header-section-number">33.2</span> Introduction to causal decomposition</h2>
+<p>In the previous section, we saw an example of using a DAG-derived adjustment set to estimate the total effect of <code>X</code> on <code>Y</code>. For this next component, we will use the same DAG that encodes our causal knowledge about the study system. Specifically, this DAG includes variables with oddly convenient letter abbreviations:</p>
+<ul>
+<li>one baseline confounder <code>C</code></li>
+<li>one exposure <code>X</code></li>
+<li>two mediators <code>M1</code> and <code>M2</code></li>
+<li>one continuous outcome <code>Y</code></li>
+</ul>
+<p>Additionally, the design of our study includes some sampling structure, namely multiple observers (<code>obs</code>) collecting data at multiple sites (<code>site</code>). These are encoded as two crossed grouping factors,<code>site</code> and <code>obs</code>. As a reminder, here is what that DAG looked like:</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+
+    C[C]
+    X[X]
+    M1[M1]
+    M2[M2]
+    Y[Y]
+
+    C --&gt; X
+    X --&gt; M1
+    C --&gt; M1
+    C --&gt; Y
+    X --&gt; M2
+    X --&gt; Y
+    M1 --&gt; M2
+    M2 --&gt; Y
+
+    style C fill:#FACECE,stroke:none,color:#000000,font-size:16px
+    style X fill:#D6EAF8,stroke:none,color:#000000,font-size:16px
+    style M1 fill:#FDEBD0,stroke:none,color:#000000,font-size:16px
+    style M2 fill:#FDEBD0,stroke:none,color:#000000,font-size:16px
+    style Y fill:#D5F5E3,stroke:none,color:#000000,font-size:16px
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Remember the three main components of a well-structured Structural Causal Model:</p>
+<ul>
+<li><strong>Directed acyclic graphs (DAGs):</strong> These are graphs that describe how we think our study system is causally structured (<em>this</em> affects <em>that</em>, <em>ad nauseum</em>)</li>
+<li><strong>Structural equations:</strong> These formal equations parameterize causal relationships and help us carefully target specific questions</li>
+<li><strong>Counterfactual reasoning:</strong> An approach to defining causal effects by comparing outcomes under different hypothetical interventions. This is akin to predicting from a best-fit model (except far better).</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span><strong>What if I don’t wanna (use SCMs)?</strong>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>If you plan to say anything about causes (even informally), you are already making causal assumptions. A simple DAG just makes that logic explicit so that you and others can see and understand everything that you are assuming. This helps you avoid accidental bias. Whether you fit models using frequentist or Bayesian tools is secondary; the key is getting the causal reasoning right first.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="the-formal-scm-approach-how-to-get-it-done" class="level2" data-number="33.3">
+<h2 data-number="33.3" class="anchored" data-anchor-id="the-formal-scm-approach-how-to-get-it-done"><span class="header-section-number">33.3</span> The formal SCM approach: How to get it done!</h2>
+<p>In this tutorial, we are using the <em>same dataset</em>, the <em>same core DAG</em>, and the same general frequentist (GAM-based) philosophy. This eases us into these new concepts and approaches without burdening us with the new jargon of Bayesian approaches. The primary difference is that we now move from a single total-effect model to a set of <em>node-specific structural equations</em> that allow us to ask:</p>
+<blockquote class="blockquote">
+<p>How much of that effect is total, how much is direct, and how much is transmitted indirectly through the mediating pathways of the DAG?</p>
+</blockquote>
+<p>To answer this question, we need a full Structural Causal Model (SCM) rather than a single adjustment-set model. To get a full SCM, the basic recipe consists of these primary steps (all starting with your causal DAG):</p>
+<p><strong>Step 1:</strong> Use the DAG to break the effect into its different pathways. <strong>Step 2:</strong> For each node (other than exogenous nodes), create a model that includes only its parents as covariates. <strong>Step 3:</strong> Use information theory (AIC) to find the best-supported error distribution of each model. <strong>Step 4:</strong> Identify the best-supported functional form of the models (i.e.&nbsp;use GAM smooths for anything continuous or time-based). <strong>Step 5:</strong> Add random effects for repeated structure. <strong>Step 6:</strong> Add appropriate correlation structure for temporal or spatial autocorrelation (if the DAG does not already encode this). <strong>Step 7:</strong> Simulate outcomes (using counterfactual approaches).</p>
+<p>This is the basic logic of causal decomposition in an SCM. Though this might sound daunting, think about this: you are already familiar with most of the tools required to successfully create this kind of causal model. The most important thing to remember during execution of the above step is: <strong>Do not change your variable; they are defined by your DAG!</strong></p>
+<p>As mentioned before, we will use the same dataset used in <a href="https://jpkelley.github.io/ZOO5500/chapters/simple_scm.html"><strong>SCM: Total Effects</strong></a>. Click on this expandable box to generate the data again.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Generate the fake dataset for this example (R code)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260408</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>n_site <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>n_obs  <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>n_rep  <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>n      <span class="ot">&lt;-</span> n_site <span class="sc">*</span> n_obs <span class="sc">*</span> n_rep</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>site <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">paste0</span>(<span class="st">"site_"</span>, <span class="fu">seq_len</span>(n_site)), <span class="at">each =</span> n_obs <span class="sc">*</span> n_rep))</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>obs  <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">rep</span>(<span class="fu">paste0</span>(<span class="st">"obs_"</span>, <span class="fu">seq_len</span>(n_obs)), <span class="at">each =</span> n_rep), <span class="at">times =</span> n_site))</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>b_site_x  <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n_site, <span class="dv">0</span>, <span class="fl">0.55</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>b_obs_x   <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n_obs, <span class="dv">0</span>, <span class="fl">0.45</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>b_site_m1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n_site, <span class="dv">0</span>, <span class="fl">0.35</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>b_obs_m1  <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n_obs, <span class="dv">0</span>, <span class="fl">0.30</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>b_site_m2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n_site, <span class="dv">0</span>, <span class="fl">0.35</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>b_obs_m2  <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n_obs, <span class="dv">0</span>, <span class="fl">0.30</span>)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>b_site_y  <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n_site, <span class="dv">0</span>, <span class="fl">0.70</span>)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>b_obs_y   <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n_obs, <span class="dv">0</span>, <span class="fl">0.55</span>)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>C <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="fl">1.1</span>)</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fl">0.85</span> <span class="sc">*</span> C <span class="sc">+</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  b_site_x[site] <span class="sc">+</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  b_obs_x[obs] <span class="sc">+</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="fl">1.0</span>)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>M1 <span class="ot">&lt;-</span> <span class="fl">1.0</span> <span class="sc">*</span> <span class="fu">sin</span>(X <span class="sc">/</span> <span class="fl">1.3</span>) <span class="sc">+</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.55</span> <span class="sc">*</span> C <span class="sc">+</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  b_site_m1[site] <span class="sc">+</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  b_obs_m1[obs] <span class="sc">+</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="fl">0.8</span>)</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>M2 <span class="ot">&lt;-</span> <span class="fl">0.60</span> <span class="sc">*</span> X <span class="sc">+</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.85</span> <span class="sc">*</span> M1 <span class="sc">+</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.18</span> <span class="sc">*</span> C <span class="sc">+</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  b_site_m2[site] <span class="sc">+</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>  b_obs_m2[obs] <span class="sc">+</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="fl">0.9</span>)</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fl">1.15</span> <span class="sc">*</span> X <span class="sc">+</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>  <span class="fl">1.10</span> <span class="sc">*</span> M2 <span class="sc">-</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.42</span> <span class="sc">*</span> (M2<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.70</span> <span class="sc">*</span> C <span class="sc">+</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>  b_site_y[site] <span class="sc">+</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>  b_obs_y[obs] <span class="sc">+</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rt</span>(n, <span class="at">df =</span> <span class="dv">6</span>) <span class="sc">*</span> <span class="fl">0.9</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>  <span class="at">site =</span> site,</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>  <span class="at">obs  =</span> obs,</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>  <span class="at">C    =</span> C,</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>  <span class="at">X    =</span> X,</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>  <span class="at">M1   =</span> M1,</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>  <span class="at">M2   =</span> M2,</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>  <span class="at">Y    =</span> Y</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(dat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 200
+Columns: 7
+$ site &lt;fct&gt; site_1, site_1, site_1, site_1, site_1, site_1, site_1, site_1, s…
+$ obs  &lt;fct&gt; obs_1, obs_1, obs_1, obs_1, obs_1, obs_1, obs_1, obs_1, obs_1, ob…
+$ C    &lt;dbl&gt; 2.53019368, 0.09841712, -1.07479864, 0.34897694, 0.80689301, -0.5…
+$ X    &lt;dbl&gt; 0.95443559, 0.20817467, -1.55041162, 2.83542865, 0.30419252, -1.9…
+$ M1   &lt;dbl&gt; 2.701884760, -0.566712174, -1.526371293, 1.438314550, 0.936134522…
+$ M2   &lt;dbl&gt; 2.7620128, 0.2653152, -1.7551261, 2.9403361, 0.3641560, -2.770621…
+$ Y    &lt;dbl&gt; 4.0011511, -0.9691240, -5.4194487, 4.5770825, 1.3178349, -7.18640…</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>After simulating these data, let us move through the SCM Steps systematically!</p>
+</section>
+<section id="step-1-use-the-dag-to-break-the-effect-into-its-different-pathways" class="level2" data-number="33.4">
+<h2 data-number="33.4" class="anchored" data-anchor-id="step-1-use-the-dag-to-break-the-effect-into-its-different-pathways"><span class="header-section-number">33.4</span> Step 1: Use the DAG to break the effect into its different pathways</h2>
+<p>We start the causal decomposition process by examining your DAG very closely and then tracing all causal pathways from <code>X</code> to <code>Y</code> in the DAG. Each path represents a way the effect of <code>X</code> can reach <code>Y</code>; in other words, each path is a distinct –but maybe not mutually exclusive– mechanism of action. In this DAG, there are three pathways are:</p>
+<ul>
+<li><strong>Direct:</strong> <code>X → Y</code><br>
+</li>
+<li><strong>Indirect via M2:</strong> <code>X → M2 → Y</code><br>
+</li>
+<li><strong>Indirect via M1 and M2:</strong> <code>X → M1 → M2 → Y</code></li>
+</ul>
+<blockquote class="blockquote">
+<p>The total effect of <code>X</code> on <code>Y</code> is the combination of all these pathways.</p>
+</blockquote>
+<p>This first step is simply about using the DAG as a map to define what you mean by <em>direct</em> and <em>indirect</em> effects.</p>
+</section>
+<section id="step-2-create-node-specific-models-that-include-only-its-parents-as-covariates" class="level2" data-number="33.5">
+<h2 data-number="33.5" class="anchored" data-anchor-id="step-2-create-node-specific-models-that-include-only-its-parents-as-covariates"><span class="header-section-number">33.5</span> Step 2: Create node-specific models that include only its parents as covariates</h2>
+<p>The parent-set rule ultimately operationalizes the entire SCM. How does it work? For each endogenous node, we write one structural equation (and as associated statistical model like a GLMM or GAMM) containing its direct causes in the DAG. In other words:</p>
+<blockquote class="blockquote">
+<p>Each node is modeled as a function of its parents <strong>only</strong>.</p>
+</blockquote>
+<p>That sounds simple, but this is the singular modeling action that converts a messy kitchen-sink model to an causal model. That is, in a kitchen-sink analysis, you might throw many variables into a regression for <code>Y</code> and then compare coefficients (which we now know is problematic on a few levels). In an SCM, you instead ask:</p>
+<ul>
+<li><em>What are the direct causes of <code>X</code>?</em></li>
+<li><em>What are the direct causes of <code>M1</code>?</em></li>
+<li><em>What are the direct causes of <code>M2</code>?</em></li>
+<li><em>What are the direct causes of <code>Y</code>?</em></li>
+</ul>
+<p>Then you write one model for each node. And, then, you made the predicted values of one upstream model fill in the predictor values of the next model(s) downstream, <em>ad finitum</em>. Under the causal assumptions of our working DAG, the parent sets (represented by brackets <code>{ }</code>) are:</p>
+<ul>
+<li><code>pa(C) = { }</code> because <code>C</code> is exogenous</li>
+<li><code>pa(X) = {C}</code></li>
+<li><code>pa(M1) = {C, X}</code></li>
+<li><code>pa(M2) = {X, M1}</code></li>
+<li><code>pa(Y) = {C, X, M2}</code></li>
+</ul>
+<p>This time, instead of focusing only on <code>X -&gt; Y</code>, we focus on the full system. We do <strong>not</strong> need an equation for <code>C</code> here because <code>C</code> is treated as baseline and exogenous.</p>
+<p>Here the outlined (thick border) nodes are the outcomes for which we need explicit structural equations.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+
+    C[C]
+    X[X]
+    M1[M1]
+    M2[M2]
+    Y[Y]
+
+    C --&gt; X
+    X --&gt; M1
+    C --&gt; M1
+    C --&gt; Y
+    X --&gt; M2
+    X --&gt; Y
+    M1 --&gt; M2
+    M2 --&gt; Y
+
+    style C fill:#FACECE,stroke:none,color:#000000,font-size:16px
+    style X fill:#AED6F1,stroke:#2E86C1,stroke-width:3px,color:#000000,font-size:16px
+    style M1 fill:#FDEBD0,stroke:#CA6F1E,stroke-width:3px,color:#000000,font-size:16px
+    style M2 fill:#FDEBD0,stroke:#CA6F1E,stroke-width:3px,color:#000000,font-size:16px
+    style Y fill:#ABEBC6,stroke:#239B56,stroke-width:3px,color:#000000,font-size:16px
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Why does the parent-set rule make sense?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It makes sense because each structural equation is meant to represent the <em>local causal mechanism</em> generating that node. If a variable is not a parent of a node in the DAG, then adding it to that node’s equation would generally mean one of two things:</p>
+<ul>
+<li>you are changing the causal assumptions of the DAG, or</li>
+<li>you are adding a non-causal predictor for convenience</li>
+</ul>
+<p>That may improve prediction, but it no longer cleanly represents the mechanism implied by the DAG. So, in an SCM, the parent set is not chosen by AIC, convenience, or habit. It is chosen by the DAG. Put another way:</p>
+<blockquote class="blockquote">
+<p>If invoking causality, all covariates are chosen by the DAG and not <em>by you.</em></p>
+</blockquote>
+</div>
+</div>
+<p><strong>Parent-set (on a DAG) for outcome variable <code>X</code></strong></p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+
+    C[C]
+    X[X]
+    M1[M1]
+    M2[M2]
+    Y[Y]
+
+    C --&gt; X
+    X --&gt; M1
+    C --&gt; M1
+    C --&gt; Y
+    X --&gt; M2
+    X --&gt; Y
+    M1 --&gt; M2
+    M2 --&gt; Y
+
+    style C fill:#FACECE,stroke:#B03A2E,stroke-width:3px,color:#000000,font-size:16px
+    style X fill:#AED6F1,stroke:#2E86C1,stroke-width:3px,color:#000000,font-size:16px
+    style M1 fill:#F8F9F9,stroke:none,color:#000000,font-size:16px
+    style M2 fill:#F8F9F9,stroke:none,color:#000000,font-size:16px
+    style Y fill:#F8F9F9,stroke:none,color:#000000,font-size:16px
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>** Parent-set (on a DAG) for outcome variable <code>M1</code>**</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+
+    C[C]
+    X[X]
+    M1[M1]
+    M2[M2]
+    Y[Y]
+
+    C --&gt; X
+    X --&gt; M1
+    C --&gt; M1
+    C --&gt; Y
+    X --&gt; M2
+    X --&gt; Y
+    M1 --&gt; M2
+    M2 --&gt; Y
+
+    style C fill:#FACECE,stroke:#B03A2E,stroke-width:3px,color:#000000,font-size:16px
+    style X fill:#AED6F1,stroke:#2E86C1,stroke-width:3px,color:#000000,font-size:16px
+    style M1 fill:#FDEBD0,stroke:#CA6F1E,stroke-width:3px,color:#000000,font-size:16px
+    style M2 fill:#F8F9F9,stroke:none,color:#000000,font-size:16px
+    style Y fill:#F8F9F9,stroke:none,color:#000000,font-size:16px
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p><strong>Parent-set (on a DAG) for outcome variable <code>M2</code></strong></p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+
+    C[C]
+    X[X]
+    M1[M1]
+    M2[M2]
+    Y[Y]
+
+    C --&gt; X
+    X --&gt; M1
+    C --&gt; M1
+    C --&gt; Y
+    X --&gt; M2
+    X --&gt; Y
+    M1 --&gt; M2
+    M2 --&gt; Y
+
+    style C fill:#F8F9F9,stroke:none,color:#000000,font-size:16px
+    style X fill:#AED6F1,stroke:#2E86C1,stroke-width:3px,color:#000000,font-size:16px
+    style M1 fill:#FDEBD0,stroke:#CA6F1E,stroke-width:3px,color:#000000,font-size:16px
+    style M2 fill:#FDEBD0,stroke:#CA6F1E,stroke-width:4px,color:#000000,font-size:16px
+    style Y fill:#F8F9F9,stroke:none,color:#000000,font-size:16px
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p><strong>Parent-set (on a DAG) for outcome variable <code>Y</code></strong></p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+
+    C[C]
+    X[X]
+    M1[M1]
+    M2[M2]
+    Y[Y]
+
+    C --&gt; X
+    X --&gt; M1
+    C --&gt; M1
+    C --&gt; Y
+    X --&gt; M2
+    X --&gt; Y
+    M1 --&gt; M2
+    M2 --&gt; Y
+
+    style C fill:#FACECE,stroke:#B03A2E,stroke-width:3px,color:#000000,font-size:16px
+    style X fill:#AED6F1,stroke:#2E86C1,stroke-width:3px,color:#000000,font-size:16px
+    style M1 fill:#F8F9F9,stroke:none,color:#000000,font-size:16px
+    style M2 fill:#FDEBD0,stroke:#CA6F1E,stroke-width:3px,color:#000000,font-size:16px
+    style Y fill:#ABEBC6,stroke:#239B56,stroke-width:4px,color:#000000,font-size:16px
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="steps-3-5-finalize-one-submodel-at-a-time-error-functional-form-and-random-effects" class="level2" data-number="33.6">
+<h2 data-number="33.6" class="anchored" data-anchor-id="steps-3-5-finalize-one-submodel-at-a-time-error-functional-form-and-random-effects"><span class="header-section-number">33.6</span> Steps 3-5: Finalize one submodel at a time (error, functional form, and random effects)</h2>
+<p>In practice, it is often easier to work through the structural equations <em>one node-specific model at a time</em>. For each endogenous node (again, all nodes except the ones that have no parents), we move through the same sequence as follows:</p>
+<ul>
+<li>identify the parent set from the DAG<br>
+</li>
+<li>compare plausible error distributions with AIC (i.e.&nbsp;you can test appropriate error structure)</li>
+<li>compare functional forms (linear versus smooth) with AIC<br>
+</li>
+<li>compare repeated-structure terms (e.g., <code>site</code>, <code>obs</code>, or crossed random effects) with AIC<br>
+</li>
+<li>temporal or spatial autocorrelation</li>
+</ul>
+<p>Also remember that these models can vary in:</p>
+<ul>
+<li>phylogenetic variance structure</li>
+<li>interactions (effect modifiers) between fixed terms</li>
+</ul>
+<p>The goal is to use these steps to deliberately model everything in your model (design-wise, interaction-wise, etc.) that is not explicitly represented in your DAG.</p>
+<p>The important point at this stage is that, once your DAG is fixed with the causal assumptions (i.e.&nbsp;what the parent variables are), the parent-set of variables for any focal node <strong>does not</strong> change. We are not asking which variables belong in the model; the DAG has already answered that. This is critically important. If you add or remove variables at this stage, you are fundamentally changing your estimand, which means you are changing your primary question. Who knew that some such a simple choice of variable inclusion could change the focus of an entire grant proposal, thesis proposal, or scientific manuscript?!?</p>
+<p>Once one submodel is finalized, we move to the next node. Certainly, these steps are laborious –and there are more advanced ways to speed up this process– but the result is a powerful set of effectively linked models that be used to answer a myriad questions. In this section, we show this full process for two submodels:</p>
+<ul>
+<li>the model for outcome <code>M2</code></li>
+<li>the model for outcome <code>Y</code></li>
+</ul>
+<p>For the other submodels, the same Steps 3-5 should be followed, but, for the rare sake of brevity in this course, I will not show all of that code and output in the rendered document.</p>
+<p>In the following subsections, we will outline (and retain the color of) the response variable and covariates that should go into the model. All other variables will be highlighted in light gray.</p>
+</section>
+<section id="finalizing-the-submodel-for-m2" class="level2" data-number="33.7">
+<h2 data-number="33.7" class="anchored" data-anchor-id="finalizing-the-submodel-for-m2"><span class="header-section-number">33.7</span> Finalizing the submodel for <code>M2</code></h2>
+<p>Under the DAG, the parent set for <code>M2</code> is <code>{X, M1}</code>. So the structural equation for outcome <code>M2</code> must be based on those two parents. We now finalize that model in three stages.</p>
+<section id="step-3-compare-plausible-error-distributions-for-m2" class="level3" data-number="33.7.1">
+<h3 data-number="33.7.1" class="anchored" data-anchor-id="step-3-compare-plausible-error-distributions-for-m2"><span class="header-section-number">33.7.1</span> Step 3: Compare plausible error distributions for <code>M2</code></h3>
+<p>Here, we keep the parent-set fixed and compare two candidate error distributions using AIC.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mod_m2_gaussian_err <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  M2 <span class="sc">~</span> X <span class="sc">+</span> M1,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>mod_m2_scat_err <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  M2 <span class="sc">~</span> X <span class="sc">+</span> M1,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">scat</span>(),</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> <span class="fu">c</span>(<span class="st">"M2: Gaussian"</span>, <span class="st">"M2: scat"</span>),</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">AIC =</span> <span class="fu">c</span>(<span class="fu">AIC</span>(mod_m2_gaussian_err), <span class="fu">AIC</span>(mod_m2_scat_err))</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(AIC) <span class="sc">|&gt;</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">delta_AIC =</span> AIC <span class="sc">-</span> <span class="fu">min</span>(AIC))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  model          AIC delta_AIC
+  &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;
+1 M2: Gaussian  601.      0   
+2 M2: scat      603.      2.02</code></pre>
+</div>
+</div>
+<p>For this tutorial, we proceed with the better-supported error distribution (Gaussian/Normal) for <code>M2</code>.</p>
+</section>
+<section id="step-4.-compare-functional-forms-for-m2" class="level3" data-number="33.7.2">
+<h3 data-number="33.7.2" class="anchored" data-anchor-id="step-4.-compare-functional-forms-for-m2"><span class="header-section-number">33.7.2</span> Step 4. Compare functional forms for <code>M2</code></h3>
+<p>Now we keep the parent set and error distribution (Gaussian/Normal) fixed, but compare linear and nonlinear forms for the parent variables.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mod_m2_linear <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  M2 <span class="sc">~</span> X <span class="sc">+</span> M1,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>mod_m2_sx <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  M2 <span class="sc">~</span> <span class="fu">s</span>(X) <span class="sc">+</span> M1,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>mod_m2_sm1 <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  M2 <span class="sc">~</span> X <span class="sc">+</span> <span class="fu">s</span>(M1),</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>mod_m2_sb <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>  M2 <span class="sc">~</span> <span class="fu">s</span>(X) <span class="sc">+</span> <span class="fu">s</span>(M1),</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> <span class="fu">c</span>(<span class="st">"M2: all linear"</span>, <span class="st">"M2: smooth X"</span>, <span class="st">"M2: smooth M1"</span>, <span class="st">"M2: smooth both"</span>),</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">AIC =</span> <span class="fu">c</span>(<span class="fu">AIC</span>(mod_m2_linear), <span class="fu">AIC</span>(mod_m2_sx), <span class="fu">AIC</span>(mod_m2_sm1), <span class="fu">AIC</span>(mod_m2_sb))</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(AIC) <span class="sc">|&gt;</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">delta_AIC =</span> AIC <span class="sc">-</span> <span class="fu">min</span>(AIC))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  model             AIC delta_AIC
+  &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;
+1 M2: smooth X     601.   0      
+2 M2: all linear   601.   0.00193
+3 M2: smooth M1    601.   0.459  
+4 M2: smooth both  601.   0.501  </code></pre>
+</div>
+</div>
+<p>For this tutorial, we next proceed to the final step using the model with the Gaussian error distribution and the best-supported functional form (<code>s(X) + s(M1)</code>) for <code>M2</code>.</p>
+</section>
+<section id="step-5.-compare-repeated-structure-terms-for-m2" class="level3" data-number="33.7.3">
+<h3 data-number="33.7.3" class="anchored" data-anchor-id="step-5.-compare-repeated-structure-terms-for-m2"><span class="header-section-number">33.7.3</span> Step 5. Compare repeated-structure terms for <code>M2</code></h3>
+<p>Finally, we take the best-supported mean structure and compare three ways of accounting for repeated structure:</p>
+<ul>
+<li>random effect for <code>site</code></li>
+<li>random effect for <code>obs</code></li>
+<li>crossed random effects for both <code>site</code> and <code>obs</code></li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>mod_m2_site <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  M2 <span class="sc">~</span> <span class="fu">s</span>(X) <span class="sc">+</span> <span class="fu">s</span>(M1) <span class="sc">+</span> <span class="fu">s</span>(site, <span class="at">bs =</span> <span class="st">"re"</span>),</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>mod_m2_obs <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  M2 <span class="sc">~</span> <span class="fu">s</span>(X) <span class="sc">+</span> <span class="fu">s</span>(M1) <span class="sc">+</span> <span class="fu">s</span>(obs, <span class="at">bs =</span> <span class="st">"re"</span>),</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>mod_m2_crossed <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  M2 <span class="sc">~</span> <span class="fu">s</span>(X) <span class="sc">+</span> <span class="fu">s</span>(M1) <span class="sc">+</span> <span class="fu">s</span>(site, <span class="at">bs =</span> <span class="st">"re"</span>) <span class="sc">+</span> <span class="fu">s</span>(obs, <span class="at">bs =</span> <span class="st">"re"</span>),</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> <span class="fu">c</span>(<span class="st">"M2: site RE"</span>, <span class="st">"M2: obs RE"</span>, <span class="st">"M2: crossed REs"</span>),</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">AIC =</span> <span class="fu">c</span>(<span class="fu">AIC</span>(mod_m2_site), <span class="fu">AIC</span>(mod_m2_obs), <span class="fu">AIC</span>(mod_m2_crossed))</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(AIC) <span class="sc">|&gt;</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">delta_AIC =</span> AIC <span class="sc">-</span> <span class="fu">min</span>(AIC))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  model             AIC delta_AIC
+  &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;
+1 M2: crossed REs  511.       0  
+2 M2: site RE      526.      14.5
+3 M2: obs RE       599.      87.7</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>mod_m2 <span class="ot">&lt;-</span> mod_m2_crossed</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_m2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Family: gaussian 
+Link function: identity 
+
+Formula:
+M2 ~ s(X) + s(M1) + s(site, bs = "re") + s(obs, bs = "re")
+
+Parametric coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)   0.1606     0.4103   0.391    0.696
+
+Approximate significance of smooth terms:
+          edf Ref.df       F  p-value    
+s(X)    1.402  1.703  78.172  &lt; 2e-16 ***
+s(M1)   1.000  1.000 285.207  &lt; 2e-16 ***
+s(site) 2.922  3.000  38.607  &lt; 2e-16 ***
+s(obs)  3.331  4.000   5.264 0.000158 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+R-sq.(adj) =  0.874   Deviance explained =   88%
+-REML = 262.38  Scale est. = 0.70679   n = 200</code></pre>
+</div>
+</div>
+<p>At this point, the <code>M2</code> submodel is finalized. As stated previously, we will only model one more node in this tutorial, but I will put this into an expandable box to keep this page from exploding in length. Click on the box below to expand this model approach for outcome <code>Y</code>.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Finalizing the submodel for <code>Y</code>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Under the DAG, the parent set for <code>Y</code> is <code>{C, X, M2}</code>. So the structural equation for <code>Y</code> must be based on those three parents. We now repeat the same sequence as we did for outcome <code>M2</code>.</p>
+<section id="step-3-compare-plausible-error-distributions-for-y" class="level3" data-number="33.7.4">
+<h3 data-number="33.7.4" class="anchored" data-anchor-id="step-3-compare-plausible-error-distributions-for-y"><span class="header-section-number">33.7.4</span> Step 3: Compare plausible error distributions for <code>Y</code></h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>mod_y_gaussian_err <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> X <span class="sc">+</span> M2 <span class="sc">+</span> C,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>mod_y_scat_err <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> X <span class="sc">+</span> M2 <span class="sc">+</span> C,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">scat</span>(),</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> <span class="fu">c</span>(<span class="st">"Y: Gaussian"</span>, <span class="st">"Y: scat"</span>),</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">AIC =</span> <span class="fu">c</span>(<span class="fu">AIC</span>(mod_y_gaussian_err), <span class="fu">AIC</span>(mod_y_scat_err))</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(AIC) <span class="sc">|&gt;</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">delta_AIC =</span> AIC <span class="sc">-</span> <span class="fu">min</span>(AIC))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  model         AIC delta_AIC
+  &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;
+1 Y: scat     1047.       0  
+2 Y: Gaussian 1074.      26.6</code></pre>
+</div>
+</div>
+<p>For this tutorial, we proceed with the better-supported error distribution (“scat”) for <code>Y</code>.</p>
+</section>
+<section id="step-4.-compare-functional-forms-for-y" class="level3" data-number="33.7.5">
+<h3 data-number="33.7.5" class="anchored" data-anchor-id="step-4.-compare-functional-forms-for-y"><span class="header-section-number">33.7.5</span> Step 4. Compare functional forms for <code>Y</code></h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>mod_y_linear <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> X <span class="sc">+</span> M2 <span class="sc">+</span> C,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">scat</span>(),</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>mod_y_sx <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> <span class="fu">s</span>(X) <span class="sc">+</span> M2 <span class="sc">+</span> C,</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">scat</span>(),</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>mod_y_sm2 <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> X <span class="sc">+</span> <span class="fu">s</span>(M2) <span class="sc">+</span> C,</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">scat</span>(),</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>mod_y_sc <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> X <span class="sc">+</span> M2 <span class="sc">+</span> <span class="fu">s</span>(C),</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">scat</span>(),</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>mod_y_sb <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> <span class="fu">s</span>(X) <span class="sc">+</span> <span class="fu">s</span>(M2) <span class="sc">+</span> <span class="fu">s</span>(C),</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">scat</span>(),</span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> <span class="fu">c</span>(<span class="st">"Y: all linear"</span>, <span class="st">"Y: smooth X"</span>, <span class="st">"Y: smooth M2"</span>, <span class="st">"Y: smooth C"</span>, <span class="st">"Y: smooth all"</span>),</span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">AIC =</span> <span class="fu">c</span>(<span class="fu">AIC</span>(mod_y_linear), <span class="fu">AIC</span>(mod_y_sx), <span class="fu">AIC</span>(mod_y_sm2), <span class="fu">AIC</span>(mod_y_sc), <span class="fu">AIC</span>(mod_y_sb))</span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(AIC) <span class="sc">|&gt;</span></span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">delta_AIC =</span> AIC <span class="sc">-</span> <span class="fu">min</span>(AIC))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  model           AIC delta_AIC
+  &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;
+1 Y: smooth M2   756.    0     
+2 Y: smooth all  756.    0.0103
+3 Y: smooth X    991.  236.    
+4 Y: smooth C   1010.  254.    
+5 Y: all linear 1047.  292.    </code></pre>
+</div>
+</div>
+<p>For this tutorial, we proceed with the fixed error distribution (“scat”) as well as the best-supported functional form (<code>s(X) + s(M2) + s(C)</code>) for <code>Y</code>.</p>
+</section>
+<section id="step-5.-compare-repeated-structure-terms-for-y" class="level3" data-number="33.7.6">
+<h3 data-number="33.7.6" class="anchored" data-anchor-id="step-5.-compare-repeated-structure-terms-for-y"><span class="header-section-number">33.7.6</span> Step 5. Compare repeated-structure terms for <code>Y</code></h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>mod_y_site <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> <span class="fu">s</span>(X) <span class="sc">+</span> <span class="fu">s</span>(M2) <span class="sc">+</span> <span class="fu">s</span>(C) <span class="sc">+</span> <span class="fu">s</span>(site, <span class="at">bs =</span> <span class="st">"re"</span>),</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">scat</span>(),</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>mod_y_obs <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> <span class="fu">s</span>(X) <span class="sc">+</span> <span class="fu">s</span>(M2) <span class="sc">+</span> <span class="fu">s</span>(C) <span class="sc">+</span> <span class="fu">s</span>(obs, <span class="at">bs =</span> <span class="st">"re"</span>),</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">scat</span>(),</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>mod_y_crossed <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> <span class="fu">s</span>(X) <span class="sc">+</span> <span class="fu">s</span>(M2) <span class="sc">+</span> <span class="fu">s</span>(C) <span class="sc">+</span> <span class="fu">s</span>(site, <span class="at">bs =</span> <span class="st">"re"</span>) <span class="sc">+</span> <span class="fu">s</span>(obs, <span class="at">bs =</span> <span class="st">"re"</span>),</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">scat</span>(),</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> <span class="fu">c</span>(<span class="st">"Y: site RE"</span>, <span class="st">"Y: obs RE"</span>, <span class="st">"Y: crossed REs"</span>),</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">AIC =</span> <span class="fu">c</span>(<span class="fu">AIC</span>(mod_y_site), <span class="fu">AIC</span>(mod_y_obs), <span class="fu">AIC</span>(mod_y_crossed))</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(AIC) <span class="sc">|&gt;</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">delta_AIC =</span> AIC <span class="sc">-</span> <span class="fu">min</span>(AIC))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  model            AIC delta_AIC
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;
+1 Y: crossed REs  587.       0  
+2 Y: site RE      639.      52.5
+3 Y: obs RE       737.     150. </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>mod_y <span class="ot">&lt;-</span> mod_y_crossed</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Family: Scaled t(33.01,0.963) 
+Link function: identity 
+
+Formula:
+Y ~ s(X) + s(M2) + s(C) + s(site, bs = "re") + s(obs, bs = "re")
+
+Parametric coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)  -2.8756     0.6903  -4.166  3.1e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Approximate significance of smooth terms:
+          edf Ref.df  Chi.sq p-value    
+s(X)    1.000  1.000  132.06  &lt;2e-16 ***
+s(M2)   7.356  8.336 2108.84  &lt;2e-16 ***
+s(C)    1.000  1.000   77.74  &lt;2e-16 ***
+s(site) 2.959  3.000  224.46  &lt;2e-16 ***
+s(obs)  3.752  4.000   63.96  &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+R-sq.(adj) =  0.965   Deviance explained = 93.6%
+-REML = 308.92  Scale est. = 1         n = 200</code></pre>
+</div>
+</div>
+<p>At this point, the <code>Y</code> submodel is finalized.</p>
+</section>
+</div>
+</div>
+</div>
+<p>The same SCM steps 3-5 should be applied to the remaining endogenous nodes. In this example, that means finalizing the structural equations for <code>X</code> and <code>M1</code> by:</p>
+<ul>
+<li>comparing plausible error distributions<br>
+</li>
+<li>comparing linear versus smooth forms<br>
+</li>
+<li>comparing repeated-structure terms</li>
+</ul>
+<p>We run those models below so they are available for later steps, but we hide the code and output in the rendered document.</p>
+<p>After choosing the best-supported random-effects structure, it is a good idea to check residual diagnostics for the final submodels.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>sim <span class="ot">&lt;-</span> <span class="fu">simulate</span>(mod_y, <span class="at">nsim =</span> <span class="dv">1000</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">createDHARMa</span>(</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">simulatedResponse =</span> sim,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">observedResponse =</span> dat<span class="sc">$</span>Y,</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">fittedPredictedResponse =</span> <span class="fu">predict</span>(mod_y, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(res)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="SCM_part02_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span><strong>What steps did we miss in some of the above node-level models?</strong> <em>(Think before expanding.)</em>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For the sake of brevity, this tutorial emphasizes the logic of causal decomposition. In a full SCM analysis, you should inspect each node-level structural equation carefully. That is, you should conduct a full diagnostic (residual check, etc.) of each submodel. Here, we only show the residual diagnostic check for the final outcome (<code>Y</code>) model.</p>
+</div>
+</div>
+</div>
+<p>After Steps 3-5 have been completed for each endogenous node in our causal DAG, the final submodels can be written as a system of structural equations. In this example, the fitted submodels are:</p>
+<p><span class="math display">\[
+\begin{aligned}
+X_i &amp;\sim \mathrm{Gaussian}(\mu_{X,i}, \sigma_X^2) \\
+\mu_{X,i} &amp;= f_X(C_i) + b^{(X)}_{\mathrm{site}[i]} + b^{(X)}_{\mathrm{obs}[i]} \\
+M_{1,i} &amp;\sim \mathrm{Gaussian}(\mu_{M1,i}, \sigma_{M1}^2) \\
+\mu_{M1,i} &amp;= f_{M1,1}(X_i) + f_{M1,2}(C_i) + b^{(M1)}_{\mathrm{site}[i]} + b^{(M1)}_{\mathrm{obs}[i]} \\
+M_{2,i} &amp;\sim \mathrm{Gaussian}(\mu_{M2,i}, \sigma_{M2}^2) \\
+\mu_{M2,i} &amp;= f_{M2,1}(X_i) + f_{M2,2}(M_{1,i}) + b^{(M2)}_{\mathrm{site}[i]} + b^{(M2)}_{\mathrm{obs}[i]} \\
+Y_i &amp;\sim \text{scaled-}t(\mu_{Y,i}, \sigma_Y, \nu) \\
+\mu_{Y,i} &amp;= f_{Y,1}(X_i) + f_{Y,2}(M_{2,i}) + f_{Y,3}(C_i) + b^{(Y)}_{\mathrm{site}[i]} + b^{(Y)}_{\mathrm{obs}[i]}
+\end{aligned}
+\]</span></p>
+<p><em>How to read this structural model (line by line); do not be afraid!</em></p>
+<p>This node-by-node structural causal model is built such that:</p>
+<ul>
+<li>each equation represents one node in the DAG</li>
+<li>each mean model includes <em>only</em> that node’s parents</li>
+</ul>
+<p>Together, these encode the full causal structure needed for decomposition (total, direct, indirect effects). Each variable is modeled in two steps:</p>
+<ol type="1">
+<li><strong>Distribution line</strong>: how the observed value varies around its mean (usually Gaussian, but scaled-<span class="math inline">\(t\)</span> for <span class="math inline">\(Y\)</span>)<br>
+</li>
+<li><strong>Mean model</strong>: what predicts that mean (its causal parents)</li>
+</ol>
+<p>The general structure of each model contains the following:</p>
+<ul>
+<li><span class="math inline">\(i\)</span>: observation (data point)</li>
+<li><span class="math inline">\(\sim\)</span>: “is distributed as”</li>
+<li><span class="math inline">\(\mu\)</span>: expected (predicted) value</li>
+<li><span class="math inline">\(f(\cdot)\)</span>: fitted function (linear or nonlinear)</li>
+<li><span class="math inline">\(b_{\mathrm{site}[i]}, b_{\mathrm{obs}[i]}\)</span>: random effects for site and observer</li>
+</ul>
+<p><em>What do subscripts like “,1” mean?</em></p>
+<p>Expressions like <span class="math inline">\(f_{M1,1}(X_i)\)</span>, <span class="math inline">\(f_{M1,2}(C_i)\)</span> use “,1”, “,2”, etc. to label different functional components. They do <em>not</em> imply indexing (as we have seen before). They simply distinguish <em>separate effects within the same equation</em>. Therefore, we can interpret these components:</p>
+<ul>
+<li><span class="math inline">\(f_{M1,1}(X_i)\)</span>: effect of <span class="math inline">\(X\)</span> on <span class="math inline">\(M_1\)</span></li>
+<li><span class="math inline">\(f_{M1,2}(C_i)\)</span>: effect of <span class="math inline">\(C\)</span> on <span class="math inline">\(M_1\)</span></li>
+</ul>
+<p>General rule: &gt; <span class="math inline">\(f_{\text{node},k}(\cdot)\)</span> = the <span class="math inline">\(k\)</span>-th function contributing to that node’s mean, usually corresponding to one parent in the DAG</p>
+<p>These equations also show the order in which the submodels fit together for simulation or g-computation. This is critically important, as a downstream model depends on the output of an upstream model:</p>
+<ol type="1">
+<li>model <code>X</code> from <code>C</code></li>
+<li>model <code>M1</code> from <code>X</code> and <code>C</code></li>
+<li>model <code>M2</code> from <code>X</code> and <code>M1</code></li>
+<li>model <code>Y</code> from <code>X</code>, <code>M2</code>, and <code>C</code></li>
+</ol>
+<p>This ordering follows our causal DAG and ensures that each node is generated only after its parents have been generated.</p>
+</section>
+</section>
+<section id="step-6-add-appropriate-correlation-structure-for-temporal-or-spatial-autocorrelation-if-needed" class="level2" data-number="33.8">
+<h2 data-number="33.8" class="anchored" data-anchor-id="step-6-add-appropriate-correlation-structure-for-temporal-or-spatial-autocorrelation-if-needed"><span class="header-section-number">33.8</span> Step 6: Add appropriate correlation structure for temporal or spatial autocorrelation (if needed)</h2>
+<p>This tutorial does not implement temporal or spatial correlation structures, but this is where they would enter the workflow.</p>
+<p>For <strong>spatial autocorrelation</strong>, one option in <code>mgcv</code> is to include a spatial smooth such as a Gaussian process term, for example <code>s(x_coord, y_coord, bs = "gp")</code> (or <code>gp()</code>-style smooth specification depending on the modeling context). This can absorb residual spatial structure when nearby observations are more similar than expected.</p>
+<p>However, there is an important causal caveat here. In SCM work, spatial proxies can be <em>dangerous</em> if they partly summarize downstream patterns (i.e.&nbsp;modeled results) rather than true upstream causes. A spatial autocovariate, for example, may be partly built from neighboring response values, which is effectively the same as conditioning on an outcome-derived variable (which we now know is not scientifically defensible). That may distort the causal interpretation of a structural equation.</p>
+<p>Because of this, the program Stan or its usage through R (via <code>brms</code>) is often a much more flexible and overall better option when you need to combine causal submodels with residual correlation structures. It provides more flexible ways to model structured dependence while keeping the mean structure tied to the DAG.</p>
+<p>For <em>temporal autocorrelation</em>, the same basic logic applies. If repeated observations through time remain autocorrelated after accounting for the modeled parents, you may need an additional correlation structure. In some cases, though, the better –and arguably easier– causal move is to represent the true temporal process directly in the DAG by including:</p>
+<ul>
+<li>lagged causes as explicit parent nodes</li>
+<li>time-varying states</li>
+<li>biologically meaningful temporal drivers</li>
+</ul>
+<p>That approach is often more scientifically transparent than treating all temporal dependence as a nuisance correlation. For this example, we will stop at the random-effects stage and proceed without an explicit temporal or spatial correlation structure.</p>
+</section>
+<section id="step-7-simulate-outcomes-using-counterfactual-approaches." class="level2" data-number="33.9">
+<h2 data-number="33.9" class="anchored" data-anchor-id="step-7-simulate-outcomes-using-counterfactual-approaches."><span class="header-section-number">33.9</span> Step 7: Simulate outcomes (using counterfactual approaches).</h2>
+<p>Now we get to the step that produces actual causal estimates. While the full workflow can be streamlined with tools like <code>brms</code>, the counterfactual approach to estimating total, direct, and indirect effects involves the following substeps (a-f):</p>
+<ul>
+<li>Substep 7a: Build <em>g-computation</em> using the fitted structural equations</li>
+<li>Substep 7b: Define the reference (baseline) prediction setting</li>
+<li>Substep 7c: Specify the intervention(s) (e.g., set <code>X = x1</code> vs.&nbsp;<code>X = x0</code>)</li>
+<li>Substep 7d: Predict outcomes under each intervention to obtain the <em>total effect</em></li>
+<li>Substep 7e: Compute the <em>controlled direct effect</em> by fixing mediator(s)</li>
+<li>Substep 7f: Decompose the <em>total effect</em> into <em>direct</em> and <em>indirect</em> components</li>
+<li>Substep 7g: Quantify uncertainty (e.g., via bootstrap)</li>
+</ul>
+<section id="substep-7a-build-g-computation-from-the-set-of-fitted-structural-equations" class="level3" data-number="33.9.1">
+<h3 data-number="33.9.1" class="anchored" data-anchor-id="substep-7a-build-g-computation-from-the-set-of-fitted-structural-equations"><span class="header-section-number">33.9.1</span> Substep 7a: Build <code>g-computation</code> from the set of fitted structural equations</h3>
+<p>We now use the fitted node-specific models that you built in the above sections to propagate your specified interventions through the DAG. This is like letting your system respond naturally to a manipulation (and this is very similar to an experiment). You should order your models in a way that allows the upstream model(s) to provide output that serves as covariates for downstream model (following your DAG logic). For our submodels, this would be:</p>
+<ol type="1">
+<li>model <code>X</code> from <code>C</code></li>
+<li>model <code>M1</code> from <code>X</code> and <code>C</code></li>
+<li>model <code>M2</code> from <code>X</code> and <code>M1</code></li>
+<li>model <code>Y</code> from <code>X</code>, <code>M2</code>, and <code>C</code></li>
+</ol>
+<p>After Step 1 (our first model), models are populated by covariates that have been output from the previous models.</p>
+</section>
+</section>
+<section id="substep-7b-define-the-reference-baseline-prediction-settings" class="level2" data-number="33.10">
+<h2 data-number="33.10" class="anchored" data-anchor-id="substep-7b-define-the-reference-baseline-prediction-settings"><span class="header-section-number">33.10</span> Substep 7b: Define the reference (baseline) prediction settings</h2>
+<p>Before specifying interventions, we need to decide how to handle the following:</p>
+<ul>
+<li>upstream confounders (e.g., <code>C</code>)</li>
+<li>grouping structure (e.g., <code>site</code>, <code>obs</code>)</li>
+<li>other sources of variation not directly manipulated</li>
+</ul>
+<blockquote class="blockquote">
+<p>Rememeber that our goal is to isolate the effect of <code>X</code>; therefore, everything else must be held constant (or set at ecologically meaningful values).</p>
+</blockquote>
+<p>For upstream confounders like <code>C</code>, you may choose to retain them at their observed values (the most natural and interpretable approach). Alternatively, you may choose to average over them. In either case (with the former being more scientifically defensible).</p>
+<p>For random effects and grouping structures like <code>site</code> and <code>obs</code>, we want to avoid two things: (1) introducing variability from random draws (during the later resampling) and, mostly, (2) conditioning on an arbitrary level. A simple approach is to <em>fix these variables at their most common observed level</em> (thereby making the final inference more generalizable).</p>
+<p>All of these baseline values (that have nothing to do with the fixed effects) allow you to build the base prediction dataset. This dataset is the necessary foundation for the resampling approach that we will use at the end of this tutorial.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># function to return the most common level of a factor</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>mode_factor <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">factor</span>(<span class="fu">names</span>(<span class="fu">which.max</span>(<span class="fu">table</span>(x))), <span class="at">levels =</span> <span class="fu">levels</span>(x))</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co"># construct the baseline prediction dataset</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>new_base <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">C =</span> dat<span class="sc">$</span>C,</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">site =</span> <span class="fu">mode_factor</span>(dat<span class="sc">$</span>site),</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">obs  =</span> <span class="fu">mode_factor</span>(dat<span class="sc">$</span>obs)</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="substep-7c-specify-the-interventions" class="level3" data-number="33.10.1">
+<h3 data-number="33.10.1" class="anchored" data-anchor-id="substep-7c-specify-the-interventions"><span class="header-section-number">33.10.1</span> Substep 7c: Specify the intervention(s)</h3>
+<p>To make the effects concrete and interpretable, we compare two intervention values of <code>X</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>x0 <span class="ot">&lt;-</span> <span class="fu">quantile</span>(dat<span class="sc">$</span>X, <span class="fl">0.25</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">quantile</span>(dat<span class="sc">$</span>X, <span class="fl">0.75</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">x0 =</span> x0, <span class="at">x1 =</span> x1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    x0.25%     x1.75% 
+-1.1060846  0.9555505 </code></pre>
+</div>
+</div>
+<p>You could choose other contrasts, but this interquartile comparison is often a sensible default because it avoids extreme values. Alternatively, if your data were standardized, you could pick +1 or -1 standard deviation as your two <code>X</code> values for the “intervention.”s</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Interpretation reminder
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Every effect estimate below is a contrast between two hypothetical interventions (i.e.&nbsp;starting values representing a specific scenario that you wish to “control”):</p>
+<ul>
+<li>set <code>X = x1</code></li>
+<li>set <code>X = x0</code></li>
+</ul>
+<p>So the resulting quantities that result from this workflow are not generic slopes (like model coefficients). Instead, the results are what are called <em>counterfactual contrasts</em> (differences in predicted <code>Y</code> values) under specified interventions. In our old friend, the kitchen-sink model, this is similar to how practitioners would calculate the predicted <code>Y</code> after setting a variable (or sometimes multiple variables) to a value of interest and then setting all other variables to their mean or 0.</p>
+</div>
+</div>
+</section>
+<section id="substep-7d-predict-outcomes-under-each-intervention-to-obtain-the-total-effect" class="level3" data-number="33.10.2">
+<h3 data-number="33.10.2" class="anchored" data-anchor-id="substep-7d-predict-outcomes-under-each-intervention-to-obtain-the-total-effect"><span class="header-section-number">33.10.2</span> Substep 7d: Predict outcomes under each intervention to obtain the <em>total effect</em></h3>
+<p>For the <strong>total effect</strong>, we let the intervention on <code>X</code> flow through both mediators. As a helper function, I specified the order of the functions to predict each model in the determined order. Look at the function very closely and attempt to decipher what each line is doing.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>predict_under_do_x <span class="ot">&lt;-</span> <span class="cf">function</span>(x_value, base_dat) {</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  dat_x <span class="ot">&lt;-</span> base_dat <span class="sc">|&gt;</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">X =</span> x_value)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  m1_hat <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod_m1, <span class="at">newdata =</span> dat_x, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  dat_m2 <span class="ot">&lt;-</span> dat_x <span class="sc">|&gt;</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">M1 =</span> m1_hat)</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  m2_hat <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod_m2, <span class="at">newdata =</span> dat_m2, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  dat_y <span class="ot">&lt;-</span> dat_m2 <span class="sc">|&gt;</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">M2 =</span> m2_hat)</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  y_hat <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod_y, <span class="at">newdata =</span> dat_y, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  y_hat</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>What is <span class="math inline">\(\hat{y}\)</span> in the above function?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>All the “hat” means is that it is a predicted value from a model!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="substep-7e-compute-the-controlled-direct-effect-by-fixing-mediators" class="level3" data-number="33.10.3">
+<h3 data-number="33.10.3" class="anchored" data-anchor-id="substep-7e-compute-the-controlled-direct-effect-by-fixing-mediators"><span class="header-section-number">33.10.3</span> Substep 7e: Compute the <em>controlled direct effect</em> by fixing mediator(s)</h3>
+<p>For a <strong>controlled direct effect</strong>, we hold the mediators fixed at their natural values under the baseline intervention <code>X = x0</code>, then compare the resulting predictions for <code>Y</code> when changing only the direct <code>X -&gt; Y</code> path. We follow the same order as the prediction function above.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>predict_cde <span class="ot">&lt;-</span> <span class="cf">function</span>(x_treat, x_mediator_ref, base_dat) {</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  dat_xref <span class="ot">&lt;-</span> base_dat <span class="sc">|&gt;</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">X =</span> x_mediator_ref)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  m1_ref <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod_m1, <span class="at">newdata =</span> dat_xref, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  dat_m2ref <span class="ot">&lt;-</span> dat_xref <span class="sc">|&gt;</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">M1 =</span> m1_ref)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  m2_ref <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod_m2, <span class="at">newdata =</span> dat_m2ref, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  dat_y <span class="ot">&lt;-</span> base_dat <span class="sc">|&gt;</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">X =</span> x_treat,</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">M2 =</span> m2_ref</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>  y_hat <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod_y, <span class="at">newdata =</span> dat_y, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>  y_hat</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="substep-7f-decompose-the-total-effect-into-direct-and-indirect-components" class="level2" data-number="33.11">
+<h2 data-number="33.11" class="anchored" data-anchor-id="substep-7f-decompose-the-total-effect-into-direct-and-indirect-components"><span class="header-section-number">33.11</span> Substep 7f: Decompose the <em>total effect</em> into <em>direct</em> and <em>indirect</em> components</h2>
+<p>Remember that we want <em>counterfactual contrasts</em> from all of this. Therefore, we need to specify the effect of <code>X</code> on outcome <code>Y</code> by estimating how a change in <code>Y</code> corresponds to a change in <code>X</code> (hmmm…slope anyone?).</p>
+<p>In the following code, you will notice that we predict the outcomes and then take the difference.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>y_do_x1 <span class="ot">&lt;-</span> <span class="fu">predict_under_do_x</span>(x1, new_base)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>y_do_x0 <span class="ot">&lt;-</span> <span class="fu">predict_under_do_x</span>(x0, new_base)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>te_hat <span class="ot">&lt;-</span> <span class="fu">mean</span>(y_do_x1 <span class="sc">-</span> y_do_x0)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co"># controlled direct effect: hold mediator pathway at its x0 level</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>cde_x1_x0 <span class="ot">&lt;-</span> <span class="fu">mean</span>(</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">predict_cde</span>(<span class="at">x_treat =</span> x1, <span class="at">x_mediator_ref =</span> x0, <span class="at">base_dat =</span> new_base) <span class="sc">-</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">predict_cde</span>(<span class="at">x_treat =</span> x0, <span class="at">x_mediator_ref =</span> x0, <span class="at">base_dat =</span> new_base)</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>ie_hat <span class="ot">&lt;-</span> te_hat <span class="sc">-</span> cde_x1_x0</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">effect =</span> <span class="fu">c</span>(<span class="st">"Total effect"</span>, <span class="st">"Controlled direct effect"</span>, <span class="st">"Indirect effect"</span>),</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">estimate =</span> <span class="fu">c</span>(te_hat, cde_x1_x0, ie_hat)</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  effect                   estimate
+  &lt;chr&gt;                       &lt;dbl&gt;
+1 Total effect                 6.04
+2 Controlled direct effect     2.15
+3 Indirect effect              3.89</code></pre>
+</div>
+</div>
+<p>But this is only a point estimate. As ecologists, we always require an estimate of the noise (uncertainty) in our system.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span><strong>Extra information: What kind of direct effect is this?</strong> <em>(Alert! More jargon!)</em>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Because we hold the mediator pathway fixed at the level generated under <code>X = x0</code>, this is called a <em>controlled direct effect</em> rather than a <em>natural direct effect</em>. There is a subtle difference between these two versions; these will become important as you dig deeper in SCMs!</p>
+</div>
+</div>
+</section>
+<section id="substep-7g-quantify-uncertainty-e.g.-via-bootstrap" class="level2" data-number="33.12">
+<h2 data-number="33.12" class="anchored" data-anchor-id="substep-7g-quantify-uncertainty-e.g.-via-bootstrap"><span class="header-section-number">33.12</span> Substep 7g: Quantify uncertainty (e.g., via bootstrap)</h2>
+<p>To quantify uncertainty for the frequentist approach that we have adopted, we can bootstrap the full decomposition. This means that on each bootstrap replicate we do the following:</p>
+<ol type="1">
+<li>resample rows from the dataset</li>
+<li>refit each node-specific model using the new dataset</li>
+<li>re-run the <code>g-computation</code></li>
+<li>store the total, direct, and indirect effects</li>
+</ol>
+<p>If you look carefully, I have built in all the familiar functions from the previous steps to assist with this resampling procedure.</p>
+<p>Here, we use a modest number of bootstrap replicates here. Still, to make things faster, we will use the <code>multisession</code> function in the <code>future</code> package in R to run the processes on several open instances of R.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>boot_decomp <span class="ot">&lt;-</span> <span class="cf">function</span>(idx, data, x0, x1) {</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># idx = the indices for the resampled rows</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  d <span class="ot">&lt;-</span> data[idx, ]</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  ref_site_b <span class="ot">&lt;-</span> <span class="fu">mode_factor</span>(d<span class="sc">$</span>site)</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  ref_obs_b  <span class="ot">&lt;-</span> <span class="fu">mode_factor</span>(d<span class="sc">$</span>obs)</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  new_base_b <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">C =</span> d<span class="sc">$</span>C,</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">site =</span> <span class="fu">factor</span>(ref_site_b, <span class="at">levels =</span> <span class="fu">levels</span>(data<span class="sc">$</span>site)),</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">obs  =</span> <span class="fu">factor</span>(ref_obs_b,  <span class="at">levels =</span> <span class="fu">levels</span>(data<span class="sc">$</span>obs))</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Now run each dataset through the specific order of the causal models.</span></span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>  mod_m1_b <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>    M1 <span class="sc">~</span> <span class="fu">s</span>(X) <span class="sc">+</span> <span class="fu">s</span>(C) <span class="sc">+</span> <span class="fu">s</span>(site, <span class="at">bs =</span> <span class="st">"re"</span>) <span class="sc">+</span> <span class="fu">s</span>(obs, <span class="at">bs =</span> <span class="st">"re"</span>),</span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> d,</span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>  mod_m2_b <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>    M2 <span class="sc">~</span> <span class="fu">s</span>(X) <span class="sc">+</span> <span class="fu">s</span>(M1) <span class="sc">+</span> <span class="fu">s</span>(site, <span class="at">bs =</span> <span class="st">"re"</span>) <span class="sc">+</span> <span class="fu">s</span>(obs, <span class="at">bs =</span> <span class="st">"re"</span>),</span>
+<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> d,</span>
+<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
+<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a>  mod_y_b <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a>    Y <span class="sc">~</span> <span class="fu">s</span>(X) <span class="sc">+</span> <span class="fu">s</span>(M2) <span class="sc">+</span> <span class="fu">s</span>(C) <span class="sc">+</span> <span class="fu">s</span>(site, <span class="at">bs =</span> <span class="st">"re"</span>) <span class="sc">+</span> <span class="fu">s</span>(obs, <span class="at">bs =</span> <span class="st">"re"</span>),</span>
+<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> d,</span>
+<span id="cb28-33"><a href="#cb28-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">scat</span>(),</span>
+<span id="cb28-34"><a href="#cb28-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">"REML"</span></span>
+<span id="cb28-35"><a href="#cb28-35" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb28-36"><a href="#cb28-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-37"><a href="#cb28-37" aria-hidden="true" tabindex="-1"></a>  <span class="co"># predict total effect (TE)</span></span>
+<span id="cb28-38"><a href="#cb28-38" aria-hidden="true" tabindex="-1"></a>  predict_under_do_x_b <span class="ot">&lt;-</span> <span class="cf">function</span>(x_value, base_dat) {</span>
+<span id="cb28-39"><a href="#cb28-39" aria-hidden="true" tabindex="-1"></a>    dat_x <span class="ot">&lt;-</span> base_dat <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">X =</span> x_value)</span>
+<span id="cb28-40"><a href="#cb28-40" aria-hidden="true" tabindex="-1"></a>    m1_hat <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod_m1_b, <span class="at">newdata =</span> dat_x, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb28-41"><a href="#cb28-41" aria-hidden="true" tabindex="-1"></a>    dat_m2 <span class="ot">&lt;-</span> dat_x <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">M1 =</span> m1_hat)</span>
+<span id="cb28-42"><a href="#cb28-42" aria-hidden="true" tabindex="-1"></a>    m2_hat <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod_m2_b, <span class="at">newdata =</span> dat_m2, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb28-43"><a href="#cb28-43" aria-hidden="true" tabindex="-1"></a>    dat_y <span class="ot">&lt;-</span> dat_m2 <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">M2 =</span> m2_hat)</span>
+<span id="cb28-44"><a href="#cb28-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">predict</span>(mod_y_b, <span class="at">newdata =</span> dat_y, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb28-45"><a href="#cb28-45" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb28-46"><a href="#cb28-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-47"><a href="#cb28-47" aria-hidden="true" tabindex="-1"></a>  <span class="co"># predict controlled direct effect (CDE)</span></span>
+<span id="cb28-48"><a href="#cb28-48" aria-hidden="true" tabindex="-1"></a>  predict_cde_b <span class="ot">&lt;-</span> <span class="cf">function</span>(x_treat, x_mediator_ref, base_dat) {</span>
+<span id="cb28-49"><a href="#cb28-49" aria-hidden="true" tabindex="-1"></a>    dat_xref <span class="ot">&lt;-</span> base_dat <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">X =</span> x_mediator_ref)</span>
+<span id="cb28-50"><a href="#cb28-50" aria-hidden="true" tabindex="-1"></a>    m1_ref <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod_m1_b, <span class="at">newdata =</span> dat_xref, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb28-51"><a href="#cb28-51" aria-hidden="true" tabindex="-1"></a>    dat_m2ref <span class="ot">&lt;-</span> dat_xref <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">M1 =</span> m1_ref)</span>
+<span id="cb28-52"><a href="#cb28-52" aria-hidden="true" tabindex="-1"></a>    m2_ref <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod_m2_b, <span class="at">newdata =</span> dat_m2ref, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb28-53"><a href="#cb28-53" aria-hidden="true" tabindex="-1"></a>    dat_y <span class="ot">&lt;-</span> base_dat <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">X =</span> x_treat, <span class="at">M2 =</span> m2_ref)</span>
+<span id="cb28-54"><a href="#cb28-54" aria-hidden="true" tabindex="-1"></a>    <span class="fu">predict</span>(mod_y_b, <span class="at">newdata =</span> dat_y, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb28-55"><a href="#cb28-55" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb28-56"><a href="#cb28-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-57"><a href="#cb28-57" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Differences are the counterfactual contrasts</span></span>
+<span id="cb28-58"><a href="#cb28-58" aria-hidden="true" tabindex="-1"></a>  te <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">predict_under_do_x_b</span>(x1, new_base_b) <span class="sc">-</span> <span class="fu">predict_under_do_x_b</span>(x0, new_base_b))</span>
+<span id="cb28-59"><a href="#cb28-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-60"><a href="#cb28-60" aria-hidden="true" tabindex="-1"></a>  de <span class="ot">&lt;-</span> <span class="fu">mean</span>(</span>
+<span id="cb28-61"><a href="#cb28-61" aria-hidden="true" tabindex="-1"></a>    <span class="fu">predict_cde_b</span>(<span class="at">x_treat =</span> x1, <span class="at">x_mediator_ref =</span> x0, <span class="at">base_dat =</span> new_base_b) <span class="sc">-</span></span>
+<span id="cb28-62"><a href="#cb28-62" aria-hidden="true" tabindex="-1"></a>      <span class="fu">predict_cde_b</span>(<span class="at">x_treat =</span> x0, <span class="at">x_mediator_ref =</span> x0, <span class="at">base_dat =</span> new_base_b)</span>
+<span id="cb28-63"><a href="#cb28-63" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb28-64"><a href="#cb28-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-65"><a href="#cb28-65" aria-hidden="true" tabindex="-1"></a>  <span class="co"># values are not in any order, so we can simply take the difference to get the distribution of IE</span></span>
+<span id="cb28-66"><a href="#cb28-66" aria-hidden="true" tabindex="-1"></a>  ie <span class="ot">&lt;-</span> te <span class="sc">-</span> de</span>
+<span id="cb28-67"><a href="#cb28-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-68"><a href="#cb28-68" aria-hidden="true" tabindex="-1"></a>  <span class="co"># create output data for this</span></span>
+<span id="cb28-69"><a href="#cb28-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">te =</span> te, <span class="at">de =</span> de, <span class="at">ie =</span> ie)</span>
+<span id="cb28-70"><a href="#cb28-70" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Now, we can run the bootstrap.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressWarnings</span>(<span class="fu">plan</span>(multisession))</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">99</span>)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">200</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>boot_ids <span class="ot">&lt;-</span> <span class="fu">replicate</span>(B, <span class="fu">sample</span>(<span class="fu">seq_len</span>(<span class="fu">nrow</span>(dat)), <span class="at">replace =</span> <span class="cn">TRUE</span>), <span class="at">simplify =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>boot_res <span class="ot">&lt;-</span> <span class="fu">future_map_dfr</span>(boot_ids, boot_decomp, <span class="at">data =</span> dat, <span class="at">x0 =</span> x0, <span class="at">x1 =</span> x1, <span class="at">.progress =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tibble' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'mgcv' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dplyr' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tibble' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'mgcv' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dplyr' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tibble' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'mgcv' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dplyr' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tibble' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'mgcv' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dplyr' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tibble' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'mgcv' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dplyr' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tibble' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'mgcv' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dplyr' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tibble' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'mgcv' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dplyr' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tibble' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'mgcv' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dplyr' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tibble' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'mgcv' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dplyr' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tibble' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'mgcv' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dplyr' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tibble' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'mgcv' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dplyr' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tibble' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'mgcv' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dplyr' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tibble' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'mgcv' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dplyr' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tibble' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'mgcv' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dplyr' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tibble' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'mgcv' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dplyr' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tibble' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'mgcv' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dplyr' was built under R version 4.3.3</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>boot_summary <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">effect =</span> <span class="fu">c</span>(<span class="st">"Total effect"</span>, <span class="st">"Controlled direct effect"</span>, <span class="st">"Indirect effect"</span>),</span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">estimate =</span> <span class="fu">c</span>(<span class="fu">mean</span>(boot_res<span class="sc">$</span>te), <span class="fu">mean</span>(boot_res<span class="sc">$</span>de), <span class="fu">mean</span>(boot_res<span class="sc">$</span>ie)),</span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">lwr =</span> <span class="fu">c</span>(<span class="fu">quantile</span>(boot_res<span class="sc">$</span>te, <span class="fl">0.025</span>), <span class="fu">quantile</span>(boot_res<span class="sc">$</span>de, <span class="fl">0.025</span>), <span class="fu">quantile</span>(boot_res<span class="sc">$</span>ie, <span class="fl">0.025</span>)),</span>
+<span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">upr =</span> <span class="fu">c</span>(<span class="fu">quantile</span>(boot_res<span class="sc">$</span>te, <span class="fl">0.975</span>), <span class="fu">quantile</span>(boot_res<span class="sc">$</span>de, <span class="fl">0.975</span>), <span class="fu">quantile</span>(boot_res<span class="sc">$</span>ie, <span class="fl">0.975</span>))</span>
+<span id="cb78-6"><a href="#cb78-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb78-7"><a href="#cb78-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-8"><a href="#cb78-8" aria-hidden="true" tabindex="-1"></a>boot_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  effect                   estimate   lwr   upr
+  &lt;chr&gt;                       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 Total effect                 4.89 2.70   6.90
+2 Controlled direct effect     2.12 1.64   2.60
+3 Indirect effect              2.77 0.524  4.80</code></pre>
+</div>
+</div>
+</section>
+<section id="step-8-visualize-the-decomposition" class="level2" data-number="33.13">
+<h2 data-number="33.13" class="anchored" data-anchor-id="step-8-visualize-the-decomposition"><span class="header-section-number">33.13</span> Step 8: Visualize the decomposition</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>boot_summary <span class="sc">|&gt;</span></span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> effect, <span class="at">y =</span> estimate, <span class="at">ymin =</span> lwr, <span class="at">ymax =</span> upr)) <span class="sc">+</span></span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>() <span class="sc">+</span></span>
+<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb80-7"><a href="#cb80-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Estimated causal contrast"</span>,</span>
+<span id="cb80-8"><a href="#cb80-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Total, direct, and indirect effects from the fitted SCM"</span></span>
+<span id="cb80-9"><a href="#cb80-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="SCM_part02_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="step-9-interpreting-the-results" class="level2" data-number="33.14">
+<h2 data-number="33.14" class="anchored" data-anchor-id="step-9-interpreting-the-results"><span class="header-section-number">33.14</span> Step 9: Interpreting the results</h2>
+<p>How do we interpret all os this? Here is the basic logic for interpretation. You would need to translate this to ecological verbiage:</p>
+<ul>
+<li><em>Total effect (TE):</em> this number tells you how much <code>Y</code> changes, on average, when moving from <code>do(X = x0)</code> to <code>do(X = x1)</code> (<em>sensu</em> Judea Pearl) and allowing all downstream pathways to respond naturally</li>
+<li><em>Controlled direct effect (CDE):” </em> this number tells you how much of that contrast remains when the mediator pathway is held fixed at its <code>x0</code> level</li>
+<li><em>Indirect effect (IE):</em> this number is the portion of the total effect transmitted through the mediating system</li>
+</ul>
+</section>
+<section id="conclusion" class="level2" data-number="33.15">
+<h2 data-number="33.15" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">33.15</span> Conclusion</h2>
+<p>This conclude our SCM tutorial!</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/simple_scm.html" class="pagination-link" aria-label="SCM: Total Effects">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">SCM: Total Effects</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/brms_SCM.html" class="pagination-link" aria-label="SCM: Bayesian">
+        <span class="nav-page-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">SCM: Bayesian</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

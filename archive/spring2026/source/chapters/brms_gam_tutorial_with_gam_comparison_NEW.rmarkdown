@@ -1,0 +1,427 @@
+---
+title: "SCM: Bayesian"
+format:
+  html:
+    toc: true
+    code-fold: false
+editor_options: 
+  chunk_output_type: console
+---
+
+## Overview
+
+This short tutorial shows the same SCM/g-computation logic two ways:
+
+1. A frequentist `mgcv::gam()` workflow using bootstrap draws. This is the same SCM workflow that you saw in the previous tutorial.
+2. A Bayesian `brms` workflow using posterior draws.
+
+The goal is not to introduce every feature of `brms`, but rather to show how total, controlled direct, and indirect effects can be estimated in a way that parallels the frequentist GAM approach. Let us go through the steps.
+
+## 1. Simulate the same DAG-structured dataset
+
+```{r}
+library(tidyverse)
+library(mgcv)
+library(brms)
+library(posterior)
+library(tidybayes)
+library(ggplot2)
+
+set.seed(20260408)
+
+n_site <- 4
+n_obs  <- 5
+n_rep  <- 10
+n      <- n_site * n_obs * n_rep
+
+site <- factor(rep(paste0("site_", seq_len(n_site)), each = n_obs * n_rep))
+obs  <- factor(rep(rep(paste0("obs_", seq_len(n_obs)), each = n_rep), times = n_site))
+
+b_site_x  <- rnorm(n_site, 0, 0.55)
+b_obs_x   <- rnorm(n_obs, 0, 0.45)
+b_site_m1 <- rnorm(n_site, 0, 0.35)
+b_obs_m1  <- rnorm(n_obs, 0, 0.30)
+b_site_m2 <- rnorm(n_site, 0, 0.35)
+b_obs_m2  <- rnorm(n_obs, 0, 0.30)
+b_site_y  <- rnorm(n_site, 0, 0.70)
+b_obs_y   <- rnorm(n_obs, 0, 0.55)
+
+C <- rnorm(n, mean = 0, sd = 1.1)
+
+X <- 0.85 * C +
+  b_site_x[site] +
+  b_obs_x[obs] +
+  rnorm(n, 0, 1.0)
+
+M1 <- 1.0 * sin(X / 1.3) +
+  0.55 * C +
+  b_site_m1[site] +
+  b_obs_m1[obs] +
+  rnorm(n, 0, 0.8)
+
+M2 <- 0.60 * X +
+  0.85 * M1 +
+  0.18 * C +
+  b_site_m2[site] +
+  b_obs_m2[obs] +
+  rnorm(n, 0, 0.9)
+
+Y <- 1.15 * X +
+  1.10 * M2 -
+  0.42 * (M2^2) +
+  0.70 * C +
+  b_site_y[site] +
+  b_obs_y[obs] +
+  rt(n, df = 6) * 0.9
+
+dat <- tibble(site, obs, C, X, M1, M2, Y)
+```
+
+The intervention contrast uses the 25th and 75th percentiles of `X`.
+
+```{r}
+x0 <- unname(quantile(dat$X, 0.25))
+x1 <- unname(quantile(dat$X, 0.75))
+
+intervention_values <- tibble(
+  intervention = c("x0: 25th percentile", "x1: 75th percentile"),
+  value = c(x0, x1)
+)
+
+knitr::kable(intervention_values, digits = 2)
+```
+
+## 2. Frequentist GAM bootstrap comparison
+
+The frequentist comparison uses the same structural equations as the Bayesian version. The bootstrap gives a sampling distribution of the total, controlled direct, and indirect effects.
+
+```{r}
+mode_factor <- function(x) {
+  factor(names(which.max(table(x))), levels = levels(x))
+}
+
+fit_gam_scm <- function(d) {
+  d <- d |>
+    mutate(
+      site = factor(site, levels = levels(dat$site)),
+      obs  = factor(obs,  levels = levels(dat$obs))
+    )
+
+  list(
+    m1 = gam(
+      M1 ~ s(X) + s(C) + s(site, bs = "re") + s(obs, bs = "re"),
+      data = d,
+      family = gaussian(),
+      method = "REML"
+    ),
+    m2 = gam(
+      M2 ~ s(X) + s(M1) + s(site, bs = "re") + s(obs, bs = "re"),
+      data = d,
+      family = gaussian(),
+      method = "REML"
+    ),
+    y = gam(
+      Y ~ s(X) + s(M2) + s(C) + s(site, bs = "re") + s(obs, bs = "re"),
+      data = d,
+      family = scat(),
+      method = "REML"
+    )
+  )
+}
+
+gam_gcomp_one <- function(d, x0, x1, draw = 1) {
+  fits <- fit_gam_scm(d)
+
+  base_dat <- tibble(
+    C = dat$C,
+    site = mode_factor(dat$site),
+    obs  = mode_factor(dat$obs)
+  )
+
+  predict_do_x <- function(x_value) {
+    d_x <- base_dat |> mutate(X = x_value)
+
+    m1_hat <- predict(fits$m1, newdata = d_x, type = "response")
+    m2_hat <- predict(fits$m2, newdata = d_x |> mutate(M1 = m1_hat), type = "response")
+    y_hat  <- predict(fits$y,  newdata = d_x |> mutate(M1 = m1_hat, M2 = m2_hat), type = "response")
+
+    mean(y_hat)
+  }
+
+  predict_cde <- function(x_treat, x_mediator_ref) {
+    d_ref <- base_dat |> mutate(X = x_mediator_ref)
+
+    m1_ref <- predict(fits$m1, newdata = d_ref, type = "response")
+    m2_ref <- predict(fits$m2, newdata = d_ref |> mutate(M1 = m1_ref), type = "response")
+
+    y_hat <- predict(
+      fits$y,
+      newdata = base_dat |> mutate(X = x_treat, M2 = m2_ref),
+      type = "response"
+    )
+
+    mean(y_hat)
+  }
+
+  total_effect <- predict_do_x(x1) - predict_do_x(x0)
+  direct_effect <- predict_cde(x1, x0) - predict_cde(x0, x0)
+  indirect_effect <- total_effect - direct_effect
+
+  tibble(
+    .draw = draw,
+    method = "GAM bootstrap",
+    effect = c("Total effect", "Controlled direct effect", "Indirect effect"),
+    estimate = c(total_effect, direct_effect, indirect_effect)
+  )
+}
+
+set.seed(20260412)
+
+B <- 200
+
+boot_ids <- replicate(
+  B,
+  sample(seq_len(nrow(dat)), replace = TRUE),
+  simplify = FALSE
+)
+
+gam_effects <- purrr::map2_dfr(
+  boot_ids,
+  seq_along(boot_ids),
+  \(idx, draw) gam_gcomp_one(dat[idx, ], x0 = x0, x1 = x1, draw = draw)
+)
+```
+
+## 3. Fit the Bayesian DAG path models
+
+These are the same final structural equations used in the frequentist GAM workflow, translated directly into `brms` syntax.
+
+::: {.callout-note}
+## Choosing priors
+
+For an example like this one, we can use weak priors that keep estimates in ecologically plausible ranges without forcing the answer (i.e. the final effect). A good and simple starting point is `normal(0, 1)` for slopes. Predictors are on a reasonable scale, but we may wish to allow a slightly wider prior for intercepts. By convention, we can use exponential priors for standard deviations and smooth penalties. For scaled-t distributions (outcomes), we can place a prior on `nu` so the model can represent heavier tails without becoming completely unconstrained.
+:::
+
+
+First, we set our priors for the Bayesian model.
+
+```{r}
+priors_gaussian <- c(
+  prior(normal(0, 1), class = "b"),
+  prior(normal(0, 2), class = "Intercept"),
+  prior(exponential(1), class = "sd"),
+  prior(exponential(1), class = "sds"),
+  prior(exponential(1), class = "sigma")
+)
+
+priors_student <- c(
+  prior(normal(0, 1), class = "b"),
+  prior(normal(0, 2), class = "Intercept"),
+  prior(exponential(1), class = "sd"),
+  prior(exponential(1), class = "sds"),
+  prior(exponential(1), class = "sigma"),
+  prior(gamma(2, 0.1), class = "nu")
+)
+```
+
+What do these mean? Work through them:
+
+* `b ~ normal(0, 1)` The effects (beta coefficients) are likely small and centered near zero  
+* `Intercept ~ normal(0, 2)` The outcome starts near zero but can vary more  
+* `sd`, `sds`, `sigma ~ exponential(1)` Variability is positive and usually not huge (regularizing noise and random effects)  
+* `nu ~ gamma(2, 0.1)` *(Scaled t-distribution model only)* Allows heavier tails (outliers), but keeps them reasonable
+
+Now, let's In plain terms, what do these mean? It means this: Most effects are relatively small. Noise is minimized, and the model allows some outliers without going too wild! These are just used to help the model finds some meaningful values.
+
+
+Now, let us fit the individual path-specific models:
+
+```{r}
+
+fit_m1 <- brm(
+  M1 ~ s(X) + s(C) + (1 | site) + (1 | obs),
+  data = dat,
+  family = gaussian(),
+  prior = priors_gaussian,
+  chains = 4, cores = 4, iter = 2000,
+  seed = 20260408,
+  silent = 2, refresh = 0
+)
+
+fit_m2 <- brm(
+  M2 ~ s(X) + s(M1) + (1 | site) + (1 | obs),
+  data = dat,
+  family = gaussian(),
+  prior = priors_gaussian,
+  chains = 4, cores = 4, iter = 2000,
+  seed = 20260409,
+  silent = 2, refresh = 0
+)
+
+fit_y <- brm(
+  Y ~ s(X) + s(M2) + s(C) + (1 | site) + (1 | obs),
+  data = dat,
+  family = student(),
+  prior = priors_student,
+  chains = 4, cores = 4, iter = 2000,
+  seed = 20260410,
+  silent = 2, refresh = 0
+)
+```
+
+```{r}
+model_checks <- tibble(
+  model = c("M1", "M2", "Y"),
+  max_rhat = c(
+    max(rhat(fit_m1), na.rm = TRUE),
+    max(rhat(fit_m2), na.rm = TRUE),
+    max(rhat(fit_y),  na.rm = TRUE)
+  )
+)
+
+knitr::kable(model_checks, digits = 3)
+```
+
+## 4. Bayesian posterior g-computation
+
+For each posterior draw, we can predict the mediator values under the chosen intervention and then feed those predictions into the next model in the causal chain. This is the Bayesian analogue of the bootstrap g-computation above. It is very analogous, as you see. 
+
+::: {.callout-warning}
+## **WARNING!!** This code is very computationally intensive. Depending on your computer's configuration, it can take a very long time.
+:::
+
+```{r}
+new_base <- tibble(
+  C = dat$C,
+  site = mode_factor(dat$site),
+  obs  = mode_factor(dat$obs)
+)
+
+posterior_mean_response <- function(fit, newdata, draw_id) {
+  as.vector(posterior_epred(
+    fit,
+    newdata = newdata,
+    draw_ids = draw_id,
+    re_formula = NULL,
+    allow_new_levels = FALSE
+  ))
+}
+
+set.seed(20260411)
+draw_ids <- sample(seq_len(ndraws(fit_y)), size = min(500, ndraws(fit_y)))
+
+predict_do_x_one <- function(draw_id, x_value) {
+  dat_x <- new_base |> mutate(X = x_value)
+  m1 <- posterior_mean_response(fit_m1, dat_x, draw_id)
+  m2 <- posterior_mean_response(fit_m2, dat_x |> mutate(M1 = m1), draw_id)
+  y  <- posterior_mean_response(fit_y,  dat_x |> mutate(M1 = m1, M2 = m2), draw_id)
+
+  tibble(.draw = draw_id, ybar = mean(y))
+}
+
+predict_cde_one <- function(draw_id, x_treat, x_mediator_ref) {
+  dat_ref <- new_base |> mutate(X = x_mediator_ref)
+  m1_ref <- posterior_mean_response(fit_m1, dat_ref, draw_id)
+  m2_ref <- posterior_mean_response(fit_m2, dat_ref |> mutate(M1 = m1_ref), draw_id)
+
+  y <- posterior_mean_response(
+    fit_y,
+    new_base |> mutate(X = x_treat, M2 = m2_ref),
+    draw_id
+  )
+
+  tibble(.draw = draw_id, ybar = mean(y))
+}
+
+predict_do_x <- function(x_value) {
+  purrr::map_dfr(draw_ids, predict_do_x_one, x_value = x_value)
+}
+
+predict_cde <- function(x_treat, x_mediator_ref) {
+  purrr::map_dfr(
+    draw_ids,
+    predict_cde_one,
+    x_treat = x_treat,
+    x_mediator_ref = x_mediator_ref
+  )
+}
+
+post_te <- predict_do_x(x1) |>
+  rename(y_x1 = ybar) |>
+  left_join(predict_do_x(x0) |> rename(y_x0 = ybar), by = ".draw") |>
+  transmute(.draw, total_effect = y_x1 - y_x0)
+
+post_cde <- predict_cde(x1, x0) |>
+  rename(y_x1_m0 = ybar) |>
+  left_join(predict_cde(x0, x0) |> rename(y_x0_m0 = ybar), by = ".draw") |>
+  transmute(.draw, direct_effect = y_x1_m0 - y_x0_m0)
+
+post_effects <- post_te |>
+  left_join(post_cde, by = ".draw") |>
+  mutate(indirect_effect = total_effect - direct_effect) |>
+  pivot_longer(-.draw, names_to = "effect", values_to = "estimate") |>
+  mutate(
+    method = "brms posterior",
+    effect = recode(
+      effect,
+      total_effect = "Total effect",
+      direct_effect = "Controlled direct effect",
+      indirect_effect = "Indirect effect"
+    )
+  ) |>
+  select(.draw, method, effect, estimate)
+```
+
+## 5. Compare GAM bootstrap and brms posterior effects
+
+The table and plot below compare the frequentist bootstrap distribution to the Bayesian posterior distribution. They are directly comparable because both are stored with the same columns: `.draw`, `method`, `effect`, and `estimate`.
+
+```{r}
+comparison_effects <- bind_rows(gam_effects, post_effects)
+
+effect_summary <- comparison_effects |>
+  group_by(method, effect) |>
+  median_qi(estimate, .width = 0.95) |>
+  transmute(
+    method,
+    effect,
+    estimate = estimate,
+    lwr_95 = .lower,
+    upr_95 = .upper
+  ) |>
+  arrange(effect, method)
+
+knitr::kable(effect_summary, digits = 2)
+```
+
+Plot the comparison!
+
+```{r}
+comparison_effects |>
+  ggplot(aes(x = estimate, y = effect, fill = method)) +
+  stat_halfeye(
+    .width = c(0.5, 0.8, 0.95),
+    point_interval = median_qi,
+    position = position_dodge(width = 0.7),
+    alpha = 0.7
+  ) +
+  labs(
+    x = "Estimated causal contrast",
+    y = NULL,
+    fill = NULL,
+    title = "GAM bootstrap vs brms posterior causal effects",
+    subtitle = "Both workflows estimate the same total, controlled direct, and indirect effects"
+  )
+```
+
+## 6. Save effect draws and summaries
+
+```{r}
+#| echo: false
+
+readr::write_csv(gam_effects, "gam_effect_draws.csv")
+readr::write_csv(post_effects, "brms_effect_draws.csv")
+readr::write_csv(comparison_effects, "gam_brms_effect_draws.csv")
+readr::write_csv(effect_summary, "gam_brms_effect_summary.csv")
+```
+

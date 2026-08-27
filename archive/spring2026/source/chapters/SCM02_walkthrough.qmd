@@ -1,0 +1,594 @@
+---
+title: "SCM02_walkthrough"
+format: html
+editor_options: 
+  chunk_output_type: console
+---
+
+## Workspace set-up
+
+```{r}
+#| message: false
+#| warning: false
+
+library(tidyverse)
+library(mgcv)
+library(dagitty)
+library(igraph)
+library(broom)
+library(furrr)
+library(future)
+library(gratia)
+library(DHARMa)
+```
+
+
+## Generate the fake dataset for this example (R code)
+
+```{r}
+set.seed(20260408)
+
+n_site <- 4
+n_obs  <- 5
+n_rep  <- 10
+n      <- n_site * n_obs * n_rep
+
+site <- factor(rep(paste0("site_", seq_len(n_site)), each = n_obs * n_rep))
+obs  <- factor(rep(rep(paste0("obs_", seq_len(n_obs)), each = n_rep), times = n_site))
+
+b_site_x  <- rnorm(n_site, 0, 0.55)
+b_obs_x   <- rnorm(n_obs, 0, 0.45)
+
+b_site_m1 <- rnorm(n_site, 0, 0.35)
+b_obs_m1  <- rnorm(n_obs, 0, 0.30)
+
+b_site_m2 <- rnorm(n_site, 0, 0.35)
+b_obs_m2  <- rnorm(n_obs, 0, 0.30)
+
+b_site_y  <- rnorm(n_site, 0, 0.70)
+b_obs_y   <- rnorm(n_obs, 0, 0.55)
+
+C <- rnorm(n, mean = 0, sd = 1.1)
+
+X <- 0.85 * C +
+  b_site_x[site] +
+  b_obs_x[obs] +
+  rnorm(n, 0, 1.0)
+
+M1 <- 1.0 * sin(X / 1.3) +
+  0.55 * C +
+  b_site_m1[site] +
+  b_obs_m1[obs] +
+  rnorm(n, 0, 0.8)
+
+M2 <- 0.60 * X +
+  0.85 * M1 +
+  0.18 * C +
+  b_site_m2[site] +
+  b_obs_m2[obs] +
+  rnorm(n, 0, 0.9)
+
+Y <- 1.15 * X +
+  1.10 * M2 -
+  0.42 * (M2^2) +
+  0.70 * C +
+  b_site_y[site] +
+  b_obs_y[obs] +
+  rt(n, df = 6) * 0.9
+
+dat <- tibble(
+  site = site,
+  obs  = obs,
+  C    = C,
+  X    = X,
+  M1   = M1,
+  M2   = M2,
+  Y    = Y
+)
+
+glimpse(dat)
+```
+
+---
+
+## Submodel for `X`
+
+## Error distributions for `X`
+
+```{r}
+x_error01 <- gam(
+  X ~ C,
+  data = dat,
+  family = gaussian(),
+  method = "REML"
+)
+
+x_error02 <- gam(
+ X ~ C,
+  data = dat,
+  family = scat(),
+  method = "REML"
+)
+
+tibble(
+  model = c("X: Gaussian", "X: scat"),
+  AIC = c(AIC(x_error01), AIC(x_error02))
+) |>
+  arrange(AIC) |>
+  mutate(delta_AIC = AIC - min(AIC))
+```
+
+## Random effects structure for 'X'
+
+```{r}
+x_re01 <- gam(
+  X ~ C + s(site, bs = "re"),
+  data = dat,
+  family = gaussian(),
+  method = "REML"
+)
+
+x_re02 <- gam(
+  X ~ C + s(obs, bs = "re"),
+  data = dat,
+  family = gaussian(),
+  method = "REML"
+)
+
+x_re03 <- gam(
+  X ~ C + s(site, bs = "re") + s(obs, bs = "re"),
+  data = dat,
+  family = gaussian(),
+  method = "REML"
+)
+
+tibble(
+  model = c("X: site RE", "X: obs RE", "X: crossed REs"),
+  AIC = c(AIC(x_re01), AIC(x_re02), AIC(x_re03))
+) |>
+  arrange(AIC) |>
+  mutate(delta_AIC = AIC - min(AIC))
+```
+
+## Functional form for `X`
+
+```{r}
+x_form01 <- gam(
+  X ~ C + s(site, bs = "re") + s(obs, bs = "re"),
+  data = dat,
+  family = gaussian(),
+  method = "REML"
+)
+
+x_form02 <- gam(
+  X ~ s(C) + s(site, bs = "re") + s(obs, bs = "re"),
+  data = dat,
+  family = gaussian(),
+  method = "REML"
+)
+
+tibble(
+  model = c("X: linear", "X: smooth X"),
+  AIC = c(AIC(x_form01), AIC(x_form02))
+) |>
+  arrange(AIC) |>
+  mutate(delta_AIC = AIC - min(AIC))
+
+```
+
+---
+
+# Submodel for `M1`
+
+## Error distribution for `M1`
+
+```{r}
+m1_error01 <- gam(
+  M1 ~ X + C,
+  data = dat,
+  family = gaussian(),
+  method = "REML"
+)
+
+m1_error02 <- gam(
+  M1 ~ X + C,
+  data = dat,
+  family = scat(),
+  method = "REML"
+)
+
+tibble(
+  model = c("M1: gaussian", "M1: scaled-t"),
+  AIC = c(AIC(m1_error01), AIC(m1_error02))
+) |>
+  arrange(AIC) |>
+  mutate(delta_AIC = AIC - min(AIC))
+
+```
+
+
+## Random effects structure for `M1`
+
+```{r}
+m1_re01 <- gam(
+  M1 ~ X + C + s(site, bs = "re"),
+  data = dat,
+  family = gaussian(),
+  method = "REML"
+)
+
+m1_re02 <- gam(
+  M1 ~ X + C + s(obs, bs = "re"),
+  data = dat,
+  family = gaussian(),
+  method = "REML"
+)
+
+m1_re03 <- gam(
+  M1 ~ X + C + s(site, bs = "re") + s(obs, bs = "re"),
+  data = dat,
+  family = gaussian(),
+  method = "REML"
+)
+
+tibble(
+  model = c("M1: site RE", "M1: obs RE", "M1: crossed REs"),
+  AIC = c(AIC(m1_re01), AIC(m1_re02), AIC(m1_re03))
+) |>
+  arrange(AIC) |>
+  mutate(delta_AIC = AIC - min(AIC))
+```
+:::
+
+### Function form for 'M1'
+
+```{r}
+m1_form01 <- gam(
+  M1 ~ X + C + s(site, bs = "re") + s(obs, bs = "re"),
+  data = dat,
+  family = gaussian(),
+  method = "REML"
+)
+
+m1_form02 <- gam(
+  M1 ~ s(X) + C + s(site, bs = "re") + s(obs, bs = "re"),
+  data = dat,
+  family = gaussian(),
+  method = "REML"
+)
+
+m1_form03 <- gam(
+  M1 ~ X + s(C) + s(site, bs = "re") + s(obs, bs = "re"),
+  data = dat,
+  family = gaussian(),
+  method = "REML"
+)
+
+m1_form04 <- gam(
+  M1 ~ s(X) + s(C) + s(site, bs = "re") + s(obs, bs = "re"),
+  data = dat,
+  family = gaussian(),
+  method = "REML"
+)
+
+tibble(
+  model = c("M1: all linear", "M1: smooth X", "M1: smooth C", "M1: smooth both"),
+  AIC = c(AIC(m1_form01), AIC(m1_form02), AIC(m1_form03), AIC(m1_form04))
+) |>
+  arrange(AIC) |>
+  mutate(delta_AIC = AIC - min(AIC))
+```
+
+---
+
+## Submodel for `M2`
+
+### Error distribution for `M2`
+
+```{r}
+m2_error01 <- gam(
+  M2 ~ X + M1,
+  data = dat,
+  family = gaussian(),
+  method = "REML"
+)
+
+m2_error02 <- gam(
+  M2 ~ X + M1,
+  data = dat,
+  family = scat(),
+  method = "REML"
+)
+
+tibble(
+  model = c("M2: gaussian", "M2: scat"),
+  AIC = c(AIC(m2_error01), AIC(m2_error02))
+) |>
+  arrange(AIC) |>
+  mutate(delta_AIC = AIC - min(AIC))
+```
+
+### Random effects structure for `M2`
+
+```{r}
+m2_re01 <- gam(
+  M2 ~ X + M1 + s(site, bs = "re"),
+  data = dat,
+  family = gaussian(),
+  method = "REML"
+)
+
+m2_re02 <- gam(
+  M2 ~ X + M1 + s(obs, bs = "re"),
+  data = dat,
+  family = gaussian(),
+  method = "REML"
+)
+
+m2_re03 <- gam(
+  M2 ~ X + M1 + s(site, bs = "re") + s(obs, bs = "re"),
+  data = dat,
+  family = gaussian(),
+  method = "REML"
+)
+
+tibble(
+  model = c("M2: site RE", "M2: obs RE", "M2: crossed REs"),
+  AIC = c(AIC(m2_re01), AIC(m2_re02), AIC(m2_re03))
+) |>
+  arrange(AIC) |>
+  mutate(delta_AIC = AIC - min(AIC))
+```
+
+### Functional form for `M2`
+
+```{r}
+m2_form01 <- gam(
+  M2 ~ X + M1 + s(site, bs = "re") + s(obs, bs = "re"),
+  data = dat,
+  family = gaussian(),
+  method = "REML"
+)
+
+m2_form02 <- gam(
+  M2 ~ s(X) + M1 + s(site, bs = "re") + s(obs, bs = "re"),
+  data = dat,
+  family = gaussian(),
+  method = "REML"
+)
+
+m2_form03 <- gam(
+  M2 ~ X + s(M1) + s(site, bs = "re") + s(obs, bs = "re"),
+  data = dat,
+  family = gaussian(),
+  method = "REML"
+)
+
+m2_form04 <- gam(
+  M2 ~ s(X) + s(M1) + s(site, bs = "re") + s(obs, bs = "re"),
+  data = dat,
+  family = gaussian(),
+  method = "REML"
+)
+
+tibble(
+  model = c("M2: all linear", "M2: smooth X", "M2: smooth C", "M2: smooth both"),
+  AIC = c(AIC(m2_form01), AIC(m2_form02), AIC(m2_form03), AIC(m2_form04))
+) |>
+  arrange(AIC) |>
+  mutate(delta_AIC = AIC - min(AIC))
+```
+
+
+# The part uses ALL models in the second part of the SCM tutorial
+
+
+```{r}
+# function to return the most common level of a factor
+mode_factor <- function(x) {
+  factor(names(which.max(table(x))), levels = levels(x))
+}
+
+# construct the baseline prediction dataset
+new_base <- tibble(
+  C = dat$C,
+  site = mode_factor(dat$site),
+  obs  = mode_factor(dat$obs)
+)
+```
+
+
+
+### Substep 7c: Specify the intervention(s)
+
+```{r}
+x0 <- quantile(dat$X, 0.25)
+x1 <- quantile(dat$X, 0.75)
+
+c(x0 = x0, x1 = x1)
+```
+
+
+
+### Substep 7d: Predict outcomes under each intervention to obtain the *total effect*
+
+
+```{r}
+predict_under_do_x <- function(x_value, base_dat) {
+
+  dat_x <- base_dat |>
+    mutate(X = x_value)
+  m1_hat <- predict(mod_m1, newdata = dat_x, type = "response")
+
+  dat_m2 <- dat_x |>
+    mutate(M1 = m1_hat)
+  m2_hat <- predict(mod_m2, newdata = dat_m2, type = "response")
+
+  dat_y <- dat_m2 |>
+    mutate(M2 = m2_hat)
+  y_hat <- predict(mod_y, newdata = dat_y, type = "response")
+
+  y_hat
+}
+```
+
+
+### Substep 7e: Compute the *controlled direct effect* by fixing mediator(s)
+
+
+```{r}
+predict_cde <- function(x_treat, x_mediator_ref, base_dat) {
+
+  dat_xref <- base_dat |>
+    mutate(X = x_mediator_ref)
+  m1_ref <- predict(mod_m1, newdata = dat_xref, type = "response")
+
+  dat_m2ref <- dat_xref |>
+    mutate(M1 = m1_ref)
+  m2_ref <- predict(mod_m2, newdata = dat_m2ref, type = "response")
+
+  dat_y <- base_dat |>
+    mutate(
+      X = x_treat,
+      M2 = m2_ref
+    )
+  y_hat <- predict(mod_y, newdata = dat_y, type = "response")
+
+  y_hat
+}
+```
+
+## Substep 7f: Decompose the *total effect* into *direct* and *indirect* components
+
+
+```{r}
+y_do_x1 <- predict_under_do_x(x1, new_base)
+y_do_x0 <- predict_under_do_x(x0, new_base)
+
+te_hat <- mean(y_do_x1 - y_do_x0)
+
+# controlled direct effect: hold mediator pathway at its x0 level
+cde_x1_x0 <- mean(
+  predict_cde(x_treat = x1, x_mediator_ref = x0, base_dat = new_base) -
+    predict_cde(x_treat = x0, x_mediator_ref = x0, base_dat = new_base)
+)
+
+ie_hat <- te_hat - cde_x1_x0
+
+tibble(
+  effect = c("Total effect", "Controlled direct effect", "Indirect effect"),
+  estimate = c(te_hat, cde_x1_x0, ie_hat)
+)
+```
+
+
+
+```{r}
+
+boot_decomp <- function(idx, data, x0, x1) {
+  
+  # idx = the indices for the resampled rows
+  d <- data[idx, ]
+
+  ref_site_b <- mode_factor(d$site)
+  ref_obs_b  <- mode_factor(d$obs)
+
+  new_base_b <- tibble(
+    C = d$C,
+    site = factor(ref_site_b, levels = levels(data$site)),
+    obs  = factor(ref_obs_b,  levels = levels(data$obs))
+  )
+
+  # Now run each dataset through the specific order of the causal models.
+  mod_m1_b <- gam(
+    M1 ~ s(X) + s(C) + s(site, bs = "re") + s(obs, bs = "re"),
+    data = d,
+    family = gaussian(),
+    method = "REML"
+  )
+
+  mod_m2_b <- gam(
+    M2 ~ s(X) + s(M1) + s(site, bs = "re") + s(obs, bs = "re"),
+    data = d,
+    family = gaussian(),
+    method = "REML"
+  )
+
+  mod_y_b <- gam(
+    Y ~ s(X) + s(M2) + s(C) + s(site, bs = "re") + s(obs, bs = "re"),
+    data = d,
+    family = scat(),
+    method = "REML"
+  )
+
+  # predict total effect (TE)
+  predict_under_do_x_b <- function(x_value, base_dat) {
+    dat_x <- base_dat |> mutate(X = x_value)
+    m1_hat <- predict(mod_m1_b, newdata = dat_x, type = "response")
+    dat_m2 <- dat_x |> mutate(M1 = m1_hat)
+    m2_hat <- predict(mod_m2_b, newdata = dat_m2, type = "response")
+    dat_y <- dat_m2 |> mutate(M2 = m2_hat)
+    predict(mod_y_b, newdata = dat_y, type = "response")
+  }
+
+  # predict controlled direct effect (CDE)
+  predict_cde_b <- function(x_treat, x_mediator_ref, base_dat) {
+    dat_xref <- base_dat |> mutate(X = x_mediator_ref)
+    m1_ref <- predict(mod_m1_b, newdata = dat_xref, type = "response")
+    dat_m2ref <- dat_xref |> mutate(M1 = m1_ref)
+    m2_ref <- predict(mod_m2_b, newdata = dat_m2ref, type = "response")
+    dat_y <- base_dat |> mutate(X = x_treat, M2 = m2_ref)
+    predict(mod_y_b, newdata = dat_y, type = "response")
+  }
+
+  # Differences are the counterfactual contrasts
+  te <- mean(predict_under_do_x_b(x1, new_base_b) - predict_under_do_x_b(x0, new_base_b))
+
+  de <- mean(
+    predict_cde_b(x_treat = x1, x_mediator_ref = x0, base_dat = new_base_b) -
+      predict_cde_b(x_treat = x0, x_mediator_ref = x0, base_dat = new_base_b)
+  )
+
+  # values are not in any order, so we can simply take the difference to get the distribution of IE
+  ie <- te - de
+
+  # create output data for this
+  tibble(te = te, de = de, ie = ie)
+}
+```
+
+Now, we can run the bootstrap.
+
+```{r}
+
+suppressWarnings(plan(multisession))
+
+set.seed(99)
+B <- 200
+boot_ids <- replicate(B, sample(seq_len(nrow(dat)), replace = TRUE), simplify = FALSE)
+
+boot_res <- future_map_dfr(boot_ids, boot_decomp, data = dat, x0 = x0, x1 = x1, .progress = TRUE)
+
+boot_summary <- tibble(
+  effect = c("Total effect", "Controlled direct effect", "Indirect effect"),
+  estimate = c(mean(boot_res$te), mean(boot_res$de), mean(boot_res$ie)),
+  lwr = c(quantile(boot_res$te, 0.025), quantile(boot_res$de, 0.025), quantile(boot_res$ie, 0.025)),
+  upr = c(quantile(boot_res$te, 0.975), quantile(boot_res$de, 0.975), quantile(boot_res$ie, 0.975))
+)
+
+boot_summary
+```
+
+## Step 8: Visualize the decomposition
+
+```{r}
+boot_summary |>
+  ggplot(aes(x = effect, y = estimate, ymin = lwr, ymax = upr)) +
+  geom_pointrange() +
+  coord_flip() +
+  labs(
+    x = NULL,
+    y = "Estimated causal contrast",
+    title = "Total, direct, and indirect effects from the fitted SCM"
+  )
+```

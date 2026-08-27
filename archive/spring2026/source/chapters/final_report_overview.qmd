@@ -1,0 +1,403 @@
+---
+title: "Final Report: Overview"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: false
+    theme: cosmo
+    embed-resources: true
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+::: {.callout-important}
+## Due date
+**Friday, 08-May-2026** (Feel free to turn it in *much* earlier!)
+:::
+
+::::: columns
+::: {.column width="50%"}
+## Goal of the final report
+
+This final deliverable for ZOO/ECOL-5500 replaces the original, separate assignments on interpretation, results, full draft, and revision planning. Because everyone's projects are at vastly different stages, the goal is not to produce a perfect paper or even a complete methods or results section. The goal is for you to demonstrate that you can connect a research question, causal assumptions, model structure, results, and interpretation into one coherent analysis. Remember that this is a final synthesis of what you have learned about your study system during this course; it is not a giant everything-you-have-ever-done document. Include only what helps me understand (ahem...reminds me of) the question, model, results, and interpretation.
+:::
+
+::: {.column width="50%"}
+![](../graphics/jackalope_graphics/graduating_jackalope.png)
+
+:::
+
+:::::
+
+## Formatting and report structure
+
+Format: PDF (or HTML)
+
+Suggested length: Whatever length is necessary (likely 4-8 pages but can be shorter)
+
+You can organize your final report in any meaningful and easy-to-read way. Though not required (as this does not match exactly to the `Required Components` below, you may use the following structure directly:
+
+1. Revised question and estimand
+2. Causal assumptions and core DAG
+3. Data and model overview
+4. Results
+5. Interpretation by estimand
+6. Limitations and next revision priorities
+7. Supplementary material (if needed; see below)
+
+## Required components 
+
+In your final report, you should include the components in the following table (including a description of what a high-quality write-up would include):
+
+| component | what high-quality looks like |
+|----------|---------------------|
+|**Revised research question and estimand(s)** | The research question is specific and matches the model; each estimand is clearly defined (e.g., total, direct, or indirect effect) and tied directly to a given question. |
+|**2. Causal assumptions and justification** | Key assumptions are stated explicitly (e.g., no unmeasured confounding) and justified using ecological knowledge, study design, or prior work (whatever your expertise tells you). |
+| **3. Core causal diagram or assumption figure** | The diagram is simple, readable, and defensible; it includes only relevant variables and clearly shows assumed causal structure (not design-specific features like random effects). |
+| **4. Statistical model(s) for each estimand** | Each model --GLMM, GAMM, etc.-- corresponds directly to a specific estimand and follows logically from the diagram (e.g., appropriate adjustment set); no unnecessary variables are included. |
+| **5. Results in tabular form** | Results are presented clearly with estimates and uncertainty (e.g., intervals), without selective reporting or omission of key variables. |
+| **6. Interpretable visualization** | Figures directly support interpretation (e.g., show contrasts or effects), are clearly labeled, and avoid unnecessary complexity. |
+| **7. Interpretation (study inference and limitations)** | Results are interpreted in a way that matches the analysis type (descriptive, associational, or causal); uncertainty is acknowledged and limitations are discussed honestly. |
+| **8. Reflection and revision note** | A coherent reflection on how the project evolved, what changed, and what you would improve, showing critical thinking about the process. |
+
+These can be included in Let us discuss each of these in turn.
+
+---
+
+### 1. Revised research question and estimand
+
+Begin with a revised version of your original research question. The revised question should match the analysis you actually built. Your revised question should be specific about:
+
+* the outcome,
+* the focal predictor, treatment, exposure, or comparison
+* the population or observational unit
+* the scale of comparison when relevant
+* whether the target is descriptive, associational/predictive, , or causal
+
+Then state the estimand in plain, easy-to-access language. Examples:
+
+* “What is the total effect of burn severity on vegetation cover, comparing high-severity burned plots to unburned plots, among sampled sites?”
+* “How does predicted bird abundance vary with fruit availability after adjusting for the measured common causes represented in the DAG?”
+* “Can acoustic features predict behavioral state during playback trials?”
+
+::: {.callout-note}
+## What to do if your question changed
+
+That is more than fine! In 1-2 sentences, briefly explain why. A good final report often requires narrowing or completely rewriting the original question so that it matches the data, model, and assumptions. This is why is is generally advantageous to devise your questions early in the project phase (i.e. before approaches have been defined).  
+:::
+
+### 2. Causal assumptions and justification
+
+For this component, please provide a short justification for the assumptions that make your analysis interpretable. As we have discussed, you already have implicit causal assumptions in your mental model; therefore, this is the time to make those assumptions explicitly (and then justify them). This short justification may be a paragraph or a small table (as you might see in the main body of a paper or in the supplementary information section). Include the assumptions that matter most for your project. At minimum, address the following:
+
+* What variables are treated as causes, outcomes, mediators, confounders, or measured context?
+* What variables did you adjust for, and why?
+* What variables did you intentionally **not** adjust for, and why?
+* What major unmeasured causes could impact (nay, threaten) the interpretation?
+* If the analysis is not causal, what kind of association or prediction is being estimated?
+
+Here is a useful table format (if you choose to go this route):
+
+| assumption | reasoning | effect on interpretation |
+|---|---|---|
+| Site ruggedness affects both burn severity and vegetation structure | Rugged terrain may influence fire behavior and plant communities | Estimated burn effect may partly reflect terrain differences |
+| Post-treatment vegetation variables are not adjusted for | They may mediate the effect of burn severity | Adjusting for them could remove part of the effect being estimated |
+
+::: {.callout-warning}
+## A quick note on the phrase “spurious correlation”
+
+When justifying your causal assumptions, be careful with the phrase **spurious correlation**. In causal analysis, a correlation is not simply “spurious” because it is observational. A correlation may reflect a causal effect, confounding, selection bias, shared causes, reverse causation, measurement structure, or pure noise (classical meaning of "spurious"). Generally, you need an explicit causal model (in your head or on paper) that states specifically what problem (estimand) you are intended. In other words, "spurious" is not "spurious."
+:::
+
+### 3. Core causal diagram or assumption figure
+
+Include one simple figure (ideally a Directed Acyclic Graph, or DAG) that shows the core structure and assumptions of your analysis. As a reminder for creating a DAG, you should use only:
+
+* measured variables (at different scales, if necessary)
+* variable states that you explicitly define
+* treatments/exposures/predictors (variable under direct manipulation, or variable whose effect you are interested in)
+* outcomes (response variable)
+* key contextual variables (what we think about as "covariates")
+
+Do **not** include vague abstract concepts (e.g. "weather") or indices unless they are essential and clearly defined (*weather* is not easily defined). Keep the diagram simple enough that it helps you effectively communicate your analysis to the reader.
+
+You may use Mermaid, DAGitty, a hand-drawn figure (clearly legible), or another clear visualization (e.g. Powerpoint, Canva, etc.).
+
+Here is an example [Mermaid](https://mermaid.js.org/) template:
+
+```{mermaid}
+flowchart LR
+
+X["**Focal Predictor / Treatment**"]
+C["**Measured Context / Confounder**"]
+M["**Mediator, if relevant**"]
+Y["**Outcome**"]
+
+C --> X
+C --> Y
+X --> M
+M --> Y
+X --> Y
+
+classDef exposure fill:#cfe8ff,stroke:#5b8db8,stroke-width:3px,color:#000,font-size:17px;
+classDef context fill:#ffffff,stroke:#888888,stroke-width:3px,color:#000,font-size:17px;
+classDef mediator fill:#f4b6b6,stroke:#b35c5c,stroke-width:3px,color:#000,font-size:17px;
+classDef outcome fill:#d9f2d9,stroke:#5a9a5a,stroke-width:3px,color:#000,font-size:17px;
+
+class X exposure;
+class C context;
+class M mediator;
+class Y outcome;
+```
+
+
+### 4. Statistical model(s) for each estimand
+
+Analyze one to three core questions, depending on the scope and stage of your project. Choose fewer questions and do them clearly (rather than many questions asked and answered weakly). For each question, include the following:
+
+* the research question (hypothesis)
+* the estimand
+* the model used
+* the adjustment set
+* the outcome scale (error distribution)
+* any other relevant structural features (random effect, temporal lags, phylogeny, etc.)
+* the interpretation scale
+
+Examples of acceptable models include, but are not limited to:
+
+* linear model
+* generalized linear (mixed) model
+* generalized additive (mixed) model
+* Bayesian model
+* occupancy model
+* hidden Markov model
+* random forest or predictive model, if the estimand is clearly predictive
+* another model discussed in class or justified for your project (and previously discussed with me)
+
+::: {.callout-tip}
+## Remember to keep the model aligned with the estimand
+
+Do not use a complex model just because it seems impressive. Use the simplest model that allows you to answer the question you actually asked. And please do not be tempted to use a model just because someone else (from your lab, in a paper, etc.) used it for their specific project questions.
+:::
+
+### 5. Results in tabular form
+
+Include at least one clean results table. Generally, the table should be interpretable without reading your code. Depending on your model, this might include:
+
+* estimated contrasts (complementary to graphed results)
+* effect sizes
+* predictions
+* uncertainty intervals
+* model comparison summaries (for submodel comparisons, **not** for variable selection)
+* posterior summaries (if you used `brms` or similar)
+* classification or prediction performance metrics (though we have only scratched the surface of this)
+
+The table must have:
+
+* a clear caption,
+* readable variable names,
+* units where relevant,
+* uncertainty summaries where appropriate.
+
+Avoid dumping raw model output directly into the report unless it has been cleaned and explained. Note that this section is highly flexible. It can accompany an existing graph as an inset box, for instance.
+
+### 6. Interpretable visualization
+
+Include at least one figure that communicates the main result. Good figures might show:
+
+* predicted outcomes across a focal gradient
+* estimated treatment contrasts (e.g. from g-computation)
+* marginal effects (change in the response variable when one variable changes, as others are fixed)
+* observed data plus model predictions (can go in supplementary information)
+* uncertainty bands (be sure to specify what kind)
+* residual or sensitivity checks if they are important to interpretation
+
+Every figure must have:
+
+* axis labels with units (where relevant)
+* an informative caption
+* enough explanation that the reader knows what comparison/effect is being visualized
+
+### 7. Interpretation (study inference and limtitations)
+
+For each estimand, write **1–3 sentences** interpreting your result(s). Each interpretation should a description of :
+
+* what the model suggests,
+* the direction and approximate size of the result
+* the uncertainty or limitation that matters most to you (and, possibly, to future readers)
+
+Do your best to not overclaim. Do not tell a bigger biological story than your analysis supports. Examples include (1) inferring causality from non-causal assumptions, or (2) claiming an association using descriptive summaries alone. Here are three examples of a primary result sentence (from an example about the effect of burn severity): 
+
+| claim type | statement |
+|------|----------|
+| **Descriptive** | *Plots with high burn severity consistently had lower vegetation cover than unburned plots, differing by about X units across the sampled sites.* |
+| **Associational / predictive** | *After adjusting for slope, aspect, soil type, and precipitation, high burn severity is associated with about X units lower vegetation cover, with little uncertainty.* |
+| **Causal** | *Under the assumption that key common causes are accounted for, high burn severity reduces vegetation cover by about X units compared to unburned conditions.* |
+
+Use the tables in the boxes below to translate vague scientific wording into precise wording that matches each analysis's inferential goal(s). Click on each box to expand.
+
+::: {.callout-note collapse="true" icon=false}
+## **Descriptive claims:** What do we observe?
+
+**Goal:** Describe what is in the data, not what causes it.
+
+| vague wording | example |
+|---|---|
+| **"Higher/lower"** | "Mean vegetation cover was X in high-severity plots and Y in unburned plots." |
+| **"Large difference"** | "Vegetation cover differed by approximately X units between groups." |
+| **"Clear pattern"** | "Vegetation cover was consistently lower in high-severity plots across the sampled sites." |
+| **"Varies"** | "Vegetation cover ranged from X to Y across plots." |
+| **"Similar values"** | "Values were similar across groups, with means differing by less than X units." |
+| **"Typical value"** | "The median value was X." |
+| **"Spread"** | "Values were dispersed across plots, with a range of X to Y." |
+| **"No difference"** | "Observed values were similar across groups, with overlapping ranges." |
+| **"Extreme values"** | "Several observations fell above X, in the upper tail of the observed distribution." |
+
+:::
+
+::: {.callout-tip collapse="true" icon=false}
+## **Associational / predictive claims:** What varies with what?
+
+**Goal:** Describe conditional associations, not causes.
+
+| vague wording | Better, precise alternatives |
+|---|---|
+| **"Strong relationship"** | "A one-unit increase in X is associated with a change of approximately X units in Y." |
+| **"Significant effect"** | "The estimated difference is X units with interval [a, b], which does not include zero." |
+| **"Trend"** | "The estimate suggests a difference of X units, but uncertainty is high." |
+| **"Controls for variables"** | "The model conditions on slope, aspect, soil type, and precipitation." |
+| **"After accounting for..."** | "After adjusting for slope, aspect, soil type, and precipitation." |
+| **"Independent effect of X"** | "The estimate for X compares units with the same values of the other variables in the model." |
+| **"Robust result"** | "The estimate is similar across alternative model specifications." |
+| **"Predicts"** | "Is associated with" when describing data; "is used to predict" when describing model output. |
+| **"Explains variation"** | "Accounts for X% of variation in Y." |
+| **"Clear and consistent"** | "The estimated difference is large, precisely estimated, and similar across the observed range of conditions." |
+| **"No effect"** | "The estimated difference is near zero, with uncertainty that includes both positive and negative values." |
+
+:::
+
+::: {.callout-warning collapse="true" icon=false}
+## **Causal claims:** What would change under an intervention?
+
+**Goal:** Tie the statement to an estimand and the assumptions that make the interpretation causal.
+
+| Vague wording | Better, precise alternatives |
+|---|---|
+| **"X affects Y"** | "We estimate the total effect of X on Y under the assumed causal structure." |
+| **"Impact of X"** | "The estimated total effect of X on Y is approximately X units." |
+| **"X drives Y"** | "X is estimated to change Y under the assumption that the relevant confounders are accounted for." |
+| **"Causal relationship"** | "Interpreted as causal under the assumption that key common causes are accounted for." |
+| **"Direct effect"** | "The effect of X on Y not operating through M, holding M fixed." |
+| **"Indirect effect"** | "The portion of the effect of X on Y that operates through M." |
+| **"Mechanism"** | "X influences Y in part through M." |
+| **"After controlling for..."** | "After adjusting for variables assumed to be common causes of X and Y." |
+| **"Spurious relationship"** | "The association may be explained by confounding by Z or by conditioning on Z." |
+| **"All else equal"** | "Comparing units with the same values of the identified adjustment set." |
+| **"Robust causal result"** | "The estimated effect is similar across plausible alternative causal assumptions." |
+| **"Clear effect"** | "The estimated causal effect is large relative to variation and is estimated with little uncertainty." |
+| **"No causal effect"** | "The estimated effect is near zero, with uncertainty spanning both positive and negative values." |
+
+:::
+
+If you would like to see a full list of verbs and verb phrases that are appropriate for communicating different types of analysis. (Please let me know if there are other words or phrases that could be added here.)
+
+::: {.callout-tip collapse=true icon=false}
+
+## **Suggested verbiage for your inferential goals (a long table)**
+
+🟢 GREEN: Employ comfortably! 
+🟡 YELLOW: Be cautious.
+🔴 RED: Avoid like the plague.
+
+| **Verb / Phrase**      | **Descriptive** | **Associational / Predictive** | **Total Effect** | **Direct Effect** | **Indirect Effect** | **Experimental Effect** |
+| ---------------------- | --------------- | ------------------------------ | ---------------- | ----------------- | ------------------- | ----------------------- |
+| causes                 | 🔴              | 🔴                             | 🟡               | 🟡                | 🟡                  | 🟢                      |
+| leads to               | 🔴              | 🟡                             | 🟡               | 🟡                | 🟡                  | 🟢                      |
+| produces               | 🔴              | 🟡                             | 🟡               | 🟡                | 🟡                  | 🟢                      |
+| results in             | 🔴              | 🟡                             | 🟡               | 🟡                | 🟡                  | 🟢                      |
+| induces                | 🔴              | 🔴                             | 🟡               | 🟡                | 🟡                  | 🟢                      |
+| generates              | 🔴              | 🟡                             | 🟡               | 🟡                | 🟡                  | 🟢                      |
+| affects                | 🔴              | 🟡                             | 🟢               | 🟡                | 🟡                  | 🟡                      |
+| changes                | 🔴              | 🟡                             | 🟢               | 🟡                | 🟡                  | 🟡                      |
+| increases / decreases  | 🔴              | 🟡                             | 🟢               | 🟡                | 🟡                  | 🟡                      |
+| shifts / alters        | 🔴              | 🟡                             | 🟢               | 🟡                | 🟡                  | 🟡                      |
+| has a causal effect on | 🔴              | 🔴                             | 🟢               | 🟡                | 🟡                  | 🟢                      |
+| directly affects       | 🔴              | 🔴                             | 🔴               | 🟢                | 🔴                  | 🟡                      |
+| has a direct effect on | 🔴              | 🔴                             | 🔴               | 🟢                | 🔴                  | 🟡                      |
+| independently affects  | 🔴              | 🔴                             | 🔴               | 🟢                | 🔴                  | 🟡                      |
+| indirectly affects     | 🔴              | 🔴                             | 🔴               | 🔴                | 🟢                  | 🟡                      |
+| affects through        | 🔴              | 🔴                             | 🔴               | 🔴                | 🟢                  | 🟡                      |
+| operates via           | 🔴              | 🔴                             | 🔴               | 🔴                | 🟢                  | 🟡                      |
+| is mediated by         | 🔴              | 🔴                             | 🔴               | 🔴                | 🟢                  | 🟡                      |
+| influences             | 🟡              | 🟡                             | 🟡               | 🟡                | 🟡                  | 🟡                      |
+| impacts                | 🟡              | 🟡                             | 🟡               | 🟡                | 🟡                  | 🟡                      |
+| contributes to         | 🟡              | 🟢                             | 🟡               | 🟡                | 🟡                  | 🟡                      |
+| drives                 | 🔴              | 🟡                             | 🔴               | 🔴                | 🔴                  | 🟡                      |
+| determines             | 🔴              | 🔴                             | 🔴               | 🔴                | 🔴                  | 🟡                      |
+| controls               | 🔴              | 🔴                             | 🔴               | 🔴                | 🔴                  | 🔴                      |
+| is associated with     | 🟡              | 🟢                             | 🔴               | 🔴                | 🔴                  | 🔴                      |
+| is correlated with     | 🟡              | 🟢                             | 🔴               | 🔴                | 🔴                  | 🔴                      |
+| covaries with          | 🟡              | 🟢                             | 🔴               | 🔴                | 🔴                  | 🔴                      |
+| is linked to           | 🟡              | 🟢                             | 🔴               | 🔴                | 🔴                  | 🔴                      |
+| is related to          | 🟡              | 🟢                             | 🔴               | 🔴                | 🔴                  | 🔴                      |
+| predicts               | 🔴              | 🟢                             | 🔴               | 🔴                | 🔴                  | 🔴                      |
+| is predictive of       | 🔴              | 🟢                             | 🔴               | 🔴                | 🔴                  | 🔴                      |
+| is a predictor of      | 🔴              | 🟢                             | 🔴               | 🔴                | 🔴                  | 🔴                      |
+| tracks                 | 🟡              | 🟢                             | 🔴               | 🔴                | 🔴                  | 🔴                      |
+| co-occurs with         | 🟢              | 🟢                             | 🔴               | 🔴                | 🔴                  | 🔴                      |
+| explains               | 🟢              | 🟢                             | 🔴               | 🔴                | 🔴                  | 🔴                      |
+
+
+:::
+
+
+### 8. Short final reflection or revision note
+
+End with a brief note identifying what you would revise next.
+
+Include:
+
+* the top 1–3 limitations,
+* the next analysis or diagnostic you would do,
+* what additional data or design change would most improve inference.
+
+This replaces the separate revision-plan assignment that was originally in the syllabus. Keep it short, sweet, and specific.
+
+## Optional supplementary material
+
+Use supplementary material for details that are useful but would interrupt the main report.
+
+Appropriate supplementary material includes:
+
+* a longer assumption table,
+* extra model diagnostics,
+* sensitivity checks,
+* alternative DAGs,
+* additional figures,
+* cleaned code chunks,
+* variable definitions.
+
+## Checklist before submission
+
+Before submitting, make sure you can answer “yes” to each item.
+
+* [ ] Did I rewrite my research question so that it matches the analysis I actually performed?
+* [ ] Did I state the estimand in plain language?
+* [ ] Did I explain the causal or associational assumptions behind the analysis?
+* [ ] Did I include a simple causal diagram or assumption figure?
+* [ ] Did I analyze 1–3 clear questions rather than many vague ones?
+* [ ] Did I use a model appropriate for the estimand?
+* [ ] Did I include at least one clean results table?
+* [ ] Did I include at least one interpretable visualization?
+* [ ] Did I interpret each estimand in 1–3 restrained sentences?
+* [ ] Did I state the main limitation or next revision priority?
+
+## Evaluation emphasis
+
+Your submission will be evaluated on coherence, not perfection. The most important question is:
+
+> Does the final report connect the question, assumptions, model, results, and interpretation into one defensible analysis?
+

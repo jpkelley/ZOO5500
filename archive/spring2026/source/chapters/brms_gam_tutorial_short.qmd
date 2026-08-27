@@ -1,0 +1,362 @@
+---
+title: "Total, Direct, and Indirect Effects with `brms`"
+subtitle: "A short Bayesian SCM walkthrough parallel to the frequentist GAM example"
+format:
+  html:
+    toc: true
+    code-fold: false
+    code-tools: false
+execute:
+  echo: false
+  message: false
+  warning: false
+editor_options:
+  chunk_output_type: console
+---
+
+## Goal
+
+This short tutorial shows how to estimate **total**, **controlled direct**, and **indirect** effects with `brms` using the same simulated SCM and final path models used in `SCM02_walkthrough.qmd`.
+
+The point is not to introduce a new causal framework. The point is to show that the Bayesian workflow is almost the same as the frequentist GAM workflow:
+
+1. fit the DAG-implied path models;
+2. intervene on `X`;
+3. propagate predictions forward through the mediator chain;
+4. compare posterior distributions of the resulting causal contrasts.
+
+The code is run but not shown in the rendered page, so the page focuses on the conceptual steps and the final effect distributions.
+
+## DAG and estimands
+
+```{mermaid}
+flowchart LR
+  C[Confounder C] --> X[Exposure X]
+  C --> M1[Mediator M1]
+  C --> Y[Outcome Y]
+  X --> M1
+  X --> M2[Mediator M2]
+  X --> Y
+  M1 --> M2
+  M2 --> Y
+```
+
+The estimands are:
+
+- **Total effect:** change in `Y` when `X` is moved from `x0` to `x1`, allowing `M1` and `M2` to respond naturally.
+- **Controlled direct effect:** change in `Y` when `X` is moved from `x0` to `x1`, while the mediator pathway is held fixed at its `x0` level.
+- **Indirect effect:** `total effect - controlled direct effect`.
+
+::: {.callout-note}
+## How to choose priors
+
+For this kind of teaching example, start with **weakly regularizing priors** that keep the model stable without forcing a strong biological conclusion. A useful workflow is:
+
+1. standardize continuous predictors when possible;
+2. use normal priors centered at 0 for fixed effects;
+3. use half-normal or exponential priors for standard deviations;
+4. use a prior on residual scale that is consistent with the outcome scale;
+5. run prior predictive checks if the priors might strongly shape the result.
+
+In real analyses, priors should reflect the measurement scale, plausible biological effect sizes, and any previous evidence. The goal is not to make priors invisible; the goal is to make them defensible.
+:::
+
+## 1. Simulate the same dataset
+
+The data-generating process below matches the `SCM02_walkthrough` example: crossed grouping variables, confounding by `C`, a nonlinear `X -> M1` path, a mediated `M1 -> M2` path, and a nonlinear `M2 -> Y` relationship.
+
+```{r}
+library(tidyverse)
+library(brms)
+library(posterior)
+library(tidybayes)
+library(ggplot2)
+
+set.seed(20260408)
+
+n_site <- 4
+n_obs  <- 5
+n_rep  <- 10
+n      <- n_site * n_obs * n_rep
+
+site <- factor(rep(paste0("site_", seq_len(n_site)), each = n_obs * n_rep))
+obs  <- factor(rep(rep(paste0("obs_", seq_len(n_obs)), each = n_rep), times = n_site))
+
+b_site_x  <- rnorm(n_site, 0, 0.55)
+b_obs_x   <- rnorm(n_obs, 0, 0.45)
+b_site_m1 <- rnorm(n_site, 0, 0.35)
+b_obs_m1  <- rnorm(n_obs, 0, 0.30)
+b_site_m2 <- rnorm(n_site, 0, 0.35)
+b_obs_m2  <- rnorm(n_obs, 0, 0.30)
+b_site_y  <- rnorm(n_site, 0, 0.70)
+b_obs_y   <- rnorm(n_obs, 0, 0.55)
+
+C <- rnorm(n, mean = 0, sd = 1.1)
+
+X <- 0.85 * C +
+  b_site_x[site] +
+  b_obs_x[obs] +
+  rnorm(n, 0, 1.0)
+
+M1 <- 1.0 * sin(X / 1.3) +
+  0.55 * C +
+  b_site_m1[site] +
+  b_obs_m1[obs] +
+  rnorm(n, 0, 0.8)
+
+M2 <- 0.60 * X +
+  0.85 * M1 +
+  0.18 * C +
+  b_site_m2[site] +
+  b_obs_m2[obs] +
+  rnorm(n, 0, 0.9)
+
+Y <- 1.15 * X +
+  1.10 * M2 -
+  0.42 * (M2^2) +
+  0.70 * C +
+  b_site_y[site] +
+  b_obs_y[obs] +
+  rt(n, df = 6) * 0.9
+
+dat <- tibble(site, obs, C, X, M1, M2, Y)
+```
+
+The intervention contrast uses the 25th and 75th percentiles of `X`, as in the frequentist walkthrough.
+
+```{r}
+x0 <- unname(quantile(dat$X, 0.25))
+x1 <- unname(quantile(dat$X, 0.75))
+
+intervention_values <- tibble(
+  intervention = c("x0: 25th percentile", "x1: 75th percentile"),
+  value = c(x0, x1)
+)
+
+knitr::kable(intervention_values, digits = 2)
+```
+
+## 2. Fit the DAG path models
+
+These are the same final structural equations used in the frequentist GAM walkthrough, translated directly into `brms` syntax.
+
+```{r}
+priors_gaussian <- c(
+  prior(normal(0, 1), class = "b"),
+  prior(normal(0, 2), class = "Intercept"),
+  prior(exponential(1), class = "sd"),
+  prior(exponential(1), class = "sds"),
+  prior(exponential(1), class = "sigma")
+)
+
+priors_student <- c(
+  prior(normal(0, 1), class = "b"),
+  prior(normal(0, 2), class = "Intercept"),
+  prior(exponential(1), class = "sd"),
+  prior(exponential(1), class = "sds"),
+  prior(exponential(1), class = "sigma"),
+  prior(gamma(2, 0.1), class = "nu")
+)
+
+fit_m1 <- brm(
+  M1 ~ s(X) + s(C) + (1 | site) + (1 | obs),
+  data = dat,
+  family = gaussian(),
+  prior = priors_gaussian,
+  chains = 4, cores = 4, iter = 2000,
+  seed = 20260408,
+  silent = 2, refresh = 0
+)
+
+fit_m2 <- brm(
+  M2 ~ s(X) + s(M1) + (1 | site) + (1 | obs),
+  data = dat,
+  family = gaussian(),
+  prior = priors_gaussian,
+  chains = 4, cores = 4, iter = 2000,
+  seed = 20260409,
+  silent = 2, refresh = 0
+)
+
+fit_y <- brm(
+  Y ~ s(X) + s(M2) + s(C) + (1 | site) + (1 | obs),
+  data = dat,
+  family = student(),
+  prior = priors_student,
+  chains = 4, cores = 4, iter = 2000,
+  seed = 20260410,
+  silent = 2, refresh = 0
+)
+```
+
+The mediator models propagate the intervention forward. The outcome model estimates `Y` after the simulated intervention has passed through the mediator chain.
+
+```{r}
+model_checks <- tibble(
+  model = c("M1", "M2", "Y"),
+  max_rhat = c(
+    max(rhat(fit_m1), na.rm = TRUE),
+    max(rhat(fit_m2), na.rm = TRUE),
+    max(rhat(fit_y),  na.rm = TRUE)
+  )
+)
+
+knitr::kable(model_checks, digits = 3)
+```
+
+## 3. Posterior g-computation
+
+For each posterior draw, we predict the mediator values under the intervention and feed those predictions into the next model. This is the Bayesian analogue of the bootstrap g-computation in the frequentist walkthrough.
+
+```{r}
+mode_factor <- function(x) {
+  factor(names(which.max(table(x))), levels = levels(x))
+}
+
+new_base <- tibble(
+  C = dat$C,
+  site = mode_factor(dat$site),
+  obs  = mode_factor(dat$obs)
+)
+
+posterior_mean_response <- function(fit, newdata, draw_id) {
+  as.vector(posterior_epred(
+    fit,
+    newdata = newdata,
+    draw_ids = draw_id,
+    re_formula = NULL,
+    allow_new_levels = FALSE
+  ))
+}
+
+# Use a manageable number of posterior draws for the intervention simulation.
+set.seed(20260411)
+draw_ids <- sample(seq_len(ndraws(fit_y)), size = min(500, ndraws(fit_y)))
+
+predict_do_x_one <- function(draw_id, x_value) {
+  dat_x <- new_base |> mutate(X = x_value)
+  m1 <- posterior_mean_response(fit_m1, dat_x, draw_id)
+  m2 <- posterior_mean_response(fit_m2, dat_x |> mutate(M1 = m1), draw_id)
+  y  <- posterior_mean_response(fit_y,  dat_x |> mutate(M1 = m1, M2 = m2), draw_id)
+
+  tibble(.draw = draw_id, ybar = mean(y))
+}
+
+predict_cde_one <- function(draw_id, x_treat, x_mediator_ref) {
+  dat_ref <- new_base |> mutate(X = x_mediator_ref)
+  m1_ref <- posterior_mean_response(fit_m1, dat_ref, draw_id)
+  m2_ref <- posterior_mean_response(fit_m2, dat_ref |> mutate(M1 = m1_ref), draw_id)
+
+  y <- posterior_mean_response(
+    fit_y,
+    new_base |> mutate(X = x_treat, M2 = m2_ref),
+    draw_id
+  )
+
+  tibble(.draw = draw_id, ybar = mean(y))
+}
+
+predict_do_x <- function(x_value) {
+  purrr::map_dfr(draw_ids, predict_do_x_one, x_value = x_value)
+}
+
+predict_cde <- function(x_treat, x_mediator_ref) {
+  purrr::map_dfr(
+    draw_ids,
+    predict_cde_one,
+    x_treat = x_treat,
+    x_mediator_ref = x_mediator_ref
+  )
+}
+post_te <- predict_do_x(x1) |>
+  rename(y_x1 = ybar) |>
+  left_join(predict_do_x(x0) |> rename(y_x0 = ybar), by = ".draw") |>
+  transmute(.draw, total_effect = y_x1 - y_x0)
+
+post_cde <- predict_cde(x1, x0) |>
+  rename(y_x1_m0 = ybar) |>
+  left_join(predict_cde(x0, x0) |> rename(y_x0_m0 = ybar), by = ".draw") |>
+  transmute(.draw, direct_effect = y_x1_m0 - y_x0_m0)
+
+post_effects <- post_te |>
+  left_join(post_cde, by = ".draw") |>
+  mutate(indirect_effect = total_effect - direct_effect) |>
+  pivot_longer(-.draw, names_to = "effect", values_to = "estimate") |>
+  mutate(effect = recode(effect,
+                         total_effect = "Total effect",
+                         direct_effect = "Controlled direct effect",
+                         indirect_effect = "Indirect effect"))
+```
+
+## 4. Posterior effect summaries
+
+The table and plot compare the `brms` posterior effect distributions to the
+frequentist GAM/bootstrap estimates from the earlier SCM walkthrough.
+
+```{r}
+effect_summary <- post_effects |>
+  group_by(effect) |>
+  median_qi(estimate, .width = 0.95) |>
+  transmute(
+    method = "brms posterior",
+    effect,
+    estimate = estimate,
+    lwr_95 = .lower,
+    upr_95 = .upper
+  )
+
+gam_summary <- gam_effects |>
+  group_by(effect) |>
+  median_qi(estimate, .width = 0.95) |>
+  transmute(
+    method = "GAM bootstrap",
+    effect,
+    estimate = estimate,
+    lwr_95 = .lower,
+    upr_95 = .upper
+  )
+
+bind_rows(effect_summary, gam_summary) |>
+  arrange(effect, method) |>
+  knitr::kable(digits = 2)
+
+```
+
+```{r}
+gam_intervals <- gam_effects |>
+  group_by(effect) |>
+  median_qi(estimate, .width = 0.95)
+
+post_effects |>
+  ggplot(aes(x = estimate, y = effect)) +
+  stat_halfeye(
+    .width = c(0.5, 0.8, 0.95),
+    point_interval = median_qi
+  ) +
+  geom_pointrange(
+    data = gam_intervals,
+    aes(x = estimate, xmin = .lower, xmax = .upper, y = effect),
+    inherit.aes = FALSE,
+    position = position_nudge(y = -0.18),
+    linewidth = 0.7
+  ) +
+  labs(
+    x = "Causal contrast",
+    y = NULL,
+    title = "brms posterior distributions with GAM/bootstrap intervals",
+    subtitle = "Half-eye = brms posterior; point-range = frequentist GAM/bootstrap estimate"
+  )
+
+```
+The posterior draws can be saved and compared directly to the frequentist bootstrap draws from `SCM02_walkthrough.qmd`.
+
+```{r}
+readr::write_csv(post_effects, "brms_effect_draws.csv")
+readr::write_csv(effect_summary, "brms_effect_summary.csv")
+```
+
+## Interpretation
+
+The Bayesian and frequentist workflows are doing the same causal operation: fitting the DAG-implied structural equations and propagating interventions through them. The main difference is uncertainty propagation. The frequentist version uses resampling; the `brms` version uses the posterior distribution.
+
+The important conceptual lesson is that total, direct, and indirect effects come from the **intervention simulation**, not from simply reading off one coefficient from one model.

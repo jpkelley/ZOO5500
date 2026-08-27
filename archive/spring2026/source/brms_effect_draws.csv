@@ -1,0 +1,1501 @@
+.draw,method,effect,estimate
+897,brms posterior,Total effect,6.347884237388882
+897,brms posterior,Controlled direct effect,2.1944326100330795
+897,brms posterior,Indirect effect,4.153451627355803
+2258,brms posterior,Total effect,6.268891714195432
+2258,brms posterior,Controlled direct effect,1.999042290677953
+2258,brms posterior,Indirect effect,4.269849423517479
+3258,brms posterior,Total effect,6.285602618205108
+3258,brms posterior,Controlled direct effect,1.8746817454826115
+3258,brms posterior,Indirect effect,4.410920872722497
+473,brms posterior,Total effect,6.337831831167205
+473,brms posterior,Controlled direct effect,1.9636624846743351
+473,brms posterior,Indirect effect,4.37416934649287
+642,brms posterior,Total effect,5.810007967394547
+642,brms posterior,Controlled direct effect,2.3707522428591106
+642,brms posterior,Indirect effect,3.4392557245354367
+3447,brms posterior,Total effect,5.685076316660844
+3447,brms posterior,Controlled direct effect,2.4941532921318608
+3447,brms posterior,Indirect effect,3.190923024528983
+2097,brms posterior,Total effect,5.755981194313556
+2097,brms posterior,Controlled direct effect,2.8985716610367342
+2097,brms posterior,Indirect effect,2.8574095332768215
+365,brms posterior,Total effect,6.378967068310287
+365,brms posterior,Controlled direct effect,1.8925077237690413
+365,brms posterior,Indirect effect,4.486459344541245
+756,brms posterior,Total effect,4.916220853243205
+756,brms posterior,Controlled direct effect,1.7835026454522727
+756,brms posterior,Indirect effect,3.1327182077909326
+328,brms posterior,Total effect,6.402025831024887
+328,brms posterior,Controlled direct effect,2.1561027036579823
+328,brms posterior,Indirect effect,4.245923127366905
+2517,brms posterior,Total effect,5.444826975784411
+2517,brms posterior,Controlled direct effect,2.354323410998656
+2517,brms posterior,Indirect effect,3.0905035647857555
+2360,brms posterior,Total effect,5.3965676826259195
+2360,brms posterior,Controlled direct effect,1.6215804561295357
+2360,brms posterior,Indirect effect,3.7749872264963837
+2907,brms posterior,Total effect,5.854133537871296
+2907,brms posterior,Controlled direct effect,1.975463071786046
+2907,brms posterior,Indirect effect,3.87867046608525
+2283,brms posterior,Total effect,5.775200577528038
+2283,brms posterior,Controlled direct effect,1.7796448226395798
+2283,brms posterior,Indirect effect,3.995555754888458
+1280,brms posterior,Total effect,5.4258956487243495
+1280,brms posterior,Controlled direct effect,2.1306234810082816
+1280,brms posterior,Indirect effect,3.295272167716068
+835,brms posterior,Total effect,5.696517410483258
+835,brms posterior,Controlled direct effect,2.6627744023774262
+835,brms posterior,Indirect effect,3.033743008105832
+2010,brms posterior,Total effect,5.3962465835019495
+2010,brms posterior,Controlled direct effect,2.030592897878165
+2010,brms posterior,Indirect effect,3.3656536856237844
+1453,brms posterior,Total effect,4.400433339464755
+1453,brms posterior,Controlled direct effect,2.1842428961316394
+1453,brms posterior,Indirect effect,2.216190443333115
+2269,brms posterior,Total effect,5.793263640344842
+2269,brms posterior,Controlled direct effect,1.7610360742443518
+2269,brms posterior,Indirect effect,4.03222756610049
+3748,brms posterior,Total effect,5.616704383717042
+3748,brms posterior,Controlled direct effect,2.59416243239426
+3748,brms posterior,Indirect effect,3.022541951322782
+1644,brms posterior,Total effect,4.748722606746105
+1644,brms posterior,Controlled direct effect,2.3342136211993414
+1644,brms posterior,Indirect effect,2.4145089855467634
+976,brms posterior,Total effect,5.598275335974794
+976,brms posterior,Controlled direct effect,2.381016179087408
+976,brms posterior,Indirect effect,3.217259156887386
+3582,brms posterior,Total effect,6.57188682587828
+3582,brms posterior,Controlled direct effect,1.4147979970918474
+3582,brms posterior,Indirect effect,5.157088828786432
+485,brms posterior,Total effect,5.938560953097334
+485,brms posterior,Controlled direct effect,2.3111721446458144
+485,brms posterior,Indirect effect,3.62738880845152
+2583,brms posterior,Total effect,5.677658873791596
+2583,brms posterior,Controlled direct effect,2.018859504053683
+2583,brms posterior,Indirect effect,3.6587993697379124
+3063,brms posterior,Total effect,5.679639088582606
+3063,brms posterior,Controlled direct effect,1.5427784599176162
+3063,brms posterior,Indirect effect,4.13686062866499
+3718,brms posterior,Total effect,6.472620036247869
+3718,brms posterior,Controlled direct effect,2.538402907732419
+3718,brms posterior,Indirect effect,3.9342171285154497
+2796,brms posterior,Total effect,5.472453570487575
+2796,brms posterior,Controlled direct effect,2.7570334554193456
+2796,brms posterior,Indirect effect,2.7154201150682296
+2680,brms posterior,Total effect,5.84734481491568
+2680,brms posterior,Controlled direct effect,1.9224627951995528
+2680,brms posterior,Indirect effect,3.9248820197161276
+162,brms posterior,Total effect,5.793188368292106
+162,brms posterior,Controlled direct effect,2.1380312624468862
+162,brms posterior,Indirect effect,3.6551571058452197
+1840,brms posterior,Total effect,5.471172138256955
+1840,brms posterior,Controlled direct effect,2.157883917278089
+1840,brms posterior,Indirect effect,3.3132882209788663
+3782,brms posterior,Total effect,5.550278444435052
+3782,brms posterior,Controlled direct effect,2.364263768335615
+3782,brms posterior,Indirect effect,3.186014676099437
+2923,brms posterior,Total effect,6.19210331570362
+2923,brms posterior,Controlled direct effect,2.210073607667077
+2923,brms posterior,Indirect effect,3.982029708036543
+509,brms posterior,Total effect,6.441421851835599
+509,brms posterior,Controlled direct effect,1.783563252284622
+509,brms posterior,Indirect effect,4.657858599550977
+96,brms posterior,Total effect,6.514067195642109
+96,brms posterior,Controlled direct effect,2.3746147960530952
+96,brms posterior,Indirect effect,4.139452399589013
+213,brms posterior,Total effect,5.06681000658855
+213,brms posterior,Controlled direct effect,1.9805060792381504
+213,brms posterior,Indirect effect,3.0863039273504
+2686,brms posterior,Total effect,5.141891277201005
+2686,brms posterior,Controlled direct effect,1.9974957468117416
+2686,brms posterior,Indirect effect,3.144395530389263
+614,brms posterior,Total effect,5.311089879354677
+614,brms posterior,Controlled direct effect,1.7209832757487258
+614,brms posterior,Indirect effect,3.5901066036059515
+2999,brms posterior,Total effect,6.364458500109617
+2999,brms posterior,Controlled direct effect,2.192414647729053
+2999,brms posterior,Indirect effect,4.172043852380564
+209,brms posterior,Total effect,6.005562054482479
+209,brms posterior,Controlled direct effect,2.4081059114167576
+209,brms posterior,Indirect effect,3.5974561430657217
+749,brms posterior,Total effect,5.377375582336857
+749,brms posterior,Controlled direct effect,2.312352690801629
+749,brms posterior,Indirect effect,3.0650228915352278
+1677,brms posterior,Total effect,5.769928667676961
+1677,brms posterior,Controlled direct effect,1.8811498653370449
+1677,brms posterior,Indirect effect,3.888778802339916
+3661,brms posterior,Total effect,5.439854308813407
+3661,brms posterior,Controlled direct effect,1.9483431691215722
+3661,brms posterior,Indirect effect,3.491511139691835
+1846,brms posterior,Total effect,5.02201534289453
+1846,brms posterior,Controlled direct effect,2.231957551845646
+1846,brms posterior,Indirect effect,2.790057791048884
+1326,brms posterior,Total effect,4.77565327327595
+1326,brms posterior,Controlled direct effect,1.844859674673256
+1326,brms posterior,Indirect effect,2.9307935986026936
+2179,brms posterior,Total effect,6.199122883169539
+2179,brms posterior,Controlled direct effect,2.0449779042018372
+2179,brms posterior,Indirect effect,4.154144978967702
+2928,brms posterior,Total effect,7.08731394893767
+2928,brms posterior,Controlled direct effect,2.061221094088923
+2928,brms posterior,Indirect effect,5.026092854848747
+95,brms posterior,Total effect,6.288336537928243
+95,brms posterior,Controlled direct effect,2.623969017878629
+95,brms posterior,Indirect effect,3.6643675200496144
+3988,brms posterior,Total effect,5.435649499055171
+3988,brms posterior,Controlled direct effect,2.1434274304347527
+3988,brms posterior,Indirect effect,3.2922220686204184
+420,brms posterior,Total effect,4.3671699325052025
+420,brms posterior,Controlled direct effect,1.8805138629135605
+420,brms posterior,Indirect effect,2.4866560695916418
+1443,brms posterior,Total effect,5.8071646918447994
+1443,brms posterior,Controlled direct effect,2.0002823088550645
+1443,brms posterior,Indirect effect,3.806882382989735
+438,brms posterior,Total effect,6.037969100986212
+438,brms posterior,Controlled direct effect,1.7768692228285703
+438,brms posterior,Indirect effect,4.2610998781576415
+1485,brms posterior,Total effect,5.470046125365116
+1485,brms posterior,Controlled direct effect,2.3204274926198956
+1485,brms posterior,Indirect effect,3.14961863274522
+3341,brms posterior,Total effect,6.5817028127708435
+3341,brms posterior,Controlled direct effect,2.22089624065618
+3341,brms posterior,Indirect effect,4.360806572114663
+3109,brms posterior,Total effect,4.944151332392357
+3109,brms posterior,Controlled direct effect,2.361004063707354
+3109,brms posterior,Indirect effect,2.583147268685003
+2763,brms posterior,Total effect,5.387588604389866
+2763,brms posterior,Controlled direct effect,2.077699756447387
+2763,brms posterior,Indirect effect,3.3098888479424793
+2724,brms posterior,Total effect,5.854470096737058
+2724,brms posterior,Controlled direct effect,2.3818994045698636
+2724,brms posterior,Indirect effect,3.472570692167195
+3792,brms posterior,Total effect,4.209979595756755
+3792,brms posterior,Controlled direct effect,2.0310683081689884
+3792,brms posterior,Indirect effect,2.1789112875877663
+3913,brms posterior,Total effect,5.912362069091802
+3913,brms posterior,Controlled direct effect,2.0242588259094827
+3913,brms posterior,Indirect effect,3.8881032431823197
+2124,brms posterior,Total effect,6.016965448433224
+2124,brms posterior,Controlled direct effect,2.066071801276775
+2124,brms posterior,Indirect effect,3.9508936471564486
+2505,brms posterior,Total effect,5.126594671984053
+2505,brms posterior,Controlled direct effect,2.0295795534649113
+2505,brms posterior,Indirect effect,3.097015118519142
+1625,brms posterior,Total effect,5.461293908718213
+1625,brms posterior,Controlled direct effect,2.2111303114693373
+1625,brms posterior,Indirect effect,3.250163597248876
+3895,brms posterior,Total effect,5.3523312589541
+3895,brms posterior,Controlled direct effect,1.8321302260364134
+3895,brms posterior,Indirect effect,3.520201032917687
+1523,brms posterior,Total effect,5.412751266992105
+1523,brms posterior,Controlled direct effect,1.7950588147401088
+1523,brms posterior,Indirect effect,3.617692452251996
+3427,brms posterior,Total effect,5.049815360387927
+3427,brms posterior,Controlled direct effect,2.140307482019952
+3427,brms posterior,Indirect effect,2.9095078783679753
+3044,brms posterior,Total effect,7.248632658266098
+3044,brms posterior,Controlled direct effect,1.5141193220981233
+3044,brms posterior,Indirect effect,5.734513336167975
+2393,brms posterior,Total effect,6.332976745418745
+2393,brms posterior,Controlled direct effect,2.215759402869783
+2393,brms posterior,Indirect effect,4.117217342548962
+1235,brms posterior,Total effect,5.959592796061449
+1235,brms posterior,Controlled direct effect,2.0627825593303095
+1235,brms posterior,Indirect effect,3.89681023673114
+2311,brms posterior,Total effect,7.424990357079724
+2311,brms posterior,Controlled direct effect,2.081188611807536
+2311,brms posterior,Indirect effect,5.343801745272188
+3576,brms posterior,Total effect,4.541877476493642
+3576,brms posterior,Controlled direct effect,1.9788329537797291
+3576,brms posterior,Indirect effect,2.563044522713913
+2812,brms posterior,Total effect,6.073188461050444
+2812,brms posterior,Controlled direct effect,2.5729582128765514
+2812,brms posterior,Indirect effect,3.5002302481738927
+2649,brms posterior,Total effect,5.318311522508042
+2649,brms posterior,Controlled direct effect,1.879691826111505
+2649,brms posterior,Indirect effect,3.438619696396537
+2049,brms posterior,Total effect,5.397647287576155
+2049,brms posterior,Controlled direct effect,2.268314296996529
+2049,brms posterior,Indirect effect,3.129332990579626
+3836,brms posterior,Total effect,6.32756032244197
+3836,brms posterior,Controlled direct effect,2.233003953057829
+3836,brms posterior,Indirect effect,4.094556369384141
+166,brms posterior,Total effect,5.515483281718507
+166,brms posterior,Controlled direct effect,1.466597234902021
+166,brms posterior,Indirect effect,4.048886046816486
+1267,brms posterior,Total effect,5.680760991586446
+1267,brms posterior,Controlled direct effect,1.7621476458634815
+1267,brms posterior,Indirect effect,3.9186133457229646
+1760,brms posterior,Total effect,4.899440029378965
+1760,brms posterior,Controlled direct effect,2.0709069864527816
+1760,brms posterior,Indirect effect,2.8285330429261837
+1463,brms posterior,Total effect,4.51849136308138
+1463,brms posterior,Controlled direct effect,2.157286081128921
+1463,brms posterior,Indirect effect,2.361205281952459
+3554,brms posterior,Total effect,6.293594283825886
+3554,brms posterior,Controlled direct effect,1.8911061859976428
+3554,brms posterior,Indirect effect,4.402488097828243
+1400,brms posterior,Total effect,6.456020353641484
+1400,brms posterior,Controlled direct effect,1.8358842353590052
+1400,brms posterior,Indirect effect,4.6201361182824785
+2975,brms posterior,Total effect,5.727034243569006
+2975,brms posterior,Controlled direct effect,2.4856993920508237
+2975,brms posterior,Indirect effect,3.241334851518182
+44,brms posterior,Total effect,6.255253094810074
+44,brms posterior,Controlled direct effect,2.545213327249149
+44,brms posterior,Indirect effect,3.710039767560925
+2626,brms posterior,Total effect,6.633220188219054
+2626,brms posterior,Controlled direct effect,1.6631037462647922
+2626,brms posterior,Indirect effect,4.9701164419542625
+1344,brms posterior,Total effect,6.0562305882490906
+1344,brms posterior,Controlled direct effect,1.3747876018960876
+1344,brms posterior,Indirect effect,4.681442986353003
+138,brms posterior,Total effect,4.74051281103578
+138,brms posterior,Controlled direct effect,2.0429821745987704
+138,brms posterior,Indirect effect,2.6975306364370093
+2096,brms posterior,Total effect,4.8976568667715386
+2096,brms posterior,Controlled direct effect,2.15451018572575
+2096,brms posterior,Indirect effect,2.7431466810457885
+1258,brms posterior,Total effect,5.50435284272849
+1258,brms posterior,Controlled direct effect,1.8195620615784196
+1258,brms posterior,Indirect effect,3.68479078115007
+1754,brms posterior,Total effect,6.284585735382683
+1754,brms posterior,Controlled direct effect,2.6034186955258205
+1754,brms posterior,Indirect effect,3.681167039856862
+84,brms posterior,Total effect,5.8258051588651885
+84,brms posterior,Controlled direct effect,2.184224028240542
+84,brms posterior,Indirect effect,3.6415811306246466
+1252,brms posterior,Total effect,5.91505265384228
+1252,brms posterior,Controlled direct effect,2.486373171378813
+1252,brms posterior,Indirect effect,3.428679482463467
+2745,brms posterior,Total effect,5.709473765625219
+2745,brms posterior,Controlled direct effect,1.6678786037906153
+2745,brms posterior,Indirect effect,4.0415951618346035
+1119,brms posterior,Total effect,6.317713416156016
+1119,brms posterior,Controlled direct effect,2.4697111498726736
+1119,brms posterior,Indirect effect,3.848002266283342
+1776,brms posterior,Total effect,4.518228453757393
+1776,brms posterior,Controlled direct effect,1.39202618645636
+1776,brms posterior,Indirect effect,3.126202267301033
+2660,brms posterior,Total effect,6.3998940284563925
+2660,brms posterior,Controlled direct effect,2.4270423811851685
+2660,brms posterior,Indirect effect,3.972851647271224
+3089,brms posterior,Total effect,7.491105917474998
+3089,brms posterior,Controlled direct effect,2.333197568144877
+3089,brms posterior,Indirect effect,5.157908349330121
+3350,brms posterior,Total effect,7.3056100201266165
+3350,brms posterior,Controlled direct effect,2.0285048418763902
+3350,brms posterior,Indirect effect,5.277105178250226
+2480,brms posterior,Total effect,5.455802201436644
+2480,brms posterior,Controlled direct effect,2.093839177429738
+2480,brms posterior,Indirect effect,3.3619630240069056
+1759,brms posterior,Total effect,5.32633266213452
+1759,brms posterior,Controlled direct effect,2.406261404911701
+1759,brms posterior,Indirect effect,2.9200712572228196
+2967,brms posterior,Total effect,4.3937425302344035
+2967,brms posterior,Controlled direct effect,2.1683544103586163
+2967,brms posterior,Indirect effect,2.225388119875787
+3922,brms posterior,Total effect,5.405968365131526
+3922,brms posterior,Controlled direct effect,2.2464721642237437
+3922,brms posterior,Indirect effect,3.159496200907782
+1151,brms posterior,Total effect,5.396680108082428
+1151,brms posterior,Controlled direct effect,1.8829210476916143
+1151,brms posterior,Indirect effect,3.513759060390814
+3965,brms posterior,Total effect,6.118875150777747
+3965,brms posterior,Controlled direct effect,2.111211532939834
+3965,brms posterior,Indirect effect,4.007663617837913
+3796,brms posterior,Total effect,4.691760561064459
+3796,brms posterior,Controlled direct effect,2.289379705497891
+3796,brms posterior,Indirect effect,2.402380855566568
+1278,brms posterior,Total effect,5.186980897432469
+1278,brms posterior,Controlled direct effect,1.54424986912933
+1278,brms posterior,Indirect effect,3.642731028303139
+716,brms posterior,Total effect,5.740065632894515
+716,brms posterior,Controlled direct effect,2.1208897647430285
+716,brms posterior,Indirect effect,3.6191758681514865
+2306,brms posterior,Total effect,6.363740485468263
+2306,brms posterior,Controlled direct effect,2.1733586573520998
+2306,brms posterior,Indirect effect,4.190381828116163
+543,brms posterior,Total effect,6.64517163519585
+543,brms posterior,Controlled direct effect,2.3942658317340464
+543,brms posterior,Indirect effect,4.250905803461803
+78,brms posterior,Total effect,4.661142562930834
+78,brms posterior,Controlled direct effect,1.7867209981772374
+78,brms posterior,Indirect effect,2.8744215647535967
+1087,brms posterior,Total effect,4.860622746969056
+1087,brms posterior,Controlled direct effect,1.808043039290001
+1087,brms posterior,Indirect effect,3.0525797076790546
+1112,brms posterior,Total effect,5.581044782005991
+1112,brms posterior,Controlled direct effect,2.4266251589443026
+1112,brms posterior,Indirect effect,3.1544196230616883
+740,brms posterior,Total effect,5.774516282988641
+740,brms posterior,Controlled direct effect,2.2593275185162653
+740,brms posterior,Indirect effect,3.5151887644723754
+3562,brms posterior,Total effect,5.005066403433189
+3562,brms posterior,Controlled direct effect,2.421424123734231
+3562,brms posterior,Indirect effect,2.5836422796989584
+1444,brms posterior,Total effect,4.385168371264498
+1444,brms posterior,Controlled direct effect,1.7015092389659274
+1444,brms posterior,Indirect effect,2.683659132298571
+2865,brms posterior,Total effect,5.205910970052704
+2865,brms posterior,Controlled direct effect,2.2595796148508223
+2865,brms posterior,Indirect effect,2.946331355201882
+2986,brms posterior,Total effect,5.209297175129172
+2986,brms posterior,Controlled direct effect,2.1339215724583593
+2986,brms posterior,Indirect effect,3.0753756026708126
+2217,brms posterior,Total effect,5.415939189523844
+2217,brms posterior,Controlled direct effect,1.5097625683155447
+2217,brms posterior,Indirect effect,3.906176621208299
+1074,brms posterior,Total effect,4.462746624497076
+1074,brms posterior,Controlled direct effect,1.9837757536175886
+1074,brms posterior,Indirect effect,2.478970870879488
+3333,brms posterior,Total effect,5.817863308317197
+3333,brms posterior,Controlled direct effect,1.9812676492463939
+3333,brms posterior,Indirect effect,3.836595659070803
+3257,brms posterior,Total effect,5.433099036990107
+3257,brms posterior,Controlled direct effect,2.308971678301931
+3257,brms posterior,Indirect effect,3.124127358688176
+346,brms posterior,Total effect,5.637276019290487
+346,brms posterior,Controlled direct effect,2.1614394370552485
+346,brms posterior,Indirect effect,3.475836582235239
+3067,brms posterior,Total effect,6.604291475446509
+3067,brms posterior,Controlled direct effect,2.311365509665858
+3067,brms posterior,Indirect effect,4.2929259657806504
+954,brms posterior,Total effect,5.829082158081916
+954,brms posterior,Controlled direct effect,1.8615199498533594
+954,brms posterior,Indirect effect,3.9675622082285567
+680,brms posterior,Total effect,6.405067379120612
+680,brms posterior,Controlled direct effect,1.9166168810128723
+680,brms posterior,Indirect effect,4.48845049810774
+1824,brms posterior,Total effect,5.557117696730885
+1824,brms posterior,Controlled direct effect,1.8703794419898192
+1824,brms posterior,Indirect effect,3.686738254741066
+1137,brms posterior,Total effect,4.707480435304767
+1137,brms posterior,Controlled direct effect,1.283944487732132
+1137,brms posterior,Indirect effect,3.423535947572635
+291,brms posterior,Total effect,6.810714169792798
+291,brms posterior,Controlled direct effect,2.2002329995891503
+291,brms posterior,Indirect effect,4.610481170203649
+2158,brms posterior,Total effect,5.091744512402103
+2158,brms posterior,Controlled direct effect,2.009869804775753
+2158,brms posterior,Indirect effect,3.0818747076263504
+1549,brms posterior,Total effect,7.569958346346721
+1549,brms posterior,Controlled direct effect,2.1753960613947063
+1549,brms posterior,Indirect effect,5.3945622849520145
+267,brms posterior,Total effect,6.890577352007992
+267,brms posterior,Controlled direct effect,2.092266938597378
+267,brms posterior,Indirect effect,4.798310413410614
+3794,brms posterior,Total effect,5.94346900819642
+3794,brms posterior,Controlled direct effect,1.9278956026846776
+3794,brms posterior,Indirect effect,4.015573405511742
+373,brms posterior,Total effect,5.96385728447682
+373,brms posterior,Controlled direct effect,2.8113450048117374
+373,brms posterior,Indirect effect,3.1525122796650824
+3340,brms posterior,Total effect,4.579337043485685
+3340,brms posterior,Controlled direct effect,2.4672914748800667
+3340,brms posterior,Indirect effect,2.1120455686056183
+2887,brms posterior,Total effect,6.199750483564156
+2887,brms posterior,Controlled direct effect,1.7689622937222316
+2887,brms posterior,Indirect effect,4.430788189841924
+1872,brms posterior,Total effect,5.397971785740055
+1872,brms posterior,Controlled direct effect,2.5257908697953093
+1872,brms posterior,Indirect effect,2.872180915944746
+2834,brms posterior,Total effect,5.735927243948347
+2834,brms posterior,Controlled direct effect,2.1159107648772943
+2834,brms posterior,Indirect effect,3.6200164790710527
+912,brms posterior,Total effect,5.80863645737926
+912,brms posterior,Controlled direct effect,1.3858141387386391
+912,brms posterior,Indirect effect,4.422822318640621
+3432,brms posterior,Total effect,5.957183638159456
+3432,brms posterior,Controlled direct effect,1.7646563060196225
+3432,brms posterior,Indirect effect,4.192527332139833
+3948,brms posterior,Total effect,6.539005482062049
+3948,brms posterior,Controlled direct effect,2.3227911523243177
+3948,brms posterior,Indirect effect,4.216214329737731
+2268,brms posterior,Total effect,7.121009117273323
+2268,brms posterior,Controlled direct effect,2.053716560161953
+2268,brms posterior,Indirect effect,5.0672925571113705
+1360,brms posterior,Total effect,6.5195639480848895
+1360,brms posterior,Controlled direct effect,2.2565513441310205
+1360,brms posterior,Indirect effect,4.263012603953869
+3790,brms posterior,Total effect,5.8540343428471076
+3790,brms posterior,Controlled direct effect,1.9749698245938578
+3790,brms posterior,Indirect effect,3.8790645182532497
+3884,brms posterior,Total effect,5.211658196360924
+3884,brms posterior,Controlled direct effect,1.742840307764868
+3884,brms posterior,Indirect effect,3.468817888596056
+2117,brms posterior,Total effect,5.949498278612552
+2117,brms posterior,Controlled direct effect,2.6266333891373033
+2117,brms posterior,Indirect effect,3.3228648894752486
+2304,brms posterior,Total effect,7.291289648935264
+2304,brms posterior,Controlled direct effect,2.4340164480611155
+2304,brms posterior,Indirect effect,4.857273200874149
+2331,brms posterior,Total effect,5.72121327514804
+2331,brms posterior,Controlled direct effect,1.8754332672370382
+2331,brms posterior,Indirect effect,3.845780007911002
+455,brms posterior,Total effect,4.858220221993175
+455,brms posterior,Controlled direct effect,1.8394517191448145
+455,brms posterior,Indirect effect,3.018768502848361
+2810,brms posterior,Total effect,6.278262295332934
+2810,brms posterior,Controlled direct effect,1.9477323200877685
+2810,brms posterior,Indirect effect,4.330529975245165
+2477,brms posterior,Total effect,4.504760213369509
+2477,brms posterior,Controlled direct effect,2.2523783334179233
+2477,brms posterior,Indirect effect,2.2523818799515856
+2814,brms posterior,Total effect,6.2677208057427976
+2814,brms posterior,Controlled direct effect,1.857618665928897
+2814,brms posterior,Indirect effect,4.410102139813901
+459,brms posterior,Total effect,5.949794640647712
+459,brms posterior,Controlled direct effect,2.3158443255242327
+459,brms posterior,Indirect effect,3.633950315123479
+737,brms posterior,Total effect,4.769982216906966
+737,brms posterior,Controlled direct effect,2.0699413174697106
+737,brms posterior,Indirect effect,2.7000408994372553
+1383,brms posterior,Total effect,5.927239164366697
+1383,brms posterior,Controlled direct effect,2.0478965112397933
+1383,brms posterior,Indirect effect,3.879342653126904
+1897,brms posterior,Total effect,6.259228715405631
+1897,brms posterior,Controlled direct effect,1.7643527917159472
+1897,brms posterior,Indirect effect,4.494875923689683
+2683,brms posterior,Total effect,5.532168892891491
+2683,brms posterior,Controlled direct effect,1.6687194389810038
+2683,brms posterior,Indirect effect,3.863449453910487
+1916,brms posterior,Total effect,6.641454777365164
+1916,brms posterior,Controlled direct effect,2.1411161252403095
+1916,brms posterior,Indirect effect,4.500338652124855
+499,brms posterior,Total effect,6.346574147757101
+499,brms posterior,Controlled direct effect,2.24528207727757
+499,brms posterior,Indirect effect,4.101292070479531
+2751,brms posterior,Total effect,5.466850689245031
+2751,brms posterior,Controlled direct effect,1.788568549493324
+2751,brms posterior,Indirect effect,3.678282139751707
+595,brms posterior,Total effect,6.872262501464544
+595,brms posterior,Controlled direct effect,1.970757966345797
+595,brms posterior,Indirect effect,4.901504535118747
+1831,brms posterior,Total effect,5.172427374389106
+1831,brms posterior,Controlled direct effect,2.2093189143181413
+1831,brms posterior,Indirect effect,2.963108460070965
+727,brms posterior,Total effect,4.060390401380386
+727,brms posterior,Controlled direct effect,2.1027481559629253
+727,brms posterior,Indirect effect,1.9576422454174605
+1918,brms posterior,Total effect,5.038026225476296
+1918,brms posterior,Controlled direct effect,1.843893431482644
+1918,brms posterior,Indirect effect,3.194132793993652
+1120,brms posterior,Total effect,6.624837336194591
+1120,brms posterior,Controlled direct effect,1.9732915902286
+1120,brms posterior,Indirect effect,4.651545745965991
+2302,brms posterior,Total effect,5.580387891322587
+2302,brms posterior,Controlled direct effect,2.1703153518836027
+2302,brms posterior,Indirect effect,3.4100725394389846
+1283,brms posterior,Total effect,4.184261898053461
+1283,brms posterior,Controlled direct effect,1.8022471520597643
+1283,brms posterior,Indirect effect,2.382014745993697
+2334,brms posterior,Total effect,5.745452910492492
+2334,brms posterior,Controlled direct effect,2.0208481293067933
+2334,brms posterior,Indirect effect,3.724604781185699
+1546,brms posterior,Total effect,6.361711977673699
+1546,brms posterior,Controlled direct effect,1.857761861080364
+1546,brms posterior,Indirect effect,4.5039501165933356
+2510,brms posterior,Total effect,6.561236607256868
+2510,brms posterior,Controlled direct effect,2.137208166116804
+2510,brms posterior,Indirect effect,4.424028441140064
+814,brms posterior,Total effect,4.740888356321035
+814,brms posterior,Controlled direct effect,1.9919226557997447
+814,brms posterior,Indirect effect,2.74896570052129
+3431,brms posterior,Total effect,6.44400668082548
+3431,brms posterior,Controlled direct effect,2.1956775984630212
+3431,brms posterior,Indirect effect,4.248329082362459
+995,brms posterior,Total effect,4.718815339202994
+995,brms posterior,Controlled direct effect,2.059406563470899
+995,brms posterior,Indirect effect,2.659408775732095
+1301,brms posterior,Total effect,7.468512748191875
+1301,brms posterior,Controlled direct effect,1.834507418329748
+1301,brms posterior,Indirect effect,5.634005329862127
+1415,brms posterior,Total effect,5.279331840917888
+1415,brms posterior,Controlled direct effect,2.230891551754885
+1415,brms posterior,Indirect effect,3.048440289163003
+3389,brms posterior,Total effect,8.590483477249633
+3389,brms posterior,Controlled direct effect,2.195843667217515
+3389,brms posterior,Indirect effect,6.394639810032118
+1118,brms posterior,Total effect,5.534183164874103
+1118,brms posterior,Controlled direct effect,1.9183741056127182
+1118,brms posterior,Indirect effect,3.615809059261385
+1942,brms posterior,Total effect,6.19910369445264
+1942,brms posterior,Controlled direct effect,1.8475644570157739
+1942,brms posterior,Indirect effect,4.351539237436866
+2707,brms posterior,Total effect,5.744704771481416
+2707,brms posterior,Controlled direct effect,2.720800814695572
+2707,brms posterior,Indirect effect,3.023903956785844
+2507,brms posterior,Total effect,6.454446995254786
+2507,brms posterior,Controlled direct effect,2.4278555583210233
+2507,brms posterior,Indirect effect,4.026591436933763
+780,brms posterior,Total effect,5.808761877765816
+780,brms posterior,Controlled direct effect,2.161502543219856
+780,brms posterior,Indirect effect,3.6472593345459603
+105,brms posterior,Total effect,5.533009421746113
+105,brms posterior,Controlled direct effect,1.7706480858531242
+105,brms posterior,Indirect effect,3.7623613358929893
+1869,brms posterior,Total effect,7.491212622135276
+1869,brms posterior,Controlled direct effect,1.657923644563514
+1869,brms posterior,Indirect effect,5.833288977571762
+1937,brms posterior,Total effect,5.68608289021458
+1937,brms posterior,Controlled direct effect,2.2059844443543515
+1937,brms posterior,Indirect effect,3.4800984458602287
+3947,brms posterior,Total effect,4.514389649980429
+3947,brms posterior,Controlled direct effect,1.7364905787583504
+3947,brms posterior,Indirect effect,2.7778990712220786
+713,brms posterior,Total effect,5.776648282338487
+713,brms posterior,Controlled direct effect,1.58521502391249
+713,brms posterior,Indirect effect,4.191433258425997
+3551,brms posterior,Total effect,5.907110327871568
+3551,brms posterior,Controlled direct effect,1.9818705047087004
+3551,brms posterior,Indirect effect,3.925239823162868
+1385,brms posterior,Total effect,5.768108122976622
+1385,brms posterior,Controlled direct effect,1.8247571143457857
+1385,brms posterior,Indirect effect,3.943351008630836
+3227,brms posterior,Total effect,7.1765301031127215
+3227,brms posterior,Controlled direct effect,1.9321075221332098
+3227,brms posterior,Indirect effect,5.244422580979512
+3825,brms posterior,Total effect,6.59483150322245
+3825,brms posterior,Controlled direct effect,2.3993000688566153
+3825,brms posterior,Indirect effect,4.195531434365835
+3468,brms posterior,Total effect,6.407155603318219
+3468,brms posterior,Controlled direct effect,2.4232463068886254
+3468,brms posterior,Indirect effect,3.9839092964295935
+3706,brms posterior,Total effect,5.932099300401038
+3706,brms posterior,Controlled direct effect,2.3959121859869033
+3706,brms posterior,Indirect effect,3.536187114414135
+3210,brms posterior,Total effect,5.967022772259658
+3210,brms posterior,Controlled direct effect,2.3224382794292433
+3210,brms posterior,Indirect effect,3.6445844928304147
+1308,brms posterior,Total effect,4.588027783232487
+1308,brms posterior,Controlled direct effect,2.131288713436225
+1308,brms posterior,Indirect effect,2.4567390697962623
+2487,brms posterior,Total effect,5.811640855532191
+2487,brms posterior,Controlled direct effect,1.8469595638697798
+2487,brms posterior,Indirect effect,3.964681291662411
+2770,brms posterior,Total effect,4.755939028799402
+2770,brms posterior,Controlled direct effect,2.3044058471361892
+2770,brms posterior,Indirect effect,2.4515331816632124
+3760,brms posterior,Total effect,5.098572554157911
+3760,brms posterior,Controlled direct effect,1.8373496544024182
+3760,brms posterior,Indirect effect,3.2612228997554933
+853,brms posterior,Total effect,5.858624027526961
+853,brms posterior,Controlled direct effect,1.3426278214982612
+853,brms posterior,Indirect effect,4.515996206028699
+2889,brms posterior,Total effect,6.191923410628671
+2889,brms posterior,Controlled direct effect,2.2578838678058455
+2889,brms posterior,Indirect effect,3.934039542822825
+2164,brms posterior,Total effect,6.077075962319733
+2164,brms posterior,Controlled direct effect,1.8385599414111549
+2164,brms posterior,Indirect effect,4.238516020908579
+3368,brms posterior,Total effect,5.700119143440556
+3368,brms posterior,Controlled direct effect,2.2440354488315952
+3368,brms posterior,Indirect effect,3.456083694608961
+3667,brms posterior,Total effect,4.8760906369735775
+3667,brms posterior,Controlled direct effect,2.0975611951827706
+3667,brms posterior,Indirect effect,2.778529441790807
+2593,brms posterior,Total effect,4.942849564754664
+2593,brms posterior,Controlled direct effect,2.1530161575039752
+2593,brms posterior,Indirect effect,2.789833407250689
+61,brms posterior,Total effect,5.474762928777003
+61,brms posterior,Controlled direct effect,2.2481712314599607
+61,brms posterior,Indirect effect,3.2265916973170423
+787,brms posterior,Total effect,6.664875042026949
+787,brms posterior,Controlled direct effect,2.6266975698724293
+787,brms posterior,Indirect effect,4.03817747215452
+1839,brms posterior,Total effect,6.458469627720712
+1839,brms posterior,Controlled direct effect,2.2597143029225215
+1839,brms posterior,Indirect effect,4.19875532479819
+2465,brms posterior,Total effect,6.1478439194174825
+2465,brms posterior,Controlled direct effect,2.2370323311969016
+2465,brms posterior,Indirect effect,3.910811588220581
+3688,brms posterior,Total effect,4.761266019548657
+3688,brms posterior,Controlled direct effect,1.8711286785224164
+3688,brms posterior,Indirect effect,2.8901373410262403
+2024,brms posterior,Total effect,4.825873080407503
+2024,brms posterior,Controlled direct effect,2.0471382901401602
+2024,brms posterior,Indirect effect,2.778734790267343
+3329,brms posterior,Total effect,5.763207777864299
+3329,brms posterior,Controlled direct effect,2.3777444163021753
+3329,brms posterior,Indirect effect,3.3854633615621235
+148,brms posterior,Total effect,5.485712068916843
+148,brms posterior,Controlled direct effect,1.9083863539922956
+148,brms posterior,Indirect effect,3.5773257149245477
+2090,brms posterior,Total effect,6.452140837838847
+2090,brms posterior,Controlled direct effect,2.2992848732459867
+2090,brms posterior,Indirect effect,4.15285596459286
+1018,brms posterior,Total effect,6.656187103338387
+1018,brms posterior,Controlled direct effect,2.2410747541524505
+1018,brms posterior,Indirect effect,4.415112349185936
+572,brms posterior,Total effect,7.271362247101223
+572,brms posterior,Controlled direct effect,2.1595937950730457
+572,brms posterior,Indirect effect,5.111768452028177
+1944,brms posterior,Total effect,6.38447807814663
+1944,brms posterior,Controlled direct effect,2.288679850518506
+1944,brms posterior,Indirect effect,4.095798227628125
+2954,brms posterior,Total effect,5.011950467539078
+2954,brms posterior,Controlled direct effect,2.4641574347821726
+2954,brms posterior,Indirect effect,2.5477930327569056
+2721,brms posterior,Total effect,7.430264136118817
+2721,brms posterior,Controlled direct effect,2.1939900352346298
+2721,brms posterior,Indirect effect,5.236274100884187
+2338,brms posterior,Total effect,7.078026526337243
+2338,brms posterior,Controlled direct effect,1.6306203904038843
+2338,brms posterior,Indirect effect,5.447406135933358
+2592,brms posterior,Total effect,4.948097570548784
+2592,brms posterior,Controlled direct effect,1.8143776288969067
+2592,brms posterior,Indirect effect,3.1337199416518775
+3637,brms posterior,Total effect,6.7223276969698285
+3637,brms posterior,Controlled direct effect,2.2958884212587347
+3637,brms posterior,Indirect effect,4.426439275711093
+2820,brms posterior,Total effect,5.445589322700404
+2820,brms posterior,Controlled direct effect,2.4195382117844373
+2820,brms posterior,Indirect effect,3.026051110915967
+3024,brms posterior,Total effect,4.924389500585818
+3024,brms posterior,Controlled direct effect,2.4525781282776165
+3024,brms posterior,Indirect effect,2.4718113723082014
+3781,brms posterior,Total effect,6.526714896405677
+3781,brms posterior,Controlled direct effect,1.8920439012940724
+3781,brms posterior,Indirect effect,4.6346709951116045
+240,brms posterior,Total effect,6.148106749587753
+240,brms posterior,Controlled direct effect,2.129093687932216
+240,brms posterior,Indirect effect,4.019013061655537
+1232,brms posterior,Total effect,6.4285344645395774
+1232,brms posterior,Controlled direct effect,2.259776149266734
+1232,brms posterior,Indirect effect,4.168758315272843
+1429,brms posterior,Total effect,5.023535124318269
+1429,brms posterior,Controlled direct effect,2.3382228760417805
+1429,brms posterior,Indirect effect,2.685312248276489
+150,brms posterior,Total effect,5.917297557588216
+150,brms posterior,Controlled direct effect,1.6265509199158208
+150,brms posterior,Indirect effect,4.290746637672395
+3213,brms posterior,Total effect,4.929548226409482
+3213,brms posterior,Controlled direct effect,2.08753455130282
+3213,brms posterior,Indirect effect,2.842013675106662
+1681,brms posterior,Total effect,6.242794524070777
+1681,brms posterior,Controlled direct effect,1.7089893744909417
+1681,brms posterior,Indirect effect,4.533805149579836
+1198,brms posterior,Total effect,7.1872600212940565
+1198,brms posterior,Controlled direct effect,1.9958192582040235
+1198,brms posterior,Indirect effect,5.191440763090033
+3172,brms posterior,Total effect,4.448942917807019
+3172,brms posterior,Controlled direct effect,2.4067311800288027
+3172,brms posterior,Indirect effect,2.042211737778216
+1058,brms posterior,Total effect,5.382637122373855
+1058,brms posterior,Controlled direct effect,2.180489232375951
+1058,brms posterior,Indirect effect,3.202147889997904
+290,brms posterior,Total effect,6.659667934152404
+290,brms posterior,Controlled direct effect,2.067935501290232
+290,brms posterior,Indirect effect,4.591732432862172
+2375,brms posterior,Total effect,5.544392772580743
+2375,brms posterior,Controlled direct effect,2.141664239858015
+2375,brms posterior,Indirect effect,3.402728532722728
+507,brms posterior,Total effect,5.606005734805746
+507,brms posterior,Controlled direct effect,1.7237249470740301
+507,brms posterior,Indirect effect,3.8822807877317156
+3087,brms posterior,Total effect,5.1674236415113075
+3087,brms posterior,Controlled direct effect,1.8359713970925293
+3087,brms posterior,Indirect effect,3.331452244418778
+1102,brms posterior,Total effect,6.277766928894554
+1102,brms posterior,Controlled direct effect,1.7129344798084953
+1102,brms posterior,Indirect effect,4.564832449086058
+934,brms posterior,Total effect,6.675879518383375
+934,brms posterior,Controlled direct effect,1.7990571078146567
+934,brms posterior,Indirect effect,4.8768224105687175
+22,brms posterior,Total effect,5.385555087155287
+22,brms posterior,Controlled direct effect,1.450057326294274
+22,brms posterior,Indirect effect,3.9354977608610127
+1215,brms posterior,Total effect,5.538292325746314
+1215,brms posterior,Controlled direct effect,1.3384098892718597
+1215,brms posterior,Indirect effect,4.199882436474454
+3803,brms posterior,Total effect,6.207837072183676
+3803,brms posterior,Controlled direct effect,2.0613375597049948
+3803,brms posterior,Indirect effect,4.146499512478682
+2133,brms posterior,Total effect,6.209814395791783
+2133,brms posterior,Controlled direct effect,2.420515398342355
+2133,brms posterior,Indirect effect,3.789298997449428
+2744,brms posterior,Total effect,5.884961480884975
+2744,brms posterior,Controlled direct effect,2.243799503366448
+2744,brms posterior,Indirect effect,3.641161977518527
+2194,brms posterior,Total effect,5.192559377640066
+2194,brms posterior,Controlled direct effect,1.891279148292185
+2194,brms posterior,Indirect effect,3.3012802293478813
+1224,brms posterior,Total effect,5.574969166915448
+1224,brms posterior,Controlled direct effect,2.085446138689483
+1224,brms posterior,Indirect effect,3.489523028225965
+3292,brms posterior,Total effect,6.842959459284831
+3292,brms posterior,Controlled direct effect,1.940667312011262
+3292,brms posterior,Indirect effect,4.9022921472735685
+3626,brms posterior,Total effect,5.857352967505942
+3626,brms posterior,Controlled direct effect,2.4251568323281107
+3626,brms posterior,Indirect effect,3.432196135177831
+500,brms posterior,Total effect,4.822212308063509
+500,brms posterior,Controlled direct effect,1.7962117272631062
+500,brms posterior,Indirect effect,3.026000580800403
+38,brms posterior,Total effect,5.80132227931218
+38,brms posterior,Controlled direct effect,2.296923676168956
+38,brms posterior,Indirect effect,3.5043986031432244
+3393,brms posterior,Total effect,6.121072457774229
+3393,brms posterior,Controlled direct effect,1.9076103474421986
+3393,brms posterior,Indirect effect,4.21346211033203
+366,brms posterior,Total effect,4.512086285985459
+366,brms posterior,Controlled direct effect,1.5799631489185368
+366,brms posterior,Indirect effect,2.9321231370669225
+2288,brms posterior,Total effect,6.520552847003244
+2288,brms posterior,Controlled direct effect,2.005288730043733
+2288,brms posterior,Indirect effect,4.515264116959511
+135,brms posterior,Total effect,5.086606011009194
+135,brms posterior,Controlled direct effect,1.7770588224898787
+135,brms posterior,Indirect effect,3.3095471885193155
+2866,brms posterior,Total effect,4.810527836016347
+2866,brms posterior,Controlled direct effect,1.4483999656709237
+2866,brms posterior,Indirect effect,3.3621278703454234
+3519,brms posterior,Total effect,6.41776003821735
+3519,brms posterior,Controlled direct effect,1.8495825287476326
+3519,brms posterior,Indirect effect,4.568177509469717
+1455,brms posterior,Total effect,4.488698540697676
+1455,brms posterior,Controlled direct effect,1.2576080149992774
+1455,brms posterior,Indirect effect,3.2310905256983986
+3933,brms posterior,Total effect,7.496514065054322
+3933,brms posterior,Controlled direct effect,2.449066868571907
+3933,brms posterior,Indirect effect,5.047447196482415
+3335,brms posterior,Total effect,7.164769349416288
+3335,brms posterior,Controlled direct effect,2.0489479650368576
+3335,brms posterior,Indirect effect,5.11582138437943
+178,brms posterior,Total effect,7.013344945912662
+178,brms posterior,Controlled direct effect,2.467285178366189
+178,brms posterior,Indirect effect,4.546059767546473
+3787,brms posterior,Total effect,6.003893858470916
+3787,brms posterior,Controlled direct effect,2.5148067971283248
+3787,brms posterior,Indirect effect,3.4890870613425915
+1524,brms posterior,Total effect,5.572684391335324
+1524,brms posterior,Controlled direct effect,2.1133861351028
+1524,brms posterior,Indirect effect,3.459298256232524
+1138,brms posterior,Total effect,6.478874695899242
+1138,brms posterior,Controlled direct effect,1.8188460496814716
+1138,brms posterior,Indirect effect,4.66002864621777
+2910,brms posterior,Total effect,5.914845182382778
+2910,brms posterior,Controlled direct effect,2.0264257280662763
+2910,brms posterior,Indirect effect,3.8884194543165016
+2476,brms posterior,Total effect,7.721576722631442
+2476,brms posterior,Controlled direct effect,2.3703470257190786
+2476,brms posterior,Indirect effect,5.3512296969123625
+599,brms posterior,Total effect,5.132429082534028
+599,brms posterior,Controlled direct effect,2.060661097407805
+599,brms posterior,Indirect effect,3.0717679851262227
+2257,brms posterior,Total effect,5.459071703856109
+2257,brms posterior,Controlled direct effect,2.0994784125788053
+2257,brms posterior,Indirect effect,3.359593291277304
+1965,brms posterior,Total effect,6.940556019727801
+1965,brms posterior,Controlled direct effect,1.7935936762928266
+1965,brms posterior,Indirect effect,5.146962343434974
+1868,brms posterior,Total effect,6.932991045823525
+1868,brms posterior,Controlled direct effect,1.64448352140935
+1868,brms posterior,Indirect effect,5.288507524414175
+1750,brms posterior,Total effect,5.416083239245456
+1750,brms posterior,Controlled direct effect,2.3389507041224213
+1750,brms posterior,Indirect effect,3.0771325351230345
+2144,brms posterior,Total effect,7.11680834562071
+2144,brms posterior,Controlled direct effect,2.2237661470728547
+2144,brms posterior,Indirect effect,4.893042198547855
+2648,brms posterior,Total effect,5.398616501508472
+2648,brms posterior,Controlled direct effect,2.1103318062390795
+2648,brms posterior,Indirect effect,3.2882846952693923
+1858,brms posterior,Total effect,6.433619429118561
+1858,brms posterior,Controlled direct effect,1.9706444233049756
+1858,brms posterior,Indirect effect,4.462975005813586
+621,brms posterior,Total effect,5.871519201617432
+621,brms posterior,Controlled direct effect,2.5086941043653734
+621,brms posterior,Indirect effect,3.362825097252059
+1417,brms posterior,Total effect,5.693921624984444
+1417,brms posterior,Controlled direct effect,1.5967852727185288
+1417,brms posterior,Indirect effect,4.097136352265915
+2322,brms posterior,Total effect,5.328779745775033
+2322,brms posterior,Controlled direct effect,2.1305507026437285
+2322,brms posterior,Indirect effect,3.1982290431313043
+2051,brms posterior,Total effect,6.357832925355452
+2051,brms posterior,Controlled direct effect,1.837332701025887
+2051,brms posterior,Indirect effect,4.520500224329565
+1002,brms posterior,Total effect,5.445841488667079
+1002,brms posterior,Controlled direct effect,1.9052112970079245
+1002,brms posterior,Indirect effect,3.5406301916591545
+815,brms posterior,Total effect,5.037826922994247
+815,brms posterior,Controlled direct effect,1.6327345533413882
+815,brms posterior,Indirect effect,3.405092369652859
+652,brms posterior,Total effect,5.890383007794091
+652,brms posterior,Controlled direct effect,2.3224423887813668
+652,brms posterior,Indirect effect,3.567940619012724
+2955,brms posterior,Total effect,5.900926155771417
+2955,brms posterior,Controlled direct effect,2.0234211532698048
+2955,brms posterior,Indirect effect,3.8775050025016125
+2273,brms posterior,Total effect,6.098623076096634
+2273,brms posterior,Controlled direct effect,2.101679242582126
+2273,brms posterior,Indirect effect,3.996943833514508
+1861,brms posterior,Total effect,5.276790963367375
+1861,brms posterior,Controlled direct effect,1.9566463611250982
+1861,brms posterior,Indirect effect,3.3201446022422774
+3877,brms posterior,Total effect,6.7040762805014324
+3877,brms posterior,Controlled direct effect,2.8117385604642
+3877,brms posterior,Indirect effect,3.8923377200372324
+1597,brms posterior,Total effect,4.862861134742426
+1597,brms posterior,Controlled direct effect,2.410629183503227
+1597,brms posterior,Indirect effect,2.452231951239199
+445,brms posterior,Total effect,6.8273056084451476
+445,brms posterior,Controlled direct effect,2.201140979301734
+445,brms posterior,Indirect effect,4.626164629143414
+440,brms posterior,Total effect,5.343531286038571
+440,brms posterior,Controlled direct effect,1.4240671455033396
+440,brms posterior,Indirect effect,3.9194641405352315
+1787,brms posterior,Total effect,5.89424305534196
+1787,brms posterior,Controlled direct effect,2.4381915843225412
+1787,brms posterior,Indirect effect,3.4560514710194186
+2828,brms posterior,Total effect,5.797494826826135
+2828,brms posterior,Controlled direct effect,2.6152516501091174
+2828,brms posterior,Indirect effect,3.1822431767170176
+2998,brms posterior,Total effect,8.299821359590617
+2998,brms posterior,Controlled direct effect,1.7362018178666876
+2998,brms posterior,Indirect effect,6.563619541723929
+235,brms posterior,Total effect,4.406785942086475
+235,brms posterior,Controlled direct effect,2.0323870969060547
+235,brms posterior,Indirect effect,2.37439884518042
+1920,brms posterior,Total effect,6.181820270078134
+1920,brms posterior,Controlled direct effect,2.327722318015357
+1920,brms posterior,Indirect effect,3.8540979520627774
+3956,brms posterior,Total effect,6.789947286571377
+3956,brms posterior,Controlled direct effect,2.475925829405801
+3956,brms posterior,Indirect effect,4.314021457165576
+93,brms posterior,Total effect,6.141590895885173
+93,brms posterior,Controlled direct effect,1.9914773478614554
+93,brms posterior,Indirect effect,4.150113548023718
+3648,brms posterior,Total effect,5.042955989043751
+3648,brms posterior,Controlled direct effect,1.9409144110612726
+3648,brms posterior,Indirect effect,3.1020415779824786
+596,brms posterior,Total effect,5.835669286893881
+596,brms posterior,Controlled direct effect,1.7162946398295795
+596,brms posterior,Indirect effect,4.119374647064301
+2168,brms posterior,Total effect,6.62171978962162
+2168,brms posterior,Controlled direct effect,2.1318875266248942
+2168,brms posterior,Indirect effect,4.489832262996726
+315,brms posterior,Total effect,5.465383398954307
+315,brms posterior,Controlled direct effect,2.2583095333941685
+315,brms posterior,Indirect effect,3.2070738655601385
+3377,brms posterior,Total effect,7.847398254940742
+3377,brms posterior,Controlled direct effect,2.2897033835935465
+3377,brms posterior,Indirect effect,5.557694871347196
+1206,brms posterior,Total effect,5.670602695810004
+1206,brms posterior,Controlled direct effect,1.3201720237119274
+1206,brms posterior,Indirect effect,4.350430672098076
+1319,brms posterior,Total effect,7.393502301767482
+1319,brms posterior,Controlled direct effect,2.369327359124741
+1319,brms posterior,Indirect effect,5.024174942642741
+2839,brms posterior,Total effect,6.073973193217264
+2839,brms posterior,Controlled direct effect,2.4933221924087556
+2839,brms posterior,Indirect effect,3.5806510008085084
+2646,brms posterior,Total effect,6.540212998786103
+2646,brms posterior,Controlled direct effect,2.0620596223329466
+2646,brms posterior,Indirect effect,4.4781533764531565
+1604,brms posterior,Total effect,5.947892354698562
+1604,brms posterior,Controlled direct effect,1.8175611728744117
+1604,brms posterior,Indirect effect,4.13033118182415
+3059,brms posterior,Total effect,5.349135516297178
+3059,brms posterior,Controlled direct effect,1.9987097773860791
+3059,brms posterior,Indirect effect,3.350425738911099
+3559,brms posterior,Total effect,4.810070686390775
+3559,brms posterior,Controlled direct effect,2.355474975264931
+3559,brms posterior,Indirect effect,2.454595711125844
+698,brms posterior,Total effect,5.762478492066272
+698,brms posterior,Controlled direct effect,2.2292934387286314
+698,brms posterior,Indirect effect,3.5331850533376405
+3297,brms posterior,Total effect,5.206989339643979
+3297,brms posterior,Controlled direct effect,2.2572031628460296
+3297,brms posterior,Indirect effect,2.949786176797949
+1246,brms posterior,Total effect,6.097698884670552
+1246,brms posterior,Controlled direct effect,1.7573409280883818
+1246,brms posterior,Indirect effect,4.340357956582171
+2201,brms posterior,Total effect,7.319377692407213
+2201,brms posterior,Controlled direct effect,2.418512156241896
+2201,brms posterior,Indirect effect,4.900865536165316
+3010,brms posterior,Total effect,5.194528961225317
+3010,brms posterior,Controlled direct effect,1.5324458505358822
+3010,brms posterior,Indirect effect,3.662083110689435
+183,brms posterior,Total effect,6.430142414592031
+183,brms posterior,Controlled direct effect,2.254172332903048
+183,brms posterior,Indirect effect,4.175970081688983
+2659,brms posterior,Total effect,6.158766130905295
+2659,brms posterior,Controlled direct effect,1.797064476939462
+2659,brms posterior,Indirect effect,4.361701653965833
+2002,brms posterior,Total effect,4.045310551230263
+2002,brms posterior,Controlled direct effect,1.958555884312916
+2002,brms posterior,Indirect effect,2.086754666917347
+3337,brms posterior,Total effect,5.7788987217030225
+3337,brms posterior,Controlled direct effect,2.4076633263429916
+3337,brms posterior,Indirect effect,3.371235395360031
+1707,brms posterior,Total effect,4.967546402498797
+1707,brms posterior,Controlled direct effect,2.302141546489353
+1707,brms posterior,Indirect effect,2.6654048560094443
+1915,brms posterior,Total effect,5.874523948773535
+1915,brms posterior,Controlled direct effect,1.975270075485061
+1915,brms posterior,Indirect effect,3.8992538732884743
+2935,brms posterior,Total effect,5.268346633772927
+2935,brms posterior,Controlled direct effect,2.0663742877186047
+2935,brms posterior,Indirect effect,3.201972346054322
+2616,brms posterior,Total effect,6.178933979048536
+2616,brms posterior,Controlled direct effect,2.0883146173438054
+2616,brms posterior,Indirect effect,4.09061936170473
+3422,brms posterior,Total effect,4.892126215361258
+3422,brms posterior,Controlled direct effect,1.7322269341499017
+3422,brms posterior,Indirect effect,3.159899281211356
+3009,brms posterior,Total effect,5.606332641061998
+3009,brms posterior,Controlled direct effect,2.1494110422927415
+3009,brms posterior,Indirect effect,3.4569215987692568
+1630,brms posterior,Total effect,6.405441439666081
+1630,brms posterior,Controlled direct effect,2.0139778740879075
+1630,brms posterior,Indirect effect,4.3914635655781735
+221,brms posterior,Total effect,5.67809963772086
+221,brms posterior,Controlled direct effect,2.094213812127499
+221,brms posterior,Indirect effect,3.5838858255933608
+1734,brms posterior,Total effect,6.07345466927036
+1734,brms posterior,Controlled direct effect,2.2197970729636074
+1734,brms posterior,Indirect effect,3.8536575963067525
+1042,brms posterior,Total effect,6.169150538775039
+1042,brms posterior,Controlled direct effect,2.063591913005445
+1042,brms posterior,Indirect effect,4.105558625769594
+1039,brms posterior,Total effect,5.881116889529792
+1039,brms posterior,Controlled direct effect,2.395387448836342
+1039,brms posterior,Indirect effect,3.48572944069345
+1090,brms posterior,Total effect,5.428709644245452
+1090,brms posterior,Controlled direct effect,1.9156889113133455
+1090,brms posterior,Indirect effect,3.5130207329321066
+3015,brms posterior,Total effect,6.8180398555544475
+3015,brms posterior,Controlled direct effect,1.9976841338043774
+3015,brms posterior,Indirect effect,4.8203557217500705
+3102,brms posterior,Total effect,7.024732460800096
+3102,brms posterior,Controlled direct effect,1.9558860978856165
+3102,brms posterior,Indirect effect,5.0688463629144795
+1954,brms posterior,Total effect,5.816875834473505
+1954,brms posterior,Controlled direct effect,1.990300558222477
+1954,brms posterior,Indirect effect,3.826575276251028
+2437,brms posterior,Total effect,5.897352912635012
+2437,brms posterior,Controlled direct effect,2.026953158266351
+2437,brms posterior,Indirect effect,3.870399754368661
+3412,brms posterior,Total effect,5.662368829620322
+3412,brms posterior,Controlled direct effect,2.0129670413535776
+3412,brms posterior,Indirect effect,3.649401788266744
+2709,brms posterior,Total effect,5.771616700014369
+2709,brms posterior,Controlled direct effect,1.8423763536617552
+2709,brms posterior,Indirect effect,3.9292403463526138
+2595,brms posterior,Total effect,5.525644054146653
+2595,brms posterior,Controlled direct effect,2.0125070270837586
+2595,brms posterior,Indirect effect,3.5131370270628945
+2852,brms posterior,Total effect,6.155451779394056
+2852,brms posterior,Controlled direct effect,2.4460305973621606
+2852,brms posterior,Indirect effect,3.7094211820318956
+3179,brms posterior,Total effect,5.506990858922118
+3179,brms posterior,Controlled direct effect,1.204012429887504
+3179,brms posterior,Indirect effect,4.3029784290346145
+3750,brms posterior,Total effect,6.3255664826918165
+3750,brms posterior,Controlled direct effect,1.5223417381045774
+3750,brms posterior,Indirect effect,4.803224744587239
+2017,brms posterior,Total effect,4.465825412434089
+2017,brms posterior,Controlled direct effect,2.2735169092092784
+2017,brms posterior,Indirect effect,2.192308503224811
+3363,brms posterior,Total effect,7.233340415125134
+3363,brms posterior,Controlled direct effect,2.261025843193088
+3363,brms posterior,Indirect effect,4.9723145719320465
+3532,brms posterior,Total effect,5.791601993266106
+3532,brms posterior,Controlled direct effect,2.1099329183107196
+3532,brms posterior,Indirect effect,3.681669074955386
+1621,brms posterior,Total effect,5.617329105258899
+1621,brms posterior,Controlled direct effect,1.8941651684260719
+1621,brms posterior,Indirect effect,3.7231639368328273
+811,brms posterior,Total effect,5.239715394062757
+811,brms posterior,Controlled direct effect,2.4338713362434747
+811,brms posterior,Indirect effect,2.8058440578192823
+1188,brms posterior,Total effect,6.183783526187523
+1188,brms posterior,Controlled direct effect,1.9922273128234962
+1188,brms posterior,Indirect effect,4.191556213364027
+2461,brms posterior,Total effect,4.995521072163431
+2461,brms posterior,Controlled direct effect,2.267094752915299
+2461,brms posterior,Indirect effect,2.7284263192481317
+3865,brms posterior,Total effect,4.0066328500202255
+3865,brms posterior,Controlled direct effect,1.8736918139541625
+3865,brms posterior,Indirect effect,2.132941036066063
+294,brms posterior,Total effect,5.70737443727578
+294,brms posterior,Controlled direct effect,2.248667376143427
+294,brms posterior,Indirect effect,3.458707061132353
+3230,brms posterior,Total effect,5.77100151395161
+3230,brms posterior,Controlled direct effect,1.786734781718759
+3230,brms posterior,Indirect effect,3.984266732232851
+3252,brms posterior,Total effect,5.904151353206081
+3252,brms posterior,Controlled direct effect,2.1074453298055387
+3252,brms posterior,Indirect effect,3.7967060234005423
+1180,brms posterior,Total effect,4.650663050383706
+1180,brms posterior,Controlled direct effect,2.062935028190587
+1180,brms posterior,Indirect effect,2.5877280221931187
+1027,brms posterior,Total effect,6.345084951680795
+1027,brms posterior,Controlled direct effect,2.1385649838402045
+1027,brms posterior,Indirect effect,4.20651996784059
+3128,brms posterior,Total effect,7.278925666238658
+3128,brms posterior,Controlled direct effect,1.758358133536344
+3128,brms posterior,Indirect effect,5.520567532702314
+714,brms posterior,Total effect,4.726696007963979
+714,brms posterior,Controlled direct effect,2.1513215643158765
+714,brms posterior,Indirect effect,2.5753744436481028
+3508,brms posterior,Total effect,6.074070295866767
+3508,brms posterior,Controlled direct effect,1.9874698251219325
+3508,brms posterior,Indirect effect,4.086600470744835
+3441,brms posterior,Total effect,6.288405842427617
+3441,brms posterior,Controlled direct effect,1.914297338067961
+3441,brms posterior,Indirect effect,4.374108504359656
+206,brms posterior,Total effect,4.119817889910532
+206,brms posterior,Controlled direct effect,2.0443791564016243
+206,brms posterior,Indirect effect,2.075438733508908
+520,brms posterior,Total effect,6.052179929741744
+520,brms posterior,Controlled direct effect,2.27273296487669
+520,brms posterior,Indirect effect,3.7794469648650537
+2774,brms posterior,Total effect,6.448540433197592
+2774,brms posterior,Controlled direct effect,2.172957768026446
+2774,brms posterior,Indirect effect,4.275582665171147
+2892,brms posterior,Total effect,4.514957093487481
+2892,brms posterior,Controlled direct effect,1.7638774827525219
+2892,brms posterior,Indirect effect,2.751079610734959
+2985,brms posterior,Total effect,6.290738083177089
+2985,brms posterior,Controlled direct effect,1.6682851277937707
+2985,brms posterior,Indirect effect,4.622452955383318
+2072,brms posterior,Total effect,5.609547316681756
+2072,brms posterior,Controlled direct effect,1.440176152742605
+2072,brms posterior,Indirect effect,4.169371163939152
+2488,brms posterior,Total effect,5.520368284731733
+2488,brms posterior,Controlled direct effect,1.840385642785495
+2488,brms posterior,Indirect effect,3.679982641946238
+344,brms posterior,Total effect,6.255553496674598
+344,brms posterior,Controlled direct effect,2.0381600652128316
+344,brms posterior,Indirect effect,4.217393431461767
+3402,brms posterior,Total effect,4.9469551360016615
+3402,brms posterior,Controlled direct effect,1.8409065915599854
+3402,brms posterior,Indirect effect,3.106048544441676
+693,brms posterior,Total effect,7.657608755328679
+693,brms posterior,Controlled direct effect,2.706097098459822
+693,brms posterior,Indirect effect,4.951511656868858
+2317,brms posterior,Total effect,6.220829402677532
+2317,brms posterior,Controlled direct effect,2.1035599189143115
+2317,brms posterior,Indirect effect,4.117269483763221
+3542,brms posterior,Total effect,6.56732589401994
+3542,brms posterior,Controlled direct effect,2.3156459961281413
+3542,brms posterior,Indirect effect,4.251679897891799
+125,brms posterior,Total effect,5.013024199112204
+125,brms posterior,Controlled direct effect,2.238506612473749
+125,brms posterior,Indirect effect,2.7745175866384546
+2058,brms posterior,Total effect,5.150075324733228
+2058,brms posterior,Controlled direct effect,1.9909551971738388
+2058,brms posterior,Indirect effect,3.1591201275593894
+1813,brms posterior,Total effect,5.898057288953702
+1813,brms posterior,Controlled direct effect,1.9904080425448436
+1813,brms posterior,Indirect effect,3.907649246408859
+3147,brms posterior,Total effect,5.7177294346856264
+3147,brms posterior,Controlled direct effect,2.459408799716549
+3147,brms posterior,Indirect effect,3.2583206349690776
+1222,brms posterior,Total effect,6.12187248422381
+1222,brms posterior,Controlled direct effect,1.7553449163242538
+1222,brms posterior,Indirect effect,4.366527567899556
+117,brms posterior,Total effect,7.362668872326237
+117,brms posterior,Controlled direct effect,1.969522562836043
+117,brms posterior,Indirect effect,5.393146309490194
+3099,brms posterior,Total effect,6.8628287917746364
+3099,brms posterior,Controlled direct effect,2.3847378780717245
+3099,brms posterior,Indirect effect,4.478090913702912
+1755,brms posterior,Total effect,6.213733202904251
+1755,brms posterior,Controlled direct effect,2.221692804781636
+1755,brms posterior,Indirect effect,3.992040398122615
+1977,brms posterior,Total effect,6.877218631612603
+1977,brms posterior,Controlled direct effect,1.6453310932577394
+1977,brms posterior,Indirect effect,5.231887538354863
+491,brms posterior,Total effect,7.157664914152614
+491,brms posterior,Controlled direct effect,2.7269966343805128
+491,brms posterior,Indirect effect,4.430668279772101
+1606,brms posterior,Total effect,6.298532617260296
+1606,brms posterior,Controlled direct effect,2.037916435861429
+1606,brms posterior,Indirect effect,4.260616181398867
+2750,brms posterior,Total effect,5.944477731322363
+2750,brms posterior,Controlled direct effect,2.260091870907698
+2750,brms posterior,Indirect effect,3.6843858604146646
+2927,brms posterior,Total effect,6.007366608150384
+2927,brms posterior,Controlled direct effect,1.5738223358692514
+2927,brms posterior,Indirect effect,4.433544272281132
+429,brms posterior,Total effect,4.921007566036472
+429,brms posterior,Controlled direct effect,2.1887337498189616
+429,brms posterior,Indirect effect,2.7322738162175106
+3106,brms posterior,Total effect,6.4861195659178605
+3106,brms posterior,Controlled direct effect,2.7932147466742796
+3106,brms posterior,Indirect effect,3.692904819243581
+1684,brms posterior,Total effect,5.71220899094379
+1684,brms posterior,Controlled direct effect,2.202363562516153
+1684,brms posterior,Indirect effect,3.509845428427637
+1616,brms posterior,Total effect,7.032696777863126
+1616,brms posterior,Controlled direct effect,1.8905103508065508
+1616,brms posterior,Indirect effect,5.142186427056576
+2654,brms posterior,Total effect,5.304751713507126
+2654,brms posterior,Controlled direct effect,2.307346759392913
+2654,brms posterior,Indirect effect,2.997404954114213
+3424,brms posterior,Total effect,6.179855349299715
+3424,brms posterior,Controlled direct effect,2.1515205163419155
+3424,brms posterior,Indirect effect,4.0283348329578
+3741,brms posterior,Total effect,6.558498165346444
+3741,brms posterior,Controlled direct effect,1.819472510185995
+3741,brms posterior,Indirect effect,4.739025655160449
+422,brms posterior,Total effect,7.120671034569215
+422,brms posterior,Controlled direct effect,2.1087243525292236
+422,brms posterior,Indirect effect,5.011946682039991
+1876,brms posterior,Total effect,5.542493242362088
+1876,brms posterior,Controlled direct effect,2.5708858573171964
+1876,brms posterior,Indirect effect,2.9716073850448916
+3293,brms posterior,Total effect,6.243713601966249
+3293,brms posterior,Controlled direct effect,2.056629572213577
+3293,brms posterior,Indirect effect,4.187084029752672
+1627,brms posterior,Total effect,4.65429404631282
+1627,brms posterior,Controlled direct effect,1.6467717202023213
+1627,brms posterior,Indirect effect,3.0075223261104993
+2048,brms posterior,Total effect,6.270083955776226
+2048,brms posterior,Controlled direct effect,2.2344203123604536
+2048,brms posterior,Indirect effect,4.035663643415772
+2748,brms posterior,Total effect,5.115370801065416
+2748,brms posterior,Controlled direct effect,2.4652100852508463
+2748,brms posterior,Indirect effect,2.65016071581457
+383,brms posterior,Total effect,5.476187898215898
+383,brms posterior,Controlled direct effect,2.125495271993173
+383,brms posterior,Indirect effect,3.350692626222725
+293,brms posterior,Total effect,5.205104499837509
+293,brms posterior,Controlled direct effect,1.7014738905075624
+293,brms posterior,Indirect effect,3.5036306093299463
+1849,brms posterior,Total effect,6.32554377117293
+1849,brms posterior,Controlled direct effect,1.7781134428450511
+1849,brms posterior,Indirect effect,4.547430328327879
+3396,brms posterior,Total effect,6.75443671678358
+3396,brms posterior,Controlled direct effect,2.184693166194617
+3396,brms posterior,Indirect effect,4.569743550588964
+874,brms posterior,Total effect,5.020212508510273
+874,brms posterior,Controlled direct effect,2.1063099301390054
+874,brms posterior,Indirect effect,2.9139025783712675
+3990,brms posterior,Total effect,6.336851094592933
+3990,brms posterior,Controlled direct effect,2.323086216892234
+3990,brms posterior,Indirect effect,4.013764877700699
+1966,brms posterior,Total effect,7.43717578310371
+1966,brms posterior,Controlled direct effect,1.8879011720866599
+1966,brms posterior,Indirect effect,5.54927461101705
+3614,brms posterior,Total effect,4.636212993743524
+3614,brms posterior,Controlled direct effect,2.132196570328805
+3614,brms posterior,Indirect effect,2.5040164234147193
+3752,brms posterior,Total effect,6.110802624591144
+3752,brms posterior,Controlled direct effect,1.9368662601219322
+3752,brms posterior,Indirect effect,4.173936364469212
+1189,brms posterior,Total effect,5.027128624244133
+1189,brms posterior,Controlled direct effect,2.205447643194203
+1189,brms posterior,Indirect effect,2.82168098104993
+1056,brms posterior,Total effect,5.089984399332547
+1056,brms posterior,Controlled direct effect,2.566861706300324
+1056,brms posterior,Indirect effect,2.523122693032223
+557,brms posterior,Total effect,5.6206790349312445
+557,brms posterior,Controlled direct effect,2.4324683125134965
+557,brms posterior,Indirect effect,3.188210722417748
+1486,brms posterior,Total effect,5.490421768949395
+1486,brms posterior,Controlled direct effect,2.306533478369257
+1486,brms posterior,Indirect effect,3.1838882905801382
+3091,brms posterior,Total effect,5.057234848442703
+3091,brms posterior,Controlled direct effect,1.9275501456844097
+3091,brms posterior,Indirect effect,3.1296847027582935
+1339,brms posterior,Total effect,7.368250412136515
+1339,brms posterior,Controlled direct effect,1.963740289944969
+1339,brms posterior,Indirect effect,5.404510122191546
+1371,brms posterior,Total effect,7.053055198296402
+1371,brms posterior,Controlled direct effect,1.61517469850151
+1371,brms posterior,Indirect effect,5.4378804997948915
+2047,brms posterior,Total effect,5.065434411248112
+2047,brms posterior,Controlled direct effect,1.8404265445575636
+2047,brms posterior,Indirect effect,3.2250078666905484
+583,brms posterior,Total effect,5.541639463802859
+583,brms posterior,Controlled direct effect,2.021372567371668
+583,brms posterior,Indirect effect,3.5202668964311914
+409,brms posterior,Total effect,5.703805839953689
+409,brms posterior,Controlled direct effect,2.117565267362329
+409,brms posterior,Indirect effect,3.5862405725913598
+1382,brms posterior,Total effect,5.386541464011365
+1382,brms posterior,Controlled direct effect,1.5040772973764032
+1382,brms posterior,Indirect effect,3.8824641666349615
+2567,brms posterior,Total effect,6.530876410432437
+2567,brms posterior,Controlled direct effect,1.7213648512506512
+2567,brms posterior,Indirect effect,4.809511559181786
+1891,brms posterior,Total effect,6.420900131692855
+1891,brms posterior,Controlled direct effect,2.3258774241033393
+1891,brms posterior,Indirect effect,4.095022707589516
+2570,brms posterior,Total effect,6.072070578506101
+2570,brms posterior,Controlled direct effect,1.8047140908031838
+2570,brms posterior,Indirect effect,4.2673564877029175
+2011,brms posterior,Total effect,5.998504070911871
+2011,brms posterior,Controlled direct effect,1.654829391707879
+2011,brms posterior,Indirect effect,4.343674679203992
+165,brms posterior,Total effect,5.83719607210724
+165,brms posterior,Controlled direct effect,2.232831894653413
+165,brms posterior,Indirect effect,3.6043641774538266
+3397,brms posterior,Total effect,6.469081707830964
+3397,brms posterior,Controlled direct effect,2.239875681481932
+3397,brms posterior,Indirect effect,4.229206026349032
+3399,brms posterior,Total effect,7.241574114416672
+3399,brms posterior,Controlled direct effect,2.082361743966602
+3399,brms posterior,Indirect effect,5.15921237045007
+186,brms posterior,Total effect,7.455113794577898
+186,brms posterior,Controlled direct effect,2.349542658379619
+186,brms posterior,Indirect effect,5.105571136198279
+1379,brms posterior,Total effect,5.593946209570359
+1379,brms posterior,Controlled direct effect,2.1702624792700886
+1379,brms posterior,Indirect effect,3.4236837303002705
+1974,brms posterior,Total effect,4.2143262660081335
+1974,brms posterior,Controlled direct effect,2.3760418892339414
+1974,brms posterior,Indirect effect,1.838284376774192
+180,brms posterior,Total effect,5.585787923639401
+180,brms posterior,Controlled direct effect,1.769875325167101
+180,brms posterior,Indirect effect,3.8159125984723
+3440,brms posterior,Total effect,4.738850753634734
+3440,brms posterior,Controlled direct effect,2.152166095748741
+3440,brms posterior,Indirect effect,2.5866846578859932
+3935,brms posterior,Total effect,4.029786678712121
+3935,brms posterior,Controlled direct effect,1.7354721234268051
+3935,brms posterior,Indirect effect,2.2943145552853155
+2161,brms posterior,Total effect,6.466198611620964
+2161,brms posterior,Controlled direct effect,2.1467825577611706
+2161,brms posterior,Indirect effect,4.319416053859793
+3436,brms posterior,Total effect,5.069074896713767
+3436,brms posterior,Controlled direct effect,1.887873843801047
+3436,brms posterior,Indirect effect,3.18120105291272
+1528,brms posterior,Total effect,6.052728186191784
+1528,brms posterior,Controlled direct effect,2.3538643058075404
+1528,brms posterior,Indirect effect,3.6988638803842435
+2604,brms posterior,Total effect,5.632533149234508
+2604,brms posterior,Controlled direct effect,2.2859999845156906
+2604,brms posterior,Indirect effect,3.3465331647188172
+3134,brms posterior,Total effect,5.2216455865508316
+3134,brms posterior,Controlled direct effect,2.365351215490721
+3134,brms posterior,Indirect effect,2.8562943710601107
+2893,brms posterior,Total effect,5.74712511882412
+2893,brms posterior,Controlled direct effect,2.131784161206502
+2893,brms posterior,Indirect effect,3.615340957617618
+3398,brms posterior,Total effect,6.037568760105098
+3398,brms posterior,Controlled direct effect,2.138379453608861
+3398,brms posterior,Indirect effect,3.899189306496237
+2412,brms posterior,Total effect,7.077042197131223
+2412,brms posterior,Controlled direct effect,2.48240440952047
+2412,brms posterior,Indirect effect,4.594637787610753
+1223,brms posterior,Total effect,4.793288803328257
+1223,brms posterior,Controlled direct effect,2.092923643444586
+1223,brms posterior,Indirect effect,2.700365159883671
+303,brms posterior,Total effect,6.007047734524356
+303,brms posterior,Controlled direct effect,2.0854220766257283
+303,brms posterior,Indirect effect,3.9216256578986277
+2020,brms posterior,Total effect,6.360483195732953
+2020,brms posterior,Controlled direct effect,2.3221321961848855
+2020,brms posterior,Indirect effect,4.038350999548067
+2913,brms posterior,Total effect,5.144331250912277
+2913,brms posterior,Controlled direct effect,2.6404546692084914
+2913,brms posterior,Indirect effect,2.5038765817037856
+3119,brms posterior,Total effect,5.724104054188396
+3119,brms posterior,Controlled direct effect,2.3187388914714093
+3119,brms posterior,Indirect effect,3.4053651627169863
+3521,brms posterior,Total effect,5.9205236065727345
+3521,brms posterior,Controlled direct effect,1.9784423125374189
+3521,brms posterior,Indirect effect,3.9420812940353156
+1335,brms posterior,Total effect,5.2161316624588565
+1335,brms posterior,Controlled direct effect,1.920552328758571
+1335,brms posterior,Indirect effect,3.295579333700285
+2780,brms posterior,Total effect,4.629176757936401
+2780,brms posterior,Controlled direct effect,2.277727447798146
+2780,brms posterior,Indirect effect,2.3514493101382548
+1945,brms posterior,Total effect,5.7972984471955975
+1945,brms posterior,Controlled direct effect,2.288907593989924
+1945,brms posterior,Indirect effect,3.5083908532056736
+3490,brms posterior,Total effect,6.69521012956848
+3490,brms posterior,Controlled direct effect,2.202719635262227
+3490,brms posterior,Indirect effect,4.492490494306253
+683,brms posterior,Total effect,5.56730806635184
+683,brms posterior,Controlled direct effect,2.304965519880124
+683,brms posterior,Indirect effect,3.262342546471716
+1185,brms posterior,Total effect,5.637041308031232
+1185,brms posterior,Controlled direct effect,2.380860334731846
+1185,brms posterior,Indirect effect,3.2561809732993856
+2726,brms posterior,Total effect,4.551887998064832
+2726,brms posterior,Controlled direct effect,2.1375633312814837
+2726,brms posterior,Indirect effect,2.4143246667833487
+3248,brms posterior,Total effect,6.29301232293722
+3248,brms posterior,Controlled direct effect,2.134658441910791
+3248,brms posterior,Indirect effect,4.158353881026429
+788,brms posterior,Total effect,7.332610603027268
+788,brms posterior,Controlled direct effect,2.7387658661712515
+788,brms posterior,Indirect effect,4.593844736856017
+785,brms posterior,Total effect,6.592942752067994
+785,brms posterior,Controlled direct effect,2.1155361478936605
+785,brms posterior,Indirect effect,4.477406604174334
+1372,brms posterior,Total effect,6.3655086188130365
+1372,brms posterior,Controlled direct effect,2.1798670710625014
+1372,brms posterior,Indirect effect,4.185641547750535
+3999,brms posterior,Total effect,7.005267818198306
+3999,brms posterior,Controlled direct effect,2.1737153468939394
+3999,brms posterior,Indirect effect,4.8315524713043665
+1968,brms posterior,Total effect,6.3874920378304525
+1968,brms posterior,Controlled direct effect,2.0885170575951246
+1968,brms posterior,Indirect effect,4.298974980235328
+1341,brms posterior,Total effect,5.34898509203941
+1341,brms posterior,Controlled direct effect,2.219216132429752
+1341,brms posterior,Indirect effect,3.129768959609658
+3969,brms posterior,Total effect,6.796441993657675
+3969,brms posterior,Controlled direct effect,2.023934487113752
+3969,brms posterior,Indirect effect,4.772507506543922
+1160,brms posterior,Total effect,5.600708595572189
+1160,brms posterior,Controlled direct effect,1.8809912799973323
+1160,brms posterior,Indirect effect,3.7197173155748566
+1948,brms posterior,Total effect,7.030145148810275
+1948,brms posterior,Controlled direct effect,1.9761244915437728
+1948,brms posterior,Indirect effect,5.054020657266502
+3597,brms posterior,Total effect,4.44158488317269
+3597,brms posterior,Controlled direct effect,1.679195409920896
+3597,brms posterior,Indirect effect,2.762389473251794
+2872,brms posterior,Total effect,5.528952387742406
+2872,brms posterior,Controlled direct effect,1.9379677936975157
+2872,brms posterior,Indirect effect,3.59098459404489
+2676,brms posterior,Total effect,5.19013005948833
+2676,brms posterior,Controlled direct effect,1.9079564568063694
+2676,brms posterior,Indirect effect,3.2821736026819606
+3454,brms posterior,Total effect,5.795971803491262
+3454,brms posterior,Controlled direct effect,2.024007787518761
+3454,brms posterior,Indirect effect,3.7719640159725007
+1763,brms posterior,Total effect,5.812349738456385
+1763,brms posterior,Controlled direct effect,1.4680056890790132
+1763,brms posterior,Indirect effect,4.344344049377372
+3502,brms posterior,Total effect,5.43568904425877
+3502,brms posterior,Controlled direct effect,1.7360656902879823
+3502,brms posterior,Indirect effect,3.6996233539707877
+3927,brms posterior,Total effect,5.913343742204118
+3927,brms posterior,Controlled direct effect,1.9844266980356116
+3927,brms posterior,Indirect effect,3.9289170441685064
+210,brms posterior,Total effect,5.692057257185443
+210,brms posterior,Controlled direct effect,1.6518371924695772
+210,brms posterior,Indirect effect,4.040220064715866
+3759,brms posterior,Total effect,4.43776555972561
+3759,brms posterior,Controlled direct effect,1.637832584517927
+3759,brms posterior,Indirect effect,2.7999329752076827
+894,brms posterior,Total effect,6.58043755215
+894,brms posterior,Controlled direct effect,2.3623221158196834
+894,brms posterior,Indirect effect,4.218115436330317
+2191,brms posterior,Total effect,5.355364199137695
+2191,brms posterior,Controlled direct effect,2.460369974220848
+2191,brms posterior,Indirect effect,2.8949942249168465
+696,brms posterior,Total effect,5.398813603250622
+696,brms posterior,Controlled direct effect,2.038159280108908
+696,brms posterior,Indirect effect,3.3606543231417145
+1513,brms posterior,Total effect,6.72478481661966
+1513,brms posterior,Controlled direct effect,2.0003932685211043
+1513,brms posterior,Indirect effect,4.724391548098556
+2533,brms posterior,Total effect,6.5998053818701905
+2533,brms posterior,Controlled direct effect,1.8910722409008636
+2533,brms posterior,Indirect effect,4.708733140969327
+2172,brms posterior,Total effect,6.543928775975179
+2172,brms posterior,Controlled direct effect,2.107734527572011
+2172,brms posterior,Indirect effect,4.436194248403169
+3269,brms posterior,Total effect,4.965472801310867
+3269,brms posterior,Controlled direct effect,1.7384617013146046
+3269,brms posterior,Indirect effect,3.227011099996262
+2727,brms posterior,Total effect,5.953689027528295
+2727,brms posterior,Controlled direct effect,1.8853266919559584
+2727,brms posterior,Indirect effect,4.068362335572337
+539,brms posterior,Total effect,6.12411967766393
+539,brms posterior,Controlled direct effect,2.0800057726550762
+539,brms posterior,Indirect effect,4.044113905008853
+2203,brms posterior,Total effect,5.14805798199558
+2203,brms posterior,Controlled direct effect,1.6040527227472163
+2203,brms posterior,Indirect effect,3.5440052592483635
+3452,brms posterior,Total effect,5.865214863649008
+3452,brms posterior,Controlled direct effect,2.2131374789375924
+3452,brms posterior,Indirect effect,3.652077384711416
+2401,brms posterior,Total effect,5.856010119503728
+2401,brms posterior,Controlled direct effect,2.147204118480162
+2401,brms posterior,Indirect effect,3.708806001023566
+1566,brms posterior,Total effect,5.938835122174011
+1566,brms posterior,Controlled direct effect,1.9472147712637942
+1566,brms posterior,Indirect effect,3.9916203509102175
+661,brms posterior,Total effect,7.707588863279602
+661,brms posterior,Controlled direct effect,2.0343604696890782
+661,brms posterior,Indirect effect,5.673228393590524
+1362,brms posterior,Total effect,5.0140826645788845
+1362,brms posterior,Controlled direct effect,2.2501410821273877
+1362,brms posterior,Indirect effect,2.763941582451497
+2080,brms posterior,Total effect,4.44568747747853
+2080,brms posterior,Controlled direct effect,1.4993437324711216
+2080,brms posterior,Indirect effect,2.9463437450074084
+2103,brms posterior,Total effect,5.964099534202444
+2103,brms posterior,Controlled direct effect,2.5137585131740625
+2103,brms posterior,Indirect effect,3.4503410210283816
+3640,brms posterior,Total effect,6.796156160448072
+3640,brms posterior,Controlled direct effect,2.171169312225814
+3640,brms posterior,Indirect effect,4.624986848222258
+1086,brms posterior,Total effect,4.694405174114733
+1086,brms posterior,Controlled direct effect,2.0591479204920646
+1086,brms posterior,Indirect effect,2.6352572536226684
+3793,brms posterior,Total effect,4.508230397851056
+3793,brms posterior,Controlled direct effect,2.2121413316507414
+3793,brms posterior,Indirect effect,2.296089066200315
+890,brms posterior,Total effect,5.009492403610363
+890,brms posterior,Controlled direct effect,1.9479485481586536
+890,brms posterior,Indirect effect,3.061543855451709
+14,brms posterior,Total effect,5.26197157346435
+14,brms posterior,Controlled direct effect,1.9641975612874027
+14,brms posterior,Indirect effect,3.297774012176947
+3324,brms posterior,Total effect,6.442228489256742
+3324,brms posterior,Controlled direct effect,2.4692099902488946
+3324,brms posterior,Indirect effect,3.973018499007847
+3376,brms posterior,Total effect,7.100677048089088
+3376,brms posterior,Controlled direct effect,2.5176284275789143
+3376,brms posterior,Indirect effect,4.583048620510175
+1848,brms posterior,Total effect,7.271922463322017
+1848,brms posterior,Controlled direct effect,2.502440582152688
+1848,brms posterior,Indirect effect,4.769481881169329
+1449,brms posterior,Total effect,5.458804451703527
+1449,brms posterior,Controlled direct effect,2.312899369434719
+1449,brms posterior,Indirect effect,3.1459050822688077
+1729,brms posterior,Total effect,5.026303551536584
+1729,brms posterior,Controlled direct effect,1.5904798136535583
+1729,brms posterior,Indirect effect,3.435823737883026
+3130,brms posterior,Total effect,6.0003392585126
+3130,brms posterior,Controlled direct effect,1.815026703334445
+3130,brms posterior,Indirect effect,4.185312555178156
+2549,brms posterior,Total effect,6.889327617234235
+2549,brms posterior,Controlled direct effect,2.6805049122483875
+2549,brms posterior,Indirect effect,4.208822704985847
+3367,brms posterior,Total effect,7.924153348852637
+3367,brms posterior,Controlled direct effect,1.7787171917655646
+3367,brms posterior,Indirect effect,6.145436157087072
+1721,brms posterior,Total effect,5.374869277716027
+1721,brms posterior,Controlled direct effect,2.0066459866333854
+1721,brms posterior,Indirect effect,3.368223291082642
+3615,brms posterior,Total effect,5.075637690577879
+3615,brms posterior,Controlled direct effect,2.3079411590322136
+3615,brms posterior,Indirect effect,2.767696531545665
+1949,brms posterior,Total effect,4.123268961749459
+1949,brms posterior,Controlled direct effect,2.2910092726671354
+1949,brms posterior,Indirect effect,1.8322596890823237
+1259,brms posterior,Total effect,6.030626577857401
+1259,brms posterior,Controlled direct effect,1.8141315489244265
+1259,brms posterior,Indirect effect,4.216495028932974
+1364,brms posterior,Total effect,5.25394615331331
+1364,brms posterior,Controlled direct effect,1.9434156231218551
+1364,brms posterior,Indirect effect,3.3105305301914543
+3202,brms posterior,Total effect,4.756005899488299
+3202,brms posterior,Controlled direct effect,1.9383347537918179
+3202,brms posterior,Indirect effect,2.8176711456964814
+67,brms posterior,Total effect,5.734002304582762
+67,brms posterior,Controlled direct effect,1.805607785210368
+67,brms posterior,Indirect effect,3.928394519372394
+3890,brms posterior,Total effect,3.581195665012725
+3890,brms posterior,Controlled direct effect,2.0199288936625006
+3890,brms posterior,Indirect effect,1.5612667713502244
+2276,brms posterior,Total effect,4.905441873248575
+2276,brms posterior,Controlled direct effect,1.5976465023701134
+2276,brms posterior,Indirect effect,3.3077953708784618

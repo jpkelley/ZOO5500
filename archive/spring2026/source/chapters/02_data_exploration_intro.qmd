@@ -1,0 +1,142 @@
+---
+title: "Data Exploration"
+date: ""
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+execute:
+  echo: true
+  warning: false
+  message: false
+  error: false
+editor: visual
+---
+
+## Introduction
+
+Consider the following scenario. Being an expert in jackalope analytics, you are asked (by some really awesome colleagues) to analyze a dataset that you have never seen. You meet with your colleagues; they describe the data, their goals, and their timeline; you send a few appropriate follow-up questions. They answer. All seems good. You jump right into analysis. Two weeks (!) into a complex workflow, you discover two small details they “forgot” to mention: (1) half the data are questionable because, unbeknowst to them, a jackalope infiltrated the field crew and collected data for a month, and (2) several samples were contaminated with jackalope saliva.
+
+Because you skipped the critical data exploration step, you just injected a suite of bad assumptions into everything downstream. The lesson is oddly simple: take your time and be systematic in data exploration. In this course, the goal is not to rush into running statistical models or jump to drawing strong inference, but rather to catch problems early -- before they derail your modeling. Even if you collected the data yourself and feel like you know them inside and out, do not assume that you can or should bypass this critical step. Data Demons have great timing and even greater motivation to see you fail, especially near the end of a project or a degree.
+
+This week, we purposefully slow the workflow down and practice exploring datasets so that problems like these show up early --long before they shape your model decisions or waste weeks of work. In the next pages, we will walk through core data exploration steps that should always come *before* formal modeling.
+
+> **In simple terms, what is data exploration?** Data exploration is where you learn what your data *can* say — before you ask them (*not* tell them) to say it.
+
+## Goals for this section (Week 3)
+
+By the end of this week, you should be able to:
+
+-   Describe some of the advantages and disadvantages of several types of data exploration approaches (before and after modeling)
+-   Examine your own dataset for outliers
+-   Justify the removal of outliers
+-   Realize the importance of taking your good ole’ sweet time with data exploration
+
+## Relevant readings related to data exploration
+
+*These are not required readings. These are simply some useful references for you.*
+
+-   [**O'Hara & Kotze (2010)**](https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/j.2041-210X.2010.00021.x) on why you should not log transform count data.
+-   [**Beltran & Tarwater (2024)**](https://pmc.ncbi.nlm.nih.gov/articles/PMC11444780/) on why you should not categorize some data.
+-   [**Zuur et al. (2010)**](https://besjournals.onlinelibrary.wiley.com/doi/10.1111/j.2041-210X.2009.00001.x) on some of the primary approaches for data exploration (what this page is based on)
+
+## Core Benefits of Data Exploration
+
+Let us delve into the core advantages of a formal data exploration phase. Data exploration determines whether your data, assumptions, and planned analysis are scientifically defensible. Each section below represents a distinct utility of the exploration phase.
+
+::: {.callout-tip icon="false" collapse="true"}
+## **Reality-checking your mental model**
+
+Data exploration is where your expectations collide with the data you actually collected.
+
+At this stage, you evaluate whether:
+
+-   The data look the way you expected them to
+-   Variables behave in ways consistent with how they were measured
+-   Any patterns or anomalies that contradict your initial assumptions
+
+This is where naïve assumptions die early --before they become permanent within your chosen modeling framework.
+:::
+
+::: {.callout-tip icon="false" collapse="true"}
+## **Auditing measurement quality (not “finding patterns”)**
+
+Exploration is a measurement audit. It is *not* a fishing expedition to find interesting aspects of your data. Data exploration (*ante hoc*) lets you assess whether the numbers themselves are credible by asking three questions:
+
+-   Are there signs of systematic bias (e.g. floor/ceiling effects, truncation, observer effects)?
+-   How much noise or variability is present (e.g. precision, repeatability)?
+-   Do any values indicate measurement failure/error rather than biological data-generating processes?
+
+The central question at this stage is simple: **Do these numbers deserve to be modeled?**
+:::
+
+::: {.callout-tip icon="false" collapse="true"}
+## **Turning metadata into something testable**
+
+Metadata is not documentation-after-the-fact; it becomes operational during exploration. This is where you actively test assumptions such as:
+
+-   What does one row of the dataset actually represent?
+-   Does the nested structure of the data (e.g. number of individuals in each of many sites)
+-   Do temporal and spatial units align with the research question?
+
+Exploration exposes missing or contradictory metadata immediately.
+:::
+
+::: {.callout-tip icon="false" collapse="true"}
+## **Informing how you design your models**
+
+Data exploration directly constrains your modeling options. It helps you determine:
+
+-   Which covariates are redundant (e.g., PCA as a redundancy diagnostic)
+-   Which transformations (e.g. scaling) are scientifically defensible
+-   Which model families are plausible (and which are not)
+
+Data exploration helps decide how the analysis should be done, so it cannot be skipped.
+:::
+
+::: {.callout-tip icon="false" collapse="true"}
+## **Building scientific humility**
+
+In this course, data exploration is where you learn a few hard but important lessons:
+
+-   Data are not perfect reflections of reality; they are messy results of how measurements were made
+-   Feeling confident that you know your data does not mean you are right
+-   Running models without exploring your data first amounts to guesswork.
+
+Data exploration is best understood as **friendly peer review before you waste two weeks of your life**.
+:::
+
+------------------------------------------------------------------------
+
+## Summary: What data exploration is and is not
+
+**What is data exploration used for?**
+
+Data exploration exists to decide whether your data are fit for an analysis and whether that analysis is defensible. Use this phase to ask:
+
+-   Do these data behave like they were measured the way I think they were?
+-   Are there obvious data biases or limits to precision or accuracy?
+-   Do variables mean what their names suggest (i.e. following good nomenclature rules)?
+-   Do groups, measurement units, and temporal and spatial scales make scientific sense?
+-   Do any of the data already cause model failure?
+
+If you cannot clearly explain what you learned during data exploration, you are not ready to move on to the data modeling phase.
+
+------------------------------------------------------------------------
+
+**What Data Exploration is *not***
+
+Data exploration should ***not*** be used for:
+
+-   Fishing for significant results (i.e. omitting extreme values to change your model results)
+-   Generating pretty plots that do not reflect model results
+-   Running PCA because ***there are many variables***
+-   Deleting outliers without understanding why they exist (e.g. not caring about data-generating processes)
+-   A formality you rush through to get to “the real analysis”
+
+If exploration feels boring or unnecessary, you are either skipping it or not doing it well.
+
+------------------------------------------------------------------------
+
+In the next section, we go over some approaches of a standard data exploration toolkit that will allow you understand the structure and limits of your dataset.

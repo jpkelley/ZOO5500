@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>30&nbsp; DAG Construction – Quantitative Analysis of (Messy) Field Data</title>
+<title>12&nbsp; DAG Construction – Quantitative Analysis of (Messy) Field Data</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -119,7 +119,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/05_01_why_scms.html">Part V: Curves to Meaning</a></li><li class="breadcrumb-item"><a href="../chapters/05_02_building_dags.html"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">DAG Construction</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/03_statistical_aphorisms.html">Part I: Questions Before Models</a></li><li class="breadcrumb-item"><a href="../chapters/05_02_building_dags.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">DAG Construction</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -177,32 +177,26 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/int_calendar_sp26.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Course calendar</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../chapters/int_ai_policy.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">GenAI Use Guidelines</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">GenAI Use Guidelines</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/int_preparing_yourself.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Preparing Yourself</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Preparing Yourself</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/int_assignment_grades.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Assignments &amp; Grades</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Assignments &amp; Grades</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/int_project_scoping.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Project Scoping</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Project Scoping</span></span></a>
   </div>
 </li>
       </ul>
@@ -219,48 +213,48 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/00_ai_prompting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">AI Prompting for Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">AI Prompting for Analysis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/00_using_jackalope_gpt.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Using JackalopeGPT</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Using JackalopeGPT</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
- <span class="menu-text">Part I: Reproducible Analyses</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part I: Questions Before Models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/01_reproducible_workflow_intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Reproducible Analyses</span></span></a>
+  <a href="../chapters/03_statistical_aphorisms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Statistical Philosophy</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/01_nature_of_data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Nature of Data</span></span></a>
+  <a href="../chapters/05_01_why_scms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Why SCMs?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/01_metadata_low_friction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Metadata</span></span></a>
+  <a href="../chapters/05_02_building_dags.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">DAG Construction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/01_naming_conventions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Conventions and Style</span></span></a>
+  <a href="../chapters/05_02b_KS_to_DAGs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">From kitchen-sink to SCM</span></span></a>
   </div>
 </li>
       </ul>
@@ -268,7 +262,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
- <span class="menu-text">Part II: Chaos to Columns</span></a>
+ <span class="menu-text">Part II: From the Causal System to Data</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -276,26 +270,50 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../chapters/01_nature_of_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">The Nature of Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01_reproducible_workflow_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Reproducible Analyses</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01_metadata_low_friction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Metadata</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01_naming_conventions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Conventions and Style</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../chapters/02_data_exploration_intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data Exploration</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Data Exploration</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/02_data_exploration_toolkit.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data Exploration Toolkit</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Exploration Toolkit</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/02_outliers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Tool 1: Outliers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Tool 1: Outliers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/02_tutorial_data_exploration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Tutorial: Data Exploration</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Tutorial: Data Exploration</span></span></a>
   </div>
 </li>
       </ul>
@@ -303,7 +321,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
- <span class="menu-text">Part III: Columns to Lines</span></a>
+ <span class="menu-text">Part III: Models as Estimators</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -311,56 +329,56 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/03_statistical_aphorisms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Statistical Philosophy</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../chapters/03_intro_modeling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Introduction to Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Introduction to Models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/03_intro_glms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">GLM Introduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">GLM Introduction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/03_tutorial_glms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Tutorial: GLMs</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Tutorial: GLMs</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/03_glm_partial_association.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Tutorial: Partial Associations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Tutorial: Partial Associations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/03_DHARMA_diagnostics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">DHARMA diagnostics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">DHARMA diagnostics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/03_glmms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">GLMM Introduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">GLMM Introduction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/03_tutorial_glmms_part01.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Tutorial: GLMMs</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Tutorial: GLMMs</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/03_glmm_epilogue.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">GLMM epilogue</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">GLMM epilogue</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04_tutorial_gams.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Tutorial: GAMs</span></span></a>
   </div>
 </li>
       </ul>
@@ -368,7 +386,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
- <span class="menu-text">Part IV: Columns to Curves</span></a>
+ <span class="menu-text">Part IV: Estimating Causal Effects</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -376,58 +394,27 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/04_tutorial_gams.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Tutorial: GAMs</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
- <span class="menu-text">Part V: Curves to Meaning</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/05_01_why_scms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Why SCMs?</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/05_02_building_dags.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">DAG Construction</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/05_02b_KS_to_DAGs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">From kitchen-sink to SCM</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../chapters/simple_scm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">SCM: Total Effects</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">SCM: Total Effects</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/SCM_part02.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">SCM: Direct/Indirect Effects</span></span></a>
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">SCM: Direct/Indirect Effects</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/brms_SCM.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">SCM: Bayesian</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">SCM: Bayesian</span></span></a>
   </div>
 </li>
       </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Part V: Inference and Reporting</span></span>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
@@ -441,7 +428,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/final_report_overview.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Final Report: Overview</span></span></a>
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Final Report: Overview</span></span></a>
   </div>
 </li>
       </ul>
@@ -456,34 +443,34 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">30.1</span> Introduction</a></li>
-  <li><a href="#general-architecture-of-a-directed-acyclic-graph-dag" id="toc-general-architecture-of-a-directed-acyclic-graph-dag" class="nav-link" data-scroll-target="#general-architecture-of-a-directed-acyclic-graph-dag"><span class="header-section-number">30.2</span> General architecture of a Directed Acyclic Graph (DAG)</a></li>
-  <li><a href="#constructing-a-dag-for-your-study-system" id="toc-constructing-a-dag-for-your-study-system" class="nav-link" data-scroll-target="#constructing-a-dag-for-your-study-system"><span class="header-section-number">30.3</span> Constructing a DAG for your study system</a></li>
-  <li><a href="#a-practical-workflow-for-building-a-dag" id="toc-a-practical-workflow-for-building-a-dag" class="nav-link" data-scroll-target="#a-practical-workflow-for-building-a-dag"><span class="header-section-number">30.4</span> A practical workflow for building a DAG</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">12.1</span> Introduction</a></li>
+  <li><a href="#general-architecture-of-a-directed-acyclic-graph-dag" id="toc-general-architecture-of-a-directed-acyclic-graph-dag" class="nav-link" data-scroll-target="#general-architecture-of-a-directed-acyclic-graph-dag"><span class="header-section-number">12.2</span> General architecture of a Directed Acyclic Graph (DAG)</a></li>
+  <li><a href="#constructing-a-dag-for-your-study-system" id="toc-constructing-a-dag-for-your-study-system" class="nav-link" data-scroll-target="#constructing-a-dag-for-your-study-system"><span class="header-section-number">12.3</span> Constructing a DAG for your study system</a></li>
+  <li><a href="#a-practical-workflow-for-building-a-dag" id="toc-a-practical-workflow-for-building-a-dag" class="nav-link" data-scroll-target="#a-practical-workflow-for-building-a-dag"><span class="header-section-number">12.4</span> A practical workflow for building a DAG</a>
   <ul class="collapse">
-  <li><a href="#step-1-start-with-the-system-not-a-statistical-model" id="toc-step-1-start-with-the-system-not-a-statistical-model" class="nav-link" data-scroll-target="#step-1-start-with-the-system-not-a-statistical-model"><span class="header-section-number">30.4.1</span> Step 1: Start with the system, not a statistical model</a></li>
-  <li><a href="#step-2-list-your-core-exposureoutcome-questions" id="toc-step-2-list-your-core-exposureoutcome-questions" class="nav-link" data-scroll-target="#step-2-list-your-core-exposureoutcome-questions"><span class="header-section-number">30.4.2</span> Step 2: List your core exposure–outcome questions</a></li>
-  <li><a href="#step-3-start-with-one-simple-causal-link" id="toc-step-3-start-with-one-simple-causal-link" class="nav-link" data-scroll-target="#step-3-start-with-one-simple-causal-link"><span class="header-section-number">30.4.3</span> Step 3: Start with one simple causal link</a></li>
-  <li><a href="#step-4-add-common-causes-confounders" id="toc-step-4-add-common-causes-confounders" class="nav-link" data-scroll-target="#step-4-add-common-causes-confounders"><span class="header-section-number">30.4.4</span> Step 4: Add common causes (confounders)</a></li>
-  <li><a href="#step-5-add-mechanisms-mediators" id="toc-step-5-add-mechanisms-mediators" class="nav-link" data-scroll-target="#step-5-add-mechanisms-mediators"><span class="header-section-number">30.4.5</span> Step 5: Add mechanisms (mediators)</a></li>
-  <li><a href="#step-6-merge-overlapping-pieces-into-one-global-dag" id="toc-step-6-merge-overlapping-pieces-into-one-global-dag" class="nav-link" data-scroll-target="#step-6-merge-overlapping-pieces-into-one-global-dag"><span class="header-section-number">30.4.6</span> Step 6: Merge overlapping pieces into one global DAG</a></li>
-  <li><a href="#step-7-represent-underlying-processes-latent-variables-and-scale" id="toc-step-7-represent-underlying-processes-latent-variables-and-scale" class="nav-link" data-scroll-target="#step-7-represent-underlying-processes-latent-variables-and-scale"><span class="header-section-number">30.4.7</span> Step 7: Represent underlying processes (latent variables and scale)</a></li>
-  <li><a href="#step-8-refine-the-dag" id="toc-step-8-refine-the-dag" class="nav-link" data-scroll-target="#step-8-refine-the-dag"><span class="header-section-number">30.4.8</span> Step 8: Refine the DAG</a></li>
+  <li><a href="#step-1-start-with-the-system-not-a-statistical-model" id="toc-step-1-start-with-the-system-not-a-statistical-model" class="nav-link" data-scroll-target="#step-1-start-with-the-system-not-a-statistical-model"><span class="header-section-number">12.4.1</span> Step 1: Start with the system, not a statistical model</a></li>
+  <li><a href="#step-2-list-your-core-exposureoutcome-questions" id="toc-step-2-list-your-core-exposureoutcome-questions" class="nav-link" data-scroll-target="#step-2-list-your-core-exposureoutcome-questions"><span class="header-section-number">12.4.2</span> Step 2: List your core exposure–outcome questions</a></li>
+  <li><a href="#step-3-start-with-one-simple-causal-link" id="toc-step-3-start-with-one-simple-causal-link" class="nav-link" data-scroll-target="#step-3-start-with-one-simple-causal-link"><span class="header-section-number">12.4.3</span> Step 3: Start with one simple causal link</a></li>
+  <li><a href="#step-4-add-common-causes-confounders" id="toc-step-4-add-common-causes-confounders" class="nav-link" data-scroll-target="#step-4-add-common-causes-confounders"><span class="header-section-number">12.4.4</span> Step 4: Add common causes (confounders)</a></li>
+  <li><a href="#step-5-add-mechanisms-mediators" id="toc-step-5-add-mechanisms-mediators" class="nav-link" data-scroll-target="#step-5-add-mechanisms-mediators"><span class="header-section-number">12.4.5</span> Step 5: Add mechanisms (mediators)</a></li>
+  <li><a href="#step-6-merge-overlapping-pieces-into-one-global-dag" id="toc-step-6-merge-overlapping-pieces-into-one-global-dag" class="nav-link" data-scroll-target="#step-6-merge-overlapping-pieces-into-one-global-dag"><span class="header-section-number">12.4.6</span> Step 6: Merge overlapping pieces into one global DAG</a></li>
+  <li><a href="#step-7-represent-underlying-processes-latent-variables-and-scale" id="toc-step-7-represent-underlying-processes-latent-variables-and-scale" class="nav-link" data-scroll-target="#step-7-represent-underlying-processes-latent-variables-and-scale"><span class="header-section-number">12.4.7</span> Step 7: Represent underlying processes (latent variables and scale)</a></li>
+  <li><a href="#step-8-refine-the-dag" id="toc-step-8-refine-the-dag" class="nav-link" data-scroll-target="#step-8-refine-the-dag"><span class="header-section-number">12.4.8</span> Step 8: Refine the DAG</a></li>
   </ul></li>
-  <li><a href="#step-9-add-effect-modification-interactions" id="toc-step-9-add-effect-modification-interactions" class="nav-link" data-scroll-target="#step-9-add-effect-modification-interactions"><span class="header-section-number">30.5</span> Step 9: Add effect modification (interactions)</a>
+  <li><a href="#step-9-add-effect-modification-interactions" id="toc-step-9-add-effect-modification-interactions" class="nav-link" data-scroll-target="#step-9-add-effect-modification-interactions"><span class="header-section-number">12.5</span> Step 9: Add effect modification (interactions)</a>
   <ul class="collapse">
-  <li><a href="#step-10-use-the-dag-to-see-what-questions-are-possible" id="toc-step-10-use-the-dag-to-see-what-questions-are-possible" class="nav-link" data-scroll-target="#step-10-use-the-dag-to-see-what-questions-are-possible"><span class="header-section-number">30.5.1</span> Step 10: Use the DAG to see what questions are possible</a></li>
+  <li><a href="#step-10-use-the-dag-to-see-what-questions-are-possible" id="toc-step-10-use-the-dag-to-see-what-questions-are-possible" class="nav-link" data-scroll-target="#step-10-use-the-dag-to-see-what-questions-are-possible"><span class="header-section-number">12.5.1</span> Step 10: Use the DAG to see what questions are possible</a></li>
   </ul></li>
-  <li><a href="#up-next" id="toc-up-next" class="nav-link" data-scroll-target="#up-next"><span class="header-section-number">30.6</span> Up next!</a></li>
+  <li><a href="#up-next" id="toc-up-next" class="nav-link" data-scroll-target="#up-next"><span class="header-section-number">12.6</span> Up next!</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/05_01_why_scms.html">Part V: Curves to Meaning</a></li><li class="breadcrumb-item"><a href="../chapters/05_02_building_dags.html"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">DAG Construction</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/03_statistical_aphorisms.html">Part I: Questions Before Models</a></li><li class="breadcrumb-item"><a href="../chapters/05_02_building_dags.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">DAG Construction</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">DAG Construction</span></h1>
+<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">DAG Construction</span></h1>
 </div>
 
 
@@ -500,12 +487,12 @@ window.Quarto = {
 </header>
 
 
-<section id="introduction" class="level2" data-number="30.1">
-<h2 data-number="30.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">30.1</span> Introduction</h2>
+<section id="introduction" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">12.1</span> Introduction</h2>
 <p>In this section, we explore the Directed Acyclic Graph (DAG), the first step of constructing an operational Structural Causal Model. Though this step seems like a simple drawing exercise, this step often becomes one of the most illuminating parts of the SCM process. If done thoroughly and carefully, building the DAG forces you to explicitly state assumptions that you did not realize were critical to your questions.</p>
 </section>
-<section id="general-architecture-of-a-directed-acyclic-graph-dag" class="level2" data-number="30.2">
-<h2 data-number="30.2" class="anchored" data-anchor-id="general-architecture-of-a-directed-acyclic-graph-dag"><span class="header-section-number">30.2</span> General architecture of a Directed Acyclic Graph (DAG)</h2>
+<section id="general-architecture-of-a-directed-acyclic-graph-dag" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="general-architecture-of-a-directed-acyclic-graph-dag"><span class="header-section-number">12.2</span> General architecture of a Directed Acyclic Graph (DAG)</h2>
 <p>A Directed Acyclic Graph represents all plausible causal relationships in the system. In essence, it encapsulates we know about our study system. This DAG will form the basis for your entire set of questions about your system.</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
@@ -660,8 +647,8 @@ classDef node fill:#d9d9d9,color:#000,stroke-width:0px;
 </div>
 <p>Any good DAG should represent <strong>causal assumptions</strong>, <em>not</em> statistical correlations. If there is good ecological justification for a causal link between two variables, you should include it in the model (even if a relationship between two variables has never been tested). Unlike non-causal approaches, a useful DAG emphasizes conceptual completeness over statistical parsimony. In other words, it is better to include more knowledge in a DAG than try to simplify it. So, how do we efficiently construct a DAG that has strong causal assumptions?</p>
 </section>
-<section id="constructing-a-dag-for-your-study-system" class="level2" data-number="30.3">
-<h2 data-number="30.3" class="anchored" data-anchor-id="constructing-a-dag-for-your-study-system"><span class="header-section-number">30.3</span> Constructing a DAG for your study system</h2>
+<section id="constructing-a-dag-for-your-study-system" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="constructing-a-dag-for-your-study-system"><span class="header-section-number">12.3</span> Constructing a DAG for your study system</h2>
 <div class="callout callout-style-default callout-tip no-icon callout-empty-content callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -703,8 +690,8 @@ classDef node fill:#d9d9d9,color:#000,stroke-width:0px;
 </div>
 </div>
 </section>
-<section id="a-practical-workflow-for-building-a-dag" class="level2" data-number="30.4">
-<h2 data-number="30.4" class="anchored" data-anchor-id="a-practical-workflow-for-building-a-dag"><span class="header-section-number">30.4</span> A practical workflow for building a DAG</h2>
+<section id="a-practical-workflow-for-building-a-dag" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="a-practical-workflow-for-building-a-dag"><span class="header-section-number">12.4</span> A practical workflow for building a DAG</h2>
 <p>Building a DAG for a study system typically involves the following steps:</p>
 <ul>
 <li><strong>Step 1:</strong> Start with the study system, not a statistical model<br>
@@ -727,8 +714,8 @@ classDef node fill:#d9d9d9,color:#000,stroke-width:0px;
 </ul>
 <p>Let us detail these 10 steps.</p>
 <hr>
-<section id="step-1-start-with-the-system-not-a-statistical-model" class="level3" data-number="30.4.1">
-<h3 data-number="30.4.1" class="anchored" data-anchor-id="step-1-start-with-the-system-not-a-statistical-model"><span class="header-section-number">30.4.1</span> Step 1: Start with the system, not a statistical model</h3>
+<section id="step-1-start-with-the-system-not-a-statistical-model" class="level3" data-number="12.4.1">
+<h3 data-number="12.4.1" class="anchored" data-anchor-id="step-1-start-with-the-system-not-a-statistical-model"><span class="header-section-number">12.4.1</span> Step 1: Start with the system, not a statistical model</h3>
 <p>This step is the hardest of all the steps. Begin by thinking about the ecological system you are studying. Do not think about the regression or other model that you plan to fit. Do not think about whether you should log-transform a variable or not. At this point, you should focus on three questions only:</p>
 <ul>
 <li>What are the major processes in this system? (e.g.&nbsp;predator-prey, pollination, intrapair communication)</li>
@@ -737,8 +724,8 @@ classDef node fill:#d9d9d9,color:#000,stroke-width:0px;
 </ul>
 <p>Again, at this first stage, your goal is to ignore anything related to statistical models. Do not worry about coefficients, significance, or functional form of a model.</p>
 </section>
-<section id="step-2-list-your-core-exposureoutcome-questions" class="level3" data-number="30.4.2">
-<h3 data-number="30.4.2" class="anchored" data-anchor-id="step-2-list-your-core-exposureoutcome-questions"><span class="header-section-number">30.4.2</span> Step 2: List your core exposure–outcome questions</h3>
+<section id="step-2-list-your-core-exposureoutcome-questions" class="level3" data-number="12.4.2">
+<h3 data-number="12.4.2" class="anchored" data-anchor-id="step-2-list-your-core-exposureoutcome-questions"><span class="header-section-number">12.4.2</span> Step 2: List your core exposure–outcome questions</h3>
 <p>Next, your task is to write down the main causal questions you want the DAG to support. For example, let us consider the direct causal links I thought about <em>before</em> constructing the DAG above:</p>
 <ul>
 <li>What is the effect of <span class="math inline">\(vegetation\_cover\)</span> on <span class="math inline">\(nesting\_survival\)</span>?</li>
@@ -749,8 +736,8 @@ classDef node fill:#d9d9d9,color:#000,stroke-width:0px;
 </ul>
 <p>These questions help identify the main parts of the system that must appear in the DAG.</p>
 </section>
-<section id="step-3-start-with-one-simple-causal-link" class="level3" data-number="30.4.3">
-<h3 data-number="30.4.3" class="anchored" data-anchor-id="step-3-start-with-one-simple-causal-link"><span class="header-section-number">30.4.3</span> Step 3: Start with one simple causal link</h3>
+<section id="step-3-start-with-one-simple-causal-link" class="level3" data-number="12.4.3">
+<h3 data-number="12.4.3" class="anchored" data-anchor-id="step-3-start-with-one-simple-causal-link"><span class="header-section-number">12.4.3</span> Step 3: Start with one simple causal link</h3>
 <p>Your next step is to make an explicit causal claim about each of the exposure-outcome questions listed in Step 2. For example, if your question is:</p>
 <blockquote class="blockquote">
 <p><em>What is the effect of <span class="math inline">\(vegetation\_cover\)</span> (the exposure) on <span class="math inline">\(predator\_abundance\)</span> (the outcome)?</em></p>
@@ -775,8 +762,8 @@ classDef out fill:#bfe3c0,color:#000,stroke-width:0px;
 <p>Even though this looks simple and almost trivial, be certain that each exposure-outcome is well justified. Every arrow you draw should be scientifically defensible based on some combination of theory, data, or observation.</p>
 <hr>
 </section>
-<section id="step-4-add-common-causes-confounders" class="level3" data-number="30.4.4">
-<h3 data-number="30.4.4" class="anchored" data-anchor-id="step-4-add-common-causes-confounders"><span class="header-section-number">30.4.4</span> Step 4: Add common causes (confounders)</h3>
+<section id="step-4-add-common-causes-confounders" class="level3" data-number="12.4.4">
+<h3 data-number="12.4.4" class="anchored" data-anchor-id="step-4-add-common-causes-confounders"><span class="header-section-number">12.4.4</span> Step 4: Add common causes (confounders)</h3>
 <p>Next, ask whether there are any variables that could plausibly influence <em>both</em> the exposure and the outcome. Recall that these are called <em>confounders</em>, and they are often among the most important variables to idntify For each candidate confounder, ask these two questions:</p>
 <ul>
 <li>Is there evidence (literature, pilot data, or natural history) that it affects <span class="math inline">\(X\)</span> (the exposure/treatment)?</li>
@@ -803,8 +790,8 @@ classDef out fill:#bfe3c0,color:#000,stroke-width:0px;
 <p>At this stage, it is fine to include as many confounders as you want, but each edge (and its directionality) should still be grounded in solid scientific evidence.</p>
 <hr>
 </section>
-<section id="step-5-add-mechanisms-mediators" class="level3" data-number="30.4.5">
-<h3 data-number="30.4.5" class="anchored" data-anchor-id="step-5-add-mechanisms-mediators"><span class="header-section-number">30.4.5</span> Step 5: Add mechanisms (mediators)</h3>
+<section id="step-5-add-mechanisms-mediators" class="level3" data-number="12.4.5">
+<h3 data-number="12.4.5" class="anchored" data-anchor-id="step-5-add-mechanisms-mediators"><span class="header-section-number">12.4.5</span> Step 5: Add mechanisms (mediators)</h3>
 <p>This is where the utility of DAGs really shines. The next step is to ask whether the effect of <span class="math inline">\(X\)</span> on <span class="math inline">\(Y\)</span> operates through intermediate variables. These variables are called <em>mediators</em> and represent ecological mechanisms. Note that, for the same causal question (“does <span class="math inline">\(X\)</span> affect <span class="math inline">\(Y\)</span>?”), a confounder cannot represent an ecological mechanism because it is upstream of the exposure <span class="math inline">\(X\)</span>. The question that you are asking is this:</p>
 <ul>
 <li><em>Through what variables does <span class="math inline">\(X\)</span> affect <span class="math inline">\(Y\)</span>?</em></li>
@@ -836,8 +823,8 @@ classDef out fill:#bfe3c0,color:#000,stroke-width:0px;
 </div>
 <p>Remember that mediators should represent real ecological/biological pathways and not just additional statistical covariates. If you ignore that, you will be in the kitchen sink again.</p>
 </section>
-<section id="step-6-merge-overlapping-pieces-into-one-global-dag" class="level3" data-number="30.4.6">
-<h3 data-number="30.4.6" class="anchored" data-anchor-id="step-6-merge-overlapping-pieces-into-one-global-dag"><span class="header-section-number">30.4.6</span> Step 6: Merge overlapping pieces into one global DAG</h3>
+<section id="step-6-merge-overlapping-pieces-into-one-global-dag" class="level3" data-number="12.4.6">
+<h3 data-number="12.4.6" class="anchored" data-anchor-id="step-6-merge-overlapping-pieces-into-one-global-dag"><span class="header-section-number">12.4.6</span> Step 6: Merge overlapping pieces into one global DAG</h3>
 <p>While going through Steps 1-5, you will quickly notice that the same variables and pathways appear repeatedly. This is a sign that you are capturing shared structure in the system rather than constructing isolated hypotheses. (You can, of course, streamline this process in the future by starting with upstream –or exogenous– variables and working your way towards to the outcome variable.) Your goal now is to integrate these overlapping pieces into a single global DAG. Remember:</p>
 <blockquote class="blockquote">
 <p>You should build one DAG for your study system. Do <strong>not</strong> construct one DAG per question!</p>
@@ -862,8 +849,8 @@ classDef out fill:#bfe3c0,color:#000,stroke-width:0px;
 <p>Importantly, each edge in this integrated, global DAG should still be defensible based on theory, literature, pilot data, or natural history. Not to worry if you forget something at this step, as Step 8 is essentially a quality control check. Just keep moving forward through the process.</p>
 <hr>
 </section>
-<section id="step-7-represent-underlying-processes-latent-variables-and-scale" class="level3" data-number="30.4.7">
-<h3 data-number="30.4.7" class="anchored" data-anchor-id="step-7-represent-underlying-processes-latent-variables-and-scale"><span class="header-section-number">30.4.7</span> Step 7: Represent underlying processes (latent variables and scale)</h3>
+<section id="step-7-represent-underlying-processes-latent-variables-and-scale" class="level3" data-number="12.4.7">
+<h3 data-number="12.4.7" class="anchored" data-anchor-id="step-7-represent-underlying-processes-latent-variables-and-scale"><span class="header-section-number">12.4.7</span> Step 7: Represent underlying processes (latent variables and scale)</h3>
 <p>At this stage, your goal is to ask whether your DAG represents your best knowledge of the ecological process under study, or if it only represents the variables you chose to measure out of convenience. Hopefully, these lines of questioning occurred during the project planning phase, where you could pre-emptively address two common issues that arise in ecological studies:</p>
 <ul>
 <li><strong>latent (unmeasured) variables</strong></li>
@@ -993,8 +980,8 @@ Note
 <hr>
 </section>
 </section>
-<section id="step-8-refine-the-dag" class="level3" data-number="30.4.8">
-<h3 data-number="30.4.8" class="anchored" data-anchor-id="step-8-refine-the-dag"><span class="header-section-number">30.4.8</span> Step 8: Refine the DAG</h3>
+<section id="step-8-refine-the-dag" class="level3" data-number="12.4.8">
+<h3 data-number="12.4.8" class="anchored" data-anchor-id="step-8-refine-the-dag"><span class="header-section-number">12.4.8</span> Step 8: Refine the DAG</h3>
 <p>Now you have a very solid draft DAG. Your goal in this next step is to take a big step back and carefully review and refine. This serves as a quality-control check on the causal assumptions that we have made in the previous steps. Once again, you ask some familiar questions:</p>
 <ul>
 <li>Is every edge (arrow) clearly justified (via paper, pilot data, or observation)?</li>
@@ -1121,8 +1108,8 @@ style Frugivore_System fill:#f7f7f7,stroke:#999,stroke-width:1px
 <hr>
 </section>
 </section>
-<section id="step-9-add-effect-modification-interactions" class="level2" data-number="30.5">
-<h2 data-number="30.5" class="anchored" data-anchor-id="step-9-add-effect-modification-interactions"><span class="header-section-number">30.5</span> Step 9: Add effect modification (interactions)</h2>
+<section id="step-9-add-effect-modification-interactions" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="step-9-add-effect-modification-interactions"><span class="header-section-number">12.5</span> Step 9: Add effect modification (interactions)</h2>
 <p>The last effect type in our causal framework is the <em>effect modifier</em>. An <strong>effect modifier</strong> is a variable that makes the effect of <span class="math inline">\(X\)</span> on <span class="math inline">\(Y\)</span> depend on another variable <span class="math inline">\(Z\)</span>. In practice, this is what we mean by an <strong>interaction</strong> (a term familier to you from GLMs and GLMMs). Conceptually, it really is that simple. For example, predator abundance may reduce nesting success, but the strength of that effect may depend on vegetation structure. In a DAG, this is represented simply as both <span class="math inline">\(predator_abundance\)</span> and <span class="math inline">\(vegetation_structure\)</span> causing <span class="math inline">\(nesting success\)</span>:</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
@@ -1150,8 +1137,8 @@ Y \sim X + Z + X \times Z
 \]</span></p>
 <p>Here, the <span class="math inline">\(predator\_abundance \times vegetation\_structure\)</span> term means that the effect of <span class="math inline">\(predator\_abundance\)</span> on <span class="math inline">\(vegetation\_structure\)</span> changes depending on <span class="math inline">\(nesting\_success\)</span>.</p>
 <p>So, after building your DAG, carefully document what variables will go into your structural models, including interactions and random effects.</p>
-<section id="step-10-use-the-dag-to-see-what-questions-are-possible" class="level3" data-number="30.5.1">
-<h3 data-number="30.5.1" class="anchored" data-anchor-id="step-10-use-the-dag-to-see-what-questions-are-possible"><span class="header-section-number">30.5.1</span> Step 10: Use the DAG to see what questions are possible</h3>
+<section id="step-10-use-the-dag-to-see-what-questions-are-possible" class="level3" data-number="12.5.1">
+<h3 data-number="12.5.1" class="anchored" data-anchor-id="step-10-use-the-dag-to-see-what-questions-are-possible"><span class="header-section-number">12.5.1</span> Step 10: Use the DAG to see what questions are possible</h3>
 <p>This is one of the most fascinating and fun parts of DAG construction. A well-constructed global DAG does more than simply represent the causal assumptions underlying your original hypotheses/questions. A good DAG allows you to systematically evaluate what questions can be supported by the causal structure you have. Because you have painstakingly worked to justify every edge in these previous steps, you can now ask narrow your focus onto a number of probing -yet flexible– questions such as:</p>
 <ul>
 <li>Which exposure–outcome relationships are supported by plausible pathways?</li>
@@ -1163,8 +1150,8 @@ Y \sim X + Z + X \times Z
 <hr>
 </section>
 </section>
-<section id="up-next" class="level2" data-number="30.6">
-<h2 data-number="30.6" class="anchored" data-anchor-id="up-next"><span class="header-section-number">30.6</span> Up next!</h2>
+<section id="up-next" class="level2" data-number="12.6">
+<h2 data-number="12.6" class="anchored" data-anchor-id="up-next"><span class="header-section-number">12.6</span> Up next!</h2>
 <p>So, remember that a DAG is just one part of a Structural Causal Model. The other critical component is the set of actual structural equations.On the next page, we will focus on a single exposure–outcome pair, define the estimand, determine the correct adjustment set, and translate the DAG into a statistical model (using tools familiar to you).</p>
 
 
@@ -1574,12 +1561,12 @@ Y \sim X + Z + X \times Z
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../chapters/05_01_why_scms.html" class="pagination-link" aria-label="Why SCMs?">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Why SCMs?</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Why SCMs?</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../chapters/05_02b_KS_to_DAGs.html" class="pagination-link" aria-label="From kitchen-sink to SCM">
-        <span class="nav-page-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">From kitchen-sink to SCM</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">From kitchen-sink to SCM</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

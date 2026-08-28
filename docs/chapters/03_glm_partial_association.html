@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>23&nbsp; Tutorial: Partial Associations – Quantitative Analysis of (Messy) Field Data</title>
+<title>25&nbsp; Tutorial: Partial Associations – Quantitative Analysis of (Messy) Field Data</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -150,7 +150,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/03_statistical_aphorisms.html">Part III: Columns to Lines</a></li><li class="breadcrumb-item"><a href="../chapters/03_glm_partial_association.html"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Tutorial: Partial Associations</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/03_intro_modeling.html">Part III: Models as Estimators</a></li><li class="breadcrumb-item"><a href="../chapters/03_glm_partial_association.html"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Tutorial: Partial Associations</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -208,32 +208,26 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/int_calendar_sp26.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Course calendar</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../chapters/int_ai_policy.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">GenAI Use Guidelines</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">GenAI Use Guidelines</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/int_preparing_yourself.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Preparing Yourself</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Preparing Yourself</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/int_assignment_grades.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Assignments &amp; Grades</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Assignments &amp; Grades</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/int_project_scoping.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Project Scoping</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Project Scoping</span></span></a>
   </div>
 </li>
       </ul>
@@ -250,13 +244,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/00_ai_prompting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">AI Prompting for Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">AI Prompting for Analysis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/00_using_jackalope_gpt.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Using JackalopeGPT</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Using JackalopeGPT</span></span></a>
   </div>
 </li>
       </ul>
@@ -264,7 +258,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
- <span class="menu-text">Part I: Reproducible Analyses</span></a>
+ <span class="menu-text">Part I: Questions Before Models</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -272,26 +266,26 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/01_reproducible_workflow_intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Reproducible Analyses</span></span></a>
+  <a href="../chapters/03_statistical_aphorisms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Statistical Philosophy</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/01_nature_of_data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Nature of Data</span></span></a>
+  <a href="../chapters/05_01_why_scms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Why SCMs?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/01_metadata_low_friction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Metadata</span></span></a>
+  <a href="../chapters/05_02_building_dags.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">DAG Construction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/01_naming_conventions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Conventions and Style</span></span></a>
+  <a href="../chapters/05_02b_KS_to_DAGs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">From kitchen-sink to SCM</span></span></a>
   </div>
 </li>
       </ul>
@@ -299,7 +293,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
- <span class="menu-text">Part II: Chaos to Columns</span></a>
+ <span class="menu-text">Part II: From the Causal System to Data</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -307,26 +301,50 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../chapters/01_nature_of_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">The Nature of Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01_reproducible_workflow_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Reproducible Analyses</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01_metadata_low_friction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Metadata</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01_naming_conventions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Conventions and Style</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../chapters/02_data_exploration_intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data Exploration</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Data Exploration</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/02_data_exploration_toolkit.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data Exploration Toolkit</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Exploration Toolkit</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/02_outliers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Tool 1: Outliers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Tool 1: Outliers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/02_tutorial_data_exploration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Tutorial: Data Exploration</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Tutorial: Data Exploration</span></span></a>
   </div>
 </li>
       </ul>
@@ -334,7 +352,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
- <span class="menu-text">Part III: Columns to Lines</span></a>
+ <span class="menu-text">Part III: Models as Estimators</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -342,56 +360,56 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/03_statistical_aphorisms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Statistical Philosophy</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../chapters/03_intro_modeling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Introduction to Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Introduction to Models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/03_intro_glms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">GLM Introduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">GLM Introduction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/03_tutorial_glms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Tutorial: GLMs</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Tutorial: GLMs</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/03_glm_partial_association.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Tutorial: Partial Associations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Tutorial: Partial Associations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/03_DHARMA_diagnostics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">DHARMA diagnostics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">DHARMA diagnostics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/03_glmms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">GLMM Introduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">GLMM Introduction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/03_tutorial_glmms_part01.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Tutorial: GLMMs</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Tutorial: GLMMs</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/03_glmm_epilogue.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">GLMM epilogue</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">GLMM epilogue</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04_tutorial_gams.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Tutorial: GAMs</span></span></a>
   </div>
 </li>
       </ul>
@@ -399,7 +417,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
- <span class="menu-text">Part IV: Columns to Curves</span></a>
+ <span class="menu-text">Part IV: Estimating Causal Effects</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -407,58 +425,27 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/04_tutorial_gams.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Tutorial: GAMs</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
- <span class="menu-text">Part V: Curves to Meaning</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/05_01_why_scms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Why SCMs?</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/05_02_building_dags.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">DAG Construction</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/05_02b_KS_to_DAGs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">From kitchen-sink to SCM</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../chapters/simple_scm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">SCM: Total Effects</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">SCM: Total Effects</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/SCM_part02.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">SCM: Direct/Indirect Effects</span></span></a>
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">SCM: Direct/Indirect Effects</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/brms_SCM.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">SCM: Bayesian</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">SCM: Bayesian</span></span></a>
   </div>
 </li>
       </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Part V: Inference and Reporting</span></span>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
@@ -472,7 +459,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/final_report_overview.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Final Report: Overview</span></span></a>
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Final Report: Overview</span></span></a>
   </div>
 </li>
       </ul>
@@ -487,23 +474,23 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#how-a-glm-works-for-partial-associations" id="toc-how-a-glm-works-for-partial-associations" class="nav-link active" data-scroll-target="#how-a-glm-works-for-partial-associations"><span class="header-section-number">23.1</span> How a GLM works (for partial associations)</a></li>
-  <li><a href="#residualization" id="toc-residualization" class="nav-link" data-scroll-target="#residualization"><span class="header-section-number">23.2</span> Residualization</a></li>
-  <li><a href="#residualization-two-model-predictors" id="toc-residualization-two-model-predictors" class="nav-link" data-scroll-target="#residualization-two-model-predictors"><span class="header-section-number">23.3</span> Residualization: Two model predictors</a>
+  <li><a href="#how-a-glm-works-for-partial-associations" id="toc-how-a-glm-works-for-partial-associations" class="nav-link active" data-scroll-target="#how-a-glm-works-for-partial-associations"><span class="header-section-number">25.1</span> How a GLM works (for partial associations)</a></li>
+  <li><a href="#residualization" id="toc-residualization" class="nav-link" data-scroll-target="#residualization"><span class="header-section-number">25.2</span> Residualization</a></li>
+  <li><a href="#residualization-two-model-predictors" id="toc-residualization-two-model-predictors" class="nav-link" data-scroll-target="#residualization-two-model-predictors"><span class="header-section-number">25.3</span> Residualization: Two model predictors</a>
   <ul class="collapse">
-  <li><a href="#plotting-all-the-residuals" id="toc-plotting-all-the-residuals" class="nav-link" data-scroll-target="#plotting-all-the-residuals"><span class="header-section-number">23.3.1</span> Plotting all the residuals</a></li>
+  <li><a href="#plotting-all-the-residuals" id="toc-plotting-all-the-residuals" class="nav-link" data-scroll-target="#plotting-all-the-residuals"><span class="header-section-number">25.3.1</span> Plotting all the residuals</a></li>
   </ul></li>
-  <li><a href="#residualization-more-than-two-model-predictors" id="toc-residualization-more-than-two-model-predictors" class="nav-link" data-scroll-target="#residualization-more-than-two-model-predictors"><span class="header-section-number">23.4</span> Residualization: More than two model predictors</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">23.5</span> Summary</a></li>
+  <li><a href="#residualization-more-than-two-model-predictors" id="toc-residualization-more-than-two-model-predictors" class="nav-link" data-scroll-target="#residualization-more-than-two-model-predictors"><span class="header-section-number">25.4</span> Residualization: More than two model predictors</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">25.5</span> Summary</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/03_statistical_aphorisms.html">Part III: Columns to Lines</a></li><li class="breadcrumb-item"><a href="../chapters/03_glm_partial_association.html"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Tutorial: Partial Associations</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/03_intro_modeling.html">Part III: Models as Estimators</a></li><li class="breadcrumb-item"><a href="../chapters/03_glm_partial_association.html"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Tutorial: Partial Associations</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Tutorial: Partial Associations</span></h1>
+<h1 class="title"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Tutorial: Partial Associations</span></h1>
 </div>
 
 
@@ -520,8 +507,8 @@ window.Quarto = {
 </header>
 
 
-<section id="how-a-glm-works-for-partial-associations" class="level2" data-number="23.1">
-<h2 data-number="23.1" class="anchored" data-anchor-id="how-a-glm-works-for-partial-associations"><span class="header-section-number">23.1</span> How a GLM works (for partial associations)</h2>
+<section id="how-a-glm-works-for-partial-associations" class="level2" data-number="25.1">
+<h2 data-number="25.1" class="anchored" data-anchor-id="how-a-glm-works-for-partial-associations"><span class="header-section-number">25.1</span> How a GLM works (for partial associations)</h2>
 <div class="columns">
 <div class="column" style="width:70%;">
 <p>A key strength of a GLM is that it can estimate the association between a predictor and an outcome while simultaneously accounting for other variables in the model; that is, it can quantify partial associations rather than just simple bivariate relationships. It helps to remember that when a model includes multiple predictors, its coefficients describe <strong>partial associations</strong>, which are defined with respect to:</p>
@@ -534,8 +521,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="residualization" class="level2" data-number="23.2">
-<h2 data-number="23.2" class="anchored" data-anchor-id="residualization"><span class="header-section-number">23.2</span> Residualization</h2>
+<section id="residualization" class="level2" data-number="25.2">
+<h2 data-number="25.2" class="anchored" data-anchor-id="residualization"><span class="header-section-number">25.2</span> Residualization</h2>
 <p>One intuitive way to do this is through <strong>residualization</strong>. By successively removing the variation explained by a covariate, we can isolate any remaining structure in the data (using residuals) and then examine how that relates to the response variable. The sequence below reproduces –almost exactly– the coefficient for a single predictor in a GLM.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -551,8 +538,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="residualization-two-model-predictors" class="level2" data-number="23.3">
-<h2 data-number="23.3" class="anchored" data-anchor-id="residualization-two-model-predictors"><span class="header-section-number">23.3</span> Residualization: Two model predictors</h2>
+<section id="residualization-two-model-predictors" class="level2" data-number="25.3">
+<h2 data-number="25.3" class="anchored" data-anchor-id="residualization-two-model-predictors"><span class="header-section-number">25.3</span> Residualization: Two model predictors</h2>
 <p>First, we begin with the previously examined dataset of <em>Lepusantilocapra pufferi</em> (puffer jackalope). Again, you will need to set up with R space, including loading R packages and reading in the example dataset.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"chapters/class_r_scripts/load_packages.r"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -707,8 +694,8 @@ Number of Fisher Scoring iterations: 2</code></pre>
 </div>
 </div>
 </div>
-<section id="plotting-all-the-residuals" class="level3" data-number="23.3.1">
-<h3 data-number="23.3.1" class="anchored" data-anchor-id="plotting-all-the-residuals"><span class="header-section-number">23.3.1</span> Plotting all the residuals</h3>
+<section id="plotting-all-the-residuals" class="level3" data-number="25.3.1">
+<h3 data-number="25.3.1" class="anchored" data-anchor-id="plotting-all-the-residuals"><span class="header-section-number">25.3.1</span> Plotting all the residuals</h3>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
@@ -755,8 +742,8 @@ Number of Fisher Scoring iterations: 2</code></pre>
 <p>Examine the summary of <code>modbase</code> to compare the coefficients for <code>mean_depth</code> and <code>dens</code> to the variation in each of these plots. You should immediately notice the one with less residual structure (more clustered around the regression line) has the larger effect size.</p>
 </section>
 </section>
-<section id="residualization-more-than-two-model-predictors" class="level2" data-number="23.4">
-<h2 data-number="23.4" class="anchored" data-anchor-id="residualization-more-than-two-model-predictors"><span class="header-section-number">23.4</span> Residualization: More than two model predictors</h2>
+<section id="residualization-more-than-two-model-predictors" class="level2" data-number="25.4">
+<h2 data-number="25.4" class="anchored" data-anchor-id="residualization-more-than-two-model-predictors"><span class="header-section-number">25.4</span> Residualization: More than two model predictors</h2>
 <p>The above example clearly illustrates how residualization works for a model with two predictors. But what about a model with &gt;2 predictors? We will simply add one of the other potential predictors (<code>period</code>) to our base model from above. Again, this is a rather nonsensical formulation:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>mod_full <span class="ot">&lt;-</span> <span class="fu">glm</span>(abund <span class="sc">~</span> mean_depth <span class="sc">+</span> dens <span class="sc">+</span> period, <span class="at">data =</span> pufferi)</span>
@@ -867,8 +854,8 @@ Number of Fisher Scoring iterations: 2</code></pre>
 </div>
 </div>
 </section>
-<section id="summary" class="level2" data-number="23.5">
-<h2 data-number="23.5" class="anchored" data-anchor-id="summary"><span class="header-section-number">23.5</span> Summary</h2>
+<section id="summary" class="level2" data-number="25.5">
+<h2 data-number="25.5" class="anchored" data-anchor-id="summary"><span class="header-section-number">25.5</span> Summary</h2>
 <p>The goal of this tutorial was to demystify the mathematics of regression so that it feels like a transparent tool rather than a black box. We showed that a partial coefficient is simply the relationship between the leftover variation in a predictor and the leftover variation in the response after accounting for other variables. It really is that simple.</p>
 
 
@@ -1278,12 +1265,12 @@ Number of Fisher Scoring iterations: 2</code></pre>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../chapters/03_tutorial_glms.html" class="pagination-link" aria-label="Tutorial: GLMs">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Tutorial: GLMs</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Tutorial: GLMs</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../chapters/03_DHARMA_diagnostics.html" class="pagination-link" aria-label="DHARMA diagnostics">
-        <span class="nav-page-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">DHARMA diagnostics</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">DHARMA diagnostics</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -1,4 +1,10 @@
-## From broad hypotheses to specific hypotheses
+---
+title: "Hypotheses and Predictions"
+format: html
+numbered: true
+---
+
+## Hypotheses and Predictions
 
 ### Exactly what is a *hypothesis*?
 
@@ -124,41 +130,19 @@ Words such as *effect*, *influence*, *driver*, and *mechanism* are not merely co
 
 A **hypothesis** and a **prediction** play different roles in scientific reasoning.
 
-> **Hypothesis:** a proposition about the ecological system.
+|             | Hypothesis                                        | Prediction                                                                                                          |
+| ----------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Role**    | Proposition about how the ecological system works | Expected empirical consequence of a hypothesis                                                                      |
+| **Scope**   | Generalizes beyond a particular study             | Tied to a particular study, design, or measurement                                                                  |
+| **Example** | Increasing rainfall reduces foraging activity.    | During 10-minute observations, birds experiencing higher rainfall intensity will spend less time actively foraging. |
 
-> **Prediction:** an expected empirical consequence of that hypothesis in a particular study.
+A prediction therefore connects a hypothesis to *what we expect to observe in a particular study*. For example, we can progressively move from a broad scientific idea toward something that can be directly connected to data:
 
-For example:
+- **Broad hypothesis:** Food availability limits avian populations.
+- **More specific causal hypothesis:** Increasing food availability increases reproductive success.
+- **Prediction:** Food-supplemented territories will produce more fledglings during the breeding season than otherwise comparable unsupplemented territories.
 
-**Hypothesis**
-
-> Increasing rainfall reduces foraging activity.
-
-**Prediction**
-
-> During 10-minute observation periods, birds experiencing higher rainfall intensity will spend less time actively foraging than birds experiencing lower rainfall intensity.
-
-The hypothesis makes a claim about **how the ecological system works**. The prediction translates that claim into an **expected empirical pattern in a particular study**.
-
-This distinction becomes especially useful when moving from broad scientific ideas toward empirical analysis:
-
-**Broad hypothesis**
-
-> Food availability limits avian populations.
-
-↓
-
-**More specific causal hypothesis**
-
-> Increasing food availability increases reproductive success.
-
-↓
-
-**Prediction**
-
-> Food-supplemented territories will produce more fledglings during the breeding season than otherwise comparable unsupplemented territories.
-
-The prediction is now much closer to something we could connect to an actual study design and measurement process.
+The prediction connects the hypothesis to a particular study design and measurement process.
 
 ::: {.callout-important}
 ### The wording alone does not make something a hypothesis or prediction

@@ -14,7 +14,7 @@ Define the scientific target before you choose a DAG, statistical model, or mode
 ### What to include
 
 -   **Broad scientific context**
-    -   Briefly identify the larger proposition or *hyperthesis* your project addresses
+    -   Briefly identify the larger proposition (major hypothesis) that your project addresses
 -   **Specific hypothesis**
     -   State the hypothesis you intend to evaluate
     -   Keep it focused enough that it can generate a specific prediction
@@ -249,7 +249,7 @@ Assemble the major pieces of the project into one coherent analytical narrative.
 Your draft should make the following chain easy to follow:
 
 -   **Scientific question and hypothesis**
-    -   Briefly establish the broader proposition/hyperthesis and focal hypothesis(es)
+    -   Briefly establish the broader proposition and focal hypothesis(es)
 -   **Prediction and estimand**
     -   State the focal prediction and exactly what effect you set out to estimate
 -   **DAG and causal assumptions**
@@ -290,7 +290,7 @@ Demonstrate the complete estimand-aware workflow developed throughout the course
 
 Your final report should integrate:
 
--   **Proposition/hyperthesis, hypothesis, and prediction**
+-   **Hypothesis, and prediction**
     -   Establish the scientific logic leading to the analysis
 -   **Primary estimand**
     -   State clearly what causal or statistical effect you sought to estimate

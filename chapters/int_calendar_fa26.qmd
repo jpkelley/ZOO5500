@@ -60,9 +60,8 @@ Click to expand each week for readings, class activities, and milestone expectat
 
 - Syllabus
 - Statistical Philosophy
-- Hypotheses/Hypertheses & Estimands
-- Why SCMs?
-- Franks, Ruxton & Sherratt (2025)
+- Hypotheses and Predictions
+
 
 ### After class {.unnumbered}
 

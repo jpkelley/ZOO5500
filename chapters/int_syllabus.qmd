@@ -19,7 +19,13 @@ Due to the nature of the course, I will not have specific office hours. The clas
 
 ## Prerequisites
 
-To ensure your success in this course, the following are required: - You must have a dataset to be analyzed this semester. This is very important. This class will only cover data reformatting; we will not cover data processing (except as necessary in specific cases). - Your data analysis must not be used in another (past or present). - You must be at least in your second year of graduate school. - You must have some exposure to using the Program R (tidyverse preferred, but base R is nice too). - You must have taken a statistics course in the last five years.
+To ensure your success in this course, the following are required: 
+
+- You must have a dataset to be analyzed this semester. This is very important. This class will only cover data reformatting; we will not cover data processing (except as necessary in specific cases). 
+- Your data analysis must not be used in another course (past or present). Your goal should be to discover something new. How else can you expect to maintain excitement?
+- You should be at least in your second year of graduate school (or, at least, feel that you are).
+- You must have some exposure to using the Program R (tidyverse preferred, but base R is nice too). 
+- You must have taken a statistics course in the last five years.
 
 ## Assessment and Grading Standards
 
@@ -41,7 +47,7 @@ Graduate school can be considerably challenging. Each of us is attempting to jug
 
 -   **Don't be afraid to redirect the flow of the course.** 5000-level courses are intended to be flexible and fun. I want to give you adequate time to think about and discuss the course material. I'm willing to alter the pace of the course, change the order of topics, or create new exercises/challenges for you. This is intended to be fun while simultaneously transforming you into nimble analytical thinkers and doers! So, just talk to me about how I can help!
 
--   **Read all the material in this online course guidebook.** Many online courses focus on lecture and also require a large amount of reading; this one does neither. This website introduces topics and primes your thinking, so that we can have fruitful discussions in class. 
+-   **Read all the material in this online course guidebook.** Many courses focus on lecture and also require a large amount of reading; this one does neither. This website introduces topics and primes your thinking, so that we can have fruitful discussions in class. 
 
 -   **Show up to as many of discussions as you can.** When we meet together, our goal will be to solidify everyone's understanding of different concepts and how they are linked. These concepts will be useful as you navigate your own analysis project.
 
@@ -49,7 +55,7 @@ Graduate school can be considerably challenging. Each of us is attempting to jug
 
 As your instructor, you should expect me to:
 
--   Try my very hardest to make the course go smoothly (the reason you now have this nice new online course guide); but please be prepared for the inevitable hiccups. No matter how hard we all try, there always seem to be a few obstacles (like internet going down for a couple of hours when we're on Zoom).
+-   Try my very hardest to make the course go smoothly (the reason you now have this nice new web-basedcourse guide); but please be prepared for the inevitable hiccups. No matter how hard we all try, there always seem to be a few obstacles (like internet going down for a couple of hours when we're on Zoom).
 -   Respond to questions within 24 hours during the work week. However, I likely will not respond during the weekend (unless there is an urgent matter).
 -   Respect you not only as a learner but as a colleague.
 -   Understand that these are strange and sometimes unforgiving times. We all have varying levels of tolerance and resistance to stress. If you are having a hard time for whatever reason, please communicate with me. Fortunately, I really suck at judging people, but I can do a hell of a job listening and working with you to solve a problem (or finding someone else who can).

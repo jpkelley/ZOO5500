@@ -3,248 +3,345 @@ title: "Assignments & Grades"
 number-sections: false
 ---
 
-This page first describes the Milestone Assignments referenced in the course calendar. Each section below explains the purpose of the milestone, what to submit, and what “good” typically looks like. Grading rubrics are described at the end of this page.
+This page describes the Milestone Assignments referenced in the course calendar. These should not be viewed as eight separate assignments. Each milestone builds on the previous one, moving from a clearly defined scientific target through causal identification, estimation, inference, and final synthesis. Each section below explains the purpose of the milestone, what to submit, and what a “good” assignment typically looks like. The general rubric is described at the end of this page.
 
 ## Milestone Assignment descriptions
 
-::: {.callout-note title="**Analysis Concept Note (Week 2)**" icon="false" collapse="true"}
+::: {.callout-note title="**Scientific Question + Estimand Note (Week 2; due 11-Sep)**" icon="false" collapse="true"}
 **Purpose:**\
-Lock in a feasible analysis plan early, so you’re not improvising later. This is about scope, clarity, and workflow—not results.
+Define the scientific target before you choose a DAG, statistical model, or model family. This assignment is about making clear what you are actually trying to learn from your project.
 
 ### What to include
-[Download the Analysis Concept Note template (.qmd)](../templates/01_template.qmd)
 
--   Working title (can change later)
--   Your focal question (1–3 sentences; plain language)
--   Study system and units of analysis (what is one “row,” conceptually?)
--   Response variable(s) and predictor(s) you expect to use (draft list is fine)
--   Hypothesized relationships
-    -   Short bullets; include directionality when possible
--   Data source and file plan
-    -   Where the data live\
-    -   What you will name files\
-    -   What the folder structure will be
--   Planned model family (tentative)
-    -   e.g., GLM / GLMM / GAM / GAMM, and why that’s your first guess
--   Potential complications you already suspect
-    -   Missing data, non-independence, zero inflation, seasonality, etc.
+-   **Broad scientific context**
+    -   Briefly identify the larger proposition or *hyperthesis* your project addresses
+-   **Specific hypothesis**
+    -   State the hypothesis you intend to evaluate
+    -   Keep it focused enough that it can generate a specific prediction
+-   **Prediction(s)**
+    -   State the expected pattern or contrast in a form that connects directly to your focal effect
+-   **Primary estimand**
+    -   Describe the effect you want to estimate
+    -   Identify the exposure/treatment, outcome, and relevant comparison
+    -   State the population, units, or conditions to which the effect applies when relevant
+-   **Brief project and data description**
+    -   Study system
+    -   Unit of analysis
+    -   Data source and basic sampling structure
 
 ### Submission format
 
--   1–2 pages (PDF) or a short Quarto/Markdown page
--   Clear headings (don’t bury the key information)
+-   Approximately 1–2 pages (Word) or a short Quarto page
+-   Use clear headings so the progression from scientific idea → hypothesis → prediction → estimand is easy for me to follow
+-   Include the final Evaluation Table (i.e. rubric-tested) output from JackalopeGPT with your submission
 
 ### “Good” looks like
 
--   A question that is answerable with the data you actually have
--   Reasonable scope for one semester
--   A workflow plan that makes your project reproducible from day one
+-   A hypothesis and prediction that clearly follow from the broader scientific idea
+-   An estimand that says exactly what effect you want to learn about
+-   A scientific target that is plausible (given the  data and scope of a one-semester project)
+-   No commitment to a statistical model simply because it is familiar
 :::
 
-::: {.callout-note title="**Data Readiness Note (Week 4)**" icon="false" collapse="true"}
-**Purpose:**
-For your Data Readiness Note, you will build upon your Analysis Concept Note. (Note that this does _not_ mean that you should simply paste the information below at the end of your Analysis Concept Note; it means that you should recycle.reuse the materials from your Analysis Concept Note as a foundation for your metadata and data readiness statement.) 
+::: {.callout-note title="**Causal Analysis Plan (Week 4; due 25-Sep)**" icon="false" collapse="true"}
+**Purpose:**\
+Show that your scientific question, causal assumptions, estimand, and identification strategy fit together *before* you begin serious statistical modeling. This is the major causal-planning milestone for the project.
 
-The primary goal of the Data Readiness Note is to demonstrate that your dataset is analysis-ready—or identify exactly what still blocks you. This is your chance to be honest about limitations before modeling. 
+### What to include
+
+-   **Your current DAG**
+    -   Include the variables and causal relationships needed to represent the system relevant to your focal estimand
+    -   Keep the graph focused: not every ecological process in the ecological universe belongs in your DAG
+-   **Causal assumptions**
+    -   Briefly explain the most important arrows
+    -   Identify important assumptions represented by missing arrows when necessary
+-   **Primary estimand**
+    -   Restate or refine the estimand from your Week 2 note
+-   **Causal roles**
+    -   Identify important exposures, outcomes, confounders, mediators, colliders, or other variables relevant to the focal effect
+-   **Identification argument**
+    -   Explain why the focal effect is identifiable—or why it may not be
+    -   Identify the adjustment strategy implied by the DAG
+    -   Explain why key variables should or should not be conditioned on
+-   **Major unmeasured threats**
+    -   Identify the most important unmeasured variables or assumptions that could threaten the causal interpretation
 
 ### Submission format
 
-Unlike Assignment #1 (Analysis Concept Note), there is flexibility in the submission format. As you will see below, I recommend using the YAML template for Part 1 (metadata), but the format is otherwise up to you. If you submit in a rendered PDF or HTML, I will provide general feedback in text form (Word document, etc.); if you submit as QMD file, I will respond within callout boxes. Whatever works best for your workflow also works for me!
-
-### What to include
-
-The components in the list below should be included in your assignment submission; keep these in _separate_ files for your own records, but please --if you can-- combine them all into a single file before submitting via email. 
-
-**Part 1: Metadata file**
-It is strongly suggested you use [**YAML Metadata Template**](../templates/metadata_template.yaml), but you may also create a temporary metadata document using a spreadsheet. Your submission should include a _very good initial attempt_ at making a formal metadata file that includes the following kinds of information (but could include more):
-
--   Dataset summary: Number of rows/observations, key grouping structure (site, individual, date, etc.)
--   Data dictionary (lightweight): Variable name → meaning → units → type (numeric, factor, date)
--   Missingness and exclusions: what is missing, where is it missing from, and what you did about it (if anything)
--   Measurement and uncertainty notes: Known measurement error, detection limits, observer effects, instrument drift, etc.
-
-**Part 2: Basic Exploratory Data Analysis outputs**
-This component should include _minimal but informative_ exploratory data analysis. You _do not_ need to show density plots of all 1000+ variables. Highlight a few approaches that detected problematic issues, if possible. Again, make this useful for your own documentation purposes. This short section should include:
-    
--   Basic graphs or tables
-    -   1–3 plots that reveal structure (distributions, relationships, time trends)
-    -   A short paragraph interpreting what matters
--   Readiness decision
-    -   “Ready to model” or “Not ready yet,” with a clear plan to get there
-
-**Part 3: AI-based Evaluation Table**
-A document showing that you used JackalopeGPT to include the final Evaluation Table (i.e. rubric-tested) output from JackalopeGPT. 
+-   Word or Quarto page
+-   Include a legible DAG plus concise text explaining the reasoning behind it
+-   The goal is not a giant causal encyclopedia; emphasize assumptions that matter for your focal estimand
+-   Include the final Evaluation Table (i.e. rubric-tested) output from JackalopeGPT
 
 ### “Good” looks like
 
-A submission of high quality will demonstrate:
-
--   that you have a clear idea about (and can explain) what each variable means and whether it is trustworthy
--   that you recognize your responsibility to document your metadata in a way that can be understood by future users
--   that you purposefully applied basic approaches of Exploratory Data Analysis (and have not used this as a simple plot dump)
--   that you are ready to move on to data analysis!
-
-
+-   The DAG, estimand, and identification argument tell the same causal story
+-   Adjustment decisions follow from causal reasoning rather than variable screening or AIC
+-   Important assumptions and unmeasured threats are visible rather than hidden
+-   You can explain why the proposed analysis would estimate the effect you claim it estimates
 :::
 
-::: {.callout-note title="**Working Model: Draft (Week 7)**" icon="false" collapse="true"}
+::: {.callout-note title="**Data + Estimator Plan (Week 6; due 09-Oct)**" icon="false" collapse="true"}
 **Purpose:**\
-Put a real model on the table. This is a draft: imperfect is fine, but it must be runnable and defensible.
+Connect the causal architecture of your project to the data you actually have and to the statistical machinery you will use. This milestone asks whether your measured variables can represent the DAG well enough to estimate the focal effect.
 
 ### What to include
 
--   Your current model formula(s) (plain language and/or code notation)
--   Model type (GLM, GLMM, GAM, etc.) and why it fits the data structure
--   Key diagnostics or checks (draft level)
-    -   Anything that suggests it’s “in the ballpark” or clearly broken
--   One short interpretation paragraph
-    -   What the model suggests (careful language; no over-claiming)
--   A short “known issues” list
-    -   What you know is wrong or incomplete\
-    -   What you plan to try next
+**Part 1: From DAG nodes to measurements**
+
+-   Map the important variables in your DAG to variables in your dataset
+-   For each major measured variable, document as needed:
+    -   what was measured
+    -   units or coding
+    -   sampling or grouping structure
+    -   important measurement limitations
+-   Identify important DAG variables that are missing or only imperfectly measured
+
+**Part 2: Data quality + targeted EDA**
+
+-   Summarize missingness, exclusions, and obvious data-quality problems
+-   Include a *small* set of useful exploratory plots or tables
+    -   Focus on features that affect the proposed estimator: distributions, sparsity, clustering, nonlinear patterns, temporal structure, etc.
+    -   Do not submit a plot dump
+-   Explain what the EDA changes (or does *not* change) about your analysis plan
+
+**Part 3: Proposed estimator**
+
+-   Name the statistical estimator/model you currently plan to use
+    -   e.g., GLM, GLMM, GAM, GAMM, standardization/g-computation, or another appropriate approach
+-   Give the proposed model structure or formula when possible
+-   Explain why the estimator is appropriate for:
+    -   the estimand
+    -   the outcome distribution
+    -   the sampling/dependence structure
+    -   the functional relationships you expect
+-   Briefly describe how your files/code are organized so the analysis can be reproduced (this is primarily for your own records)
 
 ### Submission format
 
--   Quarto page (preferred) or PDF with model description and outputs
--   Include enough detail that someone else could reproduce the model from your write-up
--   In your Quarto-formatted (.qmd) submission, please include the final Evaluation Table (i.e. rubric-tested) output from JackalopeGPT. 
+-   Word or Quarto page; a concise metadata/data dictionary may be included as a table or separate file
+-   Include only EDA that informs measurement, model structure, or estimation
+-   Include the final Evaluation Table (i.e. rubric-tested) output from JackalopeGPT
 
 ### “Good” looks like
 
--   A runnable model aligned with your question
--   Honest diagnostics and a clear plan to improve
+-   A clear mapping from causal variables → measured variables → statistical estimator
+-   Honest treatment of measurement limitations and missing information
+-   EDA used purposefully rather than as a search for “significant” patterns
+-   An estimator justified by the scientific target and data structure (not merely by software availability or familiarity)
 :::
 
-::: {.callout-note title="**Working Model: Final Lock (Week 8)**" icon="false" collapse="true"}
+::: {.callout-note title="**Working Estimator Checkpoint (Week 8; due 23-Oct)**" icon="false" collapse="true"}
 **Purpose:**\
-Freeze the core model so the rest of the semester can focus on prediction, interpretation, and reporting instead of endless tinkering.
+Run a real model (estimator) early enough to catch any obvious implementation problems. This is a checkpoint; this is *not* a rigid model that you must marry. You are, of course, allowed to make careful changes that are consistent with the *a priori* established causal reasoning, data structure, or model diagnostics.
 
 ### What to include
 
--   Final model specification
-    -   Final formula, family/link, random effects or smooths, correlation structures if used
--   Justification
-    -   Why this structure is appropriate for the data and the question
--   Model checks
-    -   A small set of diagnostics you can defend\
-    -   Notes on remaining limitations
--   What changes are no longer allowed
-    -   After the lock, presentation and interpretation may improve, but model shopping should stop without compelling justification
+-   **Current primary estimator/model**
+    -   Model formula or equivalent specification
+    -   Family/link, random effects, smooths, correlation structures, or other important components where relevant
+-   **Why this estimator**
+    -   Briefly connect the specification back to your estimand and identification strategy
+-   **Key diagnostics/checks**
+    -   Include a small number of checks that tell you whether the estimator is behaving reasonably
+    -   Flag obvious violations, convergence problems, residual structure, poor support, or other concerns
+-   **Preliminary estimate**
+    -   Include a preliminary focal effect estimate if the analysis is ready for one
+    -   If it is not ready, say exactly what is intefering with the estimation
+-   **Unresolved issues**
+    -   What remains uncertain, broken, or incomplete?
+    -   What changes are you considering, and what would justify them?
 
 ### Submission format
 
--   Quarto page (preferred) or PDF
--   Include key outputs you will rely on later (even if figures improve)
--   In your Quarto-formatted (.qmd) submission, please include the final Evaluation Table (i.e. rubric-tested) output from JackalopeGPT. 
+-   RProj folder complete with Quarto (preferred) as well as raw data file with enough code/output description to make the estimator reproducible
+-   Keep diagnostics selective and interpretable
+-   Include the final Evaluation Table (i.e. rubric-tested) output from JackalopeGPT
 
 ### “Good” looks like
 
--   A stable model you can explain to a skeptical reader
--   Evidence you tested assumptions (rather than hoping)
+-   A runnable estimator that follows from the causal and data plans
+-   Diagnostics are used to learn about problems rather than simply certify the model
+-   Any proposed changes have a scientific or statistical justification
+-   Known problems are stated plainly rather than hidden
 :::
 
-::: {.callout-note title="**Interpretation Memo (Week 12)**" icon="false" collapse="true"}
+::: {.callout-note title="**Estimate + Inference Checkpoint (Week 11; due 13-Nov)**" icon="false" collapse="true"}
 **Purpose:**\
-Practice disciplined interpretation and uncertainty-aware reasoning. This is where you show that you can tell the truth about what the model does—and does not—say.
+Align the estimand, numerical estimate, uncertainty, and scientific claim. This is where you demonstrate that the quantity produced by your analysis actually supports the statement you set out to make.
 
 ### What to include
 
--   Main result(s) in plain language
--   Uncertainty
-    -   What is uncertain and why\
-    -   Confidence intervals, credible intervals, prediction intervals, or other appropriate summaries
--   Prediction vs. inference clarity
-    -   Are you predicting new cases, explaining mechanisms, or both?
--   Sensitivity or robustness (lightweight)
-    -   One small check that increases confidence (or reveals fragility)
--   Limitations
-    -   The most important threats to inference and how they affect interpretation
+-   **Primary estimate(s)**
+    -   Report the focal effect on a scientifically interpretable scale (no weird ratios that take 10 minutes to decipher)
+    -   Use contrasts, standardized/g-computed estimates, predictions, or other summaries appropriate to your estimand
+-   **Uncertainty**
+    -   Provide confidence intervals, credible intervals, simulation-based uncertainty, or another appropriate summary
+    -   Explain what the uncertainty represents
+-   **Diagnostics and sensitivity**
+    -   Include the checks most relevant to trusting the estimate
+    -   Add a lightweight sensitivity/robustness check where useful
+-   **Exact supported claim**
+    -   Write the scientific claim that you think follows from the estimate
+    -   Make the population, comparison, direction, magnitude, or conditions explicit when appropriate
+-   **Assumptions and limitations**
+    -   Identify the assumptions most important to the causal interpretation
+    -   Explain the major remaining limitations
+-   **What cannot be inferred**
+    -   State at least one tempting interpretation that the analysis does *not* support
 
 ### Submission format
 
--   \~1–2 pages (PDF) or Quarto page
--   Emphasis on writing quality and intellectual restraint
--   In your Quarto-formatted (.qmd) submission, please include the final Evaluation Table (i.e. rubric-tested) output from JackalopeGPT. 
+-   Approximately 1–2 pages plus the minimum figures/tables needed to show the estimate and uncertainty
+-   Word or Quarto
+-   Include the final Evaluation Table (i.e. rubric-tested) output from JackalopeGPT
 
 ### “Good” looks like
 
--   Clear, honest claims tied directly to model output
--   Uncertainty is centered, not hidden
--   No story time beyond what the evidence supports
+-   The reported estimate corresponds to the stated estimand
+-   Uncertainty is visible and interpreted rather than treated as decoration
+-   The scientific claim does not outrun the identification assumptions or data
+-   You can distinguish what the analysis supports from what remains unknown
 :::
 
-::: {.callout-note title="**Results Section (Week 14)**" icon="false" collapse="true"}
-
-**NOTE: This assignment was removed, as everyone in the class was at different stages of their analysis.**
-
+::: {.callout-note title="**Interpretation / Peer-Audit Memo (Week 12; due 20-Nov)**" icon="false" collapse="true"}
 **Purpose:**\
-Draft the Results section you would submit in a real paper or report: concise, structured, and supported by tables and figures.
+Turn peer critique into concrete revision. Rather than producing another long interpretation assignment, this short memo asks you to identify the most important problems revealed by the audit and explain what you will do about each of them.
 
 ### What to include
 
--   Short orienting paragraph
-    -   What you modeled and what the reader should look for
--   Core results
-    -   2–4 key findings, depending on project scope
--   Tables and/or figures
-    -   Clean, interpretable, labeled, and referenced in text
--   Minimal interpretation
-    -   State what you found; deeper interpretation comes later or is clearly separated
+Respond to **three issues** identified through peer review:
+
+-   **One causal issue**
+    -   e.g., DAG structure, identification, adjustment, causal language, or an important assumption
+-   **One statistical issue**
+    -   e.g., model specification, diagnostics, uncertainty, functional form, dependence, or estimation
+-   **One communication issue**
+    -   e.g., figure/table clarity, terminology, organization, or a claim that is difficult to interpret
+
+For each issue:
+
+-   Briefly describe the concern
+-   State whether you agree that it requires revision
+-   Explain the change you will make—or justify why you will not make one
+-   Note any consequence for the estimand, estimator, estimate, or inference
 
 ### Submission format
 
--   Quarto page (ideal) or PDF
--   Include figure and table captions
--   In your Quarto-formatted (.qmd) submission, please include the final Evaluation Table (i.e. rubric-tested) output from JackalopeGPT. 
+-   Short memo (Word format is fine); approximately 1 page is usually enough
+-   A simple three-part structure is encouraged: **causal → statistical → communication**
+-   Include the final Evaluation Table (i.e. rubric-tested) output from JackalopeGPT
 
 ### “Good” looks like
 
--   Findings are understandable without reading your code
--   Figures and tables do real work
--   Claims match the evidence shown
+-   Peer feedback is evaluated thoughtfully; do not simply accept all revisions.
+-   Planned revisions are very specific and actionable
+-   You recognize when one change propagates through other parts of the causal workflow
+-   The memo makes the next stage of revision obvious
 :::
 
-::: {.callout-note title="**Full Draft (Week 15)**" icon="false" collapse="true"}
-
-
-**NOTE: This assignment was removed, as everyone in the class was at different stages of their analysis. One-on-one meetings with each student took the place of this assignment.**
-
+::: {.callout-note title="**Integrated Analysis Draft (Week 14; due 04-Dec)**" icon="false" collapse="true"}
 **Purpose:**\
-Assemble a complete, coherent draft that reads like a real scientific product. Structure and flow matter here.
+Assemble the major pieces of the project into one coherent analytical narrative. (This should be easy.) This is the concrete object used for your final report: it should be complete but still considered a draft.
 
 ### What to include
 
--   At minimum: Introduction, Methods, Results, Discussion (or equivalent)
--   Consistent terminology
-    -   Variable names, units, and definitions do not drift
--   All figures and tables in near-final form
--   References and citations, as appropriate
+Your draft should make the following chain easy to follow:
+
+-   **Scientific question and hypothesis**
+    -   Briefly establish the broader proposition/hyperthesis and focal hypothesis(es)
+-   **Prediction and estimand**
+    -   State the focal prediction and exactly what effect you set out to estimate
+-   **DAG and causal assumptions**
+    -   Include the current causal diagram and the assumptions most important to the analysis
+-   **Identification**
+    -   Explain the adjustment/identification strategy
+-   **Data and estimator**
+    -   Connect measured variables and sampling structure to the estimator
+    -   Describe the final or near-final statistical specification
+-   **Estimate and uncertainty**
+    -   Present the focal effect estimate(s), uncertainty, and key diagnostics
+-   **Inference**
+    -   State the scientific interpretation supported by the analysis
+    -   Identify major limitations and what cannot be concluded
+-   **Figures and tables**
+    -   Include the key visual or tabular results needed to understand the analysis
+
+### Submission format
+
+-   Word or Quarto render (HTML preferred)
+-   This does *not* have to look like a conventional journal manuscript; organization around the causal workflow is encouraged
+-   Figures and tables should be legible, captioned, and referenced in the text
+-   Include the final Evaluation Table (i.e. rubric-tested) output from JackalopeGPT
+
+### “Good” looks like
+
+-   A reader can trace the logic from scientific question to inference without reconstructing it from scattered pieces
+-   Terminology and target effects remain consistent throughout
+-   Figures and tables support the main argument rather than simply display output
+-   Remaining weaknesses are limited enough that focused revision can produce the final report
+:::
+
+::: {.callout-note title="**Final Report (Week 15; due 11-Dec)**" icon="false" collapse="true"}
+**Purpose:**\
+Demonstrate the complete estimand-aware workflow developed throughout the course. The goal is not to produce a giant everything-you-have-ever-done document or to force every project into a conventional manuscript structure. The goal is a coherent, defensible analysis in which the scientific question, causal assumptions, statistical estimation, and inference all line up.
+
+### What to include
+
+Your final report should integrate:
+
+-   **Proposition/hyperthesis, hypothesis, and prediction**
+    -   Establish the scientific logic leading to the analysis
+-   **Primary estimand**
+    -   State clearly what causal or statistical effect you sought to estimate
+-   **DAG and causal assumptions**
+    -   Present the causal structure relevant to the focal estimand
+    -   Explain the assumptions that matter most
+-   **Identification**
+    -   Explain why the focal effect is—or is not—identifiable under those assumptions
+    -   State the adjustment strategy or other identification logic
+-   **Data and measurement**
+    -   Describe the data, sampling structure, and important measurement limitations
+-   **Estimator**
+    -   Explain the statistical machinery used to estimate the target effect
+    -   Include important diagnostics and justification
+-   **Estimate and uncertainty**
+    -   Present the focal estimate(s) on an interpretable scale
+    -   Make uncertainty explicit
+-   **Inference and limitations**
+    -   State the scientific conclusion supported by the analysis
+    -   Distinguish that conclusion from claims the analysis cannot support
+    -   Identify the assumptions or limitations that matter most
+-   **Key figures and tables**
+    -   Include only those that materially help communicate the analysis
 
 ### Submission format
 
 -   Quarto render (HTML or PDF preferred)
--   Ensure figures and tables are legible and captioned
--   In your Quarto-formatted (.qmd) submission, please include the final Evaluation Table (i.e. rubric-tested) output from JackalopeGPT. 
+-   Organize the report so the causal and inferential logic is easy to follow
+-   Keep the report focused on the *final* analytical story rather than documenting every abandoned model or exploratory detour
+
+**Instructions:** [**Click here for the complete (and exhaustive) set of instructions.**](https://jpkelley.github.io/ZOO5500/chapters/final_report_overview.html)
 
 ### “Good” looks like
 
--   A document that could be revised into something publishable
--   Clear logic and honest uncertainty
--   No missing major components
-:::
+-   The scientific question, estimand, DAG, identification strategy, estimator, estimate, and inference form one coherent chain
+-   Causal claims are proportional to the assumptions and evidence supporting them
+-   Uncertainty and important limitations are visible
+-   A skeptical reader can understand both what you learned and why you believe the analysis supports it
 
-::: {.callout-note title="**Final Report (Week 16)**" icon="false" collapse="true"}
-**Purpose:**\
-This final deliverable for ZOO/ECOL-5500 replaces the original, separate assignments on interpretation, results, full draft, and revision planning. Because everyone's projects are at vastly different stages, the goal is not to produce a perfect paper or even a complete methods or results section. The goal is for you to demonstrate that you can connect a research question, causal assumptions, model structure, results, and interpretation into one coherent analysis. Remember that this is a final synthesis of what you have learned about your study system during this course; it is not a giant everything-you-have-ever-done document. Include only what helps me understand (ahem...reminds me of) the question, model, results, and interpretation.
+### Important note about grades on the Final Report. 
 
-**Instructions:** [**Click here for the complete (and exhaustive) set of instructions.**](https://jpkelley.github.io/ZOO5500/chapters/final_report_overview.html) Please note that this is severe over-detail of the assignment. But some folks have asked about it!
+Because the component parts of the Final Report have been graded throughout the term, I will not be re-reading all Final Report Submissions. There is simply not enough time to give a full review of all submissions. That said, I will be skimming each submission and spot-checking specific points about which I made notes during the course of the term. 
+
+
 :::
 
 ------------------------------------------------------------------------
 
 ## General assignment submission requirements
 
-For many assignments, at least a partial template is provided (e.g. YAML or QMD). You may choose to submit a raw Quarto Markdown file or submit a version of it rendered as a PDF or in HTML (viewable in a browser). As long as it is legible and, more importantly, makes sense within your own workflow, it works for me.
+You may choose to submit a raw Quarto Markdown file or submit a version of it rendered as a Word document (so that it is editable by me). As long as it is legible and, more importantly, makes sense within your own workflow, it works for me.
 
 Here is a brief note about Quarto Markdown, which is preferred to R Markdown. While R Markdown is **not** obsolete by any means, it has a number of disadvantages compared to Quarto; these are summarized in the table below.
 
@@ -265,7 +362,7 @@ For this course, please use Quarto.
 
 ::::: columns
 ::: {.column width="70%"}
-Numerical grades are downright loathsome. For all assignments except the Final Report, I use the Traffic Signal Grading Scale:
+Numerical grades are downright loathsome. And boring. And laborious. For all assignments, I use the Traffic Signal Grading Scale:
 
 | Grade  | Simple meaning   | Scientific judgement                       |
 |--------|------------------|--------------------------------------------|

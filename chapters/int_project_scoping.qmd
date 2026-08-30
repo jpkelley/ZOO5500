@@ -5,9 +5,19 @@ number-sections: false
 toc: true
 ---
 
-This course is designed so that your **final product** (Methods + Results + start of Discussion / primary inferences) is built **incrementally** across Milestone Assignments. The fastest way to struggle in this course is to choose a project that is “interesting” but not **workable** (either because it is too big, or it is beyond your current experience level). The fastest way to thrive is to choose a project that is both **meaningful** to _you_ and also has a clearly defined **scope**.
+This course is designed so that your **final product** (Methods + Results + start of Discussion / primary inferences) is built **incrementally** across Milestone Assignments. The fastest way to struggle in this course is to choose a project that is “interesting” but not **workable** (either because it is too grand in scope, or it is beyond your current experience level). Conversely, the fastest and easiest way to thrive is to choose a project that is both **meaningful** to _you_, has a clearly defined and manageable **scope**, and directly benefits from the course topics. Towards these goals, every course Milestone is a checkpoint that asks you to refine and build upon the *same* project:
 
-Below are a few concrete recommendations for scoping a project that is:
+- Week 2: Scientific Question + Estimand Note
+- Week 4: Causal Analysis Plan 
+- Week 6: Data + Estimator Plan 
+- Week 8: Working Estimator Checkpoint
+- Week 11: Estimate + Inference Checkpoint
+- Week 12: Interpretation / Peer-Audit Memo
+- Week 14: Integrated Analysis Draft 
+- Week 15: Final Report
+
+A well-scoped project means each milestone feels like a **natural next step**, not a complete and uncomfortable reset. 
+Below are a few concrete recommendations (Principles) for scoping a project that is:
 
 - **Maximally helpful** for your scientific growth  
 - Something you can **think deeply about** all semester  
@@ -15,24 +25,11 @@ Below are a few concrete recommendations for scoping a project that is:
 - Something that helps you progress toward your **degree**
 - Something that **excites you** enough to keep returning to it
 
-## The big idea: pick a data analysis project that benefits from the course topics
-
-Every milestone is a checkpoint that asks you to refine the *same* project:
-
-- Week 2: Analysis Concept Note (scope + design clarity + workflow plan)
-- Week 4: Data Readiness Note (data trustworthiness + Exploratory Data Analysis with purpose)
-- Week 7–8: Working Model (runnable → defensible → locked)
-- Week 12: Interpretation Memo (uncertainty-aware reasoning)
-- Week 14: Results Section (clear, concise quantitative reporting)
-- Week 15: Full Draft (coherent paper-like product)
-- Week 16: Revision Plan (strategic improvement thinking)
-
-A well-scoped project means each milestone feels like a **natural next step**, not a complete and uncomfortable reset. 
 
 Below are five Principles of Scoping for projects in this course (click on the boxes to expand):
 
 ::: {.callout-tip icon=false collapse=true}
-### **Scoping Principle #1: “You only get one semester of attention”**
+### **Scoping Principle #1: “You only get one semester or undivided attention”**
 
 Choose a question that you will be happy thinking about repeatedly but only for this finite, semester-long period. If the project is too small, there is a danger that you may become bored. If the project is too big and ambitious, you will likely drown in a turbulent sea of discontent (and then blame me or your housemate).
 
@@ -50,16 +47,14 @@ A good scope has:
 
 This course covers:
 
+- Structural causal modeling (conceptual level; DAGs)
 - Metrology, uncertainty, and data quality
 - Exploratory Data Analysis for messy data
 - GLMs → GLMMs → GAMs / GAMMs
 - Spatial / temporal heterogeneity
-- Model comparison (AIC)
-- Prediction and validation
-- Structural causal modeling (conceptual level; DAGs)
 - Writing results with restraint (defensible claims)
 
-A strong project doesn’t need to use *every* tool — but it should naturally connect to **several** of them. Ideally, your project has at least *one* “real” complication that forces you to think like a scientist:
+A strong project doesn’t need to use *every* tool — but it should naturally connect to **several** of them. Ideally, your project has at least *one* “real” complication that forces you to think like a scientist. Such complications may include:
 
 - non-independence (repeated measures; clustered sampling)
 - zeros (many true zeros or detection problems)
@@ -72,23 +67,23 @@ A strong project doesn’t need to use *every* tool — but it should naturally 
 ::: {.callout-tip icon=false collapse=true}
 ## **Scoping Principle #3: Use this to build an reusable infrastructure**
 
-The biggest hidden benefit of a good scope is that it rewards you for building a clean workflow early:
+The greatest hidden benefit of good project scoping is that it rewards you for building a clean workflow early that includes:
 
 - clear folder structure
-- reproducible Quarto document(s)
+- reproducible Quarto or other Markdown document(s)
 - a lightweight data dictionary
 - stable variable names and units
 - AI interaction logging for troubleshooting and drift tracking
 
-If your project is well-scoped, each improvement you make in Week 2–4 pays dividends in Weeks 7–15.
+If your project is well-scoped, each improvement you make in Week 2–4 will pay dividends after week 7.
 :::
 
 ::: {.callout-tip icon=false collapse=true}
-## **Scoping Principle #4: pick something that advances your degree**
+## **Scoping Principle #4: Pick something that advances the progess towards your degree**
 
 If possible, choose a dataset that:
 
-- is from your lab, thesis, dissertation, or a collaborator
+- is from your research, lab, or a collaborator
 - connects to a real paper/report you *could* write
 - has a real audience beyond this course (advisor, lab group, agency, etc.)
 
@@ -96,20 +91,18 @@ Even if the final product is “only” a course draft, you want it to be a **us
 :::
 
 ::: {.callout-tip icon=false collapse=true}
-## **Scoping Principle #5: be honest about what you have right now**
+## **Scoping Principle #5: Be honest about what you have right now**
 
 A project is not “good” because it is fascinating; it is good because you can **answer something** with the data you actually possess.
 
-Before committing, you should be able to answer:
+Before committing to a dataset for your course project, you should be able to answer:
 
-- Do I have the dataset _in-hand_ by Week 2?
-- Does the dataset need cleaning, and can this be done by Weeks 2-3?
+- Do I have the dataset _in-hand_ by the end of Week 1?
+- Can I explain each variable’s meaning and units by the end of Week 1?
 - Are the key variables already measured?
-- Can I explain each variable’s meaning and units by Week 4?
-- Is the sampling design understandable enough to model by Week 7?
-- Can I reasonably lock a core model by Week 8?
+- Does the dataset need cleaning, and can this be done by the end of Weeks 2?
 
-If the answer is _no_ to any of these, you can still proceed, but you must scope down to what is truly feasible.
+If the answer is _no_ to any of these, you can still proceed, but I strongly suggest that you reduce the scope to a level that is realistically feasible.
 :::
 
 ## A practical scoping checklist
@@ -149,10 +142,10 @@ Does canopy cover predict bird counts per visit, after accounting for site-to-si
 - repeated measures → non-independence
 
 **Why this is well-scoped:**  
-- runnable GLMM by Week 7  
-- lockable model by Week 8  
-- meaningful uncertainty-aware interpretation by Week 12  
-- produces a clean Results section by Week 14
+- clear question: canopy cover → bird counts per visit.
+- known structure: 4 visits nested within 30 sites.
+- defensible model: count GLMM with site random intercept.
+- manageable complication: detection varies with canopy/wind.
 
 **What you *don’t* try to do:**  
 - no “global biodiversity mechanisms”  
@@ -199,9 +192,9 @@ Too broad to be answerable in one semester
 :::
 :::::
 
-## “Scope down” moves that work (and feel good)
-
-If your idea is too big, these moves are almost always helpful (but we can talk about what is best for your particular goals):
+## Hints for reducing scope that actually work (and reduce stress)
+ 
+If your idea is too largely scoped, these actions are almost always helpful (but we can talk about what is best for your particular goals):
 
 - **Pick one response variable** (one outcome, not five)
 - **Choose one spatial scale** (plots *or* sites, not a whole hierarchy)

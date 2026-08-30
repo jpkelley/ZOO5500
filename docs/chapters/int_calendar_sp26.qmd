@@ -14,30 +14,30 @@ Use the calendar table below to see what’s coming each week; simply click a we
 All Milestone Assignments due by end of day on Friday.
 :::
 
-::: {.course-info tbl-colwidths="[14, 32, 18, 18, 10, 8]"}
-| **Week** | **Topics** | **In-class exercise** | **Milestone assignment** (due Friday) | **Stress level** | **Grade weight (%)** |
-|-----------:|------------|------------|------------|------------|------------|
-| [**Week 1**<br>19-Jan-2026](#week-1) | Course intro; RStudio setup; AI guardrails | Project scoping discussion | — | Very low | 0 |
-| [**Week 2**<br>26-Jan-2026](#week-2) | File structure; reproducible workflows; AI logs | File audit walkthrough | Analysis Concept Note | Low | 5 |
-| [**Week 3**<br>02-Feb-2026](#week-3) | Data exploration; measurement & uncertainty | Exploratory data analysis walkthrough | — | Very low | 0 |
-| [**Week 4**<br>09-Feb-2026](#week-4) | GLMs (theory + practice) | GLM exercise | Data Readiness Note | Low | 10 |
-| [**Week 5**<br>16-Feb-2026](#week-5) | GLMs | Model comparison exercise | — | Low | 5 |
-| [**Week 6**<br>23-Feb-2026](#week-6) | GLMMs | GLMM exercise | — | Moderate | 15 |
-| [**Week 7**<br>02-Mar-2026](#week-7) | GAMs | GAM exercise | Working Model (draft) | Moderate | 0 |
-| [**Week 8**<br>09-Mar-2026](#week-8) | GAMMs; spatial & temporal heterogeneity | Model refinement exercise | Working Model (final lock) | Moderate | 15 |
-| [**Week 9**<br>16-Mar-2026](#week-9) | Student Spring Break | — | — | None | 0 |
-| [**Week 10**<br>23-Mar-2026](#week-10) | Structural Causal Modeling (SCM) | Causal diagram critique | — | Low | 10 |
-| [**Week 11**<br>30-Mar-2026](#week-11) | Instructor Spring Break | — | — | None | 0 |
-| [**Week 12**<br>06-Apr-2026](#week-12) | Prediction & uncertainty (SCMs) | Prediction checks | Interpretation Memo | Low | 10 |
-| [**Week 13**<br>13-Apr-2026](#week-13) | Synthesis & justification (SCMs) | Peer + AI review | -— | Moderate | 0 |
-| [**Week 14**<br>20-Apr-2026](#week-14) | One-on-one meetings | Final project check-in | -- | Low | 10 |
-| [**Week 15**<br>27-Apr-2026](#week-15) | Writing Results sections | Draft clinic | -- | Moderate | 0 |
-| [**Week 16**<br>04-May-2026](#week-16) | Reflection & closure | Course wrap-up | Final report | Moderate | 20 |
+::: {.course-info tbl-colwidths="[16, 40, 26, 18]"}
+| **Week** | **Topics** | **In-class focus** | **Milestone assignment** |
+|-----------:|------------|------------|------------|
+| [**Week 1**<br>19-Jan-2026](#week-1) | Course introduction; from ecological questions to causal inference | Project scoping; causal vs. non-causal questions | — |
+| [**Week 2**<br>26-Jan-2026](#week-2) | Hypotheses, predictions, and target effects | From hypotheses to estimand-aware predictions | Analysis Concept Note |
+| [**Week 3**<br>02-Feb-2026](#week-3) | Structural Causal Models (SCMs) and DAGs | Building and critiquing causal diagrams | — |
+| [**Week 4**<br>09-Feb-2026](#week-4) | Causal identification; confounders, mediators, and colliders | Identifying adjustment sets and target effects | Data Readiness Note |
+| [**Week 5**<br>16-Feb-2026](#week-5) | Measurement, data quality, and purposeful EDA | From ecological processes to observed data | — |
+| [**Week 6**<br>23-Feb-2026](#week-6) | Generalized Linear Models (GLMs) | Connecting causal questions to statistical models | — |
+| [**Week 7**<br>02-Mar-2026](#week-7) | GLMs; specification, diagnostics, and interpretation | Building and evaluating models | Working Model (draft) |
+| [**Week 8**<br>09-Mar-2026](#week-8) | Hierarchical data and GLMMs | Dependence, random effects, and effective sample size | Working Model (final lock) |
+| [**Week 9**<br>16-Mar-2026](#week-9) | Student Spring Break | — | — |
+| [**Week 10**<br>23-Mar-2026](#week-10) | Nonlinear relationships: GAMs and GAMMs | Modeling nonlinear ecological effects | — |
+| [**Week 11**<br>30-Mar-2026](#week-11) | Instructor Spring Break | — | — |
+| [**Week 12**<br>06-Apr-2026](#week-12) | Spatial and temporal structure; prediction and uncertainty | Estimating and visualizing focal effects | Interpretation Memo |
+| [**Week 13**<br>13-Apr-2026](#week-13) | From estimates to causal inference | Effect sizes, uncertainty, and justification | — |
+| [**Week 14**<br>20-Apr-2026](#week-14) | Synthesis and project development | One-on-one project meetings | — |
+| [**Week 15**<br>27-Apr-2026](#week-15) | Communicating quantitative evidence | Figures, tables, and Results-section clinic | — |
+| [**Week 16**<br>04-May-2026](#week-16) | Synthesis, reflection, and closure | From ecological question to defensible inference | Final report |
 :::
 
 ## Calendar edit history
-Removed AIC model selection from Week 05.
-Changed Weeks 14-16 to consolidate all weekly assignments into a final report.
+
+[Changes to the calendar will be added here.]
 
 ## Weekly Information
 

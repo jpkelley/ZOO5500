@@ -5,64 +5,23 @@ numbered: true
 
 ## Essential Course Information {.unnumbered}
 
-::: course-info
-| Instructor | Patrick Kelley |
+::: {.course-info tbl-colwidths="[20, 80]"}
+| Instructor | [Patrick Kelley](https://jpkelley.github.io/bcl/patrick_kelley.html) |
 |---------------------|---------------------------------------------------|
 | **Email** | jkelle24\@uwyo.edu |
 | **Schedule** | Mon / Wed, 11:00–12:50 Mountain Time |
 | **Dates** | 31-Aug-2026 to 11-Dec-2026 |
 | **Meeting Type** | in-person (Zoom access as needed) |
 | **Location** | Classroom Building 115 |
-| **Communication** | Slack (private link sent to your email) |
 :::
 
+## About this course {.unnumbered}
+
+Ecologists want to understand why nature works the way it does. Does rainfall reduce foraging opportunities? Does predation cause reproductive failure? Answering such questions requires far more than fitting statistical models. It requires thinking carefully and deliberately about causality. This course takes a causal-first approach to messy ecological data. Students will learn to formulate logical hypotheses of different types, generate estimand-aware predictions that clearly identify effects that they actually want to learn about. Students then use Structural Causal Models (SCMs) and Directed Acyclic Graphs (DAGs) to represent ecological knowledge, eplicitly state causal assumptions (based on evidence), and determine whether those effects can be identified from data. Rather than letting AIC decide which variables matter (or assuming that fitting a Structural Equation Model (SEM) makes an analysis causal, or letting the traditional SEM approach quietly eliminate causal assumptions), students will learn to clearly and quickly distinguish between causal reasoning from statistical machinery. Using their own projects (and recently discovered and absolutely real long-term datasets on jackalope ecology), students will then conduct their own analyses.
 
 ## Quicklinks {.unnumbered}
 
-[**Course Calendar**](https://jpkelley.github.io/ZOO5500/chapters/int_calendar_sp26.html){rel="external" target="_blank"}
- 
-:::: columns
-
-::: {.column width="30%"}
-
-::: {.callout-note icon=false collapse=true}
-## **Class collaboration tools**
- 
-[Collaborative Statistics References](https://docs.google.com/document/d/1abc9-8_gHdmGDlnbElgdKHY7udbbKJ33KH7Cckb9Vyg/edit?usp=sharing)
-:::
-
-:::
-
-::: {.column width="4%"}
-
-:::
-
-::: {.column width="30%"}
-
-::: {.callout-warning icon=false collapse=true}
-## **Workflow templates**
-
-[YAML Metadata Template (general)](templates/metadata_template.yaml)
-:::
-
-:::
-
-::: {.column width="4%"}
-
-:::
-
-::: {.column width="30%"}
-
-::: {.callout-tip icon=false collapse=true}
-## **Assignment templates**
-
-[Analysis Concept Note](templates/01_template.qmd)
-:::
-
-:::
-
-::::
-
+[**Course Calendar**](https://jpkelley.github.io/ZOO5500/chapters/int_calendar_fa26.html){rel="external" target="_blank"}
 
 ---
 

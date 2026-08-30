@@ -48,7 +48,7 @@ This mode is informal, exploratory, and **never evaluative**.
 - Executed **only** when explicitly invoked (via menu or trigger phrases)  
 - Used to assess whether work appears *ready for submission*, not to grade on scientific quality. 
 
-### **AI Interaction Logging** (To be launched on Monday, 26-Jan-2026!!)
+### **AI Interaction Logging**
 
 - Minimal documentation of AI assistance  
 - Triggered **only** by the exact command: `log this`  

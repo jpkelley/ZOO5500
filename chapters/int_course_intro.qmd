@@ -9,65 +9,59 @@ format:
 
 ## Welcome to Quantitative Analysis of (Messy) Field Data!
 
-Thanks for joining us this term! I couldn't be more pleased at the large size of the class this term! This means that there are more perspectives to help guide us through the following phases of data analysis:
+Thanks for being the new cohort of Jackanapes this term! I could not be more pleased by the "large" size of the class. More people means more perspectives as we learn to reason our way from ecological questions to defensible inference.
 
-> **Messy field or lab data → processed data → models → inference**
+As ecologists, we rarely just want to describe nature. Just look at most published ecology papers! From the verbiage used by most ecologists (especially non-experimental ones), it is clear that the ultimate goal is to understand *why nature works the way it does*. Understanding *why* something happens requires more than fitting statistical models. We ecologists need to be explicit about what effect we want to learn, what we think causes what, and whether our data can actually identify that effect. On all three, we ecologists need to make drastic improvements. This is one focus of my lab, and this is the reason why I teach this course. We will begin with ecological hypotheses and estimand-aware predictions, use Structural Causal Models (SCMs) and DAGs to make our causal assumptions explicit, and only then turn to the statistical models that are most familiar in traditional ecological analyses. Along the way, we will see that many common approaches actually alter our original questions, sometimes without our knowledge. 
+
+The course path looks something like this:
 
 ![](../graphics/workflow_diagram/basic_workflow.png)
 
-The complexity of the project, difficulty of field conditions, or an impending deadline can make the jumps from data collection to inference horribly daunting to young and old researchers alike. Our joint goal in this course is to become more comfortable with each of these steps, so that we not only work more efficiently but we also know a bit more about how to sense of our complex world. It is my sincerest hope that this course will not only teach you some about statistics (and some statistical traps) but that it will also give you a unique opportunity to work with your peers as you delve into the myriad issues that inevitably arise in data analysis. Working together means that we must first acknowledge that each one of us assimilates new material and produces syntheses in varied ways. All I ask is that each of you
+Along the way, we will question some familiar practices: how AIC cannot tell us which variables should be controlled, how coefficients in a multiple regression model are usually not comparable effect sizes, how traditional covariance-based Structural Causal Models upset natural causal structure of systems, and adding more (or removing) covariates without knowing their function in the data-generating system can sometimes increase rather than reduce bias.
+
+Of course, moving from an ecological idea to a scientifically defensible inference can be extremely daunting, especially when you have  messy field data, imprecise measurements, uneven sampling, nonlinear relationships, and looming deadlines. A central goal of this course is to help you  become more comfortable with this entire process while also learning from one another. Each of us (including me) approaches problems differently, and those differences allow us to make faster and more meaningful headway towards making sense of a very complex world.
 
 ## Course Objectives
 
 By the end of this course, you should be able to:
 
--   **Think quantitatively about messy ecological data.** You should be on your way to developing a habit of translating real-world ecological questions into quantitative frameworks, while explicitly acknowledging uncertainty and bias in estimation and measurement.
-
--   **Distinguish between questions/hypotheses, data, and inferences.** You should be able to (1) clearly separate ecological hypotheses, the data actually collected, and the quantities being estimated, and (2) understand why these distinctions matter for interpretation and decision-making.
-
--   **Understand the processes that generate data.** You should be able to recognize how different study designs, variation in detection, observer effects, instrument error, and data processing shape and constrain the structure of ecological datasets.
-
--   **Select, build, and critique statistical models as scientific tools.** You should be comfortable choosing and using statistical models not as black boxes, but as explicit representations of assumptions about ecological processes, variation, and causal structure. You should never blindly choose a statistical model again!
-
--   **Interpret results in ecological —not just statistical— terms.** You should be able to conceptually move beyond p-values and coefficients to clearly articulate what your results mean biologically, mechanistically, and practically.
-
--   **Be comfortable applying causal --and not just correlational-- reasoning.** You should be able to use causal thinking (conceptual models and directed acyclic graphs) to evaluate what can —and ehat cannot— be inferred from observational and experimental data.
-
--   **Communicate quantitative results clearly, transparently, and honestl.y** Present analyses, figures, and conclusions in ways that are transparent, reproducible, and appropriate for scientific audiences.
-
--   **Develop durable, reproducible analytical workflows.** You should be increasingly comfortable with good data-science practices that support clarity, versioning (even though we will not delve into GitHub this term), and reusability of analyses.
-
--   **Develop new confidence working with unfamiliar, complex, imperfect datasets.** You should leave this course better prepared to engage with real ecological data —without expecting it to be clean, complete, or simple.
+- **Convert ecological ideas into testable questions.** Construct hypotheses logically and develop predictions that specify the effect (estimand) you actually want to estimate.
+- **Represent causal assumptions explicitly.** Use SCMs and DAGs to describe how you think an ecological system works and distinguish among confounders, mediators, colliders, and other variables.
+- **Determine whether an effect is identifiable.** Ask whether the causal effect you care about can actually be estimated from the data you have (and under what assumptions).
+- **Build statistical models that match the question.** Use GLMs, GLMMs, GAMs, GAMMs, and related approaches after determining the causal question and appropriate adjustment set (which also reduce minimal required sample sizes).
+- **Recognize when common analytical approaches cause trouble.** Understand why AIC-based variable selection, “controlling for everything,” and traditional, covariance-based Structural Equation Models (SEMs) can create biased results and do not alone tell us which causal effects we are estimating.
+- **Deal with messy ecological data.** Account for repeated observations, hierarchical structure, nonlinear relationships, imperfect detection, measurement error, and other complications of real field data.
+- **Interpret effects rather than just model output.** Explain what was estimated, the assumptions required, the uncertainty involved, and what the result actually means biologically.
+- **Develop transparent and reproducible analyses.** Make the reasoning that connects hypotheses, causal assumptions, statistical models, and biological conclusions explicit so that models are either well-supported or fail loudly.
 
 ## Topics covered {.unnumbered}
 
 The course covers the following topics, roughly in the following order:
 
--   Metrology: measurands, measurement error, uncertainty, and data quality\
--   Exploratory data analysis of messy data\
--   Generalized Linear Models (GLMs): theory and implementation\
--   Model comparison using AIC and information-theoretic approaches\
--   Generalized Linear Mixed Models (GLMMs) and effective sample size\
--   Generalized Additive Models (GAMs)\
--   Generalized Additive Mixed Models (GAMMs)\
--   Modeling spatial and temporal heterogeneity\
--   Structural Causal Modeling (SCM) and causal diagrams\
--   Prediction, uncertainty propagation, and model validation\
--   Synthesis of analytical results and justification of inference\
--   Tables, figures, and reporting standards for quantitative results\
--   Writing defensible and interpretable Results sections
+- **Hypotheses and predictions:** logical formulation and estimand-aware predictions
+- **Structural Causal Models and DAGs:** causal assumptions and pathways
+- **Causal identification:** confounding, adjustment, and identifiable effects
+- **Metrology:** measurands, measurement error, uncertainty, and data quality
+- **Exploratory data analysis:** purposeful exploration of messy data
+- **Generalized Linear Models (GLMs):** linear relationships and estimation of focal effects
+- **Hierarchical data and GLMMs:** dependence, random effects, and effective sample size
+- **GAMs and GAMMs:** nonlinear ecological relationships
+- **Spatial and temporal structure:** heterogeneity and dependence
+- **Model evaluation:** diagnostics, validation, prediction, and appropriate use of AIC
+- **Inference:** effect sizes, uncertainty, and interpretation
+- **Communication:** figures, tables, and defensible Results sections
 
-Given this ambitious scope, we may only scratch the surface of some topics. Even our cursory treatment is aimed at convincing you why these subjects matter for scientists who have messy data.
+Given this ambitious scope (and depending on the course pacing), we may only scratch the surface of some topics. Even our cursory treatment is aimed at convincing you why these subjects matter for scientists who have messy data.
 
-## What is new this term (Spring 2026)?
+## What is new this term (Fall 2026)?
 
-For Spring 2026, I have added attention to new topics that improve both efficiency of analysis workflows and our ability to understand causality at a deeper level. Specifically, I have chosen to add course components on:
+This course generally contains the same material as in Spring 2026 when the new "causal" version of this course was inaugurated. Of particular importance to you are the following course components:
 
--   **Using large-language models (LLMs) --via ChatGPT-- to improve analytical workflows.** This term, I have integrated ChatGPT into the course as a way to support the *process* of analysis rather than to automate the analysis itself. Many of the hardest parts of quantitative work happen outside of writing code: figuring out why R code isn’t behaving as expected, checking whether an interpretation actually follows from a model, troubleshooting an obscure error message, or getting feedback on how tp clearly document a decision. Used carefully, ChatGPT can act like a sounding board for troubleshooting, sanity-checking, and refining explanations without taking over your critical thinking. Throughout the course, I have deliberately constrained ChatGPT's role and scope and have tailored its guardrails to match the course progression. In other words, ChatGPT is used to help improve analytical workflow and decision-making, not to generate results or write code on a student’s behalf. We will work together to assess the utility of this tool as the term advances.
+-   **Using large-language models (LLMs) --via ChatGPT-- to improve analytical workflows.** This term, I have changed the way that ChatGPT is integrated into the course. as a way to support the *process* of analysis rather than to automate the analysis itself. Many of the hardest parts of quantitative work happen outside of writing code: figuring out why R code isn’t behaving as expected, checking whether an interpretation actually follows from a model, troubleshooting an obscure error message, or getting feedback on how tp clearly document a decision. Used carefully, ChatGPT can act like a sounding board for troubleshooting, sanity-checking, and refining explanations without taking over your critical thinking. Throughout the course, I have deliberately constrained ChatGPT's role and scope and have tailored its guardrails to match the course progression. In other words, ChatGPT is used to help improve analytical workflow and decision-making, not to generate results or write code on a student’s behalf. We will work together to assess the utility of this tool as the term advances.
 
 ::::: columns
 ::: {.column width="80%"}
--   **Using large-language models (LLMs) to improve teaching at scale.** What does this mean? In past terms, between 10-15 students have been enrolled in this course. This term, I have allowed 26 students to enroll. Without a Teaching Assistant, this spawns a significant issue of scale. This is solvable if we use AI as a helpful tool. So, after spending some time as an LLM-consultant and tester, I decided to explicitly integrate chatGPT's LLMs into my teaching/grading workflow. This means that students will use a custom GPT that I created specifically for ZOO/ECOL-5500 called [JackalopeGPT](https://chatgpt.com/g/g-696966777a948191858541cd7986057e-jackalopegpt){target="_blank"} (using ChatGPT) to run checks on their work prior to submission; this will solve some of the "tuning" issues (with codes, grammar, clarity, etc.) that I have seen in student submissions in previous years.
+-   **Using large-language models (LLMs) to streamline learning and teaching at scale.** What does this mean? Very simply, it means that I customize an AI agent to do some of the busy work for me (e.g. checking code consistency, making sure there all assignment components are present, etc.). Therefore, I have worked hard to leverage my freelance work as an LLM-consultant and tester for two AI companies to carefully explicitly integrate chatGPT's LLMs into my teaching/grading workflow. This means that you will use a custom GPT that I created specifically for ZOO/ECOL-5500 called [JackalopeGPT](https://chatgpt.com/g/g-696966777a948191858541cd7986057e-jackalopegpt){target="_blank"} (using ChatGPT) to run checks on your work prior to submission; this will solve some of the "tuning" issues (with codes, grammar, clarity, etc.) that I have seen in student submissions in previous years and allow me to focus on more substantial feedback.
 :::
 
 ::: {.column width="20%"}
@@ -75,8 +69,6 @@ For Spring 2026, I have added attention to new topics that improve both efficien
 :::
 :::::
 
--   **Structural Causal Models (SCMs)** I added Structural Causal Models (SCMs) at the end of the course to give us a way to think more clearly about complex systems where multiple variables influence each other at the same time. In the first part of the course, students will see the limits of fitting separate models (e.g. GLMs, GLMMs, GAMMs) for singular response variables; those models can work individually, but they often miss shared drivers, indirect effects, or how pieces of the complex system of exogenous and endogenous factors fit together. SCMs give us a way to lay out those relationships explicitly and analyze them as a connected structure (as is present in natural systems) rather than as a collection of isolated models. The goal isn’t to replace the modeling approaches we’ve already used but to improve inference by making our assumptions about the system clear and coherent.
-
--   **Jackalopes!** This course corrects a long-standing perspective that (1) jackalopes had deer-like antlers (Fig. 1), and (2) there was only a single species of jackalopes (Fig. 2). We will use the newly discovered cryptid ecosystem for course exercises and examples.
+-   **Jackalopes!** This course continues its work to correct a long-standing perspective that (1) jackalopes had deer-like antlers (Fig. 1), and (2) there was only a single species of jackalopes (Fig. 2). We will use many jackalope species in the newly discovered cryptid ecosystem for course exercises and examples.
 
 ![Figure 1. Illustrations of the correct and incorrect ornament morphology of jackalopes.](../graphics/jackalope_graphics/correct_jackalope.png)

@@ -19,22 +19,22 @@ This page covers the basics of Large Language Models (LLM), the fundamentals of 
   model *how to say it* by rewarding outputs people judge as better
   (clearer, safer, more helpful, etc.).
 
-The key takeaway is very practical for our purposes in this course: these models are optimized for *interaction* (between the user and LLM). The trade-off is that they are not necessarily built for accuracy. Model responses to users' prompts (see Section 8.1.2) can sound amazingly confident and authoritative even when their information is grossly incorrect. 
+The key takeaway is very practical for our purposes in this course: these models are optimized for *interaction* (between the user and LLM). The trade-off is that they are not necessarily built for accuracy (or for reproducibility, as the LLM changes regularly). Model responses to users' prompts (see Section 8.1.2) can sound amazingly confident and authoritative even when their information is grossly incorrect. 
 
 
 ### What are prompts?
 
 As stated above, you begin each interaction with an LLM using a prompt. A **prompt** is simply your input to the trained model; it is your question or request. There are two broad classes of prompts that are operationally differentiated by their purpose:
 
-- **Evaluative prompts:** Models that *produce* content (e.g., text,
+- **Generative prompts:** Models that *produce* content (e.g., text,
   code, summaries, or ideas).
-- **Generative prompts:** Models that assess or critique ingested
+- **Evaluative prompts:** Models that assess or critique ingested
   data.
 
 In this course, your goal for JackalopeGPT is not to “get an answer," so we primarily use evaluative prompts. This prompting type keeps you in control of important scientific decisions and constrains the model's role to that of a friendly reviewer or sounding board (rather than an autonomous data scientist).
 
 ::: {.callout-note title="Good prompt engineering takes practice"}
-Please note that it may take a bit of practice to concisely write prompts that contain all of this information *and* yield high-quality responses, but this is a good framework to get you started.
+Please note that it may take a bit of practice to concisely write prompts that contain all of this information *and* yield high-quality responses with as few interactions as possible, but this is a good framework to get you started.
 :::
 
 ## Engineering Successful Prompts
@@ -46,14 +46,13 @@ Successful prompting is usually iterative, involving the following basic steps:
 1. **State expectations clearly.** Your goal is to produce an output you can evaluate.
 2. **Evaluate the response using a documented rubric.** 
 You should always have an implicit (or explicit) **rubric** in mind: a short set of criteria that defines what a *good* response should contain.
-3. **Revise the prompt to reduce ambiguity and increase verifiability.** Use the rubric to improve the prompt by clarifying the task/topic/context, adding constraints, and requiring formal checks so the response is easier to evaluate. 
-4. **Repeat (briefly, yet thoughtfully).** until the output is actionable.
+3. **Revise the prompt to reduce ambiguity and increase verifiability.** Use the rubric to improve the prompt by clarifying the task/topic/context, adding constraints, and requiring formal checks so the response is easier to evaluate. 4. **Repeat (briefly, yet thoughtfully).** until the output is actionable.
 
 ### Why good prompting matters (and why you should *verify* outputs)
 
-Large Language Models can be extremely helpful, but they are not a scientific authority, and its responses are not “timeless.” That is, the quality of the responses depends heavily on what you ask and when you ask it (given what information has been recently folded into the LLM training). 
+Large Language Models can be extremely helpful, but they are not a scientific authority, and their responses are not “timeless.” That is, the quality of the responses depends heavily on what you ask and when you ask it (given what information has been recently folded into the LLM training). 
 
-### Actions for writing strong prompts
+### Hints for writing strong prompts (i.e. you should not use LLM chats as a replacement for web searches)
 
 - **Leverage your expertise:** Use your biological knowledge to define what matters: structure of your study design, sources of bias (detectability of individuals), confounding variables, scale, or non-independence.
 - **Be challenging and specific.** Remove the escape routes. Provide the response type, design, predictors,
@@ -74,12 +73,12 @@ Use **TRACE** as a memory hook (technically, a *acronymic mnemonic*) for what to
 
 - **T (Task/Topic, aka Context):** What problem are you working on?
   What’s the data/design?
-- **R (Role):** What kind of helper should JackalopeGPT be?
-- **A (Audience):** What level should it explain to?
+- **R (Role):** What kind of helper should the GPT be?
+- **A (Audience):** For what group should the level of complexity be taillored?
 - **C (Criteria):** What must a good answer include?
 - **E (Exclusions):** What should it avoid? What is out-of-scope?
 
-Here is a more detailed description. The bracketed, italicized components indicate places where you enter your original prompt components. Examples are given in the Description column. 
+Below is a more detailed description of these (within an example). The bracketed, italicized components indicate places where you enter your original prompt components. Examples are given in the Description column. 
 
 ::: {.course-info tbl-colwidths="[10, 14, 78]"}
 | **Letter** | **Component** | **Description** |
@@ -159,7 +158,7 @@ If any one of these is missing, revise the **prompt** before revising your analy
 
 ### Quantifying Model Drift: Another way to put rubrics to work
 
-Large Language Models are updated and adjusted over time. That means the same prompt can yield different answers across weeks or months—sometimes subtly, sometimes dramatically. To stay scientifically grounded, you need a habit of **validation**, a way to detect when the LLM’s behavior has changed and when outputs should no longer be trusted. Consider the following scenario. Imagine you weigh your study subjects on a scale every morning. A lab jackanape recalibrates the scale every few weeks without telling you. After discovering that this has occurred, would you trust that the measurements are directly comparable across time? However, if your lab protocol included a daily measurement of a standardized set of weights, you could determine exactly when recalibrations were back, and, what's even better, you could adjust your measurements accordingly. Science would be saved! 
+Large Language Models are updated and adjusted over time. That means the same prompt can yield different answers across weeks or months—sometimes subtly, sometimes dramatically. To stay scientifically grounded, you need a habit of **validation**, a way to detect when the LLM’s behavior has changed and when outputs should no longer be trusted. Consider the following scenario. Imagine you weigh your study subjects on a scale every morning. A lab jackanape recalibrates the scale every few weeks without telling you. After discovering that this has occurred, would you trust that the measurements are directly comparable across time? However, if your lab protocol included a daily measurement of a standardized set of weights, you could determine exactly when recalibrations were conducted, and, even better, you could adjust your measurements accordingly. Science would be saved! 
 
 ::: {.green-box collapse=true}
 **A practical --and easy-- way to assess “model drift” in your own work**
@@ -177,7 +176,7 @@ Large Language Models are updated and adjusted over time. That means the same pr
 
 ## Synthesis: Examples of improving prompts
 
-**Instructions to students:** Read the excessively broad-scope prompt first. Pause and think: 
+**Instructions to students:** For each example below, read the excessively broad-scope prompt first. Pause and think: 
 
 * *What information is missing (hint: use the TRACE framework)?*
 * *What verbiage could be added to fill most or all of those missing components?* 

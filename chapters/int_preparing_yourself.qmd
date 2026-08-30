@@ -11,29 +11,8 @@ format:
 
 To prepare for the course, here is what you are expected to do by the end of the first week (specific information is below this list):
 
--   **Join the ZOO-5500 Slack (private link sent via email)**
 -   **Download, Install, and set up [RStudio Desktop](https://posit.co/download/rstudio-desktop)**
 -   **Gather your dataset files for your analysis**
-
-### Join the ZOO-5500 Slack
-
-Just click on the list and follow instructions. We will use Slack to encourage ongoing, low-stakes discussion within the class. This will be for sharing questions, ideas, and insights in real time so that learning can continue outside of scheduled class meetings. This allows everyone (even me) to get answers to questions that I might be thinking about at odd times. It also allows for problems to be solved faster; rather than waiting until our synchronous Zoom session to ask about an issue, we can group-think over the course of the week. Remember that this is set up to improve collaboration; it does not mean that anyone should be responding outside of work hours or on the weekends. Below are the preferred channels for different kinds of communication:
-
--   **#announcements** \>Read-only channel for important course information like deadlines, corrections, and post-class clarifications. Check this regularly.
-
--   **#course-questions** \>For general course or assignment questions (due dates, unclear wording on websites) that others might also have. Expect peer responses and occasional instructor follow-ups.
-
--   **#data-help** \>For data wrangling and technical data issues (imports, joins, NAs, plots). Not for model choice or interpretation.
-
--   **#model-talk** \>For conceptual questions about models and assumptions. Discussion-focused; no code debugging.
-
--   **#analysis-workflow** \>For questions about reproducibility, organization, reporting, and good analytical habits.
-
--   **#ai-use-and-logs** For discussing allowed AI use and posting AI interaction logs when requested. No private communication or graded work.
-
--   **#papers-good-bad-ugly** \>For highlighting examples of good and bad analyses in published work.
-
--   **#random** \>For off-topic chat, random links, and fun stuff. This will help keep everything else focused.
 
 ### Download, Install, and set up [RStudio Desktop](https://posit.co/download/rstudio-desktop/)
 

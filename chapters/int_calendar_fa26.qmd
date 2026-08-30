@@ -1,0 +1,470 @@
+## Calendar overview
+
+Use the calendar table below to see what’s coming each week. Click a week in the first column to jump to the full weekly details below. This calendar may change slightly as we progress through the term. You will receive immediate notification of any changes.
+
+::: callout-note
+All Milestone Assignments are due by end of day on Friday.
+:::
+
+::: {.course-info tbl-colwidths="[15, 31, 20, 20, 14]"}
+| **Week / Date** | **Topic** | **Monday (M)** | **Wednesday (W)** | **Milestone Assignment** |
+|-----------:|------------|------------|------------|------------|
+| [**Week 1**<br>(31-Aug)](#week-1) | Scientific questions, estimands & why SCM | Course intro; scientific hypotheses | SCMs; draft project DAG | — |
+| [**Week 2**<br>(07-Sep)](#week-2) | DAG grammar, causal roles & project data orientation | **NO CLASS** (Labor Day) | DAG grammar; data inventory | Scientific Question + Estimand Note |
+| [**Week 3**<br>(14-Sep)](#week-3) | Identification & the complete SCM workflow | Identification; adjustment sets | Identify effects; map measured variables | — |
+| [**Week 4**<br>(21-Sep)](#week-4) | SCM synthesis, critique & causal analysis planning | Causal audit and revision | Published-analysis + peer critique | Causal Analysis Plan |
+| [**Week 5**<br>(28-Sep)](#week-5) | Measurement, data structure & targeted exploration | Measurement; map variables to DAG | Targeted EDA | — |
+| [**Week 6**<br>(05-Oct)](#week-6) | Models as estimators & GLMs | Estimand → estimator → estimate; GLMs | GLMs; diagnostics | Data + Estimator Plan |
+| [**Week 7**<br>(12-Oct)](#week-7) | Hierarchical data & GLMMs | **NO CLASS** (mid-semester break) | Random effects; dependence; GLMMs | — |
+| [**Week 8**<br>(19-Oct)](#week-8) | Nonlinearity | GAMs/GAMMs; assess nonlinearity | Open analysis | Working Estimator Checkpoint |
+| [**Week 9**<br>(26-Oct)](#week-9) | Causal-effect estimation | Total effects; g-computation/standardization | Open analysis | — |
+| [**Week 10**<br>(02-Nov)](#week-10) | Mechanistic effects | Direct/indirect effects; mediation | Open analysis | — |
+| [**Week 11**<br>(09-Nov)](#week-11) | Inference from estimates | Open analysis | Estimate → uncertainty → inference | Estimate + Inference Checkpoint |
+| [**Week 12**<br>(16-Nov)](#week-12) | Analysis, interpretation & peer audit | Open analysis/writing | Open peer review | Interpretation / Peer-Audit Memo |
+| [**Week 13**<br>(23-Nov)](#week-13) | Thanksgiving break | **NO CLASS** | **NO CLASS** | — |
+| [**Week 14**<br>(30-Nov)](#week-14) | Project consultation & integrated analysis | Project meetings / independent work | Analysis + writing clinic | Integrated Analysis Draft |
+| [**Week 15**<br>(07-Dec)](#week-15) | Peer review, synthesis & revision | Peer review + revision | Course synthesis; final project work | Final Report |
+:::
+
+## Calendar edit history
+
+- Revised for Fall 2026.
+- Reorganized the course around an estimand-aware SCM workflow: scientific question → hypothesis/prediction → DAG → identification → estimator → estimate → inference.
+- Consolidated graded work into integrated Milestone Assignments.
+
+## Weekly Information
+
+Click to expand each week for readings, class activities, and milestone expectations.
+
+::: {#week-1 .callout-tip .unnumbered icon="false" collapse="true"}
+### **Week 1 (31-Aug)**
+
+**Topic:** Scientific questions, estimands & why SCM  
+**Milestone assignment:** —
+
+### Before class {.unnumbered}
+
+- Nothing. That would be pretty $#!tty of me to assign work prior to the semester.
+
+### Monday {.unnumbered}
+
+- Course introduction
+- Scientific hypotheses and predictions
+
+### Wednesday {.unnumbered}
+
+- Why Structural Causal Models?
+- Begin drafting your project DAG
+
+### Reading {.unnumbered}
+
+- Syllabus
+- Statistical Philosophy
+- Hypotheses/Hypertheses & Estimands
+- Why SCMs?
+- Franks, Ruxton & Sherratt (2025)
+
+### After class {.unnumbered}
+
+- Continue developing your scientific question and initial causal structure.
+:::
+
+::: {#week-2 .callout-tip .unnumbered icon="false" collapse="true"}
+### **Week 2 (07-Sep)**
+
+**Topic:** DAG grammar, causal roles & project data orientation  
+**Milestone assignment:** **Scientific Question + Estimand Note — due 11-Sep**
+
+### Before class {.unnumbered}
+
+- Review causal assumptions, DAG notation, and causal roles.
+
+### Monday {.unnumbered}
+
+- **NO CLASS — Labor Day**
+
+### Wednesday {.unnumbered}
+
+- DAG grammar
+- Project data inventory in R
+
+### Reading {.unnumbered}
+
+- Causal Assumptions
+- Reading DAGs
+- DAG Construction
+- From DAG to Estimand
+
+### After class {.unnumbered}
+
+- **Submit:** Scientific Question + Estimand Note
+:::
+
+::: {#week-3 .callout-tip .unnumbered icon="false" collapse="true"}
+### **Week 3 (14-Sep)**
+
+**Topic:** Identification & the complete SCM workflow  
+**Milestone assignment:** N/A
+
+### Before class {.unnumbered}
+
+- Read the Identification material.
+- Review the complete SCM workflow.
+
+### Monday {.unnumbered}
+
+- Identification and adjustment
+- Identify confounding paths and candidate adjustment sets for your project
+
+### Wednesday {.unnumbered}
+
+- Identifying causal effects
+- Map DAG variables to measured and unmeasured quantities
+
+### Reading {.unnumbered}
+
+- Identification
+- SCM workflow figure
+- Selected Arif & MacNeil (2023)
+
+### After class {.unnumbered}
+
+- Refine your identification argument and note important unmeasured threats.
+:::
+
+::: {#week-4 .callout-tip .unnumbered icon="false" collapse="true"}
+### **Week 4 (21-Sep)**
+
+**Topic:** SCM synthesis, critique & causal analysis planning  
+**Milestone assignment:** **Causal Analysis Plan — due 25-Sep**
+
+### Before class {.unnumbered}
+
+- Review the kitchen-sink versus SCM comparison.
+- Review concise SEM versus SCM material.
+
+### Monday {.unnumbered}
+
+- Compare analytical approaches
+- Project causal audit and DAG revision
+
+### Wednesday {.unnumbered}
+
+- Critique a published analysis
+- Peer critique of DAG, estimand, and identification strategy
+
+### Reading {.unnumbered}
+
+- From Kitchen-Sink to SCM
+- Traditional SEM / SEM vs SCM material
+
+### After class {.unnumbered}
+
+- **Submit:** Causal Analysis Plan
+:::
+
+::: {#week-5 .callout-tip .unnumbered icon="false" collapse="true"}
+### **Week 5 (28-Sep)**
+
+**Topic:** Measurement, data structure & targeted exploration  
+**Milestone assignment:** N/A
+
+### Before class {.unnumbered}
+
+- Review measurement/measurand concepts and targeted EDA.
+
+### Monday {.unnumbered}
+
+- Measurement and measurands
+- Map project measurements to DAG variables in R
+
+### Wednesday {.unnumbered}
+
+- Targeted exploratory data analysis
+- Examine distributions, missingness, outliers, and data structure
+
+### Reading {.unnumbered}
+
+- Nature of Data
+- Reproducible Analyses
+- Data Exploration
+- Outliers
+
+### After class {.unnumbered}
+
+- Document measurement limitations and EDA findings that affect your planned estimator.
+:::
+
+::: {#week-6 .callout-tip .unnumbered icon="false" collapse="true"}
+### **Week 6 (05-Oct)**
+
+**Topic:** Models as estimators & GLMs  
+**Milestone assignment:** **Data + Estimator Plan — due 09-Oct**
+
+### Before class {.unnumbered}
+
+- Review model foundations and the GLM introduction.
+
+### Monday {.unnumbered}
+
+- Estimand → estimator → estimate
+- GLM foundations
+
+### Wednesday {.unnumbered}
+
+- GLMs and partial associations
+- Diagnostics and project model fitting in R
+
+### Reading {.unnumbered}
+
+- Introduction to Models
+- GLM Introduction
+- GLM tutorial
+- Partial Associations
+- DHARMa
+
+### After class {.unnumbered}
+
+- **Submit:** Data + Estimator Plan
+:::
+
+::: {#week-7 .callout-tip .unnumbered icon="false" collapse="true"}
+### **Week 7 (12-Oct)**
+
+**Topic:** Hierarchical data & GLMMs  
+**Milestone assignment:** N/A
+
+### Before class {.unnumbered}
+
+- Review the GLMM introduction and tutorial.
+
+### Monday {.unnumbered}
+
+- **NO CLASS — mid-semester break**
+
+### Wednesday {.unnumbered}
+
+- Random effects, dependence, and effective sample size
+- Fit or refine GLMMs where appropriate
+
+### Reading {.unnumbered}
+
+- GLMM Introduction + Tutorial
+
+### After class {.unnumbered}
+
+- Continue model development and diagnostics for hierarchical data where relevant.
+:::
+
+::: {#week-8 .callout-tip .unnumbered icon="false" collapse="true"}
+### **Week 8 (19-Oct)**
+
+**Topic:** Nonlinearity  
+**Milestone assignment:** **Working Estimator Checkpoint — due 23-Oct**
+
+### Before class {.unnumbered}
+
+- Review the GAM/GAMM tutorial.
+
+### Monday {.unnumbered}
+
+- GAMs and GAMMs
+- Assess nonlinearity in your project
+
+### Wednesday {.unnumbered}
+
+- Open analysis: troubleshooting, diagnostics, coding, and figures
+
+### Reading {.unnumbered}
+
+- GAM/GAMM tutorial
+
+### After class {.unnumbered}
+
+- **Submit:** Working Estimator Checkpoint
+:::
+
+::: {#week-9 .callout-tip .unnumbered icon="false" collapse="true"}
+### **Week 9 (26-Oct)**
+
+**Topic:** Causal-effect estimation  
+**Milestone assignment:** N/A
+
+### Before class {.unnumbered}
+
+- Review total-effect estimation.
+
+### Monday {.unnumbered}
+
+- Total effects
+- G-computation / standardization
+- Generate a primary project effect estimate in R
+
+### Wednesday {.unnumbered}
+
+- Open analysis and project consultations
+
+### Reading {.unnumbered}
+
+- SCM: Total Effects
+
+### After class {.unnumbered}
+
+- Refine your focal effect estimate and associated diagnostics.
+:::
+
+::: {#week-10 .callout-tip .unnumbered icon="false" collapse="true"}
+### **Week 10 (02-Nov)**
+
+**Topic:** Mechanistic effects  
+**Milestone assignment:** N/A
+
+### Before class {.unnumbered}
+
+- Review direct and indirect effects, focusing on material relevant to your project.
+
+### Monday {.unnumbered}
+
+- Direct and indirect effects
+- Mediation
+- Assess whether a mechanistic estimand is appropriate for your project
+
+### Wednesday {.unnumbered}
+
+- Open analysis: estimation, diagnostics, sensitivity, and figures
+
+### Reading {.unnumbered}
+
+- SCM: Direct/Indirect Effects
+
+### After class {.unnumbered}
+
+- Continue analysis; pursue mechanistic effects only where scientifically justified.
+:::
+
+::: {#week-11 .callout-tip .unnumbered icon="false" collapse="true"}
+### **Week 11 (09-Nov)**
+
+**Topic:** Inference from estimates  
+**Milestone assignment:** **Estimate + Inference Checkpoint — due 13-Nov**
+
+### Before class {.unnumbered}
+
+- Read **Interpreting Evidence Without Overclaiming**.
+
+### Monday {.unnumbered}
+
+- Open analysis and project consultations
+
+### Wednesday {.unnumbered}
+
+- Estimate → uncertainty → inference
+- Project inference audit
+
+### Reading {.unnumbered}
+
+- Interpreting Evidence Without Overclaiming
+
+### After class {.unnumbered}
+
+- **Submit:** Estimate + Inference Checkpoint
+:::
+
+::: {#week-12 .callout-tip .unnumbered icon="false" collapse="true"}
+### **Week 12 (16-Nov)**
+
+**Topic:** Analysis, interpretation & peer audit  
+**Milestone assignment:** **Interpretation / Peer-Audit Memo — due 20-Nov**
+
+### Before class {.unnumbered}
+
+- Bring current analyses, figures, and interpretation to class.
+
+### Monday {.unnumbered}
+
+- Open analysis and writing
+- Develop figures and interpretation
+
+### Wednesday {.unnumbered}
+
+- Open peer review
+- Audit the complete causal workflow
+
+### Reading {.unnumbered}
+
+- None.
+
+### After class {.unnumbered}
+
+- **Submit:** Interpretation / Peer-Audit Memo
+:::
+
+::: {#week-13 .callout-tip .unnumbered icon="false" collapse="true"}
+### **Week 13 (23-Nov)**
+
+**Topic:** Thanksgiving break  
+**Milestone assignment:** N/A
+
+### Notes {.unnumbered}
+
+- No class Monday
+- No class Wednesday
+- No assignment due
+:::
+
+::: {#week-14 .callout-tip .unnumbered icon="false" collapse="true"}
+### **Week 14 (30-Nov)**
+
+**Topic:** Project consultation & integrated analysis  
+**Milestone assignment:** **Integrated Analysis Draft (due 04-Dec)**
+
+### Before class {.unnumbered}
+
+- Review the Final Report overview and rubric.
+- Bring your current integrated analysis and key figures/tables.
+
+### Monday {.unnumbered}
+
+- Project meetings and independent work
+
+### Wednesday {.unnumbered}
+
+- Analysis + writing clinic
+- Draft, figures/tables, and consultations
+
+### Reading {.unnumbered}
+
+- Final Report overview / rubric
+
+### After class {.unnumbered}
+
+- **Submit:** Integrated Analysis Draft
+:::
+
+::: {#week-15 .callout-tip .unnumbered icon="false" collapse="true"}
+### **Week 15 (07-Dec)**
+
+**Topic:** Peer review, synthesis & revision  
+**Milestone assignment:** **Final Report (due 11-Dec)**
+
+### Before class {.unnumbered}
+
+- Prepare your integrated draft and specific revision questions.
+
+### Monday {.unnumbered}
+
+- Peer review and revision
+
+### Wednesday {.unnumbered}
+
+- Brief course synthesis
+- Final project work
+
+### Reading {.unnumbered}
+
+- None
+
+### After class {.unnumbered}
+
+- **Submit:** Final Report (and then you are done!)
+:::

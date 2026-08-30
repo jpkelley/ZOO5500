@@ -15,7 +15,7 @@ execute:
 
 ::: {.callout-important}
 ## Due date
-**Friday, 08-May-2026** (Feel free to turn it in *much* earlier!)
+**Friday, 11-Dec-2026** (Feel free to turn it in *much* earlier!)
 :::
 
 ::::: columns
@@ -126,7 +126,7 @@ Do **not** include vague abstract concepts (e.g. "weather") or indices unless th
 
 You may use Mermaid, DAGitty, a hand-drawn figure (clearly legible), or another clear visualization (e.g. Powerpoint, Canva, etc.).
 
-Here is an example [Mermaid](https://mermaid.js.org/) template:
+Here is an example [Mermaid](https://mermaid.js.org/) DAG:
 
 ```{mermaid}
 flowchart LR

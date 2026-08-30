@@ -42,7 +42,7 @@ $$
 {rainfall}_{i} + 
 {flock\_size}_{i}
 $$
-where _i_ indexes specific observations. This may seem (or actually be) a perfectly reasonable predictive ecological model. This kind of miodel structure is what we refer to as a "kitchen-sink model" (since we throw everything into the model) or the "garbage can regression" (because...well...that's obvious); this approach is what most of us have been taught. But the central problem --and one that has massive implications for strong inference as well as the direction of future research-- is not the statistical model itself. It is how ecologists interpret such models. 
+where _i_ indexes specific observations. This may seem (or actually be) a perfectly reasonable predictive ecological model. This kind of model structure is what we refer to as a "kitchen-sink model" (since we throw everything into the model) or the "garbage can regression" (because...well...that's obvious); this approach is what most of us have been taught. But the central problem --and one that has massive implications for strong inference as well as the direction of future research-- is not the statistical model itself. It is how ecologists interpret such models. 
 
 ::: {.callout-tip collapse=false icon=false}
 ## **What many ecologists think this model is doing**
@@ -84,7 +84,7 @@ The core problem is not the specific types of statistical models. Rather, it is 
 
 Below is a comparison of kitchen-sink versus causal (DAG) approaches. My primary intent with this table is to encourage you to think critically about what traditional ecological approaches (kitchen-sink models) are lacking. Specifically, in causal settings (again, the way in which most ecologists think and _do_), some approaches are not only weaker. The core issue is that these approaches fail to answer the questions set forth by formal Hypotheses and Predictions. Modern ecological approaches (causal inference via DAGs) emphasize that causal questions (or even implications) _require_ explicit assumptions about data-generating processes. This does not mean simply devising a good question; it means that all research questions must be backed up by careful understanding of causal logic. 
 
-The 3-tier, 4-star scale below that I use is intentionally blunt and admittedly a bit ruthless. I have considered three dimensions: inferential validity, clarity of interpretation, and convenience. In short, the approach that obscures mechanisms or produces ambiguous answers scores comparatively lower. The approach that clarifies how ecological systems operate scores higher.
+The 3-tier, 4-star scale below that I use is intentionally blunt and admittedly a bit ruthless (though I can justify each rating). I have considered three dimensions: inferential validity, clarity of interpretation, and convenience. In short, the approach that obscures mechanisms or produces ambiguous answers scores comparatively lower. The approach that clarifies how ecological systems operate scores higher.
 
 ::: {.course-info tbl-colwidths="[26,74]"}
 | | |
@@ -97,7 +97,7 @@ The 3-tier, 4-star scale below that I use is intentionally blunt and admittedly 
 ::: {.course-info tbl-colwidths="[6, 35, 25, 28]"}
 | Tier | Feature | Kitchen-Sink Approach | Causal Inference (DAG) Approach |
 |---|---|---|---|
-| <span class="square tier1"></span> | Risk of systematic bias | ☆☆☆☆ | ★★★★ |
+| <span class="square tier1"></span> | Avoiding systematic bias | ☆☆☆☆ | ★★★★ |
 | <span class="square tier1"></span> | Avoiding collider bias | ☆☆☆☆ | ★★★★ |
 | <span class="square tier1"></span> | Avoiding mediator bias | ☆☆☆☆ | ★★★★ |
 | <span class="square tier1"></span> | Clarity of estimand | ☆☆☆☆ | ★★★★ |
@@ -115,7 +115,7 @@ The 3-tier, 4-star scale below that I use is intentionally blunt and admittedly 
 
 :::
 
-Hopefully, this stresses the need to overhaul our general approach to the study of ecology and adopt the Structural Causal Model (SCM). 
+Hopefully, this stresses the need to rework our general approach to the study of ecology and adopt the Structural Causal Model (SCM). 
 
 ## What are Structural Causal Models (SCMs) _(in ecology, specifically)_?
 
@@ -139,41 +139,6 @@ At first glance, SCMs may seem like just another complicated statistical framewo
 * Estimate total, direct, and indirect effects
 * Understand their system with less data
 * Integrate causal relationships from other studies
-
-## Verbiage of descriptive, associational, and causal hypotheses
-
-It is critically important to be able to understand when scientific inference (yours or those who have published paper) aligns or fails to align with intended hypotheses. This involves identifying scientific intent by distinguishing between these three hypothesis types:
-
-* **Descriptive hypotheses:** what patterns exist
-* **Associational/predictive hypotheses:** statistical relationships that allow prediction
-* **Causal hypotheses:**  how changing one variable produces changes in another (SCMs!)
-
-Each hypothesis type tends to use a characteristic verbiage. Learning how to recognize this verbiage can help you understand what type of inference authors are attempting to make. Furthermore, it allows you to quickly assess major logical fallacies and assess validity of results. And, by leveraging this language carefully and thoughtfully, you can describe your work unambiguously. Click on the expandable boxes below to view verbs and nouns associated with each type of hypothesis:
-
-::: {.callout-warning icon=false collapse=true}
-## **Descriptive Hypotheses**
-
-***Verbs:*** *describe*, *characterize*, *document*, *quantify*, *summarize*, *report*, *measure*, *compare*, *catalog*
-
-***Nouns:*** *pattern*, *distribution*, *trend*, *rate*, *frequency*, *abundance*, *composition*, *diversity*, *structure*, *variation*
-:::
-
-::: {.callout-note icon=false collapse=true}
-## **Associational / Predictive Hypotheses**
-
-***Verbs:*** *correlate*, *predict*, *associate*, *relate*, *forecast*, *explain variation in*, *covary with*, *model*, *estimate*
-
-***Nouns:*** *correlation*, *association*, *relationship*, *covariance*, *linkage*, *dependence*, *prediction*, *forecast*, *model*, *estimate*
-:::
-
-::: {.callout-tip icon=false collapse=true}
-## **Causal Hypotheses**
-
-***Verbs:*** *affect*, *influence*, *cause*, *determine*, *alter*, *drive*, *generate*, *produce*, *lead to*
-
-***Nouns:*** *effect*, *impact*, *influence*, *mechanism*, *process*, *pathway*, *driver*, *cause*, *consequence*, *outcome*
-:::
-
 
 ## Misconception: SCMs require huge datasets
 

@@ -5,6 +5,21 @@ number-sections: false
 
 This page describes the Milestone Assignments referenced in the course calendar. These should not be viewed as eight separate assignments. Each milestone builds on the previous one, moving from a clearly defined scientific target through causal identification, estimation, inference, and final synthesis. Each section below explains the purpose of the milestone, what to submit, and what a “good” assignment typically looks like. The general rubric is described at the end of this page.
 
+## How the Milestone Assignments are organized (and their Purposes)
+
+::: {.course-info tbl-colwidths="[10, 50, 40]"}
+| Week | Milestone Assignment | Purpose / Goal |
+|:---|:---|:---|
+| **2** | **Scientific Question + Estimand Note** | Define the target effect. |
+| **4** | **Causal Analysis Plan** | Establish causal identification. |
+| **6** | **Data + Estimator Plan** | Link data to the estimand. |
+| **8** | **Working Estimator Checkpoint** | Implement and diagnose the estimator. |
+| **11** | **Estimate + Inference Checkpoint** | Make defensible inferences. |
+| **12** | **Interpretation / Peer-Audit Memo** | Identify needed revisions. |
+| **14** | **Integrated Analysis Draft** | Integrate the causal workflow. |
+| **15** | **Final Report** | Present a defensible analysis. |
+:::
+
 ## Milestone Assignment descriptions
 
 ::: {.callout-note title="**Scientific Question + Estimand Note (Week 2; due 11-Sep)**" icon="false" collapse="true"}
@@ -345,13 +360,15 @@ You may choose to submit a raw Quarto Markdown file or submit a version of it re
 
 Here is a brief note about Quarto Markdown, which is preferred to R Markdown. While R Markdown is **not** obsolete by any means, it has a number of disadvantages compared to Quarto; these are summarized in the table below.
 
+::: {.course-info tbl-colwidths="[33, 30, 37]"}
 | Dimension         | R Markdown  | Quarto                     |
-| ----------------- | ----------- | -------------------------- |
+| :----------------- | :----------- | :-------------------------- |
 | age               | older       | newer                      |
 | primary language  | R           | multi-language             |
 | document types    | reports     | docs, books, sites, slides |
 | cross-referencing | manual      | built-in                   |
 | extensibility     | constrained | modular                    |
+:::
 
 So, in your own work, if you ever anticipate wanting to streamline your workflow, I recommend migrating your old R Markdown files to Quarto. Note that there are a few steps to do so, steps that involve changing file headers and syntax. I have had to do this with my older R Markdown files, and it doesn't take much time. Quarto can really add huge advantages, including reproducible creation of scientific presentations (sometimes in minutes and not hours). 
 
@@ -365,7 +382,7 @@ For this course, please use Quarto.
 Numerical grades are downright loathsome. And boring. And laborious. For all assignments, I use the Traffic Signal Grading Scale:
 
 | Grade  | Simple meaning   | Scientific judgement                       |
-|--------|------------------|--------------------------------------------|
+|:--------|:------------------|:--------------------------------------------|
 | Green  | Good to Proceed  | Scientifically coherent for this milestone |
 | Yellow | Exercise Caution | Viable, but revision is required           |
 | Red    | Stop and Rework  | Not yet ready for scientific judgment      |
@@ -385,7 +402,7 @@ Hmm...see a pattern here? Maybe top-tier science is built upon iterative improve
 *The Traffic Signal Grading Scale applies to all Milestone Assignments. Grading reflects scientific readiness relative to the purpose of the milestone.*
 
 | Dimension | 🟢 GREEN: Good to Proceed | 🟡 YELLOW: Exercise Caution | 🔴 RED: Stop and Rework |
-|------------------|------------------|------------------|------------------|
+|:-----------------|------------------|------------------|------------------|
 | **Purpose & intent** | Clearly meets the core intent of the milestone | Partially meets intent; key elements need revision | Does not meet the core intent of the milestone |
 | **Question or objective** | Clear, focused, and appropriate for this stage | Present but vague, drifting, or overly broad | Unclear, unfocused, or missing |
 | **Alignment (question–data–methods)** | Question, data, and approach are coherently aligned | Partial alignment; gaps or weak links remain | Fundamental mismatch between components |

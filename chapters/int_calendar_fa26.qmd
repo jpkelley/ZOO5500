@@ -61,6 +61,7 @@ Click to expand each week for readings, class activities, and milestone expectat
 - Syllabus
 - Statistical Philosophy
 - Hypotheses and Predictions
+- Start reading [Franks et al. (2025)](files/Franks_et_al_2025.pdf)
 
 
 ### After class {.unnumbered}
@@ -124,7 +125,7 @@ Click to expand each week for readings, class activities, and milestone expectat
 
 - Identification
 - SCM workflow figure
-- Selected Arif & MacNeil (2023)
+- Selected [Arif & MacNeil (2023)](files/Arif_MacNeil_2021.pdf)
 
 ### After class {.unnumbered}
 

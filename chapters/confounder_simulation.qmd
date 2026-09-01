@@ -1,0 +1,249 @@
+---
+title: "confounder_simulation"
+format: html
+---
+
+```{r}
+library(tidyr)
+library(ggplot2)
+```
+
+
+Set up the simulation
+
+
+```{r}
+set.seed(5500)
+
+nsim <- 1000
+n <- 1000
+
+results <- vector("list", nsim) 
+
+for (i in 1:nsim) {
+
+  # Random edge strengths
+  a <- runif(1, -5, 5)   # C -> X
+  b <- runif(1, -5, 5)    # C -> Y
+  d <- runif(1, -5, 5)    # X -> Y
+  e <- runif(1, -5, 5)    # X -> M
+  f <- runif(1, -5, 5)    # M -> Y
+
+  # Simulate data
+  C <- rnorm(n)
+  X <- a * C + rnorm(n)
+  M <- e * X + rnorm(n)
+
+  Y <- d * X +
+       f * M +
+       b * C +
+       rnorm(n)
+
+  dat <- data.frame(C, X, M, Y)
+
+  # True total effect of X on Y
+  true_effect <- d + e * f
+
+  # Models
+  m_unadjusted <- lm(Y ~ X, data = dat)
+  m_adjusted   <- lm(Y ~ X + C, data = dat)
+
+  beta_unadjusted <- coef(m_unadjusted)["X"]
+  beta_adjusted   <- coef(m_adjusted)["X"]
+
+  results[[i]] <- data.frame(
+    sim = i,
+    true_effect = true_effect,
+    estimate_unadjusted = beta_unadjusted,
+    estimate_adjusted = beta_adjusted,
+    abs_error_unadjusted =
+      abs(beta_unadjusted - true_effect),
+    abs_error_adjusted =
+      abs(beta_adjusted - true_effect)
+  )
+}
+
+results <- do.call(rbind, results)
+
+```
+
+Summarize
+
+```{r}
+
+mean(results$abs_error_unadjusted)
+mean(results$abs_error_adjusted)
+
+median(results$abs_error_unadjusted)
+median(results$abs_error_adjusted)
+
+```
+
+Plot everything
+
+
+```{r}
+
+
+error_long <- results |>
+  select(
+    sim,
+    abs_error_unadjusted,
+    abs_error_adjusted
+  ) |>
+  pivot_longer(
+    cols = starts_with("abs_error"),
+    names_to = "model",
+    values_to = "absolute_error"
+  )
+
+error_long$model <- factor(
+  error_long$model,
+  levels = c(
+    "abs_error_unadjusted",
+    "abs_error_adjusted"
+  ),
+  labels = c(
+    "Without C",
+    "Adjusting for C"
+  )
+)
+
+ggplot(
+  error_long,
+  aes(x = model, y = absolute_error)
+) +
+  geom_boxplot() +
+  labs(
+    x = NULL,
+    y = "Absolute error in estimated total effect"
+  ) +
+  theme_minimal()
+
+```
+
+
+## Effect of conditioning on mediator
+
+```{r}
+library(tidyverse)
+
+set.seed(5500)
+
+nsim <- 1000
+n <- 1000
+
+results_m <- vector("list", nsim)
+
+for (i in 1:nsim) {
+
+  # Random edge strengths
+  a <- runif(1, -5, 5)   # C -> X
+  b <- runif(1, -5, 5)    # C -> Y
+  d <- runif(1, -5, 5)    # X -> Y
+  e <- runif(1, -5, 5)   # X -> M
+  f <- runif(1, -5, 5)    # M -> Y
+
+  # Simulate data
+  C <- rnorm(n)
+
+  X <- a * C + rnorm(n)
+
+  M <- e * X + rnorm(n)
+
+  Y <- d * X +
+       f * M +
+       b * C +
+       rnorm(n)
+
+  dat <- data.frame(C, X, M, Y)
+
+  # True TOTAL effect of X on Y
+  true_total_effect <- d + e * f
+
+  # Correct adjustment for total effect
+  m_without_M <- lm(Y ~ X + C, data = dat)
+
+  # Conditions on mediator
+  m_with_M <- lm(Y ~ X + C + M, data = dat)
+
+  beta_without_M <- coef(m_without_M)["X"]
+  beta_with_M    <- coef(m_with_M)["X"]
+
+  results_m[[i]] <- data.frame(
+    sim = i,
+    true_total_effect = true_total_effect,
+
+    estimate_without_M = beta_without_M,
+    estimate_with_M = beta_with_M,
+
+    abs_error_without_M =
+      abs(beta_without_M - true_total_effect),
+
+    abs_error_with_M =
+      abs(beta_with_M - true_total_effect)
+  )
+}
+
+results_m <- bind_rows(results_m)
+
+results_m |>
+  summarise(
+    mean_error_without_M =
+      mean(abs_error_without_M),
+
+    mean_error_with_M =
+      mean(abs_error_with_M),
+
+    median_error_without_M =
+      median(abs_error_without_M),
+
+    median_error_with_M =
+      median(abs_error_with_M)
+  )
+
+```
+
+Visualize
+
+```{r}
+error_long_m <- results_m |>
+  select(
+    sim,
+    abs_error_without_M,
+    abs_error_with_M
+  ) |>
+  pivot_longer(
+    cols = starts_with("abs_error"),
+    names_to = "model",
+    values_to = "absolute_error"
+  )
+
+error_long_m$model <- factor(
+  error_long_m$model,
+  levels = c(
+    "abs_error_without_M",
+    "abs_error_with_M"
+  ),
+  labels = c(
+    "Without M",
+    "With M"
+  )
+)
+
+ggplot(
+  error_long_m,
+  aes(
+    x = model,
+    y = absolute_error
+  )
+) +
+  geom_boxplot() +
+  labs(
+    x = NULL,
+    y = "Absolute error in estimated direct effect"
+  ) +
+  theme_minimal()
+
+```
+

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>12&nbsp; Why SCMs? – Quantitative Analysis of (Messy) Field Data</title>
+<title>11&nbsp; Why SCMs? – Quantitative Analysis of (Messy) Field Data</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -33,7 +33,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/01_hypotheses_estimands.html" rel="prev">
+<link href="../chapters/01_hypotheses_estimands.html" rel="next">
+<link href="../chapters/03_statistical_aphorisms.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -114,7 +115,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/03_statistical_aphorisms.html">Part I: Questions Before Models</a></li><li class="breadcrumb-item"><a href="../chapters/05_01_why_scms.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Why SCMs?</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/03_statistical_aphorisms.html">Part I: Questions Before Models</a></li><li class="breadcrumb-item"><a href="../chapters/05_01_why_scms.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Why SCMs?</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -236,14 +237,20 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/01_hypotheses_estimands.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Hypotheses and Predictions</span></span></a>
+  <a href="../chapters/05_01_why_scms.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Why SCMs?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/05_01_why_scms.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Why SCMs?</span></span></a>
+  <a href="../chapters/01_hypotheses_estimands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Hypotheses and Predictions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05_02_building_dags.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">DAG Construction</span></span></a>
   </div>
 </li>
       </ul>
@@ -278,20 +285,20 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#summary-comparison-of-kitchen-sink-versus-causal-inference-approaches" id="toc-summary-comparison-of-kitchen-sink-versus-causal-inference-approaches" class="nav-link active" data-scroll-target="#summary-comparison-of-kitchen-sink-versus-causal-inference-approaches"><span class="header-section-number">12.2</span> Summary comparison of kitchen-sink versus causal inference approaches</a></li>
-  <li><a href="#what-are-structural-causal-models-scms-in-ecology-specifically" id="toc-what-are-structural-causal-models-scms-in-ecology-specifically" class="nav-link" data-scroll-target="#what-are-structural-causal-models-scms-in-ecology-specifically"><span class="header-section-number">12.3</span> What are Structural Causal Models (SCMs) <em>(in ecology, specifically)</em>?</a></li>
-  <li><a href="#misconception-scms-require-huge-datasets" id="toc-misconception-scms-require-huge-datasets" class="nav-link" data-scroll-target="#misconception-scms-require-huge-datasets"><span class="header-section-number">12.4</span> Misconception: SCMs require huge datasets</a></li>
-  <li><a href="#summary-and-up-next" id="toc-summary-and-up-next" class="nav-link" data-scroll-target="#summary-and-up-next"><span class="header-section-number">12.5</span> Summary and up next!</a></li>
-  <li><a href="#references-for-this-section" id="toc-references-for-this-section" class="nav-link" data-scroll-target="#references-for-this-section"><span class="header-section-number">12.6</span> References for this section</a></li>
+  <li><a href="#summary-comparison-of-kitchen-sink-versus-causal-inference-approaches" id="toc-summary-comparison-of-kitchen-sink-versus-causal-inference-approaches" class="nav-link active" data-scroll-target="#summary-comparison-of-kitchen-sink-versus-causal-inference-approaches"><span class="header-section-number">11.2</span> Summary comparison of kitchen-sink versus causal inference approaches</a></li>
+  <li><a href="#what-are-structural-causal-models-scms-in-ecology-specifically" id="toc-what-are-structural-causal-models-scms-in-ecology-specifically" class="nav-link" data-scroll-target="#what-are-structural-causal-models-scms-in-ecology-specifically"><span class="header-section-number">11.3</span> What are Structural Causal Models (SCMs) <em>(in ecology, specifically)</em>?</a></li>
+  <li><a href="#misconception-scms-require-huge-datasets" id="toc-misconception-scms-require-huge-datasets" class="nav-link" data-scroll-target="#misconception-scms-require-huge-datasets"><span class="header-section-number">11.4</span> Misconception: SCMs require huge datasets</a></li>
+  <li><a href="#summary-and-up-next" id="toc-summary-and-up-next" class="nav-link" data-scroll-target="#summary-and-up-next"><span class="header-section-number">11.5</span> Summary and up next!</a></li>
+  <li><a href="#references-for-this-section" id="toc-references-for-this-section" class="nav-link" data-scroll-target="#references-for-this-section"><span class="header-section-number">11.6</span> References for this section</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/03_statistical_aphorisms.html">Part I: Questions Before Models</a></li><li class="breadcrumb-item"><a href="../chapters/05_01_why_scms.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Why SCMs?</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/03_statistical_aphorisms.html">Part I: Questions Before Models</a></li><li class="breadcrumb-item"><a href="../chapters/05_01_why_scms.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Why SCMs?</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Why SCMs?</span></h1>
+<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Why SCMs?</span></h1>
 </div>
 
 
@@ -326,8 +333,8 @@ window.Quarto = {
 </div>
 <div class="columns">
 <div class="column" style="width:65%;">
-<section id="setting-the-stage-for-structural-causal-models-scms" class="level2" data-number="12.1">
-<h2 data-number="12.1" class="anchored" data-anchor-id="setting-the-stage-for-structural-causal-models-scms"><span class="header-section-number">12.1</span> Setting the stage for Structural Causal Models (SCMs)</h2>
+<section id="setting-the-stage-for-structural-causal-models-scms" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="setting-the-stage-for-structural-causal-models-scms"><span class="header-section-number">11.1</span> Setting the stage for Structural Causal Models (SCMs)</h2>
 <p>As ecologists, many of us have spent months (or years) collecting data in uncomfortable field conditions and have permanent scars (or gut flora) as proof. We return from the field excited to play ecological detective and see what our data analysis tells us about our system. So, we then proceed with an analysis that proceeds as follows:</p>
 <ol type="1">
 <li>Identify a response variable.</li>
@@ -415,8 +422,8 @@ window.Quarto = {
 <p><em>“You put everything into a regression equation, toss with some creative story-telling, and hope the reviewers eat it. In general, this is not a valid approach, for well-known reasons. But it can get you published. Causal salad can discover causes too. But you have to get lucky. … No amount of data reliably turns salad into sense.”</em> (Richard McElreath)</p>
 </blockquote>
 <p>The core problem is not the specific types of statistical models. Rather, it is the lack of a clear causal questions guiding the modeling approach. In this section, we integrate what we have learned into a formal framework for understanding what ecologists everywhere strive for but seldom achieve: causality, or an understanding of the factors that <em>affect</em>, <em>influence</em>, <em>cause</em>, <em>determine</em>, <em>alter</em>, <em>drive</em>, <em>generate</em>, <em>produce</em>, or <em>lead to</em> observed phenomena. This is a powerful framework that was formalized fairly recently by Pearl (2009) but, unfortunately, has not been widely adopted in the field of ecology.</p>
-<section id="summary-comparison-of-kitchen-sink-versus-causal-inference-approaches" class="level2" data-number="12.2">
-<h2 data-number="12.2" class="anchored" data-anchor-id="summary-comparison-of-kitchen-sink-versus-causal-inference-approaches"><span class="header-section-number">12.2</span> Summary comparison of kitchen-sink versus causal inference approaches</h2>
+<section id="summary-comparison-of-kitchen-sink-versus-causal-inference-approaches" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="summary-comparison-of-kitchen-sink-versus-causal-inference-approaches"><span class="header-section-number">11.2</span> Summary comparison of kitchen-sink versus causal inference approaches</h2>
 <p>Below is a comparison of kitchen-sink versus causal (DAG) approaches. My primary intent with this table is to encourage you to think critically about what traditional ecological approaches (kitchen-sink models) are lacking. Specifically, in causal settings (again, the way in which most ecologists think and <em>do</em>), some approaches are not only weaker. The core issue is that these approaches fail to answer the questions set forth by formal Hypotheses and Predictions. Modern ecological approaches (causal inference via DAGs) emphasize that causal questions (or even implications) <em>require</em> explicit assumptions about data-generating processes. This does not mean simply devising a good question; it means that all research questions must be backed up by careful understanding of causal logic.</p>
 <p>The 3-tier, 4-star scale below that I use is intentionally blunt and admittedly a bit ruthless (though I can justify each rating). I have considered three dimensions: inferential validity, clarity of interpretation, and convenience. In short, the approach that obscures mechanisms or produces ambiguous answers scores comparatively lower. The approach that clarifies how ecological systems operate scores higher.</p>
 <div class="course-info" data-tbl-colwidths="[26,74]">
@@ -553,8 +560,8 @@ window.Quarto = {
 </div>
 <p>Hopefully, this stresses the need to rework our general approach to the study of ecology and adopt the Structural Causal Model (SCM).</p>
 </section>
-<section id="what-are-structural-causal-models-scms-in-ecology-specifically" class="level2" data-number="12.3">
-<h2 data-number="12.3" class="anchored" data-anchor-id="what-are-structural-causal-models-scms-in-ecology-specifically"><span class="header-section-number">12.3</span> What are Structural Causal Models (SCMs) <em>(in ecology, specifically)</em>?</h2>
+<section id="what-are-structural-causal-models-scms-in-ecology-specifically" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="what-are-structural-causal-models-scms-in-ecology-specifically"><span class="header-section-number">11.3</span> What are Structural Causal Models (SCMs) <em>(in ecology, specifically)</em>?</h2>
 <blockquote class="blockquote">
 <p><em>“Nothing in biology makes sense except in the light of evolution.”</em> (Theodosius Dobzhansky)</p>
 </blockquote>
@@ -578,14 +585,14 @@ window.Quarto = {
 <li>Integrate causal relationships from other studies</li>
 </ul>
 </section>
-<section id="misconception-scms-require-huge-datasets" class="level2" data-number="12.4">
-<h2 data-number="12.4" class="anchored" data-anchor-id="misconception-scms-require-huge-datasets"><span class="header-section-number">12.4</span> Misconception: SCMs require huge datasets</h2>
+<section id="misconception-scms-require-huge-datasets" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="misconception-scms-require-huge-datasets"><span class="header-section-number">11.4</span> Misconception: SCMs require huge datasets</h2>
 <p>A very common misconception is that SCMs –like other <em>big and fancy</em> models– require unreasonably large and multidimensional datasets because they involve multiple variables and multiple equations. In reality, SCMs often require <strong>far less data per model</strong> than traditional “kitchen-sink” approaches.</p>
 <p>Think about a <em>global model</em> that you have seen. Think about how many predictors you have seen in this model. Kitchen-sink models like this include a large number of predictors that are forced into a single equation. This inclusion increases the number of model parameters and increases the probability of have multi-collinearity. In stark contrast, SCMs split the system apart into <strong>multiple smaller submodels</strong> that reflect specific questions. Each one of these submodels includes only the <strong>parent variables</strong> specified by the DAG (we will discuss this in the next sections). In many cases, this may mean that you only need 1-3 predictors in a model to estimate an effect. Thus, building a DAG-based causal models usually means that you are working with far simpler and more stable models that yield stable estimates even with small to modest sample sizes.</p>
 <p>Rather than putting the emphasis on more data (as kitchen-sink models do), SCMs instead emphasize well-supported ecological knowledge and causal assumptions (which most ecologists do most of the time anyway!).</p>
 </section>
-<section id="summary-and-up-next" class="level2" data-number="12.5">
-<h2 data-number="12.5" class="anchored" data-anchor-id="summary-and-up-next"><span class="header-section-number">12.5</span> Summary and up next!</h2>
+<section id="summary-and-up-next" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="summary-and-up-next"><span class="header-section-number">11.5</span> Summary and up next!</h2>
 <p>In sum, SCMs have three components:</p>
 <ul>
 <li><strong>Directed acyclic graphs (DAGs),</strong> which describe how ecologists think a study system is causally structured (<em>this</em> affects <em>that</em>, <em>ad nauseum</em>)</li>
@@ -594,8 +601,8 @@ window.Quarto = {
 </ul>
 <p>In the following sections, we will address each of these components in turn, beginning with the incredibly useful Directed acyclic graphs (DAGs).</p>
 </section>
-<section id="references-for-this-section" class="level2" data-number="12.6">
-<h2 data-number="12.6" class="anchored" data-anchor-id="references-for-this-section"><span class="header-section-number">12.6</span> References for this section</h2>
+<section id="references-for-this-section" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="references-for-this-section"><span class="header-section-number">11.6</span> References for this section</h2>
 <ul>
 <li><a href="https://onlinelibrary.wiley.com/doi/epdf/10.1111/brv.70029" target="_blank" rel="noopener">Download link</a> Franks D.W., Ruxton G.D., and T.N. Sherratt. 2025. Ecology needs a causal overhaul. <em>Biological Reviews</em>. https://doi.org/10.1111/brv.70029</li>
 <li>Pearl, J. (2009). <em>Causality: Models, reasoning, and inference</em> (2nd ed.). Cambridge University</li>
@@ -1007,11 +1014,14 @@ window.Quarto = {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/01_hypotheses_estimands.html" class="pagination-link" aria-label="Hypotheses and Predictions">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Hypotheses and Predictions</span></span>
+      <a href="../chapters/03_statistical_aphorisms.html" class="pagination-link" aria-label="Statistical Philosophy">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Statistical Philosophy</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../chapters/01_hypotheses_estimands.html" class="pagination-link" aria-label="Hypotheses and Predictions">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Hypotheses and Predictions</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

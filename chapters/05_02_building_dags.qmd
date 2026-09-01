@@ -8,11 +8,11 @@ format:
 
 ## Introduction
 
-In this section, we explore the Directed Acyclic Graph (DAG), the first step of constructing an operational Structural Causal Model. Though this step seems like a simple drawing exercise, this step often becomes one of the most illuminating parts of the SCM process. If done thoroughly and carefully, building the DAG forces you to explicitly state assumptions that you did not realize were critical to your questions. 
+In this section, we explore the Directed Acyclic Graph (DAG), the first step of constructing an operational Structural Causal Model. Though this step seems like a simple drawing exercise, it is critical to the SCM process. This step often becomes one of the most illuminating parts of the SCM process. If done thoroughly and carefully, building the DAG forces you to explicitly state assumptions that you did not realize were critical to your questions. 
 
 ## General architecture of a Directed Acyclic Graph (DAG)
 
-A Directed Acyclic Graph represents all plausible causal relationships in the system. In essence, it encapsulates we know about our study system. This DAG will form the basis for your entire set of questions about your system.
+A Directed Acyclic Graph represents all plausible causal relationships in your system. In essence, it encapsulates everything important in our study system. This DAG will form the basis for your entire set of questions about your system.
 
 ::: {.callout-tip icon=false collapse=false}
 ## **Important DAG terminology**
@@ -50,6 +50,7 @@ Typical node categories include:
 * **organismal traits** (e.g. body size, metabolic rate)  
 * **behavioral responses** (e.g. foraging rate, vigilance)  
 * **demographic outcomes** (e.g. survival, reproductive success)  
+* **human dimensions** (e.g., land use, management actions, harvest pressure, recreation)
 * **measurement processes** (e.g. detection probability, observer effort)
 :::
 

@@ -92,7 +92,6 @@ Though we will discuss estimands at length later in the course during the modeli
 
 - is defined by both the scientific question **and** the analysis model  
 - depends on the data, measurement process, and assumptions  
-- is the quantity you can *actually* estimate from the data  
 
 Examples:
 
@@ -215,4 +214,4 @@ Examples of raw data include:
 
 Raw data are the foundation of all scientific analysis. On their own, however, they are incomplete. To be interpretable, reusable, and reproducible, raw data require **context**.
 
-That context comes from **metadata**, which are introduced on the next page. Keeping the focus here on raw data helps avoid mixing observations of the world with explanations about how those observations were produced. Metadata play a different conceptual role, and treating them separately keeps that distinction clear.
+That context comes from **metadata**, which are discussed in the coming sections. Keeping the focus here on raw data helps avoid mixing observations of the world with explanations about how those observations were produced. Metadata play a different conceptual role, and treating them separately keeps that distinction clear.

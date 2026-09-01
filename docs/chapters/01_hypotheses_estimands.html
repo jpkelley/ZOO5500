@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>11&nbsp; Hypotheses and Predictions – Quantitative Analysis of (Messy) Field Data</title>
+<title>12&nbsp; Hypotheses and Predictions – Quantitative Analysis of (Messy) Field Data</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -33,8 +33,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/05_01_why_scms.html" rel="next">
-<link href="../chapters/03_statistical_aphorisms.html" rel="prev">
+<link href="../chapters/05_02_building_dags.html" rel="next">
+<link href="../chapters/05_01_why_scms.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -86,7 +86,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/03_statistical_aphorisms.html">Part I: Questions Before Models</a></li><li class="breadcrumb-item"><a href="../chapters/01_hypotheses_estimands.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Hypotheses and Predictions</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/03_statistical_aphorisms.html">Part I: Questions Before Models</a></li><li class="breadcrumb-item"><a href="../chapters/01_hypotheses_estimands.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Hypotheses and Predictions</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -208,14 +208,20 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/01_hypotheses_estimands.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Hypotheses and Predictions</span></span></a>
+  <a href="../chapters/05_01_why_scms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Why SCMs?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/05_01_why_scms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Why SCMs?</span></span></a>
+  <a href="../chapters/01_hypotheses_estimands.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Hypotheses and Predictions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05_02_building_dags.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">DAG Construction</span></span></a>
   </div>
 </li>
       </ul>
@@ -250,25 +256,25 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#hypotheses-and-predictions" id="toc-hypotheses-and-predictions" class="nav-link active" data-scroll-target="#hypotheses-and-predictions"><span class="header-section-number">11.1</span> Hypotheses and Predictions</a>
+  <li><a href="#hypotheses-and-predictions" id="toc-hypotheses-and-predictions" class="nav-link active" data-scroll-target="#hypotheses-and-predictions"><span class="header-section-number">12.1</span> Hypotheses and Predictions</a>
   <ul class="collapse">
-  <li><a href="#exactly-what-is-a-hypothesis" id="toc-exactly-what-is-a-hypothesis" class="nav-link" data-scroll-target="#exactly-what-is-a-hypothesis"><span class="header-section-number">11.1.1</span> Exactly what is a <em>hypothesis</em>?</a></li>
+  <li><a href="#exactly-what-is-a-hypothesis" id="toc-exactly-what-is-a-hypothesis" class="nav-link" data-scroll-target="#exactly-what-is-a-hypothesis"><span class="header-section-number">12.1.1</span> Exactly what is a <em>hypothesis</em>?</a></li>
   </ul></li>
-  <li><a href="#common-forms-of-ecological-hypotheses" id="toc-common-forms-of-ecological-hypotheses" class="nav-link" data-scroll-target="#common-forms-of-ecological-hypotheses"><span class="header-section-number">11.2</span> Common forms of ecological hypotheses</a>
+  <li><a href="#common-forms-of-ecological-hypotheses" id="toc-common-forms-of-ecological-hypotheses" class="nav-link" data-scroll-target="#common-forms-of-ecological-hypotheses"><span class="header-section-number">12.2</span> Common forms of ecological hypotheses</a>
   <ul class="collapse">
-  <li><a href="#some-things-called-hypotheses-contain-way-more-than-a-hypothesis" id="toc-some-things-called-hypotheses-contain-way-more-than-a-hypothesis" class="nav-link" data-scroll-target="#some-things-called-hypotheses-contain-way-more-than-a-hypothesis"><span class="header-section-number">11.2.1</span> Some things called “hypotheses” contain way more than a hypothesis</a></li>
+  <li><a href="#some-things-called-hypotheses-contain-way-more-than-a-hypothesis" id="toc-some-things-called-hypotheses-contain-way-more-than-a-hypothesis" class="nav-link" data-scroll-target="#some-things-called-hypotheses-contain-way-more-than-a-hypothesis"><span class="header-section-number">12.2.1</span> Some things called “hypotheses” contain way more than a hypothesis</a></li>
   </ul></li>
-  <li><a href="#verbiage-of-descriptive-associational-and-causal-hypotheses" id="toc-verbiage-of-descriptive-associational-and-causal-hypotheses" class="nav-link" data-scroll-target="#verbiage-of-descriptive-associational-and-causal-hypotheses"><span class="header-section-number">11.3</span> Verbiage of descriptive, associational, and causal hypotheses</a></li>
-  <li><a href="#hypotheses-are-not-predictions" id="toc-hypotheses-are-not-predictions" class="nav-link" data-scroll-target="#hypotheses-are-not-predictions"><span class="header-section-number">11.4</span> Hypotheses are not predictions</a></li>
+  <li><a href="#verbiage-of-descriptive-associational-and-causal-hypotheses" id="toc-verbiage-of-descriptive-associational-and-causal-hypotheses" class="nav-link" data-scroll-target="#verbiage-of-descriptive-associational-and-causal-hypotheses"><span class="header-section-number">12.3</span> Verbiage of descriptive, associational, and causal hypotheses</a></li>
+  <li><a href="#hypotheses-are-not-predictions" id="toc-hypotheses-are-not-predictions" class="nav-link" data-scroll-target="#hypotheses-are-not-predictions"><span class="header-section-number">12.4</span> Hypotheses are not predictions</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/03_statistical_aphorisms.html">Part I: Questions Before Models</a></li><li class="breadcrumb-item"><a href="../chapters/01_hypotheses_estimands.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Hypotheses and Predictions</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/03_statistical_aphorisms.html">Part I: Questions Before Models</a></li><li class="breadcrumb-item"><a href="../chapters/01_hypotheses_estimands.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Hypotheses and Predictions</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Hypotheses and Predictions</span></h1>
+<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Hypotheses and Predictions</span></h1>
 </div>
 
 
@@ -285,10 +291,10 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="hypotheses-and-predictions" class="level2" data-number="11.1">
-<h2 data-number="11.1" class="anchored" data-anchor-id="hypotheses-and-predictions"><span class="header-section-number">11.1</span> Hypotheses and Predictions</h2>
-<section id="exactly-what-is-a-hypothesis" class="level3" data-number="11.1.1">
-<h3 data-number="11.1.1" class="anchored" data-anchor-id="exactly-what-is-a-hypothesis"><span class="header-section-number">11.1.1</span> Exactly what is a <em>hypothesis</em>?</h3>
+<section id="hypotheses-and-predictions" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="hypotheses-and-predictions"><span class="header-section-number">12.1</span> Hypotheses and Predictions</h2>
+<section id="exactly-what-is-a-hypothesis" class="level3" data-number="12.1.1">
+<h3 data-number="12.1.1" class="anchored" data-anchor-id="exactly-what-is-a-hypothesis"><span class="header-section-number">12.1.1</span> Exactly what is a <em>hypothesis</em>?</h3>
 <p>Scientists regularly use the word <em>hypothesis</em>, but its meaning is surprisingly slippery. Students are often taught that a hypothesis is a <strong>specific, testable, and falsifiable statement</strong> about the natural world. Consider the following statement from ecology:</p>
 <blockquote class="blockquote">
 <p><strong>Increasing food availability increases reproductive success.</strong></p>
@@ -310,15 +316,17 @@ ul.task-list li input[type="checkbox"] {
 </blockquote>
 <p>Broad hypotheses, such as the Food-Limitation Hypothesis, make general claims about the natural world. To test them, researchers develop more specific hypotheses that can be evaluated with particular observations or experiments. Thus, <strong>testability comes from making a broad hypothesis specific enough to connect it to evidence.</strong></p>
 <p>For example, consider three hypotheses at different levels of specificity:</p>
-<blockquote class="blockquote">
-<p><strong>Broad organizing proposition:</strong> Food availability limits avian populations. <strong>Causal hypothesis:</strong> Increasing food availability increases reproductive success. <strong>Mechanistic hypothesis:</strong> Increasing food availability increases reproductive success through increased parental provisioning.</p>
-</blockquote>
+<ul>
+<li><strong>Broad organizing proposition:</strong> Food availability limits avian populations.</li>
+<li><strong>Causal hypothesis:</strong> Increasing food availability increases reproductive success.</li>
+<li><strong>Mechanistic hypothesis:</strong> Increasing food availability increases reproductive success through increased parental provisioning.</li>
+</ul>
 <p>No single hypothesis in the above list is inherently a “better” hypothesis simply because it is more specific or more readily testable. These are all scientific propositions about food limitation, but here is the important thing to keep in mind: <strong>they are not equivalent claims</strong>. The first encompasses many possible causal relationships and mechanisms. The second specifies one causal relationship. The third specifies a particular causal mechanism. More generally, hypotheses can make different kinds of claims: some concern patterns or states of nature, others concern statistical relationships, and still others make explicit claims about what would happen if one part of an ecological system changed.</p>
 <p>Specificity does not turn a non-hypothesis into a hypothesis; it turns a broad hypothesis into a more precise one. Broad hypotheses can organize entire research programs; narrower hypotheses allow particular components of those broader ideas to be confronted with evidence. Later in the course, we will see that these distinctions matter because the second might lead us to target a <em>total effect</em>, whereas the third directs our attention toward an <em>indirect effect</em>.</p>
 </section>
 </section>
-<section id="common-forms-of-ecological-hypotheses" class="level2" data-number="11.2">
-<h2 data-number="11.2" class="anchored" data-anchor-id="common-forms-of-ecological-hypotheses"><span class="header-section-number">11.2</span> Common forms of ecological hypotheses</h2>
+<section id="common-forms-of-ecological-hypotheses" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="common-forms-of-ecological-hypotheses"><span class="header-section-number">12.2</span> Common forms of ecological hypotheses</h2>
 <p>Hypotheses differ not only in how broad or specific they are, but they also differ in the kind of claim they make. Some of these claims concern patterns or states of nature. Others concern statistical relationships. Still others make explicit causal claims about what would happen if one part of an ecological system is changed.</p>
 <p>The following are common forms encountered in ecology:</p>
 <table class="caption-top table">
@@ -382,8 +390,8 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Amplification:</strong> Z strengthens the effect of X on Y.</li>
 <li><strong>Group-specific effect:</strong> the effect of X on Y differs between groups A and B.</li>
 </ul>
-<section id="some-things-called-hypotheses-contain-way-more-than-a-hypothesis" class="level3" data-number="11.2.1">
-<h3 data-number="11.2.1" class="anchored" data-anchor-id="some-things-called-hypotheses-contain-way-more-than-a-hypothesis"><span class="header-section-number">11.2.1</span> Some things called “hypotheses” contain way more than a hypothesis</h3>
+<section id="some-things-called-hypotheses-contain-way-more-than-a-hypothesis" class="level3" data-number="12.2.1">
+<h3 data-number="12.2.1" class="anchored" data-anchor-id="some-things-called-hypotheses-contain-way-more-than-a-hypothesis"><span class="header-section-number">12.2.1</span> Some things called “hypotheses” contain way more than a hypothesis</h3>
 <p>Scientific hypotheses sometimes appear as <em>If-Then statements</em>. However, an If-Then statement can contain both a hypothesis and a prediction derived from it. For example, consider the following statement:</p>
 <blockquote class="blockquote">
 <p><strong>If increasing rainfall reduces foraging activity, then birds experiencing greater rainfall will spend less time actively foraging.</strong></p>
@@ -400,8 +408,8 @@ ul.task-list li input[type="checkbox"] {
 <p>Throughout this course, we will therefore focus less on whether a statement looks like a hypothesis and more on identifying the claim about the ecological system that the researcher intends to evaluate.</p>
 </section>
 </section>
-<section id="verbiage-of-descriptive-associational-and-causal-hypotheses" class="level2" data-number="11.3">
-<h2 data-number="11.3" class="anchored" data-anchor-id="verbiage-of-descriptive-associational-and-causal-hypotheses"><span class="header-section-number">11.3</span> Verbiage of descriptive, associational, and causal hypotheses</h2>
+<section id="verbiage-of-descriptive-associational-and-causal-hypotheses" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="verbiage-of-descriptive-associational-and-causal-hypotheses"><span class="header-section-number">12.3</span> Verbiage of descriptive, associational, and causal hypotheses</h2>
 <p>The forms above describe several ways that hypotheses can be structured. It is also critically important to recognize whether scientific inference –yours or that in a published paper– aligns with the intended hypothesis. At a broad level, we can distinguish three kinds of scientific claims:</p>
 <ul>
 <li><strong>Descriptive hypotheses:</strong> what patterns or states exist</li>
@@ -474,8 +482,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </section>
-<section id="hypotheses-are-not-predictions" class="level2" data-number="11.4">
-<h2 data-number="11.4" class="anchored" data-anchor-id="hypotheses-are-not-predictions"><span class="header-section-number">11.4</span> Hypotheses are not predictions</h2>
+<section id="hypotheses-are-not-predictions" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="hypotheses-are-not-predictions"><span class="header-section-number">12.4</span> Hypotheses are not predictions</h2>
 <p>A <strong>hypothesis</strong> and a <strong>prediction</strong> play different roles in scientific reasoning.</p>
 <table class="caption-top table">
 <colgroup>
@@ -943,13 +951,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/03_statistical_aphorisms.html" class="pagination-link" aria-label="Statistical Philosophy">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Statistical Philosophy</span></span>
+      <a href="../chapters/05_01_why_scms.html" class="pagination-link" aria-label="Why SCMs?">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Why SCMs?</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/05_01_why_scms.html" class="pagination-link" aria-label="Why SCMs?">
-        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Why SCMs?</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/05_02_building_dags.html" class="pagination-link" aria-label="DAG Construction">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">DAG Construction</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

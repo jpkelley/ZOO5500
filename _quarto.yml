@@ -35,9 +35,9 @@ book:
     - part: "Part I: Questions Before Models"
       chapters:
         - chapters/03_statistical_aphorisms.qmd
-        - chapters/01_hypotheses_estimands.qmd          
         - chapters/05_01_why_scms.qmd
-        # - chapters/05_02_building_dags.qmd
+        - chapters/01_hypotheses_estimands.qmd          
+        - chapters/05_02_building_dags.qmd
         #- chapters/01_identification.qmd                # NEW
         #- chapters/01_identification_strategies.qmd     # NEW
         #- chapters/05_02b_KS_to_DAGs.qmd

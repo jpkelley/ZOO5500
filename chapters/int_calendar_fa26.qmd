@@ -9,7 +9,7 @@ All Milestone Assignments are due by end of day on Friday.
 ::: {.course-info tbl-colwidths="[15, 31, 20, 20, 14]"}
 | **Week / Date** | **Topic** | **Monday (M)** | **Wednesday (W)** | **Milestone Assignment** |
 |-----------:|------------|------------|------------|------------|
-| [**Week 1**<br>(31-Aug)](#week-1) | Scientific questions, estimands & why SCM | Course intro; scientific hypotheses | SCMs; draft project DAG | — |
+| [**Week 1**<br>(31-Aug)](#week-1) | Scientific questions, estimands & why SCM | Course intro | Hypotheses/predictions, SCMs; draft project DAG | — |
 | [**Week 2**<br>(07-Sep)](#week-2) | DAG grammar, causal roles & project data orientation | **NO CLASS** (Labor Day) | DAG grammar; data inventory | Scientific Question + Estimand Note |
 | [**Week 3**<br>(14-Sep)](#week-3) | Identification & the complete SCM workflow | Identification; adjustment sets | Identify effects; map measured variables | — |
 | [**Week 4**<br>(21-Sep)](#week-4) | SCM synthesis, critique & causal analysis planning | Causal audit and revision | Published-analysis + peer critique | Causal Analysis Plan |
@@ -61,7 +61,7 @@ Click to expand each week for readings, class activities, and milestone expectat
 - Syllabus
 - Statistical Philosophy
 - Hypotheses and Predictions
-- Start reading [Franks et al. (2025)](files/Franks_et_al_2025.pdf)
+- Start reading [Franks et al. (2025)](..files/Franks_et_al_2025.pdf)
 
 
 ### After class {.unnumbered}

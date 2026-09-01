@@ -33,9 +33,9 @@ Broad hypotheses, such as the Food-Limitation Hypothesis, make general claims ab
 
 For example, consider three hypotheses at different levels of specificity:
 
-> **Broad organizing proposition:** Food availability limits avian populations.
-> **Causal hypothesis:** Increasing food availability increases reproductive success.
-> **Mechanistic hypothesis:** Increasing food availability increases reproductive success through increased parental provisioning.
+- **Broad organizing proposition:** Food availability limits avian populations.
+- **Causal hypothesis:** Increasing food availability increases reproductive success.
+- **Mechanistic hypothesis:** Increasing food availability increases reproductive success through increased parental provisioning.
 
 No single hypothesis in the above list is inherently a "better" hypothesis simply because it is more specific or more readily testable. These are all scientific propositions about food limitation, but here is the important thing to keep in mind: **they are not equivalent claims**. The first encompasses many possible causal relationships and mechanisms. The second specifies one causal relationship. The third specifies a particular causal mechanism. More generally, hypotheses can make different kinds of claims: some concern patterns or states of nature, others concern statistical relationships, and still others make explicit claims about what would happen if one part of an ecological system changed.
 

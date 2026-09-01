@@ -8,7 +8,7 @@ format:
 
 :::{.callout-tip collapse=false icon=true}
 ## **Strongly recommended reading:**
-[Download link](https://onlinelibrary.wiley.com/doi/epdf/10.1111/brv.70029){target="_blank" rel="noopener"} Franks D.W., Ruxton G.D., and T.N. Sherratt. 2025. Ecology needs a causal overhaul. _Biological Reviews_. https://doi.org/10.1111/brv.70029
+- [Franks D.W., Ruxton G.D., and T.N. Sherratt. 2025. Ecology needs a causal overhaul. _Biological Reviews_.](../files/Franks_et_al_2025.pdf)
 :::
 
 :::: {.columns}
@@ -161,5 +161,5 @@ In the following sections, we will address each of these components in turn, beg
 
 ## References for this section
 
-* [Download link](https://onlinelibrary.wiley.com/doi/epdf/10.1111/brv.70029){target="_blank" rel="noopener"} Franks D.W., Ruxton G.D., and T.N. Sherratt. 2025. Ecology needs a causal overhaul. _Biological Reviews_. https://doi.org/10.1111/brv.70029
+* - [Franks D.W., Ruxton G.D., and T.N. Sherratt. 2025. Ecology needs a causal overhaul. _Biological Reviews_.](../files/Franks_et_al_2025.pdf)
 * Pearl, J. (2009). _Causality: Models, reasoning, and inference_ (2nd ed.). Cambridge University

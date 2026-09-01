@@ -49,11 +49,11 @@ Click to expand each week for readings, class activities, and milestone expectat
 ### Monday {.unnumbered}
 
 - Course introduction
-- Scientific hypotheses and predictions
 
 ### Wednesday {.unnumbered}
 
 - Why Structural Causal Models?
+- Scientific hypotheses and predictions
 - Begin drafting your project DAG
 
 ### Reading {.unnumbered}
@@ -61,7 +61,7 @@ Click to expand each week for readings, class activities, and milestone expectat
 - Syllabus
 - Statistical Philosophy
 - Hypotheses and Predictions
-- Start reading [Franks et al. (2025)](..files/Franks_et_al_2025.pdf)
+- Start reading [Franks et al. (2025)](../files/Franks_et_al_2025.pdf)
 
 
 ### After class {.unnumbered}

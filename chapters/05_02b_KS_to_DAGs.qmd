@@ -13,9 +13,9 @@ execute:
 
 ## Eight-step workflow
 
-Adopting even the most rudimentary version of a Structural Causal Model can be daunting for those of us who were taught the classical kitchen-sink-AIC-will-save-us approach. As a consequence, most of us have datasets that were designed to be analyzed in this way. So, sometimes, we feel stuck and wondering how to move forward.
+Adopting even the most rudimentary version of a Structural Causal Model can be daunting for those of us who were taught the classical kitchen-sink-AIC-will-save-us (aka "throw it all in") approach. As a consequence, most of us have datasets that were designed to be analyzed in this way. So, sometimes, we feel stuck and wondering how to move forward.
 
-This is a visual guide describing what is minimally required to upgrade from a kitchen-sink model toward a more defensible Structural Causal Model (SCM). The goal is absolutely not to make everything complicated. The goal is to prevent telling the wrong story with a dataset that you have worked so hard to collect. The eight steps apply to a single estimand and can (and should) be repeated for every desired estimand in your dataset.
+This is a visual guide describing what is minimally required to upgrade from a kitchen-sink model toward a more defensible Structural Causal Model (SCM). For now, do not get caught up in the use of "SCM"; you are simply wanting to represent your study system's data-generating process. It may seem that this is an overly-complicated approach, but, oddly, the goal is to simplify your modeling to prevent telling the wrong story with a dataset that you have worked so hard to collect. These eight steps apply to a single estimand and can (and should) be repeated for every desired estimand in your dataset.
 
 ### Step 1: Lock your estimand
 
@@ -35,6 +35,21 @@ flowchart TD
   X -->|direct path| Y
   X -->|indirect path| M
   M -->|mediated path| Y
+```
+
+```{mermaid}
+flowchart TD
+  classDef exposure fill:#CFE8FF,color:#111,stroke-width:0px;
+  classDef mediator fill:#FFD8A8,color:#111,stroke-width:0px;
+  classDef outcome fill:#B6E3A8,color:#111,stroke-width:0px;
+
+  X[Exposure X]:::exposure
+  M[Mediator M]:::mediator
+  Y[Outcome Y]:::outcome
+
+  X --> Y
+  X --> M
+  M --> Y
 ```
 :::
 ::: {.column width="60%"}

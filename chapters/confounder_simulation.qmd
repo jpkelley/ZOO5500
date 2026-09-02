@@ -109,16 +109,20 @@ error_long$model <- factor(
   )
 )
 
-ggplot(
-  error_long,
-  aes(x = model, y = absolute_error)
-) +
+ggplot(error_long, aes(x = model, y = absolute_error, fill = model)) +
   geom_boxplot() +
+  scale_fill_manual(
+    values = c(
+      "Without C" = "cornflowerblue",
+      "With C" = "coral3"
+    )
+  ) +
   labs(
     x = NULL,
     y = "Absolute error in estimated total effect"
   ) +
-  theme_minimal()
+  theme_minimal() +
+  theme(legend.position = "none")
 
 ```
 
@@ -231,19 +235,20 @@ error_long_m$model <- factor(
   )
 )
 
-ggplot(
-  error_long_m,
-  aes(
-    x = model,
-    y = absolute_error
-  )
-) +
+ggplot(error_long_m, aes(x = model, y = absolute_error, fill = model)) +
   geom_boxplot() +
+  scale_fill_manual(
+    values = c(
+      "Without M" = "cornflowerblue",
+      "With M" = "coral3"
+    )
+  ) +
   labs(
     x = NULL,
-    y = "Absolute error in estimated direct effect"
+    y = "Absolute error in estimated total effect"
   ) +
-  theme_minimal()
+  theme_minimal() +
+  theme(legend.position = "none")
 
 ```
 

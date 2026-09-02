@@ -15,13 +15,13 @@ format:
 ::: {.column width="65%"}
 ## Setting the stage for Structural Causal Models (SCMs)
 
-As ecologists, many of us have spent months (or years) collecting data in uncomfortable field conditions and have permanent scars (or gut flora) as proof. We return from the field excited to play ecological detective and see what our data analysis tells us about our system. So, we then proceed with an analysis that proceeds as follows:
+As ecologists, many of us have spent months (or years) collecting data in uncomfortable field conditions and have permanent scars (or gut flora) as proof. We left with what we think is a clear hypothesis (or four)--and some associated predictions--, and We return from the field excited to play ecological detective and see what our data analysis tells us about our system. So, we then proceed with an analysis that proceeds as follows:
 
 1. Identify a response variable.
 2. Add predictors that seem biologically relevant.
 3. Include random effects for grouping factors (most likely)
 4. Fit the model (linear/nonlinear/etc.)
-5. Interpret coefficients.
+5. Interpret coefficients (i.e. compare them to each other, etc.)
 :::
 
 ::: {.column width="5%"}
@@ -42,7 +42,7 @@ $$
 {rainfall}_{i} + 
 {flock\_size}_{i}
 $$
-where _i_ indexes specific observations. This may seem (or actually be) a perfectly reasonable predictive ecological model. This kind of model structure is what we refer to as a "kitchen-sink model" (since we throw everything into the model) or the "garbage can regression" (because...well...that's obvious); this approach is what most of us have been taught. But the central problem --and one that has massive implications for strong inference as well as the direction of future research-- is not the statistical model itself. It is how ecologists interpret such models. 
+where _i_ indexes specific observations. This may seem (or actually be) a perfectly reasonable predictive ecological model. This kind of model structure is what we refer to as a "kitchen-sink model" (since we throw everything into the model) or the "garbage can regression" (because...well...that's obvious; *sensu* McElreath); this approach is what most of us have been taught. But the central problem --and one that has massive implications for strong inference as well as the direction of future research-- is not the statistical model itself. It is how ecologists have interpreted such models. 
 
 ::: {.callout-tip collapse=false icon=false}
 ## **What many ecologists think this model is doing**
@@ -58,15 +58,17 @@ where _i_ indexes specific observations. This may seem (or actually be) a perfec
 ::: {.callout-important collapse=false icon=false}
 ## **What ecologists should understand about the kitchen-sink model**
 
-* Coefficients are not causal effects.
-* "Independent effects" may not correspond to any real biological state.  
+* Most coefficients are not causal effects (so they cannot be associated with causal words)
+* "Independent effects" may not correspond to any real biological state (i.e. this is ecologically meaningless)
 * Including all variables does not ensure proper control of confounders  
-* You may be conditioning on covariates (mediators) that may increase Type II errors.  
+* You may be conditioning on covariates (mediators) that introduce bias and may increase Type II errors.  
 * You may be conditioning on covariate (colliders) that introduce bias.
-* Coefficients do not necessarily correspond to a single estimand (primary target of your study).
+* Coefficients do not necessarily correspond to the estimand (primary target quantity) of your study.
 * Comparing coefficient magnitudes can be misleading or meaningless.  
 * The model (or multiple models compared via AIC) does not tell you which variables should be included.
 * The model obscures total, direct, and indirect effects.
+
+Ouch!
 
 :::
 
@@ -78,7 +80,9 @@ And, speaking directly about multiple regression approaches:
 
 > _“You put everything into a regression equation, toss with some creative story-telling, and hope the reviewers eat it. In general, this is not a valid approach, for well-known reasons. But it can get you published. Causal salad can discover causes too. But you have to get lucky. … No amount of data reliably turns salad into sense.”_ (Richard McElreath)
 
-The core problem is not the specific types of statistical models. Rather, it is the lack of a clear causal questions guiding the modeling approach. In this section, we integrate what we have learned into a formal framework for understanding what ecologists everywhere strive for but seldom achieve: causality, or an understanding of the factors that *affect*, *influence*, *cause*, *determine*, *alter*, *drive*, *generate*, *produce*, or *lead to* observed phenomena. This is a powerful framework that was formalized fairly recently by Pearl (2009) but, unfortunately, has not been widely adopted in the field of ecology.
+The core problem is *not* the specific types of statistical models. Those are known to be mathematically robust. Rather, the central issue is the lack of a clear causal questions guiding the modeling approach. (Once again, many opponents of this statement may claim that they themselves are not invoking causal explanations, but, as we've seen, most practitioners use causal verbiage, even in observational studies.)
+
+In this section, we integrate what we have learned into a formal framework for understanding what ecologists everywhere strive for but seldom achieve: causality, or an understanding of the factors that *affect*, *influence*, *cause*, *determine*, *alter*, *drive*, *generate*, *produce*, or *lead to* observed phenomena. This is a powerful framework that was formalized fairly recently by Pearl (2009) but, unfortunately, has not been widely adopted in the field of ecology.
 
 ## Summary comparison of kitchen-sink versus causal inference approaches
 

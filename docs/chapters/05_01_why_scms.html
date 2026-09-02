@@ -203,7 +203,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/int_preparing_yourself.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Preparing Yourself</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Preparing for data analysis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -327,7 +327,9 @@ window.Quarto = {
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<p><a href="https://onlinelibrary.wiley.com/doi/epdf/10.1111/brv.70029" target="_blank" rel="noopener">Download link</a> Franks D.W., Ruxton G.D., and T.N. Sherratt. 2025. Ecology needs a causal overhaul. <em>Biological Reviews</em>. https://doi.org/10.1111/brv.70029</p>
+<ul>
+<li><a href="../files/Franks_et_al_2025.pdf">Franks D.W., Ruxton G.D., and T.N. Sherratt. 2025. Ecology needs a causal overhaul. <em>Biological Reviews</em>.</a></li>
+</ul>
 </div>
 </div>
 </div>
@@ -335,13 +337,13 @@ window.Quarto = {
 <div class="column" style="width:65%;">
 <section id="setting-the-stage-for-structural-causal-models-scms" class="level2" data-number="11.1">
 <h2 data-number="11.1" class="anchored" data-anchor-id="setting-the-stage-for-structural-causal-models-scms"><span class="header-section-number">11.1</span> Setting the stage for Structural Causal Models (SCMs)</h2>
-<p>As ecologists, many of us have spent months (or years) collecting data in uncomfortable field conditions and have permanent scars (or gut flora) as proof. We return from the field excited to play ecological detective and see what our data analysis tells us about our system. So, we then proceed with an analysis that proceeds as follows:</p>
+<p>As ecologists, many of us have spent months (or years) collecting data in uncomfortable field conditions and have permanent scars (or gut flora) as proof. We left with what we think is a clear hypothesis (or four)–and some associated predictions–, and We return from the field excited to play ecological detective and see what our data analysis tells us about our system. So, we then proceed with an analysis that proceeds as follows:</p>
 <ol type="1">
 <li>Identify a response variable.</li>
 <li>Add predictors that seem biologically relevant.</li>
 <li>Include random effects for grouping factors (most likely)</li>
 <li>Fit the model (linear/nonlinear/etc.)</li>
-<li>Interpret coefficients.</li>
+<li>Interpret coefficients (i.e.&nbsp;compare them to each other, etc.)</li>
 </ol>
 </section>
 </div><div class="column" style="width:5%;">
@@ -356,7 +358,7 @@ window.Quarto = {
 {predator\_abundance}_{i} +
 {rainfall}_{i} +
 {flock\_size}_{i}
-\]</span> where <em>i</em> indexes specific observations. This may seem (or actually be) a perfectly reasonable predictive ecological model. This kind of model structure is what we refer to as a “kitchen-sink model” (since we throw everything into the model) or the “garbage can regression” (because…well…that’s obvious); this approach is what most of us have been taught. But the central problem –and one that has massive implications for strong inference as well as the direction of future research– is not the statistical model itself. It is how ecologists interpret such models.</p>
+\]</span> where <em>i</em> indexes specific observations. This may seem (or actually be) a perfectly reasonable predictive ecological model. This kind of model structure is what we refer to as a “kitchen-sink model” (since we throw everything into the model) or the “garbage can regression” (because…well…that’s obvious; <em>sensu</em> McElreath); this approach is what most of us have been taught. But the central problem –and one that has massive implications for strong inference as well as the direction of future research– is not the statistical model itself. It is how ecologists have interpreted such models.</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -396,20 +398,20 @@ window.Quarto = {
 <div id="callout-3" class="callout-3-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <ul>
-<li>Coefficients are not causal effects.</li>
-<li>“Independent effects” may not correspond to any real biological state.<br>
-</li>
+<li>Most coefficients are not causal effects (so they cannot be associated with causal words)</li>
+<li>“Independent effects” may not correspond to any real biological state (i.e.&nbsp;this is ecologically meaningless)</li>
 <li>Including all variables does not ensure proper control of confounders<br>
 </li>
-<li>You may be conditioning on covariates (mediators) that may increase Type II errors.<br>
+<li>You may be conditioning on covariates (mediators) that introduce bias and may increase Type II errors.<br>
 </li>
 <li>You may be conditioning on covariate (colliders) that introduce bias.</li>
-<li>Coefficients do not necessarily correspond to a single estimand (primary target of your study).</li>
+<li>Coefficients do not necessarily correspond to the estimand (primary target quantity) of your study.</li>
 <li>Comparing coefficient magnitudes can be misleading or meaningless.<br>
 </li>
 <li>The model (or multiple models compared via AIC) does not tell you which variables should be included.</li>
 <li>The model obscures total, direct, and indirect effects.</li>
 </ul>
+<p>Ouch!</p>
 </div>
 </div>
 </div>
@@ -421,7 +423,8 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p><em>“You put everything into a regression equation, toss with some creative story-telling, and hope the reviewers eat it. In general, this is not a valid approach, for well-known reasons. But it can get you published. Causal salad can discover causes too. But you have to get lucky. … No amount of data reliably turns salad into sense.”</em> (Richard McElreath)</p>
 </blockquote>
-<p>The core problem is not the specific types of statistical models. Rather, it is the lack of a clear causal questions guiding the modeling approach. In this section, we integrate what we have learned into a formal framework for understanding what ecologists everywhere strive for but seldom achieve: causality, or an understanding of the factors that <em>affect</em>, <em>influence</em>, <em>cause</em>, <em>determine</em>, <em>alter</em>, <em>drive</em>, <em>generate</em>, <em>produce</em>, or <em>lead to</em> observed phenomena. This is a powerful framework that was formalized fairly recently by Pearl (2009) but, unfortunately, has not been widely adopted in the field of ecology.</p>
+<p>The core problem is <em>not</em> the specific types of statistical models. Those are known to be mathematically robust. Rather, the central issue is the lack of a clear causal questions guiding the modeling approach. (Once again, many opponents of this statement may claim that they themselves are not invoking causal explanations, but, as we’ve seen, most practitioners use causal verbiage, even in observational studies.)</p>
+<p>In this section, we integrate what we have learned into a formal framework for understanding what ecologists everywhere strive for but seldom achieve: causality, or an understanding of the factors that <em>affect</em>, <em>influence</em>, <em>cause</em>, <em>determine</em>, <em>alter</em>, <em>drive</em>, <em>generate</em>, <em>produce</em>, or <em>lead to</em> observed phenomena. This is a powerful framework that was formalized fairly recently by Pearl (2009) but, unfortunately, has not been widely adopted in the field of ecology.</p>
 <section id="summary-comparison-of-kitchen-sink-versus-causal-inference-approaches" class="level2" data-number="11.2">
 <h2 data-number="11.2" class="anchored" data-anchor-id="summary-comparison-of-kitchen-sink-versus-causal-inference-approaches"><span class="header-section-number">11.2</span> Summary comparison of kitchen-sink versus causal inference approaches</h2>
 <p>Below is a comparison of kitchen-sink versus causal (DAG) approaches. My primary intent with this table is to encourage you to think critically about what traditional ecological approaches (kitchen-sink models) are lacking. Specifically, in causal settings (again, the way in which most ecologists think and <em>do</em>), some approaches are not only weaker. The core issue is that these approaches fail to answer the questions set forth by formal Hypotheses and Predictions. Modern ecological approaches (causal inference via DAGs) emphasize that causal questions (or even implications) <em>require</em> explicit assumptions about data-generating processes. This does not mean simply devising a good question; it means that all research questions must be backed up by careful understanding of causal logic.</p>
@@ -604,7 +607,9 @@ window.Quarto = {
 <section id="references-for-this-section" class="level2" data-number="11.6">
 <h2 data-number="11.6" class="anchored" data-anchor-id="references-for-this-section"><span class="header-section-number">11.6</span> References for this section</h2>
 <ul>
-<li><a href="https://onlinelibrary.wiley.com/doi/epdf/10.1111/brv.70029" target="_blank" rel="noopener">Download link</a> Franks D.W., Ruxton G.D., and T.N. Sherratt. 2025. Ecology needs a causal overhaul. <em>Biological Reviews</em>. https://doi.org/10.1111/brv.70029</li>
+<li><ul>
+<li><a href="../files/Franks_et_al_2025.pdf">Franks D.W., Ruxton G.D., and T.N. Sherratt. 2025. Ecology needs a causal overhaul. <em>Biological Reviews</em>.</a></li>
+</ul></li>
 <li>Pearl, J. (2009). <em>Causality: Models, reasoning, and inference</em> (2nd ed.). Cambridge University</li>
 </ul>
 

@@ -1,5 +1,5 @@
 ---
-title: "Preparing Yourself"
+title: "Preparing for data analysis"
 format:
   html:
     toc: true
@@ -7,9 +7,9 @@ format:
     number-sections: true
 ---
 
-## What do I need to do to get started in this class?
+## What do I need to do to be ready for working with my data in R?
 
-To prepare for the course, here is what you are expected to do by the end of the first week (specific information is below this list):
+Here is what you are expected to do by sometimes in week 3 (sooner is better, if you want to have plenty of time to solve any problems that arise):
 
 -   **Download, Install, and set up [RStudio Desktop](https://posit.co/download/rstudio-desktop)**
 -   **Gather your dataset files for your analysis**
@@ -64,7 +64,9 @@ list.files("data/raw_data")
 
 ::: callout-note
 **Working order means more than a spreadsheet or two.**\
-A dataset is only complete if it includes **metadata**. Metadata describe: - what the variables are\
+A dataset is only complete if it includes **metadata**. Metadata describe: 
+
+- what the variables are\
 - how the data were collected\
 - under what conditions\
 - with what assumptions and limitations

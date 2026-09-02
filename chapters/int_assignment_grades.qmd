@@ -22,7 +22,7 @@ This page describes the Milestone Assignments referenced in the course calendar.
 
 ## Milestone Assignment descriptions
 
-::: {.callout-note title="**Scientific Question + Estimand Note (Week 2; due 11-Sep)**" icon="false" collapse="true"}
+::: {.callout-note title="**Scientific Question, Estimand Note, and first DAG (Week 2; due 11-Sep)**" icon="false" collapse="true"}
 **Purpose:**\
 Define the scientific target before you choose a DAG, statistical model, or model family. This assignment is about making clear what you are actually trying to learn from your project.
 
@@ -43,7 +43,10 @@ Define the scientific target before you choose a DAG, statistical model, or mode
     -   Study system
     -   Unit of analysis
     -   Data source and basic sampling structure
+-   **Draft DAG**
+    -   Create a draft Directed Acyclic Graph (following most guidelines in [DAG Construction](https://jpkelley.github.io/ZOO5500/chapters/05_02_building_dags.html)
 
+    
 ### Submission format
 
 -   Approximately 1–2 pages (Word) or a short Quarto page
@@ -354,7 +357,7 @@ Because the component parts of the Final Report have been graded throughout the 
 
 ------------------------------------------------------------------------
 
-## General assignment submission requirements
+## Submission formats: A note on Word or Quarto formats
 
 You may choose to submit a raw Quarto Markdown file or submit a version of it rendered as a Word document (so that it is editable by me). As long as it is legible and, more importantly, makes sense within your own workflow, it works for me.
 

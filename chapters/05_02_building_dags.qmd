@@ -262,6 +262,7 @@ At this stage, your goal is to ask whether your DAG represents your best knowled
 
 * **latent (unmeasured) variables**
 * **scale and measurement**
+* **proxy or index variables**
 
 Of course, sometimes it is nearly impossible to anticipate all relevant ecological processes when you have not yet learned about a study system. Let us delve into both of this issues:
 
@@ -320,7 +321,11 @@ flowchart LR
   classDef node fill:#9fbfe8,color:#000,stroke-width:0px;
 ```
 
-The second scenario is when the quantity that you measure is not the process itself. Rather, it is alocal proxy for a broader-scale, unmeasured cause. Consider a system where $territory\_quality$ is an unmeasured (*latent*) variable operating at a broader scale, while $canopy\_cover$ is a directly observed, local measurement. Here is the DAG:
+Again, in this DAG, scale is not a separate node. Instead, it is embedded in how variables are defined:
+
+#### _Proxy or index variables_
+
+The last scenario is when the quantity that you measure is not the process itself. Rather, it is a local proxy for a broader-scale, unmeasured cause. Consider a system where $territory\_quality$ is an unmeasured (*latent*) variable operating at a broader scale, while $canopy\_cover$ is a directly observed, local measurement. Here is the DAG:
 
 ```{mermaid}
 flowchart LR
@@ -333,18 +338,20 @@ flowchart LR
 
 The variable _canopy cover_ is very localized --measured within five meters of the nest-- and is driven by _territory quality_. If both are causally relevant, they should appear in the DAG as two separate nodes. 
 
+Admittedly, this is a tricky one. But it is important, especially given that ecologists deal with things like commonly used indices (that may have historical relevance) or surveys that involve estimation of detectability. 
+
 
 ::: {.callout-note icon=true}
 ## **Side note: Why does territory quality point to canopy cover?**
-In practice, we often use what are called proxy or indicator measurements to describe some larger-level conceptual metric. In this example, we are measuring canopy cover (at multiple subplots, etc.) and perhaps combing this with other variables like humidity or insecet abundance to estimate territory quality. This can make it tempting to reverse the edge direction in the DAG.
+In practice, we often use proxy or indicator measurements to characterize a broader conceptual quantity that we cannot measure directly. In this example, we might measure canopy cover at multiple subplots, perhaps along with variables such as humidity or insect abundance, and use these measurements secondarily as indicators of territory quality. Because we use the measurements to infer territory quality, it can be tempting to reverse the edge direction in the DAG.
 
-However, we now know that a DAG represents the underlying causal structure structure of our study system; it should not represent measurement order. In our example, territory quality reflects underlying unmeasured (latent) processes such as soil, disturbance, topography, or other territory-specific variables that together generate measured variables like canopy cover.
+However, a DAG represents the causal structure of the study system, not the direction in which we infer or calculate quantities from our data. In our example, territory quality represents broader, unmeasured ecological conditions associated with a territory—arising from processes such as soil, disturbance, and topography—that generate local characteristics we can measure, such as canopy cover. Thus, the causal direction is *territory quality → canopy cover* even though we may use measured canopy cover to learn about territory quality.
 
 So, remember: **Measurement order is not causal order.**
 
 :::
 
-Again, in this DAG, scale is not a separate node. Instead, it is embedded in how variables are defined:
+
 
 * **Territory quality**: broader-scale latent condition  
 * **Canopy cover**: local measured proxy  
@@ -506,8 +513,3 @@ This is one of the most fascinating and fun parts of DAG construction. A well-co
 * What new questions emerge from the causal structure?
 
 Remember that you are formalizing the causal assumptions of your study system. This can be done at any time --before, during, or after a study--, though it is idea to do _before_ you begin your study. But, as we all know from experience, our knowledge of the processes involved in our system grow as we study it (hopefully). We conduct more experiments, we make more observations, we read new and old published papers, we speak with colleagues. Therefore, we should absolutely expect that the DAG will evolve over time. If we can a DAG updated with new information, we can identify where past studies have fallen short, what present studies are constrained to estimate, and what future studies should prioritize.
-
----
-
-## Up next!
-So, remember that a DAG is just one part of a Structural Causal Model. The other critical component is the set of actual structural equations.On the next page, we will focus on a single exposure–outcome pair, define the estimand, determine the correct adjustment set, and translate the DAG into a statistical model (using tools familiar to you). 

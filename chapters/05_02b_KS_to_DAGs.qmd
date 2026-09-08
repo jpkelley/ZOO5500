@@ -13,7 +13,7 @@ execute:
 
 ## Eight-step workflow
 
-Adopting even the most rudimentary version of a Structural Causal Model can be daunting for those of us who were taught the classical kitchen-sink-AIC-will-save-us (aka "throw it all in") approach. As a consequence, most of us have datasets that were designed to be analyzed in this way. So, sometimes, we feel stuck and wondering how to move forward.
+Adopting even the most rudimentary version of a Structural Causal Model can be daunting for those of us who were taught the classical kitchen-sink-AIC-will-save-us (aka "throw it all in") approach. In short, we may feel stuck and left wondering how to move forward.
 
 This is a visual guide describing what is minimally required to upgrade from a kitchen-sink model toward a more defensible Structural Causal Model (SCM). For now, do not get caught up in the use of "SCM"; you are simply wanting to represent your study system's data-generating process. It may seem that this is an overly-complicated approach, but, oddly, the goal is to simplify your modeling to prevent telling the wrong story with a dataset that you have worked so hard to collect. These eight steps apply to a single estimand and can (and should) be repeated for every desired estimand in your dataset.
 
@@ -87,9 +87,10 @@ For every edge (arrow) you want to draw, force yourself to complete the followin
 
 > "$X$ affects $Y$ because ..."
 
-And then wait until you answer...If the sentence can easily be completedby inserting another ecological/biological process, then that process must have its own node. This is often an extremely efficient way to discover missing mechanisms.
+If the sentence can easily be completed by inserting another ecological/biological process, then consider if that process should have its own node (especially if it is important for your focal question). 
+
 :::
-:::
+
 :::
 
 ### Step 3: Check your proxy variables
@@ -111,17 +112,20 @@ flowchart TD
   Z -->|causal path| Y
 ```
 :::
+
 ::: {.column width="40%"}
 For this step, you ask yourself the following about each variable: 
 
 > "What is this value actually measuring? 
 
-A proxy is not automatically a cause, though it may sometimes be. Often, the way to improve your DAG is to create a latent variable that causes both the proxy (as it should) and the outcome. Hint: If you must use the phrase “$A$ is a proxy for $B$,” there is a large change that a node is missing from the DAG.
+A proxy is not automatically a cause. Often, a proxy implied that an underlying "construct" is missing from your DAG. One way to improve your DAG is to encode the variables your measured as part of that proxy in the DAG. 
+
 :::
+
 :::
 :::
 
-### Step 4: Collapse compositional variables
+### Step 4: Recognize compositional (or constrained) variables
 
 ::: {.callout-note appearance="simple" icon=false}
 ::: {.columns}
@@ -180,7 +184,7 @@ Such variables are called confounders, and they can be directly measured or not.
 :::
 :::
 
-### Step 6: Add a latent variable (or two) on purpose
+### Step 6: Look carefully for important unmeasured causes (latent causes)
 
 ::: {.callout-tip appearance="simple" icon=false}
 ::: {.columns}
@@ -203,9 +207,9 @@ flowchart TD
 ::: {.column width="40%"}
 This is an oddly useful (and lazy) piece of advice that seems to hold true: 
 
-> If your DAG feels too "clean", it probably is. 
+> If your DAG feels too "clean", it probably is. Ask yourself what important processes you have not measured.”
 
-You can add at least one latent node when you suspect omitted structure but cannot yet measure it directly. This does not solve major issues with the DAG. But what this exercise does is force you to give an honest interpretation of the places in your DAG are weak given what you want to say about causation.
+You could add at least one latent node when you suspect omitted structure but cannot yet measure it directly. This does not solve major issues with the DAG. But what this exercise does is force you to give an honest interpretation of the places in your DAG are weak given what you want to say about causation.
 :::
 :::
 :::
@@ -264,7 +268,7 @@ flowchart TD
 ```
 :::
 ::: {.column width="40%"}
-Once the DAG is drawn, the parent adjustment set (i.e. the terms you plan on putting into the model) should be locked by the causal logic implied by the DAG structure. Try your best not to finalize the DAG structure by changing nodes and edges for the sake of convenience. You should include confounders that block alternative causal pths (backdoor paths), and you should definitely _not_ include mediators as covariates when estimating a total effect.
+Once the DAG and estimand are specified, identify and lock the appropriate adjustment set before choosing the statistical model form. Try your best not to finalize the DAG structure by changing nodes and edges for the sake of convenience. You should include confounders that block alternative causal paths (backdoor paths), and you should definitely _not_ include mediators as covariates when estimating a total effect.
 
 Only after the DAG structure is finalized should you choose the form of the statistical model: GLM, GLMM, GAM, link function, smoothness, error family, and so forth. 
 :::

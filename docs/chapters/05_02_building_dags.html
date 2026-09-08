@@ -303,8 +303,7 @@ window.Quarto = {
   <li><a href="#step-8-refine-and-interrogate-the-dag" id="toc-step-8-refine-and-interrogate-the-dag" class="nav-link" data-scroll-target="#step-8-refine-and-interrogate-the-dag"><span class="header-section-number">13.4.8</span> Step 8: Refine and interrogate the DAG</a></li>
   </ul></li>
   <li><a href="#step-9-consider-effect-modification-interactions" id="toc-step-9-consider-effect-modification-interactions" class="nav-link" data-scroll-target="#step-9-consider-effect-modification-interactions"><span class="header-section-number">13.5</span> Step 9: Consider effect modification (interactions)</a></li>
-  <li><a href="#here-the-x-times-z-term-means-that-the-effect-of-x-on-y-depends-on-the-value-of-z.-after-building-your-dag-carefully-document-how-variables-will-enter-your-structural-models-including-hypothesized-interactions-and-random-effects." id="toc-here-the-x-times-z-term-means-that-the-effect-of-x-on-y-depends-on-the-value-of-z.-after-building-your-dag-carefully-document-how-variables-will-enter-your-structural-models-including-hypothesized-interactions-and-random-effects." class="nav-link" data-scroll-target="#here-the-x-times-z-term-means-that-the-effect-of-x-on-y-depends-on-the-value-of-z.-after-building-your-dag-carefully-document-how-variables-will-enter-your-structural-models-including-hypothesized-interactions-and-random-effects."><span class="header-section-number">13.6</span> Here, the <span class="math inline">\(X \times Z\)</span> term means that the effect of <span class="math inline">\(X\)</span> on <span class="math inline">\(Y\)</span> depends on the value of <span class="math inline">\(Z\)</span>. After building your DAG, carefully document how variables will enter your structural models, including hypothesized interactions and random effects.</a></li>
-  <li><a href="#step-10-use-the-dag-to-determine-what-questions-are-possible" id="toc-step-10-use-the-dag-to-determine-what-questions-are-possible" class="nav-link" data-scroll-target="#step-10-use-the-dag-to-determine-what-questions-are-possible"><span class="header-section-number">13.7</span> Step 10: Use the DAG to determine what questions are possible</a></li>
+  <li><a href="#step-10-use-the-dag-to-determine-what-questions-are-possible" id="toc-step-10-use-the-dag-to-determine-what-questions-are-possible" class="nav-link" data-scroll-target="#step-10-use-the-dag-to-determine-what-questions-are-possible"><span class="header-section-number">13.6</span> Step 10: Use the DAG to determine what questions are possible</a></li>
   </ul>
 </nav>
     </div>
@@ -336,7 +335,7 @@ window.Quarto = {
 </section>
 <section id="general-architecture-of-a-directed-acyclic-graph-dag" class="level2" data-number="13.2">
 <h2 data-number="13.2" class="anchored" data-anchor-id="general-architecture-of-a-directed-acyclic-graph-dag"><span class="header-section-number">13.2</span> General architecture of a Directed Acyclic Graph (DAG)</h2>
-<p>A Directed Acyclic Graph represents all plausible causal relationships in your system. In essence, it encapsulates everything important in our study system. This DAG will form the basis for your entire set of questions about your system.</p>
+<p>A single DAG represents your assumptions about the causal relationships in a study system. It should capture the causal structure that is important for multiple scientific questions you want to ask about the system.</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -865,14 +864,12 @@ classDef out fill:#bfe3c0,color:#000,stroke-width:0px;
 <p>What does this show? Both predator abundance and vegetation structure affect nest survival. Effect modification arises when the effect of predator abundance on survival depends on vegetation structure (an interaction). The DAG itself does not change. That is, effect modification does not introduce a new causal relationship—it changes how existing causes combine in the structural model for <span class="math inline">\(Y\)</span>. This raises an important question: <em>where does the interaction appear, as it is not explicitly encoded in the DAG?</em></p>
 <p>Remember that a DAG shows which variables are causes of <span class="math inline">\(Y\)</span>. The DAG does not specify how those causes combine, whether additively or interactively. Instead, the interaction appears in the structural equation:</p>
 <p><span class="math display">\[ Y \sim X + Z + X \times Z \]</span></p>
+<p>Here, the <span class="math inline">\(X \times Z\)</span> term means that the effect of <span class="math inline">\(X\)</span> on <span class="math inline">\(Y\)</span> depends on the value of <span class="math inline">\(Z\)</span>. After building your DAG, carefully document how variables will enter your structural models, including hypothesized interactions and random effects.</p>
+<hr>
 </section>
-<section id="here-the-x-times-z-term-means-that-the-effect-of-x-on-y-depends-on-the-value-of-z.-after-building-your-dag-carefully-document-how-variables-will-enter-your-structural-models-including-hypothesized-interactions-and-random-effects." class="level2" data-number="13.6">
-<h2 data-number="13.6" class="anchored" data-anchor-id="here-the-x-times-z-term-means-that-the-effect-of-x-on-y-depends-on-the-value-of-z.-after-building-your-dag-carefully-document-how-variables-will-enter-your-structural-models-including-hypothesized-interactions-and-random-effects."><span class="header-section-number">13.6</span> Here, the <span class="math inline">\(X \times Z\)</span> term means that the effect of <span class="math inline">\(X\)</span> on <span class="math inline">\(Y\)</span> depends on the value of <span class="math inline">\(Z\)</span>. After building your DAG, carefully document how variables will enter your structural models, including hypothesized interactions and random effects.</h2>
-</section>
-<section id="step-10-use-the-dag-to-determine-what-questions-are-possible" class="level2" data-number="13.7">
-<h2 data-number="13.7" class="anchored" data-anchor-id="step-10-use-the-dag-to-determine-what-questions-are-possible"><span class="header-section-number">13.7</span> Step 10: Use the DAG to determine what questions are possible</h2>
-<p>This is one of the most fascinating and fun parts of DAG construction. We will discuss this in greater detail in coming weeks.</p>
-<p>A well-constructed DAG does more than simply represent the causal assumptions underlying your original hypotheses and questions. It allows you to systematically evaluate what questions can be supported by the causal structure you have represented.</p>
+<section id="step-10-use-the-dag-to-determine-what-questions-are-possible" class="level2" data-number="13.6">
+<h2 data-number="13.6" class="anchored" data-anchor-id="step-10-use-the-dag-to-determine-what-questions-are-possible"><span class="header-section-number">13.6</span> Step 10: Use the DAG to determine what questions are possible</h2>
+<p>This is one of the most fascinating and fun parts of DAG construction. We will discuss this in greater detail in coming weeks. A well-constructed DAG does more than simply represent the causal assumptions underlying your original hypotheses and questions. It allows you to systematically evaluate what questions can be supported by the causal structure you have represented.</p>
 <p>You can now narrow your focus onto questions such as:</p>
 <ul>
 <li>Which exposure–outcome relationships are supported by plausible causal pathways?</li>
@@ -882,7 +879,7 @@ classDef out fill:#bfe3c0,color:#000,stroke-width:0px;
 </ul>
 <p>Remember that you are formalizing the causal assumptions of your study system. This can be done before, during, or after a study, though it is ideal to begin <strong>before</strong> the study whenever possible.</p>
 <p>Our understanding of an ecological system will often change as we study it. We conduct experiments, make observations, read new and old literature, and speak with colleagues. Therefore, we should expect the DAG to evolve over time.</p>
-<p>Keeping the DAG updated as our scientific understanding changes can help us identify where past studies have fallen short, what present studies are constrained to estimate, and what future studies should prioritize. ````</p>
+<p>Keeping the DAG updated as our scientific understanding changes can help us identify where past studies have fallen short, what present studies are constrained to estimate, and what future studies should prioritize.</p>
 
 
 </section>

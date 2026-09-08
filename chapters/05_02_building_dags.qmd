@@ -12,7 +12,8 @@ In this section, we explore the Directed Acyclic Graph (DAG), the first step of 
 
 ## General architecture of a Directed Acyclic Graph (DAG)
 
-A Directed Acyclic Graph represents all plausible causal relationships in your system. In essence, it encapsulates everything important in our study system. This DAG will form the basis for your entire set of questions about your system.
+A single DAG represents your assumptions about the causal relationships in a study system. It should capture the causal structure that is important for multiple scientific questions you want to ask about the system.
+
 
 ::: {.callout-tip icon=false collapse=false}
 ## **Important DAG terminology**
@@ -423,13 +424,12 @@ Remember that a DAG shows which variables are causes of $Y$. The DAG does not sp
 $$ Y \sim X + Z + X \times Z $$
 
 Here, the $X \times Z$ term means that the effect of $X$ on $Y$ depends on the value of $Z$. After building your DAG, carefully document how variables will enter your structural models, including hypothesized interactions and random effects.
+
 ---
 
 ## Step 10: Use the DAG to determine what questions are possible
 
-This is one of the most fascinating and fun parts of DAG construction. We will discuss this in greater detail in coming weeks. 
-
-A well-constructed DAG does more than simply represent the causal assumptions underlying your original hypotheses and questions. It allows you to systematically evaluate what questions can be supported by the causal structure you have represented.
+This is one of the most fascinating and fun parts of DAG construction. We will discuss this in greater detail in coming weeks. A well-constructed DAG does more than simply represent the causal assumptions underlying your original hypotheses and questions. It allows you to systematically evaluate what questions can be supported by the causal structure you have represented.
 
 You can now narrow your focus onto questions such as:
 
@@ -442,6 +442,6 @@ Remember that you are formalizing the causal assumptions of your study system. T
 
 Our understanding of an ecological system will often change as we study it. We conduct experiments, make observations, read new and old literature, and speak with colleagues. Therefore, we should expect the DAG to evolve over time.
 
-Keeping the DAG updated as our scientific understanding changes can help us identify where past studies have fallen short, what present studies are constrained to estimate, and what future studies should prioritize.
-````
+Keeping the DAG updated as our scientific understanding changes can help us identify where past studies have fallen short, what present studies are constrained to estimate, and what future studies should prioritize. 
+
 

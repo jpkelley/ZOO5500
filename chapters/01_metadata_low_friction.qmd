@@ -189,20 +189,14 @@ These formats are perfectly acceptable as *starting points*. They lower the barr
 
 ---
 
-## Why we use YAML
+## One recommendation: YAML 
 
-To support that transition from your mind (or Google Sheets), this course adopts **YAML** as the canonical format for project-level metadata.
+To support that transition from your mind (or Google Sheets), consider starting with **YAML** format as the format for your initial metadata.
 
 ::: callout-note
 ## YAML: What's in a name?
 
 Originally, YAML was an abbreviation for _"Yet Another Markup Language"_. Later, it become _"YAML Ain't Markup Language"_.
-:::
-
-::: callout-note
-## What the heck is _canonical_ in this context?
-
-_Canonical_ simply means that there is exactly one place where your dataset is formally defined; it does _not_ mean that your metadata exists as exactly one file (though it could).
 :::
 
 There are several advantages to using YAML, including:

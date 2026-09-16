@@ -107,19 +107,6 @@ In short:
 
 ---
 
-## How **Part I: Reproducible Analyses** is organized
-
-This Part follows the workflow in stages:
-
-1. **Nature of data:** What data are, how measurement works, and what _raw data_ means.
-2. **Metadata (low friction):** How to document context without drowning in formatting standards.
-3. **Reproducible workflows:** Why multiple step-by-step scripts are not enough; the need for explicit input–output mapping.
-4. **Inference and interpretation:** Where assumptions enter and where reproducibility ends.
-
-Each chapter is responsible for a **specific region of the workflow**.
-
----
-
 ## A guiding principle
 
 > **If you cannot say what a result depends on, it is not reproducible.**

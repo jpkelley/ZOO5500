@@ -37,7 +37,7 @@
     "href": "index.html#quicklinks",
     "title": "Quantitative Analysis of (Messy) Field Data",
     "section": "Quicklinks",
-    "text": "Quicklinks\nCourse Calendar\n\nThis course was created using Quarto (via R Studio) using custom CSS and HTML.\n\n\n\n\n\n\nCautionAI usage transparency\n\n\n\n\n\nIn the construction of this website, GenAI (via ChatGPT) was used in the following ways:\n\nGenerating graphics of cryptid jackalope species. This was part of an exercise in prompt engineering—specifically, learning how to design minimalist prompts that produce consistent visual themes across all outputs.\nConverting the Canvas-based course site into Quarto markdown. This included restructuring content, standardizing headers, and translating existing materials into a reproducible, version-controlled format (for hosting on GitHub).\nAssistive learning of custom CSS, in parallel with consulting online CSS documentation and manuals (i.e., as a tutor and debugger, not a design authority).\nReformatting and updating existing tables, including updating of revised dates, assignments, and course logistics.\nError-checking and troubleshooting markdown and Quarto code. This was necessary during site builds.\nImproving organization across course components. This included suggestions for cross-referencing related pages and identifying places where additional examples or clarifications would improve learning outcomes.\nEvaluating pedagogical alignment. This involved getting feedback on readability, cognitive load, and whether learning objectives were being met by the material being presented.\nEditorial support to ensure that tone and level of explanatory detail was appropriate for graduate students. This included tightening some language and reducing informational redundancy across pages.\n\nGenAI was used as an assistive tool throughout; it was not used as a content authority, decision-maker, or substitute for subject-matter expertise. All instructional choices, interpretations, and final edits remain the responsibility of the instructor (in accordance with AI Use Policy).",
+    "text": "Quicklinks\nCourse Calendar\n\n\n\n\n\n\nWarningWorkflow templates\n\n\n\n\n\nYAML Metadata Template (general)\n\n\n\n\nThis course was created using Quarto (via R Studio) using custom CSS and HTML.\n\n\n\n\n\n\nCautionAI usage transparency\n\n\n\n\n\nIn the construction of this website, GenAI (via ChatGPT) was used in the following ways:\n\nGenerating graphics of cryptid jackalope species. This was part of an exercise in prompt engineering—specifically, learning how to design minimalist prompts that produce consistent visual themes across all outputs.\nConverting the Canvas-based course site into Quarto markdown. This included restructuring content, standardizing headers, and translating existing materials into a reproducible, version-controlled format (for hosting on GitHub).\nAssistive learning of custom CSS, in parallel with consulting online CSS documentation and manuals (i.e., as a tutor and debugger, not a design authority).\nReformatting and updating existing tables, including updating of revised dates, assignments, and course logistics.\nError-checking and troubleshooting markdown and Quarto code. This was necessary during site builds.\nImproving organization across course components. This included suggestions for cross-referencing related pages and identifying places where additional examples or clarifications would improve learning outcomes.\nEvaluating pedagogical alignment. This involved getting feedback on readability, cognitive load, and whether learning objectives were being met by the material being presented.\nEditorial support to ensure that tone and level of explanatory detail was appropriate for graduate students. This included tightening some language and reducing informational redundancy across pages.\n\nGenAI was used as an assistive tool throughout; it was not used as a content authority, decision-maker, or substitute for subject-matter expertise. All instructional choices, interpretations, and final edits remain the responsibility of the instructor (in accordance with AI Use Policy).",
     "crumbs": [
       "Course Overview",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Information</span>"
@@ -745,6 +745,358 @@
     "crumbs": [
       "Part I: Questions Before Models",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>DAG Construction</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01_nature_of_data.html",
+    "href": "chapters/01_nature_of_data.html",
+    "title": "14  The Nature of Data",
+    "section": "",
+    "text": "14.1 Introduction\nUnderstanding the nature of your data is the first real step toward defensible ecological inference.You were asked to come into this course with a dataset in hand. Some of you have undoubtedly arrived with very well-organized spreadsheets. Others have long lists of folders full of raw sensor outputs, GIS layers, audio files, camera-trap images, or field notes that only you can currently interpret. All of that is perfect for this course.\nBefore we analyze anything, however, we need to be precise about three things:\nMost scientific confusion comes from mixing these three up. If you do not understand these three critical components, no amount of fancy R coding will save your analysis.\nSo, we begin where all data originate: measurement. And, for that, it helps to start with a brief introduction to the field of metrology.",
+    "crumbs": [
+      "Part II: From the Causal System to Data",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>The Nature of Data</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01_nature_of_data.html#introduction",
+    "href": "chapters/01_nature_of_data.html#introduction",
+    "title": "14  The Nature of Data",
+    "section": "",
+    "text": "What measurements represent\n\nWhat data are\n\nWhat we are actually trying to estimate",
+    "crumbs": [
+      "Part II: From the Causal System to Data",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>The Nature of Data</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01_nature_of_data.html#metrological-terminology",
+    "href": "chapters/01_nature_of_data.html#metrological-terminology",
+    "title": "14  The Nature of Data",
+    "section": "14.2 Metrological Terminology",
+    "text": "14.2 Metrological Terminology\nMetrology is simply the science of measurement. Whereas it has traditionally focused on the physical sciences and engineered systems, it applies just as much to biology and its messier subfields (e.g. ecology) as it does to physics or chemistry.\nMetrology establishes a formal framework for ensuring that scientific measurements are traceable to standards, reported with uncertainty, and reproducible across space, time, and observers. Crucially, this framework operates upstream of analysis—at the moment when information about the world are collected an raw data are generated. Metrology naturally integrates with our discussion of reproducible analyses because, instead of a number standing alone, a measurement comes bundled with information about what it was trying to measure, how reliable it is, and what assumptions were made along the way. That lets future researchers decide whether datasets are truly comparable, whether old data can answer new and exciting questions, and how much trust researchers should place in a result without having to guess what the original researcher meant.\nTwo term must be clearly differentiated from measurements and estimates. These terms are:\n\nmeasurand\nestimand\n\n\n\n\n\n\n\nNoteEtymology of measurand and estimand\n\n\n\n\n\nThe suffix –and comes from Latin –andus\n(“that which is to be acted upon [a target]”)\n\n\n\nTarget (–and)\nResult\n\n\n\n\nMeasurand\nMeasurement\n\n\nEstimand\nEstimate\n\n\n\n\n\n\n\n\n\n14.2.1 Measurand!\n\nThe theoretical quantity of interest in the world to be measured.\n\nA measurand:\n\nexists independently of observers\n\nis defined conceptually, not instrumentally\n\nis the quantity you wish you could measure directly\n\nExamples:\n\ntrue wing length\n\nactual activity level\n\nreal population abundance\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\nThe measurand is defined before measurement and never directly observed.\n\n\n\n\n\n\n\n\n\n\nNoteCan we ever directly achieve the measurand?\n\n\n\nShort answer: Almost never—and that is normal science.\n\n\n\n\n\n\n14.2.2 Estimand! (the missing precision tool)\n\nThe quantity that a statistical model is designed to estimate, given the available data.\n\nThough we will discuss estimands at length later in the course during the modeling exercises, it helps to discuss it in the context of measurands. An estimand:\n\nis defined by both the scientific question and the analysis model\n\ndepends on the data, measurement process, and assumptions\n\nExamples:\n\nmean wing length in the sampled population\n\nexpected activity level given detection and sampling design\n\nestimated population abundance under a specified model\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\nThe estimand is defined before analysis, depends on modeling choices, and is not the same as the measurand.",
+    "crumbs": [
+      "Part II: From the Causal System to Data",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>The Nature of Data</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01_nature_of_data.html#summary-measurand-vs-estimand",
+    "href": "chapters/01_nature_of_data.html#summary-measurand-vs-estimand",
+    "title": "14  The Nature of Data",
+    "section": "14.3 Summary: Measurand vs Estimand",
+    "text": "14.3 Summary: Measurand vs Estimand\n\n\n\nConcept\nMeasurand\nEstimand\n\n\n\n\nNature\nConceptual / scientific\nFormal / statistical\n\n\nExists without data?\nYes\nNo\n\n\nDepends on model?\nNo\nYes\n\n\nDefined when?\nBefore measurement\nBefore estimation\n\n\n\n\n\n\n\n\n\n\nNoteWhere does each concept belong in a scientific paper?\n\n\n\n\n\n\n\n\nConcept\nSection\n\n\n\n\nMeasurand\nIntroduction\n\n\nEstimand\nMethods\n\n\nEstimate\nResults\n\n\nInterpretation (circling back to measurand)\nDiscussion",
+    "crumbs": [
+      "Part II: From the Causal System to Data",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>The Nature of Data</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01_nature_of_data.html#what-are-data",
+    "href": "chapters/01_nature_of_data.html#what-are-data",
+    "title": "14  The Nature of Data",
+    "section": "14.4 What are data?",
+    "text": "14.4 What are data?\nOnly after measurement do we get data, the recorded outputs of those measurement processes. To understand what is meant by data, let us consult a dictionary first. Two definitions from the Merriam-Webster Dictionary—188 years apart—are especially revealing:\n\n\n\n\n\n\n\n\nNoteMerriam-Webster (2016)\n\n\n\n“Facts or information used usually to calculate, analyze, or plan something.”\n\n\n\n\n\n\n\n\n\n\n\nNoteMerriam-Webster (1828)\n\n\n\n“Quantities, principles, or facts given or admitted, by which to find things or results unknown.”\n\n\n\n\nModern usage treats data and information as synonymous. But scientifically, this is misleading.\nData are observed facts. Information is what we extract from those facts using models and assumptions.\nWe do not collect information. We collect data, and then we extract or create information. This distinction is critical for reproducibility.",
+    "crumbs": [
+      "Part II: From the Causal System to Data",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>The Nature of Data</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01_nature_of_data.html#raw-data",
+    "href": "chapters/01_nature_of_data.html#raw-data",
+    "title": "14  The Nature of Data",
+    "section": "14.5 Raw data",
+    "text": "14.5 Raw data\nBecause measurands cannot be observed directly and estimands depend on how data are generated and modeled, raw data are the critical link between scientific questions (filled with measurands) and strong inference. Raw data preserve the closest recorded traces of the measurement process, making it possible to understand how observations relate to the underlying measurand and what estimands the data can actually support.\nBy now, we have all been conducting formal scientific inquiry for many years. It is common to see folders labeled /raw_data/ that contain offloaded sensor files or spreadsheets transcribed from field notebooks. These data may feel “raw,” but often they are not.\n\nRaw data are the facts produced by an instrument or observer through a domain-specific translation, recorded at the time of observation, and preserved without post-hoc modification.\n\n\n\nWhen we offload data from a sensor or transcribe notes into a spreadsheet, our actions have a non-zero probability of influencing the data.\nExamples of raw data include:\n\naudio waveforms recorded at a study site (on the device)\n\nGPS locations logged by a collar (not yet downloaded)\n\ncounts written on a datasheet (not yet transcribed)\n\npixel values collected by a camera sensor\n\n\n\n\n\n\n\n\n\n\n\n\nWarningCommon misconceptions about raw data\n\n\n\n\n\n\nRaw data are not clean, tidy, or analysis-ready\n\nProcessed tables and summaries are not raw data\n\nRaw data are not the truth—they are translated observations\n\nRaw data are not limited to numbers\n\nMessiness does not imply poor data quality\n\nEarly processing choices permanently change the data\n\n\n\n\n\nRaw data are the foundation of all scientific analysis. On their own, however, they are incomplete. To be interpretable, reusable, and reproducible, raw data require context.\nThat context comes from metadata, which are discussed briefly in the coming sections. Keeping the focus here on raw data helps avoid mixing observations of the world with explanations about how those observations were produced. Metadata play a different conceptual role, and treating them separately keeps that distinction clear.",
+    "crumbs": [
+      "Part II: From the Causal System to Data",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>The Nature of Data</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01_reproducible_workflow_intro.html",
+    "href": "chapters/01_reproducible_workflow_intro.html",
+    "title": "15  Reproducible Analyses",
+    "section": "",
+    "text": "15.1 Why start with reproducible analysis workflows?\nAlthough ZOO/ECOL-5500 focuses on quantitative analysis and modeling, those tools are only as reliable as the infrastructure that supports them. Establishing a clear, reproducible workflow creates a solid foundation that can scale appropriately as new data arrive –whether that means new sensor downloads, ongoing field observations, or ever-expanding datasets– without requiring you to constantly restructure, reinvent, or debug your analysis.\nThis chapter provides the broad conceptual map for the rest of Part I. Subsequent chapters focus on individual components of this workflow.\nEverything up to (and including) production of figures and tables can and should be reproducible. That is, (1) you should be able to rerun an entire analysis and produce tables and figures (and fill in values in a Results section) with a simple click of a button, and (2) another user should be able to reproduce all steps in your analysis pipeline, even with minimal code. Framing the workflow as a casual path makes obvious how each result is causally linked to specific inputs, transformations, and assumptions.",
+    "crumbs": [
+      "Part II: From the Causal System to Data",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Reproducible Analyses</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01_reproducible_workflow_intro.html#analytical-workflow",
+    "href": "chapters/01_reproducible_workflow_intro.html#analytical-workflow",
+    "title": "15  Reproducible Analyses",
+    "section": "15.2 Analytical Workflow",
+    "text": "15.2 Analytical Workflow\nA statistical philosophy only works if it is supported by a deliberate, reproducible analytical workflow. This workflow description is doing a lot of work, so let us be very clear about the meaning.\n\nAnalytical workflow: The data and computational infrastructure that translates raw observations into scientifically defensible results and inferences.\n\nA workflow include everything about how datasets are stored, cleaned, explored, modeled, and reported. Importantly, it also includes how decisions are documented and how analyses can be reproduced by someone else (including your future, more frenetic self).\nDesigning a good analytical workflow is hardly a casual endeavor. In fact, it should be a target of formal and toughtful analysis itself, answering questions like:\n\nIs your workflow efficient in terms of your valuable time?\nIs your workflow efficient in terms of your computational infrastucture and abilities?\nIs your workflow clear, or does it create confusion and induce mission/scope creep?\nDoes your workflow allow you to stop and restart without losing your place?\n\nA good workflow constrains your behavior in productive ways. It limits wandering, enforces transparency, and makes progress visible. That is, there is no single correct workflow. As Rudyard Kipling wrote (In the Neolithic Age):\n\nHere’s my wisdom for your use, as I learned it when the moose And the reindeer roamed where Paris roars to-night: “There are nine and sixty ways of constructing tribal lays, And—every—single—one—of—them—is—right!\n\nThere are many ways of constructing something useful and meaningful, and every single one of them can be right. What matters is that your workflow is intentional, scientifically defensible, and aligned with your scientific goals. So, I encourage you to start formalizing a philosophical workflow that reduces bias, controls scope, and supports efficient thinking. Then stick to it until you learn something better. That moment will come, and when it does, simply update your philosophy through slow iteration rather than abandoning it.",
+    "crumbs": [
+      "Part II: From the Causal System to Data",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Reproducible Analyses</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01_reproducible_workflow_intro.html#what-is-a-reproducible-analytical-workflow",
+    "href": "chapters/01_reproducible_workflow_intro.html#what-is-a-reproducible-analytical-workflow",
+    "title": "15  Reproducible Analyses",
+    "section": "15.3 What is a reproducible analytical workflow?",
+    "text": "15.3 What is a reproducible analytical workflow?\nA common misconception—especially early in graduate training—is that reproducibility means sharing files and code on GitHub, Dryad, or similar repositories. Those components are necessary, but they is not sufficient.\nA reproducible analytical workflow is a structured system that explicitly and completely describes how scientific results are generated. Such a workflow:\n\nstarts with observations of the world, not the computer\ntreats measurement as a translation (or signal-transduction) process\nclearly and explicitly documents where data come from\nseparates data, metadata, processing, and inference\nrecords inputs → transformations → outputs at each step (this is key!)\nmakes explicit where assumptions or biases are introduced\nallows another person (or you, six months later) to reconstruct the results\n\nTogether, these features ensure that analyses can be understood, repeated, extended, and scaled as new data arrive.",
+    "crumbs": [
+      "Part II: From the Causal System to Data",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Reproducible Analyses</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01_reproducible_workflow_intro.html#the-reproducible-analytical-workflow-as-a-causal-system",
+    "href": "chapters/01_reproducible_workflow_intro.html#the-reproducible-analytical-workflow-as-a-causal-system",
+    "title": "15  Reproducible Analyses",
+    "section": "15.4 The reproducible analytical workflow as a causal system",
+    "text": "15.4 The reproducible analytical workflow as a causal system\nThe reproducible analytical workflow can be understood as a causal system in which each step produces downstream consequences: measurement choices shape the raw data, data processing constrains what can be modeled, and modeling assumptions determine what can be inferred. Thinking causally about the workflow makes it clear that results do not simply “come from the data,” but from a chain of decisions that can be traced, tested, and reproduced. Generally, this pipeline looks like this:\n\nWorld → Data → Models → Inference → Interpretation\n\nMore explicitly, as seen in the diagram at right, we have the following general steps:\n\nWorld / phenomena: Processes exist whether or not we observe them (or like them!)\nMeasurement & observation: Instruments and observers translate phenomena into recorded values.\nRaw data + metadata: Raw data must have metadata as context.\nProcessing & derivation: Filtering, organizing, feature extraction, etc.\nModels & inference rules: Assumptions can be documented and coded explicitly.\nInterpretation: Human judgment (which is usually not reproducible, unless codified).",
+    "crumbs": [
+      "Part II: From the Causal System to Data",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Reproducible Analyses</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01_reproducible_workflow_intro.html#why-workflows-matter-scientifically",
+    "href": "chapters/01_reproducible_workflow_intro.html#why-workflows-matter-scientifically",
+    "title": "15  Reproducible Analyses",
+    "section": "15.5 Why workflows matter scientifically",
+    "text": "15.5 Why workflows matter scientifically\nReproducibility in a scientific workflow is not primarily about convenience, though it often becomes convenient over time. A convenient –but non-reproducible– workflow focuses on rerunning an analysis quickly, often relying on memory, manual steps, and undocumented choices. That approach may work in the short term, but it does not scale and rarely holds up weeks, months, or years later. A reproducible workflow, by contrast, is designed so that every result can be traced back to its origins, including the data, code, assumptions, and decisions that produced it.\nAt a broader scale, reproducible workflows allow us to:\n\ndiagnose errors\nunderstand sensitivity to assumptions\nreuse data responsibly\nbuild on previous work without re-guessing decisions\nreduce long-term computational and cognitive overhead\n\nIn short:\n\nConvenience: “Can I run this analysis again?”\nReproducibility: “Can I clearly show how these results were produced?”",
+    "crumbs": [
+      "Part II: From the Causal System to Data",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Reproducible Analyses</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01_reproducible_workflow_intro.html#a-guiding-principle",
+    "href": "chapters/01_reproducible_workflow_intro.html#a-guiding-principle",
+    "title": "15  Reproducible Analyses",
+    "section": "15.6 A guiding principle",
+    "text": "15.6 A guiding principle\n\nIf you cannot say what a result depends on, it is not reproducible.\n\nKeep this sentence in mind as you move forward. The next chapter starts where all workflows begin: with the nature of data themselves.",
+    "crumbs": [
+      "Part II: From the Causal System to Data",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Reproducible Analyses</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01_reproducible_workflow_intro.html#a-parting-note",
+    "href": "chapters/01_reproducible_workflow_intro.html#a-parting-note",
+    "title": "15  Reproducible Analyses",
+    "section": "15.7 A parting note",
+    "text": "15.7 A parting note\nIn the next section, I take a step back and offer a set of statistical aphorisms that can help us remain vigilane about workflow weaknesses, leaky assumptions, incorrect modeling approach, or cryptic biases.",
+    "crumbs": [
+      "Part II: From the Causal System to Data",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Reproducible Analyses</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01_metadata_low_friction.html",
+    "href": "chapters/01_metadata_low_friction.html",
+    "title": "16  Metadata",
+    "section": "",
+    "text": "16.2 Why metadata are essential\nMetadata record the information needed to interpret measurements correctly. They tell us:\nMetadata are not bureaucracy. They are scientific memory. Without metadata, data quickly lose meaning—especially once they leave the hands of the person who collected them.\nRaw data without metadata are often difficult—or impossible—to interpret, even by the original researcher. In practice, many irreproducible analyses fail before modeling begins, because key contextual information was never recorded. A column of numbers without units, provenance, or spatial and temporal context is just a sequence of values. It is not reusable scientific data.\nAt a broad level, good metadata allow others (and future you) to:\nMetadata do not guarantee good science, but their absence almost guarantees future confusion.",
+    "crumbs": [
+      "Part II: From the Causal System to Data",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Metadata</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01_metadata_low_friction.html#what-metadata-are-and-are-not",
+    "href": "chapters/01_metadata_low_friction.html#what-metadata-are-and-are-not",
+    "title": "16  Metadata",
+    "section": "16.1 What metadata are (and are not)",
+    "text": "16.1 What metadata are (and are not)\n\nMetadata are data about data.\n\nThis definition is technically correct, but not very useful on its own. A more practical way to think about metadata is this:\n\nMetadata describe the context in which data were generated.",
+    "crumbs": [
+      "Part II: From the Causal System to Data",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Metadata</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01_metadata_low_friction.html#why-metadata-are-essential",
+    "href": "chapters/01_metadata_low_friction.html#why-metadata-are-essential",
+    "title": "16  Metadata",
+    "section": "",
+    "text": "understand what the data actually represent, and what their limitations are\n\njudge whether the data are appropriate for a new purpose or analysis\n\nreconstruct and evaluate analytical decisions made downstream",
+    "crumbs": [
+      "Part II: From the Causal System to Data",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Metadata</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01_metadata_low_friction.html#metadata-within-a-reproducible-analytical-workflow",
+    "href": "chapters/01_metadata_low_friction.html#metadata-within-a-reproducible-analytical-workflow",
+    "title": "16  Metadata",
+    "section": "16.3 Metadata within a reproducible analytical workflow",
+    "text": "16.3 Metadata within a reproducible analytical workflow\nReproducibility is not just about being able to rerun code indefinitely. It also requires being able to answer core questions about the data themselves, such as:\n\nWhat exactly was measured?\n\nUnder what conditions were the measurements taken?\n\nWhat instruments or protocols were used?\n\nWhat were the data’s limitations or sources of error?\n\nMetadata provide the necessary bridge between raw data and scientific inference. They explain how measurements came to exist and clarify which kinds of estimands the data can —and cannot— support.\nWithin the broader analytical workflow, raw data and metadata together form a complete dataset. Complete datasets can be verified, versioned, shared, and reused. All subsequent processing, modeling, and inference depend on this foundation.\n\nTo emphasize, metadata are not an afterthought; they are part of the data.",
+    "crumbs": [
+      "Part II: From the Causal System to Data",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Metadata</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01_metadata_low_friction.html#types-of-metadata-what-different-layers-do",
+    "href": "chapters/01_metadata_low_friction.html#types-of-metadata-what-different-layers-do",
+    "title": "16  Metadata",
+    "section": "16.4 Types of metadata: what different layers do",
+    "text": "16.4 Types of metadata: what different layers do\nIn practice, metadata operate at several conceptual layers. Each layer answers a different scientific question and constrains how hypotheses and models can be formulated.\n\nTogether:\nStructural metadata define what exists.\nMeasurement metadata define what it represents.\nContextual metadata define what it can be used to infer.\n\n\n\n\n\n\n\nTipStructural Metadata\n\n\n\n\n\nWhat is in the dataset\nStructural metadata describe the literal structure of the data file: variable names, units, data types, allowed values, and how missing values are encoded. This layer tells a reader (and software) what each column represents and how it should be interpreted at a basic level.\nStructural metadata directly constrain hypotheses and models by determining:\n\nwhat variables exist\n\nwhat scales and transformations are meaningful\n\nwhat distributional assumptions are even plausible\n\n\nStructural metadata define what questions can be expressed with the data at all.\n\n\n\n\n\n\n\n\n\n\nTipMeasurement Metadata\n\n\n\n\n\nHow values were generated\nMeasurement metadata describe the process by which values came into existence: instruments or observers, protocols, calibration or standardization, accuracy, resolution, and the role of human judgment versus sensors.\nThis layer determines whether variables are:\n\ndirect measurements or proxies\n\ncomparable across space, time, or observers\n\nsubject to detection error or measurement error\n\nMeasurement metadata shape hypotheses by clarifying what the variables actually represent in the real world, and they constrain model choice by determining whether additional structure (e.g., detection submodels) is required.\n\nMeasurement metadata define what your variables mean.\n\n\n\n\n\n\n\n\n\n\nTipContextual Metadata\n\n\n\n\n\nWhy the dataset looks the way it does\nContextual metadata describe the study design and constraints that shaped the dataset: sampling units, spatial and temporal scope, missingness mechanisms, access limitations, and known biases.\nThis layer determines:\n\nwhich comparisons are valid\n\nwhether observations are independent or repeated\n\nwhether certain hypotheses are testable at all\n\nContextual metadata are where limitations become explicit and where interpretive boundaries are drawn.\n\nContextual metadata define what inferences the data can support.",
+    "crumbs": [
+      "Part II: From the Causal System to Data",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Metadata</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01_metadata_low_friction.html#what-good-metadata-enable-fair-in-plain-language",
+    "href": "chapters/01_metadata_low_friction.html#what-good-metadata-enable-fair-in-plain-language",
+    "title": "16  Metadata",
+    "section": "16.5 What good metadata enable (FAIR, in plain language)",
+    "text": "16.5 What good metadata enable (FAIR, in plain language)\nAt their core, the FAIR principles (Wilkinson et al. (2016)) recognize that data are only useful if their context travels with them. Metadata are what make this possible. Much of the modern emphasis on metadata comes from the FAIR principles, which aim to ensure that scientific data are:\n\nFindable: Metadata help other people find that the data exist.\n\nAccessible: Metadata explain how to get the data and what the files mean.\n\nInteroperable: Metadata make it clear how the data are formatted and measured, so they work with other data.\n\nReusable: Metadata explain how the data were collected and what their limits are, so others can use them correctly.\n\nCrucially, FAIR is not about ensuring perfection; it is about increasing the probability of future usability.\n\n\n\n\n\n\nNote\n\n\n\nYou are not expected to memorize the FAIR acronym. What matters most is understanding what FAIR is trying to do (specifically, what it is trying to protect)!",
+    "crumbs": [
+      "Part II: From the Causal System to Data",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Metadata</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01_metadata_low_friction.html#a-low-friction-approach-to-metadata",
+    "href": "chapters/01_metadata_low_friction.html#a-low-friction-approach-to-metadata",
+    "title": "16  Metadata",
+    "section": "16.6 A low-friction approach to metadata",
+    "text": "16.6 A low-friction approach to metadata\nYou have probably encountered the long list of formal metadata standards used across scientific disciplines. For this course, you do not need to master any of them, and, in fact, you barely need to know them at all.\nOur approach to metadata is intentionally low friction. That means it fits naturally into you (and others) already work: without extra tools or unnecessary extra steps, and without specialized expertise. The goal is not blind compliance to reporting standards; first and foremost, it is about scientific clarity. We therefore adopt a simple guiding principle:\n\nLet repositories handle standardization. Your job is to record clear, honest, human-readable metadata.\n\nRepositories such as Dataverse, Zenodo, Dryad, GBIF, and institutional archives are designed to translate user-supplied documentation into formal metadata schemas. That translation only works, however, if the essential information about your data exists in the first place. What matters most at this stage is clarity and completeness, not adherence to a specific –and often over-specified– standard.",
+    "crumbs": [
+      "Part II: From the Causal System to Data",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Metadata</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01_metadata_low_friction.html#what-good-enough-metadata-must-accomplish",
+    "href": "chapters/01_metadata_low_friction.html#what-good-enough-metadata-must-accomplish",
+    "title": "16  Metadata",
+    "section": "16.7 What “good enough” metadata must accomplish",
+    "text": "16.7 What “good enough” metadata must accomplish\nAt a minimum, metadata should allow another scientifically literate person—someone outside your project—to answer the following questions:\n\nWhat are these data?\n\nWho created them?\n\nWhen and where were they collected?\n\nHow were the measurements made?\n\nWhat files belong together, and how?\n\nIf these questions cannot be answered from the metadata alone, the dataset is not reusable—no matter how sophisticated the analysis or modeling may be.",
+    "crumbs": [
+      "Part II: From the Causal System to Data",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Metadata</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01_metadata_low_friction.html#practical-formats-for-early-stage-metadata",
+    "href": "chapters/01_metadata_low_friction.html#practical-formats-for-early-stage-metadata",
+    "title": "16  Metadata",
+    "section": "16.8 Practical formats for early-stage metadata",
+    "text": "16.8 Practical formats for early-stage metadata\nIn everyday research workflows, metadata often begin life in simple, familiar formats such as:\n\nGoogle Sheet (good for coordinating field or lab work)\n\nplain-text or Markdown file (good for small or exploratory projects)\n\nThese formats are perfectly acceptable as starting points. They lower the barrier to documentation and encourage metadata to be written early in the analysis life-cycle rather than postponed. However, these format are usually best treated as temporary representations. As projects grow, metadata need to become more structured, more explicit, and easier to validate and reuse. But, if you are more comfortable beginning your journey using a version-controlled spreadsheet platform (like Google Sheets), you are welcome to do so.",
+    "crumbs": [
+      "Part II: From the Causal System to Data",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Metadata</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01_metadata_low_friction.html#one-recommendation-yaml",
+    "href": "chapters/01_metadata_low_friction.html#one-recommendation-yaml",
+    "title": "16  Metadata",
+    "section": "16.9 One recommendation: YAML",
+    "text": "16.9 One recommendation: YAML\nTo support that transition from your mind (or Google Sheets), consider starting with YAML format as the format for your initial metadata.\n\n\n\n\n\n\nNoteYAML: What’s in a name?\n\n\n\nOriginally, YAML was an abbreviation for “Yet Another Markup Language”. Later, it become “YAML Ain’t Markup Language”.\n\n\nThere are several advantages to using YAML, including:\n\nhuman-readable and easy to edit\n\nstructured and explicit about relationships\n\neasy to version-control\n\nsimple to validate and extend (i.e. Quarto markdown files have YAML headers)\n\nstraightforward to convert into repository-specific schemas later\n\nMost importantly, YAML encourages you to think carefully about what varies, what stays constant, and how different pieces of a dataset relate to one another.\nIn the next section, we will walk through the structure of a well-designed YAML metadata file, using concrete examples and expandable templates to show how common research scenarios —such as multiple instruments, deployments, or sampling rates— can be documented clearly and correctly.",
+    "crumbs": [
+      "Part II: From the Causal System to Data",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Metadata</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01_metadata_low_friction.html#levels-of-metadata-where-information-belongs-and-where-it-does-not",
+    "href": "chapters/01_metadata_low_friction.html#levels-of-metadata-where-information-belongs-and-where-it-does-not",
+    "title": "16  Metadata",
+    "section": "16.10 Levels of metadata: where information belongs (and where it does not)",
+    "text": "16.10 Levels of metadata: where information belongs (and where it does not)\nWhen you document metadata, your main job is to put information at the right level of scope. This keeps metadata clear, avoids duplication, and prevents the most common failure mode: collapsing variation.\nA useful way to think about this is a hierarchy of levels, from broad context to individual files.\n\n\n\n\n\n\n\nNoteDataset-level metadata (the whole project)\n\n\n\n\n\nThis level answers: What is this data set, broadly, and how should it be cited, discovered, and reused?\nWhat belongs at this level\n\ntitle, description, and keywords\n\ncreators, affiliations, persistent identifiers (e.g., ORCID)\n\noverall spatial and temporal scope (broad bounds, if applicable)\n\nlicense and usage rights\n\nrelated identifiers (publications, code repositories, DOIs)\n\nhigh-level description of how the data were generated\n\nprovenance summary (e.g., “data collection + processing workflow”)\n\nWhat does not belong at this level\n\nfile-specific settings or parameters\n\nvalues that vary across observations or files\n\nderived results (means, medians, model outputs)\n\nvague summaries such as “most values were…”\n\n\n\n\n\n\n\n\n\n\n\nNoteInstrument- or system-level metadata (the measurement system)\n\n\n\n\n\nThis level answers: What system, instrument, or process produced the measurements, and what are its stable properties?\nWhat belongs at this level\n\nsystem or instrument type, manufacturer, and model\n\nserial number, asset ID, or logical identifier\n\nsoftware or firmware version (if relevant)\n\nproperties that are stable across use (e.g., resolution, precision, bit depth)\n\nWhat does not belong at this level\n\nsettings that vary across observations unless explicitly declared as defaults\n\ntime- or location-specific information\n\n\n\n\n\n\n\n\n\n\n\nNoteDeployment- or configuration-level metadata (a consistent setup)\n\n\n\n\n\nThis level answers: When and under what conditions was the system used with a consistent configuration?\nWhat belongs at this level\n\nconfiguration or deployment identifier\n\ncontextual identifiers (e.g., site, batch, experiment, run)\n\nstart and end dates or times\n\nparameters that were constant during this configuration\n\ncalibration notes, protocols, or procedural references\n\nWhat does not belong at this level\n\nindividual file or observation exceptions unless explicitly mapped\n\nvalues that vary within the configuration without structure\n\n\n\n\n\n\n\n\n\n\n\nNoteFile- or observation-level metadata (individual data units)\n\n\n\n\n\nThis level answers: What is true about this specific file, record, or observation?\nWhat belongs at this level\n\nfilename or observation identifier\n\ndate and time of acquisition or creation\n\nparameter values that vary (e.g., sampling rate, resolution, settings)\n\ncontextual attributes that differ across observations\n\nlocation information, if variable\n\nWhat does not belong at this level\n\ndataset-wide descriptions\n\ninterpretive judgments (e.g., “high quality”) unless defined by a controlled scheme\n\n\n\n\n\n\n\n\n\n\n\n\nTipTwo rules that prevent most metadata mistakes\n\n\n\n\n\n\nPlace metadata at the highest level where they are constant.\nIf a sampling rate never changes across a deployment, store it at the deployment or instrument level.\nIf a metadata value varies, do not summarize it; map it explicitly by adding another metadata entry.\nNever write “sampling_rate_hz: 48000” plus “some files differ.” Instead, record which files have which values.",
+    "crumbs": [
+      "Part II: From the Causal System to Data",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Metadata</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01_metadata_low_friction.html#wrapping-this-up",
+    "href": "chapters/01_metadata_low_friction.html#wrapping-this-up",
+    "title": "16  Metadata",
+    "section": "16.11 Wrapping this up",
+    "text": "16.11 Wrapping this up\nClear and clean metadata describe what your data are and how they were generated. Just as importantly, the names you give to files, variables, and folders determine whether that information remains interpretable as projects grow. In the next section, we turn to the topic of naming conventions and coding style —small and seemingly trivial decisions that play an outsized role in scientific reproducibility. Let’s proceed!",
+    "crumbs": [
+      "Part II: From the Causal System to Data",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Metadata</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01_naming_conventions.html",
+    "href": "chapters/01_naming_conventions.html",
+    "title": "17  Conventions and Style",
+    "section": "",
+    "text": "17.1 Why you should care (even if you “just want to model stuff”)\nNaming conventions and coding style are not decoration. They are infrastructure.\nIf your names are inconsistent, your code becomes harder to read, harder to debug, and harder to share—especially once your project grows beyond “one file, one afternoon.”\nIn scientific workflows, this difference is not about elegance. It is about traceability.\nA workflow that depends on unstable or unclear names cannot be audited, reused, or trusted.\nBefore we talk about modeling or automation, we need to ensure that the basic objects in our workflow—variables, files, and folders—are named in a way that makes their roles unambiguous.\nThis is what allows:",
+    "crumbs": [
+      "Part II: From the Causal System to Data",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Conventions and Style</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01_naming_conventions.html#why-you-should-care-even-if-you-just-want-to-model-stuff",
+    "href": "chapters/01_naming_conventions.html#why-you-should-care-even-if-you-just-want-to-model-stuff",
+    "title": "17  Conventions and Style",
+    "section": "",
+    "text": "“It’s the hardest job to come up with new and unique names for a variable every time you create one but this is the difference between an average programmer and a good one.”\n— Vikram Singh Rawat\n\n\n\n\n\n\n\n\n\nNoteThe three scientific costs of sloppy naming\n\n\n\n\nInteroperability cost:\nNon-standard names break workflows across tools, languages, and collaborators.\nCollaboration cost:\nInconsistent naming forces others (including Future You) to reverse-engineer intent.\nReproducibility cost:\nWhen names drift, inputs and outputs become ambiguous, and results can no longer be traced back to their sources.\n\n\n\n\n\n\nmetadata to point to the correct data,\nscripts to operate predictably,\nand workflows to declare dependencies explicitly.",
+    "crumbs": [
+      "Part II: From the Causal System to Data",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Conventions and Style</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01_naming_conventions.html#naming-conventions-for-variables-and-files",
+    "href": "chapters/01_naming_conventions.html#naming-conventions-for-variables-and-files",
+    "title": "17  Conventions and Style",
+    "section": "17.2 Naming conventions for variables and files",
+    "text": "17.2 Naming conventions for variables and files\n\n\n\n17.2.1 What are “naming conventions”?\nThey are simply a consistent set of rules for naming:\n\nvariables (columns in your dataset)\nobjects in R (data frames, models, plots)\nfiles and folders (scripts, data, outputs)\n\n\n\n17.2.2 Three common naming styles\nYou will see these everywhere:\n\ncamelCase (meanDepth)\nPascalCase (MeanDepth)\nsnake_case (mean_depth)\n\nIn this course, we will default to snake_case for variables and files. This is strongly recommended for analysis scripts.\n\n\n\n\n\nFrom Allison Horst. Cartoon representations of common cases in coding. A snake screams “SCREAMING_SNAKE_CASE” into the face of a camel (wearing ear muffs) with “camelCase” written along its back. Vegetables on a skewer spell out “kebab-case” (words on a skewer). A mellow, happy looking snake has text “snake_case” along it.\n\n\n\n\n\n17.2.3 General guidelines (the “please don’t make future you angry” list)\nThese are simple rules that prevent a shocking number of problems:\n\n\n\n\n\n\n\n\n\nRule\nWhy it matters\nExample of poor form\n\n\n\n\nAvoid blank spaces\nSpaces complicate coding and break formulas, file paths, and scripting\nMean Depth, Site Name, Final Data.csv\n\n\nOmit special symbols like ?, $, *, +, #, (, ), -, /, }, {, |, &gt;, &lt;, etc.\nMany special characters are treated as operators or commands in R, so using them in names can break code or make it harder to work with.\nmass(g), count#, Y/N?, depth&gt;10\n\n\nUse _ as a separator\nUnderscores are safe, readable, and standard\nmean-depth, mean.depth, mean depth\n\n\nDo not begin names with numbers\nNames starting with numbers are invalid or confusing in R\n100m_depth, 2023_data\n\n\nMake names unique\nNon-unique names cause overwriting and ambiguity\ndata, data2, final, final_final\n\n\nBe consistent with case\nR is case-sensitive; inconsistency causes silent bugs\nDepth, depth, DEPTH in same project\n\n\nAvoid blank rows in data\nBlank rows can be misread as data or missing values\nEmpty rows between observations in CSV\n\n\nRemove comments from data files\nComments belong in scripts or metadata, not raw data\n# measured in June inside a CSV\n\n\nDefine and document NA values\nAmbiguous missing values lead to incorrect analyses\nMixing NA, 0, -999, . without explanation\n\n\nUse clear, documented date formats\nAmbiguous dates are easy to misinterpret\n03/04/21 (is this March 4 or April 3?)\n\n\n\n\n\n\n17.2.4 “Bad → Good” examples for variable names\nYour variable names should be: - readable at a glance - easy to type - consistent across files and projects\nHere are examples aligned with the tidyverse style guide (Hadley Wickham):\nA quick translation rule:\n\nUse units as suffixes: depth_cm, mass_g, distance_m (do not use parentheses around units)\nUse clear boolean names: yes_no or better: is_adult, has_nest\nPrefer meaning over brevity: percentile_50 beats p50 (unless p50 is a defined term in your field)",
+    "crumbs": [
+      "Part II: From the Causal System to Data",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Conventions and Style</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01_naming_conventions.html#naming-conventions-for-folders-project-structure",
+    "href": "chapters/01_naming_conventions.html#naming-conventions-for-folders-project-structure",
+    "title": "17  Conventions and Style",
+    "section": "17.3 Naming conventions for folders (project structure)",
+    "text": "17.3 Naming conventions for folders (project structure)\n\n17.3.1 Why folder names matter\nA good folder structure makes it hard to lose track of: - raw versus processed data - inputs versus outputs - code versus results - files that you can re-create versus ones you cannot (i.e. that you should never overwrite)\nIn this course, we care about reproducibility, which means: - raw data is always treated as read-only - processed data is created by scripts, acting on raw data, and never manually edited - results are generated by scripts and never manually edited\n\n\n\n\n\n\nTipA folder structure that scales\n\n\n\n\n\nA simple, stable structure (example):\n\ndata/\n\nraw_data/ (never edited)\nprocessed_data/ (created by scripts)\n\nr_scripts/ (functions + helpers)\nanalysis/ (analysis note / exercises )\noutputs/\n\nfigures/\ntables/\n\n\n\n\n\nFolder naming rules (same spirit as variable naming): - lowercase (snake_case) - no spaces - prefer underscores - descriptive names over clever names",
+    "crumbs": [
+      "Part II: From the Causal System to Data",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Conventions and Style</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01_naming_conventions.html#conventions-for-legible-and-consistent-r-code",
+    "href": "chapters/01_naming_conventions.html#conventions-for-legible-and-consistent-r-code",
+    "title": "17  Conventions and Style",
+    "section": "17.4 Conventions for legible and consistent R code",
+    "text": "17.4 Conventions for legible and consistent R code\n\n17.4.1 Why code style matters\nCode style is not about being fancy. It’s about making your thinking legible.\nGood style: - reduces bugs - improves peer review (including lab mates and future you) - makes it easier to modify models without breaking things\n\n\n\n\n\n\nNoteTwo extremely useful packages for checking R code formatting\n\n\n\n\nlintr checks your code for style problems (like a spellcheck for R code).\nstyler automatically formats your code to match a consistent style.\n\n\n\n\n\n17.4.2 “Bad → Good” examples for R code and files\nThese examples follow the tidyverse style guide (Hadley Wickham):\n\n\n\n\n\n\n\n\n\nBad\nWhy was it bad?\nGood\n\n\n\n\nFit models.r\nContains spaces; inconsistent casing; harder to reference in code\nfit_models.R\n\n\n##########\nNo semantic meaning; comments should describe intent, not fill space\n# extract elevation -----\n\n\nfindat\nVague name; gives no clue about content or structure\nfindat_mat\n\n\nfindat_mat\nRedundant and unclear; does not describe what the matrix contains\nmass_mat\n\n\n\n\nA few rules we will use repeatedly:\n\n\n17.4.3 Use nouns for objects and verbs for functions\n\nObjects (things): pufferi, pufferi_clean, model_gam\nFunctions (actions): clean_data(), fit_model(), plot_effects()\n\n\n\n17.4.4 Make “intermediate objects” obvious\nIf an object is temporary, label it like it is: - *_raw, *_clean, *_long, *_wide, *_summary\n\n\n17.4.5 Prefer readable code over clever code\n\n\n\n\n\n\n\n\nNoteOver-piped, confusing code\n\n\n\n\n\nsummary_df &lt;-\n  raw_df |&gt;\n  dplyr::filter(!is.na(count), year &gt;= 2015) |&gt;\n  dplyr::group_by(site, species) |&gt;\n  dplyr::summarise(\n    mean_count = mean(count),\n    sd_count   = sd(count),\n    n          = dplyr::n(),\n    .groups = \"drop\"\n  ) |&gt;\n  dplyr::filter(n &gt;= 5) |&gt;\n  dplyr::mutate(\n    cv = sd_count / mean_count,\n    log_mean = log(mean_count)\n  ) |&gt;\n  dplyr::arrange(dplyr::desc(log_mean))\n\n\n\n\n\n\n\n\n\n\n\n\nNoteLonger but readable code\n\n\n\n\n\n# Step 1: keep valid observations from recent years\ndf_filtered &lt;- raw_df |&gt;\n  dplyr::filter(!is.na(count), year &gt;= 2015)\n\n# Step 2: summarize counts by site and species\ndf_summary &lt;- df_filtered |&gt;\n  dplyr::group_by(site, species) |&gt;\n  dplyr::summarise(\n    mean_count = mean(count),\n    sd_count   = sd(count),\n    n          = dplyr::n(),\n    .groups = \"drop\"\n  )\n\n# Step 3: retain well-sampled groups\ndf_sufficient &lt;- df_summary |&gt;\n  dplyr::filter(n &gt;= 5)\n\n# Step 4: compute derived metrics\ndf_metrics &lt;- df_sufficient |&gt;\n  dplyr::mutate(\n    cv       = sd_count / mean_count,\n    log_mean = log(mean_count)\n  )\n\n# Step 5: order results for inspection\nsummary_df &lt;- df_metrics |&gt;\n  dplyr::arrange(dplyr::desc(log_mean))\n\n\n\n\n\n\n\n17.4.6 A final note about reproducible analyses\nIn workflow tools like targets, names are not simply cosmetic. They define nodes in a dependency graph (i.e. the ways all your inputs, processes, and outputs are connected). If names are unclear, the graph is unclear. If the graph is unclear, the workflow is not reproducible.\n\n\n\n\n\n\nTipPractical guidance\n\n\n\n\nUse CSV/TSV when the dataset is small enough to load quickly and inspect easily.\nConsider .RDS when you want an R-native format that preserves object structure.\nConsider .parquet when files get big and you care about speed + file size.",
+    "crumbs": [
+      "Part II: From the Causal System to Data",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Conventions and Style</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01_naming_conventions.html#your-minimum-standard-checklist-use-this-before-you-submit-anything",
+    "href": "chapters/01_naming_conventions.html#your-minimum-standard-checklist-use-this-before-you-submit-anything",
+    "title": "17  Conventions and Style",
+    "section": "17.5 Your “minimum standard” checklist (use this before you submit anything)",
+    "text": "17.5 Your “minimum standard” checklist (use this before you submit anything)\n\n\n\n\n\n\nNoteNaming + style checklist\n\n\n\nData + variables\n\nColumn names are snake_case\nNo spaces or special characters in column names\nUnits are explicit where relevant (_m, _cm, _g, _s)\nMissing values are documented (what is NA, what is 0, what is “not observed”?)\nDates are in a clear, documented format (and the order is not ambiguous)\n\nFolders + files\n\nFolder names are lowercase and descriptive\nRaw data are not edited in place\nProcessed data are created by scripts (not by hand)\n\nR code\n\nObjects use nouns; functions use verbs\nScripts are readable (spacing, line breaks, consistent naming)\nYou can restart R and run the workflow without relying on “things in memory”",
+    "crumbs": [
+      "Part II: From the Causal System to Data",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Conventions and Style</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01_naming_conventions.html#practice-task-recommended",
+    "href": "chapters/01_naming_conventions.html#practice-task-recommended",
+    "title": "17  Conventions and Style",
+    "section": "17.6 Practice task (recommended)",
+    "text": "17.6 Practice task (recommended)\n\nPick one of your current projects (or a past project).\nRename:\n\n5 confusing variables\n3 confusing files\n1 confusing folder\n\nMake one small style improvement:\n\nconsistent naming\nreadable comments\nbreak one long chunk into 2–3 meaningful steps\n\n\nThe goal is not perfection. The goal is to start practicing now.",
+    "crumbs": [
+      "Part II: From the Causal System to Data",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Conventions and Style</span>"
     ]
   }
 ]

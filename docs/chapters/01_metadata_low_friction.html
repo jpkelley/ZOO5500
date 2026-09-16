@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>11&nbsp; Why SCMs? – Quantitative Analysis of (Messy) Field Data</title>
+<title>16&nbsp; Metadata – Quantitative Analysis of (Messy) Field Data</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -33,8 +33,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/01_hypotheses_estimands.html" rel="next">
-<link href="../chapters/03_statistical_aphorisms.html" rel="prev">
+<link href="../chapters/01_naming_conventions.html" rel="next">
+<link href="../chapters/01_reproducible_workflow_intro.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -73,35 +73,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -115,7 +86,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/03_statistical_aphorisms.html">Part I: Questions Before Models</a></li><li class="breadcrumb-item"><a href="../chapters/05_01_why_scms.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Why SCMs?</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/01_nature_of_data.html">Part II: From the Causal System to Data</a></li><li class="breadcrumb-item"><a href="../chapters/01_metadata_low_friction.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Metadata</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -222,13 +193,13 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
  <span class="menu-text">Part I: Questions Before Models</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/03_statistical_aphorisms.html" class="sidebar-item-text sidebar-link">
@@ -237,7 +208,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/05_01_why_scms.html" class="sidebar-item-text sidebar-link active">
+  <a href="../chapters/05_01_why_scms.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Why SCMs?</span></span></a>
   </div>
 </li>
@@ -257,13 +228,13 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
  <span class="menu-text">Part II: From the Causal System to Data</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/01_nature_of_data.html" class="sidebar-item-text sidebar-link">
@@ -278,7 +249,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/01_metadata_low_friction.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/01_metadata_low_friction.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Metadata</span></span></a>
   </div>
 </li>
@@ -316,20 +287,25 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#summary-comparison-of-kitchen-sink-versus-causal-inference-approaches" id="toc-summary-comparison-of-kitchen-sink-versus-causal-inference-approaches" class="nav-link active" data-scroll-target="#summary-comparison-of-kitchen-sink-versus-causal-inference-approaches"><span class="header-section-number">11.2</span> Summary comparison of kitchen-sink versus causal inference approaches</a></li>
-  <li><a href="#what-are-structural-causal-models-scms-in-ecology-specifically" id="toc-what-are-structural-causal-models-scms-in-ecology-specifically" class="nav-link" data-scroll-target="#what-are-structural-causal-models-scms-in-ecology-specifically"><span class="header-section-number">11.3</span> What are Structural Causal Models (SCMs) <em>(in ecology, specifically)</em>?</a></li>
-  <li><a href="#misconception-scms-require-huge-datasets" id="toc-misconception-scms-require-huge-datasets" class="nav-link" data-scroll-target="#misconception-scms-require-huge-datasets"><span class="header-section-number">11.4</span> Misconception: SCMs require huge datasets</a></li>
-  <li><a href="#summary-and-up-next" id="toc-summary-and-up-next" class="nav-link" data-scroll-target="#summary-and-up-next"><span class="header-section-number">11.5</span> Summary and up next!</a></li>
-  <li><a href="#references-for-this-section" id="toc-references-for-this-section" class="nav-link" data-scroll-target="#references-for-this-section"><span class="header-section-number">11.6</span> References for this section</a></li>
+  <li><a href="#why-metadata-are-essential" id="toc-why-metadata-are-essential" class="nav-link active" data-scroll-target="#why-metadata-are-essential"><span class="header-section-number">16.2</span> Why metadata are essential</a></li>
+  <li><a href="#metadata-within-a-reproducible-analytical-workflow" id="toc-metadata-within-a-reproducible-analytical-workflow" class="nav-link" data-scroll-target="#metadata-within-a-reproducible-analytical-workflow"><span class="header-section-number">16.3</span> Metadata within a reproducible analytical workflow</a></li>
+  <li><a href="#types-of-metadata-what-different-layers-do" id="toc-types-of-metadata-what-different-layers-do" class="nav-link" data-scroll-target="#types-of-metadata-what-different-layers-do"><span class="header-section-number">16.4</span> Types of metadata: what different layers do</a></li>
+  <li><a href="#what-good-metadata-enable-fair-in-plain-language" id="toc-what-good-metadata-enable-fair-in-plain-language" class="nav-link" data-scroll-target="#what-good-metadata-enable-fair-in-plain-language"><span class="header-section-number">16.5</span> What good metadata enable (FAIR, in plain language)</a></li>
+  <li><a href="#a-low-friction-approach-to-metadata" id="toc-a-low-friction-approach-to-metadata" class="nav-link" data-scroll-target="#a-low-friction-approach-to-metadata"><span class="header-section-number">16.6</span> A low-friction approach to metadata</a></li>
+  <li><a href="#what-good-enough-metadata-must-accomplish" id="toc-what-good-enough-metadata-must-accomplish" class="nav-link" data-scroll-target="#what-good-enough-metadata-must-accomplish"><span class="header-section-number">16.7</span> What “good enough” metadata must accomplish</a></li>
+  <li><a href="#practical-formats-for-early-stage-metadata" id="toc-practical-formats-for-early-stage-metadata" class="nav-link" data-scroll-target="#practical-formats-for-early-stage-metadata"><span class="header-section-number">16.8</span> Practical formats for early-stage metadata</a></li>
+  <li><a href="#one-recommendation-yaml" id="toc-one-recommendation-yaml" class="nav-link" data-scroll-target="#one-recommendation-yaml"><span class="header-section-number">16.9</span> One recommendation: YAML</a></li>
+  <li><a href="#levels-of-metadata-where-information-belongs-and-where-it-does-not" id="toc-levels-of-metadata-where-information-belongs-and-where-it-does-not" class="nav-link" data-scroll-target="#levels-of-metadata-where-information-belongs-and-where-it-does-not"><span class="header-section-number">16.10</span> Levels of metadata: where information belongs (and where it does <em>not</em>)</a></li>
+  <li><a href="#wrapping-this-up" id="toc-wrapping-this-up" class="nav-link" data-scroll-target="#wrapping-this-up"><span class="header-section-number">16.11</span> Wrapping this up</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/03_statistical_aphorisms.html">Part I: Questions Before Models</a></li><li class="breadcrumb-item"><a href="../chapters/05_01_why_scms.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Why SCMs?</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/01_nature_of_data.html">Part II: From the Causal System to Data</a></li><li class="breadcrumb-item"><a href="../chapters/01_metadata_low_friction.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Metadata</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Why SCMs?</span></h1>
+<h1 class="title"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Metadata</span></h1>
 </div>
 
 
@@ -346,303 +322,442 @@ window.Quarto = {
 </header>
 
 
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="columns">
+<div class="column" style="width:48%;">
+<section id="what-metadata-are-and-are-not" class="level2" data-number="16.1">
+<h2 data-number="16.1" class="anchored" data-anchor-id="what-metadata-are-and-are-not"><span class="header-section-number">16.1</span> What metadata are (and are not)</h2>
+<blockquote class="blockquote">
+<p><strong>Metadata are data about data.</strong></p>
+</blockquote>
+<p>This definition is technically correct, but not very useful on its own. A more practical way to think about metadata is this:</p>
+<blockquote class="blockquote">
+<p><strong>Metadata describe the context in which data were generated.</strong></p>
+</blockquote>
+</section>
+</div><div class="column" style="width:48%;">
+<p><img src="../graphics/other_stylized_graphics/metadata_graphic.png" class="img-fluid"></p>
+</div>
+</div>
+<p>Metadata record the information needed to interpret measurements correctly. They tell us:</p>
+<ul>
+<li>who collected the data<br>
+</li>
+<li>when and where they were collected<br>
+</li>
+<li>how measurements were made<br>
+</li>
+<li>what files belong together<br>
+</li>
+<li>what assumptions, constraints, or limitations existed upstream</li>
+</ul>
+<p>Metadata are not bureaucracy. They are <strong>scientific memory</strong>. Without metadata, data quickly lose meaning—especially once they leave the hands of the person who collected them.</p>
+<hr>
+<section id="why-metadata-are-essential" class="level2" data-number="16.2">
+<h2 data-number="16.2" class="anchored" data-anchor-id="why-metadata-are-essential"><span class="header-section-number">16.2</span> Why metadata are essential</h2>
+<p>Raw data without metadata are often difficult—or impossible—to interpret, even by the original researcher. In practice, many irreproducible analyses fail <strong>before modeling begins</strong>, because key contextual information was never recorded. A column of numbers without units, provenance, or spatial and temporal context is just a sequence of values. It is not reusable scientific data.</p>
+<p>At a broad level, good metadata allow others (and future you) to:</p>
+<ul>
+<li>understand what the data actually represent, and what their limitations are<br>
+</li>
+<li>judge whether the data are appropriate for a new purpose or analysis<br>
+</li>
+<li>reconstruct and evaluate analytical decisions made downstream</li>
+</ul>
+<p>Metadata do not guarantee good science, but their absence almost guarantees future confusion.</p>
+<hr>
+</section>
+<section id="metadata-within-a-reproducible-analytical-workflow" class="level2" data-number="16.3">
+<h2 data-number="16.3" class="anchored" data-anchor-id="metadata-within-a-reproducible-analytical-workflow"><span class="header-section-number">16.3</span> Metadata within a reproducible analytical workflow</h2>
+<p>Reproducibility is not just about being able to rerun code indefinitely. It also requires being able to answer core questions about the data themselves, such as:</p>
+<ul>
+<li>What <em>exactly</em> was measured?<br>
+</li>
+<li>Under what conditions were the measurements taken?<br>
+</li>
+<li>What instruments or protocols were used?<br>
+</li>
+<li>What were the data’s limitations or sources of error?</li>
+</ul>
+<p>Metadata provide the necessary bridge between <strong>raw data</strong> and <strong>scientific inference</strong>. They explain how measurements came to exist and clarify which kinds of estimands the data can —and cannot— support.</p>
+<p>Within the broader analytical workflow, raw data and metadata together form a <strong>complete dataset</strong>. Complete datasets can be verified, versioned, shared, and reused. All subsequent processing, modeling, and inference depend on this foundation.</p>
+<blockquote class="blockquote">
+<p>To emphasize, metadata are <em>not</em> an afterthought; <strong>they are part of the data.</strong></p>
+</blockquote>
+<hr>
+</section>
+<section id="types-of-metadata-what-different-layers-do" class="level2" data-number="16.4">
+<h2 data-number="16.4" class="anchored" data-anchor-id="types-of-metadata-what-different-layers-do"><span class="header-section-number">16.4</span> Types of metadata: what different layers do</h2>
+<p>In practice, metadata operate at several conceptual layers. Each layer answers a different scientific question and constrains how hypotheses and models can be formulated.</p>
+<blockquote class="blockquote">
+<p><strong>Together:</strong><br>
+Structural metadata define what exists.<br>
+Measurement metadata define what it represents.<br>
+Contextual metadata define what it can be used to infer.</p>
+</blockquote>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Structural Metadata
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><em>What is in the dataset</em></p>
+<p>Structural metadata describe the <strong>literal structure of the data file</strong>: variable names, units, data types, allowed values, and how missing values are encoded. This layer tells a reader (and software) what each column represents and how it should be interpreted at a basic level.</p>
+<p>Structural metadata directly constrain hypotheses and models by determining:</p>
+<ul>
+<li>what variables exist<br>
+</li>
+<li>what scales and transformations are meaningful<br>
+</li>
+<li>what distributional assumptions are even plausible</li>
+</ul>
+<blockquote class="blockquote">
+<p>Structural metadata define <strong>what questions can be expressed</strong> with the data at all.</p>
+</blockquote>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Measurement Metadata
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><em>How values were generated</em></p>
+<p>Measurement metadata describe the <strong>process by which values came into existence</strong>: instruments or observers, protocols, calibration or standardization, accuracy, resolution, and the role of human judgment versus sensors.</p>
+<p>This layer determines whether variables are:</p>
+<ul>
+<li>direct measurements or proxies<br>
+</li>
+<li>comparable across space, time, or observers<br>
+</li>
+<li>subject to detection error or measurement error</li>
+</ul>
+<p>Measurement metadata shape hypotheses by clarifying <em>what the variables actually represent</em> in the real world, and they constrain model choice by determining whether additional structure (e.g., detection submodels) is required.</p>
+<blockquote class="blockquote">
+<p>Measurement metadata define <strong>what your variables mean</strong>.</p>
+</blockquote>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Contextual Metadata
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><em>Why the dataset looks the way it does</em></p>
+<p>Contextual metadata describe the <strong>study design and constraints</strong> that shaped the dataset: sampling units, spatial and temporal scope, missingness mechanisms, access limitations, and known biases.</p>
+<p>This layer determines:</p>
+<ul>
+<li>which comparisons are valid<br>
+</li>
+<li>whether observations are independent or repeated<br>
+</li>
+<li>whether certain hypotheses are testable at all</li>
+</ul>
+<p>Contextual metadata are where limitations become explicit and where interpretive boundaries are drawn.</p>
+<blockquote class="blockquote">
+<p>Contextual metadata define <strong>what inferences the data can support</strong>.</p>
+</blockquote>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="what-good-metadata-enable-fair-in-plain-language" class="level2" data-number="16.5">
+<h2 data-number="16.5" class="anchored" data-anchor-id="what-good-metadata-enable-fair-in-plain-language"><span class="header-section-number">16.5</span> What good metadata enable (FAIR, in plain language)</h2>
+<p>At their core, the FAIR principles (<a href="https://www.nature.com/articles/sdata201618">Wilkinson <em>et al.</em> (2016)</a>) recognize that data are only useful if their <strong>context travels with them</strong>. Metadata are what make this possible. Much of the modern emphasis on metadata comes from the <strong>FAIR principles</strong>, which aim to ensure that scientific data are:</p>
+<ul>
+<li><strong>Findable:</strong> Metadata help other people <em>find that the data exist</em>.<br>
+</li>
+<li><strong>Accessible:</strong> Metadata explain <em>how to get the data and what the files mean</em>.<br>
+</li>
+<li><strong>Interoperable:</strong> Metadata make it clear <em>how the data are formatted and measured</em>, so they work with other data.<br>
+</li>
+<li><strong>Reusable:</strong> Metadata explain <em>how the data were collected and what their limits are</em>, so others can use them correctly.</li>
+</ul>
+<p>Crucially, FAIR is not about ensuring perfection; it is about increasing the probability of <strong>future usability</strong>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Strongly recommended reading:</strong>
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You are <em>not</em> expected to memorize the FAIR acronym. What matters most is understanding what FAIR is trying to do (specifically, what it is trying to protect)!</p>
+</div>
+</div>
+<hr>
+</section>
+<section id="a-low-friction-approach-to-metadata" class="level2" data-number="16.6">
+<h2 data-number="16.6" class="anchored" data-anchor-id="a-low-friction-approach-to-metadata"><span class="header-section-number">16.6</span> A low-friction approach to metadata</h2>
+<p>You have probably encountered the long list of formal metadata standards used across scientific disciplines. For this course, you do <strong>not</strong> need to master any of them, and, in fact, you barely need to know them at all.</p>
+<p>Our approach to metadata is intentionally <strong>low friction</strong>. That means it fits naturally into you (and others) already work: without extra tools or unnecessary extra steps, and without specialized expertise. The goal is not blind compliance to reporting standards; first and foremost, it is about scientific clarity. We therefore adopt a simple guiding principle:</p>
+<blockquote class="blockquote">
+<p><em>Let repositories handle standardization. Your job is to record clear, honest, human-readable metadata.</em></p>
+</blockquote>
+<p>Repositories such as Dataverse, Zenodo, Dryad, GBIF, and institutional archives are designed to translate user-supplied documentation into formal metadata schemas. That translation only works, however, if the essential information about your data exists in the first place. What matters most at this stage is <strong>clarity and completeness</strong>, not adherence to a specific –and often over-specified– standard.</p>
+<hr>
+</section>
+<section id="what-good-enough-metadata-must-accomplish" class="level2" data-number="16.7">
+<h2 data-number="16.7" class="anchored" data-anchor-id="what-good-enough-metadata-must-accomplish"><span class="header-section-number">16.7</span> What “good enough” metadata must accomplish</h2>
+<p>At a minimum, metadata should allow another scientifically literate person—someone outside your project—to answer the following questions:</p>
+<ul>
+<li>What are these data?<br>
+</li>
+<li>Who created them?<br>
+</li>
+<li>When and where were they collected?<br>
+</li>
+<li>How were the measurements made?<br>
+</li>
+<li>What files belong together, and how?</li>
+</ul>
+<p>If these questions cannot be answered from the metadata alone, the dataset is not reusable—no matter how sophisticated the analysis or modeling may be.</p>
+<hr>
+</section>
+<section id="practical-formats-for-early-stage-metadata" class="level2" data-number="16.8">
+<h2 data-number="16.8" class="anchored" data-anchor-id="practical-formats-for-early-stage-metadata"><span class="header-section-number">16.8</span> Practical formats for early-stage metadata</h2>
+<p>In everyday research workflows, metadata often begin life in simple, familiar formats such as:</p>
+<ul>
+<li><strong>Google Sheet</strong> (good for coordinating field or lab work)<br>
+</li>
+<li><strong>plain-text or Markdown file</strong> (good for small or exploratory projects)</li>
+</ul>
+<p>These formats are perfectly acceptable as <em>starting points</em>. They lower the barrier to documentation and encourage metadata to be written early in the analysis life-cycle rather than postponed. However, these format are usually best treated as <strong>temporary representations</strong>. As projects grow, metadata need to become more structured, more explicit, and easier to validate and reuse. But, if you are more comfortable beginning your journey using a version-controlled spreadsheet platform (like Google Sheets), you are welcome to do so.</p>
+<hr>
+</section>
+<section id="one-recommendation-yaml" class="level2" data-number="16.9">
+<h2 data-number="16.9" class="anchored" data-anchor-id="one-recommendation-yaml"><span class="header-section-number">16.9</span> One recommendation: YAML</h2>
+<p>To support that transition from your mind (or Google Sheets), consider starting with <strong>YAML</strong> format as the format for your initial metadata.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>YAML: What’s in a name?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Originally, YAML was an abbreviation for <em>“Yet Another Markup Language”</em>. Later, it become <em>“YAML Ain’t Markup Language”</em>.</p>
+</div>
+</div>
+<p>There are several advantages to using YAML, including:</p>
+<ul>
+<li><strong>human-readable and easy to edit</strong><br>
+</li>
+<li><strong>structured and explicit about relationships</strong><br>
+</li>
+<li><strong>easy to version-control</strong><br>
+</li>
+<li><strong>simple to validate and extend</strong> (i.e.&nbsp;Quarto markdown files have YAML headers)<br>
+</li>
+<li><strong>straightforward to convert into repository-specific schemas later</strong></li>
+</ul>
+<p>Most importantly, YAML encourages you to think carefully about <strong>what varies</strong>, <strong>what stays constant</strong>, and <strong>how different pieces of a dataset relate to one another</strong>.</p>
+<p>In the next section, we will walk through the structure of a well-designed YAML metadata file, using concrete examples and expandable templates to show how common research scenarios —such as multiple instruments, deployments, or sampling rates— can be documented clearly and correctly.</p>
+<hr>
+</section>
+<section id="levels-of-metadata-where-information-belongs-and-where-it-does-not" class="level2" data-number="16.10">
+<h2 data-number="16.10" class="anchored" data-anchor-id="levels-of-metadata-where-information-belongs-and-where-it-does-not"><span class="header-section-number">16.10</span> Levels of metadata: where information belongs (and where it does <em>not</em>)</h2>
+<p>When you document metadata, your main job is to put information at the <strong>right level of scope</strong>. This keeps metadata clear, avoids duplication, and prevents the most common failure mode: <strong>collapsing variation</strong>.</p>
+<p>A useful way to think about this is a hierarchy of levels, from broad context to individual files.</p>
+<hr>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span><strong>Dataset-level metadata</strong> (the whole project)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
+<p>This level answers: <em>What is this data set, broadly, and how should it be cited, discovered, and reused?</em></p>
+<p><strong>What belongs at this level</strong></p>
 <ul>
-<li><a href="../files/Franks_et_al_2025.pdf">Franks D.W., Ruxton G.D., and T.N. Sherratt. 2025. Ecology needs a causal overhaul. <em>Biological Reviews</em>.</a></li>
+<li>title, description, and keywords<br>
+</li>
+<li>creators, affiliations, persistent identifiers (e.g., ORCID)<br>
+</li>
+<li>overall spatial and temporal scope (broad bounds, if applicable)<br>
+</li>
+<li>license and usage rights<br>
+</li>
+<li>related identifiers (publications, code repositories, DOIs)<br>
+</li>
+<li>high-level description of how the data were generated<br>
+</li>
+<li>provenance summary (e.g., “data collection + processing workflow”)</li>
+</ul>
+<p><strong>What does <em>not</em> belong at this level</strong></p>
+<ul>
+<li>file-specific settings or parameters<br>
+</li>
+<li>values that vary across observations or files<br>
+</li>
+<li>derived results (means, medians, model outputs)<br>
+</li>
+<li>vague summaries such as “most values were…”<br>
+</li>
 </ul>
 </div>
 </div>
 </div>
-<div class="columns">
-<div class="column" style="width:65%;">
-<section id="setting-the-stage-for-structural-causal-models-scms" class="level2" data-number="11.1">
-<h2 data-number="11.1" class="anchored" data-anchor-id="setting-the-stage-for-structural-causal-models-scms"><span class="header-section-number">11.1</span> Setting the stage for Structural Causal Models (SCMs)</h2>
-<p>As ecologists, many of us have spent months (or years) collecting data in uncomfortable field conditions and have permanent scars (or gut flora) as proof. We left with what we think is a clear hypothesis (or four)–and some associated predictions–, and We return from the field excited to play ecological detective and see what our data analysis tells us about our system. So, we then proceed with an analysis that proceeds as follows:</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span><strong>Instrument- or system-level metadata</strong> (the measurement system)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>This level answers: <em>What system, instrument, or process produced the measurements, and what are its stable properties?</em></p>
+<p><strong>What belongs at this level</strong></p>
+<ul>
+<li>system or instrument type, manufacturer, and model<br>
+</li>
+<li>serial number, asset ID, or logical identifier<br>
+</li>
+<li>software or firmware version (if relevant)<br>
+</li>
+<li>properties that are stable across use (e.g., resolution, precision, bit depth)</li>
+</ul>
+<p><strong>What does <em>not</em> belong at this level</strong></p>
+<ul>
+<li>settings that vary across observations unless explicitly declared as defaults<br>
+</li>
+<li>time- or location-specific information<br>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span><strong>Deployment- or configuration-level metadata</strong> (a consistent setup)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>This level answers: <em>When and under what conditions was the system used with a consistent configuration?</em></p>
+<p><strong>What belongs at this level</strong></p>
+<ul>
+<li>configuration or deployment identifier<br>
+</li>
+<li>contextual identifiers (e.g., site, batch, experiment, run)<br>
+</li>
+<li>start and end dates or times<br>
+</li>
+<li>parameters that were constant during this configuration<br>
+</li>
+<li>calibration notes, protocols, or procedural references</li>
+</ul>
+<p><strong>What does <em>not</em> belong at this level</strong></p>
+<ul>
+<li>individual file or observation exceptions unless explicitly mapped<br>
+</li>
+<li>values that vary within the configuration without structure<br>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span><strong>File- or observation-level metadata</strong> (individual data units)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>This level answers: <em>What is true about this specific file, record, or observation?</em></p>
+<p><strong>What belongs at this level</strong></p>
+<ul>
+<li>filename or observation identifier<br>
+</li>
+<li>date and time of acquisition or creation<br>
+</li>
+<li>parameter values that vary (e.g., sampling rate, resolution, settings)<br>
+</li>
+<li>contextual attributes that differ across observations<br>
+</li>
+<li>location information, if variable</li>
+</ul>
+<p><strong>What does <em>not</em> belong at this level</strong></p>
+<ul>
+<li>dataset-wide descriptions<br>
+</li>
+<li>interpretive judgments (e.g., “high quality”) unless defined by a controlled scheme<br>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Two rules that prevent most metadata mistakes
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <ol type="1">
-<li>Identify a response variable.</li>
-<li>Add predictors that seem biologically relevant.</li>
-<li>Include random effects for grouping factors (most likely)</li>
-<li>Fit the model (linear/nonlinear/etc.)</li>
-<li>Interpret coefficients (i.e.&nbsp;compare them to each other, etc.)</li>
+<li><p><strong>Place metadata at the highest level where they are constant.</strong><br>
+If a sampling rate never changes across a deployment, store it at the deployment or instrument level.</p></li>
+<li><p><strong>If a metadata value varies, do not summarize it; map it explicitly by adding another metadata entry.</strong><br>
+Never write “sampling_rate_hz: 48000” plus “some files differ.” Instead, record which files have which values.</p></li>
 </ol>
+</div>
+</div>
+</div>
+<hr>
 </section>
-</div><div class="column" style="width:5%;">
-
-</div><div class="column" style="width:30%;">
-<p><img src="../graphics/jackalope_graphics/sherlock_jackalope.png" class="img-fluid"></p>
-</div>
-</div>
-<p>For example, you might implement the following generalized linear mixed model (GLMM), using R package <code>glmmTMB</code>:</p>
-<p><span class="math display">\[
-{provisioning\_visits}_{i} \sim
-{predator\_abundance}_{i} +
-{rainfall}_{i} +
-{flock\_size}_{i}
-\]</span> where <em>i</em> indexes specific observations. This may seem (or actually be) a perfectly reasonable predictive ecological model. This kind of model structure is what we refer to as a “kitchen-sink model” (since we throw everything into the model) or the “garbage can regression” (because…well…that’s obvious; <em>sensu</em> McElreath); this approach is what most of us have been taught. But the central problem –and one that has massive implications for strong inference as well as the direction of future research– is not the statistical model itself. It is how ecologists have interpreted such models.</p>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>What many ecologists think this model is doing</strong>
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<ul>
-<li>Estimating the independent effect of each variable on provisioning visits<br>
-</li>
-<li>Revealing which variables are most important drivers<br>
-</li>
-<li>Controlling for “all other factors” to isolate focal effects<br>
-</li>
-<li>Allowing direct comparison of effect sizes across predictors<br>
-</li>
-<li>Providing evidence for mechanisms (e.g., rainfall affects provisioning via flock size)</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span><strong>What ecologists should understand about the kitchen-sink model</strong>
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<ul>
-<li>Most coefficients are not causal effects (so they cannot be associated with causal words)</li>
-<li>“Independent effects” may not correspond to any real biological state (i.e.&nbsp;this is ecologically meaningless)</li>
-<li>Including all variables does not ensure proper control of confounders<br>
-</li>
-<li>You may be conditioning on covariates (mediators) that introduce bias and may increase Type II errors.<br>
-</li>
-<li>You may be conditioning on covariate (colliders) that introduce bias.</li>
-<li>Coefficients do not necessarily correspond to the estimand (primary target quantity) of your study.</li>
-<li>Comparing coefficient magnitudes can be misleading or meaningless.<br>
-</li>
-<li>The model (or multiple models compared via AIC) does not tell you which variables should be included.</li>
-<li>The model obscures total, direct, and indirect effects.</li>
-</ul>
-<p>Ouch!</p>
-</div>
-</div>
-</div>
-<p>This collection of weaknesses is receiving increasing attention. And some of the recent criticisms of the kitchen-sink modeling approach are especially brutal:</p>
-<blockquote class="blockquote">
-<p><em>“Rather than moving towards a better understanding of causality using the causal frameworks available, observational ecology could be described as anchored in scientifically empty statistical procedures that provide answers to ambiguous questions that no one really wanted to ask.”</em> (Franks <em>et al.</em> 2025. <em>Biological Reviews</em>)</p>
-</blockquote>
-<p>And, speaking directly about multiple regression approaches:</p>
-<blockquote class="blockquote">
-<p><em>“You put everything into a regression equation, toss with some creative story-telling, and hope the reviewers eat it. In general, this is not a valid approach, for well-known reasons. But it can get you published. Causal salad can discover causes too. But you have to get lucky. … No amount of data reliably turns salad into sense.”</em> (Richard McElreath)</p>
-</blockquote>
-<p>The core problem is <em>not</em> the specific types of statistical models. Those are known to be mathematically robust. Rather, the central issue is the lack of a clear causal questions guiding the modeling approach. (Once again, many opponents of this statement may claim that they themselves are not invoking causal explanations, but, as we’ve seen, most practitioners use causal verbiage, even in observational studies.)</p>
-<p>In this section, we integrate what we have learned into a formal framework for understanding what ecologists everywhere strive for but seldom achieve: causality, or an understanding of the factors that <em>affect</em>, <em>influence</em>, <em>cause</em>, <em>determine</em>, <em>alter</em>, <em>drive</em>, <em>generate</em>, <em>produce</em>, or <em>lead to</em> observed phenomena. This is a powerful framework that was formalized fairly recently by Pearl (2009) but, unfortunately, has not been widely adopted in the field of ecology.</p>
-<section id="summary-comparison-of-kitchen-sink-versus-causal-inference-approaches" class="level2" data-number="11.2">
-<h2 data-number="11.2" class="anchored" data-anchor-id="summary-comparison-of-kitchen-sink-versus-causal-inference-approaches"><span class="header-section-number">11.2</span> Summary comparison of kitchen-sink versus causal inference approaches</h2>
-<p>Below is a comparison of kitchen-sink versus causal (DAG) approaches. My primary intent with this table is to encourage you to think critically about what traditional ecological approaches (kitchen-sink models) are lacking. Specifically, in causal settings (again, the way in which most ecologists think and <em>do</em>), some approaches are not only weaker. The core issue is that these approaches fail to answer the questions set forth by formal Hypotheses and Predictions. Modern ecological approaches (causal inference via DAGs) emphasize that causal questions (or even implications) <em>require</em> explicit assumptions about data-generating processes. This does not mean simply devising a good question; it means that all research questions must be backed up by careful understanding of causal logic.</p>
-<p>The 3-tier, 4-star scale below that I use is intentionally blunt and admittedly a bit ruthless (though I can justify each rating). I have considered three dimensions: inferential validity, clarity of interpretation, and convenience. In short, the approach that obscures mechanisms or produces ambiguous answers scores comparatively lower. The approach that clarifies how ecological systems operate scores higher.</p>
-<div class="course-info" data-tbl-colwidths="[26,74]">
-<table class="caption-top table">
-<colgroup>
-<col style="width: 26%">
-<col style="width: 74%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><span class="square tier1"></span> Inferential validity</td>
-<td style="text-align: left;">Does this approach recover the <em>true causal quantity</em>, rather than a biased/ill-defined estimate?</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><span class="square tier2"></span> Clarity of interpretation</td>
-<td style="text-align: left;">Does it make clear <em>what is being estimated and how to interpret it ecologically</em>?</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><span class="square tier3"></span> Convenience</td>
-<td style="text-align: left;">How easy is it to implement?</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="course-info" data-tbl-colwidths="[6, 35, 25, 28]">
-<table class="caption-top table">
-<colgroup>
-<col style="width: 6%">
-<col style="width: 35%">
-<col style="width: 25%">
-<col style="width: 28%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Tier</th>
-<th>Feature</th>
-<th>Kitchen-Sink Approach</th>
-<th>Causal Inference (DAG) Approach</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><span class="square tier1"></span></td>
-<td>Avoiding systematic bias</td>
-<td>☆☆☆☆</td>
-<td>★★★★</td>
-</tr>
-<tr class="even">
-<td><span class="square tier1"></span></td>
-<td>Avoiding collider bias</td>
-<td>☆☆☆☆</td>
-<td>★★★★</td>
-</tr>
-<tr class="odd">
-<td><span class="square tier1"></span></td>
-<td>Avoiding mediator bias</td>
-<td>☆☆☆☆</td>
-<td>★★★★</td>
-</tr>
-<tr class="even">
-<td><span class="square tier1"></span></td>
-<td>Clarity of estimand</td>
-<td>☆☆☆☆</td>
-<td>★★★★</td>
-</tr>
-<tr class="odd">
-<td><span class="square tier1"></span></td>
-<td>Transparency of assumptions</td>
-<td>☆☆☆☆</td>
-<td>★★★★</td>
-</tr>
-<tr class="even">
-<td><span class="square tier1"></span></td>
-<td>Ability to estimate total effects</td>
-<td>☆☆☆☆</td>
-<td>★★★★</td>
-</tr>
-<tr class="odd">
-<td><span class="square tier1"></span></td>
-<td>Ability to estimate direct/indirect effects</td>
-<td>☆☆☆☆</td>
-<td>★★★★</td>
-</tr>
-<tr class="even">
-<td><span class="square tier2"></span></td>
-<td>Interpretability of coefficients</td>
-<td>★☆☆☆</td>
-<td>★★★★</td>
-</tr>
-<tr class="odd">
-<td><span class="square tier2"></span></td>
-<td>Handling of confounders</td>
-<td>★☆☆☆</td>
-<td>★★★★</td>
-</tr>
-<tr class="even">
-<td><span class="square tier2"></span></td>
-<td>Robustness to missing variables</td>
-<td>★☆☆☆</td>
-<td>★★★☆</td>
-</tr>
-<tr class="odd">
-<td><span class="square tier2"></span></td>
-<td>Ease of interpretation (final results)</td>
-<td>★☆☆☆</td>
-<td>★★★★</td>
-</tr>
-<tr class="even">
-<td><span class="square tier2"></span></td>
-<td>Alignment with ecological theory</td>
-<td>★★☆☆</td>
-<td>★★★★</td>
-</tr>
-<tr class="odd">
-<td><span class="square tier2"></span></td>
-<td>Model simplicity (number of predictors)</td>
-<td>★★☆☆</td>
-<td>★★★★</td>
-</tr>
-<tr class="even">
-<td><span class="square tier3"></span></td>
-<td>Ease of implementation</td>
-<td>★★★★</td>
-<td>★★☆☆</td>
-</tr>
-<tr class="odd">
-<td><span class="square tier3"></span></td>
-<td>Model flexibility (GLM/GLMM/GAMM)</td>
-<td>★★★★</td>
-<td>★★★★</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Hopefully, this stresses the need to rework our general approach to the study of ecology and adopt the Structural Causal Model (SCM).</p>
-</section>
-<section id="what-are-structural-causal-models-scms-in-ecology-specifically" class="level2" data-number="11.3">
-<h2 data-number="11.3" class="anchored" data-anchor-id="what-are-structural-causal-models-scms-in-ecology-specifically"><span class="header-section-number">11.3</span> What are Structural Causal Models (SCMs) <em>(in ecology, specifically)</em>?</h2>
-<blockquote class="blockquote">
-<p><em>“Nothing in biology makes sense except in the light of evolution.”</em> (Theodosius Dobzhansky)</p>
-</blockquote>
-<blockquote class="blockquote">
-<p><em>“Nothing in ecology makes sense except in the light of causation.”</em> (this course)</p>
-</blockquote>
-<p>Ecological systems are inherently complex. They involve causal relationships among mutiple environmental drivers, physiology, morphological traits, behaviors, and demographic outcomes. Traditional statistical models in ecology often emphasize association or prediction, which can obscure causal interpretation when mediators, confounders, or colliders are inadvertently included or omitted.</p>
-<p>Structural Causal Models (SCMs) provide a unified framework for integrating ecological knowledge with statistical analysis. Without SCMs, even the most well-intentioned ecological expertise is effectively obscured by statistical treatment. Specifically, SCMs combine three core components:</p>
-<ul>
-<li><strong>Directed acyclic graphs (DAGs):</strong> These are graphs that describe how we think our study system is causally structured (<em>this</em> affects <em>that</em>, <em>ad nauseum</em>)</li>
-<li><strong>Structural equations:</strong> These formal equations parameterize causal relationships and help us carefully target specific questions</li>
-<li><strong>Counterfactual reasoning:</strong> An approach to defining causal effects by comparing outcomes under different hypothetical interventions. This is akin to predicting from a best-fit model (except far better).</li>
-</ul>
-<p>At first glance, SCMs may seem like just another complicated statistical framework to estimate effects of multiple variables. In fact, once you get to know them, you will see that they not only simpify many of your analyses, but they also help in a number of other ways. Specifically, they help researchers:</p>
-<ul>
-<li>Translate ecological knowledge into explicit causal assumptions</li>
-<li>Identify which causal effects <em>can</em> be estimated (logically) from a dataset</li>
-<li>Parameterize statistical models in a way that aligns with the causal structure</li>
-<li>Estimate total, direct, and indirect effects</li>
-<li>Understand their system with less data</li>
-<li>Integrate causal relationships from other studies</li>
-</ul>
-</section>
-<section id="misconception-scms-require-huge-datasets" class="level2" data-number="11.4">
-<h2 data-number="11.4" class="anchored" data-anchor-id="misconception-scms-require-huge-datasets"><span class="header-section-number">11.4</span> Misconception: SCMs require huge datasets</h2>
-<p>A very common misconception is that SCMs –like other <em>big and fancy</em> models– require unreasonably large and multidimensional datasets because they involve multiple variables and multiple equations. In reality, SCMs often require <strong>far less data per model</strong> than traditional “kitchen-sink” approaches.</p>
-<p>Think about a <em>global model</em> that you have seen. Think about how many predictors you have seen in this model. Kitchen-sink models like this include a large number of predictors that are forced into a single equation. This inclusion increases the number of model parameters and increases the probability of have multi-collinearity. In stark contrast, SCMs split the system apart into <strong>multiple smaller submodels</strong> that reflect specific questions. Each one of these submodels includes only the <strong>parent variables</strong> specified by the DAG (we will discuss this in the next sections). In many cases, this may mean that you only need 1-3 predictors in a model to estimate an effect. Thus, building a DAG-based causal models usually means that you are working with far simpler and more stable models that yield stable estimates even with small to modest sample sizes.</p>
-<p>Rather than putting the emphasis on more data (as kitchen-sink models do), SCMs instead emphasize well-supported ecological knowledge and causal assumptions (which most ecologists do most of the time anyway!).</p>
-</section>
-<section id="summary-and-up-next" class="level2" data-number="11.5">
-<h2 data-number="11.5" class="anchored" data-anchor-id="summary-and-up-next"><span class="header-section-number">11.5</span> Summary and up next!</h2>
-<p>In sum, SCMs have three components:</p>
-<ul>
-<li><strong>Directed acyclic graphs (DAGs),</strong> which describe how ecologists think a study system is causally structured (<em>this</em> affects <em>that</em>, <em>ad nauseum</em>)</li>
-<li><strong>Structural equations</strong> are formal equations (models) that parameterize causal relationships and help ecologists carefully target specific questions</li>
-<li><strong>Counterfactual reasoning</strong> is the act of defining causal effects by comparing outcomes under different hypothetical interventions. This is akin to predicting from a best-fit model (except far better).</li>
-</ul>
-<p>In the following sections, we will address each of these components in turn, beginning with the incredibly useful Directed acyclic graphs (DAGs).</p>
-</section>
-<section id="references-for-this-section" class="level2" data-number="11.6">
-<h2 data-number="11.6" class="anchored" data-anchor-id="references-for-this-section"><span class="header-section-number">11.6</span> References for this section</h2>
-<ul>
-<li><ul>
-<li><a href="../files/Franks_et_al_2025.pdf">Franks D.W., Ruxton G.D., and T.N. Sherratt. 2025. Ecology needs a causal overhaul. <em>Biological Reviews</em>.</a></li>
-</ul></li>
-<li>Pearl, J. (2009). <em>Causality: Models, reasoning, and inference</em> (2nd ed.). Cambridge University</li>
-</ul>
+<section id="wrapping-this-up" class="level2" data-number="16.11">
+<h2 data-number="16.11" class="anchored" data-anchor-id="wrapping-this-up"><span class="header-section-number">16.11</span> Wrapping this up</h2>
+<p>Clear and clean metadata describe what your data are and how they were generated. Just as importantly, the names you give to files, variables, and folders determine whether that information remains interpretable as projects grow. In the next section, we turn to the topic of naming conventions and coding style —small and seemingly trivial decisions that play an outsized role in scientific reproducibility. Let’s proceed!</p>
 
 
 </section>
@@ -1050,13 +1165,13 @@ window.Quarto = {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/03_statistical_aphorisms.html" class="pagination-link" aria-label="Statistical Philosophy">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Statistical Philosophy</span></span>
+      <a href="../chapters/01_reproducible_workflow_intro.html" class="pagination-link" aria-label="Reproducible Analyses">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Reproducible Analyses</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/01_hypotheses_estimands.html" class="pagination-link" aria-label="Hypotheses and Predictions">
-        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Hypotheses and Predictions</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/01_naming_conventions.html" class="pagination-link" aria-label="Conventions and Style">
+        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Conventions and Style</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

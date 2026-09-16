@@ -38,17 +38,13 @@ book:
         - chapters/05_01_why_scms.qmd
         - chapters/01_hypotheses_estimands.qmd          
         - chapters/05_02_building_dags.qmd        
-        #- chapters/01_identification.qmd                # NEW
-        #- chapters/01_identification_strategies.qmd     # NEW
-
 
     - part: "Part II: From the Causal System to Data"
-      #chapters:
-        #- chapters/01_nature_of_data.qmd
-        #- chapters/01_data_orientation_audit.qmd        # NEW
-        #- chapters/01_reproducible_workflow_intro.qmd
-        #- chapters/01_metadata_low_friction.qmd
-        #- chapters/01_naming_conventions.qmd
+      chapters:
+        - chapters/01_nature_of_data.qmd
+        - chapters/01_reproducible_workflow_intro.qmd
+        - chapters/01_metadata_low_friction.qmd
+        - chapters/01_naming_conventions.qmd
         #- chapters/02_data_exploration_intro.qmd
         #- chapters/02_data_exploration_toolkit.qmd
         #- chapters/02_outliers.qmd

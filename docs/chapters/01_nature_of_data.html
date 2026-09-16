@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Quantitative Analysis of (Messy) Field Data</title>
+<title>14&nbsp; The Nature of Data – Quantitative Analysis of (Messy) Field Data</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,24 +26,25 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./chapters/int_course_intro.html" rel="next">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-832e3d7b6b94ddcc90a000f8fabe51a9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/01_reproducible_workflow_intro.html" rel="next">
+<link href="../chapters/05_02_building_dags.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-832e3d7b6b94ddcc90a000f8fabe51a9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -73,7 +74,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -85,7 +86,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Course Overview</a></li><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Information</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/01_nature_of_data.html">Part II: From the Causal System to Data</a></li><li class="breadcrumb-item"><a href="../chapters/01_nature_of_data.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">The Nature of Data</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -99,12 +100,12 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="./index.html" class="sidebar-logo-link">
-      <img src="./graphics/jackalope_graphics/analytical_jackalope.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
-      <img src="./graphics/jackalope_graphics/analytical_jackalope.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../graphics/jackalope_graphics/analytical_jackalope.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="../graphics/jackalope_graphics/analytical_jackalope.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Quantitative Analysis of (Messy) Field Data</a> 
+      <a href="../">Quantitative Analysis of (Messy) Field Data</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -116,46 +117,46 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Course Overview</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Information</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/int_course_intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/int_course_intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/int_syllabus.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/int_syllabus.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Syllabus</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/int_calendar_fa26.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/int_calendar_fa26.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Calendar overview</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/int_ai_policy.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/int_ai_policy.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">GenAI Use Guidelines</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/int_assignment_grades.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/int_assignment_grades.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Assignments &amp; Grades</span></span></a>
   </div>
 </li>
@@ -172,19 +173,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/int_preparing_yourself.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/int_preparing_yourself.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Preparing for data analysis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/int_project_scoping.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/int_project_scoping.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Project Scoping</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/00_ai_prompting.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/00_ai_prompting.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">AI Prompting for Analysis</span></span></a>
   </div>
 </li>
@@ -201,25 +202,25 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/03_statistical_aphorisms.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/03_statistical_aphorisms.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Statistical Philosophy</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/05_01_why_scms.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/05_01_why_scms.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Why SCMs?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/01_hypotheses_estimands.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/01_hypotheses_estimands.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Hypotheses and Predictions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/05_02_building_dags.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/05_02_building_dags.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">DAG Construction</span></span></a>
   </div>
 </li>
@@ -227,34 +228,34 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
  <span class="menu-text">Part II: From the Causal System to Data</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/01_nature_of_data.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/01_nature_of_data.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">The Nature of Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/01_reproducible_workflow_intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/01_reproducible_workflow_intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Reproducible Analyses</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/01_metadata_low_friction.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/01_metadata_low_friction.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Metadata</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/01_naming_conventions.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/01_naming_conventions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Conventions and Style</span></span></a>
   </div>
 </li>
@@ -286,19 +287,20 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#essential-course-information" id="toc-essential-course-information" class="nav-link active" data-scroll-target="#essential-course-information">Essential Course Information</a></li>
-  <li><a href="#about-this-course" id="toc-about-this-course" class="nav-link" data-scroll-target="#about-this-course">About this course</a></li>
-  <li><a href="#quicklinks" id="toc-quicklinks" class="nav-link" data-scroll-target="#quicklinks">Quicklinks</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">14.1</span> Introduction</a></li>
+  <li><a href="#metrological-terminology" id="toc-metrological-terminology" class="nav-link" data-scroll-target="#metrological-terminology"><span class="header-section-number">14.2</span> Metrological Terminology</a></li>
+  <li><a href="#summary-measurand-vs-estimand" id="toc-summary-measurand-vs-estimand" class="nav-link" data-scroll-target="#summary-measurand-vs-estimand"><span class="header-section-number">14.3</span> Summary: Measurand vs Estimand</a></li>
+  <li><a href="#what-are-data" id="toc-what-are-data" class="nav-link" data-scroll-target="#what-are-data"><span class="header-section-number">14.4</span> What are data?</a></li>
+  <li><a href="#raw-data" id="toc-raw-data" class="nav-link" data-scroll-target="#raw-data"><span class="header-section-number">14.5</span> Raw data</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Course Overview</a></li><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Information</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/01_nature_of_data.html">Part II: From the Causal System to Data</a></li><li class="breadcrumb-item"><a href="../chapters/01_nature_of_data.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">The Nature of Data</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Quantitative Analysis of (Messy) Field Data</h1>
-<p class="subtitle lead">University of Wyoming – ZOO-5500 (CRN 15229) | ECOL-5500 (CRN 15245)</p>
+<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">The Nature of Data</span></h1>
 </div>
 
 
@@ -315,97 +317,336 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="essential-course-information" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="essential-course-information">Essential Course Information</h2>
-<div class="course-info" data-tbl-colwidths="[20, 80]">
-<table class="caption-top table">
-<colgroup>
-<col style="width: 20%">
-<col style="width: 80%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Instructor</th>
-<th><a href="https://jpkelley.github.io/bcl/patrick_kelley.html">Patrick Kelley</a></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Email</strong></td>
-<td>jkelle24@uwyo.edu</td>
-</tr>
-<tr class="even">
-<td><strong>Schedule</strong></td>
-<td>Mon / Wed, 11:00–12:50 Mountain Time</td>
-</tr>
-<tr class="odd">
-<td><strong>Dates</strong></td>
-<td>31-Aug-2026 to 11-Dec-2026</td>
-</tr>
-<tr class="even">
-<td><strong>Meeting Type</strong></td>
-<td>in-person (Zoom access as needed)</td>
-</tr>
-<tr class="odd">
-<td><strong>Location</strong></td>
-<td>Classroom Building 115</td>
-</tr>
-</tbody>
-</table>
-</div>
+<section id="introduction" class="level2" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">14.1</span> Introduction</h2>
+<p>Understanding the <em>nature of your data</em> is the first real step toward defensible ecological inference.You were asked to come into this course with a dataset <em>in hand</em>. Some of you have undoubtedly arrived with very well-organized spreadsheets. Others have long lists of folders full of raw sensor outputs, GIS layers, audio files, camera-trap images, or field notes that only you can currently interpret. All of that is perfect for this course.</p>
+<p>Before we analyze anything, however, we need to be precise about three things:</p>
+<ul>
+<li><strong>What measurements represent</strong><br>
+</li>
+<li><strong>What data are</strong><br>
+</li>
+<li><strong>What we are <em>actually</em> trying to estimate</strong></li>
+</ul>
+<p>Most scientific confusion comes from mixing these three up. If you do not understand these three critical components, no amount of fancy R coding will save your analysis.</p>
+<p>So, we begin where all data originate: <strong>measurement</strong>. And, for that, it helps to start with a brief introduction to the field of <em>metrology</em>.</p>
 </section>
-<section id="about-this-course" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="about-this-course">About this course</h2>
-<p>Ecologists want to understand why nature works the way it does. Does rainfall reduce foraging opportunities? Does predation cause reproductive failure? Answering such questions requires far more than fitting statistical models. It requires thinking carefully and deliberately about causality. This course takes a causal-first approach to messy ecological data. Students will learn to formulate logical hypotheses of different types, generate estimand-aware predictions that clearly identify effects that they actually want to learn about. Students then use Structural Causal Models (SCMs) and Directed Acyclic Graphs (DAGs) to represent ecological knowledge, eplicitly state causal assumptions (based on evidence), and determine whether those effects can be identified from data. Rather than letting AIC decide which variables matter (or assuming that fitting a Structural Equation Model (SEM) makes an analysis causal, or letting the traditional SEM approach quietly eliminate causal assumptions), students will learn to clearly and quickly distinguish between causal reasoning from statistical machinery. Using their own projects (and recently discovered and absolutely real long-term datasets on jackalope ecology), students will then conduct their own analyses.</p>
-</section>
-<section id="quicklinks" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="quicklinks">Quicklinks</h2>
-<p><a href="https://jpkelley.github.io/ZOO5500/chapters/int_calendar_fa26.html" rel="external" target="_blank"><strong>Course Calendar</strong></a></p>
-<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<section id="metrological-terminology" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="metrological-terminology"><span class="header-section-number">14.2</span> Metrological Terminology</h2>
+<p>Metrology is simply the science of measurement. Whereas it has traditionally focused on the physical sciences and engineered systems, it applies just as much to biology and its messier subfields (e.g.&nbsp;ecology) as it does to physics or chemistry.</p>
+<p>Metrology establishes a formal framework for ensuring that scientific measurements are traceable to standards, reported with uncertainty, and reproducible across space, time, and observers. Crucially, this framework operates upstream of analysis—at the moment when information about the world are collected an raw data are generated. Metrology naturally integrates with our discussion of reproducible analyses because, instead of a number standing alone, a measurement comes bundled with information about what it was trying to measure, how reliable it is, and what assumptions were made along the way. That lets future researchers decide whether datasets are truly comparable, whether old data can answer new and exciting questions, and how much trust researchers should place in a result without having to guess what the original researcher meant.</p>
+<p>Two term must be clearly differentiated from measurements and estimates. These terms are:</p>
+<ul>
+<li>measurand</li>
+<li>estimand</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span><strong>Workflow templates</strong>
+<span class="screen-reader-only">Note</span><strong>Etymology of <em>measurand</em> and <em>estimand</em></strong>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><a href="templates/metadata_template.yaml">YAML Metadata Template (general)</a></p>
+<p>The suffix <strong>–and</strong> comes from Latin <em>–andus</em><br>
+(<em>“that which is to be acted upon [a target]”</em>)</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Target (–and)</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Measurand</td>
+<td>Measurement</td>
+</tr>
+<tr class="even">
+<td>Estimand</td>
+<td>Estimate</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:40%;">
+<section id="measurand" class="level3" data-number="14.2.1">
+<h3 data-number="14.2.1" class="anchored" data-anchor-id="measurand"><span class="header-section-number">14.2.1</span> Measurand!</h3>
+<blockquote class="blockquote">
+<p>The theoretical quantity of interest in the world <em>to be measured</em>.</p>
+</blockquote>
+<p>A measurand:</p>
+<ul>
+<li>exists independently of observers<br>
+</li>
+<li>is defined conceptually, not instrumentally<br>
+</li>
+<li>is the quantity you <em>wish</em> you could measure directly</li>
+</ul>
+<p>Examples:</p>
+<ul>
+<li>true wing length<br>
+</li>
+<li>actual activity level<br>
+</li>
+<li>real population abundance<br>
+</li>
+</ul>
+</section>
+</div><div class="column" style="width:60%;">
+<p><img src="../graphics/jackalope_graphics/measurand_graphic.png" class="img-fluid"></p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The measurand is <strong>defined before measurement</strong> and <strong>never directly observed</strong>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="**Can we ever directly achieve the measurand?**">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span><strong>Can we ever directly achieve the measurand?</strong>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Short answer:</strong> Almost never—and that is normal science.</p>
+</div>
+</div>
+<hr>
+<div class="columns">
+<div class="column" style="width:40%;">
+<section id="estimand-the-missing-precision-tool" class="level3" data-number="14.2.2">
+<h3 data-number="14.2.2" class="anchored" data-anchor-id="estimand-the-missing-precision-tool"><span class="header-section-number">14.2.2</span> Estimand! (the missing precision tool)</h3>
+<blockquote class="blockquote">
+<p>The quantity that a statistical model is designed to estimate, given the available data.</p>
+</blockquote>
+<p>Though we will discuss estimands at length later in the course during the modeling exercises, it helps to discuss it in the context of measurands. An estimand:</p>
+<ul>
+<li>is defined by both the scientific question <strong>and</strong> the analysis model<br>
+</li>
+<li>depends on the data, measurement process, and assumptions</li>
+</ul>
+<p>Examples:</p>
+<ul>
+<li>mean wing length in the sampled population<br>
+</li>
+<li>expected activity level given detection and sampling design<br>
+</li>
+<li>estimated population abundance under a specified model<br>
+</li>
+</ul>
+</section>
+</div><div class="column" style="width:60%;">
+<p><img src="../graphics/jackalope_graphics/estimand_graphic.png" class="img-fluid"></p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The estimand is <strong>defined before analysis</strong>, depends on modeling choices, and is <strong>not the same as the measurand</strong>.</p>
+</div>
 </div>
 </div>
 </div>
 <hr>
-<p>This course was created using Quarto (via R Studio) using custom CSS and HTML.</p>
-<div class="callout callout-style-default callout-caution no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+</section>
+<section id="summary-measurand-vs-estimand" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="summary-measurand-vs-estimand"><span class="header-section-number">14.3</span> Summary: Measurand vs Estimand</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Concept</th>
+<th>Measurand</th>
+<th>Estimand</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Nature</td>
+<td>Conceptual / scientific</td>
+<td>Formal / statistical</td>
+</tr>
+<tr class="even">
+<td>Exists without data?</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>Depends on model?</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td>Defined when?</td>
+<td>Before measurement</td>
+<td>Before estimation</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Caution</span><strong>AI usage transparency</strong>
+<span class="screen-reader-only">Note</span><strong>Where does each concept belong in a scientific paper?</strong>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>In the construction of this website, GenAI (via ChatGPT) was used in the following ways:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Concept</th>
+<th>Section</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Measurand</td>
+<td>Introduction</td>
+</tr>
+<tr class="even">
+<td>Estimand</td>
+<td>Methods</td>
+</tr>
+<tr class="odd">
+<td>Estimate</td>
+<td>Results</td>
+</tr>
+<tr class="even">
+<td>Interpretation (circling back to measurand)</td>
+<td>Discussion</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="what-are-data" class="level2" data-number="14.4">
+<h2 data-number="14.4" class="anchored" data-anchor-id="what-are-data"><span class="header-section-number">14.4</span> What are data?</h2>
+<p>Only after measurement do we get <strong>data</strong>, the recorded outputs of those measurement processes. To understand what is meant by data, let us consult a dictionary first. Two definitions from the <em>Merriam-Webster Dictionary</em>—188 years apart—are especially revealing:</p>
+<div class="columns">
+<div class="column" style="width:48%;">
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span><em>Merriam-Webster (2016)</em>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>“Facts or information used usually to calculate, analyze, or plan something.”</em></p>
+</div>
+</div>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:48%;">
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span><em>Merriam-Webster (1828)</em>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>“Quantities, principles, or facts given or admitted, by which to find things or results unknown.”</em></p>
+</div>
+</div>
+</div>
+</div>
+<p>Modern usage treats <em>data</em> and <em>information</em> as synonymous. But scientifically, this is misleading.<br>
+<strong>Data</strong> are observed facts. <strong>Information</strong> is what we extract from those facts using models and assumptions.</p>
+<p>We do not collect information. We collect data, and then we <em>extract</em> or <em>create</em> information. This distinction is critical for reproducibility.</p>
+<hr>
+</section>
+<section id="raw-data" class="level2" data-number="14.5">
+<h2 data-number="14.5" class="anchored" data-anchor-id="raw-data"><span class="header-section-number">14.5</span> Raw data</h2>
+<p>Because measurands cannot be observed directly and estimands depend on how data are generated and modeled, raw data are the critical link between scientific questions (filled with measurands) and strong inference. Raw data preserve the closest recorded traces of the measurement process, making it possible to understand how observations relate to the underlying measurand and what estimands the data can actually support.</p>
+<p>By now, we have all been conducting formal scientific inquiry for many years. It is common to see folders labeled <code>/raw_data/</code> that contain offloaded sensor files or spreadsheets transcribed from field notebooks. These data may feel “raw,” but often they are not.</p>
+<blockquote class="blockquote">
+<p><strong>Raw data</strong> are the facts produced by an instrument or observer through a domain-specific translation, recorded at the time of observation, and preserved <em>without post-hoc modification</em>.</p>
+</blockquote>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p>When we offload data from a sensor or transcribe notes into a spreadsheet, our actions have a non-zero probability of influencing the data.</p>
+<p>Examples of raw data include:</p>
 <ul>
-<li><p><strong>Generating graphics of cryptid jackalope species.</strong> This was part of an exercise in prompt engineering—specifically, learning how to design minimalist prompts that produce consistent visual themes across all outputs.</p></li>
-<li><p><strong>Converting the Canvas-based course site into Quarto markdown.</strong> This included restructuring content, standardizing headers, and translating existing materials into a reproducible, version-controlled format (for hosting on GitHub).</p></li>
-<li><p><strong>Assistive learning of custom CSS</strong>, in parallel with consulting online CSS documentation and manuals (i.e., as a tutor and debugger, not a design authority).</p></li>
-<li><p><strong>Reformatting and updating existing tables</strong>, including updating of revised dates, assignments, and course logistics.</p></li>
-<li><p><strong>Error-checking and troubleshooting markdown and Quarto code.</strong> This was necessary during site builds.</p></li>
-<li><p><strong>Improving organization across course components.</strong> This included suggestions for cross-referencing related pages and identifying places where additional examples or clarifications would improve learning outcomes.</p></li>
-<li><p><strong>Evaluating pedagogical alignment.</strong> This involved getting feedback on readability, cognitive load, and whether learning objectives were being met by the material being presented.</p></li>
-<li><p><strong>Editorial support</strong> to ensure that tone and level of explanatory detail was appropriate for graduate students. This included tightening some language and reducing informational redundancy across pages.</p></li>
+<li>audio waveforms recorded at a study site (on the device)<br>
+</li>
+<li>GPS locations logged by a collar (not yet downloaded)<br>
+</li>
+<li>counts written on a datasheet (not yet transcribed)<br>
+</li>
+<li>pixel values collected by a camera sensor<br>
+</li>
 </ul>
-<p>GenAI was used as an assistive tool throughout; it was not used as a content authority, decision-maker, or substitute for subject-matter expertise. All instructional choices, interpretations, and final edits remain the responsibility of the instructor (in accordance with <a href="../chapters/int_ai_policy.qmd">AI Use Policy</a>).</p>
+</div><div class="column" style="width:40%;">
+<p><img src="../graphics/other_stylized_graphics/milestone02_notebook.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Common misconceptions about raw data
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Raw data are <strong>not</strong> clean, tidy, or analysis-ready<br>
+</li>
+<li>Processed tables and summaries are <strong>not</strong> raw data<br>
+</li>
+<li>Raw data are <strong>not</strong> the truth—they are translated observations<br>
+</li>
+<li>Raw data are <strong>not</strong> limited to numbers<br>
+</li>
+<li>Messiness does <strong>not</strong> imply poor data quality<br>
+</li>
+<li>Early processing choices permanently change the data<br>
+</li>
+</ul>
 </div>
 </div>
 </div>
+<p>Raw data are the foundation of all scientific analysis. On their own, however, they are incomplete. To be interpretable, reusable, and reproducible, raw data require <strong>context</strong>.</p>
+<p>That context comes from <strong>metadata</strong>, which are discussed briefly in the coming sections. Keeping the focus here on raw data helps avoid mixing observations of the world with explanations about how those observations were produced. Metadata play a different conceptual role, and treating them separately keeps that distinction clear.</p>
 
 
 </section>
@@ -813,10 +1054,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../chapters/05_02_building_dags.html" class="pagination-link" aria-label="DAG Construction">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">DAG Construction</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./chapters/int_course_intro.html" class="pagination-link" aria-label="Introduction">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/01_reproducible_workflow_intro.html" class="pagination-link" aria-label="Reproducible Analyses">
+        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Reproducible Analyses</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -23,6 +23,13 @@ Ecologists want to understand why nature works the way it does. Does rainfall re
 
 [**Course Calendar**](https://jpkelley.github.io/ZOO5500/chapters/int_calendar_fa26.html){rel="external" target="_blank"}
 
+::: {.callout-warning icon=false collapse=true}
+## **Workflow templates**
+
+[YAML Metadata Template (general)](templates/metadata_template.yaml)
+:::
+
+
 ---
 
 This course was created using Quarto (via R Studio) using custom CSS and HTML. 

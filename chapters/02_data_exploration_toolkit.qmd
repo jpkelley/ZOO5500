@@ -20,10 +20,10 @@ editor: visual
 ::: {.column width="70%"}
 Data exploration is not a single step to complete before analysis; it consists of a **set of diagnostic tools applied iteratively across an analytical workflow**. In this course, we distinguish --using very non-standard but arguably useful nomenclature-- between two complementary phases of data exploration:
 
--   ***Ante hoc*** **data exploration**: diagnostic checks performed *before* formal modeling, used to assess data structure, measurement quality, and basic data and model assumptions.
--   ***Post hoc*** **data exploration**: diagnostic checks performed *after* initial models are fit and used to reassess data in light of model behavior (e.g., leverage, influence, residual structure, convergence failures, factor reduction, or model respecification).
+-   ***Ante hoc*** **data exploration**: diagnostic checks performed *before* formal modeling, used to assess measurement quality, data structure, missingness, support, and features of the data relevant to implementing your appropriate statistical model (the estimator).
+-   ***Post hoc*** **data exploration**: diagnostic checks performed *after* an initial model is fit, used to evaluate how well the statistical specification represents the data (e.g., residual structure, leverage, influence, convergence failures, or other evidence of model inadequacy).
 
-Both phases are essential. *Ante hoc* exploration helps prevent obvious problems from being baked into models, while post hoc exploration helps identify more subtle issues that only become visible after a model has been fit.
+Both phases are essential. *Ante hoc* exploration asks whether the measurements and data structure can support the planned analysis, while *post hoc* exploration asks whether the fitted model adequately represents those data. Most importantly (as I cannot emphasize this enough), neither phase determines the causal structure of your system or which variables are required for effect identification; those decisions come from the DAG and the later SCM.
 
 This section introduces a coarse yet practical *ante hoc* Data Exploration Toolkit, a subset of exploratory tools that should always be considered *before* formal modeling begins. *Post hoc* diagnostics are introduced later in the course within the context of formal data modeling.
 :::
@@ -39,30 +39,44 @@ This section introduces a coarse yet practical *ante hoc* Data Exploration Toolk
 
 In the R exercises used this course, we will repeatedly apply the following steps of the *ante hoc* Data Exploration Toolkit:
 
--   Tool #1: Assess *potential* outliers (univariate and multivariate)
--   Tool #2: Assess the presence of excess zeros
--   Tool #3: Explore interactions and structural relationships
--   Tool #4: Assess potential information redundancy among covariates (e.g., multicollinearity)
--   Tool #5: Decide whether covariate standardization is warranted (this could also be used during *post hoc* data exploration)
+-   Tool #1: Assess *potential* outliers and possible measurement errors
+-   Tool #2: Assess distributions, sparsity, and excess zeros
+-   Tool #3: Assess missingness and data completeness
+-   Tool #4: Assess sampling structure, dependence, and support
+-   Tool #5: Assess statistical relationships relevant to estimator implementation (e.g., nonlinearity, scaling, and numerical collinearity)
 
-This toolkit is **intentionally coarse and non-exhaustive**. Its purpose is not to *fix* the data, but rather to identify critical and fatal issues when they are easiest to diagnose and least costly to address. Skipping these steps often leads to confusion or [Paralysis of Analysis](https://jpkelley.github.io/ZOO5500/chapters/statistical_aphorisms.html) during modeling. Many of these are mistakes I have made myself over the years...and learned from the hard way.
+This toolkit is **intentionally coarse and non-exhaustive**. Its purpose is not to *fix* the data, but rather to identify critical and fatal issues when they are easiest to diagnose and least costly to address. Skipping these steps often leads to confusion or [Paralysis of Analysis](https://jpkelley.github.io/ZOO5500/chapters/statistical_aphorisms.html) during modeling. 
 
-This section focuses on the first three most important tools within this toolkit: assessing potential outliers, assessing potential excess of zero values, and assessing potential information redundancy among covariates. The first section --outliers-- will be discussed on its own; for the sake of course timing, the other two will be discussed in the tutorial and later in the course.
+::: {.callout-warning icon="false"}
+## What this toolkit cannot tell you
+
+Exploratory patterns do **not** determine which variables belong in your causal adjustment set. For example:
+
+-   A strong correlation does not make a variable a confounder.
+-   A weak correlation does not mean that a confounder can be dropped.
+-   Two correlated variables are not necessarily causally redundant.
+-   An apparent interaction does not, by itself, establish a causal mechanism.
+-   Principal Components Analysis (PCA) or other dimension-reduction methods should not be used simply because several causally relevant variables are correlated.
+
+Decisions about data require the exact scientific and causal reasoning that is encoded in your DAG. EDA tells you about the **measurements and statistical behavior of those variables**; it says nothing about different variables' causal roles.
+:::
+
+This section focuses on the most important tools within this toolkit that can be assessed before formal modeling. The first section (Outliers) will be discussed on its own; for the sake of course timing, the other tools will be discussed in the tutorial and later in the course as they become relevant to model implementation.
 
 ::: {.callout-tip collapse="true"}
-## GLMMs and GAMMs: why homogeneity of variance is not required
+## What about homogeneity of variance?
 
-Most ecological data are far more complex than what simple Analysis of Variance (ANOVA) or linear model frameworks can handle, often involving non-Gaussian dependent variables, hierarchical structures (i.e. nested data), and uneven sampling. In this context, enforcing homogeneity of variance in the classical sense is not required; in face, it is appropriate.
+You may have learned that you should test for “homogeneity of variance” before fitting a statistical model. We will **not** treat this as a generic *ante hoc* requirement.
 
-In Generalized Linear Mixed Model (GLMMs) and Generalized Additive Mixed Models (GAMMs), variance is explicitly modeled through the choice of error distribution, link function, and hierarchical structure. As a result, heterogeneity of variance on the response scale is not a violation of assumptions; it is often an expected property of the data.
+Why? Whether a particular variance pattern is expected or problematic depends on the model (and probability model) being used. For example, many non-Gaussian models naturally imply that variance changes with the mean. Later, when we work with GLMs, GLMMs, GAMs, and GAMMs, we will evaluate variance and residual patterns in the context of the fitted model rather than requiring the raw data to satisfy a generic homoscedasticity rule beforehand. 
 
-> Takeaway: In GLMMs and GAMMs, variance diagnostics evaluate model adequacy, not whether of not the data meet the homoscedasticity assumption *a priori*. In other words, you can skip that irrelevant section of [**Zuur et al. (2010)**](https://besjournals.onlinelibrary.wiley.com/doi/10.1111/j.2041-210X.2009.00001.x).
+> **Takeaway:** Do not try to force your raw data to satisfy assumptions of a statistical model that you have not yet specified. We will evaluate model adequacy once there is actually a model to work with. See the theme here? 
 :::
 
 ## Scope and Next Steps
 
-At this **ante hoc** stage, the goal is to **recognize potential problems**, not to resolve them.
+At this **ante hoc** stage, the goal is to **recognize features of the measurements and data structure that matter for estimation**, not to use the data to redefine the causal question. (Why would you want to do this?)
 
-In the next sections, we tackle each one of the tools in the toolkit. After focusing on each of these, in turn, we present a hands-on tutorial (discussed in class) that walks through these diagnostics using real data, illustrating how rule-based flags arise and how they should be interpreted responsibly within an analytical workflow.
+In the next sections, we tackle each tool in the toolkit. The hands-on tutorial will apply these tools to real data and ask what each finding means for the anticipated estimation step. Some findings may indicate measurement or data-quality problems; others will become relevant when we choose and implement models in the coming weeks.
 
-As a reminder, *post hoc* data exploration will be introduced later in the course, once models are fitted and can provide additional information about how the data and model interact.
+As yet another reminder, an exploratory pattern **does not** override the causal reasoning already encoded in your DAG. Instead, the DAG tells us what must be estimated to answer your focal question, while exploration helps us understand whether (and how) the available data can support that estimation. *Post hoc* data exploration will be introduced later in the course, once models are fitted and can provide additional information about how the data and model interact.

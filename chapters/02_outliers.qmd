@@ -16,9 +16,9 @@ editor: visual
 
 ## Tool #1: Assessing Potential Outliers
 
-This section introduces the first core tool of *ante hoc* Data Exploration Toolkit: assessing potential outliers. The goal is not to justify a data point's immediate removal, but rather to **flag and understand why an observation is unusual** before any modeling decisions are made. Throughout this section, outliers are treated as diagnostic signals rather than problems to be fixed,following a simple guiding principle:
+This section introduces the first core tool of the *ante hoc* Data Exploration Toolkit: assessing potential outliers. The goal is not to justify a data point's immediate removal. Rather, it is designed to flag and understand why an observation is unusual (after the DAG is created and before decisions about model implementation are made). Throughout this section, we will treat outliers as sort of diagnostic signals rather than problems to be fixed, following a simple guiding principle:
 
-> **Outlier rules guide scrutiny; they do not justify removal.**
+> **Outlier rules guide scrutiny; they do not automatically justify removal.**
 
 ## What is an outlier?
 
@@ -26,9 +26,11 @@ A commonly cited definition is:
 
 > *“...an outlier is an observation that lies outside the overall pattern of a distribution.”* (Moore & McCabe, 1999)
 
-This definition is intentionally broad and inherently **univariate**. It tells us *where* an observation sits relative to others—but not *why* it is unusual, nor what should be done about it. Perhaps a more operational --but more vague-- definition is that of [Zuur et al. (2010)](https://besjournals.onlinelibrary.wiley.com/doi/10.1111/j.2041-210X.2009.00001.x):
+This definition is intentionally broad and inherently **univariate**. It tells us *where* an observation sits relative to others—but not *why* it is unusual, nor what should be done about it. Perhaps a more operational --but still fairly vague-- definition is that of [Zuur et al. (2010)](https://besjournals.onlinelibrary.wiley.com/doi/10.1111/j.2041-210X.2009.00001.x):
 
 > *"...an observation that has a relatively large or small value compared to the majority of observations"*
+
+It is very likely that we could argue the merits and weaknesses of this definition for the remainder of the term.
 
 ::::: columns
 ::: {.column width="50%"}
@@ -36,10 +38,12 @@ This definition is intentionally broad and inherently **univariate**. It tells u
 
 Outliers arise for many reasons (any number of data-generating processes), including, but not limited to:
 
--   extreme relative to distributional assumptions\
+-   extreme relative to a statistical distribution
 -   measurement error
 -   error during data entry
 -   extremely rare but biologically plausible (so called *Black Swan* events)
+
+Importantly, an observation being unusual relative to the rest of the dataset does not tell us which of these explanations is correct. That requires returning to the measurement process, metadata, and scientific context.
 :::
 
 ::: {.column width="50%"}
@@ -91,21 +95,20 @@ $$
 
 These cutoffs are **conventional and not inferential**. They provide a rule of thumb; they ***do not*** provide a statistical test. (You should see a theme: use outlier tests to flag values for extra scrutiny.)
 
-::: {.callout-note collapse=true icon=false}
-## Tukey-style boxplots and non-normal data: do not worry! Tukey-style boxplot whiskers are nonparametric; that is, they rely on quantiles (IQR), which are *order statistics*, and not distributional assumptions. Because outlier flagging at the lower bound is based on ranks, departures from normality are acceptable. 
+::: {.callout-note collapse="true" icon="false"}
+## Tukey-style boxplots and non-normal data: do not worry! Tukey-style boxplot whiskers are nonparametric; that is, they rely on quantiles (IQR), which are *order statistics*, and not distributional assumptions. Because outlier flagging at the lower bound is based on ranks, departures from normality are acceptable.
 :::
 
 ::::: columns
-
 ::: {.column width="40%"}
-
 ### Conditional Boxplots
 
-Conditional boxplots extend the univariate, Tukey-style boxplot by stratifying the data by a grouping factor (e.g., site, treatment, time). These plots are especially useful for diagnosing heterogeneity across groups and identifying where flagged values originate. At first, the simplicity of these plots may give the impression that they are not useful, but you will quickly find that piecing together many of these visualizations can help uncover subtle issues with your data.
+Conditional boxplots extend the univariate, Tukey-style boxplot by stratifying the data by a grouping factor (e.g., site, treatment, time). These plots are especially useful for identifying where flagged values originate and whether unusual values are specific to meaningful sampling or measurement contexts. At first, the simplicity of these plots may give the impression that they are not useful, but you will quickly find that piecing together many of these visualizations can help uncover subtle issues with your data.
+
+The groups examined here should be motivated by the study design, measurement process, and causal system already represented in your SCM—not selected simply because exploratory plots reveal an interesting pattern.
 :::
 
 ::: {.column width="60%"}
-
 ```{r}
 #| echo: false
 #| message: false
@@ -174,7 +177,7 @@ Univariate screening should therefore be viewed as a **question-generating step*
 
 ## Multivariate Outliers
 
-Multivariate outliers occur when an observation is unusual **in combination across variables**, even if it appears unremarkable in any single variable. These are common in real datasets and often more consequential than univariate outliers. Because they depend on covariance structure (how one variable relates to another), multivariate outliers are invisible to univariate screening methods.
+Multivariate outliers occur when an observation is unusual **in combination across variables**, even if it appears unremarkable in any single variable. These are common in real datasets and can be more difficult to recognize than univariate outliers. Because they depend on covariance structure (how one variable relates to another), multivariate outliers are invisible to univariate screening methods.
 
 Consider this example:
 
@@ -267,7 +270,7 @@ The Tukey-style boxplot did not flag outliers in either of the univariate dimens
 
 ## Mahalanobis Distance: Identifying Multivariate Outliers
 
-Most ecological and biological datasets are inherently multivariate. A point may fall near the center of each marginal distribution yet be extreme in joint space. One tool that we can use is Mahalanobis Distance, which is a standard tool for identifying multivariate outliers because it accounts for covariance among variables. Conceptually, it measures distance from the multivariate centroid.
+Most ecological and biological datasets are inherently multivariate. A point may fall near the center of each marginal distribution yet be extreme in joint space. One tool that we can use is Mahalanobis Distance, which can be useful for flagging multivariate outliers because it accounts for covariance among variables. Conceptually, it measures distance from the multivariate centroid. As with any exploratory tool, the variables included in this calculation should have a scientific or measurement-based rationale; the covariance structure itself does not tell us which variables share a causal role or belong in an adjustment set. Use this approach wisely.
 
 ::: callout-note
 ## What the Mahalanobis distance means (plain language)
@@ -325,8 +328,8 @@ xy <- xy %>%
 xy %>% filter(md_outlier) %>% select(x, y, md, md_outlier, is_conditional_outlier)
 ```
 
-As with univariate methods, flagged points should prompt investigation—not automatic exclusion.
+As with univariate methods, flagged points should prompt investigation; they should not dictate automatic exclusion. A flagged observation should send you back to the metadata, measurement process, sampling context, or even back to the variables in your DAG. The goal is to understand why the observation is unusual within the context of your system's data-generating processes and what that implies for estimation. The goal is *not* to improve the appearance or statistical behavior of the dataset (despite what many researchers will claim).
 
 ------------------------------------------------------------------------
 
-In the next section, we will apply the *ante hoc* Data Exploration Toolki to a real dataset. This example will showcase outlier detection but will also demonstrate how to apply some of the other tools in this Toolkit.
+In the next section, we will apply the *ante hoc* Data Exploration Toolkit to a real dataset. This example will showcase outlier detection but will also demonstrate how to apply some of the other tools in this Toolkit. Throughout, remember that these exploratory tools help us understand the measurements and statistical structure of the available data; they do not redefine the causal question, estimand, or identification strategy established by the SCM.

@@ -115,13 +115,13 @@ This was a successful (and very simple) data ingestion. (Again, there are many w
 
 As you recall, we have the following steps of the *ante hoc* Data Exploration Toolkit:
 
--   Tool #1: Assess *potential* outliers (univariate and multivariate)
--   Tool #2: Assess the presence of excess zeros
--   Tool #3: Explore interactions and structural relationships
--   Tool #4: Assess potential information redundancy among covariates (e.g., multicollinearity)
--   Tool #5: Decide whether covariate standardization is warranted
+-   Tool #1: Assess *potential* outliers and possible measurement errors
+-   Tool #2: Assess distributions, sparsity, and excess zeros
+-   Tool #3: Assess missingness and data completeness
+-   Tool #4: Assess sampling structure, dependence, and support
+-   Tool #5: Assess statistical relationships relevant to estimator implementation (e.g., nonlinearity, scaling, and numerical collinearity)
 
-The good news is that we can generally combine the first three steps by simply looking at the overall structure of your dataset in several ways. These "ways" are non-prescriptive; you should continue to explore until you understand all the dimensions of your raw data. Let's begin!
+The good news is that we can begin assessing several of these features simply by looking carefully at the overall structure of your dataset in several ways. These "ways" are non-prescriptive; the goal is to understand the measurements and structure of the raw data rather than to discover which variables "belong" in an analysis. Let's begin!
 
 ## Basic examination of broad-scale data structure
 
@@ -276,7 +276,7 @@ Because violin plots do not explicitly show outliers, they may be worse in some 
 
 ### Scatter plot
 
-Do not overlook the utility of simple scatterplot. A scatterplot is useful for seeing the raw relationship between a predictor and a response across treatments. It helps you assess overall trends, clustering, and potential outliers while keeping individual observations visible.
+Do not overlook the utility of a simple scatterplot. A scatterplot is useful for seeing how two measured variables vary together across treatments. It helps you assess data coverage, clustering, unusual observations, and other features of the measurements while keeping individual observations visible.
 
 ```{r}
 ggplot(d, aes(x = number_jackalope, y = oxygen_ppm, color = salt_treatment, shape = salt_treatment)) +
@@ -329,7 +329,7 @@ d |>
 
 ### Interaction plot (Step #3)
 
-Step #3 of our Data Exploration Toolkit is to examine our interaction structure. A simple interaction plot is useful for getting a quick, visual sense of whether the relationship between a predictor and a response might change across levels of another factor. By faceting the same boxplot across salt treatments (i.e. creating "small multiples" *sensu* Edward Tufte), you can more easily compare both the typical oxygen levels and the spread of the data for each jackalope count within each treatment. This does *not* test for an interaction, but it is a fairly good reality check for overall patterns --such as shifts in medians or changes in variance-- that might justify including an interaction term later on.
+A simple interaction plot is useful for getting a quick, visual sense of how the measurements are distributed across combinations of variables. By faceting the same boxplot across salt treatments (i.e. creating "small multiples" *sensu* Edward Tufte), you can more easily compare both the typical oxygen levels and the spread of the data for each jackalope count within each treatment. This does *not* test for an interaction or determine whether an interaction belongs in the estimator. Instead, it is a useful reality check for data coverage --for example, sparse cells, missing treatment combinations, unusual observations within combinations, or differences in the amount of information available across the experimental design.
 
 ```{r}
 ggplot(d, aes(x = number_jackalope, y = oxygen_ppm)) +
@@ -345,9 +345,13 @@ This is not particularly useful for detecting data anomalies, but it could be us
 
 ------------------------------------------------------------------------
 
-## Inspecting for multicollinearity (Step #4)
+## Inspecting numerical collinearity (Tool #5)
 
-The jackalopeologists then conducted a preliminary quantification of the climate in which *L. pelonates* was found. They used remote sensors to measure humidity, precipitation, temperature, temperature variability, and heating degree days. We don’t think we can include all the variables in our statistical model, so we want to first inspect if any of the variables are correlated (i.e. they tell us redundant information). Let’s read in these climate data and save it to an object called “climate”:
+The jackalopeologists (jackanapes?) then conducted a preliminary quantification of the climate in which *L. pelonates* was found. They used remote sensors to measure humidity, precipitation, temperature, temperature variability, and heating degree days.
+
+Several of these variables may be strongly correlated. Examining that correlation can be useful because severe numerical collinearity can affect estimation, including the precision and stability of regression coefficients. But be very careful thinking that this is a core problem. **Correlated variables are not necessarily causally redundant variables.** Whether a variable is required for identification comes from the SCM, not from its correlation with other measured variables. Multicollinearity is a potential estimation problem, but we should *not* let it ruin our causal assumptions. 
+
+But, let's proceed so that we can understand what it is doing. First, let’s read in these climate data and save it to an object called “climate”:
 
 ```{r}
 climate <- import("chapters/class_exercise_data/lepusantilocapra_climate_data.csv")
@@ -361,7 +365,7 @@ str(climate)
 
 Normally, we would have the associated metadata so that you could see the units for each of these variables. For this example, the units are not important.
 
-We will proceed to visually examine multicollinearity (correlation) between these climate metrics, but we will also include–as a basic measure of strength of any correlation– the Pearson correlation metric. Let’s use a pairwise plot to visually inspect these. Note that the correlation coefficient (which varies between 0-1) is on the opposite diagonal from the graph.
+We then proceed to visually examine multicollinearity (correlation) between these climate metrics, but we will also include --as a basic measure of strength of any correlation–- the Pearson correlation metric. Let’s use a pairwise plot to visually inspect these. Note that the correlation coefficient (which varies between 0-1) is on the opposite diagonal from the graph.
 
 ```{r}
 climate |>
@@ -382,23 +386,21 @@ The `GGally::ggpairs` function markedly improves upon similar functionality of b
 -   temperature and heating degree days are strongly and negatively correlated (r = -0.998)
 -   temperature variation and heating degree days are strongly and negatively correlated (r = -0.588)
 
-So, what to do, what to do, what to do? The next part is one solution to this issue. We clearly have some variables that might be providing redundant information. This could impact our modeling (specifically inflating the variance of a given regression coefficient). We can explicitly examine this using Variance Inflation Factors (VIFs), which are calculated for each term in a model. Note that there are options for VIFs applied to both continuous and categorical variables. Let us do this for continuous variables for these climate data. Most available functions in R require regression models; however, there are some approaches--such as the `usdm` package--that require only data frames of multiple variables. So, let us use that.:
+So, what to do, what to do, what to do? We clearly have some variables that are strongly correlated. This could impact our modeling (specifically inflating the variance of a given regression coefficient). We can explicitly examine numerical collinearity using Variance Inflation Factors (VIFs), which are calculated for each term in a model. Note that there are options for VIFs applied to both continuous and categorical variables. Let us do this for continuous variables for these climate data. Most available functions in R require regression models; however, there are some approaches--such as the `usdm` package--that require only data frames of multiple variables. So, let us use that.:
 
 ```{r}
 vif_results <- usdm::vif(climate)
 vif_results
 ```
 
-This is a clear example that two variables, temperature and heating_deg_days, are highly correlated with a number of other variables. That is, they potentially provide redundant information.
+This is a clear example that two variables, temperature and heating_deg_days, are highly correlated with a number of other variables. So, what should we do with this information? A common response of the lazy statistical ecologist would be to conclude that some of these variables contain "redundant information" and either:
 
-If variables are negatively correlated, consider retaining them both. From there, you can decide to:
+-   eliminate one of the correlated variables from the analysis, or
+-   conduct a dimension-reduction analysis such as PCA.
 
--   Eliminate one of the positively correlated variables from our analysis.
--   Conduct a factor-reduction analysis to create a new variable that captures the correlated variation between correlated variables.
+But herein lies the terrible problem: neither one of these decisions follows automatically or naturally from the correlations calculated in the above process. For example, two highly correlated variables could occupy very different positions in our DAG. One might be a confounder, whereas another might function as a mediator. Combining them into a principal component would remove the variables' independent positions in the DAG, creating a new node that was suboptimally positioned in the data-generating process. Likewise, dropping a variable simply because it is correlated with another could eliminate a variable required for causal identification.
 
-The former sounds lazy and arbitrary. Let us proceed with a factor reduction approach. For this, one of the most widely accepted approaches is a principal components analysis (PCA). There are many related factor reduction methods out there as well that may work better for non-normal data, etc., but PCA generally works fairly well.
-
-Our first step is to conduct a PCA without specifying how many new components (new variables) should be generated.
+This gives us a useful opportunity, especially given how commonly methods like Principal Components Analysis is used. Specifically, by going through the following example, we can learn when not to jump immediately to PCA. For this demonstration, our first step is to conduct a PCA without specifying how many new components (new variables) should be generated. Let's begin with a simple PCA analysis.
 
 ```{r}
 pca_results <- stats::princomp(
@@ -431,14 +433,14 @@ You can see this generally reflected when you plot PCA axes of variation. A safe
 biplot(pca_results)
 ```
 
-One advantage of PCA/ICA or other factor reduction methods is that you can use expert knowledge to decide on the number of resulting axes. Certainly, in the end, these may not capture much total variation. This flexibility may improve interpretability.
-
-We can then create two new rotated scores for each observation (row). But what are these new values? These are simply new continous values that capture the variation attributable to the set of variables that correlated with each rotated component (PC1, PC2, etc.).
+One advantage of PCA/ICA or other factor reduction methods is that you can use expert knowledge to decide on the number of resulting axes. Certainly, in the end, these may not capture much total variation. This flexibility may improve interpretability. We can then create two new rotated scores for each observation (row). But what are these new values? These are simply new continous values that capture the variation attributable to the set of variables that correlated with each rotated component (PC1, PC2, etc.).
 
 The statistical convention in most fields is to accept all rotated components that sum to **\>80%** of cumulative explained variation. You can output these new rotated scores by running the following code and then inputting these as new columns in your dataset. Then, run the model with each of these new *proxy variables* as new factors in your model(s):
 
 ```{r}
 pca_results_rotated$scores
 ```
+
+PCA has successfully accomplished a statistical task: it has represented correlated variation among several measured variables using fewer dimensions. However, what it has **not** established is that those new dimensions represent the causal quantities required by our estimand. Before using them in an estimator, we would need to ask what scientific quantities they represent and whether replacing the original variables preserves the causal roles encoded in our DAG. You can clearly see how the use of Principal Components Analysis has added a level of complication to our workflow.
 
 **End of tutorial**

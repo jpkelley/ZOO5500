@@ -259,6 +259,30 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Conventions and Style</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02_data_exploration_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Data Exploration</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02_data_exploration_toolkit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Exploration Toolkit</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02_outliers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Tool 1: Outliers</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02_tutorial_data_exploration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Tutorial: Data Exploration</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -370,45 +394,45 @@ Note
 </tr>
 <tr class="even">
 <td style="text-align: right;"><a href="#week-4"><strong>Week 4</strong><br>(21-Sep)</a></td>
+<td>Measurement, data structure &amp; targeted exploration</td>
+<td>Measurement; map variables to DAG</td>
+<td>Targeted EDA</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"><a href="#week-5"><strong>Week 5</strong><br>(28-Sep)</a></td>
+<td>Models as estimators &amp; GLMs</td>
+<td>Estimand → estimator → estimate; GLMs</td>
+<td>GLMs; diagnostics</td>
+<td>Data + Estimator Plan</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><a href="#week-6"><strong>Week 6</strong><br>(05-Oct)</a></td>
+<td>Hierarchical data &amp; GLMMs</td>
+<td>Random effects; dependence; GLMMs</td>
+<td>GLMMs; diagnostics</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"><a href="#week-7"><strong>Week 7</strong><br>(12-Oct)</a></td>
+<td>Nonlinearity</td>
+<td><strong>NO CLASS</strong> (mid-semester break)</td>
+<td>GAMs/GAMMs; assess nonlinearity</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><a href="#week-8"><strong>Week 8</strong><br>(19-Oct)</a></td>
 <td>SCM synthesis, critique &amp; causal analysis planning</td>
 <td>Causal audit and revision</td>
 <td>Published-analysis + peer critique</td>
 <td>Causal Analysis Plan</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;"><a href="#week-5"><strong>Week 5</strong><br>(28-Sep)</a></td>
-<td>Measurement, data structure &amp; targeted exploration</td>
-<td>Measurement; map variables to DAG</td>
-<td>Targeted EDA</td>
-<td>—</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;"><a href="#week-6"><strong>Week 6</strong><br>(05-Oct)</a></td>
-<td>Models as estimators &amp; GLMs</td>
-<td>Estimand → estimator → estimate; GLMs</td>
-<td>GLMs; diagnostics</td>
-<td>Data + Estimator Plan</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;"><a href="#week-7"><strong>Week 7</strong><br>(12-Oct)</a></td>
-<td>Hierarchical data &amp; GLMMs</td>
-<td><strong>NO CLASS</strong> (mid-semester break)</td>
-<td>Random effects; dependence; GLMMs</td>
-<td>—</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;"><a href="#week-8"><strong>Week 8</strong><br>(19-Oct)</a></td>
-<td>Nonlinearity</td>
-<td>GAMs/GAMMs; assess nonlinearity</td>
-<td>Open analysis</td>
-<td>Working Estimator Checkpoint</td>
-</tr>
-<tr class="odd">
 <td style="text-align: right;"><a href="#week-9"><strong>Week 9</strong><br>(26-Oct)</a></td>
 <td>Causal-effect estimation</td>
 <td>Total effects; g-computation/standardization</td>
 <td>Open analysis</td>
-<td>—</td>
+<td>Working Estimator Checkpoint</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;"><a href="#week-10"><strong>Week 10</strong><br>(02-Nov)</a></td>
@@ -461,6 +485,7 @@ Note
 <li>Revised for Fall 2026.</li>
 <li>Reorganized the course around an estimand-aware SCM workflow: scientific question → hypothesis/prediction → DAG → identification → estimator → estimate → inference.</li>
 <li>Consolidated graded work into integrated Milestone Assignments.</li>
+<li>Positioned SCM synthesis and causal-analysis planning after students have developed practical experience with measurement, GLMs, GLMMs, and nonlinearity.</li>
 </ul>
 </section>
 <section id="weekly-information" class="level2" data-number="4.2">
@@ -633,40 +658,41 @@ Note
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Topic:</strong> SCM synthesis, critique &amp; causal analysis planning<br>
-<strong>Milestone assignment:</strong> <strong>Causal Analysis Plan — due 25-Sep</strong></p>
+<p><strong>Topic:</strong> Measurement, data structure &amp; targeted exploration<br>
+<strong>Milestone assignment:</strong> N/A</p>
 <section id="before-class-3" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="before-class-3">Before class</h3>
 <ul>
-<li>Review the kitchen-sink versus SCM comparison.</li>
-<li>Review concise SEM versus SCM material.</li>
+<li>Review measurement/measurand concepts and targeted EDA.</li>
 </ul>
 </section>
 <section id="monday-3" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="monday-3">Monday</h3>
 <ul>
-<li>Compare analytical approaches</li>
-<li>Project causal audit and DAG revision</li>
+<li>Measurement and measurands</li>
+<li>Map project measurements to DAG variables in R</li>
 </ul>
 </section>
 <section id="wednesday-3" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="wednesday-3">Wednesday</h3>
 <ul>
-<li>Critique a published analysis</li>
-<li>Peer critique of DAG, estimand, and identification strategy</li>
+<li>Targeted exploratory data analysis</li>
+<li>Examine distributions, missingness, outliers, and data structure</li>
 </ul>
 </section>
 <section id="reading-3" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="reading-3">Reading</h3>
 <ul>
-<li>From Kitchen-Sink to SCM</li>
-<li>Traditional SEM / SEM vs SCM material</li>
+<li>Nature of Data</li>
+<li>Reproducible Analyses</li>
+<li>Data Exploration</li>
+<li>Outliers</li>
 </ul>
 </section>
 <section id="after-class-3" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="after-class-3">After class</h3>
 <ul>
-<li><strong>Submit:</strong> Causal Analysis Plan</li>
+<li>Document measurement limitations and EDA findings that affect your planned estimator.</li>
 </ul>
 </section>
 </div>
@@ -684,41 +710,42 @@ Note
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Topic:</strong> Measurement, data structure &amp; targeted exploration<br>
-<strong>Milestone assignment:</strong> N/A</p>
+<p><strong>Topic:</strong> Models as estimators &amp; GLMs<br>
+<strong>Milestone assignment:</strong> <strong>Data + Estimator Plan — due 02-Oct</strong></p>
 <section id="before-class-4" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="before-class-4">Before class</h3>
 <ul>
-<li>Review measurement/measurand concepts and targeted EDA.</li>
+<li>Review model foundations and the GLM introduction.</li>
 </ul>
 </section>
 <section id="monday-4" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="monday-4">Monday</h3>
 <ul>
-<li>Measurement and measurands</li>
-<li>Map project measurements to DAG variables in R</li>
+<li>Estimand → estimator → estimate</li>
+<li>GLM foundations</li>
 </ul>
 </section>
 <section id="wednesday-4" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="wednesday-4">Wednesday</h3>
 <ul>
-<li>Targeted exploratory data analysis</li>
-<li>Examine distributions, missingness, outliers, and data structure</li>
+<li>GLMs and partial associations</li>
+<li>Diagnostics and project model fitting in R</li>
 </ul>
 </section>
 <section id="reading-4" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="reading-4">Reading</h3>
 <ul>
-<li>Nature of Data</li>
-<li>Reproducible Analyses</li>
-<li>Data Exploration</li>
-<li>Outliers</li>
+<li>Introduction to Models</li>
+<li>GLM Introduction</li>
+<li>GLM tutorial</li>
+<li>Partial Associations</li>
+<li>DHARMa</li>
 </ul>
 </section>
 <section id="after-class-4" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="after-class-4">After class</h3>
 <ul>
-<li>Document measurement limitations and EDA findings that affect your planned estimator.</li>
+<li><strong>Submit:</strong> Data + Estimator Plan</li>
 </ul>
 </section>
 </div>
@@ -736,42 +763,38 @@ Note
 </div>
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Topic:</strong> Models as estimators &amp; GLMs<br>
-<strong>Milestone assignment:</strong> <strong>Data + Estimator Plan — due 09-Oct</strong></p>
+<p><strong>Topic:</strong> Hierarchical data &amp; GLMMs<br>
+<strong>Milestone assignment:</strong> N/A</p>
 <section id="before-class-5" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="before-class-5">Before class</h3>
 <ul>
-<li>Review model foundations and the GLM introduction.</li>
+<li>Review the GLMM introduction and tutorial.</li>
 </ul>
 </section>
 <section id="monday-5" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="monday-5">Monday</h3>
 <ul>
-<li>Estimand → estimator → estimate</li>
-<li>GLM foundations</li>
+<li>Random effects, dependence, and effective sample size</li>
+<li>Introduce GLMMs</li>
 </ul>
 </section>
 <section id="wednesday-5" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="wednesday-5">Wednesday</h3>
 <ul>
-<li>GLMs and partial associations</li>
-<li>Diagnostics and project model fitting in R</li>
+<li>Fit or refine GLMMs where appropriate</li>
+<li>Diagnostics and project model development</li>
 </ul>
 </section>
 <section id="reading-5" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="reading-5">Reading</h3>
 <ul>
-<li>Introduction to Models</li>
-<li>GLM Introduction</li>
-<li>GLM tutorial</li>
-<li>Partial Associations</li>
-<li>DHARMa</li>
+<li>GLMM Introduction + Tutorial</li>
 </ul>
 </section>
 <section id="after-class-5" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="after-class-5">After class</h3>
 <ul>
-<li><strong>Submit:</strong> Data + Estimator Plan</li>
+<li>Continue model development and diagnostics for hierarchical data where relevant.</li>
 </ul>
 </section>
 </div>
@@ -789,12 +812,12 @@ Note
 </div>
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Topic:</strong> Hierarchical data &amp; GLMMs<br>
+<p><strong>Topic:</strong> Nonlinearity<br>
 <strong>Milestone assignment:</strong> N/A</p>
 <section id="before-class-6" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="before-class-6">Before class</h3>
 <ul>
-<li>Review the GLMM introduction and tutorial.</li>
+<li>Review the GAM/GAMM tutorial.</li>
 </ul>
 </section>
 <section id="monday-6" class="level3 unnumbered">
@@ -806,20 +829,20 @@ Note
 <section id="wednesday-6" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="wednesday-6">Wednesday</h3>
 <ul>
-<li>Random effects, dependence, and effective sample size</li>
-<li>Fit or refine GLMMs where appropriate</li>
+<li>GAMs and GAMMs</li>
+<li>Assess nonlinearity in your project</li>
 </ul>
 </section>
 <section id="reading-6" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="reading-6">Reading</h3>
 <ul>
-<li>GLMM Introduction + Tutorial</li>
+<li>GAM/GAMM tutorial</li>
 </ul>
 </section>
 <section id="after-class-6" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="after-class-6">After class</h3>
 <ul>
-<li>Continue model development and diagnostics for hierarchical data where relevant.</li>
+<li>Assess whether nonlinear relationships are important for your planned estimator and refine your model where appropriate.</li>
 </ul>
 </section>
 </div>
@@ -837,37 +860,41 @@ Note
 </div>
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Topic:</strong> Nonlinearity<br>
-<strong>Milestone assignment:</strong> <strong>Working Estimator Checkpoint — due 23-Oct</strong></p>
+<p><strong>Topic:</strong> SCM synthesis, critique &amp; causal analysis planning<br>
+<strong>Milestone assignment:</strong> <strong>Causal Analysis Plan — due 23-Oct</strong></p>
 <section id="before-class-7" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="before-class-7">Before class</h3>
 <ul>
-<li>Review the GAM/GAMM tutorial.</li>
+<li>Review the kitchen-sink versus SCM comparison.</li>
+<li>Review concise SEM versus SCM material.</li>
+<li>Revisit your project DAG, estimand, identification strategy, and developing estimator.</li>
 </ul>
 </section>
 <section id="monday-7" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="monday-7">Monday</h3>
 <ul>
-<li>GAMs and GAMMs</li>
-<li>Assess nonlinearity in your project</li>
+<li>Compare analytical approaches</li>
+<li>Project causal audit and DAG revision</li>
 </ul>
 </section>
 <section id="wednesday-7" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="wednesday-7">Wednesday</h3>
 <ul>
-<li>Open analysis: troubleshooting, diagnostics, coding, and figures</li>
+<li>Critique a published analysis</li>
+<li>Peer critique of DAG, estimand, identification strategy, and planned analysis</li>
 </ul>
 </section>
 <section id="reading-7" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="reading-7">Reading</h3>
 <ul>
-<li>GAM/GAMM tutorial</li>
+<li>From Kitchen-Sink to SCM</li>
+<li>Traditional SEM / SEM vs SCM material</li>
 </ul>
 </section>
 <section id="after-class-7" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="after-class-7">After class</h3>
 <ul>
-<li><strong>Submit:</strong> Working Estimator Checkpoint</li>
+<li><strong>Submit:</strong> Causal Analysis Plan</li>
 </ul>
 </section>
 </div>
@@ -886,7 +913,7 @@ Note
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Topic:</strong> Causal-effect estimation<br>
-<strong>Milestone assignment:</strong> N/A</p>
+<strong>Milestone assignment:</strong> <strong>Working Estimator Checkpoint — due 30-Oct</strong></p>
 <section id="before-class-8" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="before-class-8">Before class</h3>
 <ul>
@@ -905,6 +932,7 @@ Note
 <h3 class="unnumbered anchored" data-anchor-id="wednesday-8">Wednesday</h3>
 <ul>
 <li>Open analysis and project consultations</li>
+<li>Troubleshooting, diagnostics, coding, and figures</li>
 </ul>
 </section>
 <section id="reading-8" class="level3 unnumbered">
@@ -916,7 +944,7 @@ Note
 <section id="after-class-8" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="after-class-8">After class</h3>
 <ul>
-<li>Refine your focal effect estimate and associated diagnostics.</li>
+<li><strong>Submit:</strong> Working Estimator Checkpoint</li>
 </ul>
 </section>
 </div>

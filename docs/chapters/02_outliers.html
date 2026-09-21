@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2&nbsp; Introduction – Quantitative Analysis of (Messy) Field Data</title>
+<title>20&nbsp; Tool 1: Outliers – Quantitative Analysis of (Messy) Field Data</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -33,8 +68,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/int_syllabus.html" rel="next">
-<link href="../index.html" rel="prev">
+<link href="../chapters/02_tutorial_data_exploration.html" rel="next">
+<link href="../chapters/02_data_exploration_toolkit.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -73,6 +108,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -86,7 +150,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../index.html">Course Overview</a></li><li class="breadcrumb-item"><a href="../chapters/int_course_intro.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/01_nature_of_data.html">Part II: From the Causal System to Data</a></li><li class="breadcrumb-item"><a href="../chapters/02_outliers.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Tool 1: Outliers</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -117,13 +181,13 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Course Overview</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
@@ -132,7 +196,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/int_course_intro.html" class="sidebar-item-text sidebar-link active">
+  <a href="../chapters/int_course_intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
@@ -228,13 +292,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
  <span class="menu-text">Part II: From the Causal System to Data</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/01_nature_of_data.html" class="sidebar-item-text sidebar-link">
@@ -273,7 +337,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/02_outliers.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/02_outliers.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Tool 1: Outliers</span></span></a>
   </div>
 </li>
@@ -311,19 +375,26 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#welcome-to-quantitative-analysis-of-messy-field-data" id="toc-welcome-to-quantitative-analysis-of-messy-field-data" class="nav-link active" data-scroll-target="#welcome-to-quantitative-analysis-of-messy-field-data"><span class="header-section-number">2.1</span> Welcome to Quantitative Analysis of (Messy) Field Data!</a></li>
-  <li><a href="#course-objectives" id="toc-course-objectives" class="nav-link" data-scroll-target="#course-objectives"><span class="header-section-number">2.2</span> Course Objectives</a></li>
-  <li><a href="#topics-covered" id="toc-topics-covered" class="nav-link" data-scroll-target="#topics-covered">Topics covered</a></li>
-  <li><a href="#what-is-new-this-term-fall-2026" id="toc-what-is-new-this-term-fall-2026" class="nav-link" data-scroll-target="#what-is-new-this-term-fall-2026"><span class="header-section-number">2.3</span> What is new this term (Fall 2026)?</a></li>
+  <li><a href="#tool-1-assessing-potential-outliers" id="toc-tool-1-assessing-potential-outliers" class="nav-link active" data-scroll-target="#tool-1-assessing-potential-outliers"><span class="header-section-number">20.1</span> Tool #1: Assessing Potential Outliers</a></li>
+  <li><a href="#what-is-an-outlier" id="toc-what-is-an-outlier" class="nav-link" data-scroll-target="#what-is-an-outlier"><span class="header-section-number">20.2</span> What is an outlier?</a></li>
+  <li><a href="#types-of-outliers" id="toc-types-of-outliers" class="nav-link" data-scroll-target="#types-of-outliers"><span class="header-section-number">20.4</span> Types of outliers</a></li>
+  <li><a href="#univariate-outliers" id="toc-univariate-outliers" class="nav-link" data-scroll-target="#univariate-outliers"><span class="header-section-number">20.5</span> Univariate Outliers</a>
+  <ul class="collapse">
+  <li><a href="#graphical-approaches-to-univariate-outliers" id="toc-graphical-approaches-to-univariate-outliers" class="nav-link" data-scroll-target="#graphical-approaches-to-univariate-outliers"><span class="header-section-number">20.5.1</span> Graphical approaches to univariate outliers</a></li>
+  <li><a href="#tukey-box-plots" id="toc-tukey-box-plots" class="nav-link" data-scroll-target="#tukey-box-plots"><span class="header-section-number">20.5.2</span> Tukey Box Plots</a></li>
+  <li><a href="#warnings-about-detecting-univariate-outliers-from-visual-inspection" id="toc-warnings-about-detecting-univariate-outliers-from-visual-inspection" class="nav-link" data-scroll-target="#warnings-about-detecting-univariate-outliers-from-visual-inspection"><span class="header-section-number">20.5.4</span> Warnings about detecting univariate outliers from visual inspection</a></li>
+  </ul></li>
+  <li><a href="#multivariate-outliers" id="toc-multivariate-outliers" class="nav-link" data-scroll-target="#multivariate-outliers"><span class="header-section-number">20.6</span> Multivariate Outliers</a></li>
+  <li><a href="#mahalanobis-distance-identifying-multivariate-outliers" id="toc-mahalanobis-distance-identifying-multivariate-outliers" class="nav-link" data-scroll-target="#mahalanobis-distance-identifying-multivariate-outliers"><span class="header-section-number">20.7</span> Mahalanobis Distance: Identifying Multivariate Outliers</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../index.html">Course Overview</a></li><li class="breadcrumb-item"><a href="../chapters/int_course_intro.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/01_nature_of_data.html">Part II: From the Causal System to Data</a></li><li class="breadcrumb-item"><a href="../chapters/02_outliers.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Tool 1: Outliers</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></h1>
+<h1 class="title"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Tool 1: Outliers</span></h1>
 </div>
 
 
@@ -340,72 +411,235 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="welcome-to-quantitative-analysis-of-messy-field-data" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="welcome-to-quantitative-analysis-of-messy-field-data"><span class="header-section-number">2.1</span> Welcome to Quantitative Analysis of (Messy) Field Data!</h2>
-<p>Thanks for being the new cohort of Jackanapes this term! I could not be more pleased by the “large” size of the class. More people means more perspectives as we learn to reason our way from ecological questions to defensible inference.</p>
-<p>As ecologists, we rarely just want to describe nature. Just look at most published ecology papers! From the verbiage used by most ecologists (especially non-experimental ones), it is clear that the ultimate goal is to understand <em>why nature works the way it does</em>. Understanding <em>why</em> something happens requires more than fitting statistical models. We ecologists need to be explicit about what effect we want to learn, what we think causes what, and whether our data can actually identify that effect. On all three, we ecologists need to make drastic improvements. This is one focus of my lab, and this is the reason why I teach this course. We will begin with ecological hypotheses and estimand-aware predictions, use Structural Causal Models (SCMs) and DAGs to make our causal assumptions explicit, and only then turn to the statistical models that are most familiar in traditional ecological analyses. Along the way, we will see that many common approaches actually alter our original questions, sometimes without our knowledge.</p>
-<p>The course path looks something like this:</p>
-<p><img src="../graphics/workflow_diagram/basic_workflow.png" class="img-fluid"></p>
-<p>Along the way, we will question some familiar practices: how AIC cannot tell us which variables should be controlled, how coefficients in a multiple regression model are usually not comparable effect sizes, how traditional covariance-based Structural Causal Models upset natural causal structure of systems, and adding more (or removing) covariates without knowing their function in the data-generating system can sometimes increase rather than reduce bias.</p>
-<p>Of course, moving from an ecological idea to a scientifically defensible inference can be extremely daunting, especially when you have messy field data, imprecise measurements, uneven sampling, nonlinear relationships, and looming deadlines. A central goal of this course is to help you become more comfortable with this entire process while also learning from one another. Each of us (including me) approaches problems differently, and those differences allow us to make faster and more meaningful headway towards making sense of a very complex world.</p>
+<section id="tool-1-assessing-potential-outliers" class="level2" data-number="20.1">
+<h2 data-number="20.1" class="anchored" data-anchor-id="tool-1-assessing-potential-outliers"><span class="header-section-number">20.1</span> Tool #1: Assessing Potential Outliers</h2>
+<p>This section introduces the first core tool of the <em>ante hoc</em> Data Exploration Toolkit: assessing potential outliers. The goal is not to justify a data point’s immediate removal. Rather, it is designed to flag and understand why an observation is unusual (after the DAG is created and before decisions about model implementation are made). Throughout this section, we will treat outliers as sort of diagnostic signals rather than problems to be fixed, following a simple guiding principle:</p>
+<blockquote class="blockquote">
+<p><strong>Outlier rules guide scrutiny; they do not automatically justify removal.</strong></p>
+</blockquote>
 </section>
-<section id="course-objectives" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="course-objectives"><span class="header-section-number">2.2</span> Course Objectives</h2>
-<p>By the end of this course, you should be able to:</p>
-<ul>
-<li><strong>Convert ecological ideas into testable questions.</strong> Construct hypotheses logically and develop predictions that specify the effect (estimand) you actually want to estimate.</li>
-<li><strong>Represent causal assumptions explicitly.</strong> Use SCMs and DAGs to describe how you think an ecological system works and distinguish among confounders, mediators, colliders, and other variables.</li>
-<li><strong>Determine whether an effect is identifiable.</strong> Ask whether the causal effect you care about can actually be estimated from the data you have (and under what assumptions).</li>
-<li><strong>Build statistical models that match the question.</strong> Use GLMs, GLMMs, GAMs, GAMMs, and related approaches after determining the causal question and appropriate adjustment set (which also reduce minimal required sample sizes).</li>
-<li><strong>Recognize when common analytical approaches cause trouble.</strong> Understand why AIC-based variable selection, “controlling for everything,” and traditional, covariance-based Structural Equation Models (SEMs) can create biased results and do not alone tell us which causal effects we are estimating.</li>
-<li><strong>Deal with messy ecological data.</strong> Account for repeated observations, hierarchical structure, nonlinear relationships, imperfect detection, measurement error, and other complications of real field data.</li>
-<li><strong>Interpret effects rather than just model output.</strong> Explain what was estimated, the assumptions required, the uncertainty involved, and what the result actually means biologically.</li>
-<li><strong>Develop transparent and reproducible analyses.</strong> Make the reasoning that connects hypotheses, causal assumptions, statistical models, and biological conclusions explicit so that models are either well-supported or fail loudly.</li>
-</ul>
+<section id="what-is-an-outlier" class="level2" data-number="20.2">
+<h2 data-number="20.2" class="anchored" data-anchor-id="what-is-an-outlier"><span class="header-section-number">20.2</span> What is an outlier?</h2>
+<p>A commonly cited definition is:</p>
+<blockquote class="blockquote">
+<p><em>“…an outlier is an observation that lies outside the overall pattern of a distribution.”</em> (Moore &amp; McCabe, 1999)</p>
+</blockquote>
+<p>This definition is intentionally broad and inherently <strong>univariate</strong>. It tells us <em>where</em> an observation sits relative to others—but not <em>why</em> it is unusual, nor what should be done about it. Perhaps a more operational –but still fairly vague– definition is that of <a href="https://besjournals.onlinelibrary.wiley.com/doi/10.1111/j.2041-210X.2009.00001.x">Zuur et al.&nbsp;(2010)</a>:</p>
+<blockquote class="blockquote">
+<p><em>“…an observation that has a relatively large or small value compared to the majority of observations”</em></p>
+</blockquote>
+<p>It is very likely that we could argue the merits and weaknesses of this definition for the remainder of the term.</p>
 </section>
-<section id="topics-covered" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="topics-covered">Topics covered</h2>
-<p>The course covers the following topics, roughly in the following order:</p>
-<ul>
-<li><strong>Hypotheses and predictions:</strong> logical formulation and estimand-aware predictions</li>
-<li><strong>Structural Causal Models and DAGs:</strong> causal assumptions and pathways</li>
-<li><strong>Causal identification:</strong> confounding, adjustment, and identifiable effects</li>
-<li><strong>Metrology:</strong> measurands, measurement error, uncertainty, and data quality</li>
-<li><strong>Exploratory data analysis:</strong> purposeful exploration of messy data</li>
-<li><strong>Generalized Linear Models (GLMs):</strong> linear relationships and estimation of focal effects</li>
-<li><strong>Hierarchical data and GLMMs:</strong> dependence, random effects, and effective sample size</li>
-<li><strong>GAMs and GAMMs:</strong> nonlinear ecological relationships</li>
-<li><strong>Spatial and temporal structure:</strong> heterogeneity and dependence</li>
-<li><strong>Model evaluation:</strong> diagnostics, validation, prediction, and appropriate use of AIC</li>
-<li><strong>Inference:</strong> effect sizes, uncertainty, and interpretation</li>
-<li><strong>Communication:</strong> figures, tables, and defensible Results sections</li>
-</ul>
-<p>Given this ambitious scope (and depending on the course pacing), we may only scratch the surface of some topics. Even our cursory treatment is aimed at convincing you why these subjects matter for scientists who have messy data.</p>
-</section>
-<section id="what-is-new-this-term-fall-2026" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="what-is-new-this-term-fall-2026"><span class="header-section-number">2.3</span> What is new this term (Fall 2026)?</h2>
-<p>This course generally contains the same material as in Spring 2026 when the new “causal” version of this course was inaugurated. Of particular importance to you are the following course components:</p>
-<ul>
-<li><strong>Using large-language models (LLMs) –via ChatGPT– to improve analytical workflows.</strong> This term, I have changed the way that ChatGPT is integrated into the course. as a way to support the <em>process</em> of analysis rather than to automate the analysis itself. Many of the hardest parts of quantitative work happen outside of writing code: figuring out why R code isn’t behaving as expected, checking whether an interpretation actually follows from a model, troubleshooting an obscure error message, or getting feedback on how tp clearly document a decision. Used carefully, ChatGPT can act like a sounding board for troubleshooting, sanity-checking, and refining explanations without taking over your critical thinking. Throughout the course, I have deliberately constrained ChatGPT’s role and scope and have tailored its guardrails to match the course progression. In other words, ChatGPT is used to help improve analytical workflow and decision-making, not to generate results or write code on a student’s behalf. We will work together to assess the utility of this tool as the term advances.</li>
-</ul>
 <div class="columns">
-<div class="column" style="width:80%;">
+<div class="column" style="width:50%;">
+<section id="what-causes-outliers" class="level2" data-number="20.3">
+<h2 data-number="20.3" class="anchored" data-anchor-id="what-causes-outliers"><span class="header-section-number">20.3</span> What causes outliers?</h2>
+<p>Outliers arise for many reasons (any number of data-generating processes), including, but not limited to:</p>
 <ul>
-<li><strong>Using large-language models (LLMs) to streamline learning and teaching at scale.</strong> What does this mean? Very simply, it means that I customize an AI agent to do some of the busy work for me (e.g.&nbsp;checking code consistency, making sure there all assignment components are present, etc.). Therefore, I have worked hard to leverage my freelance work as an LLM-consultant and tester for two AI companies to carefully explicitly integrate chatGPT’s LLMs into my teaching/grading workflow. This means that you will use a custom GPT that I created specifically for ZOO/ECOL-5500 called <a href="https://chatgpt.com/g/g-696966777a948191858541cd7986057e-jackalopegpt" target="_blank">JackalopeGPT</a> (using ChatGPT) to run checks on your work prior to submission; this will solve some of the “tuning” issues (with codes, grammar, clarity, etc.) that I have seen in student submissions in previous years and allow me to focus on more substantial feedback.</li>
+<li>extreme relative to a statistical distribution</li>
+<li>measurement error</li>
+<li>error during data entry</li>
+<li>extremely rare but biologically plausible (so called <em>Black Swan</em> events)</li>
 </ul>
-</div><div class="column" style="width:20%;">
-<p><img src="../graphics/GPT_logo/jackalopeGPT_logo.png" class="img-fluid"></p>
+<p>Importantly, an observation being unusual relative to the rest of the dataset does not tell us which of these explanations is correct. That requires returning to the measurement process, metadata, and scientific context.</p>
+</section>
+</div><div class="column" style="width:50%;">
+<p><img src="../graphics/jackalope_graphics/black_jackalope.png" class="img-fluid"></p>
 </div>
 </div>
+<section id="types-of-outliers" class="level2" data-number="20.4">
+<h2 data-number="20.4" class="anchored" data-anchor-id="types-of-outliers"><span class="header-section-number">20.4</span> Types of outliers</h2>
+<p>A useful first distinction to make in our discussion of outlier detection is whether an observation is unusual:</p>
 <ul>
-<li><strong>Jackalopes!</strong> This course continues its work to correct a long-standing perspective that (1) jackalopes had deer-like antlers (Fig. 1), and (2) there was only a single species of jackalopes (Fig. 2). We will use many jackalope species in the newly discovered cryptid ecosystem for course exercises and examples.</li>
+<li><strong>In a single variable</strong> (univariate outlier), or<br>
+</li>
+<li><strong>Only when variables are considered jointly</strong> (multivariate outlier)</li>
 </ul>
+<p>These are conceptually different problems and require different tools.</p>
+</section>
+<section id="univariate-outliers" class="level2" data-number="20.5">
+<h2 data-number="20.5" class="anchored" data-anchor-id="univariate-outliers"><span class="header-section-number">20.5</span> Univariate Outliers</h2>
+<p>Univariate outliers occur along a single dimension (i.e.&nbsp;in a single variable). For example, a body size measurement that is much larger than most others. Such univariate outliers should <em>never</em> be removed automatically. Their role in <em>ante hoc</em> exploration is to <strong>flag observations that deserve closer inspection</strong>. So, how can we identify univariate outliers? Univariate outliers can be flagged using two approaches:</p>
+<ul>
+<li><strong>Statistical rules:</strong> rules depend on assumptions and sample size<br>
+</li>
+<li><strong>Expert judgment:</strong> assessment that relies on domain knowledge</li>
+</ul>
+<p>Both approaches have advantages and limitations. Statistical rules can be fragile with small samples, while expert judgment can be applied inconsistently over time and across contexts.</p>
+<section id="graphical-approaches-to-univariate-outliers" class="level3" data-number="20.5.1">
+<h3 data-number="20.5.1" class="anchored" data-anchor-id="graphical-approaches-to-univariate-outliers"><span class="header-section-number">20.5.1</span> Graphical approaches to univariate outliers</h3>
+<p>Before modeling, graphical inspection provides an extremely valuable first pass at outlier detection. All of these methods are <strong>subjective</strong> but effective for identifying values that warrant extra scrutiny. Because these myriad approaches essentially allow you to see the same dimensions in your dataset from slightly different perspective, we do not go all of the graphing types. Here are a few useful graphing types for your reference:</p>
+<ul>
+<li><a href="https://r-charts.com/distribution/cleveland-dot-plot/">Cleveland dot plot</a></li>
+<li><a href="https://rpubs.com/pg2000in/StripCharts">Strip plot</a></li>
+<li><a href="https://r-graph-gallery.com/density-plot.html">Generalized density plot</a></li>
+<li><a href="https://r-graph-gallery.com/heatmap">Heat map</a></li>
+<li><a href="https://r-graph-gallery.com/"><em>a myriad others</em></a></li>
+</ul>
+</section>
+<section id="tukey-box-plots" class="level3" data-number="20.5.2">
+<h3 data-number="20.5.2" class="anchored" data-anchor-id="tukey-box-plots"><span class="header-section-number">20.5.2</span> Tukey Box Plots</h3>
+<p>Tukey-style box plots are based on <strong>quantiles</strong>, not distributional assumptions. Traditional Tukey-style boxplots, which you will find in several R packages, have several core features:</p>
+<ul>
+<li>The interquartile range (IQR), or the difference between the 75% precentile (Q<sub>3</sub>) and the 25% percentile (Q<sub>1</sub>):</li>
+</ul>
+<p><span class="math display">\[
+\text{IQR} = Q_3 - Q_1
+\]</span></p>
+<ul>
+<li>Whiskers extending to <span class="math inline">\(1.5 \times \text{IQR}\)</span></li>
+<li>Points beyond this threshold flagged as outliers<br>
+</li>
+<li>Points beyond <span class="math inline">\(3 \times \text{IQR}\)</span> sometimes flagged as <em>extreme</em> outliers</li>
+</ul>
+<p>These cutoffs are <strong>conventional and not inferential</strong>. They provide a rule of thumb; they <strong><em>do not</em></strong> provide a statistical test. (You should see a theme: use outlier tests to flag values for extra scrutiny.)</p>
+<div class="callout callout-style-default callout-note no-icon callout-empty-content callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Tukey-style boxplots and non-normal data: do not worry! Tukey-style boxplot whiskers are nonparametric; that is, they rely on quantiles (IQR), which are <em>order statistics</em>, and not distributional assumptions. Because outlier flagging at the lower bound is based on ranks, departures from normality are acceptable.
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+</div>
+</section>
+<div class="columns">
+<div class="column" style="width:40%;">
+<section id="conditional-boxplots" class="level3" data-number="20.5.3">
+<h3 data-number="20.5.3" class="anchored" data-anchor-id="conditional-boxplots"><span class="header-section-number">20.5.3</span> Conditional Boxplots</h3>
+<p>Conditional boxplots extend the univariate, Tukey-style boxplot by stratifying the data by a grouping factor (e.g., site, treatment, time). These plots are especially useful for identifying where flagged values originate and whether unusual values are specific to meaningful sampling or measurement contexts. At first, the simplicity of these plots may give the impression that they are not useful, but you will quickly find that piecing together many of these visualizations can help uncover subtle issues with your data.</p>
+<p>The groups examined here should be motivated by the study design, measurement process, and causal system already represented in your SCM—not selected simply because exploratory plots reveal an interesting pattern.</p>
+</section>
+</div><div class="column" style="width:60%;">
+<div class="cell">
+<div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../graphics/jackalope_graphics/correct_jackalope.png" class="img-fluid figure-img"></p>
-<figcaption>Figure 1. Illustrations of the correct and incorrect ornament morphology of jackalopes.</figcaption>
+<p><img src="02_outliers_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Conditional boxplot allowing the user to visualize potential extreme values within specific groups.</figcaption>
 </figure>
 </div>
+</div>
+</div>
+</div>
+</div>
+<section id="warnings-about-detecting-univariate-outliers-from-visual-inspection" class="level3" data-number="20.5.4">
+<h3 data-number="20.5.4" class="anchored" data-anchor-id="warnings-about-detecting-univariate-outliers-from-visual-inspection"><span class="header-section-number">20.5.4</span> Warnings about detecting univariate outliers from visual inspection</h3>
+<p>Rules of outlier detection must be interpreted very cautiously, especially if univariate datesets exhibit <strong>small sample sizes</strong> or <strong>skewed (i.e.&nbsp;non-normal) distributions</strong>. For example, data drawn from a Gamma distribution—bounded at zero and right-skewed—may naturally produce values flagged by Tukey’s rule even when no anomaly is present.</p>
+<p>Univariate screening should therefore be viewed as a <strong>question-generating step</strong>, not an answer-generating one.</p>
+<hr>
+</section>
+</section>
+<section id="multivariate-outliers" class="level2" data-number="20.6">
+<h2 data-number="20.6" class="anchored" data-anchor-id="multivariate-outliers"><span class="header-section-number">20.6</span> Multivariate Outliers</h2>
+<p>Multivariate outliers occur when an observation is unusual <strong>in combination across variables</strong>, even if it appears unremarkable in any single variable. These are common in real datasets and can be more difficult to recognize than univariate outliers. Because they depend on covariance structure (how one variable relates to another), multivariate outliers are invisible to univariate screening methods.</p>
+<p>Consider this example:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_outliers_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_outliers_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>The Tukey-style boxplot did not flag outliers in either of the univariate dimensions. But, given the bivariate scatterplot at right, there is clearly a single value that seems to fall outside of the joint data distribution. This is why we need additional tools to help us flag potentially problematic values when dealing with multivariate data (which is probably the norm).</p>
+</section>
+<section id="mahalanobis-distance-identifying-multivariate-outliers" class="level2" data-number="20.7">
+<h2 data-number="20.7" class="anchored" data-anchor-id="mahalanobis-distance-identifying-multivariate-outliers"><span class="header-section-number">20.7</span> Mahalanobis Distance: Identifying Multivariate Outliers</h2>
+<p>Most ecological and biological datasets are inherently multivariate. A point may fall near the center of each marginal distribution yet be extreme in joint space. One tool that we can use is Mahalanobis Distance, which can be useful for flagging multivariate outliers because it accounts for covariance among variables. Conceptually, it measures distance from the multivariate centroid. As with any exploratory tool, the variables included in this calculation should have a scientific or measurement-based rationale; the covariance structure itself does not tell us which variables share a causal role or belong in an adjustment set. Use this approach wisely.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>What the Mahalanobis distance means (plain language)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The Mahalanobis distance tells us <strong>how unusual a data point is when we consider several variables together</strong>.</p>
+<p><span class="math display">\[
+D^2 = (x - \mu)^T \Sigma^{-1} (x - \mu)
+\]</span></p>
+<p>Think of it this way:</p>
+<ul>
+<li><span class="math inline">\(x\)</span> = the values for one observation (e.g., oxygen and temperature at one site)<br>
+</li>
+<li><span class="math inline">\(\mu\)</span> = the average values across all observations<br>
+</li>
+<li><span class="math inline">\((x - \mu)\)</span> = how far that observation is from the “typical” point<br>
+</li>
+<li><span class="math inline">\(\Sigma^{-1}\)</span> = a correction that accounts for different units <em>and</em> correlations between variables<br>
+</li>
+<li><span class="math inline">\(D^2\)</span> = a single number summarizing how extreme the observation is <em>given the relationships in the data</em></li>
+</ul>
+<p>A point can look reasonable on its own but still have a large Mahalanobis distance if it <strong>breaks the usual relationship between variables</strong>.</p>
+<p>That’s why Mahalanobis distance is useful for finding <strong>multivariate (conditional) outliers</strong>, not just extreme values.</p>
+</div>
+</div>
+<p>In practice, this can be implemented using existing R packages (e.g., <code>stats::mahalanobis</code>). For the dataset plotted above, the code here correctly flags the odd data point (complete, reproducible example):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">120</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>xy <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">runif</span>(n, <span class="at">min =</span> <span class="fl">5.5</span>, <span class="at">max =</span> <span class="fl">8.5</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="dv">14</span> <span class="sc">*</span> x <span class="sc">-</span> <span class="dv">20</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="fu">n</span>(), <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">x =</span> <span class="fl">7.0</span>, <span class="at">y =</span> <span class="fl">95.0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">is_conditional_outlier =</span> <span class="fu">row_number</span>() <span class="sc">==</span> <span class="fu">n</span>())</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Mahalanobis distance (stats::mahalanobis) ---</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(xy <span class="sc">%&gt;%</span> <span class="fu">select</span>(x, y))</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>md <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">mahalanobis</span>(X, <span class="at">center =</span> <span class="fu">colMeans</span>(X), <span class="at">cov =</span> stats<span class="sc">::</span><span class="fu">cov</span>(X))</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Cutoff: chi-square quantile with df = 2 (x and y)</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>cut <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">qchisq</span>(<span class="fl">0.975</span>, <span class="at">df =</span> <span class="dv">2</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>xy <span class="ot">&lt;-</span> xy <span class="sc">%&gt;%</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">md =</span> md,</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">md_outlier =</span> md <span class="sc">&gt;</span> cut</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Which rows are flagged?</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>xy <span class="sc">%&gt;%</span> <span class="fu">filter</span>(md_outlier) <span class="sc">%&gt;%</span> <span class="fu">select</span>(x, y, md, md_outlier, is_conditional_outlier)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 5
+      x     y    md md_outlier is_conditional_outlier
+  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;      &lt;lgl&gt;                 
+1     7    95  86.9 TRUE       TRUE                  </code></pre>
+</div>
+</div>
+<p>As with univariate methods, flagged points should prompt investigation; they should not dictate automatic exclusion. A flagged observation should send you back to the metadata, measurement process, sampling context, or even back to the variables in your DAG. The goal is to understand why the observation is unusual within the context of your system’s data-generating processes and what that implies for estimation. The goal is <em>not</em> to improve the appearance or statistical behavior of the dataset (despite what many researchers will claim).</p>
+<hr>
+<p>In the next section, we will apply the <em>ante hoc</em> Data Exploration Toolkit to a real dataset. This example will showcase outlier detection but will also demonstrate how to apply some of the other tools in this Toolkit. Throughout, remember that these exploratory tools help us understand the measurements and statistical structure of the available data; they do not redefine the causal question, estimand, or identification strategy established by the SCM.</p>
 
 
 </section>
@@ -813,13 +1047,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../index.html" class="pagination-link" aria-label="Information">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Information</span></span>
+      <a href="../chapters/02_data_exploration_toolkit.html" class="pagination-link" aria-label="Data Exploration Toolkit">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Exploration Toolkit</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/int_syllabus.html" class="pagination-link" aria-label="Syllabus">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Syllabus</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/02_tutorial_data_exploration.html" class="pagination-link" aria-label="Tutorial: Data Exploration">
+        <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Tutorial: Data Exploration</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

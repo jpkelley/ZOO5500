@@ -45,12 +45,11 @@ book:
         - chapters/01_reproducible_workflow_intro.qmd
         - chapters/01_metadata_low_friction.qmd
         - chapters/01_naming_conventions.qmd
-        #- chapters/02_data_exploration_intro.qmd
-        #- chapters/02_data_exploration_toolkit.qmd
-        #- chapters/02_outliers.qmd
-        #- chapters/02_tutorial_data_exploration.qmd
-        #- chapters/01_sem_vs_scm.qmd                    # NEW
-        
+        - chapters/02_data_exploration_intro.qmd
+        - chapters/02_data_exploration_toolkit.qmd
+        - chapters/02_outliers.qmd
+        - chapters/02_tutorial_data_exploration.qmd
+    
     - part: "Part III: Models as Estimators"
       #chapters: 
         #- chapters/03_intro_modeling.qmd

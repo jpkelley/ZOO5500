@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2&nbsp; Introduction – Quantitative Analysis of (Messy) Field Data</title>
+<title>18&nbsp; Data Exploration – Quantitative Analysis of (Messy) Field Data</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -33,8 +33,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/int_syllabus.html" rel="next">
-<link href="../index.html" rel="prev">
+<link href="../chapters/02_data_exploration_toolkit.html" rel="next">
+<link href="../chapters/01_naming_conventions.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -86,7 +86,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../index.html">Course Overview</a></li><li class="breadcrumb-item"><a href="../chapters/int_course_intro.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/01_nature_of_data.html">Part II: From the Causal System to Data</a></li><li class="breadcrumb-item"><a href="../chapters/02_data_exploration_intro.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Data Exploration</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -117,13 +117,13 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Course Overview</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
@@ -132,7 +132,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/int_course_intro.html" class="sidebar-item-text sidebar-link active">
+  <a href="../chapters/int_course_intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
@@ -228,13 +228,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
  <span class="menu-text">Part II: From the Causal System to Data</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/01_nature_of_data.html" class="sidebar-item-text sidebar-link">
@@ -261,7 +261,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/02_data_exploration_intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/02_data_exploration_intro.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Data Exploration</span></span></a>
   </div>
 </li>
@@ -311,19 +311,20 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#welcome-to-quantitative-analysis-of-messy-field-data" id="toc-welcome-to-quantitative-analysis-of-messy-field-data" class="nav-link active" data-scroll-target="#welcome-to-quantitative-analysis-of-messy-field-data"><span class="header-section-number">2.1</span> Welcome to Quantitative Analysis of (Messy) Field Data!</a></li>
-  <li><a href="#course-objectives" id="toc-course-objectives" class="nav-link" data-scroll-target="#course-objectives"><span class="header-section-number">2.2</span> Course Objectives</a></li>
-  <li><a href="#topics-covered" id="toc-topics-covered" class="nav-link" data-scroll-target="#topics-covered">Topics covered</a></li>
-  <li><a href="#what-is-new-this-term-fall-2026" id="toc-what-is-new-this-term-fall-2026" class="nav-link" data-scroll-target="#what-is-new-this-term-fall-2026"><span class="header-section-number">2.3</span> What is new this term (Fall 2026)?</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">18.1</span> Introduction</a></li>
+  <li><a href="#goals-for-this-section-week-4" id="toc-goals-for-this-section-week-4" class="nav-link" data-scroll-target="#goals-for-this-section-week-4"><span class="header-section-number">18.2</span> Goals for this section (Week 4)</a></li>
+  <li><a href="#relevant-readings-related-to-data-exploration" id="toc-relevant-readings-related-to-data-exploration" class="nav-link" data-scroll-target="#relevant-readings-related-to-data-exploration"><span class="header-section-number">18.3</span> Relevant readings related to data exploration</a></li>
+  <li><a href="#core-benefits-of-data-exploration" id="toc-core-benefits-of-data-exploration" class="nav-link" data-scroll-target="#core-benefits-of-data-exploration"><span class="header-section-number">18.4</span> Core Benefits of Data Exploration</a></li>
+  <li><a href="#summary-what-data-exploration-is-and-is-not" id="toc-summary-what-data-exploration-is-and-is-not" class="nav-link" data-scroll-target="#summary-what-data-exploration-is-and-is-not"><span class="header-section-number">18.5</span> Summary: What data exploration is and is not</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../index.html">Course Overview</a></li><li class="breadcrumb-item"><a href="../chapters/int_course_intro.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/01_nature_of_data.html">Part II: From the Causal System to Data</a></li><li class="breadcrumb-item"><a href="../chapters/02_data_exploration_intro.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Data Exploration</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></h1>
+<h1 class="title"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Data Exploration</span></h1>
 </div>
 
 
@@ -340,72 +341,185 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="welcome-to-quantitative-analysis-of-messy-field-data" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="welcome-to-quantitative-analysis-of-messy-field-data"><span class="header-section-number">2.1</span> Welcome to Quantitative Analysis of (Messy) Field Data!</h2>
-<p>Thanks for being the new cohort of Jackanapes this term! I could not be more pleased by the “large” size of the class. More people means more perspectives as we learn to reason our way from ecological questions to defensible inference.</p>
-<p>As ecologists, we rarely just want to describe nature. Just look at most published ecology papers! From the verbiage used by most ecologists (especially non-experimental ones), it is clear that the ultimate goal is to understand <em>why nature works the way it does</em>. Understanding <em>why</em> something happens requires more than fitting statistical models. We ecologists need to be explicit about what effect we want to learn, what we think causes what, and whether our data can actually identify that effect. On all three, we ecologists need to make drastic improvements. This is one focus of my lab, and this is the reason why I teach this course. We will begin with ecological hypotheses and estimand-aware predictions, use Structural Causal Models (SCMs) and DAGs to make our causal assumptions explicit, and only then turn to the statistical models that are most familiar in traditional ecological analyses. Along the way, we will see that many common approaches actually alter our original questions, sometimes without our knowledge.</p>
-<p>The course path looks something like this:</p>
-<p><img src="../graphics/workflow_diagram/basic_workflow.png" class="img-fluid"></p>
-<p>Along the way, we will question some familiar practices: how AIC cannot tell us which variables should be controlled, how coefficients in a multiple regression model are usually not comparable effect sizes, how traditional covariance-based Structural Causal Models upset natural causal structure of systems, and adding more (or removing) covariates without knowing their function in the data-generating system can sometimes increase rather than reduce bias.</p>
-<p>Of course, moving from an ecological idea to a scientifically defensible inference can be extremely daunting, especially when you have messy field data, imprecise measurements, uneven sampling, nonlinear relationships, and looming deadlines. A central goal of this course is to help you become more comfortable with this entire process while also learning from one another. Each of us (including me) approaches problems differently, and those differences allow us to make faster and more meaningful headway towards making sense of a very complex world.</p>
+<section id="introduction" class="level2" data-number="18.1">
+<h2 data-number="18.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">18.1</span> Introduction</h2>
+<p>Consider the following scenario. Being an expert in jackalope analytics, you are asked (by some really awesome colleagues) to analyze a dataset that you have never seen. You meet with your colleagues; they describe the data, their goals, and their timeline; you send a few appropriate follow-up questions. They answer. All seems good. You jump right into analysis. Two weeks (!) into a complex workflow, you discover two small details they “forgot” to mention: (1) half the data are questionable because, unbeknowst to them, a jackalope infiltrated the field crew and collected data for a month, and (2) several samples were contaminated with jackalope saliva.</p>
+<p>Because you skipped the critical data exploration step, you just injected a suite of bad assumptions into everything downstream. The lesson is oddly simple: take your time and be systematic in data exploration. In this course, the goal is not to rush into running statistical models or jump to drawing strong inference, but rather to catch problems early – before they derail your modeling. Even if you collected the data yourself and feel like you know them inside and out, do not assume that you can or should bypass this critical step. Data Demons have great timing and even greater motivation to see you fail, especially near the end of a project or a degree.</p>
+<p>This week, we purposefully slow the workflow down and practice exploring datasets so that problems like these show up early –long before they shape your model decisions or waste weeks of work. In the next pages, we will walk through core data exploration steps that should always come <em>before</em> formal modeling.</p>
+<blockquote class="blockquote">
+<p><strong>In simple terms, what is data exploration?</strong> Data exploration is where you learn what your data <em>can</em> say — before you ask them (<em>not</em> tell them) to say it. Most importantly, exploration does not determine your causal question; it helps determine whether the measurements you have in your dataset can support the analysis required to answer it!</p>
+</blockquote>
 </section>
-<section id="course-objectives" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="course-objectives"><span class="header-section-number">2.2</span> Course Objectives</h2>
-<p>By the end of this course, you should be able to:</p>
+<section id="goals-for-this-section-week-4" class="level2" data-number="18.2">
+<h2 data-number="18.2" class="anchored" data-anchor-id="goals-for-this-section-week-4"><span class="header-section-number">18.2</span> Goals for this section (Week 4)</h2>
+<p>By the end of this week, you should be able to:</p>
 <ul>
-<li><strong>Convert ecological ideas into testable questions.</strong> Construct hypotheses logically and develop predictions that specify the effect (estimand) you actually want to estimate.</li>
-<li><strong>Represent causal assumptions explicitly.</strong> Use SCMs and DAGs to describe how you think an ecological system works and distinguish among confounders, mediators, colliders, and other variables.</li>
-<li><strong>Determine whether an effect is identifiable.</strong> Ask whether the causal effect you care about can actually be estimated from the data you have (and under what assumptions).</li>
-<li><strong>Build statistical models that match the question.</strong> Use GLMs, GLMMs, GAMs, GAMMs, and related approaches after determining the causal question and appropriate adjustment set (which also reduce minimal required sample sizes).</li>
-<li><strong>Recognize when common analytical approaches cause trouble.</strong> Understand why AIC-based variable selection, “controlling for everything,” and traditional, covariance-based Structural Equation Models (SEMs) can create biased results and do not alone tell us which causal effects we are estimating.</li>
-<li><strong>Deal with messy ecological data.</strong> Account for repeated observations, hierarchical structure, nonlinear relationships, imperfect detection, measurement error, and other complications of real field data.</li>
-<li><strong>Interpret effects rather than just model output.</strong> Explain what was estimated, the assumptions required, the uncertainty involved, and what the result actually means biologically.</li>
-<li><strong>Develop transparent and reproducible analyses.</strong> Make the reasoning that connects hypotheses, causal assumptions, statistical models, and biological conclusions explicit so that models are either well-supported or fail loudly.</li>
+<li>Further distinguish causal decisions established by the SCM from statistical decisions that can be informed by data exploration</li>
+<li>Evaluate whether measured variables adequately represent quantities in your DAG</li>
+<li>Examine data structure, missingness, distributions, dependence, and potential measurement problems</li>
+<li>Identify and investigate unusual observations without automatically treating them as errors</li>
+<li>Explain how targeted EDA can inform estimator implementation (models) without turning it into a blind and uninformed search for interesting effects</li>
 </ul>
 </section>
-<section id="topics-covered" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="topics-covered">Topics covered</h2>
-<p>The course covers the following topics, roughly in the following order:</p>
+<section id="relevant-readings-related-to-data-exploration" class="level2" data-number="18.3">
+<h2 data-number="18.3" class="anchored" data-anchor-id="relevant-readings-related-to-data-exploration"><span class="header-section-number">18.3</span> Relevant readings related to data exploration</h2>
+<p><em>These are not required readings. These are simply some useful references for you.</em></p>
 <ul>
-<li><strong>Hypotheses and predictions:</strong> logical formulation and estimand-aware predictions</li>
-<li><strong>Structural Causal Models and DAGs:</strong> causal assumptions and pathways</li>
-<li><strong>Causal identification:</strong> confounding, adjustment, and identifiable effects</li>
-<li><strong>Metrology:</strong> measurands, measurement error, uncertainty, and data quality</li>
-<li><strong>Exploratory data analysis:</strong> purposeful exploration of messy data</li>
-<li><strong>Generalized Linear Models (GLMs):</strong> linear relationships and estimation of focal effects</li>
-<li><strong>Hierarchical data and GLMMs:</strong> dependence, random effects, and effective sample size</li>
-<li><strong>GAMs and GAMMs:</strong> nonlinear ecological relationships</li>
-<li><strong>Spatial and temporal structure:</strong> heterogeneity and dependence</li>
-<li><strong>Model evaluation:</strong> diagnostics, validation, prediction, and appropriate use of AIC</li>
-<li><strong>Inference:</strong> effect sizes, uncertainty, and interpretation</li>
-<li><strong>Communication:</strong> figures, tables, and defensible Results sections</li>
+<li><a href="https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/j.2041-210X.2010.00021.x"><strong>O’Hara &amp; Kotze (2010)</strong></a> on why you should not log transform count data.</li>
+<li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11444780/"><strong>Beltran &amp; Tarwater (2024)</strong></a> on why you should not categorize some data.</li>
+<li><a href="https://besjournals.onlinelibrary.wiley.com/doi/10.1111/j.2041-210X.2009.00001.x"><strong>Zuur et al.&nbsp;(2010)</strong></a> on some of the primary approaches for data exploration. Be very careful using all of these approaches, as some are quite dated, and methods such as factor reduction can be inappropriate when they obscure the meaning or causal roles of measured variables.</li>
 </ul>
-<p>Given this ambitious scope (and depending on the course pacing), we may only scratch the surface of some topics. Even our cursory treatment is aimed at convincing you why these subjects matter for scientists who have messy data.</p>
 </section>
-<section id="what-is-new-this-term-fall-2026" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="what-is-new-this-term-fall-2026"><span class="header-section-number">2.3</span> What is new this term (Fall 2026)?</h2>
-<p>This course generally contains the same material as in Spring 2026 when the new “causal” version of this course was inaugurated. Of particular importance to you are the following course components:</p>
+<section id="core-benefits-of-data-exploration" class="level2" data-number="18.4">
+<h2 data-number="18.4" class="anchored" data-anchor-id="core-benefits-of-data-exploration"><span class="header-section-number">18.4</span> Core Benefits of Data Exploration</h2>
+<p>Let us delve into the core advantages of a formal data exploration phase. Data exploration determines whether your data, assumptions, and planned analysis are scientifically defensible. Each section below represents a distinct utility of the exploration phase.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span><strong>Reality-checking your mental model</strong>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Data exploration is where your expectations collide with the data you actually collected.</p>
+<p>At this stage, you evaluate whether:</p>
 <ul>
-<li><strong>Using large-language models (LLMs) –via ChatGPT– to improve analytical workflows.</strong> This term, I have changed the way that ChatGPT is integrated into the course. as a way to support the <em>process</em> of analysis rather than to automate the analysis itself. Many of the hardest parts of quantitative work happen outside of writing code: figuring out why R code isn’t behaving as expected, checking whether an interpretation actually follows from a model, troubleshooting an obscure error message, or getting feedback on how tp clearly document a decision. Used carefully, ChatGPT can act like a sounding board for troubleshooting, sanity-checking, and refining explanations without taking over your critical thinking. Throughout the course, I have deliberately constrained ChatGPT’s role and scope and have tailored its guardrails to match the course progression. In other words, ChatGPT is used to help improve analytical workflow and decision-making, not to generate results or write code on a student’s behalf. We will work together to assess the utility of this tool as the term advances.</li>
+<li>The data look the way you expected them to</li>
+<li>Variables behave in ways consistent with how they were measured</li>
+<li>Any patterns or anomalies that contradict your initial assumptions</li>
 </ul>
-<div class="columns">
-<div class="column" style="width:80%;">
-<ul>
-<li><strong>Using large-language models (LLMs) to streamline learning and teaching at scale.</strong> What does this mean? Very simply, it means that I customize an AI agent to do some of the busy work for me (e.g.&nbsp;checking code consistency, making sure there all assignment components are present, etc.). Therefore, I have worked hard to leverage my freelance work as an LLM-consultant and tester for two AI companies to carefully explicitly integrate chatGPT’s LLMs into my teaching/grading workflow. This means that you will use a custom GPT that I created specifically for ZOO/ECOL-5500 called <a href="https://chatgpt.com/g/g-696966777a948191858541cd7986057e-jackalopegpt" target="_blank">JackalopeGPT</a> (using ChatGPT) to run checks on your work prior to submission; this will solve some of the “tuning” issues (with codes, grammar, clarity, etc.) that I have seen in student submissions in previous years and allow me to focus on more substantial feedback.</li>
-</ul>
-</div><div class="column" style="width:20%;">
-<p><img src="../graphics/GPT_logo/jackalopeGPT_logo.png" class="img-fluid"></p>
+<p>This is where naïve assumptions die early –before they become permanent within your chosen modeling framework.</p>
 </div>
 </div>
-<ul>
-<li><strong>Jackalopes!</strong> This course continues its work to correct a long-standing perspective that (1) jackalopes had deer-like antlers (Fig. 1), and (2) there was only a single species of jackalopes (Fig. 2). We will use many jackalope species in the newly discovered cryptid ecosystem for course exercises and examples.</li>
-</ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../graphics/jackalope_graphics/correct_jackalope.png" class="img-fluid figure-img"></p>
-<figcaption>Figure 1. Illustrations of the correct and incorrect ornament morphology of jackalopes.</figcaption>
-</figure>
 </div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span><strong>Auditing measurement quality (not “finding patterns”)</strong>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Exploration is a measurement audit. It is <em>not</em> a fishing expedition to find interesting aspects of your data. Data exploration (<em>ante hoc</em>) lets you assess whether the numbers themselves are credible by asking three questions:</p>
+<ul>
+<li>Are there signs of systematic bias (e.g.&nbsp;floor/ceiling effects, truncation, observer effects)?</li>
+<li>How much noise or variability is present (e.g.&nbsp;precision, repeatability)?</li>
+<li>Do any values indicate measurement failure/error rather than biological data-generating processes?</li>
+</ul>
+<p>The central question at this stage is simple: <strong>Do these numbers deserve to be modeled?</strong></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span><strong>Connecting the SCM to the data you actually measured</strong>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Your DAG contains conceptual variables (though you did measure these); it is your dataset that contains the actual measurements. As we have discussed, those are not necessarily the same thing.</p>
+<p>Data exploration is where metadata becomes operational. This is where you might ask:</p>
+<ul>
+<li>What does one row of the dataset actually represent?</li>
+<li>What quantity does each measured variable actually represent?</li>
+<li>How well does each measurement correspond to the variable represented in the DAG?</li>
+<li>Does the nested structure of the data (discussed in more detail later) match what you thought was sampled?</li>
+<li>Do temporal and spatial units align with the estimand?</li>
+<li>Are important DAG variables missing or represented only by proxies?</li>
+</ul>
+<p>In summary, exploration can expose any mismatches between the causal system you want to study (as encoded in your DAG) and the measurements you actually have in your dataset. That mismatch does not change the DAG; it changes what you can estimate from the available data.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span><strong>Informing how you implement your estimator</strong>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Data exploration can inform <em>how</em> you estimate your target effect, but it should not redefine the causal question or identification strategy established by your DAG.</p>
+<p>Exploration can help you determine:</p>
+<ul>
+<li>Whether the observed outcome is compatible with a proposed error distribution</li>
+<li>Whether dependence, clustering, or repeated measurements must be represented</li>
+<li>Whether important relationships appear unlikely to be adequately represented as linear</li>
+<li>Whether sparsity, limited support, or missingness creates problems for estimation</li>
+<li>Whether scaling, transformation, or other numerical choices are useful</li>
+</ul>
+<p>These are decisions about <strong>estimation</strong>, not causal identification. Whether a variable should be adjusted for because it is a confounder, mediator, or collider comes from the causal model; it does not arise from the patterns that you discover during EDA.</p>
+<p>In summary, data exploration helps you determine whether (and how) your estimand can be estimated with the data you actually have.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span><strong>Building scientific humility</strong>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>In this course, data exploration is where you learn a few hard but important lessons:</p>
+<ul>
+<li>Data are not perfect reflections of reality; they are messy results of how measurements were made</li>
+<li>Feeling confident that you know your data does not mean you are right</li>
+<li>Running models without exploring your data first amounts to guesswork.</li>
+</ul>
+<p>Data exploration is best understood as <strong>friendly peer review before you waste two weeks of your life</strong>.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="summary-what-data-exploration-is-and-is-not" class="level2" data-number="18.5">
+<h2 data-number="18.5" class="anchored" data-anchor-id="summary-what-data-exploration-is-and-is-not"><span class="header-section-number">18.5</span> Summary: What data exploration is and is not</h2>
+<p><strong>What is data exploration used for?</strong></p>
+<p>Data exploration exists to decide whether your data are fit for an analysis and whether that analysis is defensible. Use this phase to ask:</p>
+<ul>
+<li>Do these data behave like they were measured the way I think they were?</li>
+<li>Are there obvious data biases or limits to precision or accuracy?</li>
+<li>Do variables mean what their names suggest (i.e.&nbsp;following good nomenclature rules)?</li>
+<li>Do groups, measurement units, and temporal and spatial scales make scientific sense?</li>
+<li>Are there features of the data that could make the planned estimation strategy inappropriate or unreliable?</li>
+<li>Do the measured variables adequately represent the quantities required by the DAG and estimand?</li>
+</ul>
+<p>If you cannot clearly explain what you learned during data exploration, you are not ready to move on to the data modeling phase.</p>
+<hr>
+<p><strong>What Data Exploration is <em>not</em></strong></p>
+<p>Data exploration should <strong><em>not</em></strong> be used for:</p>
+<ul>
+<li>Fishing for significant results (i.e.&nbsp;omitting extreme values to change your model results)</li>
+<li>Generating pretty plots that do not reflect model results</li>
+<li>Running PCA because <strong><em>there are many variables</em></strong></li>
+<li>Deleting outliers without understanding why they exist (e.g.&nbsp;not caring about data-generating processes)</li>
+<li>A formality you rush through to get to “the real analysis”</li>
+</ul>
+<p>If exploration feels boring or unnecessary, you are either skipping it or not doing it well.</p>
+<hr>
+<p>In the next section, we go over some approaches of a standard data exploration toolkit that will allow you understand the structure and limits of your dataset.</p>
 
 
 </section>
@@ -813,13 +927,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../index.html" class="pagination-link" aria-label="Information">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Information</span></span>
+      <a href="../chapters/01_naming_conventions.html" class="pagination-link" aria-label="Conventions and Style">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Conventions and Style</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/int_syllabus.html" class="pagination-link" aria-label="Syllabus">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Syllabus</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/02_data_exploration_toolkit.html" class="pagination-link" aria-label="Data Exploration Toolkit">
+        <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Exploration Toolkit</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

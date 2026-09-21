@@ -5,19 +5,18 @@ Use the calendar table below to see what’s coming each week. Click a week in t
 ::: callout-note
 All Milestone Assignments are due by end of day on Friday.
 :::
-
 ::: {.course-info tbl-colwidths="[15, 31, 20, 20, 14]"}
 | **Week / Date** | **Topic** | **Monday (M)** | **Wednesday (W)** | **Milestone Assignment** |
 |-----------:|------------|------------|------------|------------|
 | [**Week 1**<br>(31-Aug)](#week-1) | Scientific questions, estimands & why SCM | Course intro | Hypotheses/predictions, SCMs; draft project DAG | — |
 | [**Week 2**<br>(07-Sep)](#week-2) | DAG grammar, causal roles & project data orientation | **NO CLASS** (Labor Day) | DAG grammar; data inventory | Scientific Question + Estimand Note |
 | [**Week 3**<br>(14-Sep)](#week-3) | Identification & the complete SCM workflow | Identification; adjustment sets | Identify effects; map measured variables | — |
-| [**Week 4**<br>(21-Sep)](#week-4) | SCM synthesis, critique & causal analysis planning | Causal audit and revision | Published-analysis + peer critique | Causal Analysis Plan |
-| [**Week 5**<br>(28-Sep)](#week-5) | Measurement, data structure & targeted exploration | Measurement; map variables to DAG | Targeted EDA | — |
-| [**Week 6**<br>(05-Oct)](#week-6) | Models as estimators & GLMs | Estimand → estimator → estimate; GLMs | GLMs; diagnostics | Data + Estimator Plan |
-| [**Week 7**<br>(12-Oct)](#week-7) | Hierarchical data & GLMMs | **NO CLASS** (mid-semester break) | Random effects; dependence; GLMMs | — |
-| [**Week 8**<br>(19-Oct)](#week-8) | Nonlinearity | GAMs/GAMMs; assess nonlinearity | Open analysis | Working Estimator Checkpoint |
-| [**Week 9**<br>(26-Oct)](#week-9) | Causal-effect estimation | Total effects; g-computation/standardization | Open analysis | — |
+| [**Week 4**<br>(21-Sep)](#week-4) | Measurement, data structure & targeted exploration | Measurement; map variables to DAG | Targeted EDA | — |
+| [**Week 5**<br>(28-Sep)](#week-5) | Models as estimators & GLMs | Estimand → estimator → estimate; GLMs | GLMs; diagnostics | Data + Estimator Plan |
+| [**Week 6**<br>(05-Oct)](#week-6) | Hierarchical data & GLMMs | Random effects; dependence; GLMMs | GLMMs; diagnostics | — |
+| [**Week 7**<br>(12-Oct)](#week-7) | Nonlinearity | **NO CLASS** (mid-semester break) | GAMs/GAMMs; assess nonlinearity | — |
+| [**Week 8**<br>(19-Oct)](#week-8) | SCM synthesis, critique & causal analysis planning | Causal audit and revision | Published-analysis + peer critique | Causal Analysis Plan |
+| [**Week 9**<br>(26-Oct)](#week-9) | Causal-effect estimation | Total effects; g-computation/standardization | Open analysis | Working Estimator Checkpoint |
 | [**Week 10**<br>(02-Nov)](#week-10) | Mechanistic effects | Direct/indirect effects; mediation | Open analysis | — |
 | [**Week 11**<br>(09-Nov)](#week-11) | Inference from estimates | Open analysis | Estimate → uncertainty → inference | Estimate + Inference Checkpoint |
 | [**Week 12**<br>(16-Nov)](#week-12) | Analysis, interpretation & peer audit | Open analysis/writing | Open peer review | Interpretation / Peer-Audit Memo |
@@ -25,12 +24,12 @@ All Milestone Assignments are due by end of day on Friday.
 | [**Week 14**<br>(30-Nov)](#week-14) | Project consultation & integrated analysis | Project meetings / independent work | Analysis + writing clinic | Integrated Analysis Draft |
 | [**Week 15**<br>(07-Dec)](#week-15) | Peer review, synthesis & revision | Peer review + revision | Course synthesis; final project work | Final Report |
 :::
-
 ## Calendar edit history
 
 - Revised for Fall 2026.
 - Reorganized the course around an estimand-aware SCM workflow: scientific question → hypothesis/prediction → DAG → identification → estimator → estimate → inference.
 - Consolidated graded work into integrated Milestone Assignments.
+- Positioned SCM synthesis and causal-analysis planning after students have developed practical experience with measurement, GLMs, GLMMs, and nonlinearity.
 
 ## Weekly Information
 
@@ -62,7 +61,6 @@ Click to expand each week for readings, class activities, and milestone expectat
 - Statistical Philosophy
 - Hypotheses and Predictions
 - Start reading [Franks et al. (2025)](../files/Franks_et_al_2025.pdf)
-
 
 ### After class {.unnumbered}
 
@@ -135,37 +133,6 @@ Click to expand each week for readings, class activities, and milestone expectat
 ::: {#week-4 .callout-tip .unnumbered icon="false" collapse="true"}
 ### **Week 4 (21-Sep)**
 
-**Topic:** SCM synthesis, critique & causal analysis planning  
-**Milestone assignment:** **Causal Analysis Plan — due 25-Sep**
-
-### Before class {.unnumbered}
-
-- Review the kitchen-sink versus SCM comparison.
-- Review concise SEM versus SCM material.
-
-### Monday {.unnumbered}
-
-- Compare analytical approaches
-- Project causal audit and DAG revision
-
-### Wednesday {.unnumbered}
-
-- Critique a published analysis
-- Peer critique of DAG, estimand, and identification strategy
-
-### Reading {.unnumbered}
-
-- From Kitchen-Sink to SCM
-- Traditional SEM / SEM vs SCM material
-
-### After class {.unnumbered}
-
-- **Submit:** Causal Analysis Plan
-:::
-
-::: {#week-5 .callout-tip .unnumbered icon="false" collapse="true"}
-### **Week 5 (28-Sep)**
-
 **Topic:** Measurement, data structure & targeted exploration  
 **Milestone assignment:** N/A
 
@@ -195,11 +162,11 @@ Click to expand each week for readings, class activities, and milestone expectat
 - Document measurement limitations and EDA findings that affect your planned estimator.
 :::
 
-::: {#week-6 .callout-tip .unnumbered icon="false" collapse="true"}
-### **Week 6 (05-Oct)**
+::: {#week-5 .callout-tip .unnumbered icon="false" collapse="true"}
+### **Week 5 (28-Sep)**
 
 **Topic:** Models as estimators & GLMs  
-**Milestone assignment:** **Data + Estimator Plan — due 09-Oct**
+**Milestone assignment:** **Data + Estimator Plan — due 02-Oct**
 
 ### Before class {.unnumbered}
 
@@ -228,8 +195,8 @@ Click to expand each week for readings, class activities, and milestone expectat
 - **Submit:** Data + Estimator Plan
 :::
 
-::: {#week-7 .callout-tip .unnumbered icon="false" collapse="true"}
-### **Week 7 (12-Oct)**
+::: {#week-6 .callout-tip .unnumbered icon="false" collapse="true"}
+### **Week 6 (05-Oct)**
 
 **Topic:** Hierarchical data & GLMMs  
 **Milestone assignment:** N/A
@@ -240,12 +207,13 @@ Click to expand each week for readings, class activities, and milestone expectat
 
 ### Monday {.unnumbered}
 
-- **NO CLASS — mid-semester break**
+- Random effects, dependence, and effective sample size
+- Introduce GLMMs
 
 ### Wednesday {.unnumbered}
 
-- Random effects, dependence, and effective sample size
 - Fit or refine GLMMs where appropriate
+- Diagnostics and project model development
 
 ### Reading {.unnumbered}
 
@@ -256,11 +224,11 @@ Click to expand each week for readings, class activities, and milestone expectat
 - Continue model development and diagnostics for hierarchical data where relevant.
 :::
 
-::: {#week-8 .callout-tip .unnumbered icon="false" collapse="true"}
-### **Week 8 (19-Oct)**
+::: {#week-7 .callout-tip .unnumbered icon="false" collapse="true"}
+### **Week 7 (12-Oct)**
 
 **Topic:** Nonlinearity  
-**Milestone assignment:** **Working Estimator Checkpoint — due 23-Oct**
+**Milestone assignment:** N/A
 
 ### Before class {.unnumbered}
 
@@ -268,12 +236,12 @@ Click to expand each week for readings, class activities, and milestone expectat
 
 ### Monday {.unnumbered}
 
-- GAMs and GAMMs
-- Assess nonlinearity in your project
+- **NO CLASS — mid-semester break**
 
 ### Wednesday {.unnumbered}
 
-- Open analysis: troubleshooting, diagnostics, coding, and figures
+- GAMs and GAMMs
+- Assess nonlinearity in your project
 
 ### Reading {.unnumbered}
 
@@ -281,14 +249,46 @@ Click to expand each week for readings, class activities, and milestone expectat
 
 ### After class {.unnumbered}
 
-- **Submit:** Working Estimator Checkpoint
+- Assess whether nonlinear relationships are important for your planned estimator and refine your model where appropriate.
+:::
+
+::: {#week-8 .callout-tip .unnumbered icon="false" collapse="true"}
+### **Week 8 (19-Oct)**
+
+**Topic:** SCM synthesis, critique & causal analysis planning  
+**Milestone assignment:** **Causal Analysis Plan — due 23-Oct**
+
+### Before class {.unnumbered}
+
+- Review the kitchen-sink versus SCM comparison.
+- Review concise SEM versus SCM material.
+- Revisit your project DAG, estimand, identification strategy, and developing estimator.
+
+### Monday {.unnumbered}
+
+- Compare analytical approaches
+- Project causal audit and DAG revision
+
+### Wednesday {.unnumbered}
+
+- Critique a published analysis
+- Peer critique of DAG, estimand, identification strategy, and planned analysis
+
+### Reading {.unnumbered}
+
+- From Kitchen-Sink to SCM
+- Traditional SEM / SEM vs SCM material
+
+### After class {.unnumbered}
+
+- **Submit:** Causal Analysis Plan
 :::
 
 ::: {#week-9 .callout-tip .unnumbered icon="false" collapse="true"}
 ### **Week 9 (26-Oct)**
 
 **Topic:** Causal-effect estimation  
-**Milestone assignment:** N/A
+**Milestone assignment:** **Working Estimator Checkpoint — due 30-Oct**
 
 ### Before class {.unnumbered}
 
@@ -303,6 +303,7 @@ Click to expand each week for readings, class activities, and milestone expectat
 ### Wednesday {.unnumbered}
 
 - Open analysis and project consultations
+- Troubleshooting, diagnostics, coding, and figures
 
 ### Reading {.unnumbered}
 
@@ -310,7 +311,7 @@ Click to expand each week for readings, class activities, and milestone expectat
 
 ### After class {.unnumbered}
 
-- Refine your focal effect estimate and associated diagnostics.
+- **Submit:** Working Estimator Checkpoint
 :::
 
 ::: {#week-10 .callout-tip .unnumbered icon="false" collapse="true"}

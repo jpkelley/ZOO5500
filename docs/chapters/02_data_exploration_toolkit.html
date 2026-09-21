@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2&nbsp; Introduction – Quantitative Analysis of (Messy) Field Data</title>
+<title>19&nbsp; Data Exploration Toolkit – Quantitative Analysis of (Messy) Field Data</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -33,8 +33,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/int_syllabus.html" rel="next">
-<link href="../index.html" rel="prev">
+<link href="../chapters/02_outliers.html" rel="next">
+<link href="../chapters/02_data_exploration_intro.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -86,7 +86,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../index.html">Course Overview</a></li><li class="breadcrumb-item"><a href="../chapters/int_course_intro.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/01_nature_of_data.html">Part II: From the Causal System to Data</a></li><li class="breadcrumb-item"><a href="../chapters/02_data_exploration_toolkit.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Exploration Toolkit</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -117,13 +117,13 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Course Overview</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
@@ -132,7 +132,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/int_course_intro.html" class="sidebar-item-text sidebar-link active">
+  <a href="../chapters/int_course_intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
@@ -228,13 +228,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
  <span class="menu-text">Part II: From the Causal System to Data</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/01_nature_of_data.html" class="sidebar-item-text sidebar-link">
@@ -267,7 +267,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/02_data_exploration_toolkit.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/02_data_exploration_toolkit.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Exploration Toolkit</span></span></a>
   </div>
 </li>
@@ -311,19 +311,18 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#welcome-to-quantitative-analysis-of-messy-field-data" id="toc-welcome-to-quantitative-analysis-of-messy-field-data" class="nav-link active" data-scroll-target="#welcome-to-quantitative-analysis-of-messy-field-data"><span class="header-section-number">2.1</span> Welcome to Quantitative Analysis of (Messy) Field Data!</a></li>
-  <li><a href="#course-objectives" id="toc-course-objectives" class="nav-link" data-scroll-target="#course-objectives"><span class="header-section-number">2.2</span> Course Objectives</a></li>
-  <li><a href="#topics-covered" id="toc-topics-covered" class="nav-link" data-scroll-target="#topics-covered">Topics covered</a></li>
-  <li><a href="#what-is-new-this-term-fall-2026" id="toc-what-is-new-this-term-fall-2026" class="nav-link" data-scroll-target="#what-is-new-this-term-fall-2026"><span class="header-section-number">2.3</span> What is new this term (Fall 2026)?</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">19.1</span> Overview</a></li>
+  <li><a href="#the-ante-hoc-data-exploration-toolkit" id="toc-the-ante-hoc-data-exploration-toolkit" class="nav-link" data-scroll-target="#the-ante-hoc-data-exploration-toolkit"><span class="header-section-number">19.2</span> The <em>ante hoc</em> Data Exploration Toolkit</a></li>
+  <li><a href="#scope-and-next-steps" id="toc-scope-and-next-steps" class="nav-link" data-scroll-target="#scope-and-next-steps"><span class="header-section-number">19.3</span> Scope and Next Steps</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../index.html">Course Overview</a></li><li class="breadcrumb-item"><a href="../chapters/int_course_intro.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/01_nature_of_data.html">Part II: From the Causal System to Data</a></li><li class="breadcrumb-item"><a href="../chapters/02_data_exploration_toolkit.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Exploration Toolkit</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></h1>
+<h1 class="title"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Exploration Toolkit</span></h1>
 </div>
 
 
@@ -340,72 +339,82 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="welcome-to-quantitative-analysis-of-messy-field-data" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="welcome-to-quantitative-analysis-of-messy-field-data"><span class="header-section-number">2.1</span> Welcome to Quantitative Analysis of (Messy) Field Data!</h2>
-<p>Thanks for being the new cohort of Jackanapes this term! I could not be more pleased by the “large” size of the class. More people means more perspectives as we learn to reason our way from ecological questions to defensible inference.</p>
-<p>As ecologists, we rarely just want to describe nature. Just look at most published ecology papers! From the verbiage used by most ecologists (especially non-experimental ones), it is clear that the ultimate goal is to understand <em>why nature works the way it does</em>. Understanding <em>why</em> something happens requires more than fitting statistical models. We ecologists need to be explicit about what effect we want to learn, what we think causes what, and whether our data can actually identify that effect. On all three, we ecologists need to make drastic improvements. This is one focus of my lab, and this is the reason why I teach this course. We will begin with ecological hypotheses and estimand-aware predictions, use Structural Causal Models (SCMs) and DAGs to make our causal assumptions explicit, and only then turn to the statistical models that are most familiar in traditional ecological analyses. Along the way, we will see that many common approaches actually alter our original questions, sometimes without our knowledge.</p>
-<p>The course path looks something like this:</p>
-<p><img src="../graphics/workflow_diagram/basic_workflow.png" class="img-fluid"></p>
-<p>Along the way, we will question some familiar practices: how AIC cannot tell us which variables should be controlled, how coefficients in a multiple regression model are usually not comparable effect sizes, how traditional covariance-based Structural Causal Models upset natural causal structure of systems, and adding more (or removing) covariates without knowing their function in the data-generating system can sometimes increase rather than reduce bias.</p>
-<p>Of course, moving from an ecological idea to a scientifically defensible inference can be extremely daunting, especially when you have messy field data, imprecise measurements, uneven sampling, nonlinear relationships, and looming deadlines. A central goal of this course is to help you become more comfortable with this entire process while also learning from one another. Each of us (including me) approaches problems differently, and those differences allow us to make faster and more meaningful headway towards making sense of a very complex world.</p>
-</section>
-<section id="course-objectives" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="course-objectives"><span class="header-section-number">2.2</span> Course Objectives</h2>
-<p>By the end of this course, you should be able to:</p>
-<ul>
-<li><strong>Convert ecological ideas into testable questions.</strong> Construct hypotheses logically and develop predictions that specify the effect (estimand) you actually want to estimate.</li>
-<li><strong>Represent causal assumptions explicitly.</strong> Use SCMs and DAGs to describe how you think an ecological system works and distinguish among confounders, mediators, colliders, and other variables.</li>
-<li><strong>Determine whether an effect is identifiable.</strong> Ask whether the causal effect you care about can actually be estimated from the data you have (and under what assumptions).</li>
-<li><strong>Build statistical models that match the question.</strong> Use GLMs, GLMMs, GAMs, GAMMs, and related approaches after determining the causal question and appropriate adjustment set (which also reduce minimal required sample sizes).</li>
-<li><strong>Recognize when common analytical approaches cause trouble.</strong> Understand why AIC-based variable selection, “controlling for everything,” and traditional, covariance-based Structural Equation Models (SEMs) can create biased results and do not alone tell us which causal effects we are estimating.</li>
-<li><strong>Deal with messy ecological data.</strong> Account for repeated observations, hierarchical structure, nonlinear relationships, imperfect detection, measurement error, and other complications of real field data.</li>
-<li><strong>Interpret effects rather than just model output.</strong> Explain what was estimated, the assumptions required, the uncertainty involved, and what the result actually means biologically.</li>
-<li><strong>Develop transparent and reproducible analyses.</strong> Make the reasoning that connects hypotheses, causal assumptions, statistical models, and biological conclusions explicit so that models are either well-supported or fail loudly.</li>
-</ul>
-</section>
-<section id="topics-covered" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="topics-covered">Topics covered</h2>
-<p>The course covers the following topics, roughly in the following order:</p>
-<ul>
-<li><strong>Hypotheses and predictions:</strong> logical formulation and estimand-aware predictions</li>
-<li><strong>Structural Causal Models and DAGs:</strong> causal assumptions and pathways</li>
-<li><strong>Causal identification:</strong> confounding, adjustment, and identifiable effects</li>
-<li><strong>Metrology:</strong> measurands, measurement error, uncertainty, and data quality</li>
-<li><strong>Exploratory data analysis:</strong> purposeful exploration of messy data</li>
-<li><strong>Generalized Linear Models (GLMs):</strong> linear relationships and estimation of focal effects</li>
-<li><strong>Hierarchical data and GLMMs:</strong> dependence, random effects, and effective sample size</li>
-<li><strong>GAMs and GAMMs:</strong> nonlinear ecological relationships</li>
-<li><strong>Spatial and temporal structure:</strong> heterogeneity and dependence</li>
-<li><strong>Model evaluation:</strong> diagnostics, validation, prediction, and appropriate use of AIC</li>
-<li><strong>Inference:</strong> effect sizes, uncertainty, and interpretation</li>
-<li><strong>Communication:</strong> figures, tables, and defensible Results sections</li>
-</ul>
-<p>Given this ambitious scope (and depending on the course pacing), we may only scratch the surface of some topics. Even our cursory treatment is aimed at convincing you why these subjects matter for scientists who have messy data.</p>
-</section>
-<section id="what-is-new-this-term-fall-2026" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="what-is-new-this-term-fall-2026"><span class="header-section-number">2.3</span> What is new this term (Fall 2026)?</h2>
-<p>This course generally contains the same material as in Spring 2026 when the new “causal” version of this course was inaugurated. Of particular importance to you are the following course components:</p>
-<ul>
-<li><strong>Using large-language models (LLMs) –via ChatGPT– to improve analytical workflows.</strong> This term, I have changed the way that ChatGPT is integrated into the course. as a way to support the <em>process</em> of analysis rather than to automate the analysis itself. Many of the hardest parts of quantitative work happen outside of writing code: figuring out why R code isn’t behaving as expected, checking whether an interpretation actually follows from a model, troubleshooting an obscure error message, or getting feedback on how tp clearly document a decision. Used carefully, ChatGPT can act like a sounding board for troubleshooting, sanity-checking, and refining explanations without taking over your critical thinking. Throughout the course, I have deliberately constrained ChatGPT’s role and scope and have tailored its guardrails to match the course progression. In other words, ChatGPT is used to help improve analytical workflow and decision-making, not to generate results or write code on a student’s behalf. We will work together to assess the utility of this tool as the term advances.</li>
-</ul>
+<section id="overview" class="level2" data-number="19.1">
+<h2 data-number="19.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">19.1</span> Overview</h2>
 <div class="columns">
-<div class="column" style="width:80%;">
+<div class="column" style="width:70%;">
+<p>Data exploration is not a single step to complete before analysis; it consists of a <strong>set of diagnostic tools applied iteratively across an analytical workflow</strong>. In this course, we distinguish –using very non-standard but arguably useful nomenclature– between two complementary phases of data exploration:</p>
 <ul>
-<li><strong>Using large-language models (LLMs) to streamline learning and teaching at scale.</strong> What does this mean? Very simply, it means that I customize an AI agent to do some of the busy work for me (e.g.&nbsp;checking code consistency, making sure there all assignment components are present, etc.). Therefore, I have worked hard to leverage my freelance work as an LLM-consultant and tester for two AI companies to carefully explicitly integrate chatGPT’s LLMs into my teaching/grading workflow. This means that you will use a custom GPT that I created specifically for ZOO/ECOL-5500 called <a href="https://chatgpt.com/g/g-696966777a948191858541cd7986057e-jackalopegpt" target="_blank">JackalopeGPT</a> (using ChatGPT) to run checks on your work prior to submission; this will solve some of the “tuning” issues (with codes, grammar, clarity, etc.) that I have seen in student submissions in previous years and allow me to focus on more substantial feedback.</li>
+<li><strong><em>Ante hoc</em></strong> <strong>data exploration</strong>: diagnostic checks performed <em>before</em> formal modeling, used to assess measurement quality, data structure, missingness, support, and features of the data relevant to implementing your appropriate statistical model (the estimator).</li>
+<li><strong><em>Post hoc</em></strong> <strong>data exploration</strong>: diagnostic checks performed <em>after</em> an initial model is fit, used to evaluate how well the statistical specification represents the data (e.g., residual structure, leverage, influence, convergence failures, or other evidence of model inadequacy).</li>
 </ul>
-</div><div class="column" style="width:20%;">
-<p><img src="../graphics/GPT_logo/jackalopeGPT_logo.png" class="img-fluid"></p>
+<p>Both phases are essential. <em>Ante hoc</em> exploration asks whether the measurements and data structure can support the planned analysis, while <em>post hoc</em> exploration asks whether the fitted model adequately represents those data. Most importantly (as I cannot emphasize this enough), neither phase determines the causal structure of your system or which variables are required for effect identification; those decisions come from the DAG and the later SCM.</p>
+<p>This section introduces a coarse yet practical <em>ante hoc</em> Data Exploration Toolkit, a subset of exploratory tools that should always be considered <em>before</em> formal modeling begins. <em>Post hoc</em> diagnostics are introduced later in the course within the context of formal data modeling.</p>
+</div><div class="column" style="width:30%;">
+<p><img src="../graphics/jackalope_graphics/sherlock_jackalope.png" class="img-fluid"></p>
 </div>
 </div>
+<hr>
+</section>
+<section id="the-ante-hoc-data-exploration-toolkit" class="level2" data-number="19.2">
+<h2 data-number="19.2" class="anchored" data-anchor-id="the-ante-hoc-data-exploration-toolkit"><span class="header-section-number">19.2</span> The <em>ante hoc</em> Data Exploration Toolkit</h2>
+<p>In the R exercises used this course, we will repeatedly apply the following steps of the <em>ante hoc</em> Data Exploration Toolkit:</p>
 <ul>
-<li><strong>Jackalopes!</strong> This course continues its work to correct a long-standing perspective that (1) jackalopes had deer-like antlers (Fig. 1), and (2) there was only a single species of jackalopes (Fig. 2). We will use many jackalope species in the newly discovered cryptid ecosystem for course exercises and examples.</li>
+<li>Tool #1: Assess <em>potential</em> outliers and possible measurement errors</li>
+<li>Tool #2: Assess distributions, sparsity, and excess zeros</li>
+<li>Tool #3: Assess missingness and data completeness</li>
+<li>Tool #4: Assess sampling structure, dependence, and support</li>
+<li>Tool #5: Assess statistical relationships relevant to estimator implementation (e.g., nonlinearity, scaling, and numerical collinearity)</li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../graphics/jackalope_graphics/correct_jackalope.png" class="img-fluid figure-img"></p>
-<figcaption>Figure 1. Illustrations of the correct and incorrect ornament morphology of jackalopes.</figcaption>
-</figure>
+<p>This toolkit is <strong>intentionally coarse and non-exhaustive</strong>. Its purpose is not to <em>fix</em> the data, but rather to identify critical and fatal issues when they are easiest to diagnose and least costly to address. Skipping these steps often leads to confusion or <a href="https://jpkelley.github.io/ZOO5500/chapters/statistical_aphorisms.html">Paralysis of Analysis</a> during modeling.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
 </div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>What this toolkit cannot tell you
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Exploratory patterns do <strong>not</strong> determine which variables belong in your causal adjustment set. For example:</p>
+<ul>
+<li>A strong correlation does not make a variable a confounder.</li>
+<li>A weak correlation does not mean that a confounder can be dropped.</li>
+<li>Two correlated variables are not necessarily causally redundant.</li>
+<li>An apparent interaction does not, by itself, establish a causal mechanism.</li>
+<li>Principal Components Analysis (PCA) or other dimension-reduction methods should not be used simply because several causally relevant variables are correlated.</li>
+</ul>
+<p>Decisions about data require the exact scientific and causal reasoning that is encoded in your DAG. EDA tells you about the <strong>measurements and statistical behavior of those variables</strong>; it says nothing about different variables’ causal roles.</p>
+</div>
+</div>
+<p>This section focuses on the most important tools within this toolkit that can be assessed before formal modeling. The first section (Outliers) will be discussed on its own; for the sake of course timing, the other tools will be discussed in the tutorial and later in the course as they become relevant to model implementation.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>What about homogeneity of variance?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>You may have learned that you should test for “homogeneity of variance” before fitting a statistical model. We will <strong>not</strong> treat this as a generic <em>ante hoc</em> requirement.</p>
+<p>Why? Whether a particular variance pattern is expected or problematic depends on the model (and probability model) being used. For example, many non-Gaussian models naturally imply that variance changes with the mean. Later, when we work with GLMs, GLMMs, GAMs, and GAMMs, we will evaluate variance and residual patterns in the context of the fitted model rather than requiring the raw data to satisfy a generic homoscedasticity rule beforehand.</p>
+<blockquote class="blockquote">
+<p><strong>Takeaway:</strong> Do not try to force your raw data to satisfy assumptions of a statistical model that you have not yet specified. We will evaluate model adequacy once there is actually a model to work with. See the theme here?</p>
+</blockquote>
+</div>
+</div>
+</div>
+</section>
+<section id="scope-and-next-steps" class="level2" data-number="19.3">
+<h2 data-number="19.3" class="anchored" data-anchor-id="scope-and-next-steps"><span class="header-section-number">19.3</span> Scope and Next Steps</h2>
+<p>At this <strong>ante hoc</strong> stage, the goal is to <strong>recognize features of the measurements and data structure that matter for estimation</strong>, not to use the data to redefine the causal question. (Why would you want to do this?)</p>
+<p>In the next sections, we tackle each tool in the toolkit. The hands-on tutorial will apply these tools to real data and ask what each finding means for the anticipated estimation step. Some findings may indicate measurement or data-quality problems; others will become relevant when we choose and implement models in the coming weeks.</p>
+<p>As yet another reminder, an exploratory pattern <strong>does not</strong> override the causal reasoning already encoded in your DAG. Instead, the DAG tells us what must be estimated to answer your focal question, while exploration helps us understand whether (and how) the available data can support that estimation. <em>Post hoc</em> data exploration will be introduced later in the course, once models are fitted and can provide additional information about how the data and model interact.</p>
 
 
 </section>
@@ -813,13 +822,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../index.html" class="pagination-link" aria-label="Information">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Information</span></span>
+      <a href="../chapters/02_data_exploration_intro.html" class="pagination-link" aria-label="Data Exploration">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Data Exploration</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/int_syllabus.html" class="pagination-link" aria-label="Syllabus">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Syllabus</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/02_outliers.html" class="pagination-link" aria-label="Tool 1: Outliers">
+        <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Tool 1: Outliers</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

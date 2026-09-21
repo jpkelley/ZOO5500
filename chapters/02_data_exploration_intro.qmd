@@ -22,16 +22,17 @@ Because you skipped the critical data exploration step, you just injected a suit
 
 This week, we purposefully slow the workflow down and practice exploring datasets so that problems like these show up early --long before they shape your model decisions or waste weeks of work. In the next pages, we will walk through core data exploration steps that should always come *before* formal modeling.
 
-> **In simple terms, what is data exploration?** Data exploration is where you learn what your data *can* say — before you ask them (*not* tell them) to say it.
+> **In simple terms, what is data exploration?** Data exploration is where you learn what your data *can* say — before you ask them (*not* tell them) to say it. Most importantly, exploration does not determine your causal question; it helps determine whether the measurements you have in your dataset can support the analysis required to answer it!
 
-## Goals for this section (Week 3)
+## Goals for this section (Week 4)
 
 By the end of this week, you should be able to:
 
--   Describe some of the advantages and disadvantages of several types of data exploration approaches (before and after modeling)
--   Examine your own dataset for outliers
--   Justify the removal of outliers
--   Realize the importance of taking your good ole’ sweet time with data exploration
+-   Further distinguish causal decisions established by the SCM from statistical decisions that can be informed by data exploration
+-   Evaluate whether measured variables adequately represent quantities in your DAG
+-   Examine data structure, missingness, distributions, dependence, and potential measurement problems
+-   Identify and investigate unusual observations without automatically treating them as errors
+-   Explain how targeted EDA can inform estimator implementation (models) without turning it into a blind and uninformed search for interesting effects
 
 ## Relevant readings related to data exploration
 
@@ -39,7 +40,7 @@ By the end of this week, you should be able to:
 
 -   [**O'Hara & Kotze (2010)**](https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/j.2041-210X.2010.00021.x) on why you should not log transform count data.
 -   [**Beltran & Tarwater (2024)**](https://pmc.ncbi.nlm.nih.gov/articles/PMC11444780/) on why you should not categorize some data.
--   [**Zuur et al. (2010)**](https://besjournals.onlinelibrary.wiley.com/doi/10.1111/j.2041-210X.2009.00001.x) on some of the primary approaches for data exploration (what this page is based on)
+-   [**Zuur et al. (2010)**](https://besjournals.onlinelibrary.wiley.com/doi/10.1111/j.2041-210X.2009.00001.x) on some of the primary approaches for data exploration. Be very careful using all of these approaches, as some are quite dated, and methods such as factor reduction can be inappropriate when they obscure the meaning or causal roles of measured variables.
 
 ## Core Benefits of Data Exploration
 
@@ -72,27 +73,38 @@ The central question at this stage is simple: **Do these numbers deserve to be m
 :::
 
 ::: {.callout-tip icon="false" collapse="true"}
-## **Turning metadata into something testable**
+## **Connecting the SCM to the data you actually measured**
 
-Metadata is not documentation-after-the-fact; it becomes operational during exploration. This is where you actively test assumptions such as:
+Your DAG contains conceptual variables (though you did measure these); it is your dataset that contains the actual measurements. As we have discussed, those are not necessarily the same thing.
+
+Data exploration is where metadata becomes operational. This is where you might ask:
 
 -   What does one row of the dataset actually represent?
--   Does the nested structure of the data (e.g. number of individuals in each of many sites)
--   Do temporal and spatial units align with the research question?
+-   What quantity does each measured variable actually represent?
+-   How well does each measurement correspond to the variable represented in the DAG?
+-   Does the nested structure of the data (discussed in more detail later) match what you thought was sampled?
+-   Do temporal and spatial units align with the estimand?
+-   Are important DAG variables missing or represented only by proxies?
 
-Exploration exposes missing or contradictory metadata immediately.
+  In summary, exploration can expose any mismatches between the causal system you want to study (as encoded in your DAG) and the measurements you actually have in your dataset. That mismatch does not change the DAG; it changes what you can estimate from the available data.
 :::
 
 ::: {.callout-tip icon="false" collapse="true"}
-## **Informing how you design your models**
+## **Informing how you implement your estimator**
 
-Data exploration directly constrains your modeling options. It helps you determine:
+Data exploration can inform *how* you estimate your target effect, but it should not redefine the causal question or identification strategy established by your DAG.
 
--   Which covariates are redundant (e.g., PCA as a redundancy diagnostic)
--   Which transformations (e.g. scaling) are scientifically defensible
--   Which model families are plausible (and which are not)
+Exploration can help you determine:
 
-Data exploration helps decide how the analysis should be done, so it cannot be skipped.
+-   Whether the observed outcome is compatible with a proposed error distribution
+-   Whether dependence, clustering, or repeated measurements must be represented
+-   Whether important relationships appear unlikely to be adequately represented as linear
+-   Whether sparsity, limited support, or missingness creates problems for estimation
+-   Whether scaling, transformation, or other numerical choices are useful
+
+These are decisions about **estimation**, not causal identification. Whether a variable should be adjusted for because it is a confounder, mediator, or collider comes from the causal model; it does not arise from the patterns that you discover during EDA.
+
+In summary, data exploration helps you determine whether (and how) your estimand can be estimated with the data you actually have.
 :::
 
 ::: {.callout-tip icon="false" collapse="true"}
@@ -119,7 +131,8 @@ Data exploration exists to decide whether your data are fit for an analysis and 
 -   Are there obvious data biases or limits to precision or accuracy?
 -   Do variables mean what their names suggest (i.e. following good nomenclature rules)?
 -   Do groups, measurement units, and temporal and spatial scales make scientific sense?
--   Do any of the data already cause model failure?
+-   Are there features of the data that could make the planned estimation strategy inappropriate or unreliable?
+-   Do the measured variables adequately represent the quantities required by the DAG and estimand?
 
 If you cannot clearly explain what you learned during data exploration, you are not ready to move on to the data modeling phase.
 

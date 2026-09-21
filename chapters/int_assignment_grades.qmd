@@ -11,9 +11,9 @@ This page describes the Milestone Assignments referenced in the course calendar.
 | Week | Milestone Assignment | Purpose / Goal |
 |:---|:---|:---|
 | **2** | **Scientific Question + Estimand Note** | Define the target effect. |
-| **4** | **Causal Analysis Plan** | Establish causal identification. |
-| **6** | **Data + Estimator Plan** | Link data to the estimand. |
-| **8** | **Working Estimator Checkpoint** | Implement and diagnose the estimator. |
+| **5** | **Data + Estimator Plan** | Link data to the estimand. |
+| **8** | **Causal Analysis Plan** | Establish causal identification. |
+| **9** | **Working Estimator Checkpoint** | Implement and diagnose the estimator. |
 | **11** | **Estimate + Inference Checkpoint** | Make defensible inferences. |
 | **12** | **Interpretation / Peer-Audit Memo** | Identify needed revisions. |
 | **14** | **Integrated Analysis Draft** | Integrate the causal workflow. |
@@ -61,7 +61,7 @@ Define the scientific target before you choose a DAG, statistical model, or mode
 -   No commitment to a statistical model simply because it is familiar
 :::
 
-::: {.callout-note title="**Causal Analysis Plan (Week 4; due 25-Sep)**" icon="false" collapse="true"}
+::: {.callout-note title="**Causal Analysis Plan (Week 8; due 23-Oct)**" icon="false" collapse="true"}
 **Purpose:**\
 Show that your scientific question, causal assumptions, estimand, and identification strategy fit together *before* you begin serious statistical modeling. This is the major causal-planning milestone for the project.
 
@@ -99,7 +99,7 @@ Show that your scientific question, causal assumptions, estimand, and identifica
 -   You can explain why the proposed analysis would estimate the effect you claim it estimates
 :::
 
-::: {.callout-note title="**Data + Estimator Plan (Week 6; due 09-Oct)**" icon="false" collapse="true"}
+::: {.callout-note title="**Data + Estimator Plan (Week 5; due 02-Oct)**" icon="false" collapse="true"}
 **Purpose:**\
 Connect the causal architecture of your project to the data you actually have and to the statistical machinery you will use. This milestone asks whether your measured variables can represent the DAG well enough to estimate the focal effect.
 
@@ -149,7 +149,7 @@ Connect the causal architecture of your project to the data you actually have an
 -   An estimator justified by the scientific target and data structure (not merely by software availability or familiarity)
 :::
 
-::: {.callout-note title="**Working Estimator Checkpoint (Week 8; due 23-Oct)**" icon="false" collapse="true"}
+::: {.callout-note title="**Working Estimator Checkpoint (Week 9; due 30-Oct)**" icon="false" collapse="true"}
 **Purpose:**\
 Run a real model (estimator) early enough to catch any obvious implementation problems. This is a checkpoint; this is *not* a rigid model that you must marry. You are, of course, allowed to make careful changes that are consistent with the *a priori* established causal reasoning, data structure, or model diagnostics.
 

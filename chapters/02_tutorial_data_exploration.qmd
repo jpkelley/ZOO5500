@@ -119,7 +119,7 @@ As you recall, we have the following steps of the *ante hoc* Data Exploration To
 -   Tool #2: Assess distributions, sparsity, and excess zeros
 -   Tool #3: Assess missingness and data completeness
 -   Tool #4: Assess sampling structure, dependence, and support
--   Tool #5: Assess statistical relationships relevant to estimator implementation (e.g., nonlinearity, scaling, and numerical collinearity)
+-   Tool #5: Assess statistical relationships relevant to model implementation (e.g., nonlinearity, scaling, and numerical collinearity)
 
 The good news is that we can begin assessing several of these features simply by looking carefully at the overall structure of your dataset in several ways. These "ways" are non-prescriptive; the goal is to understand the measurements and structure of the raw data rather than to discover which variables "belong" in an analysis. Let's begin!
 
@@ -329,7 +329,7 @@ d |>
 
 ### Interaction plot (Step #3)
 
-A simple interaction plot is useful for getting a quick, visual sense of how the measurements are distributed across combinations of variables. By faceting the same boxplot across salt treatments (i.e. creating "small multiples" *sensu* Edward Tufte), you can more easily compare both the typical oxygen levels and the spread of the data for each jackalope count within each treatment. This does *not* test for an interaction or determine whether an interaction belongs in the estimator. Instead, it is a useful reality check for data coverage --for example, sparse cells, missing treatment combinations, unusual observations within combinations, or differences in the amount of information available across the experimental design.
+A simple interaction plot is useful for getting a quick, visual sense of how the measurements are distributed across combinations of variables. By faceting the same boxplot across salt treatments (i.e. creating "small multiples" *sensu* Edward Tufte), you can more easily compare both the typical oxygen levels and the spread of the data for each jackalope count within each treatment. This does *not* test for an interaction or determine whether an interaction belongs in the statistical model. Instead, it is a useful reality check for data coverage --for example, sparse cells, missing treatment combinations, unusual observations within combinations, or differences in the amount of information available across the experimental design.
 
 ```{r}
 ggplot(d, aes(x = number_jackalope, y = oxygen_ppm)) +
@@ -386,7 +386,7 @@ The `GGally::ggpairs` function markedly improves upon similar functionality of b
 -   temperature and heating degree days are strongly and negatively correlated (r = -0.998)
 -   temperature variation and heating degree days are strongly and negatively correlated (r = -0.588)
 
-So, what to do, what to do, what to do? We clearly have some variables that are strongly correlated. This could impact our modeling (specifically inflating the variance of a given regression coefficient). We can explicitly examine numerical collinearity using Variance Inflation Factors (VIFs), which are calculated for each term in a model. Note that there are options for VIFs applied to both continuous and categorical variables. Let us do this for continuous variables for these climate data. Most available functions in R require regression models; however, there are some approaches--such as the `usdm` package--that require only data frames of multiple variables. So, let us use that.:
+So, what to do, what to do, what to do? We clearly have some variables that are strongly correlated. This could impact our modeling (specifically inflating the variance of a given regression coefficient). We can explicitly examine numerical collinearity using Variance Inflation Factors (VIFs), which are calculated for each term in a model. Note that there are options for VIFs applied to both continuous and categorical variables. Let us do this for continuous variables for these climate data. Most available functions in R require regression models; however, there are some approaches--such as the `usdm` package--that require only data frames of multiple variables. So, let us use that:
 
 ```{r}
 vif_results <- usdm::vif(climate)
@@ -400,7 +400,7 @@ This is a clear example that two variables, temperature and heating_deg_days, ar
 
 But herein lies the terrible problem: neither one of these decisions follows automatically or naturally from the correlations calculated in the above process. For example, two highly correlated variables could occupy very different positions in our DAG. One might be a confounder, whereas another might function as a mediator. Combining them into a principal component would remove the variables' independent positions in the DAG, creating a new node that was suboptimally positioned in the data-generating process. Likewise, dropping a variable simply because it is correlated with another could eliminate a variable required for causal identification.
 
-This gives us a useful opportunity, especially given how commonly methods like Principal Components Analysis is used. Specifically, by going through the following example, we can learn when not to jump immediately to PCA. For this demonstration, our first step is to conduct a PCA without specifying how many new components (new variables) should be generated. Let's begin with a simple PCA analysis.
+This gives us a useful opportunity, especially given how commonly methods like Principal Components Analysis are used. Specifically, by going through the following example, we can learn when not to jump immediately to PCA. For this demonstration, our first step is to conduct a PCA without specifying how many new components (new variables) should be generated. Let's begin with a simple PCA analysis.
 
 ```{r}
 pca_results <- stats::princomp(
@@ -441,6 +441,6 @@ The statistical convention in most fields is to accept all rotated components th
 pca_results_rotated$scores
 ```
 
-PCA has successfully accomplished a statistical task: it has represented correlated variation among several measured variables using fewer dimensions. However, what it has **not** established is that those new dimensions represent the causal quantities required by our estimand. Before using them in an estimator, we would need to ask what scientific quantities they represent and whether replacing the original variables preserves the causal roles encoded in our DAG. You can clearly see how the use of Principal Components Analysis has added a level of complication to our workflow.
+PCA has successfully accomplished a statistical task: it has represented correlated variation among several measured variables using fewer dimensions. However, what it has **not** established is that those new dimensions represent the causal quantities required by our estimand. Before using them in an model, we would need to ask what scientific quantities they represent and whether replacing the original variables preserves the causal roles encoded in our DAG. You can clearly see how the use of Principal Components Analysis has added a level of complication to our workflow.
 
 **End of tutorial**

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>3&nbsp; Syllabus – Quantitative Analysis of (Messy) Field Data</title>
+<title>22&nbsp; Introduction to Models – Quantitative Analysis of (Messy) Field Data</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -33,8 +68,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/int_calendar_fa26.html" rel="next">
-<link href="../chapters/int_course_intro.html" rel="prev">
+<link href="../chapters/03_intro_glms.html" rel="next">
+<link href="../chapters/02_tutorial_data_exploration.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -73,6 +108,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -86,7 +150,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../index.html">Course Overview</a></li><li class="breadcrumb-item"><a href="../chapters/int_syllabus.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Syllabus</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/03_intro_modeling.html">Part III: Models as Estimators</a></li><li class="breadcrumb-item"><a href="../chapters/03_intro_modeling.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Introduction to Models</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -117,13 +181,13 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Course Overview</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
@@ -138,7 +202,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/int_syllabus.html" class="sidebar-item-text sidebar-link active">
+  <a href="../chapters/int_syllabus.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Syllabus</span></span></a>
   </div>
 </li>
@@ -287,16 +351,16 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
  <span class="menu-text">Part III: Models as Estimators</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/03_intro_modeling.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/03_intro_modeling.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Introduction to Models</span></span></a>
   </div>
 </li>
@@ -330,28 +394,28 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#location-and-meeting-times" id="toc-location-and-meeting-times" class="nav-link active" data-scroll-target="#location-and-meeting-times"><span class="header-section-number">3.1</span> Location and meeting times</a></li>
-  <li><a href="#office-hours" id="toc-office-hours" class="nav-link" data-scroll-target="#office-hours"><span class="header-section-number">3.2</span> Office hours</a></li>
-  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites"><span class="header-section-number">3.3</span> Prerequisites</a></li>
-  <li><a href="#assessment-and-grading-standards" id="toc-assessment-and-grading-standards" class="nav-link" data-scroll-target="#assessment-and-grading-standards"><span class="header-section-number">3.4</span> Assessment and Grading Standards</a></li>
-  <li><a href="#attendanceparticipation-policy" id="toc-attendanceparticipation-policy" class="nav-link" data-scroll-target="#attendanceparticipation-policy"><span class="header-section-number">3.5</span> Attendance/Participation Policy</a></li>
-  <li><a href="#how-to-succeed-in-the-course-beyond-your-wildest-and-funniest-dreams" id="toc-how-to-succeed-in-the-course-beyond-your-wildest-and-funniest-dreams" class="nav-link" data-scroll-target="#how-to-succeed-in-the-course-beyond-your-wildest-and-funniest-dreams"><span class="header-section-number">3.6</span> How to succeed in the course (beyond your wildest and funniest dreams)</a></li>
-  <li><a href="#expectations" id="toc-expectations" class="nav-link" data-scroll-target="#expectations"><span class="header-section-number">3.7</span> Expectations</a></li>
-  <li><a href="#r-code-readings-and-discussion-sections" id="toc-r-code-readings-and-discussion-sections" class="nav-link" data-scroll-target="#r-code-readings-and-discussion-sections"><span class="header-section-number">3.8</span> R Code, readings, and discussion sections</a></li>
-  <li><a href="#classroom-climate-and-conduct" id="toc-classroom-climate-and-conduct" class="nav-link" data-scroll-target="#classroom-climate-and-conduct"><span class="header-section-number">3.9</span> Classroom Climate and Conduct</a></li>
-  <li><a href="#classroom-statement-on-diversity" id="toc-classroom-statement-on-diversity" class="nav-link" data-scroll-target="#classroom-statement-on-diversity"><span class="header-section-number">3.10</span> Classroom Statement on Diversity</a></li>
-  <li><a href="#duty-to-report" id="toc-duty-to-report" class="nav-link" data-scroll-target="#duty-to-report"><span class="header-section-number">3.11</span> Duty to Report</a></li>
-  <li><a href="#disability-statement" id="toc-disability-statement" class="nav-link" data-scroll-target="#disability-statement"><span class="header-section-number">3.12</span> Disability Statement</a></li>
-  <li><a href="#academic-honesty" id="toc-academic-honesty" class="nav-link" data-scroll-target="#academic-honesty"><span class="header-section-number">3.13</span> Academic Honesty</a></li>
+  <li><a href="#from-data-to-data-generating-processes" id="toc-from-data-to-data-generating-processes" class="nav-link active" data-scroll-target="#from-data-to-data-generating-processes"><span class="header-section-number">22.1</span> From data to data-generating processes</a></li>
+  <li><a href="#component-1-systematic-structure-signal" id="toc-component-1-systematic-structure-signal" class="nav-link" data-scroll-target="#component-1-systematic-structure-signal"><span class="header-section-number">22.2</span> Component #1: Systematic structure (signal)</a></li>
+  <li><a href="#component-2-unmeasured-variation-noise" id="toc-component-2-unmeasured-variation-noise" class="nav-link" data-scroll-target="#component-2-unmeasured-variation-noise"><span class="header-section-number">22.3</span> Component #2: Unmeasured Variation (Noise)</a></li>
+  <li><a href="#data-distributions" id="toc-data-distributions" class="nav-link" data-scroll-target="#data-distributions"><span class="header-section-number">22.4</span> Data Distributions</a>
+  <ul class="collapse">
+  <li><a href="#gaussian-normal-distribution" id="toc-gaussian-normal-distribution" class="nav-link" data-scroll-target="#gaussian-normal-distribution"><span class="header-section-number">22.4.1</span> Gaussian (Normal) Distribution</a></li>
+  <li><a href="#gamma-distribution" id="toc-gamma-distribution" class="nav-link" data-scroll-target="#gamma-distribution"><span class="header-section-number">22.4.2</span> Gamma Distribution</a></li>
+  <li><a href="#poisson-distribution" id="toc-poisson-distribution" class="nav-link" data-scroll-target="#poisson-distribution"><span class="header-section-number">22.4.3</span> Poisson Distribution</a></li>
+  <li><a href="#binomial-distribution-bernoulli-when-n-1" id="toc-binomial-distribution-bernoulli-when-n-1" class="nav-link" data-scroll-target="#binomial-distribution-bernoulli-when-n-1"><span class="header-section-number">22.4.4</span> Binomial Distribution (Bernoulli when <span class="math inline">\(n = 1\)</span>)</a></li>
+  <li><a href="#beta-distribution" id="toc-beta-distribution" class="nav-link" data-scroll-target="#beta-distribution"><span class="header-section-number">22.4.5</span> Beta Distribution</a></li>
+  <li><a href="#negative-binomial-distribution" id="toc-negative-binomial-distribution" class="nav-link" data-scroll-target="#negative-binomial-distribution"><span class="header-section-number">22.4.6</span> Negative Binomial Distribution</a></li>
+  <li><a href="#zero-inflated-poisson-distribution" id="toc-zero-inflated-poisson-distribution" class="nav-link" data-scroll-target="#zero-inflated-poisson-distribution"><span class="header-section-number">22.4.7</span> Zero-Inflated Poisson Distribution</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../index.html">Course Overview</a></li><li class="breadcrumb-item"><a href="../chapters/int_syllabus.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Syllabus</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/03_intro_modeling.html">Part III: Models as Estimators</a></li><li class="breadcrumb-item"><a href="../chapters/03_intro_modeling.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Introduction to Models</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Syllabus</span></h1>
+<h1 class="title"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Introduction to Models</span></h1>
 </div>
 
 
@@ -368,117 +432,244 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="location-and-meeting-times" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="location-and-meeting-times"><span class="header-section-number">3.1</span> Location and meeting times</h2>
-<p>Classroom Building 115 (or on Zoom, as necessary); Monday / Wednesday 11:00AM - 12:50PM (Mountain Time)</p>
-</section>
-<section id="office-hours" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="office-hours"><span class="header-section-number">3.2</span> Office hours</h2>
-<p>Due to the nature of the course, I will not have specific office hours. The class sessions are of adequate duration for you to questions and engage in one-on-one meetings with your classmates and me. That said, I am more than happy to meet individually or in small groups outside of normal class periods.</p>
-</section>
-<section id="prerequisites" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="prerequisites"><span class="header-section-number">3.3</span> Prerequisites</h2>
-<p>To ensure your success in this course, the following are required:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"chapters/class_r_scripts/load_packages.r"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="from-data-to-data-generating-processes" class="level2" data-number="22.1">
+<h2 data-number="22.1" class="anchored" data-anchor-id="from-data-to-data-generating-processes"><span class="header-section-number">22.1</span> From data to data-generating processes</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p>In this chapter, we make a necessary transition: from practical handling of data to thinking conceptually about data-generating processes. By now, you have entered your data into a spreadsheet (or some other organized data table). Now, it is time to modify this <em>“data = spreadsheet”</em> thinking and consider that <code>data</code> are outcomes of often complex <strong>processes</strong> (the ones encoded in your DAG).</p>
+<p>As a thought exercise, consider a set of mass values for a jackalope. The body mass of marsh-water guzzling jackalopes (<em>Lepus antilocaprahydropicus</em>) varies because individuals differ in body size and condition. Depending on recent food capture or hydration state, mass may fluctuate within individuals over very short time scales, driven by rapid changes to a complex digestive and metabolic machinery. Additional variation also arises during measurement due to instrument precision, calibration drift, and movement or posture on the scale. In sum, there are a myriad processes leading to a simple measurement.</p>
+</div><div class="column" style="width:40%;">
+<p><img src="graphics/jackalope_graphics/marshwater_jackalope.png" class="img-fluid"></p>
+</div>
+</div>
+<p>Every measurement reflects two central components of a system, which will be the focus of this short chapter:</p>
 <ul>
-<li>You must have a dataset to be analyzed this semester. This is very important. This class will only cover data reformatting; we will not cover data processing (except as necessary in specific cases).</li>
-<li>Your data analysis must not be used in another course (past or present). Your goal should be to discover something new. How else can you expect to maintain excitement?</li>
-<li>You should be at least in your second year of graduate school (or, at least, feel that you are).</li>
-<li>You must have some exposure to using the Program R (tidyverse preferred, but base R is nice too).</li>
-<li>You must have taken a statistics course in the last five years.</li>
+<li><strong>Component #1: Systematic structure (signal):</strong> patterns deriving from mechanisms and constraints<br>
+</li>
+<li><strong>Component #2: Unmeasured variation (noise):</strong> variability generated by unidentified mechanisms, measurement constraints, and nmeasured stochastic processes</li>
 </ul>
-</section>
-<section id="assessment-and-grading-standards" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="assessment-and-grading-standards"><span class="header-section-number">3.4</span> Assessment and Grading Standards</h2>
-<p>This course is graded as Pass or Fail (technically “Satisfactory” or “Unsatisfactory”). To pass the course you need to do the following:</p>
-<ul>
-<li>Participate at least 80% of the class meetings. Simply inform me of your absences (for health reasons, field research, etc.), and then do what you can to catch up with the work.</li>
-<li>Turn in all assignments on their due dates (see <a href="../chapters/int_calendar_sp26.qmd" target="_blank" rel="noopener">Course Calendar</a>) and receive a Green Light on all assignment submissions by the end of term (see <a href="../chapters/int_assignment_grades.html">Assignments &amp; Grading</a>).</li>
-</ul>
-</section>
-<section id="attendanceparticipation-policy" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="attendanceparticipation-policy"><span class="header-section-number">3.5</span> Attendance/Participation Policy</h2>
-<p>This is a graduate level course, and you are here for your own benefit. Of course, to achieve this benefit, it is paramount that you attend class, stay engaged with the material, and not only learn how to do your own analysis but understand other types of data and analyses by working with your group members. If you do this, you should have analyzed your own data by the end of the semester and have part of a manuscript completed. Please email me ahead of time when you will be unable to attend class for a valid reason.</p>
-</section>
-<section id="how-to-succeed-in-the-course-beyond-your-wildest-and-funniest-dreams" class="level2" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="how-to-succeed-in-the-course-beyond-your-wildest-and-funniest-dreams"><span class="header-section-number">3.6</span> How to succeed in the course (beyond your wildest and funniest dreams)</h2>
-<p>Graduate school can be considerably challenging. Each of us is attempting to juggle research, teaching, classes, health, and family, all while coping with unexpected (and sometimes life-altering) stressors. Course information is flying at you from every direction with many specific terms and concepts that you need to learn and operationalize. So, here are some reminders for you (even though I know you don’t need these):</p>
-<ul>
-<li><p><strong>Ask questions!</strong> Even though there are no exams in ZOO5500, take copious notes and work collaboratively to build course notes.</p></li>
-<li><p><strong>Don’t be afraid to redirect the flow of the course.</strong> 5000-level courses are intended to be flexible and fun. I want to give you adequate time to think about and discuss the course material. I’m willing to alter the pace of the course, change the order of topics, or create new exercises/challenges for you. This is intended to be fun while simultaneously transforming you into nimble analytical thinkers and doers! So, just talk to me about how I can help!</p></li>
-<li><p><strong>Read all the material in this online course guidebook.</strong> Many courses focus on lecture and also require a large amount of reading; this one does neither. This website introduces topics and primes your thinking, so that we can have fruitful discussions in class.</p></li>
-<li><p><strong>Show up to as many of discussions as you can.</strong> When we meet together, our goal will be to solidify everyone’s understanding of different concepts and how they are linked. These concepts will be useful as you navigate your own analysis project.</p></li>
-</ul>
-</section>
-<section id="expectations" class="level2" data-number="3.7">
-<h2 data-number="3.7" class="anchored" data-anchor-id="expectations"><span class="header-section-number">3.7</span> Expectations</h2>
-<p>As your instructor, you should expect me to:</p>
-<ul>
-<li>Try my very hardest to make the course go smoothly (the reason you now have this nice new web-basedcourse guide); but please be prepared for the inevitable hiccups. No matter how hard we all try, there always seem to be a few obstacles (like internet going down for a couple of hours when we’re on Zoom).</li>
-<li>Respond to questions within 24 hours during the work week. However, I likely will not respond during the weekend (unless there is an urgent matter).</li>
-<li>Respect you not only as a learner but as a colleague.</li>
-<li>Understand that these are strange and sometimes unforgiving times. We all have varying levels of tolerance and resistance to stress. If you are having a hard time for whatever reason, please communicate with me. Fortunately, I really suck at judging people, but I can do a hell of a job listening and working with you to solve a problem (or finding someone else who can).</li>
-</ul>
-<p>As a student, you are expected to:</p>
-<ul>
-<li>Be respectful of everyone in the class, including me. No one has time to think about some asinine comment made in class.</li>
-<li>Ask for help if needed.</li>
-<li>Treat your presence in the classroom and your enrollment in this course as you would a job; Act professionally, arrive on time, pay attention, complete your work in a timely and professional manner, and treat your learning seriously.</li>
-<li>Understand that everyone is going through different things (family events, etc.), and be understanding of each other.</li>
-<li>Be engaged in the course.</li>
-<li>Be engaged within your assigned groups and help each other learn. Teaching another group member something you know solidifies your own knowledge and also sets you up to be a great future colleague.</li>
-</ul>
-</section>
-<section id="r-code-readings-and-discussion-sections" class="level2" data-number="3.8">
-<h2 data-number="3.8" class="anchored" data-anchor-id="r-code-readings-and-discussion-sections"><span class="header-section-number">3.8</span> R Code, readings, and discussion sections</h2>
-<p>All R code required for both instruction and hands-on exercises is available within this course book. Unlike past versions of this course, the present iteration has limited traditional lectures. That said, I may respond to your specific questions by creating mini-presentations for you, which I will present in class. I will share such material immediately after our discussions.</p>
-</section>
-<section id="classroom-climate-and-conduct" class="level2" data-number="3.9">
-<h2 data-number="3.9" class="anchored" data-anchor-id="classroom-climate-and-conduct"><span class="header-section-number">3.9</span> Classroom Climate and Conduct</h2>
-<p>We are all expected to be respectful towards each other. Spirited debate and disagreement are expected—and encouraged—but this should focus on ideas rather than people. Scientific arguments are strongest when they address evidence, assumptions, logic, and consequences. Appeals to authority (including your advisor, another professor, a prominent scientist, or me) are poor substitutes for a logical argument. You are welcome to challenge any idea presented in this course, especially mine (I love it!), but, for the sake of the future state of science, I expect that you will first explain why you disagree and then engage constructively with the reasoning and subsequent debate. <em>Ad hominem</em> attacks, offensive language, and dismissive behavior (eye-rolling, saying “whatever,” etc.) are not appropriate in a learning environment and may result in dismissal from the classroom. That said, after we get to know each other, a bit of constructive snarkiness can be good for morale. Lastly, for the privacy of your fellow students, please do not record lectures or classroom discussions without permission.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="A note on knowledge-sharing">
+<blockquote class="blockquote">
+<p>These two components are co-products of the same data-generating processes.</p>
+</blockquote>
+<p>Once you start thinking about data in this way, it perhaps becomes clearer that not all variation in a given dataset carries the same meaning. Some variation reflects real structure in the system that we actually care about. Some has to do with the natural limits of the data themselves. Other variation comes from randomness, measurement limits, or processes that we did not explicitly account for.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
-<i class="callout-icon"></i>
+<i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>A note on knowledge-sharing
+<span class="screen-reader-only">Note</span>A thought about ecology being a discipline of controlling noise
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Our classroom is a shared intellectual space. Questions, mistakes, and partial understanding are part of learning. Please remember that supporting one another’s intellectual growth matters more than performative corrections or demonstrations of expertise.</p>
+<p>The order in which Signal and Noise are discussed below does not reflect my view of their relative importance. In fact, for modeling purposes, I argue that the majority of ecologists’ work, rightly so, I think, is focused on coping with noise. To convince you of this, take any scientific paper and compare the length of the sections dedicated to hypotheses and methods. We use calibrated instruments; we carefully design well-replicated and controlled experiments; we test and re-test interobserver reliability; we control for difference is detectability (or other biases). What remains after dealing with all the noise is the answer to an often simple question (hypothesis). So, with that, let us delve into the two components of an initial statistical model for a set of measurements.</p>
 </div>
 </div>
 </div>
+<p>So, with that, let us delve into the two fundamental components of set of measurements.</p>
+<hr>
 </section>
-<section id="classroom-statement-on-diversity" class="level2" data-number="3.10">
-<h2 data-number="3.10" class="anchored" data-anchor-id="classroom-statement-on-diversity"><span class="header-section-number">3.10</span> Classroom Statement on Diversity</h2>
-<p>The University of Wyoming values an educational environment that is diverse, equitable, and inclusive. The diversity that students and faculty bring to class, including age, country of origin, culture, disability, economic class, ethnicity, gender identity, immigration status, linguistic, political affiliation, race, religion, sexual orientation, veteran status, worldview, and other social and cultural diversity is valued, respected, and considered a resource for learning. we understand that our UW community members represent a rich variety of backgrounds and perspectives. We are committed to providing an atmosphere for learning that respects diversity of all types. While working together to build this community, we ask all members–from students to staff to faculty–to:</p>
+<section id="component-1-systematic-structure-signal" class="level2" data-number="22.2">
+<h2 data-number="22.2" class="anchored" data-anchor-id="component-1-systematic-structure-signal"><span class="header-section-number">22.2</span> Component #1: Systematic structure (signal)</h2>
+<p>In our work, we are observing the results of interacting forces operating in real systems. Those forces operate directionally (in time and space). Something influences something else; that something influences yet another something. And so forth. And despite the often misinterpreted adage “Correlation does not equal causation,” ecologists rarely stop at correlation. Associations are taken almost as cues to hypothesize about the mechanisms that generated them. Even when we fully describe a simple univariate distribution, we are making assumptions about observable variation: whether events occur independently, whether variability scales with the mean (in some fashion), and whether measurements fluctuate around a central tendency (in some fashion). In a regression model (e.g.&nbsp;GLM, GLMM), the “signal” is the component of the outcome distribution that we model as varying with specified predictors. The model does not create causation; it describes observable patterns under its specific assumptions. Whether a modeled contrast estimates a causal effect depends on the study design, causal assumptions, and identification strategy.</p>
+<hr>
+</section>
+<section id="component-2-unmeasured-variation-noise" class="level2" data-number="22.3">
+<h2 data-number="22.3" class="anchored" data-anchor-id="component-2-unmeasured-variation-noise"><span class="header-section-number">22.3</span> Component #2: Unmeasured Variation (Noise)</h2>
+<p>The second component of any set of measurements is unmeasured variation, often called <em>noise</em>. Unfortunately, the word <em>noise</em> has morphed into a sort of statistical pejorative that we equate with annoying, irrelevant, or cumbersome. So, why is noise so important? It is important because a model of the world is incomplete if it explains only the mean of a signal but ignores how variability behaves around that mean. Explaining the average outcome is only half the story. We must also understand why observations deviate from that average (or other measure of central tendency). In other words, noise is not a nuisance obscuring an otherwise pristine biological or ecological signal. It is not static layered on top of clear understanding. At its core, <em>noise</em> refers to the myriad additional processes operating in concert with the systematic structure of the data we have chosen to model. These processes are very real, and often scientifically interesting. Noise can arise from:</p>
 <ul>
-<li>Be transparent about pre-existing biases and beliefs.</li>
-<li>Do not hesitate to share their unique experiences and perspectives.</li>
-<li>Be open to the views of others.</li>
-<li>Honor the uniqueness of their colleagues.</li>
-<li>Appreciate the opportunity that we have to learn from each other in this community.</li>
-<li>Value each other’s opinions and communicate in a respectful manner.</li>
-<li>Keep confidential any discussions of a personal (or professional) nature.</li>
-<li>Use this opportunity together to discuss ways in which we can create an inclusive environment in this course and across the University community.</li>
+<li><p>Individual variation (heterogeneity)</p></li>
+<li><p>Environmental fluctuations</p></li>
+<li><p>Measurement error (accuracy and precision)</p></li>
+<li><p>Unmeasured drivers</p></li>
+<li><p>Stochastic processes</p></li>
+</ul>
+<p>At first glance, this list may feel extremely unsettling. It suggests that much of the world lies beyond direct and easy measurement. But to a scientist, this diversity of variation represents opportunity. Each source of variability reflects some underlying mechanism. Each pattern of deviation welcomes new explanation. To be clear, noise is not something we subtract away after modeling the “real” part of the system. Like systematic structure, it has structure of its own. Different mechanisms generate different <em>kinds</em> of variability. We can describe some of these recognizable patterns of variability with <strong>distributions</strong>. Similar distributions can result from different processes.</p>
+<hr>
+</section>
+<section id="data-distributions" class="level2" data-number="22.4">
+<h2 data-number="22.4" class="anchored" data-anchor-id="data-distributions"><span class="header-section-number">22.4</span> Data Distributions</h2>
+<p>If variability has structure, we need a precise language to describe it. In statistics, that language is the probability distribution. So, what is a distribution?</p>
+<blockquote class="blockquote">
+<p>A probability distribution describes which values an outcome can take and how probable those values are, conditional on a model. It does not, by itself, identify the processes that produced them.</p>
+</blockquote>
+<p>A data distribution specifies:</p>
+<ul>
+<li><p>What values are possible (constraints)</p></li>
+<li><p>How variability scales with the mean</p></li>
+<li><p>Whether outcomes are discrete or continuous</p></li>
+<li><p>Whether extreme outcomes are rare or common</p></li>
+</ul>
+<p>The key insight is this: when we choose a distribution, we make a working statistical assumption about variability. We can inform this choice with knowledge of the measurement process and check its implications against the data. For example:</p>
+<ul>
+<li><p>Count data: Some candidate distributions assume that variance scales with the mean</p></li>
+<li><p>Proportion data: We acknowledge constraints on the data (bounded between 0 and 1)</p></li>
+</ul>
+<p>Once we begin looking at distributions as statistical models, it becomes clear that different distributions make different assumptions about the observed data. The Normal distribution reflects additive variation around a central tendency. Count distributions arise when outcomes reflect the accumulation of discrete events. Other distributions emerge when values are bounded, strictly positive, or shaped by multiplicative processes (such as the Gamma distribution). We are acknowledging that the features of the dataset arise from some process or processes, while recognizing that the distribution alone cannot identify them. Before selecting an outcome distribution for an effect analysis, we must specify the question and estimand, describe the causal system with an SCM, determine how the effect can be identified, and examine how the outcome was observed or measured. Then we can choose an estimator and a suitable outcome distribution and check the model. A well-fitting distribution cannot repair invalid causal identification.</p>
+<p>In what follows, I introduce several commonly used distributions and the types of data-generating processes they can represent. This is by no means an exhaustive list. As you read, focus less on their mathematical formulas and more on the assumptions they encode about randomness, constraints, and mechanism.</p>
+<section id="gaussian-normal-distribution" class="level3" data-number="22.4.1">
+<h3 data-number="22.4.1" class="anchored" data-anchor-id="gaussian-normal-distribution"><span class="header-section-number">22.4.1</span> Gaussian (Normal) Distribution</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_intro_modeling_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Type:</strong> Continuous <strong>Support:</strong> <span class="math inline">\(-\infty &lt; x &lt; \infty\)</span> <strong>Variance/mean relationship:</strong></p>
+<ul>
+<li><p>In a Gaussian model with constant variance, the conditional variance is assumed constant</p></li>
+<li><p>Under that assumption, it does not depend on the conditional mean</p></li>
+</ul>
+<p><strong>Ecological examples</strong></p>
+<ul>
+<li><p>Measurement error in body mass</p></li>
+<li><p>Daily deviation in stream temperature from a seasonal mean</p></li>
 </ul>
 </section>
-<section id="duty-to-report" class="level2" data-number="3.11">
-<h2 data-number="3.11" class="anchored" data-anchor-id="duty-to-report"><span class="header-section-number">3.11</span> Duty to Report</h2>
-<p>UW faculty are committed to supporting students and upholding the University’s non-discrimination policy. Under Title IX, discrimination based upon sex and gender is prohibited. If you experience an incident of sex- or gender-based discrimination, we encourage you to report it. While you may talk to a faculty member, understand that as a “Responsible Employee” of the University, the faculty member is required to report information you share about the incident to the University’s Title IX Coordinator (you may choose whether you or anyone involved is identified by name). If you would like to speak with someone who may be able to afford you privacy or confidentiality, there are people who can meet with you. Faculty can help direct you or you may find info about UW policy and resources at http://www.uwyo.edu/reportit. While we want you to feel comfortable coming to us with issues you may be struggling with or concerns you may be having, please be aware that we have some reporting requirements that are part of our job requirements at UW. You do not have to go through the experience alone. For example, if you inform us of an issue of sexual harassment, sexual assault, or discrimination we will keep the information as private as we can, but we am required to bring it to the attention of the institution’s Title IX Coordinator. If you would like to talk to those offices directly, you can contact Equal Opportunity Report and Response (Bureau of Mines Room 319, 766-5200, report-it@uwyo.edu, www.uwyo.edu/reportit). Additionally, you can also report incidents or complaints to the UW Police Department. You can also get support at the STOP Violence program (stopviolence@uwyo.edu, www.uwyo.edu/stop, 766-3296) (or SAFE Project (www.safeproject.org, campus@safeproject.org, 766-3434, 24-Hour hotline: 745-3556). Assistance and resources are available, and you are not required to make a formal complaint or participate in an investigation to access them. Another common example is if you are struggling with an issue that may be traumatic, or under unusual stress. We will likely inform the Dean of Students Office or Counseling Center. If you would like to reach out directly to them for assistance, you can contact them by going to www.uwyo.edu/dos/uwyocares.</p>
+<section id="gamma-distribution" class="level3" data-number="22.4.2">
+<h3 data-number="22.4.2" class="anchored" data-anchor-id="gamma-distribution"><span class="header-section-number">22.4.2</span> Gamma Distribution</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_intro_modeling_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Type:</strong> Continuous <strong>Support:</strong> <span class="math inline">\(0 &lt; x &lt; \infty\)</span> <strong>Variance/mean relationship:</strong></p>
+<ul>
+<li>Variance proportional to μ² (square of the mean)</li>
+<li>Variability increases faster than mean</li>
+</ul>
+<p><strong>Ecological examples</strong></p>
+<ul>
+<li><p>Biomass accumulation</p></li>
+<li><p>Time until an event (e.g., flowering)</p></li>
+<li><p>Rainfall (with a slight adjustment for zero values)</p></li>
+</ul>
 </section>
-<section id="disability-statement" class="level2" data-number="3.12">
-<h2 data-number="3.12" class="anchored" data-anchor-id="disability-statement"><span class="header-section-number">3.12</span> Disability Statement</h2>
-<p>If you have a physical, learning, sensory or psychological disability and require accommodations, please let me know as soon as possible. You will need to register with, and provide documentation of your disability to University Disability Support Services (UDSS) in SEO, room 330 Knight Hall.</p>
+<section id="poisson-distribution" class="level3" data-number="22.4.3">
+<h3 data-number="22.4.3" class="anchored" data-anchor-id="poisson-distribution"><span class="header-section-number">22.4.3</span> Poisson Distribution</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_intro_modeling_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Type:</strong> Discrete <strong>Support:</strong> <span class="math inline">\(x \in \{0,1,2,\dots\}\)</span> (<em>x</em> is an element of…) <strong>Variance/mean relationship:</strong></p>
+<ul>
+<li><p>Variance equals the mean</p></li>
+<li><p>Variability increases linearly with μ (mean)</p></li>
+</ul>
+<p><strong>Ecological examples</strong></p>
+<ul>
+<li><p>Number of nests in a plot</p></li>
+<li><p>Number of insects captured per trap</p></li>
+</ul>
 </section>
-<section id="academic-honesty" class="level2" data-number="3.13">
-<h2 data-number="3.13" class="anchored" data-anchor-id="academic-honesty"><span class="header-section-number">3.13</span> Academic Honesty</h2>
-<p>The University of Wyoming is built upon a strong foundation of integrity, respect and trust. All members of the university community have a responsibility to be honest and the right to expect honesty from others. Any form of academic dishonesty is unacceptable to our community and will not be tolerated [from the University Catalog]. Teachers and students should report suspected violations of standards of academic honesty to the instructor, department head, or dean. Other University regulations can be found <a href="http://www.uwyo.edu/generalcounsel/new-regulatory-structure/index.html">here</a></p>
+<section id="binomial-distribution-bernoulli-when-n-1" class="level3" data-number="22.4.4">
+<h3 data-number="22.4.4" class="anchored" data-anchor-id="binomial-distribution-bernoulli-when-n-1"><span class="header-section-number">22.4.4</span> Binomial Distribution (Bernoulli when <span class="math inline">\(n = 1\)</span>)</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_intro_modeling_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Type:</strong> Discrete <strong>Support:</strong> <span class="math inline">\(x \in \{0,1,\dots,n\}\)</span>, where <span class="math inline">\(x\)</span> is the number of successes in <span class="math inline">\(n\)</span> trials <strong>Variance/mean relationship:</strong></p>
+<ul>
+<li><p>Variance = <span class="math inline">\(np(1-p)\)</span> for <span class="math inline">\(n\)</span> trials; <span class="math inline">\(p(1-p)\)</span> when <span class="math inline">\(n = 1\)</span></p></li>
+<li><p>Constrained by bounds 0 and n</p></li>
+</ul>
+<p><strong>Ecological examples</strong></p>
+<ul>
+<li><p>Number of successful nests out of total attempts</p></li>
+<li><p>Germination success out of planted seeds</p></li>
+</ul>
+</section>
+<section id="beta-distribution" class="level3" data-number="22.4.5">
+<h3 data-number="22.4.5" class="anchored" data-anchor-id="beta-distribution"><span class="header-section-number">22.4.5</span> Beta Distribution</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_intro_modeling_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Type:</strong> Continuous <strong>Support:</strong> <span class="math inline">\(0 &lt; x &lt; 1\)</span> <strong>Variance/mean relationship:</strong></p>
+<ul>
+<li><p>Variance depends on both mean and precision</p></li>
+<li><p>Constrained between 0 and 1 (but does not include 0 or 1)</p></li>
+</ul>
+<p><strong>Ecological examples</strong></p>
+<ul>
+<li><p>Continuous proportion of canopy cover (excluding exact 0 and 1)</p></li>
+<li><p>Continuous proportion of habitat area occupied (excluding exact 0 and 1; occupancy across a known number of sites is binomial)</p></li>
+</ul>
+</section>
+<section id="negative-binomial-distribution" class="level3" data-number="22.4.6">
+<h3 data-number="22.4.6" class="anchored" data-anchor-id="negative-binomial-distribution"><span class="header-section-number">22.4.6</span> Negative Binomial Distribution</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_intro_modeling_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Type:</strong> Discrete <strong>Support:</strong> <span class="math inline">\(x \in \{0,1,2,\dots\}\)</span> (<em>x</em> is an element of…) <strong>Variance/mean relationship:</strong></p>
+<ul>
+<li>Variance = <span class="math inline">\(μ + μ²/k\)</span> (where <em>k</em> is a dispersion parameter)</li>
+<li>Variance exceeds mean</li>
+</ul>
+<p><strong>Ecological examples</strong></p>
+<ul>
+<li><p>Aggregated insect counts</p></li>
+<li><p>Overdispersed species abundance</p></li>
+</ul>
+</section>
+<section id="zero-inflated-poisson-distribution" class="level3" data-number="22.4.7">
+<h3 data-number="22.4.7" class="anchored" data-anchor-id="zero-inflated-poisson-distribution"><span class="header-section-number">22.4.7</span> Zero-Inflated Poisson Distribution</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_intro_modeling_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Type:</strong> Discrete <strong>Support:</strong> <span class="math inline">\(x \in \{0,1,2,\dots\}\)</span> (<em>x</em> is an element of…) <strong>Variance/mean relationship:</strong></p>
+<ul>
+<li><p>Extra zeros inflate variance</p></li>
+<li><p>Variance greater than Poisson expectation</p></li>
+</ul>
+<p><strong>Ecological examples</strong></p>
+<ul>
+<li><p>Species absent from many sampling sites</p></li>
+<li><p>Traps with structural zeros</p></li>
+</ul>
+<p>Next, we will introduce Generalized Linear Models so we can understand their distinct advantages over other, older approaches. A GLM specifies how an outcome’s conditional distribution varies with a set of predictors. We first decide what comparison we seek (estimand!) and which variables are needed to identify it (adjustment set!). Only after we have done these steps can we choose an appropriate type of statistical model.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -884,13 +1075,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/int_course_intro.html" class="pagination-link" aria-label="Introduction">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span>
+      <a href="../chapters/02_tutorial_data_exploration.html" class="pagination-link" aria-label="Tutorial: Data Exploration">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Tutorial: Data Exploration</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/int_calendar_fa26.html" class="pagination-link" aria-label="Calendar overview">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Calendar overview</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/03_intro_glms.html" class="pagination-link" aria-label="GLM Introduction">
+        <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">GLM Introduction</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

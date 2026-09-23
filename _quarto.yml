@@ -51,9 +51,9 @@ book:
         - chapters/02_tutorial_data_exploration.qmd
     
     - part: "Part III: Models as Estimators"
-      #chapters: 
-        #- chapters/03_intro_modeling.qmd
-        #- chapters/03_intro_glms.qmd
+      chapters: 
+        - chapters/03_intro_modeling.qmd
+        - chapters/03_intro_glms.qmd
         #- chapters/03_tutorial_glms.qmd
         #- chapters/03_glm_partial_association.qmd
        # - chapters/03_DHARMA_diagnostics.qmd

@@ -18,9 +18,9 @@ source("chapters/class_r_scripts/load_packages.r")
 
 ## Separating signal from noise
 
-Our task as scientists is to learn how to separate the patterns that carry meaningful information (*signal*) from the variation that does not (*noise*). This is why we use all of these silly models in the first place. So, what exactly are models?
+Our task as scientists is to learn how to describe patterns that carry meaningful information (*signal*) and variation not accounted for by our current model (*noise*). Unmodeled variation may include causes that matter for the effect we seek to estimate. This is why we use all of these silly models in the first place. So, what exactly are models?
 
-> Models are hypotheses about how the data were generated.
+> Statistical models are hypotheses about selected features of how the data were generated. An SCM expresses our assumptions about the causal system; the statistical model specifies how we estimate a quantity from observed data.
 
 ### Comparing GLMs to vintage models (ANOVAs and *t*-tests)
 
@@ -28,7 +28,7 @@ Let us begin this introduction to our primary modeling framework (the GLM) by co
 
 ::::: columns
 ::: {.column width="60%"}
-Here, we provide some simulation code that will (hopefully) convince you that GLMs are pretty much the same kinds of models that you were exposed to in your introductory statistics courses back in the day. As you will quickly see, however, GLMs are highly flexible and will allow you to extract the maximum amount of signal from your noisy data.
+Here, we provide some simulation code that will (hopefully) convince you that GLMs are pretty much the same kinds of models that you were exposed to in your introductory statistics courses back in the day. As you will quickly see, however, GLMs are highly flexible and will allow you to describe systematic patterns in noisy data, once you have specified the question, estimand, and identification strategy.
 
 We will simulate a fake dataset that has two groups (1 and 2). The values for each group follow normal distributions with a standard deviation of 1. The groups differ in their mean values, however, by one unit.
 
@@ -62,47 +62,46 @@ p
 :::
 :::::
 
-Now, using three models (*t*-test, ANOVA, and GLM), let us test the hypothesis that these two groups differ. Remember that *t*-tests and ANOVAs are **linear models** that assume, among other things, that both the signal and the noise follow a Gaussian/Normal distribution. Note that we need to convert the ANOVA's *F*-stat to a *t*-statistic for comparability. You can see the code for this multi-model comparison in this callout box:
+Now, using three approaches (*t*-test, ANOVA, and GLM), let us test the hypothesis that these two group means differ. A *t*-test and a one-way ANOVA can be expressed using the Gaussian linear-model framework: conditional outcomes are modeled as Gaussian with a group-specific mean and, here, a common variance. The systematic mean need not itself be Gaussian. We use a pooled-variance *t*-test so its variance assumption matches the ANOVA and Gaussian GLM, and convert the ANOVA's *F*-statistic to an absolute *t*-statistic for comparability. You can see the code for this multi-model comparison in this callout box:
 
 ::: {.callout-note icon="false" collapse="true"}
 ## R code for inter-model comparison
 
 ```{r}
-ttest.mod <- t.test(y ~ id, data=d) # t-test
+ttest.mod <- t.test(y ~ id, data=d, var.equal=TRUE) # pooled-variance t-test
 anova.mod <- aov(y ~ id, data=d) # ANOVA
-glm.mod <- glm(y ~ id, data=d) # GLM
+glm.mod <- glm(y ~ id, data=d, family=gaussian()) # Gaussian GLM
 
 ttest.t <- abs(as.numeric(ttest.mod$statistic))
 anova.f <- summary(anova.mod)[[1]]$F[1]
 anova.t <- sqrt(anova.f) # t-stat = sqrt(F-stat)
-glm.t <- coefficients(summary(glm.mod))[2, 3]
+glm.t <- abs(coefficients(summary(glm.mod))[2, 3])
 ```
 
 Then, we compare all the test statistics (*t*-values), from which the *p*-values are derived.
 
 ```{r}
-tvals <- c(ttest.t, anova.t, glm.t) # thus, p-values and inference are the same
+tvals <- c(ttest.t, anova.t, glm.t) # same absolute t statistic under matched assumptions
 tvals
 ```
 :::
 
-You can see that all of the *t*-values are exactly the same (*t* = 4.119985). Fantastic! Now you can sit back and silently reconsider your desire to use a *t*-test or ANOVA (or anything similar). Let us say that we are not abandoning *t*-tests and ANOVAs; instead, we are outgrowing them. The table below shows a number of other advantages that GLMs have.
+You can see that the absolute *t*-values are the same under these matched assumptions. Fantastic! The two-sided *p*-values also match. This equivalence is about an estimated difference in group means, not about whether that difference is causal. Now you can sit back and silently reconsider your desire to use a *t*-test or ANOVA (or anything similar). Let us say that we are not abandoning *t*-tests and ANOVAs; instead, we are placing them within a broader modeling framework. The table below shows a number of other capabilities that GLMs and their extensions have.
 
-::: {.course-info tbl-colwidths="[70, 10, 10, 10]"}
-| Functionality / Capability                | t-test | ANOVA | GLM |
-|-------------------------------------------|:------:|:-----:|:---:|
-| Unbalanced sample                         |   ✅   |  ✅   | ✅  |
-| Compare more than two groups              |        |  ✅   | ✅  |
-| Handle continuous predictors              |        |       | ✅  |
-| Handle non-Normal distributions           |        |       | ✅  |
-| Complex hierarchical random effects       |        |       | ✅  |
-| Use link functions (*log*, *logit*, etc.) |        |       | ✅  |
-| Predicted values from model output        |        |       | ✅  |
-| Nonlinear extensions                      |        |       | ✅  |
-| Under current development                 |        |       | ✅  |
+::: {.course-info tbl-colwidths="[65, 12, 12, 11]"}
+| Functionality / Capability                | t-test |    ANOVA    |   GLM    |
+|-------------------------------------------|:------:|:-----------:|:--------:|
+| Unbalanced sample                         |   ✅   |     ✅      |    ✅    |
+| Compare more than two groups              |        |     ✅      |    ✅    |
+| Handle continuous predictors              |        | ✅ (ANCOVA) |    ✅    |
+| Handle non-Gaussian outcome families      |        |             |    ✅    |
+| Hierarchical random effects               |        |             | In GLMMs |
+| Use link functions (*log*, *logit*, etc.) |        |             |    ✅    |
+| Predicted values from fitted model        |   ✅   |     ✅      |    ✅    |
+| Nonlinear functional forms or extensions  |        |     ✅      |    ✅    |
 :::
 
-Hopefully, this short exercise convinces you that GLMs and their extensions (Generalized Linear --and Additive-- Mixed Models) no longer need to be viewed as *“advanced statistics”*; they can simply be used as a formal and unified language for ecological thinking.
+Hopefully, this short exercise convinces you that GLMs and their extensions (Generalized Linear and Additive Mixed Models) no longer need to be viewed as *“advanced statistics”*; they can simply be used as a formal and unified language for ecological thinking.
 
 ### Setting the stage for GLMs
 
@@ -115,7 +114,7 @@ Most textbook treatments of GLMs start off examining a model with Gaussian (norm
 
 In many classroom situations, that works beautifully. If we are modeling body mass of adults (*why adults?*), temperature, or some other roughly symmetric continuous variable, the Gaussian/normal distribution is often appropriate. However, the Gaussian/normal distribution is often the exception rather than the rule because:
 
-> Most ecological data are not normally distributed.
+> Many ecological outcomes require a model other than a constant-variance Gaussian model. The marginal distribution of an outcome alone does not decide its conditional model.
 
 Why? As ecologists, we regularly collect data on proportions, rates, skewed measurements, zero-heavy processes, and, perhaps most commonly, counts like:
 
@@ -124,25 +123,25 @@ Why? As ecologists, we regularly collect data on proportions, rates, skewed meas
 -   Number of nests in a plot\
 -   Number of disease cases
 
-For example, consider counts of events. Count distributions --often best approximated by a Poisson distribution-- have their own features, including:
+For example, consider counts of events. Count distributions, sometimes modeled with a Poisson distribution, have their own features, including:
 
 -   Values cannot be negative.
 -   Values are discrete (not continuous)
 -   They often have variances that equal or increase with their mean
 -   They are frequently right-skewed
 
-A Gaussian model, on the other hand, ignores almost everything about how most ecological data are generated. Therefore, in this section, we will first explore the Poisson GLM, which is designed specifically for count data. It:
+A constant-variance Gaussian model may poorly represent the support and conditional variability of these counts. Therefore, in this section, we will first explore the Poisson GLM, which is designed specifically for count data. It:
 
 -   Restricts predictions to non-negative values.
 -   Allows variance to increase with the mean.
 
 Furthermore, using a Poisson GLM allows you to see the internal architecture of a GLM. It is a bit more difficult to see how a GLM works when using a Gaussian distribution. In a Poisson GLM, the GLM components are clearly delineated:
 
--   The **error distribution** describes the noise.
--   The **linear predictor** describes the signal.
+-   The **conditional outcome distribution** describes variability around the modeled mean.
+-   The **linear predictor** describes modeled variation in the mean.
 -   The **link function** connects the expected value of the response to the linear predictor
 
-Because those parts are visibly distinct, the Poisson model makes it much easier to understand what a GLM is actually doing.
+Because those parts are visibly distinct, the Poisson model makes it much easier to understand what a GLM is actually doing. None of these components, by itself, identifies a causal effect. We first specify the estimand, SCM, and identification assumptions, including how measurement and sampling produce the observed outcome. Then we choose the estimator, functional form, link, and outcome family.
 
 ::: {.callout-tip collapse="true" icon="false"}
 ## A reminder about the Greek alphabet
@@ -163,10 +162,10 @@ Because those parts are visibly distinct, the Poisson model makes it much easier
 At first glance, especially if you have had no formal mathematical training, the formal notation of a GLM can appear very intimidating. Symbols such as $Y_i$, $\mu_i$, and $\eta_i$ may give the impression that the model is mathematically difficult to the average scientist. In reality, these equations simply provide an efficient way to describe simple concepts about data and model structure. Fundamentally, a relatively small set of equations can describe:
 
 -   How observations in a dataset vary
--   How predictors influence expected responses
--   How effects are linked to observable data
+-   How expected responses are modeled as varying with predictors
+-   How model parameters are linked to observable data
 
-Writing the mathematical form of a model really does helps demystify it. At least, that will be my attempt in this course. Each component of how we mathematically formalize a GLM corresponds to one part of the data-generating process.
+Writing the mathematical form of a model really does helps demystify it. At least, that will be my attempt in this course. Each component of how we mathematically formalize a GLM represents one part of our statistical description of observed data; it is not a complete SCM.
 
 First, we begin with our observations (our dataset). Using each observation $i$ and sample size $n$, we define our dataset as: $i = 1, \dots, n$:
 
@@ -174,7 +173,7 @@ We then set up the three core components of our GLM:
 
 ### Random Component (Noise)
 
-The random component --the unmeasured structure of your model-- is formalized as:
+The random component, which describes variability in the outcome conditional on the modeled mean, is formalized as:
 
 $Y_i \sim \text{Poisson}(\mu_i)$, where:
 
@@ -183,13 +182,13 @@ $Y_i \sim \text{Poisson}(\mu_i)$, where:
 
 Recall that a Poisson distribution has a mean and variance that are equal: the expected count is $\mu_i$, and the variability around that expectation is also $\mu_i$. This means that as the expected number of events (counts) increases, the spread of the data increases proportionally, so larger means naturally are associated with greater variability.
 
-$E(Y_i) = \mu_i$ $\text{Var}(Y_i) = \mu_i$
+$E(Y_i \mid X_i) = \mu_i$ and $\operatorname{Var}(Y_i \mid X_i) = \mu_i$
 
 The notation $Y_i \sim \text{Poisson}(\mu_i)$ simply states:
 
 > The observed count $Y_i$ is a random draw from a Poisson distribution with mean $\mu_i$.
 
-There is nothing mystical in this expression. It formalizes three important ideas:
+There is nothing mysterious in this expression. It formalizes three important ideas:
 
 1.  The outcome is a count (non-negative integers only).
 2.  The mean and variance are equal.
@@ -198,10 +197,10 @@ There is nothing mystical in this expression. It formalizes three important idea
 By writing the distribution explicitly, we clarify:
 
 -   What values are possible
--   How uncertainty behaves
+-   How conditional variability behaves
 -   How variance depends on the mean
 
-The equation prevents hidden assumptions. Without it, readers might assume constant variance or continuous outcomes. The formal notation makes those assumptions transparent. So, I strongly encourage you to take some time and get comfortable writing out your models in this way. These points will be reiterated below in the link function section.
+Clearly writing the equation prevents any hidden assumptions. That is, without it, readers might assume constant variance or continuous outcomes. The formal notation makes those assumptions transparent. So, I strongly encourage you to take some time and get comfortable writing out your models in this way. These points will be reiterated below in the link function section.
 
 ------------------------------------------------------------------------
 
@@ -222,9 +221,9 @@ This expression is simply a linear equation. It states:
 
 There is no randomness here. If $X_i$ and the coefficients are known, $\eta_i$ is determined exactly. The equation clarifies:
 
--   How predictors are assumed to influence outcomes.
+-   How the modeled mean varies with predictors on the link scale.
 -   That effects are additive on the linear predictor scale.
--   That the relationship is directional and structured.
+-   That the equation alone does not establish a causal direction.
 
 Without writing this formally, it is easy to obscure how predictors fold into the model. The mathematical form adds clarity about what is signal and what is noise.
 
@@ -232,13 +231,13 @@ Without writing this formally, it is easy to obscure how predictors fold into th
 
 ### Link Function
 
-The final component of a GLM is the link function, and its role is more conceptual than technical. It connects the structured part of the model (the signal) to the distribution that governs randomness (the noise).
+The final component of a GLM is the link function, and its role is more conceptual than technical. It connects the linear predictor to the mean of the conditional outcome distribution.
 
-In a GLM, the variance is defined as a function of the mean; this is general to any GLM. Recall that, in a Poisson model:
+For a specified GLM family, the conditional variance has a particular relationship to the mean (often with a dispersion parameter). Recall that, in a Poisson model:
 
-$E(Y_i) = \mu_i$ $\text{Var}(Y_i) = \mu_i$
+$E(Y_i \mid X_i) = \mu_i$ and $\operatorname{Var}(Y_i \mid X_i) = \mu_i$
 
-This tells us something very cool: once the mean $\mu_i$ is determined, the amount of variability is determined as well. The expected value and the noise structure are mathematically tied together. The link function is simply the bridge between signal and noise. It takes the output of the linear predictor (the signal) and converts it into the mean of the response distribution. Because the variance depends on that mean, the signal indirectly determines the scale of the noise.
+This tells us something very cool: once the mean $\mu_i$ is determined, the amount of variability is determined as well. The expected value and the noise structure are mathematically tied together. The link function maps the conditional mean to the linear predictor. Its inverse takes the output of the linear predictor (the modeled signal) and converts it into the mean of the response distribution. Because the variance depends on that mean, the signal indirectly determines the scale of the noise.
 
 Put another way, we first build a straight-line equation:
 
@@ -248,9 +247,9 @@ We then transform that linear result to obtain a valid mean:
 
 $\mu_i = \exp(\eta_i)$
 
-That exponentiation is all the link function is:
+Exponentiation is the inverse of the log link:
 
-> a rule that converts the output of the linear predictor into a proper mean for the distribution. Since the variance depends on the mean, this transformation also determines how much noise we expect.
+> a rule that converts the output of the linear predictor into a valid mean for this distribution. The log link itself maps the mean to the linear predictor: $\log(\mu_i)=\eta_i$. Since the Poisson variance equals the mean, the resulting mean also sets the model-implied conditional variance.
 
 ------------------------------------------------------------------------
 
@@ -261,13 +260,13 @@ Let us put this all together in a single structure that could be included in a s
 $Y_i \sim \text{Poisson}(\mu_i)$\
 $\log(\mu_i) = \beta_0 + \beta_1 X_i$
 
-This compact form contains the entire model. When broken apart, it describes:
+This compact form contains the specified statistical model, conditional on $X_i$. It does not contain the entire causal model, sampling process, or identification argument. When broken apart, it describes:
 
 -   The distribution of variability (the Poisson portion)
--   The structured influence of predictors (the line equation)
+-   The modeled association with predictors (the line equation)
 -   The transformation connecting structure to expectation (the *log* operator)
 
-The mathematical notation is far more concise than what we sometimes see in the articles' descriptions of statistical analyses. The concise form communicates all of the components of the model in a straightforward way. The value of writing them formally is not useless abstraction; it is clarity about how our decisions are translated into strong inference.
+The mathematical notation is far more concise than what we sometimes see in the articles' descriptions of statistical analyses. The concise form communicates all of the components of the model in a straightforward way. The value of writing them formally is not useless abstraction; it is clarity about how our decisions are translated into clear statistical assumptions. Strong causal inference also requires a defensible estimand and identification strategy.
 
 ------------------------------------------------------------------------
 
@@ -282,22 +281,22 @@ You will need the following file (simply click to save):
 The data include the following variables:
 
 -   `site`: where the individuals were sampled
--   `abund`: number of individuals detected at each location
--   `dens`: density of individuals at each sampling location
+-   `abund`: number of individuals detected at each location (an observed count, potentially affected by detection)
+-   `dens`: density of individuals at each sampling location (check how it was estimated and whether it derives from `abund`)
 -   `mean_depth`: mean depth, in meters of the sampling location
 -   `year`: year of the study
 -   `period`: 1=before and 2= after introduction of *Pelicanus pufferivorus* (puffer-jackalope pelican)
--   `x_km`: longitude (decimal degrees) of sampling location
--   `y_km`: latitude (decimal degrees) of sampling location
+-   `x_km`: x coordinate of sampling location (verify units in the metadata)
+-   `y_km`: y coordinate of sampling location (verify units in the metadata)
 -   `swept_area`: size in square meters of the sampling location (effort)
 
-Familiarize yourself with these data (especially `mean_depth`, `dens`, and `abund`) and then think about the following questions. Click to expand each box for the answer.
+Familiarize yourself with these data (especially `mean_depth`, `dens`, and `abund`) and then think about the following questions. Answer conceptually! Before interpreting any coefficient causally, specify the exposure, outcome, target contrast, and an SCM for depth, location, period, sampling effort, and detection. Is `abund` an appropriate measurand for the question? Click to expand each box for the answer.
 
 ::: {.callout-tip icon="false" collapse="true"}
-## **If mean depth is a true driver, what happens when we exclude it from the model?**
+## **If mean depth causally affects abundance and is omitted from the model, is that just extra noise?**
 
 **Answer:**\
-Its effect does not disappear from the world. The effect is moved into the noise (residual). It may also distort the effects of any correlated covariates (but we will discuss this more later).
+Not necessarily. Omitting a cause of the outcome can leave systematic outcome variation unexplained. It biases the target exposure effect when the omitted cause creates an open noncausal path or otherwise violates the identification or model assumptions for that estimand. If depth is a mediator, adjusting for it can instead change a total-effect estimand.
 :::
 
 ------------------------------------------------------------------------
@@ -306,7 +305,7 @@ Its effect does not disappear from the world. The effect is moved into the noise
 ## **If residual variance drops after adding mean depth, what changed?**
 
 **Answer:**\
-We improved our model’s alignment with the data-generating process (which included mean depth). Nature did not become less noisy.
+We improved the fit of the model, given the dataset. Nature did not become less noisy. For a Poisson model, the model-implied conditional variance also changes when its fitted mean changes; a reduction in a residual variation does not prove (or even suggest) that depth is causal or that identification improved. Remember, your core assumptions are located in the DAG; the results from a statistical model do not change that fact.
 :::
 
 ------------------------------------------------------------------------
@@ -315,23 +314,7 @@ We improved our model’s alignment with the data-generating process (which incl
 ## **Is residual variance (noise) a feature of the system/world or our model?**
 
 **Answer:**\
-This is sort of a trick question. Residual variance most proximately reflects what the model itself fails to explain; it is simply a mathematical way that we are making sense of the world.
+This is sort of a trick question. Residual variation reflects differences between observed outcomes and fitted values under a particular model, measurement process, and sample. It may include biological heterogeneity, observation error, and model misspecification. A Poisson model does not estimate a separate constant residual variance (remember that mean = variance for Poisson distributions).
 :::
 
-------------------------------------------------------------------------
-
-::: {.callout-tip icon="false" collapse="true"}
-## **If mean depth causally affects abundance and is omitted from the model, is that just extra noise?**
-
-**Answer:**\
-No. This means that the model has been misspecified. It does not only increase residual variance; it also creates systematic bias.
-:::
-
-------------------------------------------------------------------------
-
-::: {.callout-tip icon="false" collapse="true"}
-## **When mean depth moves from residual to systematic, are we changing the ecology?**
-
-**Answer:**\
-No. The ecology stays the same. We are changing our description of it by moving the explained variation from residual (unexplained) to systematic (explained).
-:::
+This has been a cursory introduction to the GLM framework. Most everything else in the course will build upon this foundation.

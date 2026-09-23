@@ -68,6 +68,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../chapters/03_intro_modeling.html" rel="next">
 <link href="../chapters/02_outliers.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -320,8 +321,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Part III: Models as Estimators</span></span>
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Part III: Models as Estimators</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_intro_modeling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Introduction to Models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_intro_glms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">GLM Introduction</span></span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">
@@ -475,7 +495,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Tool #2: Assess distributions, sparsity, and excess zeros</li>
 <li>Tool #3: Assess missingness and data completeness</li>
 <li>Tool #4: Assess sampling structure, dependence, and support</li>
-<li>Tool #5: Assess statistical relationships relevant to estimator implementation (e.g., nonlinearity, scaling, and numerical collinearity)</li>
+<li>Tool #5: Assess statistical relationships relevant to model implementation (e.g., nonlinearity, scaling, and numerical collinearity)</li>
 </ul>
 <p>The good news is that we can begin assessing several of these features simply by looking carefully at the overall structure of your dataset in several ways. These “ways” are non-prescriptive; the goal is to understand the measurements and structure of the raw data rather than to discover which variables “belong” in an analysis. Let’s begin!</p>
 </section>
@@ -823,7 +843,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="interaction-plot-step-3" class="level3" data-number="21.6.8">
 <h3 data-number="21.6.8" class="anchored" data-anchor-id="interaction-plot-step-3"><span class="header-section-number">21.6.8</span> Interaction plot (Step #3)</h3>
-<p>A simple interaction plot is useful for getting a quick, visual sense of how the measurements are distributed across combinations of variables. By faceting the same boxplot across salt treatments (i.e.&nbsp;creating “small multiples” <em>sensu</em> Edward Tufte), you can more easily compare both the typical oxygen levels and the spread of the data for each jackalope count within each treatment. This does <em>not</em> test for an interaction or determine whether an interaction belongs in the estimator. Instead, it is a useful reality check for data coverage –for example, sparse cells, missing treatment combinations, unusual observations within combinations, or differences in the amount of information available across the experimental design.</p>
+<p>A simple interaction plot is useful for getting a quick, visual sense of how the measurements are distributed across combinations of variables. By faceting the same boxplot across salt treatments (i.e.&nbsp;creating “small multiples” <em>sensu</em> Edward Tufte), you can more easily compare both the typical oxygen levels and the spread of the data for each jackalope count within each treatment. This does <em>not</em> test for an interaction or determine whether an interaction belongs in the statistical model. Instead, it is a useful reality check for data coverage –for example, sparse cells, missing treatment combinations, unusual observations within combinations, or differences in the amount of information available across the experimental design.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> number_jackalope, <span class="at">y =</span> oxygen_ppm)) <span class="sc">+</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
@@ -891,7 +911,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>temperature and heating degree days are strongly and negatively correlated (r = -0.998)</li>
 <li>temperature variation and heating degree days are strongly and negatively correlated (r = -0.588)</li>
 </ul>
-<p>So, what to do, what to do, what to do? We clearly have some variables that are strongly correlated. This could impact our modeling (specifically inflating the variance of a given regression coefficient). We can explicitly examine numerical collinearity using Variance Inflation Factors (VIFs), which are calculated for each term in a model. Note that there are options for VIFs applied to both continuous and categorical variables. Let us do this for continuous variables for these climate data. Most available functions in R require regression models; however, there are some approaches–such as the <code>usdm</code> package–that require only data frames of multiple variables. So, let us use that.:</p>
+<p>So, what to do, what to do, what to do? We clearly have some variables that are strongly correlated. This could impact our modeling (specifically inflating the variance of a given regression coefficient). We can explicitly examine numerical collinearity using Variance Inflation Factors (VIFs), which are calculated for each term in a model. Note that there are options for VIFs applied to both continuous and categorical variables. Let us do this for continuous variables for these climate data. Most available functions in R require regression models; however, there are some approaches–such as the <code>usdm</code> package–that require only data frames of multiple variables. So, let us use that:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>vif_results <span class="ot">&lt;-</span> usdm<span class="sc">::</span><span class="fu">vif</span>(climate)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>vif_results</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -910,7 +930,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>conduct a dimension-reduction analysis such as PCA.</li>
 </ul>
 <p>But herein lies the terrible problem: neither one of these decisions follows automatically or naturally from the correlations calculated in the above process. For example, two highly correlated variables could occupy very different positions in our DAG. One might be a confounder, whereas another might function as a mediator. Combining them into a principal component would remove the variables’ independent positions in the DAG, creating a new node that was suboptimally positioned in the data-generating process. Likewise, dropping a variable simply because it is correlated with another could eliminate a variable required for causal identification.</p>
-<p>This gives us a useful opportunity, especially given how commonly methods like Principal Components Analysis is used. Specifically, by going through the following example, we can learn when not to jump immediately to PCA. For this demonstration, our first step is to conduct a PCA without specifying how many new components (new variables) should be generated. Let’s begin with a simple PCA analysis.</p>
+<p>This gives us a useful opportunity, especially given how commonly methods like Principal Components Analysis are used. Specifically, by going through the following example, we can learn when not to jump immediately to PCA. For this demonstration, our first step is to conduct a PCA without specifying how many new components (new variables) should be generated. Let’s begin with a simple PCA analysis.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>pca_results <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">princomp</span>(</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span> humidity <span class="sc">+</span> precipitation <span class="sc">+</span> temperature <span class="sc">+</span> temp_variation <span class="sc">+</span> heating_deg_days,</span>
@@ -1004,7 +1024,7 @@ Cumulative Var 0.489 0.828</code></pre>
 37 -1.269491637  3.67997024</code></pre>
 </div>
 </div>
-<p>PCA has successfully accomplished a statistical task: it has represented correlated variation among several measured variables using fewer dimensions. However, what it has <strong>not</strong> established is that those new dimensions represent the causal quantities required by our estimand. Before using them in an estimator, we would need to ask what scientific quantities they represent and whether replacing the original variables preserves the causal roles encoded in our DAG. You can clearly see how the use of Principal Components Analysis has added a level of complication to our workflow.</p>
+<p>PCA has successfully accomplished a statistical task: it has represented correlated variation among several measured variables using fewer dimensions. However, what it has <strong>not</strong> established is that those new dimensions represent the causal quantities required by our estimand. Before using them in an model, we would need to ask what scientific quantities they represent and whether replacing the original variables preserves the causal roles encoded in our DAG. You can clearly see how the use of Principal Components Analysis has added a level of complication to our workflow.</p>
 <p><strong>End of tutorial</strong></p>
 
 
@@ -1418,6 +1438,9 @@ Cumulative Var 0.489 0.828</code></pre>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../chapters/03_intro_modeling.html" class="pagination-link" aria-label="Introduction to Models">
+        <span class="nav-page-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Introduction to Models</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

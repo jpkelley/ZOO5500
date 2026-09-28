@@ -14,7 +14,7 @@ A correctly specified model must ensure that **both**:
 
 :::
 
-The `DHARMa` package is is powerful tool for assessing both of these components. Once you understand what `DHARMa`'s residual plots are indicating, the process of diagnosing issues with your model specification becomes less complicated. The plot of the simulated residuals in DHARMa has two panels, one for each of these two components: 
+The `DHARMa` package is is powerful tool for assessing both of these components. Once you understand what `DHARMa`'s residual plots are showing you, the process of diagnosing issues with your model specification becomes less complicated. The plot of the simulated residuals in DHARMa has two panels, one for the noise component of the model (error distribution) and one for the signal component (systematic structure): 
 
 ![](../graphics/other_stylized_graphics/DHARMA_resid_labels.png)
 
@@ -22,7 +22,7 @@ Let us break this down to see what specific parts of a model each panel says som
 
 ### Left panel: QQ Plot **(Noise)**
 
-The left panel evaluates whether the chosen error distribution of the model is correct. This panel allows you to answer the question: _If this model were the true data-generating process, would residuals be uniformly distributed?_
+The left panel compares residuals from the observed data with the distribution expected if the fitted model generated the data. This panel allows you to answer the question: _If this model were the true data-generating process, would residuals be uniformly distributed (i.e. distributed across a straight, diagonal line)?_
 
 ::: {.course-info tbl-colwidths="[20, 80]"}
 | Component | What it means |

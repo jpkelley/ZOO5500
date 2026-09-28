@@ -61,43 +61,6 @@ Define the scientific target before you choose a DAG, statistical model, or mode
 -   No commitment to a statistical model simply because it is familiar
 :::
 
-::: {.callout-note title="**Causal Analysis Plan (Week 8; due 23-Oct)**" icon="false" collapse="true"}
-**Purpose:**\
-Show that your scientific question, causal assumptions, estimand, and identification strategy fit together *before* you begin serious statistical modeling. This is the major causal-planning milestone for the project.
-
-### What to include
-
--   **Your current DAG**
-    -   Include the variables and causal relationships needed to represent the system relevant to your focal estimand
-    -   Keep the graph focused: not every ecological process in the ecological universe belongs in your DAG
--   **Causal assumptions**
-    -   Briefly explain the most important arrows
-    -   Identify important assumptions represented by missing arrows when necessary
--   **Primary estimand**
-    -   Restate or refine the estimand from your Week 2 note
--   **Causal roles**
-    -   Identify important exposures, outcomes, confounders, mediators, colliders, or other variables relevant to the focal effect
--   **Identification argument**
-    -   Explain why the focal effect is identifiable—or why it may not be
-    -   Identify the adjustment strategy implied by the DAG
-    -   Explain why key variables should or should not be conditioned on
--   **Major unmeasured threats**
-    -   Identify the most important unmeasured variables or assumptions that could threaten the causal interpretation
-
-### Submission format
-
--   Word or Quarto page
--   Include a legible DAG plus concise text explaining the reasoning behind it
--   The goal is not a giant causal encyclopedia; emphasize assumptions that matter for your focal estimand
--   Include the final Evaluation Table (i.e. rubric-tested) output from JackalopeGPT
-
-### “Good” looks like
-
--   The DAG, estimand, and identification argument tell the same causal story
--   Adjustment decisions follow from causal reasoning rather than variable screening or AIC
--   Important assumptions and unmeasured threats are visible rather than hidden
--   You can explain why the proposed analysis would estimate the effect you claim it estimates
-:::
 
 ::: {.callout-note title="**Data + Estimator Plan (Week 5; due 02-Oct)**" icon="false" collapse="true"}
 **Purpose:**\
@@ -147,6 +110,45 @@ Connect the causal architecture of your project to the data you actually have an
 -   Honest treatment of measurement limitations and missing information
 -   EDA used purposefully rather than as a search for “significant” patterns
 -   An estimator justified by the scientific target and data structure (not merely by software availability or familiarity)
+:::
+
+
+::: {.callout-note title="**Causal Analysis Plan (Week 8; due 23-Oct)**" icon="false" collapse="true"}
+**Purpose:**\
+Show that your scientific question, causal assumptions, estimand, and identification strategy fit together *before* you begin serious statistical modeling. This is the major causal-planning milestone for the project.
+
+### What to include
+
+-   **Your current DAG**
+    -   Include the variables and causal relationships needed to represent the system relevant to your focal estimand
+    -   Keep the graph focused: not every ecological process in the ecological universe belongs in your DAG
+-   **Causal assumptions**
+    -   Briefly explain the most important arrows
+    -   Identify important assumptions represented by missing arrows when necessary
+-   **Primary estimand**
+    -   Restate or refine the estimand from your Week 2 note
+-   **Causal roles**
+    -   Identify important exposures, outcomes, confounders, mediators, colliders, or other variables relevant to the focal effect
+-   **Identification argument**
+    -   Explain why the focal effect is identifiable—or why it may not be
+    -   Identify the adjustment strategy implied by the DAG
+    -   Explain why key variables should or should not be conditioned on
+-   **Major unmeasured threats**
+    -   Identify the most important unmeasured variables or assumptions that could threaten the causal interpretation
+
+### Submission format
+
+-   Word or Quarto page
+-   Include a legible DAG plus concise text explaining the reasoning behind it
+-   The goal is not a giant causal encyclopedia; emphasize assumptions that matter for your focal estimand
+-   Include the final Evaluation Table (i.e. rubric-tested) output from JackalopeGPT
+
+### “Good” looks like
+
+-   The DAG, estimand, and identification argument tell the same causal story
+-   Adjustment decisions follow from causal reasoning rather than variable screening or AIC
+-   Important assumptions and unmeasured threats are visible rather than hidden
+-   You can explain why the proposed analysis would estimate the effect you claim it estimates
 :::
 
 ::: {.callout-note title="**Working Estimator Checkpoint (Week 9; due 30-Oct)**" icon="false" collapse="true"}

@@ -39,7 +39,6 @@ As a reminder, the data include the following variables:
 
 -   `site`: where the individuals were sampled
 -   `abund`: number of individuals detected at each location
--   `dens`: density of individuals at each sampling location
 -   `mean_depth`: mean depth, in meters of the sampling location
 -   `year`: year of the study
 -   `period`: 1=before and 2= after introduction of *Pelicanus pufferivorus* (puffer-jackalope pelican)
@@ -121,7 +120,7 @@ augment_glm <- augment(base_model)
 print(augment_glm)
 ```
 
-The results (from `summary()` or `broom::tidy` functions) show a significant effect of `mean_death`. As an aside, it might not be the best to use the term *effect,* as this technically implies a causal structure. But it is common usage, so we will stick to it. Just be cautious of using wording that does not match with your hypotheses and predictions.
+The results (from `summary()` or `broom::tidy` functions) show a significant effect of `mean_death`. As an aside, it might not be the best to use the term *effect,* as this technically implies a causal structure (and we might not have this in our DAG). But it is common usage, so we will stick to it. Just be cautious of using wording that does not match with your hypotheses and predictions.
 
 ## Checking residuals for heteroscedaticity and violations to normality.
 
@@ -141,19 +140,19 @@ We can then plot this simulation:
 plot(sim_res)
 ```
 
-You can immediately an abundance of red-colored text, indicating that there are some series issues. These issues may be caused diretly by variance issues, non-normality, or, most likely, model misspecification. The left plot indicates issues with normality and outlliers. The right plot is very informative as well; it converts the residuals into percentiles (y-axis), and then tests the 25%, 50%, and 75% percentiles of the model's residuals against those expected percentiles. Ideally, the three lines would follow the horizontal lines drawn at 0.25, 0.50, and 0.75. In this case, they do not.
+You can immediately an abundance of red-colored text, indicating that there are some series issues. These issues may be caused directly by variance issues, non-normality, or, most likely, model misspecification. The left plot indicates issues with normality and outlliers. The right plot is very informative as well; it converts the residuals into percentiles (y-axis), and then tests the 25%, 50%, and 75% percentiles of the model's residuals against those expected percentiles. Ideally, the three lines would follow the horizontal lines drawn at 0.25, 0.50, and 0.75. In this case, they do not.
 
 There are other built-in functions as well, including the following (these descriptions are taken directly from the \[DHARMa package vignette\] (<https://cran.r-project.org/web/packages/DHARMa/vignettes/DHARMa.html#calculating-scaled-residuals>):
 
--   `testUniformity()` - tests if the overall distribution conforms to expectations
--   `testOutliers()` - tests if there are more simulation outliers than expected
--   `testDispersion()` - tests if the simulated dispersion is equal to the observed dispersion
--   `testQuantiles()` - fits a quantile regression or residuals against a predictor (default predicted value), and tests of this conforms to the expected quantile
--   `testCategorical(simulationOutput, catPred = testData\$group)` tests residuals against a categorical predictor
--   `testZeroinflation()` - tests if there are more zeros in the data than expected from the simulations
--   `testGeneric()` - test if a generic summary statistics (user-defined) deviates from model expectations
--   `testTemporalAutocorrelation()` - tests for temporal autocorrelation in the residuals
--   `testSpatialAutocorrelation()` - tests for spatial autocorrelation in the residuals. Can also be used with a generic distance function, for example to test for phylogenetic signal in the residuals
+-   `testUniformity()`: tests if the overall distribution conforms to expectations
+-   `testOutliers()`: tests if there are more simulation outliers than expected
+-   `testDispersion()`: tests if the simulated dispersion is equal to the observed dispersion
+-   `testQuantiles()`: fits a quantile regression or residuals against a predictor (default predicted value), and tests of this conforms to the expected quantile
+-   `testCategorical(simulationOutput, catPred = testData\$group)`: tests residuals against a categorical predictor
+-   `testZeroinflation()`: tests if there are more zeros in the data than expected from the simulations
+-   `testGeneric()`: test if a generic summary statistics (user-defined) deviates from model expectations
+-   `testTemporalAutocorrelation()`: tests for temporal autocorrelation in the residuals
+-   `testSpatialAutocorrelation()`: tests for spatial autocorrelation in the residuals. Can also be used with a generic distance function, for example to test for phylogenetic signal in the residuals
 
 ------------------------------------------------------------------------
 
@@ -328,7 +327,24 @@ plotResiduals(sim_res,
 :::
 ::::::
 
-As you can see, the problems with residuals remain. This means that this really is a case of model misspecification, so let us think about what other factors we should include based on our *a priori* hypotheses. (Note that the model names could possibly be improved for clarity.) As you review the models, think critically about each one means. In all models, we include the offset variable.
+## Pause: What did we forget?
+
+We have tried different error distributions, added an offset for `swept_area`, and inspected the model residuals. The residual patterns remain. Before adding more predictors, though, we need to step back: **we never drew a DAG.** Even for simple, univariate models like the ones we are working with, always start with your DAG. And we have quickly forgotten our estimand. Our question (the estimand) concerns the relationship between `mean_depth` and the number of jackalopes detected, and whether that relationship differs before and after the puffer-jackalope pelican’s introduction. Stop and sketch a plausible causal story --based on your knowledge of natural systems-- using `mean_depth`, `abund`, `period`, `year`, `site` or location, and `swept_area`. Which variables might influence both depth and abundance? What does `period` represent, and what else could have changed over time? Why does sampling a larger area change the count we expect to detect?
+
+In class, you will compare your DAG with a classmate’s. Identify at least one arrow you are uncertain about and explain what ecological knowledge would help you decide. Only after doing this critical step should you specify models that address your question. Residual checks can help us assess how those models fit the observations; they cannot decide the causal structure for us.
+
+
+## Applying the DAG?
+As you can see, the problems with residuals remain. Our initial model is missing structure visible in the residuals. Let us use the DAG and our ecological hypotheses to decide what structure to add. Let's then apply this to the simple model. We will build upon this in class.
+
+```{r}
+pufferi$log_sa <- log(pufferi$swept_area)  # log-transform swept_area
+mod_nb_offset <- glm.nb(abund ~ mean_depth + offset(log_sa), 
+  data = pufferi)
+```
+
+
+For comparison, here is our a kitchen-sink (non-DAG) modeler might approach the problem: As you review the models, think critically about each one means and if each is appropriate for the causal assumptions encoded in the DAG. In all models, we include the offset variable.
 
 ```{r}
 mod_nb_offset_01 <- glm.nb(abund ~ offset(log_sa), 
@@ -403,4 +419,4 @@ OK, we are starting to get the picture here that we have done some good work her
 plotResiduals(sim_res, pufferi$year)
 ```
 
-This was the final check. This all tells us that we have specified the model correctly, and we have confirmed that there is no residual structure. This means that our model has correctly modeled both the noise and signal components of our observed data very well. We have successfully created a Generalized Linear Model!
+This was the final check. This all tells us that we have specified the model correctly, and we have confirmed that there is no residual structure. This means that our model has correctly modeled both the noise and signal components of our observed data very well. We have successfully created a Generalized Linear Model using a kitchen-sink approach (and AIC multimodel selection). But is it correct according to our *a priori* causal assumptions?

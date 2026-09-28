@@ -54,10 +54,9 @@ book:
       chapters: 
         - chapters/03_intro_modeling.qmd
         - chapters/03_intro_glms.qmd
-        #- chapters/03_tutorial_glms.qmd
-        #- chapters/03_glm_partial_association.qmd
-       # - chapters/03_DHARMA_diagnostics.qmd
-       # - chapters/03_glmms.qmd
+        - chapters/03_tutorial_glms.qmd
+        - chapters/03_DHARMA_diagnostics.qmd
+        - chapters/03_glmms.qmd
        # - chapters/03_tutorial_glmms_part01.qmd
        # - chapters/03_glmm_epilogue.qmd
        # - chapters/04_tutorial_gams.qmd

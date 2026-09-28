@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>22&nbsp; Introduction to Models – Quantitative Analysis of (Messy) Field Data</title>
+<title>25&nbsp; DHARMA diagnostics – Quantitative Analysis of (Messy) Field Data</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,41 +23,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -68,8 +33,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/03_intro_glms.html" rel="next">
-<link href="../chapters/02_tutorial_data_exploration.html" rel="prev">
+<link href="../chapters/03_glmms.html" rel="next">
+<link href="../chapters/03_tutorial_glms.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -108,35 +73,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -150,7 +86,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/03_intro_modeling.html">Part III: Models as Estimators</a></li><li class="breadcrumb-item"><a href="../chapters/03_intro_modeling.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Introduction to Models</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/03_intro_modeling.html">Part III: Models as Estimators</a></li><li class="breadcrumb-item"><a href="../chapters/03_DHARMA_diagnostics.html"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">DHARMA diagnostics</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -360,7 +296,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/03_intro_modeling.html" class="sidebar-item-text sidebar-link active">
+  <a href="../chapters/03_intro_modeling.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Introduction to Models</span></span></a>
   </div>
 </li>
@@ -378,7 +314,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/03_DHARMA_diagnostics.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/03_DHARMA_diagnostics.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">DHARMA diagnostics</span></span></a>
   </div>
 </li>
@@ -412,28 +348,26 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#from-data-to-data-generating-processes" id="toc-from-data-to-data-generating-processes" class="nav-link active" data-scroll-target="#from-data-to-data-generating-processes"><span class="header-section-number">22.1</span> From data to data-generating processes</a></li>
-  <li><a href="#component-1-systematic-structure-signal" id="toc-component-1-systematic-structure-signal" class="nav-link" data-scroll-target="#component-1-systematic-structure-signal"><span class="header-section-number">22.2</span> Component #1: Systematic structure (signal)</a></li>
-  <li><a href="#component-2-unmeasured-variation-noise" id="toc-component-2-unmeasured-variation-noise" class="nav-link" data-scroll-target="#component-2-unmeasured-variation-noise"><span class="header-section-number">22.3</span> Component #2: Unmeasured Variation (Noise)</a></li>
-  <li><a href="#data-distributions" id="toc-data-distributions" class="nav-link" data-scroll-target="#data-distributions"><span class="header-section-number">22.4</span> Data Distributions</a>
+  <li><a href="#interpreting-dharma-residual-diagnostic-plots" id="toc-interpreting-dharma-residual-diagnostic-plots" class="nav-link active" data-scroll-target="#interpreting-dharma-residual-diagnostic-plots"><span class="header-section-number">25.1</span> Interpreting DHARMa residual diagnostic plots</a>
   <ul class="collapse">
-  <li><a href="#gaussian-normal-distribution" id="toc-gaussian-normal-distribution" class="nav-link" data-scroll-target="#gaussian-normal-distribution"><span class="header-section-number">22.4.1</span> Gaussian (Normal) Distribution</a></li>
-  <li><a href="#gamma-distribution" id="toc-gamma-distribution" class="nav-link" data-scroll-target="#gamma-distribution"><span class="header-section-number">22.4.2</span> Gamma Distribution</a></li>
-  <li><a href="#poisson-distribution" id="toc-poisson-distribution" class="nav-link" data-scroll-target="#poisson-distribution"><span class="header-section-number">22.4.3</span> Poisson Distribution</a></li>
-  <li><a href="#binomial-distribution-bernoulli-when-n-1" id="toc-binomial-distribution-bernoulli-when-n-1" class="nav-link" data-scroll-target="#binomial-distribution-bernoulli-when-n-1"><span class="header-section-number">22.4.4</span> Binomial Distribution (Bernoulli when <span class="math inline">\(n = 1\)</span>)</a></li>
-  <li><a href="#beta-distribution" id="toc-beta-distribution" class="nav-link" data-scroll-target="#beta-distribution"><span class="header-section-number">22.4.5</span> Beta Distribution</a></li>
-  <li><a href="#negative-binomial-distribution" id="toc-negative-binomial-distribution" class="nav-link" data-scroll-target="#negative-binomial-distribution"><span class="header-section-number">22.4.6</span> Negative Binomial Distribution</a></li>
-  <li><a href="#zero-inflated-poisson-distribution" id="toc-zero-inflated-poisson-distribution" class="nav-link" data-scroll-target="#zero-inflated-poisson-distribution"><span class="header-section-number">22.4.7</span> Zero-Inflated Poisson Distribution</a></li>
+  <li><a href="#left-panel-qq-plot-noise" id="toc-left-panel-qq-plot-noise" class="nav-link" data-scroll-target="#left-panel-qq-plot-noise"><span class="header-section-number">25.1.1</span> Left panel: QQ Plot <strong>(Noise)</strong></a></li>
+  <li><a href="#right-panel-residuals-versus-predicted-signal" id="toc-right-panel-residuals-versus-predicted-signal" class="nav-link" data-scroll-target="#right-panel-residuals-versus-predicted-signal"><span class="header-section-number">25.1.2</span> Right panel: Residuals versus predicted <strong>(Signal)</strong></a></li>
   </ul></li>
+  <li><a href="#improving-your-model-a-decision-making-framework" id="toc-improving-your-model-a-decision-making-framework" class="nav-link" data-scroll-target="#improving-your-model-a-decision-making-framework"><span class="header-section-number">25.2</span> Improving your model: a decision-making framework</a>
+  <ul class="collapse">
+  <li><a href="#left-panel-qq-plot-noise-1" id="toc-left-panel-qq-plot-noise-1" class="nav-link" data-scroll-target="#left-panel-qq-plot-noise-1"><span class="header-section-number">25.2.1</span> Left panel: QQ Plot <strong>(Noise)</strong></a></li>
+  <li><a href="#right-panel-residuals-versus-predicted-signal-1" id="toc-right-panel-residuals-versus-predicted-signal-1" class="nav-link" data-scroll-target="#right-panel-residuals-versus-predicted-signal-1"><span class="header-section-number">25.2.2</span> Right panel: Residuals versus predicted <strong>(Signal)</strong></a></li>
+  </ul></li>
+  <li><a href="#dharma-model-diagnostic-decision-tree" id="toc-dharma-model-diagnostic-decision-tree" class="nav-link" data-scroll-target="#dharma-model-diagnostic-decision-tree"><span class="header-section-number">25.3</span> DHARMa Model Diagnostic Decision Tree</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/03_intro_modeling.html">Part III: Models as Estimators</a></li><li class="breadcrumb-item"><a href="../chapters/03_intro_modeling.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Introduction to Models</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/03_intro_modeling.html">Part III: Models as Estimators</a></li><li class="breadcrumb-item"><a href="../chapters/03_DHARMA_diagnostics.html"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">DHARMA diagnostics</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Introduction to Models</span></h1>
+<h1 class="title"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">DHARMA diagnostics</span></h1>
 </div>
 
 
@@ -450,244 +384,379 @@ window.Quarto = {
 </header>
 
 
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"chapters/class_r_scripts/load_packages.r"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="interpreting-dharma-residual-diagnostic-plots" class="level2" data-number="25.1">
+<h2 data-number="25.1" class="anchored" data-anchor-id="interpreting-dharma-residual-diagnostic-plots"><span class="header-section-number">25.1</span> Interpreting DHARMa residual diagnostic plots</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<section id="from-data-to-data-generating-processes" class="level2" data-number="22.1">
-<h2 data-number="22.1" class="anchored" data-anchor-id="from-data-to-data-generating-processes"><span class="header-section-number">22.1</span> From data to data-generating processes</h2>
-<div class="columns">
-<div class="column" style="width:60%;">
-<p>In this chapter, we make a necessary transition: from practical handling of data to thinking conceptually about data-generating processes. By now, you have entered your data into a spreadsheet (or some other organized data table). Now, it is time to modify this <em>“data = spreadsheet”</em> thinking and consider that <code>data</code> are outcomes of often complex <strong>processes</strong> (the ones encoded in your DAG).</p>
-<p>As a thought exercise, consider a set of mass values for a jackalope. The body mass of marsh-water guzzling jackalopes (<em>Lepus antilocaprahydropicus</em>) varies because individuals differ in body size and condition. Depending on recent food capture or hydration state, mass may fluctuate within individuals over very short time scales, driven by rapid changes to a complex digestive and metabolic machinery. Additional variation also arises during measurement due to instrument precision, calibration drift, and movement or posture on the scale. In sum, there are a myriad processes leading to a simple measurement.</p>
-</div><div class="column" style="width:40%;">
-<p><img src="graphics/jackalope_graphics/marshwater_jackalope.png" class="img-fluid"></p>
+<div class="callout-title-container flex-fill">
+Note
 </div>
 </div>
-<p>Every measurement reflects two central components of a system, which will be the focus of this short chapter:</p>
+<div class="callout-body-container callout-body">
+<p>A correctly specified model must ensure that <strong>both</strong>:</p>
 <ul>
-<li><strong>Component #1: Systematic structure (signal):</strong> patterns deriving from mechanisms and constraints<br>
+<li>The probabilistic assumptions (of the random Noise) are appropriate.<br>
 </li>
-<li><strong>Component #2: Unmeasured variation (noise):</strong> variability generated by unidentified mechanisms, measurement constraints, and nmeasured stochastic processes</li>
+<li>The systematic structure captures the ecological Signal.</li>
 </ul>
-<blockquote class="blockquote">
-<p>These two components are co-products of the same data-generating processes.</p>
-</blockquote>
-<p>Once you start thinking about data in this way, it perhaps becomes clearer that not all variation in a given dataset carries the same meaning. Some variation reflects real structure in the system that we actually care about. Some has to do with the natural limits of the data themselves. Other variation comes from randomness, measurement limits, or processes that we did not explicitly account for.</p>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+</div>
+</div>
+<p>The <code>DHARMa</code> package is is powerful tool for assessing both of these components. Once you understand what <code>DHARMa</code>’s residual plots are showing you, the process of diagnosing issues with your model specification becomes less complicated. The plot of the simulated residuals in DHARMa has two panels, one for the noise component of the model (error distribution) and one for the signal component (systematic structure):</p>
+<p><img src="../graphics/other_stylized_graphics/DHARMA_resid_labels.png" class="img-fluid"></p>
+<p>Let us break this down to see what specific parts of a model each panel says something about:</p>
+<section id="left-panel-qq-plot-noise" class="level3" data-number="25.1.1">
+<h3 data-number="25.1.1" class="anchored" data-anchor-id="left-panel-qq-plot-noise"><span class="header-section-number">25.1.1</span> Left panel: QQ Plot <strong>(Noise)</strong></h3>
+<p>The left panel compares residuals from the observed data with the distribution expected if the fitted model generated the data. This panel allows you to answer the question: <em>If this model were the true data-generating process, would residuals be uniformly distributed (i.e.&nbsp;distributed across a straight, diagonal line)?</em></p>
+<div class="course-info" data-tbl-colwidths="[20, 80]">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 80%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Error distribution choice</td>
+<td>Wrong family (Poisson, Gaussian, Gamma, etc.)</td>
+</tr>
+<tr class="even">
+<td>Link function</td>
+<td>Incorrect transformation between mean and linear predictor</td>
+</tr>
+<tr class="odd">
+<td>Dispersion parameter</td>
+<td>Overdispersion or underdispersion not handled correctly</td>
+</tr>
+<tr class="even">
+<td>Zero-inflation</td>
+<td>Excess zeros not modeled</td>
+</tr>
+<tr class="odd">
+<td>Tail behavior</td>
+<td>Heavy tails or skew not captured</td>
+</tr>
+<tr class="even">
+<td>Global variance structure</td>
+<td>Variance magnitude inconsistent with assumed model</td>
+</tr>
+<tr class="odd">
+<td>Excess extreme values</td>
+<td>More outliers than expected under assumed distribution</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="right-panel-residuals-versus-predicted-signal" class="level3" data-number="25.1.2">
+<h3 data-number="25.1.2" class="anchored" data-anchor-id="right-panel-residuals-versus-predicted-signal"><span class="header-section-number">25.1.2</span> Right panel: Residuals versus predicted <strong>(Signal)</strong></h3>
+<p>The right panel evaluates whether the <em>systematic structure</em>, or the <strong>signal,</strong> of the model is adequate.</p>
+<div class="course-info" data-tbl-colwidths="[20, 80]">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 80%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Fixed effects</td>
+<td>Incorrect or missing predictor(s)</td>
+</tr>
+<tr class="even">
+<td>Functional form</td>
+<td>Relationship should be nonlinear</td>
+</tr>
+<tr class="odd">
+<td>Interactions</td>
+<td>Slope depends on another variable</td>
+</tr>
+<tr class="even">
+<td>Random effects structure</td>
+<td>Missing grouping terms or random slopes</td>
+</tr>
+<tr class="odd">
+<td>Link function</td>
+<td>Mean structure not properly linked to response</td>
+</tr>
+<tr class="even">
+<td>Predictor-dependent variance</td>
+<td>Heteroskedasticity not modeled</td>
+</tr>
+<tr class="odd">
+<td>Autocorrelation</td>
+<td>Spatial/temporal dependence not accounted for</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="improving-your-model-a-decision-making-framework" class="level2" data-number="25.2">
+<h2 data-number="25.2" class="anchored" data-anchor-id="improving-your-model-a-decision-making-framework"><span class="header-section-number">25.2</span> Improving your model: a decision-making framework</h2>
+<p>For warning flags in your <code>DHARMa</code> residual plots, consider following these guidelines:</p>
+<section id="left-panel-qq-plot-noise-1" class="level3" data-number="25.2.1">
+<h3 data-number="25.2.1" class="anchored" data-anchor-id="left-panel-qq-plot-noise-1"><span class="header-section-number">25.2.1</span> Left panel: QQ Plot <strong>(Noise)</strong></h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 16%">
+<col style="width: 11%">
+<col style="width: 20%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Warning / Pattern</strong></th>
+<th><strong>What It Indicates (Conceptually)</strong></th>
+<th><strong>What Type of Problem Is This?</strong></th>
+<th><strong>Questions to Ask</strong></th>
+<th><strong>Possible Actions</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>KS test significant</td>
+<td>Model cannot plausibly generate observed residual distribution</td>
+<td>Distributional misspecification</td>
+<td>Is the chosen family appropriate? Is the link correct? Are zeros excessive?</td>
+<td>Try alternative family; reconsider link; evaluate zero-inflation</td>
+</tr>
+<tr class="even">
+<td>Dispersion test significant</td>
+<td>Variance magnitude inconsistent with model assumptions</td>
+<td>Global dispersion problem</td>
+<td>Is variance uniformly too large/small across observations?</td>
+<td>For counts: Poisson → Negative Binomial; add random effects; use quasi-likelihood</td>
+</tr>
+<tr class="odd">
+<td>Dispersion test significant + structured residual spread visible in right panel</td>
+<td>Variance changes systematically with predictors</td>
+<td>Structured (predictor-dependent) dispersion</td>
+<td>Does variance increase with mean or a predictor?</td>
+<td>Use location–scale model (e.g., <code>gaulss()</code> in mgcv); model dispersion explicitly; consider transformation</td>
+</tr>
+<tr class="even">
+<td>Outlier test significant</td>
+<td>More extreme values than expected under assumed distribution</td>
+<td>Heavy tails or unmodeled heterogeneity</td>
+<td>Are extremes biological? Data errors? Rare events?</td>
+<td>Check data integrity; consider heavier-tailed distribution; add missing predictors</td>
+</tr>
+<tr class="odd">
+<td>Systematic curvature in QQ line</td>
+<td>Shape mismatch between assumed and actual error distribution</td>
+<td>Tail or skew mismatch</td>
+<td>Are upper/lower quantiles deviating more strongly?</td>
+<td>Try alternative family; check transformation; reassess link</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="right-panel-residuals-versus-predicted-signal-1" class="level3" data-number="25.2.2">
+<h3 data-number="25.2.2" class="anchored" data-anchor-id="right-panel-residuals-versus-predicted-signal-1"><span class="header-section-number">25.2.2</span> Right panel: Residuals versus predicted <strong>(Signal)</strong></h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 17%">
+<col style="width: 16%">
+<col style="width: 21%">
+<col style="width: 27%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Warning / Pattern</strong></th>
+<th><strong>What It Indicates (Conceptually)</strong></th>
+<th><strong>What Type of Problem Is This?</strong></th>
+<th><strong>Questions to Ask</strong></th>
+<th><strong>Possible Actions</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Combined quantile test significant</td>
+<td>Residuals depend on fitted values</td>
+<td>Mean structure misspecified</td>
+<td>Did I miss nonlinearity? Interaction? Grouping?</td>
+<td>Add spline; test interaction; add fixed or random effects</td>
+</tr>
+<tr class="even">
+<td>Curved median line</td>
+<td>Incorrect functional form</td>
+<td>Fixed effect structure problem</td>
+<td>Is biology nonlinear?</td>
+<td>Add smooth term; transform predictor</td>
+</tr>
+<tr class="odd">
+<td>Diverging quantile bands</td>
+<td>Residual variance changes with predictions</td>
+<td>Structured variance (heteroskedasticity)</td>
+<td>Does spread increase with mean or predictor?</td>
+<td>Consider location–scale model; model dispersion; transform response</td>
+</tr>
+<tr class="even">
+<td>Pattern relative to a specific predictor</td>
+<td>Omitted or mis-specified effect</td>
+<td>Missing predictor or wrong specification</td>
+<td>Does residual trend mirror ecological expectation?</td>
+<td>Add predictor; allow nonlinear term</td>
+</tr>
+<tr class="odd">
+<td>Vertical clustering of residuals</td>
+<td>Unmodeled grouping or dependence</td>
+<td>Random effects structure problem</td>
+<td>Are observations clustered (site, time, individual)?</td>
+<td>Add random intercepts; consider random slopes</td>
+</tr>
+<tr class="even">
+<td>Systematic pattern at extremes of predictions</td>
+<td>Link function mismatch</td>
+<td>Link misspecification</td>
+<td>Is the mean–variance relationship appropriate?</td>
+<td>Try alternative link</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="dharma-model-diagnostic-decision-tree" class="level2" data-number="25.3">
+<h2 data-number="25.3" class="anchored" data-anchor-id="dharma-model-diagnostic-decision-tree"><span class="header-section-number">25.3</span> DHARMa Model Diagnostic Decision Tree</h2>
+<p>If you would rather have a decision tree to help diagnose issues with your model, here is a three step guide. Click on each step for questions related to thes diagnosis.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>A thought about ecology being a discipline of controlling noise
+<span class="screen-reader-only">Tip</span><strong>Step 01: Does the QQ panel (left panel) show problems?</strong>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>The order in which Signal and Noise are discussed below does not reflect my view of their relative importance. In fact, for modeling purposes, I argue that the majority of ecologists’ work, rightly so, I think, is focused on coping with noise. To convince you of this, take any scientific paper and compare the length of the sections dedicated to hypotheses and methods. We use calibrated instruments; we carefully design well-replicated and controlled experiments; we test and re-test interobserver reliability; we control for difference is detectability (or other biases). What remains after dealing with all the noise is the answer to an often simple question (hypothesis). So, with that, let us delve into the two components of an initial statistical model for a set of measurements.</p>
-</div>
-</div>
-</div>
-<p>So, with that, let us delve into the two fundamental components of set of measurements.</p>
-<hr>
-</section>
-<section id="component-1-systematic-structure-signal" class="level2" data-number="22.2">
-<h2 data-number="22.2" class="anchored" data-anchor-id="component-1-systematic-structure-signal"><span class="header-section-number">22.2</span> Component #1: Systematic structure (signal)</h2>
-<p>In our work, we are observing the results of interacting forces operating in real systems. Those forces operate directionally (in time and space). Something influences something else; that something influences yet another something. And so forth. And despite the often misinterpreted adage “Correlation does not equal causation,” ecologists rarely stop at correlation. Associations are taken almost as cues to hypothesize about the mechanisms that generated them. Even when we fully describe a simple univariate distribution, we are making assumptions about observable variation: whether events occur independently, whether variability scales with the mean (in some fashion), and whether measurements fluctuate around a central tendency (in some fashion). In a regression model (e.g.&nbsp;GLM, GLMM), the “signal” is the component of the outcome distribution that we model as varying with specified predictors. The model does not create causation; it describes observable patterns under its specific assumptions. Whether a modeled contrast estimates a causal effect depends on the study design, causal assumptions, and identification strategy.</p>
-<hr>
-</section>
-<section id="component-2-unmeasured-variation-noise" class="level2" data-number="22.3">
-<h2 data-number="22.3" class="anchored" data-anchor-id="component-2-unmeasured-variation-noise"><span class="header-section-number">22.3</span> Component #2: Unmeasured Variation (Noise)</h2>
-<p>The second component of any set of measurements is unmeasured variation, often called <em>noise</em>. Unfortunately, the word <em>noise</em> has morphed into a sort of statistical pejorative that we equate with annoying, irrelevant, or cumbersome. So, why is noise so important? It is important because a model of the world is incomplete if it explains only the mean of a signal but ignores how variability behaves around that mean. Explaining the average outcome is only half the story. We must also understand why observations deviate from that average (or other measure of central tendency). In other words, noise is not a nuisance obscuring an otherwise pristine biological or ecological signal. It is not static layered on top of clear understanding. At its core, <em>noise</em> refers to the myriad additional processes operating in concert with the systematic structure of the data we have chosen to model. These processes are very real, and often scientifically interesting. Noise can arise from:</p>
 <ul>
-<li><p>Individual variation (heterogeneity)</p></li>
-<li><p>Environmental fluctuations</p></li>
-<li><p>Measurement error (accuracy and precision)</p></li>
-<li><p>Unmeasured drivers</p></li>
-<li><p>Stochastic processes</p></li>
-</ul>
-<p>At first glance, this list may feel extremely unsettling. It suggests that much of the world lies beyond direct and easy measurement. But to a scientist, this diversity of variation represents opportunity. Each source of variability reflects some underlying mechanism. Each pattern of deviation welcomes new explanation. To be clear, noise is not something we subtract away after modeling the “real” part of the system. Like systematic structure, it has structure of its own. Different mechanisms generate different <em>kinds</em> of variability. We can describe some of these recognizable patterns of variability with <strong>distributions</strong>. Similar distributions can result from different processes.</p>
-<hr>
-</section>
-<section id="data-distributions" class="level2" data-number="22.4">
-<h2 data-number="22.4" class="anchored" data-anchor-id="data-distributions"><span class="header-section-number">22.4</span> Data Distributions</h2>
-<p>If variability has structure, we need a precise language to describe it. In statistics, that language is the probability distribution. So, what is a distribution?</p>
-<blockquote class="blockquote">
-<p>A probability distribution describes which values an outcome can take and how probable those values are, conditional on a model. It does not, by itself, identify the processes that produced them.</p>
-</blockquote>
-<p>A data distribution specifies:</p>
+<li><strong>Is the KS test significant?</strong>
 <ul>
-<li><p>What values are possible (constraints)</p></li>
-<li><p>How variability scales with the mean</p></li>
-<li><p>Whether outcomes are discrete or continuous</p></li>
-<li><p>Whether extreme outcomes are rare or common</p></li>
-</ul>
-<p>The key insight is this: when we choose a distribution, we make a working statistical assumption about variability. We can inform this choice with knowledge of the measurement process and check its implications against the data. For example:</p>
+<li>The assumed error distribution may be wrong.
 <ul>
-<li><p>Count data: Some candidate distributions assume that variance scales with the mean</p></li>
-<li><p>Proportion data: We acknowledge constraints on the data (bounded between 0 and 1)</p></li>
-</ul>
-<p>Once we begin looking at distributions as statistical models, it becomes clear that different distributions make different assumptions about the observed data. The Normal distribution reflects additive variation around a central tendency. Count distributions arise when outcomes reflect the accumulation of discrete events. Other distributions emerge when values are bounded, strictly positive, or shaped by multiplicative processes (such as the Gamma distribution). We are acknowledging that the features of the dataset arise from some process or processes, while recognizing that the distribution alone cannot identify them. Before selecting an outcome distribution for an effect analysis, we must specify the question and estimand, describe the causal system with an SCM, determine how the effect can be identified, and examine how the outcome was observed or measured. Then we can choose an estimator and a suitable outcome distribution and check the model. A well-fitting distribution cannot repair invalid causal identification.</p>
-<p>In what follows, I introduce several commonly used distributions and the types of data-generating processes they can represent. This is by no means an exhaustive list. As you read, focus less on their mathematical formulas and more on the assumptions they encode about randomness, constraints, and mechanism.</p>
-<section id="gaussian-normal-distribution" class="level3" data-number="22.4.1">
-<h3 data-number="22.4.1" class="anchored" data-anchor-id="gaussian-normal-distribution"><span class="header-section-number">22.4.1</span> Gaussian (Normal) Distribution</h3>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="03_intro_modeling_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p><strong>Type:</strong> Continuous <strong>Support:</strong> <span class="math inline">\(-\infty &lt; x &lt; \infty\)</span> <strong>Variance/mean relationship:</strong></p>
+<li>Did you choose the correct family?</li>
+<li>Is the link appropriate?</li>
+<li>Are zeros excessive?</li>
+</ul></li>
+<li><strong>Action:</strong> Try alternative family, link, or zero-inflation.</li>
+</ul></li>
+<li><strong>Is the dispersion test significant?</strong>
 <ul>
-<li><p>In a Gaussian model with constant variance, the conditional variance is assumed constant</p></li>
-<li><p>Under that assumption, it does not depend on the conditional mean</p></li>
-</ul>
-<p><strong>Ecological examples</strong></p>
+<li>Variance magnitude is inconsistent.
 <ul>
-<li><p>Measurement error in body mass</p></li>
-<li><p>Daily deviation in stream temperature from a seasonal mean</p></li>
-</ul>
-</section>
-<section id="gamma-distribution" class="level3" data-number="22.4.2">
-<h3 data-number="22.4.2" class="anchored" data-anchor-id="gamma-distribution"><span class="header-section-number">22.4.2</span> Gamma Distribution</h3>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="03_intro_modeling_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p><strong>Type:</strong> Continuous <strong>Support:</strong> <span class="math inline">\(0 &lt; x &lt; \infty\)</span> <strong>Variance/mean relationship:</strong></p>
+<li>Is dispersion uniformly inflated?
 <ul>
-<li>Variance proportional to μ² (square of the mean)</li>
-<li>Variability increases faster than mean</li>
-</ul>
-<p><strong>Ecological examples</strong></p>
+<li><strong>Action:</strong> Use NB instead of Poisson; add random effects.</li>
+</ul></li>
+<li>Does variance change with predictors?
 <ul>
-<li><p>Biomass accumulation</p></li>
-<li><p>Time until an event (e.g., flowering)</p></li>
-<li><p>Rainfall (with a slight adjustment for zero values)</p></li>
-</ul>
-</section>
-<section id="poisson-distribution" class="level3" data-number="22.4.3">
-<h3 data-number="22.4.3" class="anchored" data-anchor-id="poisson-distribution"><span class="header-section-number">22.4.3</span> Poisson Distribution</h3>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="03_intro_modeling_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p><strong>Type:</strong> Discrete <strong>Support:</strong> <span class="math inline">\(x \in \{0,1,2,\dots\}\)</span> (<em>x</em> is an element of…) <strong>Variance/mean relationship:</strong></p>
+<li><strong>Action:</strong> Consider location–scale model (e.g., <code>gaulss()</code>); model dispersion explicitly.</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><strong>Is the outlier test significant?</strong>
 <ul>
-<li><p>Variance equals the mean</p></li>
-<li><p>Variability increases linearly with μ (mean)</p></li>
-</ul>
-<p><strong>Ecological examples</strong></p>
+<li>More extreme values than expected.
 <ul>
-<li><p>Number of nests in a plot</p></li>
-<li><p>Number of insects captured per trap</p></li>
+<li>Data error?</li>
+<li>Rare but real biological extremes?</li>
+</ul></li>
+<li><strong>Action:</strong> Inspect data; consider heavier-tailed distribution; add missing predictors.</li>
+</ul></li>
 </ul>
-</section>
-<section id="binomial-distribution-bernoulli-when-n-1" class="level3" data-number="22.4.4">
-<h3 data-number="22.4.4" class="anchored" data-anchor-id="binomial-distribution-bernoulli-when-n-1"><span class="header-section-number">22.4.4</span> Binomial Distribution (Bernoulli when <span class="math inline">\(n = 1\)</span>)</h3>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="03_intro_modeling_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<p>If <strong>no</strong> major issues here, proceed to Step 2.</p>
 </div>
 </div>
 </div>
-<p><strong>Type:</strong> Discrete <strong>Support:</strong> <span class="math inline">\(x \in \{0,1,\dots,n\}\)</span>, where <span class="math inline">\(x\)</span> is the number of successes in <span class="math inline">\(n\)</span> trials <strong>Variance/mean relationship:</strong></p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span><strong>Step 02: Does the Residual vs Predicted (right) panel show structure?</strong>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <ul>
-<li><p>Variance = <span class="math inline">\(np(1-p)\)</span> for <span class="math inline">\(n\)</span> trials; <span class="math inline">\(p(1-p)\)</span> when <span class="math inline">\(n = 1\)</span></p></li>
-<li><p>Constrained by bounds 0 and n</p></li>
-</ul>
-<p><strong>Ecological examples</strong></p>
+<li><strong>Is the combined quantile test significant?</strong>
 <ul>
-<li><p>Number of successful nests out of total attempts</p></li>
-<li><p>Germination success out of planted seeds</p></li>
-</ul>
-</section>
-<section id="beta-distribution" class="level3" data-number="22.4.5">
-<h3 data-number="22.4.5" class="anchored" data-anchor-id="beta-distribution"><span class="header-section-number">22.4.5</span> Beta Distribution</h3>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="03_intro_modeling_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p><strong>Type:</strong> Continuous <strong>Support:</strong> <span class="math inline">\(0 &lt; x &lt; 1\)</span> <strong>Variance/mean relationship:</strong></p>
+<li>Residuals depend on fitted values.
 <ul>
-<li><p>Variance depends on both mean and precision</p></li>
-<li><p>Constrained between 0 and 1 (but does not include 0 or 1)</p></li>
-</ul>
-<p><strong>Ecological examples</strong></p>
+<li>Missing nonlinearity?</li>
+<li>Missing interaction?</li>
+<li>Missing predictor?</li>
+</ul></li>
+<li><strong>Action:</strong> Add spline terms, interactions, or predictors.</li>
+</ul></li>
+<li><strong>Is the median curve curved?</strong>
 <ul>
-<li><p>Continuous proportion of canopy cover (excluding exact 0 and 1)</p></li>
-<li><p>Continuous proportion of habitat area occupied (excluding exact 0 and 1; occupancy across a known number of sites is binomial)</p></li>
-</ul>
-</section>
-<section id="negative-binomial-distribution" class="level3" data-number="22.4.6">
-<h3 data-number="22.4.6" class="anchored" data-anchor-id="negative-binomial-distribution"><span class="header-section-number">22.4.6</span> Negative Binomial Distribution</h3>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="03_intro_modeling_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p><strong>Type:</strong> Discrete <strong>Support:</strong> <span class="math inline">\(x \in \{0,1,2,\dots\}\)</span> (<em>x</em> is an element of…) <strong>Variance/mean relationship:</strong></p>
+<li>Functional form incorrect.</li>
+<li><strong>Action:</strong> Add nonlinear term or transform predictor.</li>
+</ul></li>
+<li><strong>Do quantile bands widen or narrow?</strong>
 <ul>
-<li>Variance = <span class="math inline">\(μ + μ²/k\)</span> (where <em>k</em> is a dispersion parameter)</li>
-<li>Variance exceeds mean</li>
-</ul>
-<p><strong>Ecological examples</strong></p>
+<li>Structured variance (heteroskedasticity).</li>
+<li><strong>Action:</strong> Model dispersion (location–scale); consider transformation.</li>
+</ul></li>
+<li><strong>Is there clustering of residuals?</strong>
 <ul>
-<li><p>Aggregated insect counts</p></li>
-<li><p>Overdispersed species abundance</p></li>
+<li>Missing random effects.</li>
+<li><strong>Action:</strong> Add random intercepts or slopes.</li>
+</ul></li>
 </ul>
-</section>
-<section id="zero-inflated-poisson-distribution" class="level3" data-number="22.4.7">
-<h3 data-number="22.4.7" class="anchored" data-anchor-id="zero-inflated-poisson-distribution"><span class="header-section-number">22.4.7</span> Zero-Inflated Poisson Distribution</h3>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="03_intro_modeling_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
 </div>
 </div>
 </div>
-<p><strong>Type:</strong> Discrete <strong>Support:</strong> <span class="math inline">\(x \in \{0,1,2,\dots\}\)</span> (<em>x</em> is an element of…) <strong>Variance/mean relationship:</strong></p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span><strong>Step 03: Are BOTH panels failing?</strong>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <ul>
-<li><p>Extra zeros inflate variance</p></li>
-<li><p>Variance greater than Poisson expectation</p></li>
-</ul>
-<p><strong>Ecological examples</strong></p>
+<li>The model may be fundamentally misspecified.
 <ul>
-<li><p>Species absent from many sampling sites</p></li>
-<li><p>Traps with structural zeros</p></li>
+<li>Wrong family <strong>and</strong> wrong structure.</li>
+<li>Oversimplified ecological mechanism.</li>
+</ul></li>
+<li><strong>Action:</strong> Rebuild model from biological reasoning:
+<ul>
+<li>Reconsider response distribution.</li>
+<li>Reconsider functional relationships.</li>
+<li>Reconsider dependence structure.</li>
+</ul></li>
 </ul>
-<p>Next, we will introduce Generalized Linear Models so we can understand their distinct advantages over other, older approaches. A GLM specifies how an outcome’s conditional distribution varies with a set of predictors. We first decide what comparison we seek (estimand!) and which variables are needed to identify it (adjustment set!). Only after we have done these steps can we choose an appropriate type of statistical model.</p>
+</div>
+</div>
+</div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -1093,13 +1162,13 @@ window.Quarto = {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/02_tutorial_data_exploration.html" class="pagination-link" aria-label="Tutorial: Data Exploration">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Tutorial: Data Exploration</span></span>
+      <a href="../chapters/03_tutorial_glms.html" class="pagination-link" aria-label="Tutorial: GLMs">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Tutorial: GLMs</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/03_intro_glms.html" class="pagination-link" aria-label="GLM Introduction">
-        <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">GLM Introduction</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/03_glmms.html" class="pagination-link" aria-label="GLMM Introduction">
+        <span class="nav-page-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">GLMM Introduction</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

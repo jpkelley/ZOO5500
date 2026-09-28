@@ -1,0 +1,266 @@
+---
+title: "GLM R Walkthrough: Puffer Jackalope Abundance"
+format: html
+execute:
+  echo: true
+  warning: false
+  message: false
+  error: false
+editor: visual
+editor_options:
+  chunk_output_type: console
+---
+
+## Load packages
+
+```{r}
+source("chapters/class_r_scripts/load_packages.r")
+```
+
+## Import and inspect the data
+
+```{r}
+pufferi <- read.csv("chapters/class_exercise_data/lepusantilocapra_pufferi_abundance.csv")
+str(pufferi) # examine data structure
+```
+
+## Plot abundance against depth by period
+
+```{r}
+p <- ggplot2::ggplot(pufferi, aes(x = mean_depth, y = abund)) +
+  geom_point(color = "black", size = 3) +
+  facet_wrap(~ period, ncol = 1, nrow = 2) +
+  labs(x = "mean depth (km)", y = "number of _L. pufferi_") +
+  theme_bw()
+p
+```
+
+## Fit a baseline Gaussian GLM
+
+```{r}
+base_model <- glm(formula = abund ~ mean_depth, data = pufferi)
+```
+
+## Examine the model output
+
+```{r}
+summary(base_model) 
+```
+
+```{r}
+# Tidy model coefficients
+tidy_glm <- tidy(base_model, conf.int = TRUE)
+print(tidy_glm)
+```
+
+```{r}
+# Glance at model-level statistics
+glance_glm <- glance(base_model)
+print(glance_glm)
+```
+
+```{r}
+# Augment the original data with predictions and residuals
+augment_glm <- augment(base_model)
+print(augment_glm)
+```
+
+## Diagnose the Gaussian GLM
+
+```{r}
+sim_res <- DHARMa::simulateResiduals(base_model)
+```
+
+```{r}
+plot(sim_res)
+```
+
+## Check residuals against predictors and sampling effort
+
+```{r echo=FALSE}
+plotResiduals(sim_res, pufferi$mean_depth)
+```
+
+```{r}
+plotResiduals(sim_res, pufferi$period)
+```
+
+```{r}
+plotResiduals(sim_res, pufferi$year)
+```
+
+```{r}
+plotResiduals(sim_res, pufferi$swept_area)
+```
+
+## Inspect the count response
+
+```{r}
+hist(pufferi$abund, breaks=100)
+```
+
+## Fit and diagnose a Poisson GLM
+
+```{r}
+base_model_pois <- glm(abund ~ mean_depth, 
+  data = pufferi, 
+  family = poisson(link = "log"))
+```
+
+```{r}
+sim_res <- simulateResiduals(base_model_pois)
+```
+
+```{r}
+plot(sim_res)
+```
+
+## Test for overdispersion
+
+```{r}
+testDispersion(sim_res)
+```
+
+## Fit a negative binomial GLM
+
+```{r}
+mod_nb <- glm.nb(abund ~ mean_depth, data = pufferi)
+summary(mod_nb)
+```
+
+## Diagnose the negative binomial GLM
+
+```{r}
+testDispersion(mod_nb)
+```
+
+```{r}
+sim_res <- simulateResiduals(mod_nb)
+plot(sim_res)
+```
+
+## Check residuals against the other variables
+
+```{r}
+plotResiduals(sim_res, pufferi$mean_depth)
+```
+
+```{r}
+plotResiduals(sim_res, pufferi$period)
+```
+
+```{r}
+plotResiduals(sim_res, pufferi$year)
+```
+
+```{r}
+plotResiduals(sim_res, pufferi$swept_area)
+```
+
+## Account for swept area with an offset
+
+```{r}
+pufferi$log_sa <- log(pufferi$swept_area)  # log-transform swept_area
+mod_nb_offset <- glm.nb(abund ~ mean_depth + offset(log_sa), 
+  data = pufferi)
+```
+
+## Diagnose the offset model
+
+```{r}
+sim_res <- simulateResiduals(mod_nb_offset)
+```
+
+```{r}
+plotResiduals(sim_res, 
+              pufferi$mean_depth)
+```
+
+```{r}
+plotResiduals(sim_res, 
+              pufferi$period)
+```
+
+```{r}
+plotResiduals(sim_res, 
+              pufferi$year)
+```
+
+## Revisit the DAG and refit the offset model
+
+```{r}
+pufferi$log_sa <- log(pufferi$swept_area)  # log-transform swept_area
+mod_nb_offset <- glm.nb(abund ~ mean_depth + offset(log_sa), 
+  data = pufferi)
+```
+
+## Fit alternative candidate models for comparison
+
+```{r}
+mod_nb_offset_01 <- glm.nb(abund ~ offset(log_sa), 
+  data = pufferi)
+mod_nb_offset_02 <- glm.nb(abund ~ mean_depth + offset(log_sa), 
+  data = pufferi)
+mod_nb_offset_03 <- glm.nb(abund ~ period + offset(log_sa), 
+  data = pufferi)
+mod_nb_offset_04 <- glm.nb(abund ~ year + offset(log_sa), 
+  data = pufferi)
+mod_nb_offset_05 <- glm.nb(abund ~
+  mean_depth + period + offset(log_sa), 
+  data = pufferi)
+mod_nb_offset_06 <- glm.nb(abund ~
+  mean_depth + year + offset(log_sa), 
+  data = pufferi)
+mod_nb_offset_07 <- glm.nb(abund ~
+  period + year + offset(log_sa), 
+  data = pufferi)
+mod_nb_offset_08 <- glm.nb(abund ~
+  mean_depth * period + year + offset(log_sa), 
+  data = pufferi)
+mod_nb_offset_09 <- glm.nb(abund ~
+  mean_depth * year + period + offset(log_sa), 
+  data = pufferi)
+mod_nb_offset_10 <- glm.nb(abund ~
+  mean_depth + year * period + offset(log_sa), 
+  data = pufferi)
+```
+
+## Compare candidate models using AIC
+
+```{r}
+aic_df <- AIC(
+  mod_nb_offset_01,
+  mod_nb_offset_02,
+  mod_nb_offset_03,
+  mod_nb_offset_04,
+  mod_nb_offset_05,
+  mod_nb_offset_06,
+  mod_nb_offset_07,
+  mod_nb_offset_08,
+  mod_nb_offset_09,
+  mod_nb_offset_10
+  )
+aic_df <- aic_df |>
+  arrange(AIC)
+```
+
+## Diagnose the selected example model
+
+```{r}
+sim_res <- simulateResiduals(mod_nb_offset_10)
+plot(sim_res)
+```
+
+## Check residuals against depth, period, and year
+
+```{r}
+plotResiduals(sim_res, pufferi$mean_depth)
+```
+
+```{r}
+plotResiduals(sim_res, pufferi$period)
+```
+
+```{r}
+plotResiduals(sim_res, pufferi$year)
+```

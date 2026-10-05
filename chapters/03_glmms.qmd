@@ -97,7 +97,7 @@ If the systematic (Signal) component is misspecified, its unexplained patterns c
 
 As we all know, ecological data are not flat and unidimensional. They are layered across space, stretched across time, and organized across biological/ecological levels. If we ignore that interesting structure, we do not simply violate some formal assumptions. Instead, we actively erase the mechanisms of the data-generating process.
 
-Data multidimensionality is the major insight discussed by Simon Levin (1992) in [*“The Problem of Pattern and Scale in Ecology”*](./files/Levin_1992) in which he argues that ecological --and perhaps all biological-- patterns only make sense relative to the scale at which they are studied. Data-generating processes operating at one scale can generate structure at another. Therefore, if we observe data without acknowledging or respecting the importance of scale, we obscure its signal and inflate its noise. 
+Data multidimensionality is the major insight discussed by Simon Levin (1992) in [*“The Problem of Pattern and Scale in Ecology”*](./files/Levin_1992.pdf) in which he argues that ecological --and perhaps all biological-- patterns only make sense relative to the scale at which they are studied. Data-generating processes operating at one scale can generate structure at another. Therefore, if we observe data without acknowledging or respecting the importance of scale, we obscure its signal and inflate its noise. 
 
 Shared structure increases the likelihood of common influence, which can create both similarity and correlation. That correlation should not be considered a nuisance, as it is information about how an ecological system is organized. For example: 
 

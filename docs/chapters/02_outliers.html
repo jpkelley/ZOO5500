@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -76,7 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-832e3d7b6b94ddcc90a000f8fabe51a9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -388,6 +388,18 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">GLMM Introduction</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_tutorial_glmms_part01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Tutorial: GLMMs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_glmm_epilogue.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">GLMM epilogue</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -520,9 +532,7 @@ window.Quarto = {
 <ul>
 <li>The interquartile range (IQR), or the difference between the 75% precentile (Q<sub>3</sub>) and the 25% percentile (Q<sub>1</sub>):</li>
 </ul>
-<p><span class="math display">\[
-\text{IQR} = Q_3 - Q_1
-\]</span></p>
+<p><span class="math display">\[\text{IQR} = Q_3 - Q_1\]</span></p>
 <ul>
 <li>Whiskers extending to <span class="math inline">\(1.5 \times \text{IQR}\)</span></li>
 <li>Points beyond this threshold flagged as outliers<br>
@@ -617,9 +627,7 @@ window.Quarto = {
 </div>
 <div class="callout-body-container callout-body">
 <p>The Mahalanobis distance tells us <strong>how unusual a data point is when we consider several variables together</strong>.</p>
-<p><span class="math display">\[
-D^2 = (x - \mu)^T \Sigma^{-1} (x - \mu)
-\]</span></p>
+<p><span class="math display">\[D^2 = (x - \mu)^T \Sigma^{-1} (x - \mu)\]</span></p>
 <p>Think of it this way:</p>
 <ul>
 <li><span class="math inline">\(x\)</span> = the values for one observation (e.g., oxygen and temperature at one site)<br>

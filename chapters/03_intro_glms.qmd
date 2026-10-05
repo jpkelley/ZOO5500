@@ -107,10 +107,10 @@ Hopefully, this short exercise convinces you that GLMs and their extensions (Gen
 
 Most textbook treatments of GLMs start off examining a model with Gaussian (normally distributed) errors. The Gaussian models have core assumptions that are likely familiar and comfortable to most of you, including:
 
--   The response variable is **continuous**
--   The residual variance is **constant** (homoscedastic)
--   The error distribution is **symmetric**
--   The outcome can take **any real value** (including negatives)
+- The response variable is **continuous**
+- The residual variance is **constant** (homoscedastic)
+- The error distribution is **symmetric**
+- The outcome can take **any real value** (including negatives)
 
 In many classroom situations, that works beautifully. If we are modeling body mass of adults (*why adults?*), temperature, or some other roughly symmetric continuous variable, the Gaussian/normal distribution is often appropriate. However, the Gaussian/normal distribution is often the exception rather than the rule because:
 
@@ -118,28 +118,28 @@ In many classroom situations, that works beautifully. If we are modeling body ma
 
 Why? As ecologists, we regularly collect data on proportions, rates, skewed measurements, zero-heavy processes, and, perhaps most commonly, counts like:
 
--   Number of individuals observed\
--   Number of detections on a recorder\
--   Number of nests in a plot\
--   Number of disease cases
+- Number of individuals observed\
+- Number of detections on a recorder\
+- Number of nests in a plot\
+- Number of disease cases
 
 For example, consider counts of events. Count distributions, sometimes modeled with a Poisson distribution, have their own features, including:
 
--   Values cannot be negative.
--   Values are discrete (not continuous)
--   They often have variances that equal or increase with their mean
--   They are frequently right-skewed
+- Values cannot be negative.
+- Values are discrete (not continuous)
+- They often have variances that equal or increase with their mean
+- They are frequently right-skewed
 
 A constant-variance Gaussian model may poorly represent the support and conditional variability of these counts. Therefore, in this section, we will first explore the Poisson GLM, which is designed specifically for count data. It:
 
--   Restricts predictions to non-negative values.
--   Allows variance to increase with the mean.
+- Restricts predictions to non-negative values.
+- Allows variance to increase with the mean.
 
 Furthermore, using a Poisson GLM allows you to see the internal architecture of a GLM. It is a bit more difficult to see how a GLM works when using a Gaussian distribution. In a Poisson GLM, the GLM components are clearly delineated:
 
--   The **conditional outcome distribution** describes variability around the modeled mean.
--   The **linear predictor** describes modeled variation in the mean.
--   The **link function** connects the expected value of the response to the linear predictor
+- The **conditional outcome distribution** describes variability around the modeled mean.
+- The **linear predictor** describes modeled variation in the mean.
+- The **link function** connects the expected value of the response to the linear predictor
 
 Because those parts are visibly distinct, the Poisson model makes it much easier to understand what a GLM is actually doing. None of these components, by itself, identifies a causal effect. We first specify the estimand, SCM, and identification assumptions, including how measurement and sampling produce the observed outcome. Then we choose the estimator, functional form, link, and outcome family.
 
@@ -161,9 +161,9 @@ Because those parts are visibly distinct, the Poisson model makes it much easier
 
 At first glance, especially if you have had no formal mathematical training, the formal notation of a GLM can appear very intimidating. Symbols such as $Y_i$, $\mu_i$, and $\eta_i$ may give the impression that the model is mathematically difficult to the average scientist. In reality, these equations simply provide an efficient way to describe simple concepts about data and model structure. Fundamentally, a relatively small set of equations can describe:
 
--   How observations in a dataset vary
--   How expected responses are modeled as varying with predictors
--   How model parameters are linked to observable data
+- How observations in a dataset vary
+- How expected responses are modeled as varying with predictors
+- How model parameters are linked to observable data
 
 Writing the mathematical form of a model really does helps demystify it. At least, that will be my attempt in this course. Each component of how we mathematically formalize a GLM represents one part of our statistical description of observed data; it is not a complete SCM.
 
@@ -177,8 +177,8 @@ The random component, which describes variability in the outcome conditional on 
 
 $Y_i \sim \text{Poisson}(\mu_i)$, where:
 
--   $Y_i$: observed count for observation $i$
--   $\mu_i$: expected (mean) count for observation $i$
+- $Y_i$: observed count for observation $i$
+- $\mu_i$: expected (mean) count for observation $i$
 
 Recall that a Poisson distribution has a mean and variance that are equal: the expected count is $\mu_i$, and the variability around that expectation is also $\mu_i$. This means that as the expected number of events (counts) increases, the spread of the data increases proportionally, so larger means naturally are associated with greater variability.
 
@@ -196,9 +196,9 @@ There is nothing mysterious in this expression. It formalizes three important id
 
 By writing the distribution explicitly, we clarify:
 
--   What values are possible
--   How conditional variability behaves
--   How variance depends on the mean
+- What values are possible
+- How conditional variability behaves
+- How variance depends on the mean
 
 Clearly writing the equation prevents any hidden assumptions. That is, without it, readers might assume constant variance or continuous outcomes. The formal notation makes those assumptions transparent. So, I strongly encourage you to take some time and get comfortable writing out your models in this way. These points will be reiterated below in the link function section.
 
@@ -210,10 +210,10 @@ $\eta_i = \beta_0 + \beta_1 X_i$
 
 **Definitions**
 
--   $\eta_i$: linear predictor
--   $\beta_0$: intercept
--   $\beta_1$: slope parameter
--   $X_i$: predictor value for observation $i$
+- $\eta_i$: linear predictor
+- $\beta_0$: intercept
+- $\beta_1$: slope parameter
+- $X_i$: predictor value for observation $i$
 
 This expression is simply a linear equation. It states:
 
@@ -221,9 +221,9 @@ This expression is simply a linear equation. It states:
 
 There is no randomness here. If $X_i$ and the coefficients are known, $\eta_i$ is determined exactly. The equation clarifies:
 
--   How the modeled mean varies with predictors on the link scale.
--   That effects are additive on the linear predictor scale.
--   That the equation alone does not establish a causal direction.
+- How the modeled mean varies with predictors on the link scale.
+- That effects are additive on the linear predictor scale.
+- That the equation alone does not establish a causal direction.
 
 Without writing this formally, it is easy to obscure how predictors fold into the model. The mathematical form adds clarity about what is signal and what is noise.
 
@@ -262,9 +262,9 @@ $\log(\mu_i) = \beta_0 + \beta_1 X_i$
 
 This compact form contains the specified statistical model, conditional on $X_i$. It does not contain the entire causal model, sampling process, or identification argument. When broken apart, it describes:
 
--   The distribution of variability (the Poisson portion)
--   The modeled association with predictors (the line equation)
--   The transformation connecting structure to expectation (the *log* operator)
+- The distribution of variability (the Poisson portion)
+- The modeled association with predictors (the line equation)
+- The transformation connecting structure to expectation (the *log* operator)
 
 The mathematical notation is far more concise than what we sometimes see in the articles' descriptions of statistical analyses. The concise form communicates all of the components of the model in a straightforward way. The value of writing them formally is not useless abstraction; it is clarity about how our decisions are translated into clear statistical assumptions. Strong causal inference also requires a defensible estimand and identification strategy.
 
@@ -276,19 +276,19 @@ For this conceptual self-test, we will use a dataset that was collected from a p
 
 You will need the following file (simply click to save):
 
--   [`lepusantilocapra_pufferi_abundance.csv`](../chapters/class_exercise_data/lepusantilocapra_pufferi_abundance.csv)
+- [`lepusantilocapra_pufferi_abundance.csv`](../chapters/class_exercise_data/lepusantilocapra_pufferi_abundance.csv)
 
 The data include the following variables:
 
--   `site`: where the individuals were sampled
--   `abund`: number of individuals detected at each location (an observed count, potentially affected by detection)
--   `dens`: density of individuals at each sampling location (check how it was estimated and whether it derives from `abund`)
--   `mean_depth`: mean depth, in meters of the sampling location
--   `year`: year of the study
--   `period`: 1=before and 2= after introduction of *Pelicanus pufferivorus* (puffer-jackalope pelican)
--   `x_km`: x coordinate of sampling location (verify units in the metadata)
--   `y_km`: y coordinate of sampling location (verify units in the metadata)
--   `swept_area`: size in square meters of the sampling location (effort)
+- `site`: where the individuals were sampled
+- `abund`: number of individuals detected at each location (an observed count, potentially affected by detection)
+- `dens`: density of individuals at each sampling location (check how it was estimated and whether it derives from `abund`)
+- `mean_depth`: mean depth, in meters of the sampling location
+- `year`: year of the study
+- `period`: 1=before and 2= after introduction of *Pelicanus pufferivorus* (puffer-jackalope pelican)
+- `x_km`: x coordinate of sampling location (verify units in the metadata)
+- `y_km`: y coordinate of sampling location (verify units in the metadata)
+- `swept_area`: size in square meters of the sampling location (effort)
 
 Familiarize yourself with these data (especially `mean_depth`, `dens`, and `abund`) and then think about the following questions. Answer conceptually! Before interpreting any coefficient causally, specify the exposure, outcome, target contrast, and an SCM for depth, location, period, sampling effort, and detection. Is `abund` an appropriate measurand for the question? Click to expand each box for the answer.
 

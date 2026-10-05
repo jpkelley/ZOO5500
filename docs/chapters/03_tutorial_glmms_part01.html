@@ -1,0 +1,1654 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>27&nbsp; Tutorial: GLMMs – Quantitative Analysis of (Messy) Field Data</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/03_glmm_epilogue.html" rel="next">
+<link href="../chapters/03_glmms.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-832e3d7b6b94ddcc90a000f8fabe51a9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/03_intro_modeling.html">Part III: Models as Estimators</a></li><li class="breadcrumb-item"><a href="../chapters/03_tutorial_glmms_part01.html"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Tutorial: GLMMs</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../graphics/jackalope_graphics/analytical_jackalope.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="../graphics/jackalope_graphics/analytical_jackalope.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Quantitative Analysis of (Messy) Field Data</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Course Overview</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Information</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/int_course_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/int_syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Syllabus</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/int_calendar_fa26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Calendar overview</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/int_ai_policy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">GenAI Use Guidelines</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/int_assignment_grades.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Assignments &amp; Grades</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Part ∅: Getting set up</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/int_preparing_yourself.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Preparing for data analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/int_project_scoping.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Project Scoping</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/00_ai_prompting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">AI Prompting for Analysis</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Part I: Questions Before Models</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_statistical_aphorisms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Statistical Philosophy</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05_01_why_scms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Why SCMs?</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01_hypotheses_estimands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Hypotheses and Predictions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05_02_building_dags.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">DAG Construction</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Part II: From the Causal System to Data</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01_nature_of_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">The Nature of Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01_reproducible_workflow_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Reproducible Analyses</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01_metadata_low_friction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Metadata</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01_naming_conventions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Conventions and Style</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02_data_exploration_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Data Exploration</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02_data_exploration_toolkit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Exploration Toolkit</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02_outliers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Tool 1: Outliers</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02_tutorial_data_exploration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Tutorial: Data Exploration</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part III: Models as Estimators</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_intro_modeling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Introduction to Models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_intro_glms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">GLM Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_tutorial_glms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Tutorial: GLMs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_DHARMA_diagnostics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">DHARMA diagnostics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_glmms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">GLMM Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_tutorial_glmms_part01.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Tutorial: GLMMs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_glmm_epilogue.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">GLMM epilogue</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Part IV: Estimating Causal Effects</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Part V: Inference and Reporting</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Final Report</span></span>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">27.1</span> Introduction</a></li>
+  <li><a href="#workspace-set-up" id="toc-workspace-set-up" class="nav-link" data-scroll-target="#workspace-set-up"><span class="header-section-number">27.2</span> Workspace set-up</a></li>
+  <li><a href="#the-example-dataset-the-wyoming-jackalope-lepusantilocapra-wyomingensis" id="toc-the-example-dataset-the-wyoming-jackalope-lepusantilocapra-wyomingensis" class="nav-link" data-scroll-target="#the-example-dataset-the-wyoming-jackalope-lepusantilocapra-wyomingensis"><span class="header-section-number">27.3</span> The example dataset: The Wyoming Jackalope (<em>Lepusantilocapra wyomingensis</em>)</a></li>
+  <li><a href="#start-from-the-causal-model" id="toc-start-from-the-causal-model" class="nav-link" data-scroll-target="#start-from-the-causal-model"><span class="header-section-number">27.4</span> Start from the causal model</a></li>
+  <li><a href="#first-statistical-decision-what-kind-of-response-do-we-have" id="toc-first-statistical-decision-what-kind-of-response-do-we-have" class="nav-link" data-scroll-target="#first-statistical-decision-what-kind-of-response-do-we-have"><span class="header-section-number">27.5</span> First statistical decision: what kind of response do we have?</a></li>
+  <li><a href="#why-we-need-a-mixed-model" id="toc-why-we-need-a-mixed-model" class="nav-link" data-scroll-target="#why-we-need-a-mixed-model"><span class="header-section-number">27.6</span> Why we need a mixed model</a></li>
+  <li><a href="#fixed-effects-and-random-effects-do-different-jobs" id="toc-fixed-effects-and-random-effects-do-different-jobs" class="nav-link" data-scroll-target="#fixed-effects-and-random-effects-do-different-jobs"><span class="header-section-number">27.7</span> Fixed effects and random effects do different jobs</a>
+  <ul class="collapse">
+  <li><a href="#what-does-a-random-intercept-actually-mean" id="toc-what-does-a-random-intercept-actually-mean" class="nav-link" data-scroll-target="#what-does-a-random-intercept-actually-mean"><span class="header-section-number">27.7.1</span> What does a random intercept actually mean?</a></li>
+  </ul></li>
+  <li><a href="#looking-at-the-random-effects-output" id="toc-looking-at-the-random-effects-output" class="nav-link" data-scroll-target="#looking-at-the-random-effects-output"><span class="header-section-number">27.8</span> Looking at the random-effects output</a></li>
+  <li><a href="#random-slopes-when-groups-differ-in-a-relationship" id="toc-random-slopes-when-groups-differ-in-a-relationship" class="nav-link" data-scroll-target="#random-slopes-when-groups-differ-in-a-relationship"><span class="header-section-number">27.9</span> Random slopes: when groups differ in a relationship</a>
+  <ul class="collapse">
+  <li><a href="#interpreting-random-slope-output" id="toc-interpreting-random-slope-output" class="nav-link" data-scroll-target="#interpreting-random-slope-output"><span class="header-section-number">27.9.1</span> Interpreting random-slope output</a></li>
+  </ul></li>
+  <li><a href="#random-intercept-versus-random-slope-picture-the-implied-lines" id="toc-random-intercept-versus-random-slope-picture-the-implied-lines" class="nav-link" data-scroll-target="#random-intercept-versus-random-slope-picture-the-implied-lines"><span class="header-section-number">27.10</span> Random intercept versus random slope: picture the implied lines</a></li>
+  <li><a href="#nested-random-effects-hierarchical-sampling" id="toc-nested-random-effects-hierarchical-sampling" class="nav-link" data-scroll-target="#nested-random-effects-hierarchical-sampling"><span class="header-section-number">27.11</span> Nested random effects: hierarchical sampling</a></li>
+  <li><a href="#crossed-random-effects-membership-in-more-than-one-grouping-system" id="toc-crossed-random-effects-membership-in-more-than-one-grouping-system" class="nav-link" data-scroll-target="#crossed-random-effects-membership-in-more-than-one-grouping-system"><span class="header-section-number">27.12</span> Crossed random effects: membership in more than one grouping system</a>
+  <ul class="collapse">
+  <li><a href="#nested-or-crossed-ask-about-the-design-not-the-software" id="toc-nested-or-crossed-ask-about-the-design-not-the-software" class="nav-link" data-scroll-target="#nested-or-crossed-ask-about-the-design-not-the-software"><span class="header-section-number">27.12.1</span> Nested or crossed? Ask about the design, not the software</a></li>
+  </ul></li>
+  <li><a href="#combining-nesting-crossing-and-random-slopes" id="toc-combining-nesting-crossing-and-random-slopes" class="nav-link" data-scroll-target="#combining-nesting-crossing-and-random-slopes"><span class="header-section-number">27.13</span> Combining nesting, crossing, and random slopes</a></li>
+  <li><a href="#one-careful-use-of-aic-comparing-plausible-statistical-structures" id="toc-one-careful-use-of-aic-comparing-plausible-statistical-structures" class="nav-link" data-scroll-target="#one-careful-use-of-aic-comparing-plausible-statistical-structures"><span class="header-section-number">27.14</span> One careful use of AIC: comparing plausible statistical structures</a></li>
+  <li><a href="#check-the-fitted-model" id="toc-check-the-fitted-model" class="nav-link" data-scroll-target="#check-the-fitted-model"><span class="header-section-number">27.15</span> Check the fitted model</a></li>
+  <li><a href="#poisson-versus-negative-binomial-a-statistical-estimation-question" id="toc-poisson-versus-negative-binomial-a-statistical-estimation-question" class="nav-link" data-scroll-target="#poisson-versus-negative-binomial-a-statistical-estimation-question"><span class="header-section-number">27.16</span> Poisson versus negative binomial: a statistical-estimation question</a></li>
+  <li><a href="#reading-the-complete-glmm-output" id="toc-reading-the-complete-glmm-output" class="nav-link" data-scroll-target="#reading-the-complete-glmm-output"><span class="header-section-number">27.17</span> Reading the complete GLMM output</a>
+  <ul class="collapse">
+  <li><a href="#model-family-and-link" id="toc-model-family-and-link" class="nav-link" data-scroll-target="#model-family-and-link"><span class="header-section-number">27.17.1</span> 1. Model family and link</a></li>
+  <li><a href="#random-effects-table" id="toc-random-effects-table" class="nav-link" data-scroll-target="#random-effects-table"><span class="header-section-number">27.17.2</span> 2. Random-effects table</a></li>
+  <li><a href="#conditional-fixed-effects-table" id="toc-conditional-fixed-effects-table" class="nav-link" data-scroll-target="#conditional-fixed-effects-table"><span class="header-section-number">27.17.3</span> 3. Conditional fixed-effects table</a></li>
+  <li><a href="#dispersion-information" id="toc-dispersion-information" class="nav-link" data-scroll-target="#dispersion-information"><span class="header-section-number">27.17.4</span> 4. Dispersion information</a></li>
+  </ul></li>
+  <li><a href="#population-level-and-group-specific-predictions" id="toc-population-level-and-group-specific-predictions" class="nav-link" data-scroll-target="#population-level-and-group-specific-predictions"><span class="header-section-number">27.18</span> Population-level and group-specific predictions</a></li>
+  <li><a href="#a-compact-translation-guide" id="toc-a-compact-translation-guide" class="nav-link" data-scroll-target="#a-compact-translation-guide"><span class="header-section-number">27.19</span> A compact translation guide</a></li>
+  <li><a href="#putting-the-workflow-together" id="toc-putting-the-workflow-together" class="nav-link" data-scroll-target="#putting-the-workflow-together"><span class="header-section-number">27.20</span> Putting the workflow together</a></li>
+  <li><a href="#thought-prompts" id="toc-thought-prompts" class="nav-link" data-scroll-target="#thought-prompts"><span class="header-section-number">27.21</span> Thought prompts</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">27.22</span> Conclusion</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/03_intro_modeling.html">Part III: Models as Estimators</a></li><li class="breadcrumb-item"><a href="../chapters/03_tutorial_glmms_part01.html"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Tutorial: GLMMs</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Tutorial: GLMMs</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">warning =</span> <span class="cn">FALSE</span>, <span class="at">message =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="introduction" class="level2" data-number="27.1">
+<h2 data-number="27.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">27.1</span> Introduction</h2>
+<p>In this tutorial, we will build a Generalized Linear Mixed Model (GLMM) using the <code>glmmTMB</code> package. This also could be done within the <code>mgcv</code> package (using <code>gam()</code> or related functions), and an extremely powerful alternative is the <code>brms</code> package (Bayesian regression modeling using Stan). We will start with <code>glmmTMB</code> for the sake of clarity; its model syntax is widely used in the ecological literature.</p>
+<p>At this point in the course, however, we are <strong>not starting our analysis with a statistical model</strong>. We have already learned to begin with the causal question, define the estimand, represent our causal assumptions with a structural causal model (SCM/DAG), and determine an identification strategy. The statistical model comes <em>after</em> those steps.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Identification first; estimation second
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The DAG determines which variables must (and must not) be conditioned on to identify the causal estimand. A GLMM does not discover confounders, mediators, or colliders for us.</p>
+<p>Our job here is different: <strong>given an identified estimand, how should we structure a statistical model that respects the response distribution and the dependence created by the sampling design?</strong></p>
+</div>
+</div>
+<p>GLMMs are especially useful when observations are not independent—for example, when we repeatedly sample the same plot, measure individuals within populations, observe nests within territories, or collect observations from multiple observers. The <em>mixed</em> part of a GLMM lets us represent this grouped structure explicitly.</p>
+<p>By the end of this tutorial, you should be able to:</p>
+<ul>
+<li>distinguish fixed effects from random effects;</li>
+<li>translate a sampling design into an appropriate grouping structure;</li>
+<li>distinguish nested from crossed random effects;</li>
+<li>understand random intercepts and random slopes in both model notation and expanded equations;</li>
+<li>interpret variance, standard-deviation, and correlation estimates for random effects;</li>
+<li>diagnose whether the distributional and dependence assumptions of a fitted GLMM are reasonable; and</li>
+<li>understand the limited situations in which AIC can help compare <em>statistical structures</em> without redefining the causal adjustment set.</li>
+</ul>
+</section>
+<section id="workspace-set-up" class="level2" data-number="27.2">
+<h2 data-number="27.2" class="anchored" data-anchor-id="workspace-set-up"><span class="header-section-number">27.2</span> Workspace set-up</h2>
+<p>Please download the <code>load_packages.r</code> file again: - <a href="class_r_scripts/load_packages.r"><code>load_packages.r</code></a></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"chapters/class_r_scripts/load_packages.r"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="the-example-dataset-the-wyoming-jackalope-lepusantilocapra-wyomingensis" class="level2" data-number="27.3">
+<h2 data-number="27.3" class="anchored" data-anchor-id="the-example-dataset-the-wyoming-jackalope-lepusantilocapra-wyomingensis"><span class="header-section-number">27.3</span> The example dataset: The Wyoming Jackalope (<em>Lepusantilocapra wyomingensis</em>)</h2>
+<p>For this example, you will need the following file (simply click to save):</p>
+<ul>
+<li><a href="../chapters/class_exercise_data/lepusantilocapra_wyomingensis_dataset.csv"><code>lepusantilocapra_wyomingensis_dataset.csv</code></a></li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Jackalope seem to be everywhere. Recently, during a survey of 31 forested study plots (1 square kilometer each) here in Wyoming, scientists discovered a cryptic species of jackalope. Because it is endemic to Wyoming, they named it the Wyoming Lorax (<em>Lepusantilocapra wyomingensis</em>). The researchers quantified their abundance (counts per survey and multiple surveys per plot), community diversity (all jackalope species in the plots), and also measured several habitat features, including percentage ground vegetation, percentage herb layer, and percent leaf litter.</p>
+<p>Anyway, these scientists thought the scientific community would not believe their discovery, so they gave the dataset to the cryptid ecologists of ZOO/ECOL-5500.</p>
+</div><div class="column" style="width:50%;">
+<p><img src="../graphics/jackalope_graphics/wyoming_jackalope.png" class="img-fluid"></p>
+</div>
+</div>
+<p>You see several variables and plot information:</p>
+<ul>
+<li><code>plot_id</code>: values 1–31 for each unique plot</li>
+<li><code>forest_age</code>: categorical variable describing the age class of each plot</li>
+<li><code>tree_species</code>: species of dominant tree in each survey</li>
+<li><code>x</code> and <code>y</code>: spatial coordinates in UTM (specific projection not important)</li>
+<li><code>abundance</code>: count of <em>L. wyomingensis</em> in each survey</li>
+<li><code>shannon_hlog10</code>: Shannon diversity index of the jackalope community in each survey</li>
+<li><code>ground_veg</code>: proportion of each survey area covered in ground vegetation</li>
+<li><code>herb_layer</code>: proportion of each survey area covered in herbs</li>
+<li><code>leaf_litter</code>: proportion of each survey area covered in leaf litter only (no vegetation)</li>
+<li><code>rain_in</code>: round total precipitation (in inches…because that’s what their inexpensive rain gauge collected)</li>
+</ul>
+<p>For the sake of brevity, let us assume that these data have already been cleaned and inspected. We will focus here on statistical estimation rather than data cleaning.</p>
+</section>
+<section id="start-from-the-causal-model" class="level2" data-number="27.4">
+<h2 data-number="27.4" class="anchored" data-anchor-id="start-from-the-causal-model"><span class="header-section-number">27.4</span> Start from the causal model</h2>
+<p>Suppose our causal question concerns the effect of <code>ground_veg</code> on jackalope <code>abundance</code>. Earlier SCM work has already specified the estimand and identified the variables that must be conditioned on (i.e.&nbsp;the confounder of <code>rain_in</code>). For this tutorial, <strong>assume that the DAG-derived adjustment set is already fixed</strong>. That will save us some time.</p>
+<p>Basing our statistical modeling choices on our causal assumptions really matters. Unlike a kitchen-sink modeler, We will not fit every possible subset of predictors and ask the data which variables are important in the causal model. Variables required for identification are included in the model because of the causal assumptions;it is not because their inclusion improves AIC values, produce small <em>p</em>-values, or make residual plots prettier.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Another reminder: a statistical formula is not a DAG
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A formula such as</p>
+<p><code>abundance ~ ground_veg + rain_in</code></p>
+<p>describes a statistical conditional mean. By itself, it does not state whether <code>rain_in</code> is a confounder, mediator, collider, precision variable, or something else. Those roles must come from the SCM and be understood prior to statistical modeling.</p>
+</div>
+</div>
+<p>Let us now examine a different question: <strong>What model structure is requireds to estimate the identified relationship well?</strong></p>
+</section>
+<section id="first-statistical-decision-what-kind-of-response-do-we-have" class="level2" data-number="27.5">
+<h2 data-number="27.5" class="anchored" data-anchor-id="first-statistical-decision-what-kind-of-response-do-we-have"><span class="header-section-number">27.5</span> First statistical decision: what kind of response do we have?</h2>
+<p>Our response, <code>abundance</code>, is a count. Counts are discrete and bounded below by zero. A Gaussian model can therefore generate impossible predictions (i.e.&nbsp;less than 0) and impose an altoegher inappropriate mean–variance relationship. A Poisson model is a sensible place to begin. Why? It is not because your residual diagnostics of the fitted model “selected” it. Rather, it is because it matches the kind of observations generated by the measurement process.</p>
+<p>A simple Poisson GLM might look like this:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>glm_01 <span class="ot">&lt;-</span> <span class="fu">glm</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  abundance <span class="sc">~</span> ground_veg <span class="sc">+</span> rain_in,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> poisson,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> wyoming</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The precise fixed-effects terms in your own analysis would come from the estimand and its identification strategy. Here they simply give us a model to extend. But there is still an important problem: <strong>the rows in our dataset are not independent.</strong></p>
+</section>
+<section id="why-we-need-a-mixed-model" class="level2" data-number="27.6">
+<h2 data-number="27.6" class="anchored" data-anchor-id="why-we-need-a-mixed-model"><span class="header-section-number">27.6</span> Why we need a mixed model</h2>
+<p>We repeatedly sampled each plot (range = 3–7 samples). This means there is unbalanced and non-independent data. <em>A priori</em>, we expect observations from the same plot to be more similar than observations from different plots. They share location, history, soil, vegetation, unmeasured habitat characteristics, and many other plot-level properties. You’re probably already thinking about spatial and temporal autocorrelation, rught?</p>
+<p>If we ignore all of this clustering in the data, a conventional GLM acts as though every row provides completely independent information. That can give us inappropriate uncertainty estimates and can misrepresent the data-generating structure. This is where the GLMM enters.</p>
+<p>First, make sure our grouping variable is treated as a factor:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>wyoming <span class="ot">&lt;-</span> wyoming <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">plot_id =</span> <span class="fu">as.factor</span>(plot_id))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="fixed-effects-and-random-effects-do-different-jobs" class="level2" data-number="27.7">
+<h2 data-number="27.7" class="anchored" data-anchor-id="fixed-effects-and-random-effects-do-different-jobs"><span class="header-section-number">27.7</span> Fixed effects and random effects do different jobs</h2>
+<p>A mixed model contains at least two conceptually different components.</p>
+<p><strong>Fixed effects</strong> describe systematic relationships that are explicitly represented in the conditional mean. In our causal analysis, the exposure and required adjustment variables occur here.</p>
+<p><strong>Random effects</strong> describe structured variation among groups in the data. They allow observations belonging to the same group to share a deviation from the population-average relationship.</p>
+<p>For example:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mod_ri <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  abundance <span class="sc">~</span> ground_veg <span class="sc">+</span> rain_in <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> plot_id),</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> poisson,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> wyoming</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The new term is:</p>
+<pre class="text"><code>(1 | plot_id)</code></pre>
+<p>Read this as: <strong>Allow each plot to have its own intercept</strong>.</p>
+<section id="what-does-a-random-intercept-actually-mean" class="level3" data-number="27.7.1">
+<h3 data-number="27.7.1" class="anchored" data-anchor-id="what-does-a-random-intercept-actually-mean"><span class="header-section-number">27.7.1</span> What does a random intercept actually mean?</h3>
+<p>Ignoring the log link for a moment, an ordinary regression can be written as</p>
+<p><span class="math display">\[Y_i = \beta_0 + \beta_1X_i + \epsilon_i.\]</span></p>
+<p>Every observation shares the same intercept, <span class="math inline">\(\beta_0\)</span>.</p>
+<p>A random-intercept model for observation <span class="math inline">\(i\)</span> in plot <span class="math inline">\(j\)</span> instead contains</p>
+<p><span class="math display">\[Y_{ij} = (\beta_0 + b_{0j}) + \beta_1X_{ij} + \epsilon_{ij},\]</span></p>
+<p>where</p>
+<p><span class="math display">\[b_{0j} \sim N(0,\sigma^2_{plot}).\]</span></p>
+<p>Here, <span class="math inline">\(\beta_0\)</span> is the population-level intercept and <span class="math inline">\(b_{0j}\)</span> is plot <span class="math inline">\(j\)</span>’s deviation from that intercept. We do not estimate an unrelated fixed intercept for every plot. Instead, we assume that plot deviations arise from a common distribution whose variance, <span class="math inline">\(\sigma^2_{plot}\)</span>, is estimated from the data.</p>
+<p>For our Poisson GLMM with a log link, the conditional model is more properly written as</p>
+<p><span class="math display">\[\log(\mu_{ij}) = (\beta_0 + b_{0j}) + \beta_1X_{ij} + \beta_2Z_{ij},\]</span></p>
+<p>with</p>
+<p><span class="math display">\[Y_{ij} \sim \operatorname{Poisson}(\mu_{ij}).\]</span></p>
+<p>So the random intercept shifts a plot’s expected abundance on the <strong>linear-predictor (log) scale</strong>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Think “shared deviation”
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A random intercept says that observations from the same group share something that moves their expected response up or down together. It is a compact way to represent dependence created by grouping.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="looking-at-the-random-effects-output" class="level2" data-number="27.8">
+<h2 data-number="27.8" class="anchored" data-anchor-id="looking-at-the-random-effects-output"><span class="header-section-number">27.8</span> Looking at the random-effects output</h2>
+<p>Run:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_ri)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Family: poisson  ( log )
+Formula:          abundance ~ ground_veg + rain_in + (1 | plot_id)
+Data: wyoming
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   2472.2    2484.8   -1232.1    2464.2       169 
+
+Random effects:
+
+Conditional model:
+ Groups  Name        Variance Std.Dev.
+ plot_id (Intercept) 0.2259   0.4753  
+Number of obs: 173, groups:  plot_id, 31
+
+Conditional model:
+            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)  4.32799    0.08785   49.27  &lt; 2e-16 ***
+ground_veg   0.25294    0.04909    5.15 2.57e-07 ***
+rain_in      0.01778    0.00569    3.13  0.00177 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>The output contains a section labeled approximately like this:</p>
+<pre class="text"><code>Random effects:
+
+Conditional model:
+ Groups  Name        Variance Std.Dev.
+ plot_id (Intercept)   ...      ...</code></pre>
+<p>The two most important quantities are:</p>
+<ul>
+<li><strong>Variance</strong>: the estimated among-plot variance in the random intercepts, <span class="math inline">\(\sigma^2_{plot}\)</span>.</li>
+<li><strong>Std.Dev.</strong>: the square root of that variance, <span class="math inline">\(\sigma_{plot}\)</span>, expressed on the model’s linear-predictor scale.</li>
+</ul>
+<p>A variance near zero means that, <em>conditional on the fixed effects in the model</em>, little intercept variation remains among plots. A larger value means that plots differ substantially in their baseline expected abundance after accounting for those fixed effects.</p>
+<p>Notice what this does <strong>not</strong> mean: It does <em>not</em> mean that we can interpret <code>plot_id</code> as the “effect of plot.” Remember that <code>plot_id</code> has not been assigned a conventionalregression coefficient that we interpret. The random effect is simply describing grouped heterogeneity and dependence.</p>
+<p>You can inspect the estimated group-specific deviations with:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ranef</span>(mod_ri)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$plot_id
+   (Intercept)
+1  -0.33972591
+2  -0.41046352
+3  -0.56491196
+4   0.40374733
+5   0.23490909
+6   0.36976373
+7  -0.96818704
+8  -1.23000246
+9   0.36529060
+10 -0.08059812
+11  0.29799440
+12  0.49631594
+13 -0.56893132
+14 -0.19540635
+15 -0.15451523
+16  0.01428923
+17 -0.54725646
+18  0.11393420
+19  0.15197990
+20  1.13671636
+21  0.67870389
+22 -0.37744399
+23 -0.06354533
+24  0.31193624
+25  0.10168163
+26  0.25546879
+27  0.19182066
+28 -0.02161375
+29 -0.14715874
+30  0.27662662
+31  0.30641773</code></pre>
+</div>
+</div>
+<p>These are conditional modes (often informally called BLUPs, or Best Linear Unbiased Predictor). Positive values identify plots whose conditional intercept is above the population intercept; negative values identify plots below it. Because these estimates are partially pooled, groups with limited information are pulled more strongly toward the population mean. Note that some scientists have cleverly used this values as index metrics in secondary analyses.</p>
+</section>
+<section id="random-slopes-when-groups-differ-in-a-relationship" class="level2" data-number="27.9">
+<h2 data-number="27.9" class="anchored" data-anchor-id="random-slopes-when-groups-differ-in-a-relationship"><span class="header-section-number">27.9</span> Random slopes: when groups differ in a relationship</h2>
+<p>A random intercept allows plots to start at different baseline levels, but it assumes that the slope of a predictor is the same in every plot. Sometimes that assumption is unreasonable. Imagine that rainfall varies among repeated surveys within plots and that the relationship between rainfall and jackalope abundance differs among plots. We could allow the <code>rain_in</code> slope to vary:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>mod_rs <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  abundance <span class="sc">~</span> ground_veg <span class="sc">+</span> rain_in <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> rain_in <span class="sc">|</span> plot_id),</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> poisson,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> wyoming</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The term</p>
+<pre class="text"><code>(1 + rain_in | plot_id)</code></pre>
+<p>means: <strong>Allow both the intercept and the <code>rain_in</code> slope to vary among plots</strong>.</p>
+<p>In expanded form:</p>
+<p><span class="math display">\[\log(\mu_{ij}) =
+(\beta_0 + b_{0j})
++ \beta_1X_{ij}
++ (\beta_2 + b_{1j})Z_{ij},\]</span></p>
+<p>where <span class="math inline">\(b_{0j}\)</span> is the random intercept for plot <span class="math inline">\(j\)</span> and <span class="math inline">\(b_{1j}\)</span> is its random deviation from the population rainfall slope. This tells us that a random-slope model estimates <strong>three</strong> features of group-level variation:</p>
+<ol type="1">
+<li>variance among group intercepts;</li>
+<li>variance among group slopes; and</li>
+<li>covariance (usually displayed as a correlation) between intercept and slope deviations.</li>
+</ol>
+<section id="interpreting-random-slope-output" class="level3" data-number="27.9.1">
+<h3 data-number="27.9.1" class="anchored" data-anchor-id="interpreting-random-slope-output"><span class="header-section-number">27.9.1</span> Interpreting random-slope output</h3>
+<p>A <code>summary()</code> may contain something like:</p>
+<pre class="text"><code>Random effects:
+
+Conditional model:
+ Groups  Name        Variance Std.Dev. Corr
+ plot_id (Intercept)   ...      ...
+         rain_in       ...      ...     ...</code></pre>
+<p>The <code>rain_in</code> variance tells us how much the rainfall slope varies among plots. The correlation tells us whether plots with higher-than-average intercepts tend to have higher or lower rainfall slopes.</p>
+<p>For example, a negative intercept–slope correlation would indicate that plots with relatively high baseline abundance tend to have less positive (or more negative) rainfall relationships. Be careful: this is a description of the fitted hierarchical structure, not automatically a causal explanation for why plots differ.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>A random slope needs replication at the right level
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Do not add a random slope merely because the syntax exists. The predictor must vary within the grouping unit for the group-specific slope to be meaningfully informed by the data. A variable that is constant within each plot cannot provide repeated within-plot information about a plot-specific slope.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="random-intercept-versus-random-slope-picture-the-implied-lines" class="level2" data-number="27.10">
+<h2 data-number="27.10" class="anchored" data-anchor-id="random-intercept-versus-random-slope-picture-the-implied-lines"><span class="header-section-number">27.10</span> Random intercept versus random slope: picture the implied lines</h2>
+<p>A useful way to think about these models is to imagine one regression line for every plot.</p>
+<p>With <code>(1 | plot_id)</code>, the lines have different intercepts but the <strong>same slope</strong>:</p>
+<p><span class="math display">\[\text{Plot 1: } (\beta_0+b_{01}) + \beta_1X\]</span></p>
+<p><span class="math display">\[\text{Plot 2: } (\beta_0+b_{02}) + \beta_1X\]</span></p>
+<p><span class="math display">\[\text{Plot 3: } (\beta_0+b_{03}) + \beta_1X.\]</span></p>
+<p>With <code>(1 + X | plot_id)</code>, both intercept and slope can differ:</p>
+<p><span class="math display">\[\text{Plot 1: } (\beta_0+b_{01}) + (\beta_1+b_{11})X\]</span></p>
+<p><span class="math display">\[\text{Plot 2: } (\beta_0+b_{02}) + (\beta_1+b_{12})X\]</span></p>
+<p><span class="math display">\[\text{Plot 3: } (\beta_0+b_{03}) + (\beta_1+b_{13})X.\]</span></p>
+<p>The population coefficients <span class="math inline">\(\beta\)</span> describe the average relationship; the <span class="math inline">\(b\)</span> terms describe group-specific deviations around it.</p>
+</section>
+<section id="nested-random-effects-hierarchical-sampling" class="level2" data-number="27.11">
+<h2 data-number="27.11" class="anchored" data-anchor-id="nested-random-effects-hierarchical-sampling"><span class="header-section-number">27.11</span> Nested random effects: hierarchical sampling</h2>
+<p>Ecological sampling designs are often hierarchical. Imagine that our study had several <code>site_id</code> values, multiple <code>plot_id</code> values within each site, and repeated surveys within each plot:</p>
+<pre class="text"><code>site
+└── plot
+    └── repeated survey</code></pre>
+<p>Observations from the same plot share both a plot and a site. Plots within the same site share a site but are not the same plot.</p>
+<p>A nested random-intercept structure can be written as:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">1</span> <span class="sc">|</span> site_id<span class="sc">/</span>plot_id)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>In <code>lme4</code>/<code>glmmTMB</code> formula notation, this expands to:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">1</span> <span class="sc">|</span> site_id) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> site_id<span class="sc">:</span>plot_id)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A complete model might therefore be:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example syntax only: site_id is not required to exist in this dataset.</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># nested_mod &lt;- glmmTMB(</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   abundance ~ ground_veg + rain_in + (1 | site_id/plot_id),</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   family = poisson,</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   data = wyoming</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The model estimates variation among sites and additional variation among plots within sites.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Unique IDs can simplify nested syntax
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If every <code>plot_id</code> is globally unique—plot 17 can occur in only one site—then</p>
+<p><code>(1 | site_id) + (1 | plot_id)</code></p>
+<p>can represent the same grouping hierarchy without explicitly constructing <code>site_id:plot_id</code>. If plot labels repeat within sites (e.g., every site has plots 1, 2, and 3), use the explicit nested structure or create a unique plot identifier.</p>
+</div>
+</div>
+</section>
+<section id="crossed-random-effects-membership-in-more-than-one-grouping-system" class="level2" data-number="27.12">
+<h2 data-number="27.12" class="anchored" data-anchor-id="crossed-random-effects-membership-in-more-than-one-grouping-system"><span class="header-section-number">27.12</span> Crossed random effects: membership in more than one grouping system</h2>
+<p>Not all grouping structures are hierarchical. Suppose multiple observers survey multiple plots, and the same observer can survey several plots while each plot can be surveyed by several observers.</p>
+<p>Neither grouping factor lives “inside” the other:</p>
+<pre class="text"><code>observer A -&gt; plots 1, 3, 8
+observer B -&gt; plots 1, 2, 8
+observer C -&gt; plots 2, 3, 7</code></pre>
+<p><code>observer_id</code> and <code>plot_id</code> are <strong>crossed</strong>.</p>
+<p>We represent this as:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">1</span> <span class="sc">|</span> plot_id) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> observer_id)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>For example:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example syntax only: observer_id is not required to exist in this dataset.</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># crossed_mod &lt;- glmmTMB(</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   abundance ~ ground_veg + rain_in +</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     (1 | plot_id) + (1 | observer_id),</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   family = poisson,</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   data = wyoming</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The model now estimates one variance component for plot-to-plot heterogeneity and another for observer-to-observer heterogeneity.</p>
+<section id="nested-or-crossed-ask-about-the-design-not-the-software" class="level3" data-number="27.12.1">
+<h3 data-number="27.12.1" class="anchored" data-anchor-id="nested-or-crossed-ask-about-the-design-not-the-software"><span class="header-section-number">27.12.1</span> Nested or crossed? Ask about the design, not the software</h3>
+<p>The distinction comes from how observations were generated.</p>
+<ul>
+<li><strong>Nested:</strong> each lower-level unit belongs to only one higher-level unit (e.g., nest within territory).</li>
+<li><strong>Crossed:</strong> units from one grouping factor can occur with multiple units of another grouping factor (e.g., observer × plot).</li>
+</ul>
+<p>Do not decide this by trying formulas and seeing which one has the lowest AIC. The sampling design usually tells you the answer. Adhere to your study design and to your causal assumptions!</p>
+</section>
+</section>
+<section id="combining-nesting-crossing-and-random-slopes" class="level2" data-number="27.13">
+<h2 data-number="27.13" class="anchored" data-anchor-id="combining-nesting-crossing-and-random-slopes"><span class="header-section-number">27.13</span> Combining nesting, crossing, and random slopes</h2>
+<p>Real studies can contain all of these structures simultaneously. For example, imagine repeated surveys of plots nested within sites, with observers crossed across sites, and rainfall effects allowed to vary among plots:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>abundance <span class="sc">~</span> ground_veg <span class="sc">+</span> rain_in <span class="sc">+</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  (<span class="dv">1</span> <span class="sc">|</span> site_id) <span class="sc">+</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  (<span class="dv">1</span> <span class="sc">+</span> rain_in <span class="sc">|</span> plot_id) <span class="sc">+</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  (<span class="dv">1</span> <span class="sc">|</span> observer_id)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This formula says:</p>
+<ul>
+<li>estimate the fixed effects required by the causal model;</li>
+<li>allow baseline abundance to vary among sites;</li>
+<li>allow both baseline abundance and the rainfall relationship to vary among plots; and</li>
+<li>allow baseline abundance to vary among observers.</li>
+</ul>
+<p>That is a lot of structure. Whether the data can support it depends on replication, number of groups, variation within groups, and the amount of information in the response. Including too many random effects can cause model failure.</p>
+</section>
+<section id="one-careful-use-of-aic-comparing-plausible-statistical-structures" class="level2" data-number="27.14">
+<h2 data-number="27.14" class="anchored" data-anchor-id="one-careful-use-of-aic-comparing-plausible-statistical-structures"><span class="header-section-number">27.14</span> One careful use of AIC: comparing plausible statistical structures</h2>
+<p>We have deliberately <strong>not</strong> used AIC to choose the causal adjustment set. The DAG and identification strategy already did that work. There are, however, situations in which we may have more than one scientifically plausible <em>statistical</em> representation after the causal structure is fixed. For example, perhaps the study design clearly implies repeated measurements within <code>plot_id</code>, but we are uncertain whether there is enough evidence to estimate plot-specific rainfall slopes in addition to plot-specific intercepts.</p>
+<p>We might compare:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>mod_intercept <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  abundance <span class="sc">~</span> ground_veg <span class="sc">+</span> rain_in <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> plot_id),</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> poisson,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> wyoming</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>mod_slope <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  abundance <span class="sc">~</span> ground_veg <span class="sc">+</span> rain_in <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> rain_in <span class="sc">|</span> plot_id),</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> poisson,</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> wyoming</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(mod_intercept, mod_slope)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              df      AIC
+mod_intercept  4 2472.227
+mod_slope      6 2313.264</code></pre>
+</div>
+</div>
+<p>Notice what remains <strong>identical</strong>: the fixed-effects terms required by our causal estimand. We are comparing two representations of residual group-level heterogeneity. We are not asking AIC which confounding variables that we should keep.</p>
+<p>Even here, AIC should <em>never</em> overrule obvious information about your study design. If that study design requires a grouping term to represent known dependence, dropping it simply because AIC changes slightly can be an exceedingly poor decision. Similarly, the decision to include random slopes should be driven by the sampling process and sufficient within-group variation; it should not be generated by automated dredging (i.e.&nbsp;the ‘dredge’ package in R)</p>
+<p>Other reasonable uses of information-theoretic (i.e.&nbsp;AIC) model comparison can include comparing among data distributions or functional-forms (linear or nonlinear). This assumes, of course, that the models being compared target the <strong>same estimand</strong> and use the same required adjustment set.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>The rule for this course (again!)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Causal structure determines what must be conditioned on. Statistical structure determines how we represent the outcome, functional relationships, and dependence well enough to estimate the target quantity.</strong></p>
+<p>AIC can sometimes help with the second problem. It does not solve the first.</p>
+</div>
+</div>
+</section>
+<section id="check-the-fitted-model" class="level2" data-number="27.15">
+<h2 data-number="27.15" class="anchored" data-anchor-id="check-the-fitted-model"><span class="header-section-number">27.15</span> Check the fitted model</h2>
+<p>Suppose our design supports the random-intercept model:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>final_mod <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  abundance <span class="sc">~</span> ground_veg <span class="sc">+</span> rain_in <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> plot_id),</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> poisson,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> wyoming</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We can examine its simulated residuals with <code>DHARMa</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>simresid <span class="ot">&lt;-</span> <span class="fu">simulateResiduals</span>(<span class="at">fittedModel =</span> final_mod)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(simresid)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_tutorial_glmms_part01_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Reminder about the ‘DHARMa’ package is doing.
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As a reminder, the <code>DHARMa</code> package creates simulation-based scaled residuals that should be approximately <strong>uniformly distributed</strong> when the fitted model is behaving like it should given your specification. The Kolmogorov–Smirnov (K-S) test in the left output panel tests uniformity of these scaled residuals. The K-S test does not test normality.</p>
+<p>Residual diagnostics can reveal problems with the statistical specification: dispersion, zero inflation, functional form, temporal/spatial structure, or other unmodeled patterns. They do <strong>not</strong> tell us whether the causal effect was identified correctly. A model can have gorgeous residuals and estimate the wrong causal quantity; conversely, an identified estimand can be estimated poorly by a misspecified statistical model.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Signal versus noise problems
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When diagnostics show structure, ask the following question: <em>What kind of model assumption could generate that pattern?</em> A distributional problem may suggest revisiting the response family (for example, Poisson versus negative binomial). Systematic residual patterns against a predictor may suggest inadequate functional form. Remaining clustering may suggest dependence not yet represented by the random-effects structure.</p>
+<p>Do not respond to model diagnostic issues by automatically adding or deleting causal adjustment variables. This is a big no-no.</p>
+</div>
+</div>
+</section>
+<section id="poisson-versus-negative-binomial-a-statistical-estimation-question" class="level2" data-number="27.16">
+<h2 data-number="27.16" class="anchored" data-anchor-id="poisson-versus-negative-binomial-a-statistical-estimation-question"><span class="header-section-number">27.16</span> Poisson versus negative binomial: a statistical-estimation question</h2>
+<p>Count data often show more variation than a Poisson model permits. If diagnostics indicate overdispersion, a negative-binomial GLMM may be more appropriate:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>mod_nb <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  abundance <span class="sc">~</span> ground_veg <span class="sc">+</span> rain_in <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> plot_id),</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> nbinom2,</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> wyoming</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Notice again that the causal adjustment set has not changed. We have changed the <strong>measurement/error model</strong>, not the causal model.</p>
+<p>We would then inspect diagnostics for the revised model:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>simresid_nb <span class="ot">&lt;-</span> <span class="fu">simulateResiduals</span>(<span class="at">fittedModel =</span> mod_nb)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(simresid_nb)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_tutorial_glmms_part01_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="reading-the-complete-glmm-output" class="level2" data-number="27.17">
+<h2 data-number="27.17" class="anchored" data-anchor-id="reading-the-complete-glmm-output"><span class="header-section-number">27.17</span> Reading the complete GLMM output</h2>
+<p>Let us inspect a fitted model:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_nb)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Family: nbinom2  ( log )
+Formula:          abundance ~ ground_veg + rain_in + (1 | plot_id)
+Data: wyoming
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   1699.1    1714.9    -844.6    1689.1       168 
+
+Random effects:
+
+Conditional model:
+ Groups  Name        Variance Std.Dev.
+ plot_id (Intercept) 0.2065   0.4544  
+Number of obs: 173, groups:  plot_id, 31
+
+Dispersion parameter for nbinom2 family (): 12.2 
+
+Conditional model:
+            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)  4.29095    0.10236   41.92  &lt; 2e-16 ***
+ground_veg   0.41926    0.14984    2.80  0.00514 ** 
+rain_in      0.01776    0.01758    1.01  0.31252    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>A <code>glmmTMB</code> summary generally contains several kinds of information. Keep their meanings separate.</p>
+<section id="model-family-and-link" class="level3" data-number="27.17.1">
+<h3 data-number="27.17.1" class="anchored" data-anchor-id="model-family-and-link"><span class="header-section-number">27.17.1</span> 1. Model family and link</h3>
+<p>This tells you the assumed conditional distribution of the response and the scale on which the linear predictor operates. With <code>nbinom2</code>, the model is a negative-binomial count model; by default, the conditional mean uses a log link.</p>
+</section>
+<section id="random-effects-table" class="level3" data-number="27.17.2">
+<h3 data-number="27.17.2" class="anchored" data-anchor-id="random-effects-table"><span class="header-section-number">27.17.2</span> 2. Random-effects table</h3>
+<p>For a random-intercept model you will see the estimated variance and standard deviation among plot intercepts. These quantify remaining between-plot heterogeneity conditional on the fixed effects.</p>
+<p>For a random-intercept/random-slope model, you will additionally see slope variance and an intercept–slope correlation.</p>
+</section>
+<section id="conditional-fixed-effects-table" class="level3" data-number="27.17.3">
+<h3 data-number="27.17.3" class="anchored" data-anchor-id="conditional-fixed-effects-table"><span class="header-section-number">27.17.3</span> 3. Conditional fixed-effects table</h3>
+<p>The fixed-effects table contains estimates, standard errors, test statistics, and <em>p</em>-values on the <strong>link scale</strong>. In a log-link count model, a coefficient is an additive change in log expected abundance per unit change in the predictor, conditional on the other modeled terms and random effects.</p>
+<p>Exponentiating the coefficient converts it into a multiplier for expected abundance. For instance, a value of 1.2 (after exponentiation) means expected abundance is multiplied by 1.2, or a 20% increase.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">fixef</span>(mod_nb)<span class="sc">$</span>cond)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)  ground_veg     rain_in 
+  73.035885    1.520832    1.017916 </code></pre>
+</div>
+</div>
+<p>What does this mean? This can be tricky. The exponentiated coefficient is called a multiplier, as it tells us how much expected abundance is multiplied by for a one-unit increase in the predictor, holding the other variables constant. Because <code>ground_veg</code> ranges from 0 to 1, its multiplier of <strong>1.5208</strong> means that increasing ground vegetation from <strong>0% to 100%</strong> multiplies expected abundance by 1.5208 (a <strong>52.1% increase</strong>).</p>
+<div class="callout callout-style-default callout-note callout-titled" title="But what if you wanted to understand smaller changes?">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>But what if you wanted to understand smaller changes?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Because <code>ground_veg</code> is measured as a proportion, however, a 1-unit increase corresponds to going from 0% to 100% cover. A <strong>0.10-unit increase (10 percentage points)</strong> is often more biologically meaningful.</p>
+<p>Recall that with a log link,</p>
+<p>[ () = _0 + _1x. ]</p>
+<p>For a 1-unit increase in ground vegetation, the multiplier is</p>
+<p>[ e^{_1} = 1.5208. ]</p>
+<p>For a 0.10-unit increase, the change on the log scale is only one-tenth as large, so the multiplier becomes</p>
+<p>[ e^{0.10_1} = (e<sup>{_1})</sup>{0.10} = 1.5208^{0.10} = 1.043. ]</p>
+<p>Thus, a <strong>10-percentage-point increase in ground vegetation</strong> (for example, from 30% to 40% cover) corresponds to multiplying expected abundance by <strong>1.043</strong>, or about a <strong>4.3% increase</strong>, holding the other variables in the model constant.</p>
+<p>The general rule is</p>
+<p>[ . ]</p>
+</div>
+</div>
+<p>All of this sounds great. But do not forget: a coefficient becomes a causal-effect estimate only because the earlier identification assumptions justify that interpretation—not because it came from a GLMM!</p>
+</section>
+<section id="dispersion-information" class="level3" data-number="27.17.4">
+<h3 data-number="27.17.4" class="anchored" data-anchor-id="dispersion-information"><span class="header-section-number">27.17.4</span> 4. Dispersion information</h3>
+<p>For negative-binomial models, the output also contains information governing extra-Poisson variation. This is part of the conditional response model, not a random effect among sampling groups.</p>
+</section>
+</section>
+<section id="population-level-and-group-specific-predictions" class="level2" data-number="27.18">
+<h2 data-number="27.18" class="anchored" data-anchor-id="population-level-and-group-specific-predictions"><span class="header-section-number">27.18</span> Population-level and group-specific predictions</h2>
+<p>Mixed models naturally distinguish between predictions that average over the random-effects distribution and predictions conditional on estimated group effects. This distinction is important when communicating what your model predicts.</p>
+<p>A prediction for an already-observed plot can incorporate that plot’s estimated random deviation. A population-level prediction instead describes the relationship without conditioning on a particular plot’s realized deviation.</p>
+<p>Which prediction is relevant depends on the scientific target. If our estimand is a population-level causal contrast, we generally want the statistical estimand to correspond to that target rather than accidentally interpreting one particular plot’s conditional trajectory as the population effect.</p>
+<p>Later, we will use tools such as <code>marginaleffects</code> to obtain contrasts and predictions on scientifically meaningful scales rather than relying only on raw link-scale coefficients.</p>
+</section>
+<section id="a-compact-translation-guide" class="level2" data-number="27.19">
+<h2 data-number="27.19" class="anchored" data-anchor-id="a-compact-translation-guide"><span class="header-section-number">27.19</span> A compact translation guide</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Model syntax</th>
+<th>Statistical meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>(1 | plot_id)</code></td>
+<td>plot-specific random intercepts</td>
+</tr>
+<tr class="even">
+<td><code>(0 + X | plot_id)</code></td>
+<td>plot-specific random slopes for <code>X</code>, without a random intercept</td>
+</tr>
+<tr class="odd">
+<td><code>(1 + X | plot_id)</code></td>
+<td>correlated plot-specific intercepts and slopes for <code>X</code></td>
+</tr>
+<tr class="even">
+<td><code>(1 + X || plot_id)</code></td>
+<td>random intercepts and slopes with their correlation constrained to zero (when supported by the modeling interface)</td>
+</tr>
+<tr class="odd">
+<td><code>(1 | site_id/plot_id)</code></td>
+<td>plot nested within site</td>
+</tr>
+<tr class="even">
+<td><code>(1 | site_id) + (1 | plot_id)</code></td>
+<td>separate grouping effects; appropriate for crossed groups, or a hierarchy when plot IDs are globally unique</td>
+</tr>
+<tr class="odd">
+<td><code>(1 | plot_id) + (1 | observer_id)</code></td>
+<td>crossed plot and observer random intercepts</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Random does not mean “unimportant”
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The terms <em>fixed</em> and <em>random</em> describe how effects are represented statistically. A random effect is not a variable we have declared biologically unimportant, and a fixed effect is not automatically causal. Likewise, “random” does not mean the grouping units were randomly sampled in the ordinary-English sense.</p>
+</div>
+</div>
+</section>
+<section id="putting-the-workflow-together" class="level2" data-number="27.20">
+<h2 data-number="27.20" class="anchored" data-anchor-id="putting-the-workflow-together"><span class="header-section-number">27.20</span> Putting the workflow together</h2>
+<p>For an SCM-first analysis, the workflow now looks like this:</p>
+<ol type="1">
+<li><strong>Define the causal question and estimand.</strong> What intervention contrast are we trying to estimate?</li>
+<li><strong>Specify the SCM/DAG.</strong> State the causal assumptions explicitly.</li>
+<li><strong>Identify the estimand.</strong> Determine the valid adjustment set or other identification strategy.</li>
+<li><strong>Represent the sampling design.</strong> Identify repeated measures, clustering, nesting, crossing, temporal/spatial dependence, and plausible varying slopes.</li>
+<li><strong>Choose a response distribution and link.</strong> Use knowledge of the measurement/data-generating process.</li>
+<li><strong>Fit the statistical model.</strong> Preserve the causal adjustment set while representing the sampling structure.</li>
+<li><strong>Diagnose the statistical specification.</strong> Examine residuals, dispersion, functional form, and remaining dependence.</li>
+<li><strong>Revise the estimation model when necessary.</strong> Change distributional, functional, or dependence structure without casually redefining the estimand.</li>
+<li><strong>Estimate the target contrast.</strong> Translate the fitted model back to the causal estimand, preferably on a scientifically meaningful scale.</li>
+<li><strong>Interpret conditionally on the causal assumptions.</strong> Statistical estimation does not make the identification assumptions disappear.</li>
+</ol>
+<p>This is an important shift from a workflow in which we fit many combinations of variables and let model selection tell us which ecological story to believe. <strong>The causal model defines the question; the GLMM is one tool for estimating the answer.</strong></p>
+</section>
+<section id="thought-prompts" class="level2" data-number="27.21">
+<h2 data-number="27.21" class="anchored" data-anchor-id="thought-prompts"><span class="header-section-number">27.21</span> Thought prompts</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>1. Repeated measures
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You survey each of 30 wetlands monthly for three years. Which grouping variable is implied by the repeated-measures design? Under what circumstances might you also consider a random slope for time?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>2. Nested sampling
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You sample five leaves from each of ten trees in each of eight forest stands. Sketch the hierarchy. Which units are nested within which?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>3. Crossed sampling
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Six observers each score photographs from many of the same individual animals. Why are <code>observer_id</code> and <code>animal_id</code> crossed rather than nested?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>4. SCM versus GLMM
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Suppose your DAG says that variable <code>C</code> must be adjusted for to identify the total effect of <code>X</code> on <code>Y</code>, but a model without <code>C</code> has a lower AIC. Should <code>C</code> be removed? Explain why or why not.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>5. Random slopes
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Suppose <code>temperature</code> varies substantially among repeated surveys within each plot. What biological or sampling argument would justify <code>(1 + temperature | plot_id)</code> rather than <code>(1 | plot_id)</code>? What information would you need in the data to estimate that slope variation?</p>
+</div>
+</div>
+</section>
+<section id="conclusion" class="level2" data-number="27.22">
+<h2 data-number="27.22" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">27.22</span> Conclusion</h2>
+<p>Congratulations, you have now run a Generalized Linear Mixed Model—but more importantly, you know what structure you asked it to estimate.</p>
+<p>A GLMM is not a machine for discovering causal structure. It is a flexible statistical estimator that can represent non-Gaussian responses and dependence created by grouped observations. Random intercepts describe group-to-group shifts in baseline response; random slopes describe group-to-group variation in relationships; nested and crossed terms encode different sampling structures; and their variance/correlation parameters quantify the heterogeneity implied by those structures.</p>
+<p>In an SCM-first workflow, those statistical decisions occur <strong>after</strong> we know what causal quantity we are trying to estimate. That ordering is what keeps a sophisticated mixed model from becoming a sophisticated answer to the wrong question.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/03_glmms.html" class="pagination-link" aria-label="GLMM Introduction">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">GLMM Introduction</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/03_glmm_epilogue.html" class="pagination-link" aria-label="GLMM epilogue">
+        <span class="nav-page-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">GLMM epilogue</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

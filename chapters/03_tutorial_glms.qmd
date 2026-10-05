@@ -17,9 +17,9 @@ editor_options:
 ::: {.column width="50%"}
 In this tutorial, we introduce Generalized Linear Models (GLMs), starting with how to construct a Poisson GLM. Every type of GLM --and all of their extensions like GLMM and GAMMs-- separates:
 
--   **Signal:** linear predictor (why the mean changes)\
--   **Noise:** distribution (how observations vary around that mean)
--   **Link:** how the structured signal (the mean) maps to the response variable
+- **Signal:** linear predictor (why the mean changes)\
+- **Noise:** distribution (how observations vary around that mean)
+- **Link:** how the structured signal (the mean) maps to the response variable
 
 This separation is the real power of the GLM framework: signal and noise are model-dependent, and what is treated as systematic structure in one formulation may be treated as variability (noise) in another. It provides flexibility to test a myriad ecological data-generating hypotheses.
 :::
@@ -33,18 +33,18 @@ For this first example, we will use the dataset that you were briefly introduced
 
 You will need the following file (simply click to save):
 
--   [`lepusantilocapra_pufferi_abundance.csv`](../chapters/class_exercise_data/lepusantilocapra_pufferi_abundance.csv)
+- [`lepusantilocapra_pufferi_abundance.csv`](../chapters/class_exercise_data/lepusantilocapra_pufferi_abundance.csv)
 
 As a reminder, the data include the following variables:
 
--   `site`: where the individuals were sampled
--   `abund`: number of individuals detected at each location
--   `mean_depth`: mean depth, in meters of the sampling location
--   `year`: year of the study
--   `period`: 1=before and 2= after introduction of *Pelicanus pufferivorus* (puffer-jackalope pelican)
--   `x_km`: longitude (decimal degrees) of sampling location
--   `y_km`: latitude (decimal degrees) of sampling location
--   `swept_area`: size in square meters of the sampling location (effort)
+- `site`: where the individuals were sampled
+- `abund`: number of individuals detected at each location
+- `mean_depth`: mean depth, in meters of the sampling location
+- `year`: year of the study
+- `period`: 1=before and 2= after introduction of *Pelicanus pufferivorus* (puffer-jackalope pelican)
+- `x_km`: longitude (decimal degrees) of sampling location
+- `y_km`: latitude (decimal degrees) of sampling location
+- `swept_area`: size in square meters of the sampling location (effort)
 
 You are tasked with examining/testing the relationship between total *Lepusantilocapra pufferi* abundance and mean depth for each time period (before/after introduction of puffer-jackalope pelican). Note that this example purposefully starts with a simple --and inaccurate-- model to illustrate the process of building a better, more explanatory model.
 
@@ -122,11 +122,11 @@ print(augment_glm)
 
 The results (from `summary()` or `broom::tidy` functions) show a significant effect of `mean_death`. As an aside, it might not be the best to use the term *effect,* as this technically implies a causal structure (and we might not have this in our DAG). But it is common usage, so we will stick to it. Just be cautious of using wording that does not match with your hypotheses and predictions.
 
-## Checking residuals for heteroscedaticity and violations to normality.
+## Checking residuals for model misspecification
 
 For every final model, we need to check the structure of the residuals. In the past, this was a relatively tiresome task, which involved visual inspection of Pearson residuals. With the advent of the DHARMa package in R, this becomes much easier. A vignette for this package is exceptional and can be found \[here\] (<https://cran.r-project.org/web/packages/DHARMa/vignettes/DHARMa.html#calculating-scaled-residuals>).
 
-The package does not use Pearson residuals and instead generates simulated (standardized) residuals, making it more suitable for diagnosing generalized linear models (GLMs), mixed models, and other complex models. This simulation-based approach makes this step insensitive to sample size and allows you to more easily detect overdispersion, zero-inflation, heteroscedasticity, and model misspecification.
+The package does not use Pearson residuals and instead generates simulation-based scaled residuals, making it particularly useful for diagnosing generalized linear models (GLMs), mixed models, and other complex models. For a correctly specified model, these scaled residuals should be approximately uniformly distributed between 0 and 1. This provides a common diagnostic scale even when the expected response distribution differs among observations, and it allows you to more easily detect overdispersion, zero-inflation, heteroscedasticity, outliers, and other forms of model misspecification.
 
 The most general function is for the simulation of residuals, `simulateResiduals()`, which is run on the fitted model.
 
@@ -140,19 +140,19 @@ We can then plot this simulation:
 plot(sim_res)
 ```
 
-You can immediately an abundance of red-colored text, indicating that there are some series issues. These issues may be caused directly by variance issues, non-normality, or, most likely, model misspecification. The left plot indicates issues with normality and outlliers. The right plot is very informative as well; it converts the residuals into percentiles (y-axis), and then tests the 25%, 50%, and 75% percentiles of the model's residuals against those expected percentiles. Ideally, the three lines would follow the horizontal lines drawn at 0.25, 0.50, and 0.75. In this case, they do not.
+You can immediately see an abundance of red-colored text, indicating that there are some serious issues. The left plot examines the overall distribution of the DHARMa scaled residuals. In particular, the Kolmogorov–Smirnov (K–S) test asks whether these residuals depart from their expected **uniform distribution**. It is **not a test of residual normality**. DHARMa constructs the scaled residuals so that, if the fitted model adequately describes the data, observations should occur throughout their model-predicted distributions with approximately equal frequency; the resulting residual ranks should therefore be approximately uniform between 0 and 1. The left panel also identifies potential outliers. The right plot is very informative as well; it plots the scaled residuals against predicted values and evaluates whether the 25%, 50%, and 75% residual quantiles occur where expected. Ideally, the three quantile lines would follow the horizontal lines drawn at 0.25, 0.50, and 0.75. In this case, they do not.
 
 There are other built-in functions as well, including the following (these descriptions are taken directly from the \[DHARMa package vignette\] (<https://cran.r-project.org/web/packages/DHARMa/vignettes/DHARMa.html#calculating-scaled-residuals>):
 
--   `testUniformity()`: tests if the overall distribution conforms to expectations
--   `testOutliers()`: tests if there are more simulation outliers than expected
--   `testDispersion()`: tests if the simulated dispersion is equal to the observed dispersion
--   `testQuantiles()`: fits a quantile regression or residuals against a predictor (default predicted value), and tests of this conforms to the expected quantile
--   `testCategorical(simulationOutput, catPred = testData\$group)`: tests residuals against a categorical predictor
--   `testZeroinflation()`: tests if there are more zeros in the data than expected from the simulations
--   `testGeneric()`: test if a generic summary statistics (user-defined) deviates from model expectations
--   `testTemporalAutocorrelation()`: tests for temporal autocorrelation in the residuals
--   `testSpatialAutocorrelation()`: tests for spatial autocorrelation in the residuals. Can also be used with a generic distance function, for example to test for phylogenetic signal in the residuals
+- `testUniformity()`: tests if the overall distribution conforms to expectations
+- `testOutliers()`: tests if there are more simulation outliers than expected
+- `testDispersion()`: tests if the simulated dispersion is equal to the observed dispersion
+- `testQuantiles()`: fits a quantile regression or residuals against a predictor (default predicted value), and tests of this conforms to the expected quantile
+- `testCategorical(simulationOutput, catPred = testData\$group)`: tests residuals against a categorical predictor
+- `testZeroinflation()`: tests if there are more zeros in the data than expected from the simulations
+- `testGeneric()`: test if a generic summary statistics (user-defined) deviates from model expectations
+- `testTemporalAutocorrelation()`: tests for temporal autocorrelation in the residuals
+- `testSpatialAutocorrelation()`: tests for spatial autocorrelation in the residuals. Can also be used with a generic distance function, for example to test for phylogenetic signal in the residuals
 
 ------------------------------------------------------------------------
 
@@ -250,7 +250,7 @@ sim_res <- simulateResiduals(mod_nb)
 plot(sim_res)
 ```
 
-Whoa! That looks clean. The *overall* model residuals --that is, residuals pooled across all observations-- show no departures from normality, no overdispersion, and no obvious outliers.
+Whoa! That looks clean. The *overall* model residuals --that is, residuals pooled across all observations-- show no clear departure from the expected uniform distribution, no overdispersion, and no obvious outliers. Remember that the K–S test here is assessing **uniformity of the DHARMa scaled residuals, not normality**.
 
 However, these checks only tell us how the model behaves on average. Because our dataset includes other variables of interest, including one related to sampling effort, we also need to inspect simulated residuals as a function of those variables to look for structured lack of fit. This can be a slightly arduous process, but it is invaluable for understanding how your model is behaving.
 
@@ -333,8 +333,8 @@ We have tried different error distributions, added an offset for `swept_area`, a
 
 In class, you will compare your DAG with a classmate’s. Identify at least one arrow you are uncertain about and explain what ecological knowledge would help you decide. Only after doing this critical step should you specify models that address your question. Residual checks can help us assess how those models fit the observations; they cannot decide the causal structure for us.
 
-
 ## Applying the DAG?
+
 As you can see, the problems with residuals remain. Our initial model is missing structure visible in the residuals. Let us use the DAG and our ecological hypotheses to decide what structure to add. Let's then apply this to the simple model. We will build upon this in class.
 
 ```{r}
@@ -342,7 +342,6 @@ pufferi$log_sa <- log(pufferi$swept_area)  # log-transform swept_area
 mod_nb_offset <- glm.nb(abund ~ mean_depth + offset(log_sa), 
   data = pufferi)
 ```
-
 
 For comparison, here is our a kitchen-sink (non-DAG) modeler might approach the problem: As you review the models, think critically about each one means and if each is appropriate for the causal assumptions encoded in the DAG. In all models, we include the offset variable.
 

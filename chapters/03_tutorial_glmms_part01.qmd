@@ -8,55 +8,67 @@ execute:
   message: false
   error: false
 editor: visual
-editor_options: 
+editor_options:
   chunk_output_type: console
 ---
 
-
 ```{r}
-knitr::opts_chunk$set(warning = FALSE, message=FALSE)
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ```
 
 ## Introduction
-In this tutorial, we will build a Generalized Linear Mixed Model (GLMM) using the `glmmTMB` package. This also could be done easily within the `mgcv` package as well (using the `gam()` or `gamm` functions), but we will start with `glmmTMB` for the sake of clarity; the `glmmTMB` formulation remains the standard seen in the ecological literature. An extremely powerful alternative is the `brms` package (Bayesian regression modeling using Stan); this package can also fit GLMs, GLMMs, GAMs, GAMMs for estimating causal models. The `brms` package will be discussed during the Structural Causal Modeling section of the course.
 
-These packages extend GLMs while maintaining flexibility in distributions and link functions. They are all computationally efficient and well maintained.
+In this tutorial, we will build a Generalized Linear Mixed Model (GLMM) using the `glmmTMB` package. This also could be done within the `mgcv` package (using `gam()` or related functions), and an extremely powerful alternative is the `brms` package (Bayesian regression modeling using Stan). We will start with `glmmTMB` for the sake of clarity; its model syntax is widely used in the ecological literature.
 
-We will demonstrate how GLMMs can improve GLMs by first building another GLM (as if you were a naive researcher); this is obviously not the approach that a seasoned analyst would take. Note again that we will start with a horribly misspecified Generalized Linear Model (GLM), just as in the GLM Tutorial. 
+At this point in the course, however, we are **not starting our analysis with a statistical model**. We have already learned to begin with the causal question, define the estimand, represent our causal assumptions with a structural causal model (SCM/DAG), and determine an identification strategy. The statistical model comes *after* those steps.
 
-::: callout-note
-## Skim the GLM
-You already have experience with fitting a GLM from the previous section. If you are comfortable with GLMs, you may quickly work through the first part (by running the code and skimming the text below).
+::: callout-important
+## Identification first; estimation second
+
+The DAG determines which variables must (and must not) be conditioned on to identify the causal estimand. A GLMM does not discover confounders, mediators, or colliders for us.
+
+Our job here is different: **given an identified estimand, how should we structure a statistical model that respects the response distribution and the dependence created by the sampling design?**
 :::
+
+GLMMs are especially useful when observations are not independent—for example, when we repeatedly sample the same plot, measure individuals within populations, observe nests within territories, or collect observations from multiple observers. The *mixed* part of a GLMM lets us represent this grouped structure explicitly.
+
+By the end of this tutorial, you should be able to:
+
+- distinguish fixed effects from random effects;
+- translate a sampling design into an appropriate grouping structure;
+- distinguish nested from crossed random effects;
+- understand random intercepts and random slopes in both model notation and expanded equations;
+- interpret variance, standard-deviation, and correlation estimates for random effects;
+- diagnose whether the distributional and dependence assumptions of a fitted GLMM are reasonable; and
+- understand the limited situations in which AIC can help compare *statistical structures* without redefining the causal adjustment set.
 
 ## Workspace set-up
 
+Please download the `load_packages.r` file again:
+- [`load_packages.r`](class_r_scripts/load_packages.r)
+
+
 ```{r}
 source("chapters/class_r_scripts/load_packages.r")
-
 ```
 
 ## The example dataset: The Wyoming Jackalope (*Lepusantilocapra wyomingensis*)
 
 For this example, you will need the following file (simply click to save):
 
-*  [`lepusantilocapra_wyomingensis_dataset.csv`](../chapters/class_exercise_data/lepusantilocapra_wyomingensis_dataset.csv)
+- [`lepusantilocapra_wyomingensis_dataset.csv`](../chapters/class_exercise_data/lepusantilocapra_wyomingensis_dataset.csv)
 
-:::: columns
-
+::::: columns
 ::: {.column width="50%"}
+Jackalope seem to be everywhere. Recently, during a survey of 31 forested study plots (1 square kilometer each) here in Wyoming, scientists discovered a cryptic species of jackalope. Because it is endemic to Wyoming, they named it the Wyoming Lorax (*Lepusantilocapra wyomingensis*). The researchers quantified their abundance (counts per survey and multiple surveys per plot), community diversity (all jackalope species in the plots), and also measured several habitat features, including percentage ground vegetation, percentage herb layer, and percent leaf litter.
 
-Jackalope seem to be everywhere. Recently, during a survey of 31 forested study plots (1 square kilometer each) here in Wyoming, scientists discovered a cryptic species of jackalope. Because it is endemic to Wyoming, they named it the Wyoming Lorax (*Lepusantilocapra wyomingensis*). The researchers quantified their abundance (counts per survey and multiple surveys per plot), community diversity (all jackalope species in the plots), and also measured several habitat features, including percentage ground vegetation, percentage herb layer, and percent leaf litter. Anyway, these scientists thought the scientific community would not believe their discovery, so they gave the dataset to the cryptid ecologists of ZOO/ECOL-5500. So, let us begin by importing this dataset. Then, we can save it to an object called "wyoming" and then examine the structure of the data:
-
+Anyway, these scientists thought the scientific community would not believe their discovery, so they gave the dataset to the cryptid ecologists of ZOO/ECOL-5500.
 :::
 
 ::: {.column width="50%"}
-
 ![](../graphics/jackalope_graphics/wyoming_jackalope.png)
 :::
-
-::::
-
+:::::
 
 ```{r}
 #| echo: false
@@ -64,308 +76,601 @@ Jackalope seem to be everywhere. Recently, during a survey of 31 forested study 
 wyoming <- import("chapters/class_exercise_data/lepusantilocapra_wyomingensis_dataset.csv")
 str(wyoming)
 ```
+
 You see several variables and plot information:
 
-* `plot_id`: values 1-31 for each unique plot
-* `forest_age`: categorical variable describing the age, in years, of each plot
-* `tree_species`: species of dominant tree in each survey
-* `x` and `y`: spatial coordinates in UTM (specific projection not important) of each measured survey
-* `abundance`: of *Lepusantilocapra wyomingensis* in each survey
-* `shannon_hlog10`: Shannon diversity index of the jackalope community in each survey
-* `ground_veg`: Proportion of each survey area covered in ground vegetation
-* `herb_layer`: Proportion of each survey area covered in herbs
-* `leaf_litter`: Proportion of each survey area covered in leaf litter only (no vegetation)
-* `rain_in`: round total precipitation (in inches...because that's what their inexpensive rain gauge collected)
+- `plot_id`: values 1–31 for each unique plot
+- `forest_age`: categorical variable describing the age class of each plot
+- `tree_species`: species of dominant tree in each survey
+- `x` and `y`: spatial coordinates in UTM (specific projection not important)
+- `abundance`: count of *L. wyomingensis* in each survey
+- `shannon_hlog10`: Shannon diversity index of the jackalope community in each survey
+- `ground_veg`: proportion of each survey area covered in ground vegetation
+- `herb_layer`: proportion of each survey area covered in herbs
+- `leaf_litter`: proportion of each survey area covered in leaf litter only (no vegetation)
+- `rain_in`: round total precipitation (in inches...because that's what their inexpensive rain gauge collected)
 
-For the sake of brevity, let us assume that these data have already been cleaned and inspected for multicollinearity and outliers. That is, we will not eliminate/modidy/exorcise any data at this point. We will do some additional model validation tests (to check on the influence of outliers, etc.) after out initial analysis.
+For the sake of brevity, let us assume that these data have already been cleaned and inspected. We will focus here on statistical estimation rather than data cleaning.
 
-## Fitting Gaussian GLM(s)
+## Start from the causal model
 
-We first want to test the impact of multiple predictors on the response variable (number of parasites). We have several hypotheses to test. Following the "one model = one hypothesis" approach of Burnham and Anderson (2002), these hypotheses can easily be verbalized in a way that reflects how we test them with GLMs. That is, we think about a few of the variables and hypothesize that the number of jackalopes is impacted by:
+Suppose our causal question concerns the effect of `ground_veg` on jackalope `abundance`. Earlier SCM work has already specified the estimand and identified the variables that must be conditioned on (i.e. the confounder of `rain_in`). For this tutorial, **assume that the DAG-derived adjustment set is already fixed**. That will save us some time.
 
-* ground_veg + herb_layer + leaf_litter
-* ground_veg + herb_layer
-* ground_veg + leaf_litter
-* herb_layer + leaf_litter
-* ground_veg
-* herb_layer
-* leaf_litter
-* (none of these variable...this is our _null_ hypothesis)
-
-These can then be translated into the form of a GLM. Below serves as a quick reminder of how we write these GLMs. You should be become familiar with this general form of the models, where "~" (tilde) can be verbalized as _"...is a function of..."_. The main predictors are then put after this tilde. Then, we need to specify the dataset that the function should read from. OK, let us create a few models:
-
-```{r}
-mod_01 <- glm(abundance ~ ground_veg + herb_layer + leaf_litter, data=wyoming)
-mod_02 <- glm(abundance ~ ground_veg + herb_layer, data=wyoming)
-mod_03 <- glm(abundance ~ ground_veg + leaf_litter, data=wyoming)
-mod_04 <- glm(abundance ~ herb_layer + leaf_litter, data=wyoming)
-mod_05 <- glm(abundance ~ ground_veg, data=wyoming)
-mod_06 <- glm(abundance ~ herb_layer, data=wyoming)
-mod_07 <- glm(abundance ~ leaf_litter, data=wyoming)
-mod_08 <- glm(abundance ~ 1, data=wyoming)
-```
-
-Again, we are using these GLMs to test eight competing (i.e. multiple working) hypotheses. 
-
-### Interpretation of the GLM results
-
-Let us look at the first model in this candidate model set.
-
-```{r}
-summary(mod_01)
-```
-
-Remember that When you run the `summary()` (or `broom::tidy`) function on a model object, you will see output that will be fairly consistent across GLMs, GLMMs, GAMs, GAMMs, and many other model types. As a reminder, the main part of the model output is the coefficients table; this tells you the results of your model. You should expect to see scientific notation (e.g. 5.655e-2 = 0.05655). The way to read this is like an equation for a line (since this is a linear model):
-
-$$
-\text{Abundance} = 78.046 
-+ 68.559\,(\text{ground veg})
-+ 8.163\,(\text{herb layer})
-- 47.168\,(\text{leaf litter})
-$$
-
-where you would enter numerical values of `ground_veg`, `herb_layer`, and `leaf_litter` into the equation. So, this output is telling you that `ground_veg` has a significant (_p_ = 6.18e-05) positive impact ($\beta = 68.559; this is the slope value of the line) on `abundance`. No other factor shows a significant effect. But, as you will see, this was but a single hypothesis (`ground_veg`, `herb_layer`, and `leaf_litter`) that we tested. We need to know if it is better supported by the data than other hypotheses. 
-
-### Information-theoretic multi-model comparison
-
-For this, we use **a**n **i**nformation **c**riterion (AIC) to rank competing models based on their relative support from the data. We will explain this _ad nauseum_ in a later section, but it is sufficient for now to say that AIC provides a metric for finding a model (or models) that best balance fit and complexity. We must be explicit about what AIC is and is not used for:
-
-* **What it is _not_ used for:** "To identify the model that best fits the data"
-* **What it is used for:** "To identify the model that captures the ecological signal without overfitting the noise"
-
-In the AIC framework, our task is to let hypotheses (models) _compete_ against each other given each model's balance between signal and noise. Higher values of AIC indicate more uncertainty (and more expected information loss). The absolute value of AIC does not matter. So, for this exercise, we are looking for the model with the lowest AIC value (lowest information loss relative to a theoretical reference). 
+Basing our statistical modeling choices on our causal assumptions really matters. Unlike a kitchen-sink modeler, We will not fit every possible subset of predictors and ask the data which variables are important in the causal model. Variables required for identification are included in the model because of the causal assumptions;it is not because their inclusion improves AIC values, produce small *p*-values, or make residual plots prettier.
 
 ::: callout-note
-## **AIC: What's in a name?**
+## Another reminder: a statistical formula is not a DAG
 
-Though it is now referred to as the Akaike Information Criterion, the original AIC was named --by Akaike himself in a 1974 paper-- was "an information criterion."
+A formula such as
+
+`abundance ~ ground_veg + rain_in`
+
+describes a statistical conditional mean. By itself, it does not state whether `rain_in` is a confounder, mediator, collider, precision variable, or something else. Those roles must come from the SCM and be understood prior to statistical modeling.
 :::
 
-Let us calculate AIC values for each model that we created:
+Let us now examine a different question: **What model structure is requireds to estimate the identified relationship well?**
+
+## First statistical decision: what kind of response do we have?
+
+Our response, `abundance`, is a count. Counts are discrete and bounded below by zero. A Gaussian model can therefore generate impossible predictions (i.e. less than 0) and impose an altoegher inappropriate mean–variance relationship. A Poisson model is a sensible place to begin. Why? It is not because your residual diagnostics of the fitted model "selected" it. Rather, it is because it matches the kind of observations generated by the measurement process.
+
+A simple Poisson GLM might look like this:
 
 ```{r}
-aic_list <- AIC(mod_01, mod_02, mod_03, mod_04, mod_05, mod_06, mod_07, mod_08)
-
-# sort by ascending AIC (lowest AIC in top row)
-aic_list %>%
-  arrange(AIC)
-
+glm_01 <- glm(
+  abundance ~ ground_veg + rain_in,
+  family = poisson,
+  data = wyoming
+)
 ```
 
-The third model (`mod_03`) has the the lowest AIC value and therefore our best-supported model among those considered in the model set. _Again, we will discuss the mechanics and some of the conventional approaches to AIC-based model selection later._
+The precise fixed-effects terms in your own analysis would come from the estimand and its identification strategy. Here they simply give us a model to extend. But there is still an important problem: **the rows in our dataset are not independent.**
 
-We have now successfully created a GLM for this dataset. But, as you know, we still have some checks to do... 
+## Why we need a mixed model
 
-### Checking your GLM residuals
+We repeatedly sampled each plot (range = 3–7 samples). This means there is unbalanced and non-independent data. *A priori*, we expect observations from the same plot to be more similar than observations from different plots. They share location, history, soil, vegetation, unmeasured habitat characteristics, and many other plot-level properties. You're probably already thinking about spatial and temporal autocorrelation, rught?
 
-You now know why the structure of your model residuals is important. Let us check our best-supported model (`mod_03`) to see how the residuals are behaving. Again, use the `DHARMa` package's functionality.
+If we ignore all of this clustering in the data, a conventional GLM acts as though every row provides completely independent information. That can give us inappropriate uncertainty estimates and can misrepresent the data-generating structure. This is where the GLMM enters.
 
-```{r}
-simresid <- simulateResiduals(fittedModel = mod_03)
-plot(simresid)
-
-```
-
-Focus on the left plot (the quantile-quantile plot of residuals). Remember that the "KS test" (Kolmogorov-Smirnov test) is a test of normality of the model residuals. Here, it shows that the residuals deviate significantly from a normal distribution; this will be something to fix. It also tests for outliers in the data. The results here suggest that there are no statistical outliers. From the plot at right (the Signal portion of the residual diagnostic), we see that the median quantile of the data also shows residual structure.
-
-So, we now need to try to fix several aspects of our model to ensure that our imposed structure is fitting the data well. Sometimes, this is a difficult and laborious task. 
-
-## Fitting Poisson GLM(s)
-
-As a first step, let us step back and think critically about some fundamental features of our dataset. Among several things we could assess, we can first examine our response variable: `abundance`. We have abundance of *L. wyomingensis*, a metric that should follow a Poisson distribution (positive skew, and >0). But we did not specify this in our original GLMs. What we did was run a set of GLMs that assumed that abundance followed Gaussian/normal distribution. What were we thinking?!? 
-
-Regardless of what the model residuals show, our priority is to ensure that our data are correctly bounded. So, let us try a Poisson distribution. We do this by specifying an argument in the `glm()` function for family. Unfortunately, because of our oversight, we need to refit all of our original models (and immediately forget that our best model from our misspecfied attempt was `mod_03`, as that will likely change). Run the following:
+First, make sure our grouping variable is treated as a factor:
 
 ```{r}
-mod_01 <- glm(abundance ~ ground_veg + herb_layer + leaf_litter, family=poisson, data=wyoming)
-mod_02 <- glm(abundance ~ ground_veg + herb_layer, family=poisson, data=wyoming)
-mod_03 <- glm(abundance ~ ground_veg + leaf_litter, family=poisson, data=wyoming)
-mod_04 <- glm(abundance ~ herb_layer + leaf_litter, family=poisson, data=wyoming)
-mod_05 <- glm(abundance ~ ground_veg, family=poisson, data=wyoming)
-mod_06 <- glm(abundance ~ herb_layer, family=poisson, data=wyoming)
-mod_07 <- glm(abundance ~ leaf_litter, family=poisson, data=wyoming)
-mod_08 <- glm(abundance ~ 1, family=poisson, data=wyoming)
-
-```
-
-We again compare models using an AIC framework:
-
-```{r}
-aic_list <- AIC(mod_01, mod_02, mod_03, mod_04, mod_05, mod_06, mod_07, mod_08)
-arrange(aic_list, "AIC")
-
-```
-
-Whoa. Now, `mod_01` (our most complex model) is the best-supported model, as it has the lowest AIC value. This represents a large inferential change from the Gaussian GLM above. Let us look at this best-supported model:
-
-```{r}
-summary(mod_01)
-```
-
-And check its residuals...
-```{r}
-simresid <- simulateResiduals(fittedModel = mod_01)
-plot(simresid)
-```
-
-Yowzers. Everything about the model (the Noise and Signal components) seems to be poorly fit. Ouch. The `DHARMa` package's residual plots continue to detect structure in the model residuals, and it has now detected other problems (e.g.outliers based on our imposed distribution). I chose this example to demonstrate how even the best model in a set of models might not be a good model. There may be other factors we failed to account for that are throwing the model into utter disarray. 
-
-We may need to adjust our chosen distribution for our response variable. Or maybe there is some non-independence that is fundamental to our data structure that we need to account for. Before reading on, refer to the [_DHARMa Diagnostics_ page](https://jpkelley.github.io/ZOO5500/chapters/DHARMA_diagnostics.html) for information about diagnosing the origin of these warnings.
-
-You may have noticed from looking at the original dataset that we excluded some predictors. Think about a few potentially important data components that should have been included in our model-building and hypothesis testing in the above GLMs. Let us then remedy these omissions while we also attempt to solve our issues of non-independence. For that, we turn to Generalized Linear Mixed Models (GLMMs).
-
-## How to create a Generalized Linear Mixed Model (GLMM)
-
-For most ecological datasets, it is generally good to always assume the presence of some non-independence and act accordingly. So, let us think about and properly specify our model and not cherry-pick what we think to be important variables. 
-
-As there are two components of a mixed-effects model (the fixed and random components), we need a set of steps to guide us through the process of determing the fixed and random structures. There are three primary steps (click on the clalout boxes below to expand):
-
-::: {.callout-tip icon=false collapse=true}
-## **Step #1: Specify your global model**
-
-A _global_ model is essentially a model that includes the following:
-
-* all plausible fixed effects and interactions
-* a maximally reasonable random structure  
-
-The secret to this step is to formulate a complex yet biologically/ecologically defensible model.
-:::
-
-::: {.callout-tip icon=false collapse=true}
-## **Step #2: Optimize the random-effects structure**
-
-To determine the optimal random-effects structure, do the following:
-
-* keep the fixed-effects structure of the global model constant  
-* compare different plausible random-effects structures (using REstricted Maximum Likelihood, or REML, for selection)  
-* select the _best_ random-effects structure and lock it in (i.e. this will be the random-effects structure retained for all model comparisons in Step #3)
-
-Warning! _Do not_ be tempted to use an intercept-only fixed-effects structure when optimizing the random-effects component. The random effects are not independent of the systematic structure of your model. 
-:::
-
-::: {.callout-tip icon=false collapse=true}
-## **Step 03: Optimize the fixed-effects structure**
-
-With your random effects locked, you now move on to compared models with different fixed-effects structures. For this, do the following:
-
-* fit all models with Maximum Likelihood (not REstricted Maximum Likelihood)  
-* calculate AIC metrics for each model
-* compare AIC among the candidate model set and select best-supported models
-
-:::
-
-We can put these steps into practice by extending the GLM we just fitted.
-
-
-### Fitting GLMM(s)
-
-In the GLM formulation above, we applied our expert knowledge of our response variable (`abundance`) and specified a Poisson distribution. But, unfortunately, doing so seemed to negatively impact the model residuals. However, we _know_ that the data boundaries (>0) likely reflect the data-generating processes that we are examining. Therefore, we keep the error distribution of the original GLM. There must be another component of the model that is mis-specified. Again, refer to the [_DHARMa Diagnostics_ page](https://jpkelley.github.io/ZOO5500/chapters/DHARMA_diagnostics.html) for information about diagnosing the origin of these warnings. 
-
-Let us then consider how we collected our data. First, we know that we repeatedly sampled each plot (range = 3-7 samples). _A priori_, we expect that within-plot samples will be more similar that between-plot samples. This violates the assumption of non-independence, so we know that need to explicitly include this structural element in our model. We therefore include `plot` as a random effect (a grouping/clustering variable). To do so, we convert it from a character string to a factor, so that the function that we use later will recognize it as such.
-
-```{r}
-wyoming$plot_id <- as.factor(wyoming$plot_id) # convert "plot" to factor
-
-# Or, in tidy R:
 wyoming <- wyoming |>
   mutate(plot_id = as.factor(plot_id))
 ```
 
-We then refit our model as as `glmmTMB` (GLMM). We have made a few important changes to our model: 
+## Fixed effects and random effects do different jobs
 
-* Our first action is to incorporate `plot_id` as a random effect. Note the form of the random effect (in parentheses). This is a random intercept structure (the slope is the same for all `plot_id` levels).
-* We have added the one predictor in our dataset that we omitted in the GLMs (`rain_in`). 
+A mixed model contains at least two conceptually different components.
 
-Note that we have not included models that include any two-way interactions. These models could easily be included in the candidate model set below.
+**Fixed effects** describe systematic relationships that are explicitly represented in the conditional mean. In our causal analysis, the exposure and required adjustment variables occur here.
+
+**Random effects** describe structured variation among groups in the data. They allow observations belonging to the same group to share a deviation from the population-average relationship.
+
+For example:
+
+```{r}
+mod_ri <- glmmTMB(
+  abundance ~ ground_veg + rain_in + (1 | plot_id),
+  family = poisson,
+  data = wyoming
+)
+```
+
+The new term is:
+
+``` text
+(1 | plot_id)
+```
+
+Read this as: **Allow each plot to have its own intercept**.
+
+### What does a random intercept actually mean?
+
+Ignoring the log link for a moment, an ordinary regression can be written as
+
+$$Y_i = \beta_0 + \beta_1X_i + \epsilon_i.$$
+
+Every observation shares the same intercept, $\beta_0$.
+
+A random-intercept model for observation $i$ in plot $j$ instead contains
+
+$$Y_{ij} = (\beta_0 + b_{0j}) + \beta_1X_{ij} + \epsilon_{ij},$$
+
+where
+
+$$b_{0j} \sim N(0,\sigma^2_{plot}).$$
+
+Here, $\beta_0$ is the population-level intercept and $b_{0j}$ is plot $j$'s deviation from that intercept. We do not estimate an unrelated fixed intercept for every plot. Instead, we assume that plot deviations arise from a common distribution whose variance, $\sigma^2_{plot}$, is estimated from the data.
+
+For our Poisson GLMM with a log link, the conditional model is more properly written as
+
+$$\log(\mu_{ij}) = (\beta_0 + b_{0j}) + \beta_1X_{ij} + \beta_2Z_{ij},$$
+
+with
+
+$$Y_{ij} \sim \operatorname{Poisson}(\mu_{ij}).$$
+
+So the random intercept shifts a plot's expected abundance on the **linear-predictor (log) scale**.
 
 ::: callout-tip
-Before running the GLMMs below, examine the structure of these models very closely to see how this candidate model set has been structured. Pay close attention to how the number of models increased when we added predictors.
+## Think "shared deviation"
+
+A random intercept says that observations from the same group share something that moves their expected response up or down together. It is a compact way to represent dependence created by grouping.
 :::
 
-### Step #1: Specify your global model
+## Looking at the random-effects output
 
-Let us then identify the best random effects structure of the model. As discussed above, we start with our global model. The global model is the model with the most complex fixed-effects and random-effects structures. In this case, we have a model with four predictors and two crossed (or non-nested) random effects.
+Run:
 
 ```{r}
-global <- glmmTMB(abundance ~ ground_veg + herb_layer + leaf_litter + rain_in + (1 | plot_id) + (1 | forest_age), family=poisson, data=wyoming, REML=TRUE)
+summary(mod_ri)
 ```
 
-### Step #2: Optimizing the random effects structure
+The output contains a section labeled approximately like this:
 
-Remember that, for comparison of models with the same fixed effects but different random effects, we use REstricted Maximum Likelihood (REML) by setting `REML = TRUE` in the `glmmTMB` model (see below). Why do we use REML? Because regular Maximum Likelihood is biased for estimation of standard errors of random effects. Let us begin the global model as well as models that have different structures of the random effects (while keeping all fixed effects the same).
+``` text
+Random effects:
 
-```{r}
-global <- glmmTMB(abundance ~ ground_veg + herb_layer + leaf_litter + rain_in + (1 | plot_id) + (1 | forest_age), family=poisson, data=wyoming, REML=TRUE)
-global_01 <- glmmTMB(abundance ~ ground_veg + herb_layer + leaf_litter + rain_in + (1 | forest_age), family=poisson, data=wyoming, REML=TRUE)
-global_02 <- glmmTMB(abundance ~ ground_veg + herb_layer + leaf_litter + rain_in + (1 | plot_id), family=poisson, data=wyoming, REML=TRUE)
-
-```
-Then, we compare these models via AIC. 
-
-```{r}
-AIC(global, global_01, global_02)
+Conditional model:
+ Groups  Name        Variance Std.Dev.
+ plot_id (Intercept)   ...      ...
 ```
 
-We see something interesting here. The grouping factor `forest_age` does not improve model performance at all when we compare the AIC of models with and without it. The grouping factor `plot_id` improves model performance greatly. Therefore, we select `plot_id` as the random-effects structure for all models. 
+The two most important quantities are:
 
-This process could also be done with models containing different combinations of random slopes and intercepts. The world is your jackalope oyster.
+- **Variance**: the estimated among-plot variance in the random intercepts, $\sigma^2_{plot}$.
+- **Std.Dev.**: the square root of that variance, $\sigma_{plot}$, expressed on the model's linear-predictor scale.
 
----
+A variance near zero means that, *conditional on the fixed effects in the model*, little intercept variation remains among plots. A larger value means that plots differ substantially in their baseline expected abundance after accounting for those fixed effects.
 
-### Step 3: Optimize the fixed-effects structure
+Notice what this does **not** mean: It does *not* mean that we can interpret `plot_id` as the "effect of plot." Remember that `plot_id` has not been assigned a conventionalregression coefficient that we interpret. The random effect is simply describing grouped heterogeneity and dependence.
 
-Now that we have optimized the random effects structure, we can test different fixed-effects structures against each other. Again, we are fitting what are called additive models only; these models contain no interactions between predictors.
+You can inspect the estimated group-specific deviations with:
 
 ```{r}
-mod_01 <- glmmTMB(abundance ~ ground_veg + herb_layer + leaf_litter + rain_in + (1 | plot_id), family=poisson, data=wyoming)
-mod_02 <- glmmTMB(abundance ~ ground_veg + herb_layer + leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
-mod_03 <- glmmTMB(abundance ~ ground_veg + herb_layer + rain_in + (1 | plot_id), family=poisson, data=wyoming)
-mod_04 <- glmmTMB(abundance ~ ground_veg + rain_in + leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
-mod_05 <- glmmTMB(abundance ~ herb_layer + rain_in + leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
-mod_06 <- glmmTMB(abundance ~ ground_veg + herb_layer + (1 | plot_id), family=poisson, data=wyoming)
-mod_07 <- glmmTMB(abundance ~ ground_veg + leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
-mod_08 <- glmmTMB(abundance ~ herb_layer + leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
-mod_09 <- glmmTMB(abundance ~ herb_layer + rain_in + (1 | plot_id), family=poisson, data=wyoming)
-mod_10 <- glmmTMB(abundance ~ leaf_litter + rain_in + (1 | plot_id), family=poisson, data=wyoming)
-mod_11 <- glmmTMB(abundance ~ ground_veg + rain_in + (1 | plot_id), family=poisson, data=wyoming)
-mod_12 <- glmmTMB(abundance ~ ground_veg + (1 | plot_id), family=poisson, data=wyoming)
-mod_13 <- glmmTMB(abundance ~ herb_layer + (1 | plot_id), family=poisson, data=wyoming)
-mod_14 <- glmmTMB(abundance ~ leaf_litter + (1 | plot_id), family=poisson, data=wyoming)
-mod_15 <- glmmTMB(abundance ~ rain_in + (1 | plot_id), family=poisson, data=wyoming)
-mod_16 <- glmmTMB(abundance ~ 1 + (1 | plot_id), family=poisson, data=wyoming)
+ranef(mod_ri)
 ```
 
-For this large model set, we then calculate AIC for each model. You can run the code below, but the results are not shown below (for brevity's sake).
+These are conditional modes (often informally called BLUPs, or Best Linear Unbiased Predictor). Positive values identify plots whose conditional intercept is above the population intercept; negative values identify plots below it. Because these estimates are partially pooled, groups with limited information are pulled more strongly toward the population mean. Note that some scientists have cleverly used this values as index metrics in secondary analyses.
+
+## Random slopes: when groups differ in a relationship
+
+A random intercept allows plots to start at different baseline levels, but it assumes that the slope of a predictor is the same in every plot. Sometimes that assumption is unreasonable. Imagine that rainfall varies among repeated surveys within plots and that the relationship between rainfall and jackalope abundance differs among plots. We could allow the `rain_in` slope to vary:
 
 ```{r}
-#| output: false
-aic.df <- AIC(mod_01, mod_02, mod_03, mod_04, mod_05, mod_06, mod_07,
-  mod_08, mod_09, mod_10, mod_11, mod_12, mod_13, mod_14, mod_15,
-  mod_16
-  )
-aic.df <- aic.df |>
-  arrange(AIC)
-aic.df
+mod_rs <- glmmTMB(
+  abundance ~ ground_veg + rain_in + (1 + rain_in | plot_id),
+  family = poisson,
+  data = wyoming
+)
 ```
-Let us then examine the top model (the model with the lowest AIC value); remember, we are not yet using any formal AIC-based model selection and averaging methods. `mod_02` seems to have the best fit, based on AIC values.
+
+The term
+
+``` text
+(1 + rain_in | plot_id)
+```
+
+means: **Allow both the intercept and the `rain_in` slope to vary among plots**.
+
+In expanded form:
+
+$$\log(\mu_{ij}) =
+(\beta_0 + b_{0j})
++ \beta_1X_{ij}
++ (\beta_2 + b_{1j})Z_{ij},$$
+
+where $b_{0j}$ is the random intercept for plot $j$ and $b_{1j}$ is its random deviation from the population rainfall slope. This tells us that a random-slope model estimates **three** features of group-level variation:
+
+1.  variance among group intercepts;
+2.  variance among group slopes; and
+3.  covariance (usually displayed as a correlation) between intercept and slope deviations.
+
+### Interpreting random-slope output
+
+A `summary()` may contain something like:
+
+``` text
+Random effects:
+
+Conditional model:
+ Groups  Name        Variance Std.Dev. Corr
+ plot_id (Intercept)   ...      ...
+         rain_in       ...      ...     ...
+```
+
+The `rain_in` variance tells us how much the rainfall slope varies among plots. The correlation tells us whether plots with higher-than-average intercepts tend to have higher or lower rainfall slopes.
+
+For example, a negative intercept–slope correlation would indicate that plots with relatively high baseline abundance tend to have less positive (or more negative) rainfall relationships. Be careful: this is a description of the fitted hierarchical structure, not automatically a causal explanation for why plots differ.
+
+::: callout-warning
+## A random slope needs replication at the right level
+
+Do not add a random slope merely because the syntax exists. The predictor must vary within the grouping unit for the group-specific slope to be meaningfully informed by the data. A variable that is constant within each plot cannot provide repeated within-plot information about a plot-specific slope.
+:::
+
+## Random intercept versus random slope: picture the implied lines
+
+A useful way to think about these models is to imagine one regression line for every plot.
+
+With `(1 | plot_id)`, the lines have different intercepts but the **same slope**:
+
+$$\text{Plot 1: } (\beta_0+b_{01}) + \beta_1X$$
+
+$$\text{Plot 2: } (\beta_0+b_{02}) + \beta_1X$$
+
+$$\text{Plot 3: } (\beta_0+b_{03}) + \beta_1X.$$
+
+With `(1 + X | plot_id)`, both intercept and slope can differ:
+
+$$\text{Plot 1: } (\beta_0+b_{01}) + (\beta_1+b_{11})X$$
+
+$$\text{Plot 2: } (\beta_0+b_{02}) + (\beta_1+b_{12})X$$
+
+$$\text{Plot 3: } (\beta_0+b_{03}) + (\beta_1+b_{13})X.$$
+
+The population coefficients $\beta$ describe the average relationship; the $b$ terms describe group-specific deviations around it.
+
+## Nested random effects: hierarchical sampling
+
+Ecological sampling designs are often hierarchical. Imagine that our study had several `site_id` values, multiple `plot_id` values within each site, and repeated surveys within each plot:
+
+``` text
+site
+└── plot
+    └── repeated survey
+```
+
+Observations from the same plot share both a plot and a site. Plots within the same site share a site but are not the same plot.
+
+A nested random-intercept structure can be written as:
+
+``` r
+(1 | site_id/plot_id)
+```
+
+In `lme4`/`glmmTMB` formula notation, this expands to:
+
+``` r
+(1 | site_id) + (1 | site_id:plot_id)
+```
+
+A complete model might therefore be:
 
 ```{r}
-simresid <- simulateResiduals(fittedModel = mod_02)
+# Example syntax only: site_id is not required to exist in this dataset.
+# nested_mod <- glmmTMB(
+#   abundance ~ ground_veg + rain_in + (1 | site_id/plot_id),
+#   family = poisson,
+#   data = wyoming
+# )
+```
+
+The model estimates variation among sites and additional variation among plots within sites.
+
+::: callout-note
+## Unique IDs can simplify nested syntax
+
+If every `plot_id` is globally unique—plot 17 can occur in only one site—then
+
+`(1 | site_id) + (1 | plot_id)`
+
+can represent the same grouping hierarchy without explicitly constructing `site_id:plot_id`. If plot labels repeat within sites (e.g., every site has plots 1, 2, and 3), use the explicit nested structure or create a unique plot identifier.
+:::
+
+## Crossed random effects: membership in more than one grouping system
+
+Not all grouping structures are hierarchical. Suppose multiple observers survey multiple plots, and the same observer can survey several plots while each plot can be surveyed by several observers.
+
+Neither grouping factor lives "inside" the other:
+
+``` text
+observer A -> plots 1, 3, 8
+observer B -> plots 1, 2, 8
+observer C -> plots 2, 3, 7
+```
+
+`observer_id` and `plot_id` are **crossed**.
+
+We represent this as:
+
+``` r
+(1 | plot_id) + (1 | observer_id)
+```
+
+For example:
+
+```{r}
+# Example syntax only: observer_id is not required to exist in this dataset.
+# crossed_mod <- glmmTMB(
+#   abundance ~ ground_veg + rain_in +
+#     (1 | plot_id) + (1 | observer_id),
+#   family = poisson,
+#   data = wyoming
+# )
+```
+
+The model now estimates one variance component for plot-to-plot heterogeneity and another for observer-to-observer heterogeneity.
+
+### Nested or crossed? Ask about the design, not the software
+
+The distinction comes from how observations were generated.
+
+- **Nested:** each lower-level unit belongs to only one higher-level unit (e.g., nest within territory).
+- **Crossed:** units from one grouping factor can occur with multiple units of another grouping factor (e.g., observer × plot).
+
+Do not decide this by trying formulas and seeing which one has the lowest AIC. The sampling design usually tells you the answer. Adhere to your study design and to your causal assumptions!
+
+## Combining nesting, crossing, and random slopes
+
+Real studies can contain all of these structures simultaneously. For example, imagine repeated surveys of plots nested within sites, with observers crossed across sites, and rainfall effects allowed to vary among plots:
+
+``` r
+abundance ~ ground_veg + rain_in +
+  (1 | site_id) +
+  (1 + rain_in | plot_id) +
+  (1 | observer_id)
+```
+
+This formula says:
+
+- estimate the fixed effects required by the causal model;
+- allow baseline abundance to vary among sites;
+- allow both baseline abundance and the rainfall relationship to vary among plots; and
+- allow baseline abundance to vary among observers.
+
+That is a lot of structure. Whether the data can support it depends on replication, number of groups, variation within groups, and the amount of information in the response. Including too many random effects can cause model failure.
+
+## One careful use of AIC: comparing plausible statistical structures
+
+We have deliberately **not** used AIC to choose the causal adjustment set. The DAG and identification strategy already did that work. There are, however, situations in which we may have more than one scientifically plausible *statistical* representation after the causal structure is fixed. For example, perhaps the study design clearly implies repeated measurements within `plot_id`, but we are uncertain whether there is enough evidence to estimate plot-specific rainfall slopes in addition to plot-specific intercepts.
+
+We might compare:
+
+```{r}
+mod_intercept <- glmmTMB(
+  abundance ~ ground_veg + rain_in + (1 | plot_id),
+  family = poisson,
+  data = wyoming
+)
+
+mod_slope <- glmmTMB(
+  abundance ~ ground_veg + rain_in + (1 + rain_in | plot_id),
+  family = poisson,
+  data = wyoming
+)
+
+AIC(mod_intercept, mod_slope)
+```
+
+Notice what remains **identical**: the fixed-effects terms required by our causal estimand. We are comparing two representations of residual group-level heterogeneity. We are not asking AIC which confounding variables that we should keep.
+
+Even here, AIC should *never* overrule obvious information about your study design. If that study design requires a grouping term to represent known dependence, dropping it simply because AIC changes slightly can be an exceedingly poor decision. Similarly, the decision to include random slopes should be driven by the sampling process and sufficient within-group variation; it should not be generated by automated dredging (i.e. the 'dredge' package in R)
+
+Other reasonable uses of information-theoretic (i.e. AIC) model comparison can include comparing among data distributions or functional-forms (linear or nonlinear). This assumes, of course, that the models being compared target the **same estimand** and use the same required adjustment set.
+
+::: callout-important
+## The rule for this course (again!)
+
+**Causal structure determines what must be conditioned on. Statistical structure determines how we represent the outcome, functional relationships, and dependence well enough to estimate the target quantity.**
+
+AIC can sometimes help with the second problem. It does not solve the first.
+:::
+
+## Check the fitted model
+
+Suppose our design supports the random-intercept model:
+
+```{r}
+final_mod <- glmmTMB(
+  abundance ~ ground_veg + rain_in + (1 | plot_id),
+  family = poisson,
+  data = wyoming
+)
+```
+
+We can examine its simulated residuals with `DHARMa`:
+
+```{r}
+simresid <- simulateResiduals(fittedModel = final_mod)
 plot(simresid)
 ```
 
-Indeed, the residual structure of the `mod_02`'s Noise and Signal look much improved, even though one of the quantile lines on the right-hand plot remains problemation. But we are very close to being able to draw inference from the model. 
+::: callout-tip
 
-::: callout-warning
-## **Thought prompt: How could you improve the residual structure?**
+## Reminder about the 'DHARMa' package is doing.
 
-From your knowledge of the `DHARMa` residuals, what part of the model -- Signal or Noise-- should you focus on, given the residual structure?
+As a reminder, the `DHARMa` package creates simulation-based scaled residuals that should be approximately **uniformly distributed** when the fitted model is behaving like it should given your specification. The Kolmogorov–Smirnov (K-S) test in the left output panel tests uniformity of these scaled residuals. The K-S test does not test normality.
+
+Residual diagnostics can reveal problems with the statistical specification: dispersion, zero inflation, functional form, temporal/spatial structure, or other unmodeled patterns. They do **not** tell us whether the causal effect was identified correctly. A model can have gorgeous residuals and estimate the wrong causal quantity; conversely, an identified estimand can be estimated poorly by a misspecified statistical model.
+
 :::
 
-Let us assume we can go ahead and interpret a bit. The main results (and final model) show that the best-supported hypothesis/model is the one in which *L. wyomingensis* abundance is influenced by all of the tested covariates. Ground vegetation, herb layer percentage, and rainfall influence abundance positively, whereas the precentage of leaf litter has a negative impact of abundance. Futhermore, ground vegetation and leaf litter interact to positively influence abundance.
+::: callout-tip
+## Signal versus noise problems
 
-Congratulations, you have now run a Generalized Linear Mixed Model! You are now ready to publish your first scientific article on jackalope.
+When diagnostics show structure, ask the following question: *What kind of model assumption could generate that pattern?* A distributional problem may suggest revisiting the response family (for example, Poisson versus negative binomial). Systematic residual patterns against a predictor may suggest inadequate functional form. Remaining clustering may suggest dependence not yet represented by the random-effects structure.
 
-## Bibliography for this section
+Do not respond to model diagnostic issues by automatically adding or deleting causal adjustment variables. This is a big no-no.
+:::
 
-Burnham, K.P. and Anderson, D.R. (2002) [_Model Selection and Inference: A Practical Information-Theoretic Approach._](https://link.springer.com/book/10.1007/b97636) 2nd Edition, Springer-Verlag, New York. 
+## Poisson versus negative binomial: a statistical-estimation question
+
+Count data often show more variation than a Poisson model permits. If diagnostics indicate overdispersion, a negative-binomial GLMM may be more appropriate:
+
+```{r}
+mod_nb <- glmmTMB(
+  abundance ~ ground_veg + rain_in + (1 | plot_id),
+  family = nbinom2,
+  data = wyoming
+)
+```
+
+Notice again that the causal adjustment set has not changed. We have changed the **measurement/error model**, not the causal model.
+
+We would then inspect diagnostics for the revised model:
+
+```{r}
+simresid_nb <- simulateResiduals(fittedModel = mod_nb)
+plot(simresid_nb)
+```
+
+## Reading the complete GLMM output
+
+Let us inspect a fitted model:
+
+```{r}
+summary(mod_nb)
+```
+
+A `glmmTMB` summary generally contains several kinds of information. Keep their meanings separate.
+
+### 1. Model family and link
+
+This tells you the assumed conditional distribution of the response and the scale on which the linear predictor operates. With `nbinom2`, the model is a negative-binomial count model; by default, the conditional mean uses a log link.
+
+### 2. Random-effects table
+
+For a random-intercept model you will see the estimated variance and standard deviation among plot intercepts. These quantify remaining between-plot heterogeneity conditional on the fixed effects.
+
+For a random-intercept/random-slope model, you will additionally see slope variance and an intercept–slope correlation.
+
+### 3. Conditional fixed-effects table
+
+The fixed-effects table contains estimates, standard errors, test statistics, and *p*-values on the **link scale**. In a log-link count model, a coefficient is an additive change in log expected abundance per unit change in the predictor, conditional on the other modeled terms and random effects.
+
+Exponentiating the coefficient converts it into a multiplier for expected abundance. For instance, a value of 1.2 (after exponentiation) means expected abundance is multiplied by 1.2, or a 20% increase.
+
+```{r}
+exp(fixef(mod_nb)$cond)
+```
+
+What does this mean? This can be tricky. The exponentiated coefficient is called a multiplier, as it tells us how much expected abundance is multiplied by for a one-unit increase in the predictor, holding the other variables constant. Because `ground_veg` ranges from 0 to 1, its multiplier of **1.5208** means that increasing ground vegetation from **0% to 100%** multiplies expected abundance by 1.5208 (a **52.1% increase**). 
+
+
+::: {.callout-note title="But what if you wanted to understand smaller changes?"}
+
+Because `ground_veg` is measured as a proportion, however, a 1-unit increase corresponds to going from 0% to 100% cover. A **0.10-unit increase (10 percentage points)** is often more biologically meaningful.
+
+Recall that with a log link,
+
+\[
+\log(\mu) = \beta_0 + \beta_1x.
+\]
+
+For a 1-unit increase in ground vegetation, the multiplier is
+
+\[
+e^{\beta_1} = 1.5208.
+\]
+
+For a 0.10-unit increase, the change on the log scale is only one-tenth as large, so the multiplier becomes
+
+\[
+e^{0.10\beta_1}
+= (e^{\beta_1})^{0.10}
+= 1.5208^{0.10}
+= 1.043.
+\]
+
+Thus, a **10-percentage-point increase in ground vegetation** (for example, from 30% to 40% cover) corresponds to multiplying expected abundance by **1.043**, or about a **4.3% increase**, holding the other variables in the model constant.
+
+The general rule is
+
+\[
+\boxed{\text{Multiplier for a change of } \Delta x = (e^\beta)^{\Delta x}}.
+\]
+:::
+
+All of this sounds great. But do not forget: a coefficient becomes a causal-effect estimate only because the earlier identification assumptions justify that interpretation—not because it came from a GLMM!
+
+### 4. Dispersion information
+
+For negative-binomial models, the output also contains information governing extra-Poisson variation. This is part of the conditional response model, not a random effect among sampling groups.
+
+## Population-level and group-specific predictions
+
+Mixed models naturally distinguish between predictions that average over the random-effects distribution and predictions conditional on estimated group effects. This distinction is important when communicating what your model predicts.
+
+A prediction for an already-observed plot can incorporate that plot's estimated random deviation. A population-level prediction instead describes the relationship without conditioning on a particular plot's realized deviation.
+
+Which prediction is relevant depends on the scientific target. If our estimand is a population-level causal contrast, we generally want the statistical estimand to correspond to that target rather than accidentally interpreting one particular plot's conditional trajectory as the population effect.
+
+Later, we will use tools such as `marginaleffects` to obtain contrasts and predictions on scientifically meaningful scales rather than relying only on raw link-scale coefficients.
+
+## A compact translation guide
+
+| Model syntax | Statistical meaning |
+|------------------------------------|------------------------------------|
+| `(1 | plot_id)` | plot-specific random intercepts |
+| `(0 + X | plot_id)` | plot-specific random slopes for `X`, without a random intercept |
+| `(1 + X | plot_id)` | correlated plot-specific intercepts and slopes for `X` |
+| `(1 + X || plot_id)` | random intercepts and slopes with their correlation constrained to zero (when supported by the modeling interface) |
+| `(1 | site_id/plot_id)` | plot nested within site |
+| `(1 | site_id) + (1 | plot_id)` | separate grouping effects; appropriate for crossed groups, or a hierarchy when plot IDs are globally unique |
+| `(1 | plot_id) + (1 | observer_id)` | crossed plot and observer random intercepts |
+
+::: callout-warning
+## Random does not mean "unimportant"
+
+The terms *fixed* and *random* describe how effects are represented statistically. A random effect is not a variable we have declared biologically unimportant, and a fixed effect is not automatically causal. Likewise, "random" does not mean the grouping units were randomly sampled in the ordinary-English sense.
+:::
+
+## Putting the workflow together
+
+For an SCM-first analysis, the workflow now looks like this:
+
+1.  **Define the causal question and estimand.** What intervention contrast are we trying to estimate?
+2.  **Specify the SCM/DAG.** State the causal assumptions explicitly.
+3.  **Identify the estimand.** Determine the valid adjustment set or other identification strategy.
+4.  **Represent the sampling design.** Identify repeated measures, clustering, nesting, crossing, temporal/spatial dependence, and plausible varying slopes.
+5.  **Choose a response distribution and link.** Use knowledge of the measurement/data-generating process.
+6.  **Fit the statistical model.** Preserve the causal adjustment set while representing the sampling structure.
+7.  **Diagnose the statistical specification.** Examine residuals, dispersion, functional form, and remaining dependence.
+8.  **Revise the estimation model when necessary.** Change distributional, functional, or dependence structure without casually redefining the estimand.
+9.  **Estimate the target contrast.** Translate the fitted model back to the causal estimand, preferably on a scientifically meaningful scale.
+10. **Interpret conditionally on the causal assumptions.** Statistical estimation does not make the identification assumptions disappear.
+
+This is an important shift from a workflow in which we fit many combinations of variables and let model selection tell us which ecological story to believe. **The causal model defines the question; the GLMM is one tool for estimating the answer.**
+
+## Thought prompts
+
+::: callout-note
+## 1. Repeated measures
+
+You survey each of 30 wetlands monthly for three years. Which grouping variable is implied by the repeated-measures design? Under what circumstances might you also consider a random slope for time?
+:::
+
+::: callout-note
+## 2. Nested sampling
+
+You sample five leaves from each of ten trees in each of eight forest stands. Sketch the hierarchy. Which units are nested within which?
+:::
+
+::: callout-note
+## 3. Crossed sampling
+
+Six observers each score photographs from many of the same individual animals. Why are `observer_id` and `animal_id` crossed rather than nested?
+:::
+
+::: callout-note
+## 4. SCM versus GLMM
+
+Suppose your DAG says that variable `C` must be adjusted for to identify the total effect of `X` on `Y`, but a model without `C` has a lower AIC. Should `C` be removed? Explain why or why not.
+:::
+
+::: callout-note
+## 5. Random slopes
+
+Suppose `temperature` varies substantially among repeated surveys within each plot. What biological or sampling argument would justify `(1 + temperature | plot_id)` rather than `(1 | plot_id)`? What information would you need in the data to estimate that slope variation?
+:::
+
+## Conclusion
+
+Congratulations, you have now run a Generalized Linear Mixed Model—but more importantly, you know what structure you asked it to estimate.
+
+A GLMM is not a machine for discovering causal structure. It is a flexible statistical estimator that can represent non-Gaussian responses and dependence created by grouped observations. Random intercepts describe group-to-group shifts in baseline response; random slopes describe group-to-group variation in relationships; nested and crossed terms encode different sampling structures; and their variance/correlation parameters quantify the heterogeneity implied by those structures.
+
+In an SCM-first workflow, those statistical decisions occur **after** we know what causal quantity we are trying to estimate. That ordering is what keeps a sophisticated mixed model from becoming a sophisticated answer to the wrong question.
+

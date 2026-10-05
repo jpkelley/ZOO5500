@@ -29,7 +29,7 @@ You are free to organize your R Project folder in whatever way works best for yo
 
 First, load the required packages by sourcing the file below. There a number of ways to do this (I have noticed several ways that different labs at UW do this, and that is more than acceptable). For your convenience, I have provided the following file (click to save; you may need to add the `.r` extension manually):
 
--   [`load_packages.r`](class_r_scripts/load_packages.r)
+- [`load_packages.r`](class_r_scripts/load_packages.r)
 
 Place this file into a folder called `class_r_scripts` (just a recommendation!).
 
@@ -68,14 +68,14 @@ You should include this sourcing step at the beginning of all independent R scri
 
 Keep in my that the `tidyverse` package in R is a *meta* package and contains many standalone R packages, including:
 
--   `ggplot2`: declarative construction of statistical graphics
--   `dplyr`: relational and vectorized data manipulation operations
--   `tidyr`: restructuring datasets into tidy (rectangular) form
--   `readr`: standardized, high-performance import of tabular data
--   `purrr`: functional programming utilities for iterative workflows
--   `tibble`: enhanced data-frame representation with explicit printing semantics
--   `stringr`: consistent, vectorized string processing
--   `forcats`: handling and releveling of categorical variables
+- `ggplot2`: declarative construction of statistical graphics
+- `dplyr`: relational and vectorized data manipulation operations
+- `tidyr`: restructuring datasets into tidy (rectangular) form
+- `readr`: standardized, high-performance import of tabular data
+- `purrr`: functional programming utilities for iterative workflows
+- `tibble`: enhanced data-frame representation with explicit printing semantics
+- `stringr`: consistent, vectorized string processing
+- `forcats`: handling and releveling of categorical variables
 :::
 
 ------------------------------------------------------------------------
@@ -96,8 +96,8 @@ To test whether jackalope density and salt availability had causal effects on di
 
 To do these exercises on your own, you will need the following files (simply click to save):
 
--   [`lepusantilocapra_pelonates_experiment.csv`](chapters/class_exercise_data/lepusantilocapra_pelonates_experiment.csv)
--   [`lepusantilocapra_climate_data.csv`](chapters/class_exercise_data/lepusantilocapra_climate_data.csv)
+- [`lepusantilocapra_pelonates_experiment.csv`](chapters/class_exercise_data/lepusantilocapra_pelonates_experiment.csv)
+- [`lepusantilocapra_climate_data.csv`](chapters/class_exercise_data/lepusantilocapra_climate_data.csv)
 
 Place the data files into your `class_exercise_data` folder.
 
@@ -115,11 +115,11 @@ This was a successful (and very simple) data ingestion. (Again, there are many w
 
 As you recall, we have the following steps of the *ante hoc* Data Exploration Toolkit:
 
--   Tool #1: Assess *potential* outliers and possible measurement errors
--   Tool #2: Assess distributions, sparsity, and excess zeros
--   Tool #3: Assess missingness and data completeness
--   Tool #4: Assess sampling structure, dependence, and support
--   Tool #5: Assess statistical relationships relevant to model implementation (e.g., nonlinearity, scaling, and numerical collinearity)
+- Tool #1: Assess *potential* outliers and possible measurement errors
+- Tool #2: Assess distributions, sparsity, and excess zeros
+- Tool #3: Assess missingness and data completeness
+- Tool #4: Assess sampling structure, dependence, and support
+- Tool #5: Assess statistical relationships relevant to model implementation (e.g., nonlinearity, scaling, and numerical collinearity)
 
 The good news is that we can begin assessing several of these features simply by looking carefully at the overall structure of your dataset in several ways. These "ways" are non-prescriptive; the goal is to understand the measurements and structure of the raw data rather than to discover which variables "belong" in an analysis. Let's begin!
 
@@ -171,13 +171,13 @@ Let us now examine how the treatments and the response variable are structured a
 
 It is important at this step to avoid making any inferences about the relationships. As far as you, the responsible data analyst, are concerned, there are no relationships. You are simply looking for anything odd in the dataset: spurious datapoints, data outside the range of data (though you could use the `range()` function to see this), etc. Let us conduct a simple examination using one tabular and six graphical approaches:
 
--   Step 1: Simple `summary`
--   Step 2: Boxplot (Tukey-style)
--   Step 3: Violin plot
--   Step 4: Scatterplot
--   Step 5: Density plot
--   Step 6: Heatmap
--   Step 7: Interaction plot
+- Step 1: Simple `summary`
+- Step 2: Boxplot (Tukey-style)
+- Step 3: Violin plot
+- Step 4: Scatterplot
+- Step 5: Density plot
+- Step 6: Heatmap
+- Step 7: Interaction plot
 
 ### Simple `summary` and examination of data structure
 
@@ -349,7 +349,7 @@ This is not particularly useful for detecting data anomalies, but it could be us
 
 The jackalopeologists (jackanapes?) then conducted a preliminary quantification of the climate in which *L. pelonates* was found. They used remote sensors to measure humidity, precipitation, temperature, temperature variability, and heating degree days.
 
-Several of these variables may be strongly correlated. Examining that correlation can be useful because severe numerical collinearity can affect estimation, including the precision and stability of regression coefficients. But be very careful thinking that this is a core problem. **Correlated variables are not necessarily causally redundant variables.** Whether a variable is required for identification comes from the SCM, not from its correlation with other measured variables. Multicollinearity is a potential estimation problem, but we should *not* let it ruin our causal assumptions. 
+Several of these variables may be strongly correlated. Examining that correlation can be useful because severe numerical collinearity can affect estimation, including the precision and stability of regression coefficients. But be very careful thinking that this is a core problem. **Correlated variables are not necessarily causally redundant variables.** Whether a variable is required for identification comes from the SCM, not from its correlation with other measured variables. Multicollinearity is a potential estimation problem, but we should *not* let it ruin our causal assumptions.
 
 But, let's proceed so that we can understand what it is doing. First, let’s read in these climate data and save it to an object called “climate”:
 
@@ -381,22 +381,37 @@ climate |>
 
 The `GGally::ggpairs` function markedly improves upon similar functionality of base R. What do we see? We see that:
 
--   humidity and precipitation are strongly and positively correlated (r = 0.648)
--   temperature and temperature variation are strongly and positively correlated (r = 0.584)
--   temperature and heating degree days are strongly and negatively correlated (r = -0.998)
--   temperature variation and heating degree days are strongly and negatively correlated (r = -0.588)
+- humidity and precipitation are strongly and positively correlated (r = 0.648)
+- temperature and temperature variation are strongly and positively correlated (r = 0.584)
+- temperature and heating degree days are strongly and negatively correlated (r = -0.998)
+- temperature variation and heating degree days are strongly and negatively correlated (r = -0.588)
 
 So, what to do, what to do, what to do? We clearly have some variables that are strongly correlated. This could impact our modeling (specifically inflating the variance of a given regression coefficient). We can explicitly examine numerical collinearity using Variance Inflation Factors (VIFs), which are calculated for each term in a model. Note that there are options for VIFs applied to both continuous and categorical variables. Let us do this for continuous variables for these climate data. Most available functions in R require regression models; however, there are some approaches--such as the `usdm` package--that require only data frames of multiple variables. So, let us use that:
 
 ```{r}
-vif_results <- usdm::vif(climate)
-vif_results
+# Fit a model only to diagnose numerical collinearity
+vif_model <- lm(
+  humidity ~ precipitation + temperature + temp_variation + heating_deg_days,
+  data = climate
+)
+
+# Calculate VIF for each predictor
+vif <- sapply(names(coef(vif_model))[-1], function(x) {
+  r2 <- summary(
+    lm(reformulate(setdiff(names(coef(vif_model))[-1], x), response = x),
+       data = climate)
+  )$r.squared
+  
+  1 / (1 - r2)
+})
+
+vif
 ```
 
 This is a clear example that two variables, temperature and heating_deg_days, are highly correlated with a number of other variables. So, what should we do with this information? A common response of the lazy statistical ecologist would be to conclude that some of these variables contain "redundant information" and either:
 
--   eliminate one of the correlated variables from the analysis, or
--   conduct a dimension-reduction analysis such as PCA.
+- eliminate one of the correlated variables from the analysis, or
+- conduct a dimension-reduction analysis such as PCA.
 
 But herein lies the terrible problem: neither one of these decisions follows automatically or naturally from the correlations calculated in the above process. For example, two highly correlated variables could occupy very different positions in our DAG. One might be a confounder, whereas another might function as a mediator. Combining them into a principal component would remove the variables' independent positions in the DAG, creating a new node that was suboptimally positioned in the data-generating process. Likewise, dropping a variable simply because it is correlated with another could eliminate a variable required for causal identification.
 

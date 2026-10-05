@@ -38,10 +38,10 @@ It is very likely that we could argue the merits and weaknesses of this definiti
 
 Outliers arise for many reasons (any number of data-generating processes), including, but not limited to:
 
--   extreme relative to a statistical distribution
--   measurement error
--   error during data entry
--   extremely rare but biologically plausible (so called *Black Swan* events)
+- extreme relative to a statistical distribution
+- measurement error
+- error during data entry
+- extremely rare but biologically plausible (so called *Black Swan* events)
 
 Importantly, an observation being unusual relative to the rest of the dataset does not tell us which of these explanations is correct. That requires returning to the measurement process, metadata, and scientific context.
 :::
@@ -55,8 +55,8 @@ Importantly, an observation being unusual relative to the rest of the dataset do
 
 A useful first distinction to make in our discussion of outlier detection is whether an observation is unusual:
 
--   **In a single variable** (univariate outlier), or\
--   **Only when variables are considered jointly** (multivariate outlier)
+- **In a single variable** (univariate outlier), or\
+- **Only when variables are considered jointly** (multivariate outlier)
 
 These are conceptually different problems and require different tools.
 
@@ -64,8 +64,8 @@ These are conceptually different problems and require different tools.
 
 Univariate outliers occur along a single dimension (i.e. in a single variable). For example, a body size measurement that is much larger than most others. Such univariate outliers should *never* be removed automatically. Their role in *ante hoc* exploration is to **flag observations that deserve closer inspection**. So, how can we identify univariate outliers? Univariate outliers can be flagged using two approaches:
 
--   **Statistical rules:** rules depend on assumptions and sample size\
--   **Expert judgment:** assessment that relies on domain knowledge
+- **Statistical rules:** rules depend on assumptions and sample size\
+- **Expert judgment:** assessment that relies on domain knowledge
 
 Both approaches have advantages and limitations. Statistical rules can be fragile with small samples, while expert judgment can be applied inconsistently over time and across contexts.
 
@@ -73,25 +73,23 @@ Both approaches have advantages and limitations. Statistical rules can be fragil
 
 Before modeling, graphical inspection provides an extremely valuable first pass at outlier detection. All of these methods are **subjective** but effective for identifying values that warrant extra scrutiny. Because these myriad approaches essentially allow you to see the same dimensions in your dataset from slightly different perspective, we do not go all of the graphing types. Here are a few useful graphing types for your reference:
 
--   [Cleveland dot plot](https://r-charts.com/distribution/cleveland-dot-plot/)
--   [Strip plot](https://rpubs.com/pg2000in/StripCharts)
--   [Generalized density plot](https://r-graph-gallery.com/density-plot.html)
--   [Heat map](https://r-graph-gallery.com/heatmap)
--   [*a myriad others*](https://r-graph-gallery.com/)
+- [Cleveland dot plot](https://r-charts.com/distribution/cleveland-dot-plot/)
+- [Strip plot](https://rpubs.com/pg2000in/StripCharts)
+- [Generalized density plot](https://r-graph-gallery.com/density-plot.html)
+- [Heat map](https://r-graph-gallery.com/heatmap)
+- [*a myriad others*](https://r-graph-gallery.com/)
 
 ### Tukey Box Plots
 
 Tukey-style box plots are based on **quantiles**, not distributional assumptions. Traditional Tukey-style boxplots, which you will find in several R packages, have several core features:
 
--   The interquartile range (IQR), or the difference between the 75% precentile (Q~3~) and the 25% percentile (Q~1~):
+- The interquartile range (IQR), or the difference between the 75% precentile (Q~3~) and the 25% percentile (Q~1~):
 
-$$
-\text{IQR} = Q_3 - Q_1
-$$
+$$\text{IQR} = Q_3 - Q_1$$
 
--   Whiskers extending to $1.5 \times \text{IQR}$
--   Points beyond this threshold flagged as outliers\
--   Points beyond $3 \times \text{IQR}$ sometimes flagged as *extreme* outliers
+- Whiskers extending to $1.5 \times \text{IQR}$
+- Points beyond this threshold flagged as outliers\
+- Points beyond $3 \times \text{IQR}$ sometimes flagged as *extreme* outliers
 
 These cutoffs are **conventional and not inferential**. They provide a rule of thumb; they ***do not*** provide a statistical test. (You should see a theme: use outlier tests to flag values for extra scrutiny.)
 
@@ -277,17 +275,15 @@ Most ecological and biological datasets are inherently multivariate. A point may
 
 The Mahalanobis distance tells us **how unusual a data point is when we consider several variables together**.
 
-$$
-D^2 = (x - \mu)^T \Sigma^{-1} (x - \mu)
-$$
+$$D^2 = (x - \mu)^T \Sigma^{-1} (x - \mu)$$
 
 Think of it this way:
 
--   $x$ = the values for one observation (e.g., oxygen and temperature at one site)\
--   $\mu$ = the average values across all observations\
--   $(x - \mu)$ = how far that observation is from the “typical” point\
--   $\Sigma^{-1}$ = a correction that accounts for different units *and* correlations between variables\
--   $D^2$ = a single number summarizing how extreme the observation is *given the relationships in the data*
+- $x$ = the values for one observation (e.g., oxygen and temperature at one site)\
+- $\mu$ = the average values across all observations\
+- $(x - \mu)$ = how far that observation is from the “typical” point\
+- $\Sigma^{-1}$ = a correction that accounts for different units *and* correlations between variables\
+- $D^2$ = a single number summarizing how extreme the observation is *given the relationships in the data*
 
 A point can look reasonable on its own but still have a large Mahalanobis distance if it **breaks the usual relationship between variables**.
 

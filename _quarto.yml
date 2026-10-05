@@ -57,8 +57,8 @@ book:
         - chapters/03_tutorial_glms.qmd
         - chapters/03_DHARMA_diagnostics.qmd
         - chapters/03_glmms.qmd
-       # - chapters/03_tutorial_glmms_part01.qmd
-       # - chapters/03_glmm_epilogue.qmd
+        - chapters/03_tutorial_glmms_part01.qmd
+        - chapters/03_glmm_epilogue.qmd
        # - chapters/04_tutorial_gams.qmd
 
     - part: "Part IV: Estimating Causal Effects"
@@ -71,10 +71,15 @@ book:
       #chapters:
         #- chapters/06_inference_to_proposition.qmd       # NEW
         #- chapters/06_estimand_aware_workflow.qmd        # NEW
-        #- chapters/final_report.qmd
+
     - part: "Final Report"
       #chapters:
+              #- chapters/final_report.qmd
         #- chapters/final_report_overview.qmd
+
+execute:
+  freeze: auto
+
 format:
   html:
     theme:

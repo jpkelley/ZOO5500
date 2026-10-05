@@ -59,7 +59,7 @@ book:
         - chapters/03_glmms.qmd
         - chapters/03_tutorial_glmms_part01.qmd
         - chapters/03_glmm_epilogue.qmd
-       # - chapters/04_tutorial_gams.qmd
+        # - chapters/04_tutorial_gams.qmd
 
     - part: "Part IV: Estimating Causal Effects"
       #chapters:

@@ -27,12 +27,7 @@ These sound reasonable. But, remember, that you should **not begin by fitting mo
 
 ## Data
 
-```{r}
-
-jackalopes <- read_csv("data/jackalope_causal_workflow.csv")
-
-glimpse(jackalopes)
-```
+[Download the jackalope causal workflow data](data/jackalope_causal_workflow.csv)
 
 The variables are intentionally named so that you can infer their biological meaning.
 

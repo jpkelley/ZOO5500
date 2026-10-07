@@ -336,6 +336,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">GLMM epilogue</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/jackalope_causal_workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Jackalope Analysis: What Are We Actually Estimating?</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -453,7 +459,7 @@ Note
 <td>Models as estimators &amp; GLMs</td>
 <td>Estimand → estimator → estimate; GLMs</td>
 <td>GLMs; diagnostics</td>
-<td>Data + Estimator Plan</td>
+<td>—</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;"><a href="#week-6"><strong>Week 6</strong><br>(05-Oct)</a></td>
@@ -467,28 +473,28 @@ Note
 <td>Nonlinearity</td>
 <td><strong>NO CLASS</strong> (mid-semester break)</td>
 <td>GAMs/GAMMs; assess nonlinearity</td>
-<td>—</td>
+<td>Data Readiness Note</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;"><a href="#week-8"><strong>Week 8</strong><br>(19-Oct)</a></td>
-<td>SCM synthesis, critique &amp; causal analysis planning</td>
-<td>Causal audit and revision</td>
-<td>Published-analysis + peer critique</td>
-<td>Causal Analysis Plan</td>
+<td>SCM → statistical model bridge, synthesis &amp; critique</td>
+<td>SCM/SEM; identification → statistical model</td>
+<td>Published-analysis critique; project workshop</td>
+<td>—</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;"><a href="#week-9"><strong>Week 9</strong><br>(26-Oct)</a></td>
-<td>Causal-effect estimation</td>
-<td>Total effects; g-computation/standardization</td>
-<td>Open analysis</td>
-<td>Working Estimator Checkpoint</td>
+<td>Causal-effect estimation: prediction, intervention &amp; g-computation</td>
+<td>Total effects; prediction; g-computation</td>
+<td>Causal + Estimation Plan workshop</td>
+<td>Causal + Estimation Plan</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;"><a href="#week-10"><strong>Week 10</strong><br>(02-Nov)</a></td>
-<td>Mechanistic effects</td>
-<td>Direct/indirect effects; mediation</td>
-<td>Open analysis</td>
-<td>—</td>
+<td>Analysis implementation, diagnostics &amp; mechanistic effects</td>
+<td>Implement/diagnose plan; mediation where relevant</td>
+<td>Analysis clinic</td>
+<td>Working Analysis Checkpoint</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;"><a href="#week-11"><strong>Week 11</strong><br>(09-Nov)</a></td>
@@ -532,9 +538,9 @@ Note
 <h2 data-number="4.1" class="anchored" data-anchor-id="calendar-edit-history"><span class="header-section-number">4.1</span> Calendar edit history</h2>
 <ul>
 <li>Revised for Fall 2026.</li>
-<li>Reorganized the course around an estimand-aware SCM workflow: scientific question → hypothesis/prediction → DAG → identification → estimator → estimate → inference.</li>
+<li>Based on preparation of Fall 2026 cohort, reorganized the course around an estimand-aware SCM workflow: scientific question → hypothesis/prediction → DAG → identification → estimator → estimate → inference.</li>
 <li>Consolidated graded work into integrated Milestone Assignments.</li>
-<li>Positioned SCM synthesis and causal-analysis planning after students have developed practical experience with measurement, GLMs, GLMMs, and nonlinearity.</li>
+<li>Positioned SCM synthesis and causal-analysis planning after students have developed practical experience with measurement, GLMs, GLMMs, and nonlinearity. Was originally overly ambitious in terms of timing.</li>
 </ul>
 </section>
 <section id="weekly-information" class="level2" data-number="4.2">
@@ -760,7 +766,7 @@ Note
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Topic:</strong> Models as estimators &amp; GLMs<br>
-<strong>Milestone assignment:</strong> <strong>Data + Estimator Plan — due 02-Oct</strong></p>
+<strong>Milestone assignment:</strong> N/A</p>
 <section id="before-class-4" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="before-class-4">Before class</h3>
 <ul>
@@ -794,7 +800,7 @@ Note
 <section id="after-class-4" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="after-class-4">After class</h3>
 <ul>
-<li><strong>Submit:</strong> Data + Estimator Plan</li>
+<li>Continue developing the data portion of your project plan; no milestone submission this week.</li>
 </ul>
 </section>
 </div>
@@ -862,7 +868,7 @@ Note
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Topic:</strong> Nonlinearity<br>
-<strong>Milestone assignment:</strong> N/A</p>
+<strong>Milestone assignment:</strong> <strong>Data Readiness Note — due 16-Oct</strong></p>
 <section id="before-class-6" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="before-class-6">Before class</h3>
 <ul>
@@ -891,7 +897,8 @@ Note
 <section id="after-class-6" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="after-class-6">After class</h3>
 <ul>
-<li>Assess whether nonlinear relationships are important for your planned estimator and refine your model where appropriate.</li>
+<li><strong>Submit:</strong> Data Readiness Note</li>
+<li>Assess whether nonlinear relationships are important for your eventual estimator.</li>
 </ul>
 </section>
 </div>
@@ -909,20 +916,21 @@ Note
 </div>
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Topic:</strong> SCM synthesis, critique &amp; causal analysis planning<br>
-<strong>Milestone assignment:</strong> <strong>Causal Analysis Plan — due 23-Oct</strong></p>
+<p><strong>Topic:</strong> SCM → statistical model bridge, synthesis &amp; critique<br>
+<strong>Milestone assignment:</strong> N/A</p>
 <section id="before-class-7" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="before-class-7">Before class</h3>
 <ul>
 <li>Review the kitchen-sink versus SCM comparison.</li>
 <li>Review concise SEM versus SCM material.</li>
-<li>Revisit your project DAG, estimand, identification strategy, and developing estimator.</li>
+<li>Revisit your project DAG, estimand, identification strategy, and developing statistical model.</li>
 </ul>
 </section>
 <section id="monday-7" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="monday-7">Monday</h3>
 <ul>
-<li>Compare analytical approaches</li>
+<li>SCM, traditional SEM, and statistical models: what the arrows and coefficients mean</li>
+<li>Connect estimand → identification → statistical model</li>
 <li>Project causal audit and DAG revision</li>
 </ul>
 </section>
@@ -930,7 +938,8 @@ Note
 <h3 class="unnumbered anchored" data-anchor-id="wednesday-7">Wednesday</h3>
 <ul>
 <li>Critique a published analysis</li>
-<li>Peer critique of DAG, estimand, identification strategy, and planned analysis</li>
+<li>Connect adjustment sets to GLM/GLMM/GAM/GAMM specifications</li>
+<li>In-class project work: DAG, identification strategy, and developing estimation plan</li>
 </ul>
 </section>
 <section id="reading-7" class="level3 unnumbered">
@@ -943,7 +952,7 @@ Note
 <section id="after-class-7" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="after-class-7">After class</h3>
 <ul>
-<li><strong>Submit:</strong> Causal Analysis Plan</li>
+<li>Continue developing the combined Causal + Estimation Plan; no milestone submission this week.</li>
 </ul>
 </section>
 </div>
@@ -961,27 +970,28 @@ Note
 </div>
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Topic:</strong> Causal-effect estimation<br>
-<strong>Milestone assignment:</strong> <strong>Working Estimator Checkpoint — due 30-Oct</strong></p>
+<p><strong>Topic:</strong> Causal-effect estimation: prediction, intervention &amp; g-computation<br>
+<strong>Milestone assignment:</strong> <strong>Causal + Estimation Plan — due 30-Oct</strong></p>
 <section id="before-class-8" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="before-class-8">Before class</h3>
 <ul>
-<li>Review total-effect estimation.</li>
+<li>Review total-effect estimation and the connection between fitted statistical models and causal contrasts.</li>
 </ul>
 </section>
 <section id="monday-8" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="monday-8">Monday</h3>
 <ul>
 <li>Total effects</li>
+<li>Prediction versus intervention</li>
 <li>G-computation / standardization</li>
-<li>Generate a primary project effect estimate in R</li>
+<li>Translate fitted statistical models into estimand-specific causal contrasts</li>
 </ul>
 </section>
 <section id="wednesday-8" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="wednesday-8">Wednesday</h3>
 <ul>
-<li>Open analysis and project consultations</li>
-<li>Troubleshooting, diagnostics, coding, and figures</li>
+<li>In-class Causal + Estimation Plan workshop</li>
+<li>Project consultations: identification, model specification, prediction/g-computation, and coding</li>
 </ul>
 </section>
 <section id="reading-8" class="level3 unnumbered">
@@ -993,7 +1003,7 @@ Note
 <section id="after-class-8" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="after-class-8">After class</h3>
 <ul>
-<li><strong>Submit:</strong> Working Estimator Checkpoint</li>
+<li><strong>Submit:</strong> Causal + Estimation Plan</li>
 </ul>
 </section>
 </div>
@@ -1011,26 +1021,28 @@ Note
 </div>
 <div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Topic:</strong> Mechanistic effects<br>
-<strong>Milestone assignment:</strong> N/A</p>
+<p><strong>Topic:</strong> Analysis implementation, diagnostics &amp; mechanistic effects<br>
+<strong>Milestone assignment:</strong> <strong>Working Analysis Checkpoint — due 06-Nov</strong></p>
 <section id="before-class-9" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="before-class-9">Before class</h3>
 <ul>
+<li>Bring your current project analysis and code to class.</li>
 <li>Review direct and indirect effects, focusing on material relevant to your project.</li>
 </ul>
 </section>
 <section id="monday-9" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="monday-9">Monday</h3>
 <ul>
-<li>Direct and indirect effects</li>
-<li>Mediation</li>
+<li>Implement and diagnose the Week 9 analysis plan</li>
+<li>Direct and indirect effects / mediation where relevant</li>
 <li>Assess whether a mechanistic estimand is appropriate for your project</li>
 </ul>
 </section>
 <section id="wednesday-9" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="wednesday-9">Wednesday</h3>
 <ul>
-<li>Open analysis: estimation, diagnostics, sensitivity, and figures</li>
+<li>Analysis clinic: estimation, diagnostics, prediction/g-computation, sensitivity, and figures</li>
+<li>Troubleshoot unresolved implementation problems</li>
 </ul>
 </section>
 <section id="reading-9" class="level3 unnumbered">
@@ -1042,6 +1054,7 @@ Note
 <section id="after-class-9" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="after-class-9">After class</h3>
 <ul>
+<li><strong>Submit:</strong> Working Analysis Checkpoint</li>
 <li>Continue analysis; pursue mechanistic effects only where scientifically justified.</li>
 </ul>
 </section>

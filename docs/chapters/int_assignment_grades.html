@@ -336,6 +336,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">GLMM epilogue</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/jackalope_causal_workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Jackalope Analysis: What Are We Actually Estimating?</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -390,7 +396,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This page describes the Milestone Assignments referenced in the course calendar. These should not be viewed as eight separate assignments. Each milestone builds on the previous one, moving from a clearly defined scientific target through causal identification, estimation, inference, and final synthesis. Each section below explains the purpose of the milestone, what to submit, and what a “good” assignment typically looks like. The general rubric is described at the end of this page.</p>
+<p>This page describes the Milestone Assignments referenced in the course calendar. These should not be viewed as separate, disconnected assignments. Each milestone builds on the previous one, moving from a clearly defined scientific target through causal identification, estimation, inference, and final synthesis. Each section below explains the purpose of the milestone, what to submit, and what a “good” assignment typically looks like. The general rubric is described at the end of this page.</p>
 <section id="how-the-milestone-assignments-are-organized-and-their-purposes" class="level2">
 <h2 class="anchored" data-anchor-id="how-the-milestone-assignments-are-organized-and-their-purposes">How the Milestone Assignments are organized (and their Purposes)</h2>
 <div class="course-info" data-tbl-colwidths="[10, 50, 40]">
@@ -414,19 +420,19 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: left;">Define the target effect.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><strong>5</strong></td>
-<td style="text-align: left;"><strong>Data + Estimator Plan</strong></td>
-<td style="text-align: left;">Link data to the estimand.</td>
+<td style="text-align: left;"><strong>7</strong></td>
+<td style="text-align: left;"><strong>Data Readiness Note</strong></td>
+<td style="text-align: left;">Link the causal structure to the data you actually have.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><strong>8</strong></td>
-<td style="text-align: left;"><strong>Causal Analysis Plan</strong></td>
-<td style="text-align: left;">Establish causal identification.</td>
+<td style="text-align: left;"><strong>9</strong></td>
+<td style="text-align: left;"><strong>Causal + Estimation Plan</strong></td>
+<td style="text-align: left;">Connect identification to the statistical estimation strategy.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><strong>9</strong></td>
-<td style="text-align: left;"><strong>Working Estimator Checkpoint</strong></td>
-<td style="text-align: left;">Implement and diagnose the estimator.</td>
+<td style="text-align: left;"><strong>10</strong></td>
+<td style="text-align: left;"><strong>Working Analysis Checkpoint</strong></td>
+<td style="text-align: left;">Implement and diagnose the planned analysis.</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><strong>11</strong></td>
@@ -522,20 +528,20 @@ Define the scientific target before you choose a DAG, statistical model, or mode
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-note no-icon callout-titled" title="**Data + Estimator Plan (Week 5; due 02-Oct)**">
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="**Data Readiness Note (Week 7; due 16-Oct)**">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span><strong>Data + Estimator Plan (Week 5; due 02-Oct)</strong>
+<span class="screen-reader-only">Note</span><strong>Data Readiness Note (Week 7; due 16-Oct)</strong>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Purpose:</strong><br>
-Connect the causal architecture of your project to the data you actually have and to the statistical machinery you will use. This milestone asks whether your measured variables can represent the DAG well enough to estimate the focal effect.</p>
+Connect the causal architecture of your project to the data you actually have. This milestone asks whether your measured variables can represent the important parts of the DAG well enough to support the focal analysis, without requiring you to commit yet to a final estimator.</p>
 <section id="what-to-include-1" class="level3">
 <h3 class="anchored" data-anchor-id="what-to-include-1">What to include</h3>
 <p><strong>Part 1: From DAG nodes to measurements</strong></p>
@@ -555,25 +561,13 @@ Connect the causal architecture of your project to the data you actually have an
 <li>Summarize missingness, exclusions, and obvious data-quality problems</li>
 <li>Include a <em>small</em> set of useful exploratory plots or tables
 <ul>
-<li>Focus on features that affect the proposed estimator: distributions, sparsity, clustering, nonlinear patterns, temporal structure, etc.</li>
+<li>Focus on features that may affect estimation: distributions, sparsity, clustering, nonlinear patterns, temporal structure, etc.</li>
 <li>Do not submit a plot dump</li>
 </ul></li>
-<li>Explain what the EDA changes (or does <em>not</em> change) about your analysis plan</li>
+<li>Explain what the EDA tells you about measurement, data structure, or potential analysis challenges</li>
 </ul>
-<p><strong>Part 3: Proposed estimator</strong></p>
+<p><strong>Part 3: Data organization</strong></p>
 <ul>
-<li>Name the statistical estimator/model you currently plan to use
-<ul>
-<li>e.g., GLM, GLMM, GAM, GAMM, standardization/g-computation, or another appropriate approach</li>
-</ul></li>
-<li>Give the proposed model structure or formula when possible</li>
-<li>Explain why the estimator is appropriate for:
-<ul>
-<li>the estimand</li>
-<li>the outcome distribution</li>
-<li>the sampling/dependence structure</li>
-<li>the functional relationships you expect</li>
-</ul></li>
 <li>Briefly describe how your files/code are organized so the analysis can be reproduced (this is primarily for your own records)</li>
 </ul>
 </section>
@@ -581,36 +575,36 @@ Connect the causal architecture of your project to the data you actually have an
 <h3 class="anchored" data-anchor-id="submission-format-1">Submission format</h3>
 <ul>
 <li>Word or Quarto page; a concise metadata/data dictionary may be included as a table or separate file</li>
-<li>Include only EDA that informs measurement, model structure, or estimation</li>
+<li>Include only EDA that informs measurement, data structure, or later estimation</li>
 <li>Include the final Evaluation Table (i.e.&nbsp;rubric-tested) output from JackalopeGPT</li>
 </ul>
 </section>
 <section id="good-looks-like-1" class="level3">
 <h3 class="anchored" data-anchor-id="good-looks-like-1">“Good” looks like</h3>
 <ul>
-<li>A clear mapping from causal variables → measured variables → statistical estimator</li>
+<li>A clear mapping from causal variables → measured variables</li>
 <li>Honest treatment of measurement limitations and missing information</li>
 <li>EDA used purposefully rather than as a search for “significant” patterns</li>
-<li>An estimator justified by the scientific target and data structure (not merely by software availability or familiarity)</li>
+<li>A clear understanding of the data structure that the eventual estimator will need to accommodate</li>
 </ul>
 </section>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-note no-icon callout-titled" title="**Causal Analysis Plan (Week 8; due 23-Oct)**">
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="**Causal + Estimation Plan (Week 9; due 30-Oct)**">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span><strong>Causal Analysis Plan (Week 8; due 23-Oct)</strong>
+<span class="screen-reader-only">Note</span><strong>Causal + Estimation Plan (Week 9; due 30-Oct)</strong>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Purpose:</strong><br>
-Show that your scientific question, causal assumptions, estimand, and identification strategy fit together <em>before</em> you begin serious statistical modeling. This is the major causal-planning milestone for the project.</p>
+Show that your scientific question, causal assumptions, estimand, identification strategy, and statistical estimation strategy fit together. This is the major analysis-planning milestone for the project: the goal is to make explicit the chain from the causal question to the procedure that will produce the estimate.</p>
 <section id="what-to-include-2" class="level3">
 <h3 class="anchored" data-anchor-id="what-to-include-2">What to include</h3>
 <ul>
@@ -619,17 +613,13 @@ Show that your scientific question, causal assumptions, estimand, and identifica
 <li>Include the variables and causal relationships needed to represent the system relevant to your focal estimand</li>
 <li>Keep the graph focused: not every ecological process in the ecological universe belongs in your DAG</li>
 </ul></li>
-<li><strong>Causal assumptions</strong>
-<ul>
-<li>Briefly explain the most important arrows</li>
-<li>Identify important assumptions represented by missing arrows when necessary</li>
-</ul></li>
 <li><strong>Primary estimand</strong>
 <ul>
 <li>Restate or refine the estimand from your Week 2 note</li>
 </ul></li>
-<li><strong>Causal roles</strong>
+<li><strong>Causal assumptions and roles</strong>
 <ul>
+<li>Briefly explain the most important arrows and assumptions</li>
 <li>Identify important exposures, outcomes, confounders, mediators, colliders, or other variables relevant to the focal effect</li>
 </ul></li>
 <li><strong>Identification argument</strong>
@@ -638,9 +628,20 @@ Show that your scientific question, causal assumptions, estimand, and identifica
 <li>Identify the adjustment strategy implied by the DAG</li>
 <li>Explain why key variables should or should not be conditioned on</li>
 </ul></li>
-<li><strong>Major unmeasured threats</strong>
+<li><strong>Proposed statistical estimator/model</strong>
 <ul>
-<li>Identify the most important unmeasured variables or assumptions that could threaten the causal interpretation</li>
+<li>Name the statistical model(s) or estimator you currently plan to use (e.g., GLM, GLMM, GAM, GAMM, or another appropriate approach)</li>
+<li>Give the proposed model structure or formula when possible</li>
+<li>Identify family/link, random effects, smooths, correlation structures, or other important components where relevant</li>
+</ul></li>
+<li><strong>From fitted model to causal estimate</strong>
+<ul>
+<li>Explain how the fitted statistical model(s) will be used to estimate your focal estimand</li>
+<li>Where appropriate, describe the prediction, standardization, or g-computation step needed to obtain the causal contrast</li>
+</ul></li>
+<li><strong>Major threats and limitations</strong>
+<ul>
+<li>Identify important unmeasured variables, measurement limitations, positivity/support problems, or assumptions that could threaten the interpretation</li>
 </ul></li>
 </ul>
 </section>
@@ -648,81 +649,78 @@ Show that your scientific question, causal assumptions, estimand, and identifica
 <h3 class="anchored" data-anchor-id="submission-format-2">Submission format</h3>
 <ul>
 <li>Word or Quarto page</li>
-<li>Include a legible DAG plus concise text explaining the reasoning behind it</li>
-<li>The goal is not a giant causal encyclopedia; emphasize assumptions that matter for your focal estimand</li>
+<li>Include a legible DAG plus concise text connecting identification to estimation</li>
+<li>The goal is not a giant causal encyclopedia; emphasize decisions that matter for your focal estimand</li>
 <li>Include the final Evaluation Table (i.e.&nbsp;rubric-tested) output from JackalopeGPT</li>
 </ul>
 </section>
 <section id="good-looks-like-2" class="level3">
 <h3 class="anchored" data-anchor-id="good-looks-like-2">“Good” looks like</h3>
 <ul>
-<li>The DAG, estimand, and identification argument tell the same causal story</li>
+<li>The estimand, DAG, identification argument, statistical model, and estimation procedure tell the same causal story</li>
 <li>Adjustment decisions follow from causal reasoning rather than variable screening or AIC</li>
-<li>Important assumptions and unmeasured threats are visible rather than hidden</li>
-<li>You can explain why the proposed analysis would estimate the effect you claim it estimates</li>
+<li>The proposed model reflects the outcome, dependence structure, and plausible functional relationships in the data</li>
+<li>You can explain how model predictions or other estimator outputs become the causal effect you claim to estimate</li>
 </ul>
 </section>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-note no-icon callout-titled" title="**Working Estimator Checkpoint (Week 9; due 30-Oct)**">
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="**Working Analysis Checkpoint (Week 10; due 06-Nov)**">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span><strong>Working Estimator Checkpoint (Week 9; due 30-Oct)</strong>
+<span class="screen-reader-only">Note</span><strong>Working Analysis Checkpoint (Week 10; due 06-Nov)</strong>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Purpose:</strong><br>
-Run a real model (estimator) early enough to catch any obvious implementation problems. This is a checkpoint; this is <em>not</em> a rigid model that you must marry. You are, of course, allowed to make careful changes that are consistent with the <em>a priori</em> established causal reasoning, data structure, or model diagnostics.</p>
+Implement the Week 9 plan early enough to catch problems while there is still time to fix them. This is a lightweight implementation checkpoint rather than another major written assignment. You are allowed to make careful changes that are consistent with the established causal reasoning, data structure, and model diagnostics.</p>
 <section id="what-to-include-3" class="level3">
 <h3 class="anchored" data-anchor-id="what-to-include-3">What to include</h3>
 <ul>
-<li><strong>Current primary estimator/model</strong>
+<li><strong>A runnable current analysis</strong>
 <ul>
-<li>Model formula or equivalent specification</li>
-<li>Family/link, random effects, smooths, correlation structures, or other important components where relevant</li>
-</ul></li>
-<li><strong>Why this estimator</strong>
-<ul>
-<li>Briefly connect the specification back to your estimand and identification strategy</li>
+<li>Implement the primary statistical model(s) or estimator described in your plan</li>
+<li>Include enough code and output to show that the analysis is reproducible</li>
 </ul></li>
 <li><strong>Key diagnostics/checks</strong>
 <ul>
-<li>Include a small number of checks that tell you whether the estimator is behaving reasonably</li>
-<li>Flag obvious violations, convergence problems, residual structure, poor support, or other concerns</li>
+<li>Use a small number of checks that tell you whether the estimator is behaving reasonably</li>
+<li>Flag convergence problems, residual structure, poor support, or other concerns</li>
 </ul></li>
-<li><strong>Preliminary estimate</strong>
+<li><strong>Preliminary causal estimate, where ready</strong>
 <ul>
-<li>Include a preliminary focal effect estimate if the analysis is ready for one</li>
-<li>If it is not ready, say exactly what is intefering with the estimation</li>
+<li>Generate a preliminary focal estimate using prediction, standardization/g-computation, or another appropriate procedure</li>
+<li>If the analysis is not ready for an estimate, identify exactly what is interfering with estimation</li>
 </ul></li>
-<li><strong>Unresolved issues</strong>
+<li><strong>Very short status note</strong>
 <ul>
+<li>What currently works?</li>
 <li>What remains uncertain, broken, or incomplete?</li>
-<li>What changes are you considering, and what would justify them?</li>
+<li>What is the next change or analysis step you need to make?</li>
 </ul></li>
 </ul>
 </section>
 <section id="submission-format-3" class="level3">
 <h3 class="anchored" data-anchor-id="submission-format-3">Submission format</h3>
 <ul>
-<li>RProj folder complete with Quarto (preferred) as well as raw data file with enough code/output description to make the estimator reproducible</li>
+<li>RProj folder complete with Quarto (preferred) and the data/code needed to reproduce the current analysis</li>
+<li>Keep the written status note brief; most of this checkpoint will be developed through in-class analysis and consultation</li>
 <li>Keep diagnostics selective and interpretable</li>
-<li>Include the final Evaluation Table (i.e.&nbsp;rubric-tested) output from JackalopeGPT</li>
 </ul>
 </section>
 <section id="good-looks-like-3" class="level3">
 <h3 class="anchored" data-anchor-id="good-looks-like-3">“Good” looks like</h3>
 <ul>
-<li>A runnable estimator that follows from the causal and data plans</li>
+<li>A runnable analysis that follows from the causal and estimation plan</li>
 <li>Diagnostics are used to learn about problems rather than simply certify the model</li>
-<li>Any proposed changes have a scientific or statistical justification</li>
-<li>Known problems are stated plainly rather than hidden</li>
+<li>The connection between fitted model(s) and the focal causal estimate is explicit where possible</li>
+<li>Remaining problems are clearly identified rather than hidden</li>
 </ul>
 </section>
 </div>

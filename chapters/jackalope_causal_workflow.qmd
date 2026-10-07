@@ -1,0 +1,105 @@
+---
+title: "Jackalope Analysis: What Are We Actually Estimating?"
+format: html
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+## Scenario
+
+A long-term jackalope study is evaluating whether **brush thinning improves reproductive success** (a direct intervention). Researchers sampled jackalopes at multiple sites. Some sites received brush thinning and others did not. Each jackalope was measured repeatedly during the season.
+
+The researchers proposed the following hypotheses and predictions:
+
+> **H1.** Brush thinning increases jackalope reproductive success by increasing forage availability and improving body condition.
+
+> **P1.** Jackalopes at brush-thinned sites will have greater forage biomass, better body condition, and more offspring than jackalopes at control sites.
+
+> **P2.** Greater forage biomass will be associated with better body condition.
+
+> **P3.** Jackalopes in better body condition will produce more offspring.
+
+> **P4.** If improved forage and body condition explain the reproductive benefit of brush thinning, the effect of brush thinning on offspring production should become smaller after accounting for forage biomass and body condition.
+
+These sound reasonable. But, remember, that you should **not begin by fitting models.**
+
+## Data
+
+```{r}
+
+jackalopes <- read_csv("data/jackalope_causal_workflow.csv")
+
+glimpse(jackalopes)
+```
+
+The variables are intentionally named so that you can infer their biological meaning.
+
+## Your task
+
+As a class, develop a **detailed analysis workflow**. You do not need to complete the analysis today; this is just to get you thinking (and putting everything together). Work through these questions:
+
+1. **What is the structure of the dataset?**
+   - What is the observational unit?
+   - Which observations are independent?
+   - Where are observations repeated or nested?
+   - At what level does each variable vary?
+
+2. **What would you examine before modeling?**
+   - Missingness?
+   - Distributions?
+   - Zeros or overdispersion?
+   - Relationships among variables?
+   - Variation among sites and individuals?
+   - Anything else?
+
+3. **What, exactly, do the hypotheses ask us to estimate?**
+
+   Write the quantities in words before choosing models. Do all four predictions target the same quantity?
+
+4. **What models might be needed?**
+
+   For each quantity you identified, sketch:
+   - outcome
+   - predictors
+   - error distribution/link
+   - random-effects structure
+   - any other important model structure
+
+   **Hint: Do not assume that one model, or one random-effects structure, answers every question.**
+
+5. **How would you compare the quantities?**
+
+   Think about:
+   - the **total effect** of brush thinning on offspring production
+   - effects operating **through forage and body condition**
+   - a **controlled direct effect** of brush thinning when mediators are held fixed
+   - whether statements such as **TE = DE + IE** are automatically meaningful for every model or effect scale
+
+   You do not yet need to calculate these quantities. Describe what would have to be compared or predicted.
+
+## Stop before modeling
+
+You now have several plausible models and several quantities you might estimate.
+
+**What is missing?**
+
+Before deciding what variables belong in each model, draw a **DAG representing the data-generating process you think produced these data**.
+
+Your DAG should include, at minimum:
+
+- brush thinning
+- forage biomass
+- body condition
+- offspring production
+- site
+- individual jackalope
+
+Add other measured variables if you think they matter.
+
+Then revisit your proposed workflow:
+
+> **Which analyses estimate total effects? Which estimate direct effects? Which variables are mediators rather than confounders? What assumptions are you making when you condition on them?**
+
+There is not a single correct analysis plan. Your goal is to make the assumptions and target quantities explicit.

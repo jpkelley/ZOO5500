@@ -27,7 +27,9 @@ packages <- c(
   "readr",
   "dplyr",
   "tidyverse",
-  "usdm"
+  "usdm",
+  "DHARMa",
+  "mgcViz"
 )
 
 # Identify packages that are not installed

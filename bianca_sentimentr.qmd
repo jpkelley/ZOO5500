@@ -1,0 +1,31 @@
+---
+title: "bianca_sentimentr"
+format: html
+---
+
+```{r}
+
+install.packages(c("tidyverse", "sentimentr"))
+
+library(tidyverse)
+library(sentimentr)
+```
+
+
+
+```{r}
+
+
+responses <- tibble(
+  id = 1:6,
+  response = c(
+    "The trail was beautiful and I had a wonderful time.",
+    "The trail was poorly maintained and disappointing.",
+    "The scenery was great but the crowds were terrible.",
+    "The trail was challenging, but I really enjoyed it.",
+    "I would not recommend this trail.",
+    "I walked approximately three miles."
+  )
+)
+
+```

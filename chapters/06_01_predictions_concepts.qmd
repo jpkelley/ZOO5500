@@ -1,0 +1,121 @@
+---
+title: "From Models to Intervention Predictions"
+subtitle: "Graduate Quantitative Methods | Class discussion"
+format:
+  html:
+    toc: true
+    code-fold: false
+execute:
+  echo: true
+---
+
+## What you should know after reading this component:
+
+1. Explain the difference between an ordinary conditional prediction and a prediction under a specified intervention.
+2. Estimate a sample-average contrast in R by predicting outcomes for every individual (in the dataset) under two exposure values.
+3. Explain why an estimated intervention contrast is not evidence of a causal effect (at least, not by itself).
+
+## Recall: From estimand to adjustment to model
+
+```{mermaid}
+flowchart LR
+  E[Estimand] --> A[Adjustment Set]
+  A --> M[Model]
+  M --> P[Intervention predictions]
+  P --> R[Effect estimate]
+```
+
+> Once again, you *must* define the estimand before choosing variables, and choose variables before fitting a model.
+
+## From causal questions to predictions
+
+### 1. Total effect
+
+**Question:**  
+What is the total effect of predator abundance on nesting success?
+
+**Prediction:**  
+> Higher predator abundance will lead to **lower nesting success**.
+
+---
+
+### 2. Mediation
+
+**Question:**  
+Is the effect mediated by parental behavior?
+
+**Predictions (directional):**
+
+> Higher predator abundance will lead to **reduced parental provisioning** (or increased vigilance).
+
+> Reduced provisioning will lead to **lower nesting success**.
+
+> Therefore, predator abundance will reduce nesting success **partly through its effect on parental behavior**.
+
+> After accounting for parental behavior, the **remaining (direct) effect** of predator abundance on nesting success will be **smaller in magnitude**.
+
+---
+
+### 3. Effect modification
+
+**Question:**  
+Does the effect vary with environmental conditions?
+
+**Prediction:**  
+> The negative effect of predator abundance on nesting success will be **stronger under certain environmental conditions** (e.g., low canopy cover or high rainfall).
+
+---
+
+### Key idea
+
+> Mediation predictions must follow the **direction of each causal link**, not just the overall association.
+
+
+## What exactly are we predicting?
+
+**Ordinary conditional prediction:** $\widehat{E}(Y\mid X=x,C=c)$: predicted outcome for observations with specified values of X and C.
+
+**Intervention prediction:** $\widehat{E}(Y\mid do(X=x))$: predicted population outcome if X were set to x, *provided the causal assumptions needed to identify this quantity hold*.
+
+The same fitted regression model may be used to calculate both kinds of prediction. Changing `newdata` does not, by itself, establish a causal interpretation.
+
+## Our causal DAG
+
+```{mermaid}
+flowchart LR
+  C --> X
+  C --> Y
+  X --> Y
+```
+
+C is a common cause of X and Y. For the **total effect**, C must be accounted for; a mediator should not simply be added as an adjustment variable.
+
+**Discuss:** If we fit `Y ~ X + C`, why isn't a regression coefficient automatically an estimate of every causal question we could ask?
+
+## A population-average contrast
+
+For two interventions $x_0$ and $x_1$, predict every observation's outcome under each intervention, retaining its observed C:
+
+$$
+\widehat{\Delta}(x_1,x_0)=\frac{1}{n}\sum_{i=1}^n
+\left[\hat m(x_1,C_i)-\hat m(x_0,C_i)\right].
+$$
+
+This is **regression standardization**, a simple form of **g-computation**. It averages over the empirical distribution of C.
+
+## Think before coding
+
+- What changes between the two hypothetical datasets?
+- What stays the same?
+- Why not simply set C to its mean?
+- Does an intervention on X also intervene on C?
+
+## R demonstration and class exercise
+
+Continue with the companion exercise QMD. We will use the original `simple_scm.qmd` simulated dataset and DAG, but start with a simpler total-effect model.
+
+## Exit question
+
+What additional claims about the data-generating process would we need before interpreting the contrast as causal?
+
+**Preview for next week:** consistency, positivity, exchangeability, model specification, and the role of the DAG.

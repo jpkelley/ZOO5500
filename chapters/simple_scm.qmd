@@ -8,7 +8,7 @@ format:
 
 ## Introduction
 
-This tutorial shows how to estimate **total**, **direct**, and **indirect** effects in a nonlinear structural causal model (SCM) using **frequentist methods only** (i.e. non Bayesian), with `mgcv::gam()` as the primary modeling tool. The example is built to be scientifically defensible rather than merely predictive. Like you would do for a scientific manuscript, this tutorial:
+This tutorial shows how to estimate **total**, **direct**, and **indirect** effects in a structural causal model (SCM) using **frequentist methods only** (i.e. non Bayesian), with `mgcv::gam()` as the primary modeling tool. The example is built to be scientifically defensible rather than merely predictive. Like you would do for a scientific manuscript, this tutorial:
 
 1. states the causal DAG explicitly
 2. uses `dagitty` to define the adjustment set for the total effect

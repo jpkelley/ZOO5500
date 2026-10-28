@@ -77,9 +77,9 @@ Here is the assumed DAG:
 ```{mermaid}
 flowchart LR
   C --> X
+  X --> M1
   C --> M1
   C --> Y
-  X --> M1
   X --> M2
   X --> Y
   M1 --> M2

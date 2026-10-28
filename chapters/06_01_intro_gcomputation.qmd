@@ -1,0 +1,208 @@
+---
+title: "Introduction to Causal Effects"
+format:
+  html:
+    toc: true
+    code-fold: false
+execute:
+  echo: true
+---
+
+## Goals of this section
+
+This introduction is intended to help you work through the following goals:
+
+1. Be able to define a causal contrast for a specific change in exposure.
+2. Be able to distinguish an average effect across a population (ATE) from an effect conditional on environmental conditions (CATE).
+3. Be able to explain the difference between ordinary predictions and predictions under an intervention.
+4. Describe how g-computation uses an outcome model to estimate an intervention contrast—and what additional assumptions are needed to interpret that contrast causally.
+
+The goal with these steps is to use model predictions to estimate the causal contrasts that answer your scientific questions. With g-computation, you predict outcomes under each specified exposure intervention, calculate the contrast of interest, and average over the relevant population or environmental subgroup. Then we have an estimate of our causal effect. In graphical form, this workflow looks like: 
+
+```{mermaid}
+flowchart LR
+  Q[Scientific question] --> E[Estimand]
+  E --> A[Adjustment set]
+  A --> M[Outcome model]
+  M --> P[Intervention predictions]
+  P --> R[Effect estimate]
+```
+
+As you now know, the question always comes first. Now that we are armed with the tools to be able to model effects of our choosing, we need to step back and decide *exactly* **what effect we want to estimate** before selecting adjustment variables or fitting the model. But, remember, drawing inference about estimands also requires quantifying uncertainty and assessing whether the assumptions needed for a causal interpretation are defensible; these will be discussed later. We need to introduce the basic ideas first.
+
+## Start with the causal estimand
+
+An **estimand** is the quantity we want to learn about. Let $Y_i(x)$ be the outcome we would observe for unit $i$ if its exposure $X$ were set to $x$. We will compare two specified exposure levels, $x_0$ and $x_1$. These do not need to be 0 and 1. For today's exercise, we will focus on **two questions**:
+
+| Scientific question | Estimand | Definition |
+|---|---|---|
+| What is the average **total effect** of changing $X$ from $x_0$ to $x_1$ in our target population? | Average Treatment Effect (**ATE**) | $\tau=E[Y(x_1)]-E[Y(x_0)]$ |
+| Does that effect differ across values of an environmental variable $C$? | Conditional Average Treatment Effect (**CATE**) | $\tau(c)=E[Y(x_1)\mid C=c]-E[Y(x_0)\mid C=c]$ |
+
+::: {.callout-important}
+# How to read these equations:
+
+* **$Y(x_1)$ and $Y(x_0)$:** the outcomes $Y$ that an individual would have if we set exposure to $x_1$ or $x_0$ (e.g. nestling mass under high or low predator activity, respectively)
+* **$E[\cdot]$:** “Take the average over the relevant population or subgroup.” The ATE equation therefore reads: **average nestling mass if predator activity were set to $x_1$, minus average nestling mass if it were set to $x_0$**. Technically, this is the *expected value*.
+* **The vertical bar $\mid C=c$:** This means “among individuals whose environmental conditions equal $c$.” The CATE equation reads: **average nestling mass under $x_1$, minus average nestling mass under $x_0$, among nestlings at a particular vegetation density**.
+* **$\tau$:** (“Tau”) is the average effect, and **$\tau(c)$** names the average effect at vegetation density $c$. If mass is measured in grams, both effects are differences in grams. A positive value means higher average mass under $x_1$; a negative value means lower average mass.
+
+:::
+
+ATE and CATE are the two main types of causal effect scenarios that you will likely encounter. The ATE is an average over a specified target population. The CATE is an average for units with a specified value of $C$. In the table above, $C$ is measured before exposure. In our example, it is also a **confounder** because it affects both $X$ and $Y$. A pre-exposure variable is not necessarily a confounder in every instance.
+
+::: {.callout-note collapse="true" title="Two additional types of causal effects"}
+
+There are two additional types of causal effects to keep in mind, but we will not worry about these in this exercise (or in this course):
+
+* **Individual treatment effect (ITE)**: Contrast that compares two potential outcomes for a single unit; we generally cannot observe both. 
+* **Sample average treatment effect (SATE)**: The contrast is averaged across the sampled units, rather than the broader population. Whether it applies to that population depends on how representative the sample is.
+
+:::
+
+## Our ecological example
+
+Let us put the above knowledge into action with a hypothetical example about...you guessed it...birds and nests. Suppose that we want to understand how predator activity near a bird nest affects **nestling body mass (g)**. In this example, we will use a simulated system with the following variables:
+
+| Variable | Interpretation | Role |
+|---|---|---|
+| $C$ | Vegetation density around the nest | Pre-exposure variable (and confounder) |
+| $X$ | Predator activity near the nest | Exposure |
+| $M_1$ | Parental vigilance | Mediator |
+| $M_2$ | Parental provisioning rate | Mediator |
+| $Y$ | Nestling body mass (g) | Outcome |
+
+Here is the assumed DAG:
+
+```{mermaid}
+flowchart LR
+  C --> X
+  C --> M1
+  C --> Y
+  X --> M1
+  X --> M2
+  X --> Y
+  M1 --> M2
+  M2 --> Y
+```
+
+By now, we know how to examine a causal DAG and understand which paths connect our treatment of interest (predator activity) to the outcome/response variable (nestling mass). We also know how to identify which path in this DAG creates confounding i.e. (affects $X$ and $Y$.)
+
+Remember from our brief tutorial that the **total effect** includes all directed causal paths from $X$ to $Y$, whether direct or through $M_1$ and $M_2$. Direct and indirect effects address *how* an exposure affects an outcome; we will examine those separately in a later tutorial. **Today we define total-effect contrasts; next week we will estimate them.** For this DAG, adjusting for $C$ blocks all backdoor paths from $X$ to $Y$. We do not adjust for $M_1$ or $M_2$ in this outcome model because we want the total effect, including effects operating through those mediators.
+
+Let us look more closely at our two causal effects in the context of our biological example.
+
+### Average Treatment Effect (ATE) 
+
+For an Average Treatment Effect, we can ask the question **How much would mean nestling mass change if predator activity were set to a relatively high level ($x_1$) instead of a relatively low level ($x_0$)**? 
+
+We are comparing **two interventions on the same population**. The ATE is the difference between the two population-average potential outcomes, measured here in grams. The intervention levels must be specified (and be scientifically defensible). For a numerical exposure, a contrast between the 25th and 75th percentiles is not necessarily the same as a contrast between the 10th and 90th percentiles. If the response is nonlinear, even two changes of equal size can have different effects.
+
+### Conditional Average Treatment Effect (CATE)
+
+Now, let us consider a slightly different --a bit more illuminating-- question: **Is the effect of predator activity on nestling mass different across the range of vegetation density (going from sparse to dense)?**
+
+For this, imagine predicting nestling mass across all vegetation density levels under two interventions. That is:
+
+- Set predator activity to $x_0$ and predict mean nestling mass at each value of $C$.
+- Set predator activity to $x_1$ and make the same predictions at those same values of $C$.
+
+This gives us two predicted mean outcome curves under two interventions: one for predator activity set to \(x_0\), and one for predator activity set to \(x_1\). Each curve shows how mean nestling mass under that intervention varies with vegetation density. 
+
+Our question concerns the difference between these curves and whether that difference changes with vegetation density. For that, the vertical difference between the curves at \(C=c\) is the conditional average treatment effect (CATE) at that vegetation density:
+
+$$
+\tau(c)=E[Y(x_1)\mid C=c]-E[Y(x_0)\mid C=c].
+$$
+
+::: {.callout-important}
+# How to read this equation
+
+The above equation looks daunting, so let us break it down. This reads: “Tau of $c$ equals the average outcome if exposure were set to $x_1$, given individuals with $C=c$, minus the average outcome if exposure were set to $x_0$, given those same individuals.”
+
+In our example, we can translate this to: **At a particular vegetation density, how much would average nestling mass differ if predator activity were set to $x_1$ rather than $x_0$?** That seems more tractable.
+:::
+
+Thus, we directly assess whether the effect differs across vegetation density by examining whether this vertical difference changes as \(c\) increases.
+
+The ATE averages these conditional effects across vegetation densities, weighted by how common those densities are in the target population. It need not equal the effect at mean vegetation density.
+
+Looking at the two prediction curves **on the mass scale, in grams**, what would parallel curves imply about the CATE? What would an increasing vertical gap imply about the magnitude of the effect?
+
+::: {.callout-tip}
+## An important note about categorical and numerical variables
+
+A really important point here is that the basic logic does not change when $X$ or $C$ is categorical rather than numerical. What changes is the contrast we specify and how we present it.
+
+| Variable | If categorical | If numerical |
+|---|---|---|
+| Exposure $X$ | Compare two specified categories, such as predator-exclusion treatment versus control | Compare two specified levels of predator activity, $x_0$ and $x_1$ |
+| Covariate $C$ | Estimate a CATE for each relevant habitat category | Estimate a CATE at chosen values of vegetation density or plot a CATE curve |
+
+A causal contrast between $x_0$ and $x_1$ does not automatically tell us the effect of changing exposure between other values. To estimate this contrast from observational data, we also need support for the primary exposure: both $x_0$ and $x_1$ must be possible within the combinations of vegetation density and other adjustment variables relevant to our target population. This is the *positivity* assumption, which we will discuss later.
+
+In practice, we also need sufficient observations near those levels to estimate the contrast reliably. For a continuous exposure, support concerns neighborhoods around the specified values rather than observations at each exact value.
+:::
+
+## What exactly are we predicting?
+
+We have described the ATE and CATE by imagining what would happen under different exposure interventions. To estimate these effects, we will use predictions from a fitted model. But we first need to distinguish two questions:
+
+* **What outcomes do we expect among individuals observed at a particular exposure level?** 
+* **what outcomes would we expect if we intervened to set exposure to that level?**
+
+The two questions lead to different types of predictions because they describe different ways of defining the group whose outcome we average:
+
+* **Among nestlings observed with predator activity $x$ and vegetation density $c$, what mean mass do we expect?** This gives an **ordinary conditional prediction**, $\widehat E[Y\mid X=x,C=c]$. We select nestlings according to their observed exposure and environmental conditions. Here, “expected” means the model-estimated mean; it does not itself imply a causal interpretation. The distinction is between averaging outcomes among individuals with an observed exposure and averaging potential outcomes under an intervention.
+
+* **Among nestlings at vegetation density $c$, what mean mass would we expect/observe if predator activity were set to $x$ for all of them?** This gives an **intervention prediction**, $\widehat E[Y(x)\mid C=c]$. We consider all nestlings at that vegetation density, regardless of their observed exposure, and imagine setting (i.e. actively intervening) their exposure to the same value.
+
+The first prediction describes a group defined partly by its observed exposure. The second describes what would happen under an intervention. Under conditional exchangeability, consistency, and positivity, the observed conditional mean identifies the corresponding intervention mean. These assumptions justify using the outcome model to estimate a causal quantity; fitting the model alone does not establish them.
+
+## G-computation: from predictions to causal contrasts
+
+Given all of this, how do we move from an outcome model to a causal effect? Quite simply, we use the model to predict mean outcomes under **two specified interventions**, then compare them. This procedure is called **g-computation**.
+
+To reiterate, a single intervention gives us one mean outcome. To define an effect, we need to compare outcomes under two interventions for the same population. In our example, at a particular vegetation density $c$, the two intervention means are:
+
+* **Set predator activity to $x_0$:**
+
+  $$
+  E[Y(x_0)\mid C=c].
+  $$
+
+  This is the mean mass nestlings at vegetation density $c$ would have if predator activity were set to $x_0$.
+
+* **Set predator activity to $x_1$:**
+
+  $$
+  E[Y(x_1)\mid C=c].
+  $$
+
+  This is the mean mass those same nestlings would have if predator activity were set to $x_1$.
+
+The **effect** is the difference between these two intervention means:
+
+$$
+\tau(c)=E[Y(x_1)\mid C=c]-E[Y(x_0)\mid C=c].
+$$
+
+This is the **CATE**: the average effect of changing predator activity from $x_0$ to $x_1$ at vegetation density $c$.
+
+**G-computation estimates this contrast using model predictions:**
+
+1. Predict mean nestling mass under predator activity set to $x_0$.
+2. Predict mean mass for the same population under predator activity set to $x_1$.
+3. Subtract the predictions under $x_0$ from those under $x_1$, measuring the difference in grams.
+
+For the **CATE**, we make this comparison at a particular vegetation density. For the **ATE**, we average these conditional differences over the distribution of vegetation density in the target population. The resulting contrast is:
+
+$$
+\tau=E[Y(x_1)]-E[Y(x_0)].
+$$
+
+Here, each expectation averages over the whole target population (a population-weighted average), rather than only nestlings at a particular vegetation density. This is not generally the same as calculating the effect at mean vegetation density. 
+
+Because we specifically want the **total effect** (our original estimand), we adjust for vegetation density but do not hold parental vigilance or provisioning fixed. Those mediating processes are allowed to respond to predator activity.
+
+The model provides predictions; interpreting their differences as causal effects requires additional assumptions. We will discuss these assumptions (conditional exchangeability, consistency, and positivity) next. We also need an adequately specified outcome model and must quantify uncertainty in our estimates. We will implement the calculations in next week's R tutorial.

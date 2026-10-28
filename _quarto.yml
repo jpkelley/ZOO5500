@@ -63,10 +63,8 @@ book:
         - chapters/04_tutorial_gams.qmd
 
     - part: "Part IV: Estimating Causal Effects"
-      #chapters:
-        #- chapters/simple_scm.qmd
-        #- chapters/SCM_part02.qmd
-        #- chapters/brms_SCM.qmd
+      chapters:
+        - chapters/06_01_intro_gcomputation.qmd
 
     - part: "Part V: Inference and Reporting"
       #chapters:
